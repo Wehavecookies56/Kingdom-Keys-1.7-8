@@ -1,4 +1,4 @@
-item.kingdomKey.name=Cadena del Reino
+﻿item.kingdomKey.name=Cadena del Reino
 item.kingdomKeyD.name=Cadena del Reino D
 item.oathkeeper.name=Prometida
 item.oblivion.name=Recuerdos Lejanos
@@ -72,6 +72,7 @@ item.abaddonPlasma.name=Plasma de Abadón
 item.ominousBlight.name=Plaga Ominosa
 item.missingAche.name=Dolor Pasado
 
+
 item.winnersProof.name=Prueba de Victoria
 item.fatalCrest.name=Emblema Fatal
 item.twoBecomeOne.name=Dos Serán Uno
@@ -91,6 +92,7 @@ item.monochrome.name=Monocromo
 item.herosCrest.name=Emblema de Héroe
 item.rumblingRose.name=Rosa del Estruendo
 item.hiddenDragon.name=Dragón Oculto
+
 
 item.endsoftheEarth.name=Postrimería
 item.stormfall.name=Argavieso
@@ -114,6 +116,7 @@ item.keybladeofPeoplesHearts.name=Llave Espada del Corazón
 item.ultimaWeapon.name=Arma Artema
 item.treasureTrove.name=Tesoro Oculto
 item.starSeeker.name=Explorador Estelar
+
 
 item.kingdomKeyChain.name=Llavero de Cadena del Reino
 item.kingdomKeyDChain.name=Llavero de Cadena del Reino D
@@ -145,12 +148,13 @@ item.ultimaWeaponChain.name=Llavero de Arma Artema
 item.treasureTroveChain.name=Llavero de Tesoro Oculto
 item.starSeekerChain.name=Llavero de Explorador Estelar
 
-item.starLightChain.name=Starlight Chain
+
 item.vulpeusForetellersKeybladeChain.name=Llavero de Pronosticador Vulpeus
 item.ursusForetellersKeybladeChain.name=Llavero de Pronosticador Ursus
 item.unicornisForetellersKeybladeChain.name=Llavero de Pronosticador Unicornis
 item.leopardosForetellersKeybladeChain.name=Llavero de Pronosticador Leopardos
 item.anguisForetellersKeybladeChain.name=Llavero de Pronosticador Anguis
+
 
 item.leasKeybladeChain.name=Llavero de Llave Espada de Lea
 item.youngXehanortsKeybladeChain.name=Llavero de Llave Espada de Joven Xehanort
@@ -167,6 +171,7 @@ item.dualDiscChain.name=Invocar Disco Doble
 item.guardianBellChain.name=Invocar Guardian de la Campana
 item.skullNoiseChain.name=Invocar Ruido de Calavera
 item.woodenKeybladeChain.name=Invocar Llave Espada de Madera
+
 
 item.incompletekyebladeChain.name=Llavero de llave Espada X Incompleta
 item.kyebladeChain.name=Llavero de Llave Espada X
@@ -189,7 +194,9 @@ item.chaosRipperChain.name=Llavero de Caótica
 item.masterXehanortsKeybladeChain.name=Llavero de Llave espada del Maestro Xehanort
 item.darkgnawChain.name=Llavero de Mella Sombría
 
+
 item.zeroOneChain.name=Llavero de Cero y Uno
+
 
 item.dreamSwordChain.name=Invocar Espada de Ensueño
 item.aubadeChain.name=Llavero de Aublade
@@ -215,6 +222,7 @@ item.abaddonPlasmaChain.name=Llavero de Plasma de Abadón
 item.ominousBlightChain.name=Llavero de Plaga Omniosa
 item.missingAcheChain.name=Llavero de Dolor Pasado
 
+
 item.winnersProofChain.name=Llavero de Prueba de Victoria
 item.fatalCrestChain.name=Llavero de Emblema Fatal
 item.twoBecomeOneChain.name=Llavero de Dos Serán Uno
@@ -237,6 +245,7 @@ item.hiddenDragonChain.name=Llavero de Dragón Oculto
 item.endsoftheEarthChain.name=Llavero de Postrimería
 item.stormfallChain.name=Llavero de Argavieso
 
+
 item.destinysEmbrace.name=Abrazo del Destino
 item.waytotheDawn.name=Camino al Alba
 item.oneWingedAngel.name=Fulgor Sefárico
@@ -258,23 +267,26 @@ item.ultimaWeapon.name=Arma Artema
 item.treasureTrove.name=Tesoro Oculto
 item.starSeeker.name=Buscador Estelar
 
-item.eternalFlames.name=Eternal Flames
-item.bookOfRetribution.name=Book Of Retribution
-item.interdiction.name=Interdiction
-item.sharpShooter.name=Sharpshooter
-item.lindWorm.name=Lind Worm
-item.frozenPride.name=Frozen Pride
-item.skysplitter.name=Skysplitter
-item.lunatic.name=Lunatic
-item.appregio.name=Appregio
-item.fairGame.name=Fair Game
-item.gracefulDahlia.name=Graceful Dahlia
-item.foudre.name=Foudre
+
+item.eternalFlames.name=Llamas Eternas
+item.bookOfRetribution.name=Libro de Redistribución
+item.interdiction.name=Interdicción
+item.sharpShooter.name=Francotirador
+item.lindWorm.name=Serpiente Verde
+item.frozenPride.name=Orgullo Congelado
+item.skysplitter.name=Hiendecielos
+item.lunatic.name=Lunático
+item.appregio.name=Arpegio
+item.fairGame.name=Juego Justo
+item.gracefulDahlia.name=Dalia Graciosa
+item.foudre.name=Relámpago
+
 
 item.pureHeart.name=Corazón Puro
 item.darkHeart.name=Corazón Oscuro
 item.heart.name=Corazón
 item.kingdomHearts.name=Kingdom Hearts
+
 
 item.Sanctuary.name=Disco de Música
 item.Simple And Clean PLANITb Remix.name=Disco de Música
@@ -286,31 +298,47 @@ item.Organization XIII.name=Disco de Música
 item.No More Bugs -Bug Version-.name=Disco de Música
 item.Sinister Sundown.name=Disco de Música
 
-item.organizationHood.name=Capucha Oscura
-item.organizationCoat.name=Gabardina Oscura
-item.organizationLegs.name=Pantalones Oscuros
-item.organizationBoots.name=Botas Oscuras
+
+item.Sanctuary.desc=Sanctuary
+item.Simple And Clean PLANITb Remix.desc=Simple and Clean PLANITb Remix
+item.Musique pour la tristesse de Xion.desc=Musique pour la tristesse de Xion
+item.Birth by Sleep -A Link to the Future-.desc=A Link to the Future
+item.Dream Drop Distance -The Next Awakening-.desc=The Next Awakeing
+item.Hikari -KINGDOM Instrumental Version-.desc=Hikari
+item.Organization XIII.desc=Organization XIII
+item.No More Bugs -Bug Version-.desc=No More Bugs
+item.Sinister Sundown.desc=Sinister Sundown
+
+
+item.organizationHood.name=Capucha de Cuero Oscuro
+item.organizationCoat.name=Gabardina de Cuero Oscuro
+item.organizationLegs.name=Pantalones de Cuero Oscuro
+item.organizationBoots.name=Botas de Cuero Oscuro
+
 
 item.keybladeAHelm.name=Casco de Llave Espada
 item.keybladeAChest.name=Pechera de Llave Espada
 item.keybladeALegs.name=Grebas de Llave Espada
 item.keybladeABoots.name=Botas de Llave Espada
 
+
 item.keybladeTHelm.name=Casco de Llave Espada
 item.keybladeTChest.name=Pechera de Llave Espada
 item.keybladeTLegs.name=Grebas de Llave Espada
 item.keybladeTBoots.name=Botas de Llave Espada
+
 
 item.keybladeVHelm.name=Casco de Llave Espada
 item.keybladeVChest.name=Pechera de Llave Espada
 item.keybladeVLegs.name=Grebas de Llave Espada
 item.keybladeVBoots.name=Botas de Llave Espada
 
+
 item.keybladeEHelm.name=Casco de Llave Espada
 item.keybladeEChest.name=Pechera de Llave Espada
 item.keybladeELegs.name=Grebas de Llave Espada
 item.keybladeEBoots.name=Botas de Llave Espada
-	
+        
 item.hPOrb.name=Orbe de HP
 item.1Munny.name=1 Platín
 item.5Munny.name=5 Platines
@@ -329,9 +357,10 @@ item.2000Munny.name=2000 Platines
 item.3000Munny.name=3000 Platines
 item.4000Munny.name=4000 Platines
 item.5000Munny.name=5000 Platines
-item.6000Munny.name=¡6000 Platines!
+item.6000Munny.name=6000 Platines
 item.potion.name=Poción
 item.leatherDarkness.name=Cuero de la Oscuridad
+
 
 tile.normalBlox.name=Bloque de Error
 tile.hardBlox.name=Bloque de Error Duro
@@ -341,8 +370,8 @@ tile.rarePrizeBlox.name=Bloque de Premio Raro
 tile.dangerBlox.name=Bloque de Error Peligroso
 tile.bounceBlox.name=Bloque de Error Blando
 tile.blastBlox.name=Bloque Bomba
-tile.synthesiser.name=Sintetizador Avanzado
-tile.synthesiserMini.name=Sintetizador Básico
+tile.synthesiser.name=Sintetizador
+
 
 tile.blazingOre.name=Mena Ígnea
 tile.blazingOreN.name=Mena Ígnea
@@ -364,6 +393,7 @@ tile.darkOre.name=Mena Oscura
 tile.darkOreN.name=Mena Oscura
 tile.darkOreE.name=Mena Oscura
 tile.lucidOre.name=Mena de Ocaso
+
 
 item.blazingShard.name=Guijarro Ígneo
 item.frostShard.name=Guijarro Frío
@@ -426,6 +456,7 @@ item.orichalcum.name=Orichalcum
 item.orichalcum+.name=Orichalcum+
 item.darkMatter.name=Materia Negra
 
+
 itemgroup.KHTAB=Kingdom Keys: Kingdom Hearts
 itemgroup.KHIITAB=Kingdom Keys: Kingdom Hearts II
 itemgroup.KHCHITAB=Kingdom Keys: Kingdom Hearts Chi
@@ -436,124 +467,132 @@ itemgroup.KHDAYSTAB=Kingdom Keys: Kingdom Hearts 358/2 Days
 itemgroup.KKTAB=Kingdom Keys
 itemgroup.KKSMTAB=Kingdom Keys: Materiales de Síntesis
 
-item.kingdomKeyRecipe.name=Attack Recipe
-item.kingdomKeyDRecipe.name=Attack Recipe
-item.oathkeeperRecipe.name=Attack Recipe
-item.oblivionRecipe.name=Attack Recipe
-item.waywardWindRecipe.name=Attack Recipe
-item.rainFellRecipe.name=Attack Recipe
-item.earthShakerRecipe.name=Attack Recipe
-item.soulEaterRecipe.name=Attack Recipe
 
-item.starLightRecipe.name=Attack Recipe
-item.vulpeusForetellersKeybladeRecipe.name=Attack Recipe
-item.ursusForetellersKeybladeRecipe.name=Attack Recipe
-item.unicornisForetellersKeybladeRecipe.name=Attack Recipe
-item.leopardosForetellersKeybladeRecipe.name=Attack Recipe
-item.anguisForetellersKeybladeRecipe.name=Attack Recipe
+item.kingdomKeyRecipe.name=Receta de Ataque
+item.kingdomKeyDRecipe.name=Receta de Ataque
+item.oathkeeperRecipe.name=Receta de Ataque
+item.oblivionRecipe.name=Receta de Ataque
+item.waywardWindRecipe.name=Receta de Ataque
+item.rainFellRecipe.name=Receta de Ataque
+item.earthShakerRecipe.name=Receta de Ataque
+item.soulEaterRecipe.name=Receta de Ataque
 
-item.leasKeybladeRecipe.name=Attack Recipe
-item.youngXehanortsKeybladeRecipe.name=Attack Recipe
-item.oceanRageRecipe.name=Attack Recipe
-item.endofPainRecipe.name=Attack Recipe
-item.unboundRecipe.name=Attack Recipe
-item.sweetDreamsRecipe.name=Attack Recipe
-item.divewingRecipe.name=Attack Recipe
-item.counterpointRecipe.name=Attack Recipe
-item.allforOneRecipe.name=Attack Recipe
-item.knockoutPunchRecipe.name=Attack Recipe
-item.ferrisGearRecipe.name=Attack Recipe
-item.dualDiscRecipe.name=Attack Recipe
-item.guardianBellRecipe.name=Attack Recipe
-item.skullNoiseRecipe.name=Attack Recipe
 
-item.incompletekyebladeRecipe.name=Attack Recipe
-item.kyebladeRecipe.name=Attack Recipe
-item.lightSeekerRecipe.name=Attack Recipe
-item.lostMemoryRecipe.name=Attack Recipe
-item.frolicFlameRecipe.name=Attack Recipe
-item.masterKeeperRecipe.name=Attack Recipe
-item.brightcrestRecipe.name=Attack Recipe
-item.crownUnlimitRecipe.name=Attack Recipe
-item.noNameRecipe.name=Attack Recipe
-item.voidGearRecipe.name=Attack Recipe
-item.sweetstackRecipe.name=Attack Recipe
-item.pixiePetalRecipe.name=Attack Recipe
-item.hyperdriveRecipe.name=Attack Recipe
-item.markofaHeroRecipe.name=Attack Recipe
-item.victoryLineRecipe.name=Attack Recipe
-item.fairyStarsRecipe.name=Attack Recipe
-item.strokeofMidnightRecipe.name=Attack Recipe
-item.chaosRipperRecipe.name=Attack Recipe
-item.masterXehanortsKeybladeRecipe.name=Attack Recipe
-item.darkgnawRecipe.name=Attack Recipe
-item.woodenKeybladeRecipe.name=Attack Recipe
+item.starLightRecipe.name=Receta de Ataque
+item.vulpeusForetellersKeybladeRecipe.name=Receta de Ataque
+item.ursusForetellersKeybladeRecipe.name=Receta de Ataque
+item.unicornisForetellersKeybladeRecipe.name=Receta de Ataque
+item.leopardosForetellersKeybladeRecipe.name=Receta de Ataque
+item.anguisForetellersKeybladeRecipe.name=Receta de Ataque
 
-item.zeroOneRecipe.name=Attack Recipe
 
-item.dreamSwordRecipe.name=Attack Recipe
-item.aubadeRecipe.name=Attack Recipe
-item.umbrellaRecipe.name=Attack Recipe
-item.omegaWeaponRecipe.name=Attack Recipe
-item.twilightBlazeRecipe.name=Attack Recipe
-item.maverickFlareRecipe.name=Attack Recipe
-item.astralBlastRecipe.name=Attack Recipe
-item.darkerThanDarkRecipe.name=Attack Recipe
-item.lunarEclipseRecipe.name=Attack Recipe
-item.silentDirgeRecipe.name=Attack Recipe
-item.totalEclipseRecipe.name=Attack Recipe
-item.glimpseofDarknessRecipe.name=Attack Recipe
-item.midnightRoarRecipe.name=Attack Recipe
-item.rejectionofFateRecipe.name=Attack Recipe
-item.trueLightsFlightRecipe.name=Attack Recipe
-item.leviathanRecipe.name=Attack Recipe
-item.abyssalTideRecipe.name=Attack Recipe
-item.crownofGuiltRecipe.name=Attack Recipe
-item.signofInnocenceRecipe.name=Attack Recipe
-item.painofSolitudeRecipe.name=Attack Recipe
-item.abaddonPlasmaRecipe.name=Attack Recipe
-item.ominousBlightRecipe.name=Attack Recipe
-item.missingAcheRecipe.name=Attack Recipe
+item.leasKeybladeRecipe.name=Receta de Ataque
+item.youngXehanortsKeybladeRecipe.name=Receta de Ataque
+item.oceanRageRecipe.name=Receta de Ataque
+item.endofPainRecipe.name=Receta de Ataque
+item.unboundRecipe.name=Receta de Ataque
+item.sweetDreamsRecipe.name=Receta de Ataque
+item.divewingRecipe.name=Receta de Ataque
+item.counterpointRecipe.name=Receta de Ataque
+item.allforOneRecipe.name=Receta de Ataque
+item.knockoutPunchRecipe.name=Receta de Ataque
+item.ferrisGearRecipe.name=Receta de Ataque
+item.dualDiscRecipe.name=Receta de Ataque
+item.guardianBellRecipe.name=Receta de Ataque
+item.skullNoiseRecipe.name=Receta de Ataque
 
-item.winnersProofRecipe.name=Attack Recipe
-item.fatalCrestRecipe.name=Attack Recipe
-item.twoBecomeOneRecipe.name=Attack Recipe
-item.bondofFlameRecipe.name=Attack Recipe
-item.fenrirRecipe.name=Attack Recipe
-item.sleepingLionRecipe.name=Attack Recipe
-item.guardianSoulRecipe.name=Attack Recipe
-item.gullWingRecipe.name=Attack Recipe
-item.photonDebuggerRecipe.name=Attack Recipe
-item.sweetMemoriesRecipe.name=Attack Recipe
-item.circleofLifeRecipe.name=Attack Recipe
-item.decisivePumpkinRecipe.name=Attack Recipe
-item.wishingLampRecipe.name=Attack Recipe
-item.followtheWindRecipe.name=Attack Recipe
-item.mysteriousAbyssRecipe.name=Attack Recipe
-item.monochromeRecipe.name=Attack Recipe
-item.herosCrestRecipe.name=Attack Recipe
-item.rumblingRoseRecipe.name=Attack Recipe
-item.hiddenDragonRecipe.name=Attack Recipe
-item.endsoftheEarthRecipe.name=Attack Recipe
-item.stormfallRecipe.name=Attack Recipe
 
-item.destinysEmbraceRecipe.name=Attack Recipe
-item.waytotheDawnRecipe.name=Attack Recipe
-item.oneWingedAngelRecipe.name=Attack Recipe
-item.diamondDustRecipe.name=Attack Recipe
-item.lionheartRecipe.name=Attack Recipe
-item.metalChocoboRecipe.name=Attack Recipe
-item.spellbinderRecipe.name=Attack Recipe
-item.divineRoseRecipe.name=Attack Recipe
-item.fairyHarpRecipe.name=Attack Recipe
-item.crabClawRecipe.name=Attack Recipe
-item.wishingStarRecipe.name=Attack Recipe
-item.pumpkinHeadRecipe.name=Attack Recipe
-item.threeWishesRecipe.name=Attack Recipe
-item.jungleKingRecipe.name=Attack Recipe
-item.olympiaRecipe.name=Attack Recipe
-item.ladyLuckRecipe.name=Attack Recipe
-item.keybladeofPeoplesHeartsRecipe.name=Attack Recipe
-item.ultimaWeaponRecipe.name=Attack Recipe
-item.treasureTroveRecipe.name=Attack Recipe
-item.starSeekerRecipe.name=Attack Recipe
+item.incompletekyebladeRecipe.name=Receta de Ataque
+item.kyebladeRecipe.name=Receta de Ataque
+item.lightSeekerRecipe.name=Receta de Ataque
+item.lostMemoryRecipe.name=Receta de Ataque
+item.frolicFlameRecipe.name=Receta de Ataque
+item.masterKeeperRecipe.name=Receta de Ataque
+item.brightcrestRecipe.name=Receta de Ataque
+item.crownUnlimitRecipe.name=Receta de Ataque
+item.noNameRecipe.name=Receta de Ataque
+item.voidGearRecipe.name=Receta de Ataque
+item.sweetstackRecipe.name=Receta de Ataque
+item.pixiePetalRecipe.name=Receta de Ataque
+item.hyperdriveRecipe.name=Receta de Ataque
+item.markofaHeroRecipe.name=Receta de Ataque
+item.victoryLineRecipe.name=Receta de Ataque
+item.fairyStarsRecipe.name=Receta de Ataque
+item.strokeofMidnightRecipe.name=Receta de Ataque
+item.chaosRipperRecipe.name=Receta de Ataque
+item.masterXehanortsKeybladeRecipe.name=Receta de Ataque
+item.darkgnawRecipe.name=Receta de Ataque
+item.woodenKeybladeRecipe.name=Receta de Ataque
+
+
+item.zeroOneRecipe.name=Receta de Ataque
+
+
+item.dreamSwordRecipe.name=Receta de Ataque
+item.aubadeRecipe.name=Receta de Ataque
+item.umbrellaRecipe.name=Receta de Ataque
+item.omegaWeaponRecipe.name=Receta de Ataque
+item.twilightBlazeRecipe.name=Receta de Ataque
+item.maverickFlareRecipe.name=Receta de Ataque
+item.astralBlastRecipe.name=Receta de Ataque
+item.darkerThanDarkRecipe.name=Receta de Ataque
+item.lunarEclipseRecipe.name=Receta de Ataque
+item.silentDirgeRecipe.name=Receta de Ataque
+item.totalEclipseRecipe.name=Receta de Ataque
+item.glimpseofDarknessRecipe.name=Receta de Ataque
+item.midnightRoarRecipe.name=Receta de Ataque
+item.rejectionofFateRecipe.name=Receta de Ataque
+item.trueLightsFlightRecipe.name=Receta de Ataque
+item.leviathanRecipe.name=Receta de Ataque
+item.abyssalTideRecipe.name=Receta de Ataque
+item.crownofGuiltRecipe.name=Receta de Ataque
+item.signofInnocenceRecipe.name=Receta de Ataque
+item.painofSolitudeRecipe.name=Receta de Ataque
+item.abaddonPlasmaRecipe.name=Receta de Ataque
+item.ominousBlightRecipe.name=Receta de Ataque
+item.missingAcheRecipe.name=Receta de Ataque
+
+
+item.winnersProofRecipe.name=Receta de Ataque
+item.fatalCrestRecipe.name=Receta de Ataque
+item.twoBecomeOneRecipe.name=Receta de Ataque
+item.bondofFlameRecipe.name=Receta de Ataque
+item.fenrirRecipe.name=Receta de Ataque
+item.sleepingLionRecipe.name=Receta de Ataque
+item.guardianSoulRecipe.name=Receta de Ataque
+item.gullWingRecipe.name=Receta de Ataque
+item.photonDebuggerRecipe.name=Receta de Ataque
+item.sweetMemoriesRecipe.name=Receta de Ataque
+item.circleofLifeRecipe.name=Receta de Ataque
+item.decisivePumpkinRecipe.name=Receta de Ataque
+item.wishingLampRecipe.name=Receta de Ataque
+item.followtheWindRecipe.name=Receta de Ataque
+item.mysteriousAbyssRecipe.name=Receta de Ataque
+item.monochromeRecipe.name=Receta de Ataque
+item.herosCrestRecipe.name=Receta de Ataque
+item.rumblingRoseRecipe.name=Receta de Ataque
+item.hiddenDragonRecipe.name=Receta de Ataque
+item.endsoftheEarthRecipe.name=Receta de Ataque
+item.stormfallRecipe.name=Receta de Ataque
+
+
+item.destinysEmbraceRecipe.name=Receta de Ataque
+item.waytotheDawnRecipe.name=Receta de Ataque
+item.oneWingedAngelRecipe.name=Receta de Ataque
+item.diamondDustRecipe.name=Receta de Ataque
+item.lionheartRecipe.name=Receta de Ataque
+item.metalChocoboRecipe.name=Receta de Ataque
+item.spellbinderRecipe.name=Receta de Ataque
+item.divineRoseRecipe.name=Receta de Ataque
+item.fairyHarpRecipe.name=Receta de Ataque
+item.crabClawRecipe.name=Receta de Ataque
+item.wishingStarRecipe.name=Receta de Ataque
+item.pumpkinHeadRecipe.name=Receta de Ataque
+item.threeWishesRecipe.name=Receta de Ataque
+item.jungleKingRecipe.name=Receta de Ataque
+item.olympiaRecipe.name=Receta de Ataque
+item.ladyLuckRecipe.name=Receta de Ataque
+item.keybladeofPeoplesHeartsRecipe.name=Receta de Ataque
+item.ultimaWeaponRecipe.name=Receta de Ataque
+item.treasureTroveRecipe.name=Receta de Ataque
+item.starSeekerRecipe.name=Receta de Ataque

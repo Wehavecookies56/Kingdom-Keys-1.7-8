@@ -1,9 +1,5 @@
 package wehavecookies56.kk.core.proxies;
 
-import java.io.File;
-
-import com.jadarstudios.developercapes.DevCapes;
-
 import net.minecraftforge.client.MinecraftForgeClient;
 import wehavecookies56.kk.client.KeyBind;
 import wehavecookies56.kk.client.render.BlockRenderBlastBlox;
@@ -19,7 +15,6 @@ import wehavecookies56.kk.client.render.ItemRenderLunarEclipse;
 import wehavecookies56.kk.client.render.ItemRenderOathKeeper;
 import wehavecookies56.kk.client.render.ItemRenderOblivion;
 import wehavecookies56.kk.client.render.ItemRenderRainFell;
-import wehavecookies56.kk.client.render.ItemRenderRumblingRose;
 import wehavecookies56.kk.client.render.ItemRenderSoulEater;
 import wehavecookies56.kk.client.render.ItemRenderStarLight;
 import wehavecookies56.kk.client.render.ItemRenderTotalEclipse;
@@ -30,7 +25,6 @@ import wehavecookies56.kk.entities.EntityBlastBlox;
 import wehavecookies56.kk.entities.EntityEternalFlames;
 import wehavecookies56.kk.entities.EntityEternalFlamesProjectile;
 import wehavecookies56.kk.item.AddedItems;
-import wehavecookies56.kk.lib.Reference;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 //import com.jadarstudios.developercapes.DevCapesUtil;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -57,7 +51,6 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(AddedItems.K52, new ItemRenderTotalEclipse());
 		MinecraftForgeClient.registerItemRenderer(AddedItems.K69, new ItemRenderFenrir());
 		MinecraftForgeClient.registerItemRenderer(AddedItems.K41, new ItemRenderZeroOne());
-		MinecraftForgeClient.registerItemRenderer(AddedItems.K82, new ItemRenderRumblingRose());
 		MinecraftForgeClient.registerItemRenderer(AddedItems.BookOfRetribution, new ItemRenderBookOfRetribution());
 		MinecraftForgeClient.registerItemRenderer(AddedItems.Interdiction, new ItemRenderInterdiction());
 		MinecraftForgeClient.registerItemRenderer(AddedItems.EternalFlames, new ItemRenderEternalFlames());
@@ -68,16 +61,14 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityBlastBlox.class, new BlockRenderBlastBlox());
 		RenderingRegistry.registerEntityRenderingHandler(EntityEternalFlamesProjectile.class, new RenderSharpshooterShot2(AddedItems.EternalFlames));
 		// EntityRegistry.registerGlobalEntityID(EntityRedNocturne.class, "Red Nocturne", EntityRegistry.findGlobalUniqueEntityId(), 3515848, 12102);
-				
+
+		//Capes
+		//DevCapesUtil.addFileUrl("https://raw.github.com/Wehavecookies56/Kingdom-Keys/master/Capes.txt");
+
 	}
 
 	@Override
 	public int addArmor(String armor) {
 		return RenderingRegistry.addNewArmourRendererPrefix(armor);
-	}
-	
-	@Override
-	public void initCapes() {
-		DevCapes.getInstance().registerConfig(<CAPEJSONURL>, "kk");
 	}
 }
