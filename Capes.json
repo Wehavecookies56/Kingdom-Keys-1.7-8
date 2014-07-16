@@ -1,37 +1,25 @@
-kkdeveloper=https://raw.github.com/Wehavecookies56/Kingdom-Keys/master/Capes/DEV_CAPE.png
-kkdeveloper=wehavecookies56
-kkcontributor=https://raw.github.com/Wehavecookies56/Kingdom-Keys/master/Capes/CONTRIB_CAPE.png
-kkcontributor=EnderFurry
-kkcontributor1=https://raw.github.com/Wehavecookies56/Kingdom-Keys/master/Capes/CONTRIB_CAPE.png
-kkcontributor1=Abelatox
-kkdebug1=https://raw.github.com/Wehavecookies56/Kingdom-Keys/master/Capes/DEBUG_CAPE.png
-kkdebug1=hiiiii
-kkmodel1=https://raw.github.com/Wehavecookies56/Kingdom-Keys/master/Capes/MODEL_CAPE.png
-kkmodel1=AxusSpark
-kkmodel2=https://raw.github.com/Wehavecookies56/Kingdom-Keys/master/Capes/MODEL_CAPE.png
-kkmodel2=revoblam
 {
     "kkDev": {
-        "capeUrl": "CAPELINK GOES HERE",
+        "capeUrl": "https://raw.githubusercontent.com/Wehavecookies56/Kingdom-Keys-1.7-/master/Capes/dev_cape.png",
         "users": [
             "wehavecookies56"
         ]
     },
     "kkContrib": {
-        "capeUrl": "CAPELINK GOES HERE",
+        "capeUrl": "https://raw.githubusercontent.com/Wehavecookies56/Kingdom-Keys-1.7-/master/Capes/contrib_cape.png",
         "users": [
             "EnderFurry"
            ]
     },
     "kkModel": {
-        "capeUrl": "CAPELINK GOES HERE",
+        "capeUrl": "https://raw.githubusercontent.com/Wehavecookies56/Kingdom-Keys-1.7-/master/Capes/model_cape.png",
         "users": [
             "AxusSpark",
             "revoblam"
            ]
     },
     "kkTexturer": {
-        "capeUrl": "CAPELINK GOES HERE",
+        "capeUrl": "https://raw.githubusercontent.com/Wehavecookies56/Kingdom-Keys-1.7-/master/Capes/texturer_cape.png",
         "users": [
             "Abelatox",
             "Hartsa"
