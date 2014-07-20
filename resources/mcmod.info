@@ -1,0 +1,16 @@
+[
+{
+  "modid": "kk",
+  "name": "Kingdom Keys",
+  "description": "A mod that adds things from Kingdom hearts",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Wehavecookies56"],
+  "credits": "Abelatox for lots of help and for making spanish translations, Hartsa and Abelatox for the HD resourcepack AxuzSpark and mooshroomdragon for some 3D models",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

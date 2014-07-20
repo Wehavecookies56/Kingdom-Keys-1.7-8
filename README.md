@@ -1,4 +1,4 @@
-Kingdom-Keys-1.7-
-=================
+Kingdom-Keys
+============
 
-The new repository for the Minecraft mod Kingdom Keys
+A mod for Minecraft that adds Key blades from the game 'Kingdom Hearts' with a a full 3d model and various items from the different games

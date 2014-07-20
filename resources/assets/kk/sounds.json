@@ -1,0 +1,14 @@
+{
+    "kupo": {"category": "master", "sounds": [{"name": "kupo", "stream": false}]},
+    "summon": {"category": "player","sounds": [{"name": "summon", "stream": false}]},
+    "unsummon": {"category": "player","sounds": [{"name": "unsummon", "stream": false}]},
+    "Birth by Sleep -A Link to the Future-": {"category": "master", "records": [{"name": "Birth by Sleep -A Link to the Future-", "stream": true"}]},
+    "Dream Drop Distance - The Next Awakening": {"category": "master", "records": [{"name": "Dream Drop Distance - The Next Awakening", "stream": true"}]},
+    "Hikari -KINGDOM Instrumental Version-": {"category": "master", "records": [{"name": "Hikari -KINGDOM Instrumental Version-", "stream": true"}]},
+    "Musique pour la tristesse de Xion": {"category": "master", "records": [{"name": "Musique pour la tristesse de Xion", "stream": true"}]},
+    "No More Bugs -Bug Version-": {"category": "master", "records": [{"name": "No More Bugs -Bug Version-", "stream": true"}]},
+    "Organization XIII": {"category": "master", "records": [{"name": "Organization XIII", "stream": true"}]},
+    "Sanctuary": {"category": "master", "records": [{"name": "Sanctuary", "stream": true"}]},
+    "Simple And Clean PLANITb Remix": {"category": "master", "records": [{"name": "Simple And Clean PLANITb Remix", "stream": true"}]},
+    "Sinister Sundown": {"category": "master", "records": [{"name": "Sinister Sundown", "stream": true"}]}
+}
