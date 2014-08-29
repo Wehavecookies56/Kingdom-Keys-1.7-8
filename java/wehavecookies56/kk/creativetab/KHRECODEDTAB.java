@@ -16,6 +16,6 @@ public class KHRECODEDTAB extends CreativeTabs {
     @SideOnly(Side.CLIENT)
     public Item getTabIconItem()
     {
-        return AddedItems.K41;
+        return AddedItems.ZeroOne;
     }
 }

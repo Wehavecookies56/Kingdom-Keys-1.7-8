@@ -45,7 +45,6 @@ public class ContainerSynthesis extends Container {
 		if(slot != null && slot.getHasStack()){
 			ItemStack stack = slot.getStack();
 			ItemStack result = stack.copy();
-			
 			if(i == 36){
 				if(!mergeItemStack(stack, 0, 36, false)){
 					return null;

@@ -1,8 +1,14 @@
 package wehavecookies56.kk.lib;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.server.MinecraftServer;
+import wehavecookies56.kk.core.extendedproperties.EntityPropertyMunny;
+
 public class Strings {
 	
-	public static final String Guide = "guide";
     //Key Blades
 	public static final String Vulpeus = "vulpeusForetellersKeyblade";
 	public static final String Ursus = "ursusForetellersKeyblade";
@@ -271,6 +277,11 @@ public class Strings {
     public static final String Disc7 = "Organization XIII";
     public static final String Disc8 = "No More Bugs -Bug Version-";
     public static final String Disc9 = "Sinister Sundown";
+    public static final String Disc10 = "The 13th Anthology";
+    public static final String Disc11 = "Dearly Beloved -Symphony Version-";
+    public static final String Disc12 = "L'Oscurita Dell'Ignoto";
+    public static final String Disc13 = "Darkness of the Unknown";
+    
     //Armour
      //Organization
     public static final String OHood = "organizationHood";
@@ -426,6 +437,12 @@ public class Strings {
     public static final String Summon = "summon";
     
     //Recipes
+    public static final String MythrilShardRecipe = "mythrilShardRecipe";
+    public static final String MythrilStoneRecipe = "mythrilStoneRecipe";
+    public static final String MythrilGemRecipe = "mythrilGemRecipe";
+    public static final String MythrilCrystalRecipe = "mythrilCrystalRecipe";
+
+    
     public static final String AttackRecipe = "Attack Recipe";
     public static final String VulpeusRecipe = "vulpeusForetellersKeybladeRecipe";
 	public static final String UrsusRecipe = "ursusForetellersKeybladeRecipe";

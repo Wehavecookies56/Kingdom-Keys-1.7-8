@@ -1,33 +1,32 @@
 package wehavecookies56.kk.client;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.inventory.GuiChest;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.MinecraftServer;
 
 import org.lwjgl.input.Keyboard;
 
 import wehavecookies56.kk.KingdomKeys;
-import wehavecookies56.kk.core.packet.IPacket;
+import wehavecookies56.kk.client.gui.GuiMenu;
 import wehavecookies56.kk.core.packet.SummonPacket;
 import wehavecookies56.kk.item.AddedItems;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class KeyBind{
 
-	private static final String[] desc = {"key.summon.desc"};
+	private static final String[] desc = {"key.summon.desc", "key.menu.desc"};
 
 	public static final int SUMMON = 0;
-	private static final int[] keyValues = {Keyboard.KEY_G};
+	public static final int MENU = 1;
+	private static final int[] keyValues = {Keyboard.KEY_G, Keyboard.KEY_M};
 	private final KeyBinding[] keys;
 	@SideOnly(Side.CLIENT)
 	public KeyBind() {
@@ -45,1373 +44,1380 @@ public class KeyBind{
 		
 		EntityPlayer player = (EntityPlayer) Minecraft.getMinecraft().thePlayer;
 		
+		if (keys[MENU].isPressed()) {
+			if(Minecraft.getMinecraft().currentScreen == new GuiMenu()){
+				Minecraft.getMinecraft().displayGuiScreen(null);
+			}else if(Minecraft.getMinecraft().currentScreen == null){
+				Minecraft.getMinecraft().displayGuiScreen(new GuiMenu());
+			}
+		}
 		if (Minecraft.getMinecraft().inGameHasFocus && Minecraft.getMinecraft().theWorld.isRemote){
 			if (keys[SUMMON].isPressed()) {
 				if(Minecraft.getMinecraft().thePlayer.getHeldItem() != null){
 					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.Vulpeus){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K1c), new ItemStack(AddedItems.Vulpeus));
-						KingdomKeys.channelHandler.sendToServer(packet);
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.VulpeusChain), new ItemStack(AddedItems.Vulpeus));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K1c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.Vulpeus), new ItemStack(AddedItems.K1c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.VulpeusChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.Vulpeus), new ItemStack(AddedItems.VulpeusChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 						
 					}
 					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.Ursus){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K2c), new ItemStack(AddedItems.Ursus));
-						KingdomKeys.channelHandler.sendToServer(packet);
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.UrsusChain), new ItemStack(AddedItems.Ursus));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K2c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.Ursus), new ItemStack(AddedItems.K2c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.UrsusChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.Ursus), new ItemStack(AddedItems.UrsusChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
 					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.Unicornis){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K3c), new ItemStack(AddedItems.Unicornis));
-						KingdomKeys.channelHandler.sendToServer(packet);
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.UnicornisChain), new ItemStack(AddedItems.Unicornis));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K3c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.Unicornis), new ItemStack(AddedItems.K3c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.UnicornisChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.Unicornis), new ItemStack(AddedItems.UnicornisChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K4){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K4c), new ItemStack(AddedItems.K4));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.Leopardos){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.LeopardosChain), new ItemStack(AddedItems.Leopardos));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K4c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K4), new ItemStack(AddedItems.K4c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.LeopardosChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.Leopardos), new ItemStack(AddedItems.LeopardosChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K5){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K5c), new ItemStack(AddedItems.K5));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.Anguis){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.AnguisChain), new ItemStack(AddedItems.Anguis));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K5c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K5), new ItemStack(AddedItems.K5c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.AnguisChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.Anguis), new ItemStack(AddedItems.AnguisChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K6){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K6c), new ItemStack(AddedItems.K6));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.LeasKeyblade){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.LeasKeybladeChain), new ItemStack(AddedItems.LeasKeyblade));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K6c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K6), new ItemStack(AddedItems.K6c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.LeasKeybladeChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.LeasKeyblade), new ItemStack(AddedItems.LeasKeybladeChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K7){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K7c), new ItemStack(AddedItems.K7));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.YoungXehanortsKeyblade){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.YoungXehanortsKeybladeChain), new ItemStack(AddedItems.YoungXehanortsKeyblade));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K7c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K7), new ItemStack(AddedItems.K7c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.YoungXehanortsKeybladeChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.YoungXehanortsKeyblade), new ItemStack(AddedItems.YoungXehanortsKeybladeChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K8){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K8c), new ItemStack(AddedItems.K8));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.Oceanrage){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.OceanRageChain), new ItemStack(AddedItems.Oceanrage));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K8c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K8), new ItemStack(AddedItems.K8c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.OceanRageChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.Oceanrage), new ItemStack(AddedItems.OceanRageChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K9){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K9c), new ItemStack(AddedItems.K9));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.EndOfPain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.EndOfPainChain), new ItemStack(AddedItems.EndOfPain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K9c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K9), new ItemStack(AddedItems.K9c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.EndOfPainChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.EndOfPain), new ItemStack(AddedItems.EndOfPainChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K10){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K10c), new ItemStack(AddedItems.K10));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.Unbound){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.UnboundChain), new ItemStack(AddedItems.Unbound));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K10){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K10), new ItemStack(AddedItems.K10c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.UnboundChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.Unbound), new ItemStack(AddedItems.UnboundChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K11){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K11c), new ItemStack(AddedItems.K11));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.SweetDreams){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.SweetDreamsChain), new ItemStack(AddedItems.SweetDreams));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K11c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K11), new ItemStack(AddedItems.K11c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.SweetDreamsChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.SweetDreams), new ItemStack(AddedItems.SweetDreamsChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K12){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K12c), new ItemStack(AddedItems.K12));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.DiveWing){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.DiveWingChain), new ItemStack(AddedItems.DiveWing));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K12c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K12), new ItemStack(AddedItems.K12c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.DiveWingChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.DiveWing), new ItemStack(AddedItems.DiveWingChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K13){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K13c), new ItemStack(AddedItems.K13));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.Counterpoint){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.CounterpointChain), new ItemStack(AddedItems.Counterpoint));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K13c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K13), new ItemStack(AddedItems.K13c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.CounterpointChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.Counterpoint), new ItemStack(AddedItems.CounterpointChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K14){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K14c), new ItemStack(AddedItems.K14));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.AllForOne){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.AllForOneChain), new ItemStack(AddedItems.AllForOne));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K14c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K14), new ItemStack(AddedItems.K14c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.AllForOneChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.AllForOne), new ItemStack(AddedItems.AllForOneChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K15){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K15c), new ItemStack(AddedItems.K15));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.KnockoutPunch){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.KnockoutPunchChain), new ItemStack(AddedItems.KnockoutPunch));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K15c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K15), new ItemStack(AddedItems.K15c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.KnockoutPunchChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.KnockoutPunch), new ItemStack(AddedItems.KnockoutPunchChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K16){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K16c), new ItemStack(AddedItems.K16));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.FerrisGear){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.FerrisGearChain), new ItemStack(AddedItems.FerrisGear));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K16c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K16), new ItemStack(AddedItems.K16c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.FerrisGearChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.FerrisGear), new ItemStack(AddedItems.FerrisGearChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K17){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K17c), new ItemStack(AddedItems.K17));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.DualDisc){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.DualDiscChain), new ItemStack(AddedItems.DualDisc));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K17c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K17), new ItemStack(AddedItems.K17c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.DualDiscChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.DualDisc), new ItemStack(AddedItems.DualDiscChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K18){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K18c), new ItemStack(AddedItems.K18));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.GuardianBell){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.GuardianBellChain), new ItemStack(AddedItems.GuardianBell));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K18c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K18), new ItemStack(AddedItems.K18c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.GuardianBellChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.GuardianBell), new ItemStack(AddedItems.GuardianBellChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K19){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K19c), new ItemStack(AddedItems.K19));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.SkullNoise){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.SkullNoiseChain), new ItemStack(AddedItems.SkullNoise));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K19c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K19), new ItemStack(AddedItems.K19c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.SkullNoiseChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.SkullNoise), new ItemStack(AddedItems.SkullNoiseChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K20){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K20c), new ItemStack(AddedItems.K20));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.WoodenKeyblade){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.WoodenKeybladeChain), new ItemStack(AddedItems.WoodenKeyblade));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K20){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K20), new ItemStack(AddedItems.K20c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.WoodenKeybladeChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.WoodenKeyblade), new ItemStack(AddedItems.WoodenKeybladeChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K21){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K21c), new ItemStack(AddedItems.K21));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.KyebladeBroken){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.KyebladeBrokenChain), new ItemStack(AddedItems.KyebladeBroken));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K21c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K21), new ItemStack(AddedItems.K21c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.KyebladeBrokenChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.KyebladeBroken), new ItemStack(AddedItems.KyebladeBrokenChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K22){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K22c), new ItemStack(AddedItems.K22));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.Kyeblade){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.KyebladeChain), new ItemStack(AddedItems.Kyeblade));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K22c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K22), new ItemStack(AddedItems.K22c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.KyebladeChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.Kyeblade), new ItemStack(AddedItems.KyebladeChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K23){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K23c), new ItemStack(AddedItems.K23));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.Lightseeker){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.LightSeekerChain), new ItemStack(AddedItems.Lightseeker));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K23c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K23), new ItemStack(AddedItems.K23c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.LightSeekerChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.Lightseeker), new ItemStack(AddedItems.LightSeekerChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K24){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K24c), new ItemStack(AddedItems.K24));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.LostMemory){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.LostMemoryChain), new ItemStack(AddedItems.LostMemory));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K24c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K24), new ItemStack(AddedItems.K24c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.LostMemoryChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.LostMemory), new ItemStack(AddedItems.LostMemoryChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K25){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K25c), new ItemStack(AddedItems.K25));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.FrolicFlame){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.FrolicFlameChain), new ItemStack(AddedItems.FrolicFlame));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K25c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K25), new ItemStack(AddedItems.K25c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.FrolicFlameChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.FrolicFlame), new ItemStack(AddedItems.FrolicFlameChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K26){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K26c), new ItemStack(AddedItems.K26));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.MasterKeeper){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.MasterKeeperChain), new ItemStack(AddedItems.MasterKeeper));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K26c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K26), new ItemStack(AddedItems.K26c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.MasterKeeperChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.MasterKeeper), new ItemStack(AddedItems.MasterKeeperChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K27){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K27c), new ItemStack(AddedItems.K27));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.BrightCrest){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.BrightCrestChain), new ItemStack(AddedItems.BrightCrest));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K27c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K27), new ItemStack(AddedItems.K27c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.BrightCrestChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.BrightCrest), new ItemStack(AddedItems.BrightCrestChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K28){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K28c), new ItemStack(AddedItems.K28));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.CrownUnlimit){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.CrownUnlimitChain), new ItemStack(AddedItems.CrownUnlimit));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K28c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K28), new ItemStack(AddedItems.K28c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.CrownUnlimitChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.CrownUnlimit), new ItemStack(AddedItems.CrownUnlimitChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K29){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K29c), new ItemStack(AddedItems.K29));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.NoName){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.NoNameChain), new ItemStack(AddedItems.NoName));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K29c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K29), new ItemStack(AddedItems.K29c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.NoNameChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.NoName), new ItemStack(AddedItems.NoNameChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K30){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K30c), new ItemStack(AddedItems.K30));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.VoidGear){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.VoidGearChain), new ItemStack(AddedItems.VoidGear));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K30){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K30), new ItemStack(AddedItems.K30c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.VoidGearChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.VoidGear), new ItemStack(AddedItems.VoidGearChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K31){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K31c), new ItemStack(AddedItems.K31));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.SweetStack){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.SweetStackChain), new ItemStack(AddedItems.SweetStack));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K31c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K31), new ItemStack(AddedItems.K31c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.SweetStackChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.SweetStack), new ItemStack(AddedItems.SweetStackChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K32){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K32c), new ItemStack(AddedItems.K32));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.PixiePetal){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.PixiePetalChain), new ItemStack(AddedItems.PixiePetal));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K32c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K32), new ItemStack(AddedItems.K32c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.PixiePetalChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.PixiePetal), new ItemStack(AddedItems.PixiePetalChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K33){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K33c), new ItemStack(AddedItems.K33));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.Hyperdrive){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.HyperdriveChain), new ItemStack(AddedItems.Hyperdrive));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K33c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K33), new ItemStack(AddedItems.K33c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.HyperdriveChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.Hyperdrive), new ItemStack(AddedItems.HyperdriveChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K34){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K34c), new ItemStack(AddedItems.K34));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.MarkOfAHero){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.MarkOfAHeroChain), new ItemStack(AddedItems.MarkOfAHero));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K34c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K34), new ItemStack(AddedItems.K34c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.MarkOfAHeroChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.MarkOfAHero), new ItemStack(AddedItems.MarkOfAHeroChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K35){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K35c), new ItemStack(AddedItems.K35));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.VictoryLine){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.VictoryLineChain), new ItemStack(AddedItems.VictoryLine));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K35c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K35), new ItemStack(AddedItems.K35c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.VictoryLineChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.VictoryLine), new ItemStack(AddedItems.VictoryLineChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K36){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K36c), new ItemStack(AddedItems.K36));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.FairyStars){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.FairyStarsChain), new ItemStack(AddedItems.FairyStars));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K36c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K36), new ItemStack(AddedItems.K36c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.FairyStarsChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.FairyStars), new ItemStack(AddedItems.FairyStarsChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K37){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K37c), new ItemStack(AddedItems.K37));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.StrokeOfMidnight){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.StrokeOfMidnightChain), new ItemStack(AddedItems.StrokeOfMidnight));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K37c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K37), new ItemStack(AddedItems.K37c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.StrokeOfMidnightChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.StrokeOfMidnight), new ItemStack(AddedItems.StrokeOfMidnightChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K38){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K38c), new ItemStack(AddedItems.K38));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.ChaosRipper){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.ChaosRipperChain), new ItemStack(AddedItems.ChaosRipper));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K38c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K38), new ItemStack(AddedItems.K38c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.ChaosRipperChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.ChaosRipper), new ItemStack(AddedItems.ChaosRipperChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K39){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K39c), new ItemStack(AddedItems.K39));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.XehanortsKeyblade){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.XehanortsKeybladeChain), new ItemStack(AddedItems.XehanortsKeyblade));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K39c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K39), new ItemStack(AddedItems.K39c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.XehanortsKeybladeChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.XehanortsKeyblade), new ItemStack(AddedItems.XehanortsKeybladeChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K40){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K40c), new ItemStack(AddedItems.K40));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.Darkgnaw){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.DarkgnawChain), new ItemStack(AddedItems.Darkgnaw));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K40){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K40), new ItemStack(AddedItems.K40c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.DarkgnawChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.Darkgnaw), new ItemStack(AddedItems.DarkgnawChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K41){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K41c), new ItemStack(AddedItems.K41));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.ZeroOne){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.ZeroOneChain), new ItemStack(AddedItems.ZeroOne));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K41c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K41), new ItemStack(AddedItems.K41c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.ZeroOneChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.ZeroOne), new ItemStack(AddedItems.ZeroOneChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K42){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K42c), new ItemStack(AddedItems.K42));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.DreamSword){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.DreamSwordChain), new ItemStack(AddedItems.DreamSword));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K42c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K42), new ItemStack(AddedItems.K42c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.DreamSwordChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.DreamSword), new ItemStack(AddedItems.DreamSwordChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K43){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K43c), new ItemStack(AddedItems.K43));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.Aubade){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.AubadeChain), new ItemStack(AddedItems.Aubade));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K43c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K43), new ItemStack(AddedItems.K43c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.AubadeChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.Aubade), new ItemStack(AddedItems.AubadeChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K44){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K44c), new ItemStack(AddedItems.K44));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.Umbrella){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.UmbrellaChain), new ItemStack(AddedItems.Umbrella));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K44c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K44), new ItemStack(AddedItems.K44c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.UmbrellaChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.Umbrella), new ItemStack(AddedItems.UmbrellaChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K45){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K45c), new ItemStack(AddedItems.K45));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.OmegaWeapon){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.OmegaWeaponChain), new ItemStack(AddedItems.OmegaWeapon));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K45c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K45), new ItemStack(AddedItems.K45c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.OmegaWeaponChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.OmegaWeapon), new ItemStack(AddedItems.OmegaWeaponChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K46){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K46c), new ItemStack(AddedItems.K46));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.TwilightBlaze){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.TwilightBlazeChain), new ItemStack(AddedItems.TwilightBlaze));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K46c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K46), new ItemStack(AddedItems.K46c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.TwilightBlazeChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.TwilightBlaze), new ItemStack(AddedItems.TwilightBlazeChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K47){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K47c), new ItemStack(AddedItems.K47));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.MaverickFlare){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.MaverickFlareChain), new ItemStack(AddedItems.MaverickFlare));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K47c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K47), new ItemStack(AddedItems.K47c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.MaverickFlareChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.MaverickFlare), new ItemStack(AddedItems.MaverickFlareChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K48){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K48c), new ItemStack(AddedItems.K48));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.AstralBlast){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.AstralBlastChain), new ItemStack(AddedItems.AstralBlast));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K48c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K48), new ItemStack(AddedItems.K48c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.AstralBlastChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.AstralBlast), new ItemStack(AddedItems.AstralBlastChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K49){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K49c), new ItemStack(AddedItems.K49));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.DarkerThanDark){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.DarkerThanDarkChain), new ItemStack(AddedItems.DarkerThanDark));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K49c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K49), new ItemStack(AddedItems.K49c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.DarkerThanDarkChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.DarkerThanDark), new ItemStack(AddedItems.DarkerThanDarkChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K50){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K50c), new ItemStack(AddedItems.K50));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.LunarEclipse){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.LunarEclipseChain), new ItemStack(AddedItems.LunarEclipse));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K50){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K50), new ItemStack(AddedItems.K50c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.LunarEclipseChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.LunarEclipse), new ItemStack(AddedItems.LunarEclipseChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K51){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K51c), new ItemStack(AddedItems.K51));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.SilentDirge){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.SilentDirgeChain), new ItemStack(AddedItems.SilentDirge));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K51c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K51), new ItemStack(AddedItems.K51c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.SilentDirgeChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.SilentDirge), new ItemStack(AddedItems.SilentDirgeChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K52){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K52c), new ItemStack(AddedItems.K52));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.TotalEclipse){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.TotalEclipseChain), new ItemStack(AddedItems.TotalEclipse));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K52c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K52), new ItemStack(AddedItems.K52c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.TotalEclipseChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.TotalEclipse), new ItemStack(AddedItems.TotalEclipseChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K53){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K53c), new ItemStack(AddedItems.K53));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.GlimpseOfDarkness){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.GlimpseOfDarknessChain), new ItemStack(AddedItems.GlimpseOfDarkness));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K53c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K53), new ItemStack(AddedItems.K53c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.GlimpseOfDarknessChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.GlimpseOfDarkness), new ItemStack(AddedItems.GlimpseOfDarknessChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K54){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K54c), new ItemStack(AddedItems.K54));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.MidnightRoar){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.MidnightRoarChain), new ItemStack(AddedItems.MidnightRoar));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K54c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K54), new ItemStack(AddedItems.K54c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.MidnightRoarChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.MidnightRoar), new ItemStack(AddedItems.MidnightRoarChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K55){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K55c), new ItemStack(AddedItems.K55));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.RejectionOfFate){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.RejectionOfFateChain), new ItemStack(AddedItems.RejectionOfFate));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K55c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K55), new ItemStack(AddedItems.K55c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.RejectionOfFateChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.RejectionOfFate), new ItemStack(AddedItems.RejectionOfFateChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K56){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K56c), new ItemStack(AddedItems.K56));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.TrueLightsFlight){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.TrueLightsFlightChain), new ItemStack(AddedItems.TrueLightsFlight));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K56c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K56), new ItemStack(AddedItems.K56c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.TrueLightsFlightChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.TrueLightsFlight), new ItemStack(AddedItems.TrueLightsFlightChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K57){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K57c), new ItemStack(AddedItems.K57));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.Leviathan){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.LeviathanChain), new ItemStack(AddedItems.Leviathan));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K57c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K57), new ItemStack(AddedItems.K57c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.LeviathanChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.Leviathan), new ItemStack(AddedItems.LeviathanChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K58){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K58c), new ItemStack(AddedItems.K58));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.AbyssalTide){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.AbyssalTideChain), new ItemStack(AddedItems.AbyssalTide));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K58c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K58), new ItemStack(AddedItems.K58c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.AbyssalTideChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.AbyssalTide), new ItemStack(AddedItems.AbyssalTideChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K59){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K59c), new ItemStack(AddedItems.K59));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.CrownOfGuilt){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.CrownOfGuiltChain), new ItemStack(AddedItems.CrownOfGuilt));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K59c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K59), new ItemStack(AddedItems.K59c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.CrownOfGuiltChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.CrownOfGuilt), new ItemStack(AddedItems.CrownOfGuiltChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K60){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K60c), new ItemStack(AddedItems.K60));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.SignOfInnocence){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.SignOfInnocenceChain), new ItemStack(AddedItems.SignOfInnocence));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K60){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K60), new ItemStack(AddedItems.K60c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.SignOfInnocenceChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.SignOfInnocence), new ItemStack(AddedItems.SignOfInnocenceChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K61){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K61c), new ItemStack(AddedItems.K61));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.PainOfSolitude){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.PainOfSolitudeChain), new ItemStack(AddedItems.PainOfSolitude));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K61c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K61), new ItemStack(AddedItems.K61c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.PainOfSolitudeChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.PainOfSolitude), new ItemStack(AddedItems.PainOfSolitudeChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K62){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K62c), new ItemStack(AddedItems.K62));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.AbaddonPlasma){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.AbaddonPlasmaChain), new ItemStack(AddedItems.AbaddonPlasma));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K62c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K62), new ItemStack(AddedItems.K62c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.AbaddonPlasmaChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.AbaddonPlasma), new ItemStack(AddedItems.AbaddonPlasmaChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K63){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K63c), new ItemStack(AddedItems.K63));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.OminousBlight){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.OminousBlightChain), new ItemStack(AddedItems.OminousBlight));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K63c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K63), new ItemStack(AddedItems.K63c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.OminousBlightChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.OminousBlight), new ItemStack(AddedItems.OminousBlightChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K64){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K64c), new ItemStack(AddedItems.K64));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.MissingAche){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.MissingAcheChain), new ItemStack(AddedItems.MissingAche));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K64c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K64), new ItemStack(AddedItems.K64c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.MissingAcheChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.MissingAche), new ItemStack(AddedItems.MissingAcheChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K65){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K65c), new ItemStack(AddedItems.K65));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.WinnersProof){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.WinnersProofChain), new ItemStack(AddedItems.WinnersProof));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K65c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K65), new ItemStack(AddedItems.K65c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.WinnersProofChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.WinnersProof), new ItemStack(AddedItems.WinnersProofChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K66){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K66c), new ItemStack(AddedItems.K66));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.FatalCrest){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.FatalCrestChain), new ItemStack(AddedItems.FatalCrest));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K66c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K66), new ItemStack(AddedItems.K66c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.FatalCrestChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.FatalCrest), new ItemStack(AddedItems.FatalCrestChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K67){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K67c), new ItemStack(AddedItems.K67));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.TwoBecomesOne){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.TwoBecomesOneChain), new ItemStack(AddedItems.TwoBecomesOne));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K67c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K67), new ItemStack(AddedItems.K67c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.TwoBecomesOneChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.TwoBecomesOne), new ItemStack(AddedItems.TwoBecomesOneChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K68){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K68c), new ItemStack(AddedItems.K68));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.BondOfFlames){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.BondOfFlamesChain), new ItemStack(AddedItems.BondOfFlames));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K68c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K68), new ItemStack(AddedItems.K68c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.BondOfFlamesChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.BondOfFlames), new ItemStack(AddedItems.BondOfFlamesChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K69){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K69c), new ItemStack(AddedItems.K69));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.Fenrir){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.FenrirChain), new ItemStack(AddedItems.Fenrir));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K69c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K69), new ItemStack(AddedItems.K69c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.FenrirChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.Fenrir), new ItemStack(AddedItems.FenrirChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K70){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K70c), new ItemStack(AddedItems.K70));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.SleepingLion){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.SleepingLionChain), new ItemStack(AddedItems.SleepingLion));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K70){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K70), new ItemStack(AddedItems.K70c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.SleepingLionChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.SleepingLion), new ItemStack(AddedItems.SleepingLionChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 						
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K71){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K71c), new ItemStack(AddedItems.K71));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.GuardianSoul){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.GuardianSoulChain), new ItemStack(AddedItems.GuardianSoul));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 						
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K71c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K71), new ItemStack(AddedItems.K71c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.GuardianSoulChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.GuardianSoul), new ItemStack(AddedItems.GuardianSoulChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K72){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K72c), new ItemStack(AddedItems.K72));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.Gullwing){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.GullWingChain), new ItemStack(AddedItems.Gullwing));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K72c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K72), new ItemStack(AddedItems.K72c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.GullWingChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.Gullwing), new ItemStack(AddedItems.GullWingChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K73){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K73c), new ItemStack(AddedItems.K73));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.PhotonDebugger){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.PhotonDebuggerChain), new ItemStack(AddedItems.PhotonDebugger));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K73c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K73), new ItemStack(AddedItems.K73c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.PhotonDebuggerChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.PhotonDebugger), new ItemStack(AddedItems.PhotonDebuggerChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K74){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K74c), new ItemStack(AddedItems.K74));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.SweetMemories){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.SweetMemoriesChain), new ItemStack(AddedItems.SweetMemories));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K74c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K74), new ItemStack(AddedItems.K74c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.SweetMemoriesChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.SweetMemories), new ItemStack(AddedItems.SweetMemoriesChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K75){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K75c), new ItemStack(AddedItems.K75));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.CircleOfLife){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.CircleOfLifeChain), new ItemStack(AddedItems.CircleOfLife));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K75c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K75), new ItemStack(AddedItems.K75c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.CircleOfLifeChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.CircleOfLife), new ItemStack(AddedItems.CircleOfLifeChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K76){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K76c), new ItemStack(AddedItems.K76));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.DecisivePumpkin){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.DecisivePumpkinChain), new ItemStack(AddedItems.DecisivePumpkin));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K76c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K76), new ItemStack(AddedItems.K76c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.DecisivePumpkinChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.DecisivePumpkin), new ItemStack(AddedItems.DecisivePumpkinChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K77){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K77c), new ItemStack(AddedItems.K77));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.WishingLamp){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.WishingLampChain), new ItemStack(AddedItems.WishingLamp));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K77c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K77), new ItemStack(AddedItems.K77c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.WishingLampChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.WishingLamp), new ItemStack(AddedItems.WishingLampChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K78){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K78c), new ItemStack(AddedItems.K78));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.FollowTheWind){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.FollowTheWindChain), new ItemStack(AddedItems.FollowTheWind));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K78c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K78), new ItemStack(AddedItems.K78c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.FollowTheWindChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.FollowTheWind), new ItemStack(AddedItems.FollowTheWindChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K79){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K79c), new ItemStack(AddedItems.K79));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.MysteriousAbyss){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.MysteriousAbyssChain), new ItemStack(AddedItems.MysteriousAbyss));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K79c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K79), new ItemStack(AddedItems.K79c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.MysteriousAbyssChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.MysteriousAbyss), new ItemStack(AddedItems.MysteriousAbyssChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K80){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K80c), new ItemStack(AddedItems.K80));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.Monochrome){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.MonochromeChain), new ItemStack(AddedItems.Monochrome));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K80){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K80), new ItemStack(AddedItems.K80c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.MonochromeChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.Monochrome), new ItemStack(AddedItems.MonochromeChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K81){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K81c), new ItemStack(AddedItems.K81));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.HerosCrest){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.HerosCrestChain), new ItemStack(AddedItems.HerosCrest));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K81c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K81), new ItemStack(AddedItems.K81c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.HerosCrestChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.HerosCrest), new ItemStack(AddedItems.HerosCrestChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K82){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K82c), new ItemStack(AddedItems.K82));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.RumblingRose){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.RumblingRoseChain), new ItemStack(AddedItems.RumblingRose));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K82c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K82), new ItemStack(AddedItems.K82c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.RumblingRoseChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.RumblingRose), new ItemStack(AddedItems.RumblingRoseChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K83){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K83c), new ItemStack(AddedItems.K83));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.HiddenDragon){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.HiddenDragonChain), new ItemStack(AddedItems.HiddenDragon));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K83c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K83), new ItemStack(AddedItems.K83c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.HiddenDragonChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.HiddenDragon), new ItemStack(AddedItems.HiddenDragonChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K84){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K84c), new ItemStack(AddedItems.K84));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.EndsOfEarth){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.EndsOfEarthChain), new ItemStack(AddedItems.EndsOfEarth));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K84c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K84), new ItemStack(AddedItems.K84c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.EndsOfEarthChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.EndsOfEarth), new ItemStack(AddedItems.EndsOfEarthChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K85){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K85c), new ItemStack(AddedItems.K85));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.Stormfall){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.StormfallChain), new ItemStack(AddedItems.Stormfall));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K85c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K85), new ItemStack(AddedItems.K85c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.StormfallChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.Stormfall), new ItemStack(AddedItems.StormfallChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K86){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K86c), new ItemStack(AddedItems.K86));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.DestinysEmbrace){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.DestinysEmbraceChain), new ItemStack(AddedItems.DestinysEmbrace));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K86c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K86), new ItemStack(AddedItems.K86c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.DestinysEmbraceChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.DestinysEmbrace), new ItemStack(AddedItems.DestinysEmbraceChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K87){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K87c), new ItemStack(AddedItems.K87));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.WayToDawn){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.WayToDawnChain), new ItemStack(AddedItems.WayToDawn));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K87c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K87), new ItemStack(AddedItems.K87c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.WayToDawnChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.WayToDawn), new ItemStack(AddedItems.WayToDawnChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K88){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K88c), new ItemStack(AddedItems.K88));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.OneWingedAngel){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.OneWingedAngelChain), new ItemStack(AddedItems.OneWingedAngel));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K88c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K88), new ItemStack(AddedItems.K88c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.OneWingedAngelChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.OneWingedAngel), new ItemStack(AddedItems.OneWingedAngelChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K89){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K89c), new ItemStack(AddedItems.K89));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.DiamondDust){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.DiamondDustChain), new ItemStack(AddedItems.DiamondDust));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K89c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K89), new ItemStack(AddedItems.K89c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.DiamondDustChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.DiamondDust), new ItemStack(AddedItems.DiamondDustChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K90){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K90c), new ItemStack(AddedItems.K90));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.LionHeart){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.LionHeartChain), new ItemStack(AddedItems.LionHeart));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K90c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K90), new ItemStack(AddedItems.K90c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.LionHeartChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.LionHeart), new ItemStack(AddedItems.LionHeartChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K91){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K91c), new ItemStack(AddedItems.K91));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.MetalChocobo){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.MetalChocoboChain), new ItemStack(AddedItems.MetalChocobo));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K91c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K91), new ItemStack(AddedItems.K91c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.MetalChocoboChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.MetalChocobo), new ItemStack(AddedItems.MetalChocoboChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K92){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K92c), new ItemStack(AddedItems.K92));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.SpellBinder){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.SpellBinderChain), new ItemStack(AddedItems.SpellBinder));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K92c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K92), new ItemStack(AddedItems.K92c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.SpellBinderChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.SpellBinder), new ItemStack(AddedItems.SpellBinderChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K93){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K93c), new ItemStack(AddedItems.K93));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.DivineRose){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.DivineRoseChain), new ItemStack(AddedItems.DivineRose));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K93c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K93), new ItemStack(AddedItems.K93c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.DivineRoseChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.DivineRose), new ItemStack(AddedItems.DivineRoseChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K94){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K94c), new ItemStack(AddedItems.K94));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.FairyHarp){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.FairyHarpChain), new ItemStack(AddedItems.FairyHarp));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K94c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K94), new ItemStack(AddedItems.K94c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.FairyHarpChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.FairyHarp), new ItemStack(AddedItems.FairyHarpChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K95){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K95c), new ItemStack(AddedItems.K95));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.CrabClaw){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.CrabClawChain), new ItemStack(AddedItems.CrabClaw));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K95c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K95), new ItemStack(AddedItems.K95c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.CrabClawChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.CrabClaw), new ItemStack(AddedItems.CrabClawChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K96){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K96c), new ItemStack(AddedItems.K96));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.WishingStar){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.WishingStarChain), new ItemStack(AddedItems.WishingStar));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K96c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K96), new ItemStack(AddedItems.K96c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.WishingStarChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.WishingStar), new ItemStack(AddedItems.WishingStarChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K97){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K97c), new ItemStack(AddedItems.K97));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.PumpkinHead){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.PumpkinHeadChain), new ItemStack(AddedItems.PumpkinHead));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K97c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K97), new ItemStack(AddedItems.K97c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.PumpkinHeadChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.PumpkinHead), new ItemStack(AddedItems.PumpkinHeadChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K98){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K98c), new ItemStack(AddedItems.K98));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.ThreeWishes){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.ThreeWishesChain), new ItemStack(AddedItems.ThreeWishes));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K98c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K98), new ItemStack(AddedItems.K98c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.ThreeWishesChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.ThreeWishes), new ItemStack(AddedItems.ThreeWishesChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K99){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K99c), new ItemStack(AddedItems.K99));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.JungleKing){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.JungleKingChain), new ItemStack(AddedItems.JungleKing));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K99c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K99), new ItemStack(AddedItems.K99c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.JungleKingChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.JungleKing), new ItemStack(AddedItems.JungleKingChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K100){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K100c), new ItemStack(AddedItems.K100));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.Olympia){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.OlympiaChain), new ItemStack(AddedItems.Olympia));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K100c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K100), new ItemStack(AddedItems.K100c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.OlympiaChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.Olympia), new ItemStack(AddedItems.OlympiaChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K101){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K101c), new ItemStack(AddedItems.K101));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.LadyLuck){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.LadyLuckChain), new ItemStack(AddedItems.LadyLuck));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K101c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K101), new ItemStack(AddedItems.K101c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.LadyLuckChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.LadyLuck), new ItemStack(AddedItems.LadyLuckChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K102){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K102c), new ItemStack(AddedItems.K102));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.PeoplesHearts){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.PeoplesHeartsChain), new ItemStack(AddedItems.PeoplesHearts));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K102c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K102), new ItemStack(AddedItems.K102c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.PeoplesHeartsChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.PeoplesHearts), new ItemStack(AddedItems.PeoplesHeartsChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K103){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K103c), new ItemStack(AddedItems.K103));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.UltimaWeaopon){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.UltimaWeaponChain), new ItemStack(AddedItems.UltimaWeaopon));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K103c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K103), new ItemStack(AddedItems.K103c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.UltimaWeaponChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.UltimaWeaopon), new ItemStack(AddedItems.UltimaWeaponChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K104){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K104c), new ItemStack(AddedItems.K104));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.TreasureTrove){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.TreasureTroveChain), new ItemStack(AddedItems.TreasureTrove));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K104c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K104), new ItemStack(AddedItems.K104c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.TreasureTroveChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.TreasureTrove), new ItemStack(AddedItems.TreasureTroveChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K105){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K105c), new ItemStack(AddedItems.K105));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.StarSeeker){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.StarseekerChain), new ItemStack(AddedItems.StarSeeker));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K105c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K105), new ItemStack(AddedItems.K105c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.StarseekerChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.StarSeeker), new ItemStack(AddedItems.StarseekerChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K106){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K106c), new ItemStack(AddedItems.K106));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.SoulEater){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.SoulEaterChain), new ItemStack(AddedItems.SoulEater));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K106c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K106), new ItemStack(AddedItems.K106c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.SoulEaterChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.SoulEater), new ItemStack(AddedItems.SoulEaterChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K107){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K107c), new ItemStack(AddedItems.K107));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.StarLight){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.StarlightChain), new ItemStack(AddedItems.StarLight));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K107c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K107), new ItemStack(AddedItems.K107c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.StarlightChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.StarLight), new ItemStack(AddedItems.StarlightChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K108){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K108c), new ItemStack(AddedItems.K108));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.Rainfell){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.RainfellChain), new ItemStack(AddedItems.Rainfell));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K108c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K108), new ItemStack(AddedItems.K108c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.RainfellChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.Rainfell), new ItemStack(AddedItems.RainfellChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K109){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K109c), new ItemStack(AddedItems.K109));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.EarthShaker){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.EarthShakerChain), new ItemStack(AddedItems.EarthShaker));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K109c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K109), new ItemStack(AddedItems.K109c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.EarthShakerChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.EarthShaker), new ItemStack(AddedItems.EarthShakerChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K110){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K110c), new ItemStack(AddedItems.K110));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.WaywardWind){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.WaywardWindChain), new ItemStack(AddedItems.WaywardWind));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K110){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K110), new ItemStack(AddedItems.K110c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.WaywardWindChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.WaywardWind), new ItemStack(AddedItems.WaywardWindChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K111){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K111c), new ItemStack(AddedItems.K111));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.KingdomKey){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.KingdomKeyChain), new ItemStack(AddedItems.KingdomKey));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K111c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K111), new ItemStack(AddedItems.K111c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.KingdomKeyChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.KingdomKey), new ItemStack(AddedItems.KingdomKeyChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K112){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K112c), new ItemStack(AddedItems.K112));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.Oathkeeper){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.OathkeeperChain), new ItemStack(AddedItems.Oathkeeper));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K112c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K112), new ItemStack(AddedItems.K112c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.OathkeeperChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.Oathkeeper), new ItemStack(AddedItems.OathkeeperChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K113){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K113c), new ItemStack(AddedItems.K113));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.KingdomKeyD){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.KingdomKeyDChain), new ItemStack(AddedItems.KingdomKeyD));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K113c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K113), new ItemStack(AddedItems.K113c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.KingdomKeyDChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.KingdomKeyD), new ItemStack(AddedItems.KingdomKeyDChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K114){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K114c), new ItemStack(AddedItems.K114));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.Oblivion){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.OblivionChain), new ItemStack(AddedItems.Oblivion));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:summon", 1F, 1F);
 
 					}
-					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.K114c){
-						IPacket packet = new SummonPacket(new ItemStack(AddedItems.K114), new ItemStack(AddedItems.K114c));
-						KingdomKeys.channelHandler.sendToServer(packet);
+					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.OblivionChain){
+						IMessage packet = new SummonPacket(new ItemStack(AddedItems.Oblivion), new ItemStack(AddedItems.OblivionChain));
+						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
 
 					}

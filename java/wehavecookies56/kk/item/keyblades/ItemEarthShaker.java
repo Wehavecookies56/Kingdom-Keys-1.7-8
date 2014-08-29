@@ -25,7 +25,6 @@ public class ItemEarthShaker extends ItemSword implements IBattlegearWeapon{
     public ItemEarthShaker(ToolMaterial earthShakerMaterial) {
         super(earthShakerMaterial);
         this.setCreativeTab(KingdomKeys.KHBBSTAB);
-        this.setContainerItem(AddedItems.K109c);
     }
     public void registerIcons(IIconRegister par1IconRegister) {
         itemIcon = par1IconRegister.registerIcon(Reference.MOD_ID + ":" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".")+1));

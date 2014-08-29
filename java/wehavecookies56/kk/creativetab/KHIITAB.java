@@ -16,6 +16,6 @@ public class KHIITAB extends CreativeTabs {
     @SideOnly(Side.CLIENT)
     public Item getTabIconItem()
     {
-        return AddedItems.K112;
+        return AddedItems.Oathkeeper;
     }
 }

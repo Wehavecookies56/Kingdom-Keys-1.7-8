@@ -4,7 +4,6 @@ import java.util.List;
 
 import mods.battlegear2.api.PlayerEventChild.OffhandAttackEvent;
 import mods.battlegear2.api.weapons.IBattlegearWeapon;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,8 +13,6 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import wehavecookies56.kk.KingdomKeys;
-import wehavecookies56.kk.core.packet.EternalFlamesPacket;
-import wehavecookies56.kk.core.packet.IPacket;
 import wehavecookies56.kk.entities.EntityEternalFlamesProjectile;
 import wehavecookies56.kk.lib.Reference;
 import cpw.mods.fml.relauncher.Side;

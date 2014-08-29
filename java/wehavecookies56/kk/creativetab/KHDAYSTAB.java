@@ -16,6 +16,6 @@ public class KHDAYSTAB extends CreativeTabs {
     @SideOnly(Side.CLIENT)
     public Item getTabIconItem()
     {
-        return AddedItems.K106;
+        return AddedItems.SoulEater;
     }
 }

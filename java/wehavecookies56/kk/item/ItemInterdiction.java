@@ -31,7 +31,7 @@ public class ItemInterdiction extends ItemSword implements IBattlegearWeapon{
 	public ToolMaterial getMaterial() {
 		return this.material;
 	}
-    
+	
     @Override
     @SideOnly(Side.CLIENT)
     public EnumRarity getRarity(ItemStack par1ItemStack){

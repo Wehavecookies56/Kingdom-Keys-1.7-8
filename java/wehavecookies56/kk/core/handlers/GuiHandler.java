@@ -6,9 +6,11 @@ import net.minecraft.world.World;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.client.gui.GuiSynthesis;
 import wehavecookies56.kk.container.ContainerSynthesis;
+import wehavecookies56.kk.core.packet.OpenSynthesisPacket;
 import wehavecookies56.kk.entities.tileentities.TileEntitySynthesis;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
 
 public class GuiHandler implements IGuiHandler {
 	
@@ -22,6 +24,8 @@ public class GuiHandler implements IGuiHandler {
 		case 0:
 			TileEntity te = world.getTileEntity(x, y, z);
 			if(te != null && te instanceof TileEntitySynthesis){
+				IMessage packet = new OpenSynthesisPacket(0);
+				KingdomKeys.network.sendToServer(packet);
 				return new ContainerSynthesis(player.inventory, (TileEntitySynthesis)te);
 			}
 			break;
@@ -35,6 +39,8 @@ public class GuiHandler implements IGuiHandler {
 		case 0:
 			TileEntity te = world.getTileEntity(x, y, z);
 			if (te != null && te instanceof TileEntitySynthesis){
+				IMessage packet = new OpenSynthesisPacket(0);
+				KingdomKeys.network.sendToServer(packet);
 				return new GuiSynthesis(player.inventory, (TileEntitySynthesis)te);
 			}
 			break;

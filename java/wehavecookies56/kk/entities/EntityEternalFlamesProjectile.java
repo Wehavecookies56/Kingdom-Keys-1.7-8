@@ -2,14 +2,9 @@ package wehavecookies56.kk.entities;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import wehavecookies56.kk.KingdomKeys;
-import wehavecookies56.kk.core.packet.EternalFlamesPacket;
-import wehavecookies56.kk.core.packet.IPacket;
-import wehavecookies56.kk.item.AddedItems;
 
 public class EntityEternalFlamesProjectile extends EntityThrowable{
 

@@ -16,6 +16,6 @@ public class KHTAB extends CreativeTabs {
     @SideOnly(Side.CLIENT)
     public Item getTabIconItem()
     {
-        return AddedItems.K113;
+        return AddedItems.KingdomKeyD;
     }
 }

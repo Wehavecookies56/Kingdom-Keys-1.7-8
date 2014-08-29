@@ -16,6 +16,6 @@ public class KHCHITAB extends CreativeTabs {
     @SideOnly(Side.CLIENT)
     public Item getTabIconItem()
     {
-        return AddedItems.K107;
+        return AddedItems.StarLight;
     }
 }

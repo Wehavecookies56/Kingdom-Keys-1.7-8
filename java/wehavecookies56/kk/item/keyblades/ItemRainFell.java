@@ -25,7 +25,6 @@ public class ItemRainFell extends ItemSword implements IBattlegearWeapon{
     public ItemRainFell(ToolMaterial rainFell) {
         super(rainFell);
         this.setCreativeTab(KingdomKeys.KHBBSTAB);
-        this.setContainerItem(AddedItems.K108c);
     }
     public void registerIcons(IIconRegister par1IconRegister) {
         itemIcon = par1IconRegister.registerIcon(Reference.MOD_ID + ":" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".")+1));

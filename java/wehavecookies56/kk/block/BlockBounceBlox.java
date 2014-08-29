@@ -27,7 +27,7 @@ public class BlockBounceBlox extends Block {
         float f = 0.0625F;
         return AxisAlignedBB.getBoundingBox((double)((float)par2 + f), (double)par3, (double)((float)par4 + f), (double)((float)(par2 + 1) - f), (double)((float)(par3 + 1) - f), (double)((float)(par4 + 1) - f));
     }
-    
+
     @Override
     public void onEntityWalking(World world, int x, int y, int z, Entity entity){
         entity.motionY += 1.0;

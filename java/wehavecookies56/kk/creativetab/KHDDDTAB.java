@@ -16,6 +16,6 @@ public class KHDDDTAB extends CreativeTabs {
     @SideOnly(Side.CLIENT)
     public Item getTabIconItem()
     {
-        return AddedItems.K14;
+        return AddedItems.AllForOne;
     }
 }

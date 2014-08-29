@@ -40,20 +40,20 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void registerRenderers() {
 		//3D Model renders
-		MinecraftForgeClient.registerItemRenderer(AddedItems.K111, new ItemRenderKingdomKey());
-		MinecraftForgeClient.registerItemRenderer(AddedItems.K112, new ItemRenderOathKeeper());
-		MinecraftForgeClient.registerItemRenderer(AddedItems.K113, new ItemRenderKingdomKeyD());
-		MinecraftForgeClient.registerItemRenderer(AddedItems.K114, new ItemRenderOblivion());
-		MinecraftForgeClient.registerItemRenderer(AddedItems.K110, new ItemRenderWaywardWind());
-		MinecraftForgeClient.registerItemRenderer(AddedItems.K109, new ItemRenderEarthShaker());
-		MinecraftForgeClient.registerItemRenderer(AddedItems.K108, new ItemRenderRainFell());
-		MinecraftForgeClient.registerItemRenderer(AddedItems.K107, new ItemRenderStarLight());
-		MinecraftForgeClient.registerItemRenderer(AddedItems.K106, new ItemRenderSoulEater());
-		MinecraftForgeClient.registerItemRenderer(AddedItems.K50, new ItemRenderLunarEclipse());
-		MinecraftForgeClient.registerItemRenderer(AddedItems.K52, new ItemRenderTotalEclipse());
-		MinecraftForgeClient.registerItemRenderer(AddedItems.K69, new ItemRenderFenrir());
-		MinecraftForgeClient.registerItemRenderer(AddedItems.K41, new ItemRenderZeroOne());
-		MinecraftForgeClient.registerItemRenderer(AddedItems.K82, new ItemRenderRumblingRose());
+		MinecraftForgeClient.registerItemRenderer(AddedItems.KingdomKey, new ItemRenderKingdomKey());
+		MinecraftForgeClient.registerItemRenderer(AddedItems.Oathkeeper, new ItemRenderOathKeeper());
+		MinecraftForgeClient.registerItemRenderer(AddedItems.KingdomKeyD, new ItemRenderKingdomKeyD());
+		MinecraftForgeClient.registerItemRenderer(AddedItems.Oblivion, new ItemRenderOblivion());
+		MinecraftForgeClient.registerItemRenderer(AddedItems.WaywardWind, new ItemRenderWaywardWind());
+		MinecraftForgeClient.registerItemRenderer(AddedItems.EarthShaker, new ItemRenderEarthShaker());
+		MinecraftForgeClient.registerItemRenderer(AddedItems.Rainfell, new ItemRenderRainFell());
+		MinecraftForgeClient.registerItemRenderer(AddedItems.StarLight, new ItemRenderStarLight());
+		MinecraftForgeClient.registerItemRenderer(AddedItems.SoulEater, new ItemRenderSoulEater());
+		MinecraftForgeClient.registerItemRenderer(AddedItems.LunarEclipse, new ItemRenderLunarEclipse());
+		MinecraftForgeClient.registerItemRenderer(AddedItems.TotalEclipse, new ItemRenderTotalEclipse());
+		MinecraftForgeClient.registerItemRenderer(AddedItems.Fenrir, new ItemRenderFenrir());
+		MinecraftForgeClient.registerItemRenderer(AddedItems.ZeroOne, new ItemRenderZeroOne());
+		MinecraftForgeClient.registerItemRenderer(AddedItems.RumblingRose, new ItemRenderRumblingRose());
 		MinecraftForgeClient.registerItemRenderer(AddedItems.BookOfRetribution, new ItemRenderBookOfRetribution());
 		MinecraftForgeClient.registerItemRenderer(AddedItems.Interdiction, new ItemRenderInterdiction());
 		MinecraftForgeClient.registerItemRenderer(AddedItems.EternalFlames, new ItemRenderEternalFlames());
@@ -64,7 +64,6 @@ public class ClientProxy extends CommonProxy {
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityBlastBlox.class, new BlockRenderBlastBlox());
 		RenderingRegistry.registerEntityRenderingHandler(EntityEternalFlamesProjectile.class, new EntityRenderEternalFlamesProjectile(AddedItems.EternalFlames));
-		// EntityRegistry.registerGlobalEntityID(EntityRedNocturne.class, "Red Nocturne", EntityRegistry.findGlobalUniqueEntityId(), 3515848, 12102);
 				
 	}
 
@@ -75,7 +74,7 @@ public class ClientProxy extends CommonProxy {
 	
 	@Override
 	public void initCapes() {
-		DevCapes.getInstance().registerConfig("https://raw.githubusercontent.com/Wehavecookies56/Kingdom-Keys-1.7-/master/Capes.json", "kk");
+		DevCapes.getInstance().registerConfig("https://raw.githubusercontent.com/Wehavecookies56/Kingdom-Keys-1.7-/master/Capes.json");
 	}
 	
 
@@ -85,6 +84,5 @@ public class ClientProxy extends CommonProxy {
 	public void registerKeybinds() {
     	FMLCommonHandler.instance().bus().register(this.KeyBind);
 	}
-	
 	
 }

@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
@@ -15,10 +17,11 @@ import org.lwjgl.opengl.GL11;
 
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.container.ContainerSynthesis;
-import wehavecookies56.kk.core.packet.IPacket;
+import wehavecookies56.kk.core.extendedproperties.EntityPropertyMunny;
 import wehavecookies56.kk.core.packet.SynthesisPacket;
 import wehavecookies56.kk.entities.tileentities.TileEntitySynthesis;
 import wehavecookies56.kk.item.AddedItems;
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -29,10 +32,8 @@ public class GuiSynthesis extends GuiContainer {
 	public static boolean ClickedTab1 = true;
 	public static boolean ClickedTab2 = false;
 	public static boolean ClickedTab3 = false;
-
+	
 	public String SynthesizeText = "You lack the required materials to Synthesize";
-	int colour = 0xFF0000;
-
 
 	@SideOnly(Side.CLIENT)
 	public GuiSynthesis(InventoryPlayer invPlayer, TileEntitySynthesis synthesis) {
@@ -95,7 +96,6 @@ public class GuiSynthesis extends GuiContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	protected void drawGuiContainerForegroundLayer(int x, int y) {
-
 		mc.fontRenderer.drawString("Synthesis", 38, 14, 0x404040);
 		GL11.glColor4f(1F, 1F, 1F, 1F);
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
@@ -127,6 +127,10 @@ public class GuiSynthesis extends GuiContainer {
 		drawTexturedModalRect(Tab3X, Tab3Y, Tab3SrcX, Tab3SrcY, DimensionsOfTabW, DimensionsOfTabH);
 		drawTexturedModalRect(Tab3iconX, Tab3iconY, Tab3iconSrcX, Tab3iconSrcY, Tab3iconDimW, Tab3iconDimH);
 
+		EntityPropertyMunny props = EntityPropertyMunny.get(mc.thePlayer);
+
+		mc.fontRenderer.drawString("Munny: " + props.getMunny(), 0, 168, 0xFFF000);
+		
 		if(synthesis.getStackInSlot(0) == null){
 			if(ClickedTab1){
 				mc.fontRenderer.drawSplitString("Place an Attack Recipe or a Material Recipe in the slot", 30, 48, 120, 0xFF0000);
@@ -138,159 +142,127 @@ public class GuiSynthesis extends GuiContainer {
 				mc.fontRenderer.drawSplitString("Place an Attack Recipe or a Material Recipe in the slot", 30, 30, 120, 0xFF0000);
 			}
 		}
-		/*
-		boolean gotItems = false;
-		int colorText = 0xFF0000;
-		if(synthesis.getStackInSlot(0) != null) {
-			if(synthesis.getStackInSlot(0).getItem() == AddedItems.K88r){
-				if(ClickedTab1){
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(AddedItems.K88), 28, 28);
-					GL11.glColor3f(1, 1, 1);
-					GL11.glDisable(GL11.GL_LIGHTING);
-					fontRendererObj.drawString("+" + ((int)AddedItems.K88m.getDamageVsEntity() + 4) + " Attack Damage", 28, 48, 0x004CFF);
-					fontRendererObj.drawSplitString("You lack the required materials to synthesize", 28, 60, 120, 0xFF0000);
-					fontRendererObj.drawSplitString(AddedItems.K88.getItemStackDisplayName(new ItemStack(AddedItems.K88)), 46, 28, 120, 0x404040);
 
-				}else if(ClickedTab2){
-					fontRendererObj.drawString("Required Materials", 30, 27, 0x404040);
-
-				}else if(ClickedTab3){
-					fontRendererObj.drawSplitString("This keyblade has the enchantment Vanquish. It allows you to collect hearts from mobs when they are slain.", 30, 30, 120, 0x004CFF);
-				}
-				if(mc.thePlayer.inventory.hasItem(AddedItems.BlazingCrystal) && mc.thePlayer.inventory.hasItemStack(new ItemStack(AddedItems.BlazingGem, 0, 2))){
-					gotItems = true;
-				}else{
-					gotItems = false;
-				}
-				if(gotItems){
-					colorText = 0x00B330;
-				}else{
-					colorText = 0xFF0000;
-				}
-			}
-		}*/
-
-
-		addSynthesisRecipe(AddedItems.K1r, AddedItems.K1c, AddedItems.VulpeusMaterial, true, AddedItems.Orichalcum, AddedItems.SerenityCrystal, AddedItems.MythrilGem, AddedItems.EnergyStone, AddedItems.BrightStone, AddedItems.BlazingShard, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K2r, AddedItems.K2c, AddedItems.UrsusMaterial, true, AddedItems.Orichalcum, AddedItems.SerenityCrystal, AddedItems.MythrilGem, AddedItems.PowerStone, AddedItems.BrightStone, AddedItems.BlazingShard, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K3r, AddedItems.K3c, AddedItems.UnicornisMaterial, true, AddedItems.Orichalcum, AddedItems.SerenityCrystal, AddedItems.MythrilGem, AddedItems.TwilightStone, AddedItems.BrightStone, AddedItems.BlazingStone, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K4r, AddedItems.K4c, AddedItems.K4m, true, AddedItems.Orichalcum, AddedItems.SerenityCrystal, AddedItems.MythrilGem, AddedItems.DarkStone, AddedItems.BrightStone, AddedItems.BlazingShard, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K5r, AddedItems.K5c, AddedItems.K5m, true, AddedItems.Orichalcum, AddedItems.SerenityCrystal, AddedItems.MythrilGem, AddedItems.DenseStone, AddedItems.BrightStone, AddedItems.BlazingShard, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K6r, AddedItems.K6c, AddedItems.K6m, true, AddedItems.BlazingCrystal, AddedItems.DarkShard, AddedItems.MythrilShard, AddedItems.BrightGem, AddedItems.BlazingShard, AddedItems.DarkStone, AddedItems.BlazingStone, AddedItems.DarkMatter, null, null, null);
-		addSynthesisRecipe(AddedItems.K7r, AddedItems.K7c, AddedItems.K7m, true, AddedItems.DarkCrystal, AddedItems.PowerCrystal, AddedItems.LucidGem, AddedItems.DenseShard, AddedItems.PowerStone, AddedItems.LucidStone, AddedItems.Orichalcum, AddedItems.DarkShard, AddedItems.LucidShard, null, null);
-		addSynthesisRecipe(AddedItems.K8r, AddedItems.K8c, AddedItems.K8m, true, AddedItems.PowerCrystal, AddedItems.BrightGem, AddedItems.FrostCrystal, AddedItems.FrostGem, AddedItems.PowerStone, AddedItems.LucidShard, AddedItems.FrostStone, AddedItems.FrostShard, null, null, null);
-		addSynthesisRecipe(AddedItems.K9r, AddedItems.K8c, AddedItems.K9m, true, AddedItems.TranquilCrystal, AddedItems.TwilightGem, AddedItems.TwilightStone, AddedItems.PowerShard, AddedItems.DenseShard, AddedItems.PowerCrystal, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K10r, AddedItems.K10c, AddedItems.K10m, true, AddedItems.DarkCrystal, AddedItems.DenseGem, AddedItems.LucidGem, AddedItems.EnergyShard, AddedItems.LucidShard, AddedItems.DenseStone, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K11r, AddedItems.K11c, AddedItems.K11m, true, AddedItems.BrightCrystal, AddedItems.TwilightCrystal, AddedItems.BrightGem, AddedItems.EnergyStone, AddedItems.EnergyShard, AddedItems.PowerStone, AddedItems.BlazingShard, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K12r, AddedItems.K12c, AddedItems.K12m, true, AddedItems.PowerCrystal, AddedItems.LightningCrystal, AddedItems.LightningGem, AddedItems.BlazingStone, AddedItems.BrightGem, AddedItems.Orichalcum, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K13r, AddedItems.K13c, AddedItems.K13m, true, AddedItems.RemembranceCrystal, AddedItems.DarkGem, AddedItems.BlazingShard, AddedItems.LucidShard, AddedItems.DenseStone, AddedItems.LucidShard, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K14r, AddedItems.K14c, AddedItems.K14m, true, AddedItems.DenseCrystal, AddedItems.MythrilShard, AddedItems.MythrilGem, AddedItems.BrightShard, AddedItems.BrightStone, AddedItems.FrostShard, AddedItems.LightningShard, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K15r, AddedItems.K15c, AddedItems.K15m, true, AddedItems.PowerShard, AddedItems.EnergyShard, AddedItems.MythrilCrystal, AddedItems.DenseShard, AddedItems.DenseStone, AddedItems.DarkStone, AddedItems.LucidGem, AddedItems.DenseCrystal, AddedItems.BlazingShard, null, null);
-		addSynthesisRecipe(AddedItems.K16r, AddedItems.K16c, AddedItems.K16m, true, AddedItems.PowerCrystal, AddedItems.BrightShard, AddedItems.LucidGem, AddedItems.TranquilStone, AddedItems.TranquilGem, AddedItems.MythrilShard, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K17r, AddedItems.K17c, AddedItems.K17m, true, AddedItems.EnergyGem, AddedItems.PowerGem, AddedItems.DenseStone, AddedItems.DenseShard, AddedItems.BrightStone, AddedItems.BrightGem, AddedItems.EnergyCrystal, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K18r, AddedItems.K18c, AddedItems.K18m, true, AddedItems.DarkCrystal, AddedItems.ShinyCrystal, AddedItems.MythrilShard, AddedItems.DenseStone, AddedItems.BrightStone, AddedItems.BlazingShard, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K19r, AddedItems.K19c, AddedItems.K19m, true, AddedItems.Orichalcum, AddedItems.DarkMatter, AddedItems.LucidGem, AddedItems.MythrilGem, AddedItems.BlazingStone, AddedItems.DarkShard, AddedItems.BlazingShard, AddedItems.DarkStone, null, null, null);
-		addSynthesisRecipe(AddedItems.K20r, AddedItems.K20c, AddedItems.K20m, true, AddedItems.TranquilGem, AddedItems.SerenityShard, AddedItems.BrightShard, AddedItems.DenseStone, AddedItems.DenseShard, null, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K21r, AddedItems.K21c, AddedItems.K21m, true, AddedItems.OrichalcumPlus, AddedItems.Orichalcum, AddedItems.DarkMatter, AddedItems.DarkCrystal, AddedItems.DarkHeart, AddedItems.KingdomHearts, AddedItems.BrightCrystal, AddedItems.BrightGem, AddedItems.PureHeart, AddedItems.BrightStone, AddedItems.Heart);
-		addSynthesisRecipe(AddedItems.K22r, AddedItems.K22c, AddedItems.K22m, true, AddedItems.OrichalcumPlus, AddedItems.Orichalcum, AddedItems.DarkMatter, AddedItems.DarkCrystal, AddedItems.DarkHeart, AddedItems.KingdomHearts, AddedItems.BrightCrystal, AddedItems.BrightGem, AddedItems.PureHeart, AddedItems.K21, AddedItems.Heart);
-		addSynthesisRecipe(AddedItems.K23r, AddedItems.K23c, AddedItems.K23m, true, AddedItems.SerenityCrystal, AddedItems.BrightCrystal, AddedItems.MythrilGem, AddedItems.DenseStone, AddedItems.BrightStone, AddedItems.BlazingShard, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K24r, AddedItems.K24c, AddedItems.K24m, true, AddedItems.OrichalcumPlus, AddedItems.RemembranceCrystal, AddedItems.RemembranceShard, AddedItems.DarkStone, AddedItems.BrightStone, AddedItems.TwilightGem, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K25r, AddedItems.K25c, AddedItems.K25m, true, AddedItems.Orichalcum, AddedItems.BlazingCrystal, AddedItems.BlazingGem, AddedItems.MythrilGem, AddedItems.DenseStone, AddedItems.BrightStone, AddedItems.BlazingShard, AddedItems.BlazingStone, AddedItems.TwilightGem, null, null);
-		addSynthesisRecipe(AddedItems.K26r, AddedItems.K26c, AddedItems.K26m, true, AddedItems.OrichalcumPlus, AddedItems.MythrilGem, AddedItems.PowerShard, AddedItems.BlazingStone, AddedItems.BrightShard, null, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K27r, AddedItems.K27c, AddedItems.K27m, true, AddedItems.SerenityCrystal, AddedItems.MythrilCrystal, AddedItems.MythrilShard, AddedItems.BrightGem, AddedItems.BrightStone, AddedItems.BrightShard, AddedItems.SerenityShard, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K28r, AddedItems.K28c, AddedItems.K28m, true, AddedItems.OrichalcumPlus, AddedItems.Orichalcum, AddedItems.MythrilCrystal, AddedItems.BrightStone, AddedItems.PowerShard, AddedItems.EnergyGem, AddedItems.EnergyShard, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K29r, AddedItems.K29c, AddedItems.K29m, true, AddedItems.DarkMatter, AddedItems.DarkCrystal, AddedItems.DarkShard, AddedItems.EnergyStone, AddedItems.PowerStone, AddedItems.PowerShard, AddedItems.EnergyShard, AddedItems.PowerCrystal, null, null, null);
-		addSynthesisRecipe(AddedItems.K30r, AddedItems.K30c, AddedItems.K30m, true, AddedItems.Orichalcum, AddedItems.DarkMatter, AddedItems.DarkCrystal, AddedItems.DarkGem, AddedItems.DarkStone, AddedItems.DarkShard, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K31r, AddedItems.K31c, AddedItems.K31m, true, AddedItems.ShinyCrystal, AddedItems.SerenityCrystal, AddedItems.SerenityShard, AddedItems.FrostGem, AddedItems.FrostShard, AddedItems.TranquilStone, AddedItems.BrightGem, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K32r, AddedItems.K32c, AddedItems.K32m, true, AddedItems.MythrilCrystal, AddedItems.SerenityStone, AddedItems.TranquilStone, AddedItems.MythrilShard, AddedItems.TranquilShard, AddedItems.BrightCrystal, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K33r, AddedItems.K33c, AddedItems.K33m, true, AddedItems.PowerCrystal, AddedItems.EnergyCrystal, AddedItems.MythrilGem, AddedItems.DenseStone, AddedItems.LightningShard, AddedItems.LightningStone, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K34r, AddedItems.K34c, AddedItems.K34m, true, AddedItems.BrightCrystal, AddedItems.SerenityCrystal, AddedItems.LucidGem, AddedItems.LucidShard, AddedItems.BrightStone, AddedItems.LightningStone, AddedItems.SerenityGem, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K35r, AddedItems.K35c, AddedItems.K35m, true, AddedItems.Orichalcum, AddedItems.DarkCrystal, AddedItems.BrightCrystal, AddedItems.LightningGem, AddedItems.BrightStone, AddedItems.LucidShard, AddedItems.LightningStone, AddedItems.DarkShard, null, null, null);
-		addSynthesisRecipe(AddedItems.K36r, AddedItems.K36c, AddedItems.K36m, true, AddedItems.MythrilCrystal, AddedItems.ShinyCrystal, AddedItems.DenseGem, AddedItems.DenseStone, AddedItems.BrightStone, AddedItems.BrightShard, AddedItems.DenseShard, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K37r, AddedItems.K37c, AddedItems.K37m, true, AddedItems.FrostCrystal, AddedItems.FrostGem, AddedItems.FrostShard, AddedItems.MythrilStone, AddedItems.MythrilShard, AddedItems.BrightGem, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K38r, AddedItems.K38c, AddedItems.K38m, true, AddedItems.LucidCrystal, AddedItems.LucidShard, AddedItems.DarkCrystal, AddedItems.DarkMatter, AddedItems.DarkStone, AddedItems.DarkStone, AddedItems.DenseGem, AddedItems.DenseStone, null, null, null);
-		addSynthesisRecipe(AddedItems.K39r, AddedItems.K39c, AddedItems.K39m, true, AddedItems.OrichalcumPlus, AddedItems.DarkCrystal, AddedItems.MythrilCrystal, AddedItems.DenseCrystal, AddedItems.DarkGem, AddedItems.DarkStone, AddedItems.DenseStone, AddedItems.MythrilShard, AddedItems.DenseShard, AddedItems.DarkShard, AddedItems.DarkMatter);
-		addSynthesisRecipe(AddedItems.K40r, AddedItems.K40c, AddedItems.K40m, true, AddedItems.LucidCrystal, AddedItems.DarkGem, AddedItems.LucidGem, AddedItems.DarkShard, AddedItems.LucidShard, AddedItems.LucidStone, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K41r, AddedItems.K41c, AddedItems.K41m, true, AddedItems.Orichalcum, AddedItems.EnergyCrystal, AddedItems.EnergyGem, AddedItems.EnergyStone, AddedItems.EnergyShard, AddedItems.PowerCrystal, AddedItems.PowerGem, AddedItems.PowerStone, AddedItems.PowerShard, null, null);
-		addSynthesisRecipe(AddedItems.K42r, AddedItems.K42c, AddedItems.K42m, true, AddedItems.RemembranceCrystal, AddedItems.TranquilCrystal, AddedItems.MythrilGem, AddedItems.TranquilGem, AddedItems.RemembranceStone, AddedItems.TranquilStone, AddedItems.TranquilShard, AddedItems.RemembranceShard, null, null, null);
-		addSynthesisRecipe(AddedItems.K43r, AddedItems.K43c, AddedItems.K43m, true, AddedItems.BrightCrystal, AddedItems.PowerCrystal, AddedItems.ShinyCrystal, AddedItems.BrightGem, AddedItems.BrightStone, AddedItems.BrightShard, AddedItems.PowerShard, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K44r, AddedItems.K44c, AddedItems.K44m, true, AddedItems.FrostCrystal, AddedItems.FrostShard, AddedItems.FrostGem, AddedItems.LightningCrystal, AddedItems.LightningShard, AddedItems.LightningStone, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K45r, AddedItems.K45c, AddedItems.K45m, true, AddedItems.OrichalcumPlus, AddedItems.Orichalcum, AddedItems.MythrilShard, AddedItems.DenseShard, AddedItems.DenseStone, AddedItems.MythrilCrystal, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K46r, AddedItems.K46c, AddedItems.K46m, true, AddedItems.TwilightCrystal, AddedItems.BlazingCrystal, AddedItems.TwilightGem, AddedItems.BlazingStone, AddedItems.TwilightShard, AddedItems.BlazingShard, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K47r, AddedItems.K47c, AddedItems.K47m, true, AddedItems.DarkCrystal, AddedItems.BlazingGem, AddedItems.DarkStone, AddedItems.BlazingShard, AddedItems.BlazingStone, AddedItems.DarkShard, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K48r, AddedItems.K48c, AddedItems.K48m, true, AddedItems.Orichalcum, AddedItems.MythrilCrystal, AddedItems.BlazingShard, AddedItems.BlazingStone, AddedItems.BlazingShard, AddedItems.MythrilStone, AddedItems.MythrilShard, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K49r, AddedItems.K49c, AddedItems.K49m, true, AddedItems.DarkMatter, AddedItems.DarkCrystal, AddedItems.LucidGem, AddedItems.LucidShard, AddedItems.DarkShard, AddedItems.DarkStone, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K50r, AddedItems.K50c, AddedItems.K50m, true, AddedItems.Orichalcum, AddedItems.RemembranceCrystal, AddedItems.DarkGem, AddedItems.BrightGem, AddedItems.BrightStone, AddedItems.DarkStone, AddedItems.RemembranceShard, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K51r, AddedItems.K51c, AddedItems.K51m, true, AddedItems.SerenityCrystal, AddedItems.TranquilCrystal, AddedItems.FrostStone, AddedItems.TranquilShard, AddedItems.SerenityShard, AddedItems.FrostGem, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K52r, AddedItems.K52c, AddedItems.K52m, true, AddedItems.Orichalcum, AddedItems.TwilightCrystal, AddedItems.DarkGem, AddedItems.BrightGem, AddedItems.BrightStone, AddedItems.DarkStone, AddedItems.TwilightShard, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K53r, AddedItems.K53c, AddedItems.K53m, true, AddedItems.Orichalcum, AddedItems.SerenityCrystal, AddedItems.MythrilGem, AddedItems.DenseStone, AddedItems.BrightStone, AddedItems.BlazingShard, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K54r, AddedItems.K54c, AddedItems.K54m, true, AddedItems.DarkGem, AddedItems.SerenityCrystal, AddedItems.MythrilGem, AddedItems.DenseStone, AddedItems.BrightStone, AddedItems.BlazingShard, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K55r, AddedItems.K55c, AddedItems.K55m, true, AddedItems.RemembranceCrystal, AddedItems.DarkCrystal, AddedItems.DenseShard, AddedItems.EnergyCrystal, AddedItems.EnergyStone, AddedItems.PowerShard, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K56r, AddedItems.K56c, AddedItems.K56m, true, AddedItems.Orichalcum, AddedItems.BrightCrystal, AddedItems.BrightStone, AddedItems.BrightShard, AddedItems.PowerCrystal, AddedItems.PowerShard, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K57r, AddedItems.K57c, AddedItems.K57m, true, AddedItems.MythrilCrystal, AddedItems.MythrilGem, AddedItems.MythrilStone, AddedItems.MythrilShard, AddedItems.EnergyCrystal, AddedItems.PowerCrystal, AddedItems.PowerStone, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K58r, AddedItems.K58c, AddedItems.K58m, true, AddedItems.FrostCrystal, AddedItems.FrostGem, AddedItems.MythrilGem, AddedItems.FrostShard, AddedItems.DenseStone, AddedItems.FrostShard, AddedItems.FrostGem, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K59r, AddedItems.K59c, AddedItems.K59m, true, AddedItems.Orichalcum, AddedItems.DarkGem, AddedItems.DenseStone, AddedItems.DenseShard, null, null, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K60r, AddedItems.K60c, AddedItems.K60m, true, AddedItems.BrightCrystal, AddedItems.SerenityCrystal, AddedItems.BrightStone, AddedItems.SerenityShard, AddedItems.SerenityStone, AddedItems.BrightShard, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K61r, AddedItems.K61c, AddedItems.K61m, true, AddedItems.DenseCrystal, AddedItems.LucidGem, AddedItems.MythrilGem, AddedItems.DenseStone, AddedItems.LucidShard, AddedItems.DenseShard, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K62r, AddedItems.K62c, AddedItems.K62m, true, AddedItems.Orichalcum, AddedItems.DarkCrystal, AddedItems.DarkGem, AddedItems.LucidGem, AddedItems.DarkShard, null, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K63r, AddedItems.K63c, AddedItems.K63m, true, AddedItems.MythrilCrystal, AddedItems.MythrilGem, AddedItems.BlazingShard, AddedItems.MythrilShard, AddedItems.BlazingGem, AddedItems.EnergyShard, AddedItems.EnergyStone, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K64r, AddedItems.K64c, AddedItems.K64m, true, AddedItems.RemembranceCrystal, AddedItems.ShinyCrystal, AddedItems.RemembranceGem, AddedItems.RemembranceStone, AddedItems.BrightStone, null, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K65r, AddedItems.K65c, AddedItems.K65m, true, AddedItems.OrichalcumPlus, AddedItems.Orichalcum, AddedItems.MythrilGem, AddedItems.BlazingGem, AddedItems.FrostGem, AddedItems.LightningGem, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K66r, AddedItems.K66c, AddedItems.K66m, true, AddedItems.DarkCrystal, AddedItems.LucidCrystal, AddedItems.DarkGem, AddedItems.DenseGem, AddedItems.DenseStone, AddedItems.DarkShard, AddedItems.DenseShard, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K67r, AddedItems.K67c, AddedItems.K67m, true, AddedItems.PowerCrystal, AddedItems.EnergyCrystal, AddedItems.PowerStone, AddedItems.EnergyStone, AddedItems.PowerStone, AddedItems.PowerShard, AddedItems.EnergyShard, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K68r, AddedItems.K68c, AddedItems.K68m, true, AddedItems.DarkCrystal, AddedItems.BlazingCrystal, AddedItems.BlazingStone, AddedItems.BlazingShard, AddedItems.BrightShard, null, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K69r, AddedItems.K69c, AddedItems.K69m, true, AddedItems.LightningCrystal, AddedItems.MythrilCrystal, AddedItems.LightningGem, AddedItems.DenseStone, AddedItems.LightningShard, AddedItems.DenseShard, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K70r, AddedItems.K70c, AddedItems.K70m, true, AddedItems.TranquilCrystal, AddedItems.SerenityCrystal, AddedItems.SerenityGem, AddedItems.TranquilStone, AddedItems.SerenityShard, AddedItems.SerenityStone, AddedItems.TranquilGem, AddedItems.DarkShard, null, null, null);
-		addSynthesisRecipe(AddedItems.K71r, AddedItems.K71c, AddedItems.K71m, true, AddedItems.Orichalcum, AddedItems.DenseCrystal, AddedItems.MythrilGem, AddedItems.BrightStone, AddedItems.DenseShard, AddedItems.BrightShard, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K72r, AddedItems.K72c, AddedItems.K72m, true, AddedItems.LightningCrystal, AddedItems.LightningGem, AddedItems.LightningStone, AddedItems.LightningShard, AddedItems.SerenityStone, AddedItems.TranquilCrystal, AddedItems.TranquilShard, AddedItems.SerenityGem, null, null, null);
-		addSynthesisRecipe(AddedItems.K73r, AddedItems.K73c, AddedItems.K73m, true, AddedItems.PowerCrystal, AddedItems.PowerGem, AddedItems.MythrilGem, AddedItems.PowerStone, AddedItems.PowerShard, AddedItems.EnergyShard, AddedItems.EnergyStone, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K74r, AddedItems.K74c, AddedItems.K74m, true, AddedItems.ShinyCrystal, AddedItems.TranquilGem, AddedItems.FrostGem, AddedItems.FrostStone, AddedItems.FrostShard, AddedItems.BrightCrystal, AddedItems.TranquilShard, AddedItems.BrightShard, null, null, null);
-		addSynthesisRecipe(AddedItems.K75r, AddedItems.K75c, AddedItems.K75m, true, AddedItems.RemembranceCrystal, AddedItems.SerenityCrystal, AddedItems.MythrilGem, AddedItems.SerenityStone, AddedItems.SerenityShard, AddedItems.TranquilShard, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K76r, AddedItems.K76c, AddedItems.K76m, true, AddedItems.RemembranceCrystal, AddedItems.SerenityCrystal, AddedItems.DarkCrystal, AddedItems.LucidStone, AddedItems.BrightShard, AddedItems.DarkShard, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K77r, AddedItems.K77c, AddedItems.K77m, true, AddedItems.ShinyCrystal, AddedItems.SerenityCrystal, AddedItems.BrightGem, AddedItems.MythrilGem, AddedItems.BrightStone, AddedItems.BrightShard, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K78r, AddedItems.K78c, AddedItems.K78m, true, AddedItems.Orichalcum, AddedItems.SerenityCrystal, AddedItems.LightningGem, AddedItems.LightningStone, AddedItems.LightningShard, null, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K79r, AddedItems.K79c, AddedItems.K79m, true, AddedItems.FrostCrystal, AddedItems.PowerCrystal, AddedItems.MythrilGem, AddedItems.MythrilShard, AddedItems.FrostShard, AddedItems.PowerStone, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K80r, AddedItems.K80c, AddedItems.K80m, true, AddedItems.Orichalcum, AddedItems.LucidCrystal, AddedItems.TwilightGem, AddedItems.MythrilGem, AddedItems.TwilightStone, AddedItems.LucidStone, AddedItems.LucidShard, AddedItems.TwilightShard, null, null, null);
-		addSynthesisRecipe(AddedItems.K81r, AddedItems.K81c, AddedItems.K81m, true, AddedItems.BrightCrystal, AddedItems.TwilightCrystal, AddedItems.BrightStone, AddedItems.DenseStone, AddedItems.BrightShard, AddedItems.SerenityShard, AddedItems.TranquilStone, AddedItems.TranquilCrystal, null, null, null);
-		addSynthesisRecipe(AddedItems.K82r, AddedItems.K82c, AddedItems.K82m, true, AddedItems.Orichalcum, AddedItems.SerenityCrystal, AddedItems.MythrilGem, AddedItems.EnergyStone, AddedItems.PowerShard, AddedItems.MythrilShard, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K83r, AddedItems.K83c, AddedItems.K83m, true, AddedItems.OrichalcumPlus, AddedItems.BlazingCrystal, AddedItems.DarkGem, AddedItems.BlazingStone, AddedItems.DarkStone, AddedItems.BlazingShard, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K84r, AddedItems.K84c, AddedItems.K84m, true, AddedItems.DenseCrystal, AddedItems.DenseGem, AddedItems.DenseStone, AddedItems.DarkStone, AddedItems.DarkShard, AddedItems.DenseShard, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K85r, AddedItems.K85c, AddedItems.K85m, true, AddedItems.FrostCrystal, AddedItems.FrostGem, AddedItems.FrostStone, AddedItems.BrightStone, AddedItems.BrightShard, AddedItems.FrostShard, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K86r, AddedItems.K86c, AddedItems.K86m, true, AddedItems.SerenityCrystal, AddedItems.ShinyCrystal, AddedItems.MythrilGem, AddedItems.MythrilStone, AddedItems.TranquilStone, AddedItems.BrightShard, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K87r, AddedItems.K87c, AddedItems.K87m, true, AddedItems.Orichalcum, AddedItems.DarkCrystal, AddedItems.LightningGem, AddedItems.TwilightGem, AddedItems.DarkStone, AddedItems.LightningShard, AddedItems.TwilightShard, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K88r, AddedItems.K88c, AddedItems.K88m, true, AddedItems.OrichalcumPlus, AddedItems.Orichalcum, AddedItems.BlazingGem, AddedItems.BlazingStone, AddedItems.BlazingShard, null, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K89r, AddedItems.K89c, AddedItems.K89m, true, AddedItems.Orichalcum, AddedItems.FrostCrystal, AddedItems.FrostGem, AddedItems.FrostStone, AddedItems.FrostShard, AddedItems.MythrilCrystal, AddedItems.TwilightGem, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K90r, AddedItems.K90c, AddedItems.K90m, true, AddedItems.BlazingCrystal, AddedItems.PowerCrystal, AddedItems.PowerStone, AddedItems.BlazingStone, AddedItems.BlazingShard, AddedItems.PowerShard, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K91r, AddedItems.K91c, AddedItems.K91m, true, AddedItems.SerenityCrystal, AddedItems.LightningGem, AddedItems.SerenityStone, AddedItems.LightningShard, AddedItems.DenseCrystal, AddedItems.DenseShard, AddedItems.TranquilCrystal, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K92r, AddedItems.K92c, AddedItems.K92m, true, AddedItems.Orichalcum, AddedItems.MythrilCrystal, AddedItems.MythrilGem, AddedItems.MythrilStone, AddedItems.MythrilShard, AddedItems.BrightCrystal, AddedItems.EnergyCrystal, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K93r, AddedItems.K93c, AddedItems.K93m, true, AddedItems.BrightCrystal, AddedItems.BrightGem, AddedItems.DenseStone, AddedItems.BrightShard, null, null, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K94r, AddedItems.K94c, AddedItems.K94m, true, AddedItems.TwilightCrystal, AddedItems.TranquilCrystal, AddedItems.MythrilCrystal, AddedItems.TranquilGem, AddedItems.DenseStone, AddedItems.TwilightStone, AddedItems.TranquilShard, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K95r, AddedItems.K95c, AddedItems.K95m, true, AddedItems.FrostCrystal, AddedItems.MythrilGem, AddedItems.FrostGem, AddedItems.FrostStone, AddedItems.MythrilStone, AddedItems.FrostShard, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K96r, AddedItems.K96c, AddedItems.K96m, true, AddedItems.DenseCrystal, AddedItems.RemembranceCrystal, AddedItems.DenseGem, AddedItems.RemembranceGem, AddedItems.RemembranceStone, AddedItems.RemembranceShard, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K97r, AddedItems.K97c, AddedItems.K97m, true, AddedItems.DarkCrystal, AddedItems.LucidCrystal, AddedItems.DarkGem, AddedItems.LucidGem, AddedItems.DarkStone, AddedItems.LucidShard, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K98r, AddedItems.K98c, AddedItems.K98m, true, AddedItems.DenseCrystal, AddedItems.SerenityCrystal, AddedItems.MythrilCrystal, AddedItems.MythrilGem, AddedItems.DenseGem, AddedItems.SerenityGem, AddedItems.DenseStone, AddedItems.SerenityStone, AddedItems.MythrilShard, AddedItems.DenseShard, AddedItems.SerenityShard);
-		addSynthesisRecipe(AddedItems.K99r, AddedItems.K99c, AddedItems.K99m, true, AddedItems.EnergyCrystal, AddedItems.EnergyStone, AddedItems.EnergyShard, AddedItems.PowerCrystal, AddedItems.PowerGem, AddedItems.EnergyCrystal, AddedItems.PowerShard, AddedItems.PowerStone, null, null, null);
-		addSynthesisRecipe(AddedItems.K100r, AddedItems.K100c, AddedItems.K100m, true, AddedItems.OrichalcumPlus, AddedItems.Orichalcum, AddedItems.MythrilGem, AddedItems.SerenityGem, AddedItems.SerenityShard, AddedItems.PowerCrystal, AddedItems.PowerGem, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K101r, AddedItems.K101c, AddedItems.K101m, true, AddedItems.TranquilGem, AddedItems.SerenityGem, AddedItems.BrightCrystal, AddedItems.TranquilStone, AddedItems.SerenityShard, AddedItems.TranquilShard, AddedItems.BrightShard, null, null, null, null);
-		//addSynthesisRecipe(AddedItems.K102r, AddedItems.K102c, AddedItems.K102m, true, AddedItems.DarkMatter, AddedItems.DarkCrystal, AddedItems., item4, item5, item6, item7, item8, item9, item10, item11);
-		//addSynthesisRecipe(AddedItems.K103r, AddedItems.K103c, AddedItems.K103m, true, item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11);
+		addSynthesisRecipe(AddedItems.K1r, AddedItems.VulpeusChain, AddedItems.VulpeusMaterial, true, 2400, AddedItems.Orichalcum, AddedItems.SerenityCrystal, AddedItems.MythrilGem, AddedItems.EnergyStone, AddedItems.BrightStone, AddedItems.BlazingShard);
+		addSynthesisRecipe(AddedItems.K2r, AddedItems.UrsusChain, AddedItems.UrsusMaterial, true, 2700, AddedItems.Orichalcum, AddedItems.SerenityCrystal, AddedItems.MythrilGem, AddedItems.PowerStone, AddedItems.BrightStone, AddedItems.BlazingShard);
+		addSynthesisRecipe(AddedItems.K3r, AddedItems.UnicornisChain, AddedItems.UnicornisMaterial, true, 2250, AddedItems.Orichalcum, AddedItems.SerenityCrystal, AddedItems.MythrilGem, AddedItems.TwilightStone, AddedItems.BrightStone, AddedItems.BlazingStone);
+		addSynthesisRecipe(AddedItems.K4r, AddedItems.LeopardosChain, AddedItems.LeopardosMaterial, true, 2550, AddedItems.Orichalcum, AddedItems.SerenityCrystal, AddedItems.MythrilGem, AddedItems.DarkStone, AddedItems.BrightStone, AddedItems.BlazingShard);
+		addSynthesisRecipe(AddedItems.K5r, AddedItems.AnguisChain, AddedItems.AnguisMaterial, true, 1350, AddedItems.Orichalcum, AddedItems.SerenityCrystal, AddedItems.MythrilGem, AddedItems.DenseStone, AddedItems.BrightStone, AddedItems.BlazingShard);
+		addSynthesisRecipe(AddedItems.K6r, AddedItems.LeasKeybladeChain, AddedItems.LeasKeybladeMaterial, true, 1200, AddedItems.BlazingCrystal, AddedItems.DarkShard, AddedItems.MythrilShard, AddedItems.BrightGem, AddedItems.BlazingShard, AddedItems.DarkStone, AddedItems.BlazingStone, AddedItems.DarkMatter);
+		addSynthesisRecipe(AddedItems.K7r, AddedItems.YoungXehanortsKeybladeChain, AddedItems.YoungXehanortsKeybladeMaterial, true, 2250, AddedItems.DarkCrystal, AddedItems.PowerCrystal, AddedItems.LucidGem, AddedItems.DenseShard, AddedItems.PowerStone, AddedItems.LucidStone, AddedItems.Orichalcum, AddedItems.DarkShard, AddedItems.LucidShard);
+		addSynthesisRecipe(AddedItems.K8r, AddedItems.OceanRageChain, AddedItems.OceanRageMaterial, true, 1200, AddedItems.PowerCrystal, AddedItems.BrightGem, AddedItems.FrostCrystal, AddedItems.FrostGem, AddedItems.PowerStone, AddedItems.LucidShard, AddedItems.FrostStone, AddedItems.FrostShard);
+		addSynthesisRecipe(AddedItems.K9r, AddedItems.EndOfPainChain, AddedItems.EndOfPainMaterial, true, 1350, AddedItems.TranquilCrystal, AddedItems.TwilightGem, AddedItems.TwilightStone, AddedItems.PowerShard, AddedItems.DenseShard, AddedItems.PowerCrystal);
+		addSynthesisRecipe(AddedItems.K10r, AddedItems.UnboundChain, AddedItems.UnboundMaterial, true, 1950, AddedItems.DarkCrystal, AddedItems.DenseGem, AddedItems.LucidGem, AddedItems.EnergyShard, AddedItems.LucidShard, AddedItems.DenseStone);
+		addSynthesisRecipe(AddedItems.K11r, AddedItems.SweetDreamsChain, AddedItems.SweetDreamsMaterial, true, 1350, AddedItems.BrightCrystal, AddedItems.TwilightCrystal, AddedItems.BrightGem, AddedItems.EnergyStone, AddedItems.EnergyShard, AddedItems.PowerStone, AddedItems.BlazingShard);
+		addSynthesisRecipe(AddedItems.K12r, AddedItems.DiveWingChain, AddedItems.DivewingMaterial, true, 1050, AddedItems.PowerCrystal, AddedItems.LightningCrystal, AddedItems.LightningGem, AddedItems.BlazingStone, AddedItems.BrightGem, AddedItems.Orichalcum);
+		addSynthesisRecipe(AddedItems.K13r, AddedItems.CounterpointChain, AddedItems.CounterpointMaterial, true, 1050, AddedItems.RemembranceCrystal, AddedItems.DarkGem, AddedItems.BlazingShard, AddedItems.LucidShard, AddedItems.DenseStone, AddedItems.LucidShard);
+		addSynthesisRecipe(AddedItems.K14r, AddedItems.AllForOneChain, AddedItems.AllForOneMaterial, true, 750, AddedItems.DenseCrystal, AddedItems.MythrilShard, AddedItems.MythrilGem, AddedItems.BrightShard, AddedItems.BrightStone, AddedItems.FrostShard, AddedItems.LightningShard);
+		addSynthesisRecipe(AddedItems.K15r, AddedItems.KnockoutPunchChain, AddedItems.KnockoutPunchMaterial, true, 750, AddedItems.PowerShard, AddedItems.EnergyShard, AddedItems.MythrilCrystal, AddedItems.DenseShard, AddedItems.DenseStone, AddedItems.DarkStone, AddedItems.LucidGem, AddedItems.DenseCrystal, AddedItems.BlazingShard);
+		addSynthesisRecipe(AddedItems.K16r, AddedItems.FerrisGearChain, AddedItems.FerrisGearMaterial, true, 900, AddedItems.PowerCrystal, AddedItems.BrightShard, AddedItems.LucidGem, AddedItems.TranquilStone, AddedItems.TranquilGem, AddedItems.MythrilShard);
+		addSynthesisRecipe(AddedItems.K17r, AddedItems.DualDiscChain, AddedItems.DualDiscMaterial, true, 1050, AddedItems.EnergyGem, AddedItems.PowerGem, AddedItems.DenseStone, AddedItems.DenseShard, AddedItems.BrightStone, AddedItems.BrightGem, AddedItems.EnergyCrystal);
+		addSynthesisRecipe(AddedItems.K18r, AddedItems.GuardianBellChain, AddedItems.GuardianBellMaterial, true, 1050, AddedItems.DarkCrystal, AddedItems.ShinyCrystal, AddedItems.MythrilShard, AddedItems.DenseStone, AddedItems.BrightStone, AddedItems.BlazingShard);
+		addSynthesisRecipe(AddedItems.K19r, AddedItems.SkullNoiseChain, AddedItems.SkullNoiseMaterial, true, 900, AddedItems.Orichalcum, AddedItems.DarkMatter, AddedItems.LucidGem, AddedItems.MythrilGem, AddedItems.BlazingStone, AddedItems.DarkShard, AddedItems.BlazingShard, AddedItems.DarkStone);
+		addSynthesisRecipe(AddedItems.K20r, AddedItems.WoodenKeybladeChain, AddedItems.WoodenKeybladeMaterial, true, 300, AddedItems.TranquilGem, AddedItems.SerenityShard, AddedItems.BrightShard, AddedItems.DenseStone, AddedItems.DenseShard);
+		addSynthesisRecipe(AddedItems.K21r, AddedItems.KyebladeBrokenChain, AddedItems.KyebladeBrokenMaterial, true, 300, AddedItems.OrichalcumPlus, AddedItems.Orichalcum, AddedItems.DarkMatter, AddedItems.DarkCrystal, AddedItems.DarkHeart, AddedItems.KingdomHearts, AddedItems.BrightCrystal, AddedItems.BrightGem, AddedItems.PureHeart, AddedItems.BrightStone, AddedItems.Heart);
+		addSynthesisRecipe(AddedItems.K22r, AddedItems.KyebladeChain, AddedItems.KyebladeMaterial, true, 3750, AddedItems.OrichalcumPlus, AddedItems.Orichalcum, AddedItems.DarkMatter, AddedItems.DarkCrystal, AddedItems.DarkHeart, AddedItems.KingdomHearts, AddedItems.BrightCrystal, AddedItems.BrightGem, AddedItems.PureHeart, AddedItems.KyebladeBroken, AddedItems.Heart);
+		addSynthesisRecipe(AddedItems.K23r, AddedItems.LightSeekerChain, AddedItems.LightSeekerMaterial, true, 1350, AddedItems.SerenityCrystal, AddedItems.BrightCrystal, AddedItems.MythrilGem, AddedItems.DenseStone, AddedItems.BrightStone, AddedItems.BlazingShard);
+		addSynthesisRecipe(AddedItems.K24r, AddedItems.LostMemoryChain, AddedItems.LostMemoryMaterial, true, 1800, AddedItems.OrichalcumPlus, AddedItems.RemembranceCrystal, AddedItems.RemembranceShard, AddedItems.DarkStone, AddedItems.BrightStone, AddedItems.TwilightGem);
+		addSynthesisRecipe(AddedItems.K25r, AddedItems.FrolicFlameChain, AddedItems.FrolicFlameMaterial, true, 900, AddedItems.Orichalcum, AddedItems.BlazingCrystal, AddedItems.BlazingGem, AddedItems.MythrilGem, AddedItems.DenseStone, AddedItems.BrightStone, AddedItems.BlazingShard, AddedItems.BlazingStone, AddedItems.TwilightGem);
+		addSynthesisRecipe(AddedItems.K26r, AddedItems.MasterKeeperChain, AddedItems.MasterKeeperMaterial, true, 1950, AddedItems.OrichalcumPlus, AddedItems.MythrilGem, AddedItems.PowerShard, AddedItems.BlazingStone, AddedItems.BrightShard);
+		addSynthesisRecipe(AddedItems.K27r, AddedItems.BrightCrestChain, AddedItems.BrightCrestMaterial, true, 1050, AddedItems.SerenityCrystal, AddedItems.MythrilCrystal, AddedItems.MythrilShard, AddedItems.BrightGem, AddedItems.BrightStone, AddedItems.BrightShard, AddedItems.SerenityShard);
+		addSynthesisRecipe(AddedItems.K28r, AddedItems.CrownUnlimitChain, AddedItems.CrownUnlimitMaterial, true, 1500, AddedItems.OrichalcumPlus, AddedItems.Orichalcum, AddedItems.MythrilCrystal, AddedItems.BrightStone, AddedItems.PowerShard, AddedItems.EnergyGem, AddedItems.EnergyShard);
+		addSynthesisRecipe(AddedItems.K29r, AddedItems.NoNameChain, AddedItems.NoNameMaterial, true, 1800, AddedItems.DarkMatter, AddedItems.DarkCrystal, AddedItems.DarkShard, AddedItems.EnergyStone, AddedItems.PowerStone, AddedItems.PowerShard, AddedItems.EnergyShard, AddedItems.PowerCrystal);
+		addSynthesisRecipe(AddedItems.K30r, AddedItems.VoidGearChain, AddedItems.VoidGearMaterial, true, 1650, AddedItems.Orichalcum, AddedItems.DarkMatter, AddedItems.DarkCrystal, AddedItems.DarkGem, AddedItems.DarkStone, AddedItems.DarkShard);
+		addSynthesisRecipe(AddedItems.K31r, AddedItems.SweetStackChain, AddedItems.SweetStackMaterial, true, 1200, AddedItems.ShinyCrystal, AddedItems.SerenityCrystal, AddedItems.SerenityShard, AddedItems.FrostGem, AddedItems.FrostShard, AddedItems.TranquilStone, AddedItems.BrightGem);
+		addSynthesisRecipe(AddedItems.K32r, AddedItems.PixiePetalChain, AddedItems.PixiePetalMaterial, true, 900, AddedItems.MythrilCrystal, AddedItems.SerenityStone, AddedItems.TranquilStone, AddedItems.MythrilShard, AddedItems.TranquilShard, AddedItems.BrightCrystal);
+		addSynthesisRecipe(AddedItems.K33r, AddedItems.HyperdriveChain, AddedItems.HyperdriveMaterial, true, 1200, AddedItems.PowerCrystal, AddedItems.EnergyCrystal, AddedItems.MythrilGem, AddedItems.DenseStone, AddedItems.LightningShard, AddedItems.LightningStone);
+		addSynthesisRecipe(AddedItems.K34r, AddedItems.MarkOfAHeroChain, AddedItems.MarkOfAHeroMaterial, true, 1050, AddedItems.BrightCrystal, AddedItems.SerenityCrystal, AddedItems.LucidGem, AddedItems.LucidShard, AddedItems.BrightStone, AddedItems.LightningStone, AddedItems.SerenityGem);
+		addSynthesisRecipe(AddedItems.K35r, AddedItems.VictoryLineChain, AddedItems.VictoryLineMaterial, true, 1050, AddedItems.Orichalcum, AddedItems.DarkCrystal, AddedItems.BrightCrystal, AddedItems.LightningGem, AddedItems.BrightStone, AddedItems.LucidShard, AddedItems.LightningStone, AddedItems.DarkShard);
+		addSynthesisRecipe(AddedItems.K36r, AddedItems.FairyStarsChain, AddedItems.FairyStarsMaterial, true, 900, AddedItems.MythrilCrystal, AddedItems.ShinyCrystal, AddedItems.DenseGem, AddedItems.DenseStone, AddedItems.BrightStone, AddedItems.BrightShard, AddedItems.DenseShard);
+		addSynthesisRecipe(AddedItems.K37r, AddedItems.StrokeOfMidnightChain, AddedItems.StrokeOfMidnightMaterial, true, 900, AddedItems.FrostCrystal, AddedItems.FrostGem, AddedItems.FrostShard, AddedItems.MythrilStone, AddedItems.MythrilShard, AddedItems.BrightGem);
+		addSynthesisRecipe(AddedItems.K38r, AddedItems.ChaosRipperChain, AddedItems.ChaosRipperMaterial, true, 1050, AddedItems.LucidCrystal, AddedItems.LucidShard, AddedItems.DarkCrystal, AddedItems.DarkMatter, AddedItems.DarkStone, AddedItems.DarkStone, AddedItems.DenseGem, AddedItems.DenseStone);
+		addSynthesisRecipe(AddedItems.K39r, AddedItems.XehanortsKeybladeChain, AddedItems.XehanortsKeybladeMaterial, true, 2700, AddedItems.OrichalcumPlus, AddedItems.DarkCrystal, AddedItems.MythrilCrystal, AddedItems.DenseCrystal, AddedItems.DarkGem, AddedItems.DarkStone, AddedItems.DenseStone, AddedItems.MythrilShard, AddedItems.DenseShard, AddedItems.DarkShard, AddedItems.DarkMatter);
+		addSynthesisRecipe(AddedItems.K40r, AddedItems.DarkgnawChain, AddedItems.DarkgnawMaterial, true, 1500, AddedItems.LucidCrystal, AddedItems.DarkGem, AddedItems.LucidGem, AddedItems.DarkShard, AddedItems.LucidShard, AddedItems.LucidStone);
+		addSynthesisRecipe(AddedItems.K41r, AddedItems.ZeroOneChain, AddedItems.ZeroOneMaterial, true, 1800, AddedItems.Orichalcum, AddedItems.EnergyCrystal, AddedItems.EnergyGem, AddedItems.EnergyStone, AddedItems.EnergyShard, AddedItems.PowerCrystal, AddedItems.PowerGem, AddedItems.PowerStone, AddedItems.PowerShard);
+		addSynthesisRecipe(AddedItems.K42r, AddedItems.DreamSwordChain, AddedItems.DreamSwordMaterial, true, 750, AddedItems.RemembranceCrystal, AddedItems.TranquilCrystal, AddedItems.MythrilGem, AddedItems.TranquilGem, AddedItems.RemembranceStone, AddedItems.TranquilStone, AddedItems.TranquilShard, AddedItems.RemembranceShard);
+		addSynthesisRecipe(AddedItems.K43r, AddedItems.AubadeChain, AddedItems.AubadeMaterial, true, 1350, AddedItems.BrightCrystal, AddedItems.PowerCrystal, AddedItems.ShinyCrystal, AddedItems.BrightGem, AddedItems.BrightStone, AddedItems.BrightShard, AddedItems.PowerShard);
+		addSynthesisRecipe(AddedItems.K44r, AddedItems.UmbrellaChain, AddedItems.UmbrellaMaterial, true, 600, AddedItems.FrostCrystal, AddedItems.FrostShard, AddedItems.FrostGem, AddedItems.LightningCrystal, AddedItems.LightningShard, AddedItems.LightningStone);
+		addSynthesisRecipe(AddedItems.K45r, AddedItems.OmegaWeaponChain, AddedItems.OmegaWeaponMaterial, true, 1950, AddedItems.OrichalcumPlus, AddedItems.Orichalcum, AddedItems.MythrilShard, AddedItems.DenseShard, AddedItems.DenseStone, AddedItems.MythrilCrystal);
+		addSynthesisRecipe(AddedItems.K46r, AddedItems.TwilightBlazeChain, AddedItems.TwilightBlazeMaterial, true, 1650, AddedItems.TwilightCrystal, AddedItems.BlazingCrystal, AddedItems.TwilightGem, AddedItems.BlazingStone, AddedItems.TwilightShard, AddedItems.BlazingShard);
+		addSynthesisRecipe(AddedItems.K47r, AddedItems.MaverickFlareChain, AddedItems.MaverickFlareMaterial, true, 1350, AddedItems.DarkCrystal, AddedItems.BlazingGem, AddedItems.DarkStone, AddedItems.BlazingShard, AddedItems.BlazingStone, AddedItems.DarkShard);
+		addSynthesisRecipe(AddedItems.K48r, AddedItems.AstralBlastChain, AddedItems.AstralBlastMaterial, true, 1350, AddedItems.Orichalcum, AddedItems.MythrilCrystal, AddedItems.BlazingShard, AddedItems.BlazingStone, AddedItems.BlazingShard, AddedItems.MythrilStone, AddedItems.MythrilShard);
+		addSynthesisRecipe(AddedItems.K49r, AddedItems.DarkerThanDarkChain, AddedItems.DarkerThanDarkMaterial, true, 1200, AddedItems.DarkMatter, AddedItems.DarkCrystal, AddedItems.LucidGem, AddedItems.LucidShard, AddedItems.DarkShard, AddedItems.DarkStone);
+		addSynthesisRecipe(AddedItems.K50r, AddedItems.LunarEclipseChain, AddedItems.LunarEclipseMaterial, true, 900, AddedItems.Orichalcum, AddedItems.RemembranceCrystal, AddedItems.DarkGem, AddedItems.BrightGem, AddedItems.BrightStone, AddedItems.DarkStone, AddedItems.RemembranceShard);
+		addSynthesisRecipe(AddedItems.K51r, AddedItems.SilentDirgeChain, AddedItems.SilentDirgeMaterial, true, 1050, AddedItems.SerenityCrystal, AddedItems.TranquilCrystal, AddedItems.FrostStone, AddedItems.TranquilShard, AddedItems.SerenityShard, AddedItems.FrostGem);
+		addSynthesisRecipe(AddedItems.K52r, AddedItems.TotalEclipseChain, AddedItems.TotalEclipseMaterial, true, 1350, AddedItems.Orichalcum, AddedItems.TwilightCrystal, AddedItems.DarkGem, AddedItems.BrightGem, AddedItems.BrightStone, AddedItems.DarkStone, AddedItems.TwilightShard);
+		addSynthesisRecipe(AddedItems.K53r, AddedItems.GlimpseOfDarknessChain, AddedItems.GlimpseOfDarknessMaterial, true, 900, AddedItems.Orichalcum, AddedItems.SerenityCrystal, AddedItems.MythrilGem, AddedItems.DenseStone, AddedItems.BrightStone, AddedItems.BlazingShard);
+		addSynthesisRecipe(AddedItems.K54r, AddedItems.MidnightRoarChain, AddedItems.MidnightRoarMaterial, true, 900, AddedItems.DarkGem, AddedItems.SerenityCrystal, AddedItems.MythrilGem, AddedItems.DenseStone, AddedItems.BrightStone, AddedItems.BlazingShard);
+		addSynthesisRecipe(AddedItems.K55r, AddedItems.RejectionOfFateChain, AddedItems.RejectionOfFateMaterial, true, 1200, AddedItems.RemembranceCrystal, AddedItems.DarkCrystal, AddedItems.DenseShard, AddedItems.EnergyCrystal, AddedItems.EnergyStone, AddedItems.PowerShard);
+		addSynthesisRecipe(AddedItems.K56r, AddedItems.TrueLightsFlightChain, AddedItems.TrueLightsFlightMaterial, true, 1200, AddedItems.Orichalcum, AddedItems.BrightCrystal, AddedItems.BrightStone, AddedItems.BrightShard, AddedItems.PowerCrystal, AddedItems.PowerShard);
+		addSynthesisRecipe(AddedItems.K57r, AddedItems.LeviathanChain, AddedItems.LeviathanMaterial, true, 1350, AddedItems.MythrilCrystal, AddedItems.MythrilGem, AddedItems.MythrilStone, AddedItems.MythrilShard, AddedItems.EnergyCrystal, AddedItems.PowerCrystal, AddedItems.PowerStone);
+		addSynthesisRecipe(AddedItems.K58r, AddedItems.AbyssalTideChain, AddedItems.AbyssalTideMaterial, true, 1050, AddedItems.FrostCrystal, AddedItems.FrostGem, AddedItems.MythrilGem, AddedItems.FrostShard, AddedItems.DenseStone, AddedItems.FrostShard, AddedItems.FrostGem);
+		addSynthesisRecipe(AddedItems.K59r, AddedItems.CrownOfGuiltChain, AddedItems.CrownOfGuiltMaterial, true, 1350, AddedItems.Orichalcum, AddedItems.DarkGem, AddedItems.DenseStone, AddedItems.DenseShard);
+		addSynthesisRecipe(AddedItems.K60r, AddedItems.SignOfInnocenceChain, AddedItems.SignOfInnocenceMaterial, true, 900, AddedItems.BrightCrystal, AddedItems.SerenityCrystal, AddedItems.BrightStone, AddedItems.SerenityShard, AddedItems.SerenityStone, AddedItems.BrightShard);
+		addSynthesisRecipe(AddedItems.K61r, AddedItems.PainOfSolitudeChain, AddedItems.PainOfSolitudeMaterial, true, 750, AddedItems.DenseCrystal, AddedItems.LucidGem, AddedItems.MythrilGem, AddedItems.DenseStone, AddedItems.LucidShard, AddedItems.DenseShard);
+		addSynthesisRecipe(AddedItems.K62r, AddedItems.AbaddonPlasmaChain, AddedItems.AbaddonPlasmaMaterial, true, 1050, AddedItems.Orichalcum, AddedItems.DarkCrystal, AddedItems.DarkGem, AddedItems.LucidGem, AddedItems.DarkShard);
+		addSynthesisRecipe(AddedItems.K63r, AddedItems.OminousBlightChain, AddedItems.OminousBlightMaterial, true, 1500, AddedItems.MythrilCrystal, AddedItems.MythrilGem, AddedItems.BlazingShard, AddedItems.MythrilShard, AddedItems.BlazingGem, AddedItems.EnergyShard, AddedItems.EnergyStone);
+		addSynthesisRecipe(AddedItems.K64r, AddedItems.MissingAcheChain, AddedItems.MissingAcheMaterial, true, 1200, AddedItems.RemembranceCrystal, AddedItems.ShinyCrystal, AddedItems.RemembranceGem, AddedItems.RemembranceStone, AddedItems.BrightStone);
+		addSynthesisRecipe(AddedItems.K65r, AddedItems.WinnersProofChain, AddedItems.WinnersProofMaterial, true, 1800, AddedItems.OrichalcumPlus, AddedItems.Orichalcum, AddedItems.MythrilGem, AddedItems.BlazingGem, AddedItems.FrostGem, AddedItems.LightningGem);
+		addSynthesisRecipe(AddedItems.K66r, AddedItems.FatalCrestChain, AddedItems.FatalCrestMaterial, true, 2550, AddedItems.DarkCrystal, AddedItems.LucidCrystal, AddedItems.DarkGem, AddedItems.DenseGem, AddedItems.DenseStone, AddedItems.DarkShard, AddedItems.DenseShard);
+		addSynthesisRecipe(AddedItems.K67r, AddedItems.TwoBecomesOneChain, AddedItems.TwoBecomesOneMaterial, true, 3000, AddedItems.PowerCrystal, AddedItems.EnergyCrystal, AddedItems.PowerStone, AddedItems.EnergyStone, AddedItems.PowerStone, AddedItems.PowerShard, AddedItems.EnergyShard);
+		addSynthesisRecipe(AddedItems.K68r, AddedItems.BondOfFlamesChain, AddedItems.BondOfFlamesMaterial, true, 2100, AddedItems.DarkCrystal, AddedItems.BlazingCrystal, AddedItems.BlazingStone, AddedItems.BlazingShard, AddedItems.BrightShard);
+		addSynthesisRecipe(AddedItems.K69r, AddedItems.FenrirChain, AddedItems.FenrirMaterial, true, 3600, AddedItems.LightningCrystal, AddedItems.MythrilCrystal, AddedItems.LightningGem, AddedItems.DenseStone, AddedItems.LightningShard, AddedItems.DenseShard);
+		addSynthesisRecipe(AddedItems.K70r, AddedItems.SleepingLionChain, AddedItems.SleepingLionMaterial, true, 1950, AddedItems.TranquilCrystal, AddedItems.SerenityCrystal, AddedItems.SerenityGem, AddedItems.TranquilStone, AddedItems.SerenityShard, AddedItems.SerenityStone, AddedItems.TranquilGem, AddedItems.DarkShard);
+		addSynthesisRecipe(AddedItems.K71r, AddedItems.GuardianSoulChain, AddedItems.GuardianSoulMaterial, true, 1200, AddedItems.Orichalcum, AddedItems.DenseCrystal, AddedItems.MythrilGem, AddedItems.BrightStone, AddedItems.DenseShard, AddedItems.BrightShard);
+		addSynthesisRecipe(AddedItems.K72r, AddedItems.GullWingChain, AddedItems.GullwingMaterial, true, 750, AddedItems.LightningCrystal, AddedItems.LightningGem, AddedItems.LightningStone, AddedItems.LightningShard, AddedItems.SerenityStone, AddedItems.TranquilCrystal, AddedItems.TranquilShard, AddedItems.SerenityGem);
+		addSynthesisRecipe(AddedItems.K73r, AddedItems.PhotonDebuggerChain, AddedItems.PhotonDebuggerMaterial, true, 900, AddedItems.PowerCrystal, AddedItems.PowerGem, AddedItems.MythrilGem, AddedItems.PowerStone, AddedItems.PowerShard, AddedItems.EnergyShard, AddedItems.EnergyStone);
+		addSynthesisRecipe(AddedItems.K74r, AddedItems.SweetMemoriesChain, AddedItems.SweetMemoriesMaterial, true, 1050, AddedItems.ShinyCrystal, AddedItems.TranquilGem, AddedItems.FrostGem, AddedItems.FrostStone, AddedItems.FrostShard, AddedItems.BrightCrystal, AddedItems.TranquilShard, AddedItems.BrightShard);
+		addSynthesisRecipe(AddedItems.K75r, AddedItems.CircleOfLifeChain, AddedItems.CircleOfLifeMaterial, true, 1350, AddedItems.RemembranceCrystal, AddedItems.SerenityCrystal, AddedItems.MythrilGem, AddedItems.SerenityStone, AddedItems.SerenityShard, AddedItems.TranquilShard);
+		addSynthesisRecipe(AddedItems.K76r, AddedItems.DecisivePumpkinChain, AddedItems.DecisivePumpkinMaterial, true, 3150, AddedItems.RemembranceCrystal, AddedItems.SerenityCrystal, AddedItems.DarkCrystal, AddedItems.LucidStone, AddedItems.BrightShard, AddedItems.DarkShard);
+		addSynthesisRecipe(AddedItems.K77r, AddedItems.WishingLampChain, AddedItems.WishingLampMaterial, true, 1050, AddedItems.ShinyCrystal, AddedItems.SerenityCrystal, AddedItems.BrightGem, AddedItems.MythrilGem, AddedItems.BrightStone, AddedItems.BrightShard);
+		addSynthesisRecipe(AddedItems.K78r, AddedItems.FollowTheWindChain, AddedItems.FollowTheWindMaterial, true, 1200, AddedItems.Orichalcum, AddedItems.SerenityCrystal, AddedItems.LightningGem, AddedItems.LightningStone, AddedItems.LightningShard);
+		addSynthesisRecipe(AddedItems.K79r, AddedItems.MysteriousAbyssChain, AddedItems.MysteriousAbyssMaterial, true, 900, AddedItems.FrostCrystal, AddedItems.PowerCrystal, AddedItems.MythrilGem, AddedItems.MythrilShard, AddedItems.FrostShard, AddedItems.PowerStone);
+		addSynthesisRecipe(AddedItems.K80r, AddedItems.MonochromeChain, AddedItems.MonochromeMaterial, true, 900, AddedItems.Orichalcum, AddedItems.LucidCrystal, AddedItems.TwilightGem, AddedItems.MythrilGem, AddedItems.TwilightStone, AddedItems.LucidStone, AddedItems.LucidShard, AddedItems.TwilightShard);
+		addSynthesisRecipe(AddedItems.K81r, AddedItems.HerosCrestChain, AddedItems.HerosCrestMaterial, true, 900, AddedItems.BrightCrystal, AddedItems.TwilightCrystal, AddedItems.BrightStone, AddedItems.DenseStone, AddedItems.BrightShard, AddedItems.SerenityShard, AddedItems.TranquilStone, AddedItems.TranquilCrystal);
+		addSynthesisRecipe(AddedItems.K82r, AddedItems.RumblingRoseChain, AddedItems.RumblingRoseMaterial, true, 1650, AddedItems.Orichalcum, AddedItems.SerenityCrystal, AddedItems.MythrilGem, AddedItems.EnergyStone, AddedItems.PowerShard, AddedItems.MythrilShard);
+		addSynthesisRecipe(AddedItems.K83r, AddedItems.HiddenDragonChain, AddedItems.HiddenDragonMaterial, true, 1050, AddedItems.OrichalcumPlus, AddedItems.BlazingCrystal, AddedItems.DarkGem, AddedItems.BlazingStone, AddedItems.DarkStone, AddedItems.BlazingShard);
+		addSynthesisRecipe(AddedItems.K84r, AddedItems.EndsOfEarthChain, AddedItems.EndsOfEarthMaterial, true, 1350, AddedItems.DenseCrystal, AddedItems.DenseGem, AddedItems.DenseStone, AddedItems.DarkStone, AddedItems.DarkShard, AddedItems.DenseShard);
+		addSynthesisRecipe(AddedItems.K85r, AddedItems.StormfallChain, AddedItems.StormfallMaterial, true, 1200, AddedItems.FrostCrystal, AddedItems.FrostGem, AddedItems.FrostStone, AddedItems.BrightStone, AddedItems.BrightShard, AddedItems.FrostShard);
+		addSynthesisRecipe(AddedItems.K86r, AddedItems.DestinysEmbraceChain, AddedItems.DestinysEmbraceMaterial, true, 1050, AddedItems.SerenityCrystal, AddedItems.ShinyCrystal, AddedItems.MythrilGem, AddedItems.MythrilStone, AddedItems.TranquilStone, AddedItems.BrightShard);
+		addSynthesisRecipe(AddedItems.K87r, AddedItems.WayToDawnChain, AddedItems.WayToDawnMaterial, true, 1350, AddedItems.Orichalcum, AddedItems.DarkCrystal, AddedItems.LightningGem, AddedItems.TwilightGem, AddedItems.DarkStone, AddedItems.LightningShard, AddedItems.TwilightShard);
+		addSynthesisRecipe(AddedItems.K88r, AddedItems.OneWingedAngelChain, AddedItems.OneWingedAngelMaterial, true, 2250, AddedItems.OrichalcumPlus, AddedItems.Orichalcum, AddedItems.BlazingGem, AddedItems.BlazingStone, AddedItems.BlazingShard);
+		addSynthesisRecipe(AddedItems.K89r, AddedItems.DiamondDustChain, AddedItems.DiamondDustMaterial, true, 1500, AddedItems.Orichalcum, AddedItems.FrostCrystal, AddedItems.FrostGem, AddedItems.FrostStone, AddedItems.FrostShard, AddedItems.MythrilCrystal, AddedItems.TwilightGem);
+		addSynthesisRecipe(AddedItems.K90r, AddedItems.LionHeartChain, AddedItems.LionHeartMaterial, true, 1050, AddedItems.BlazingCrystal, AddedItems.PowerCrystal, AddedItems.PowerStone, AddedItems.BlazingStone, AddedItems.BlazingShard, AddedItems.PowerShard);
+		addSynthesisRecipe(AddedItems.K91r, AddedItems.MetalChocoboChain, AddedItems.MetalChocoboMaterial, true, 1050, AddedItems.SerenityCrystal, AddedItems.LightningGem, AddedItems.SerenityStone, AddedItems.LightningShard, AddedItems.DenseCrystal, AddedItems.DenseShard, AddedItems.TranquilCrystal);
+		addSynthesisRecipe(AddedItems.K92r, AddedItems.SpellBinderChain, AddedItems.SpellBinderMaterial, true, 900, AddedItems.Orichalcum, AddedItems.MythrilCrystal, AddedItems.MythrilGem, AddedItems.MythrilStone, AddedItems.MythrilShard, AddedItems.BrightCrystal, AddedItems.EnergyCrystal);
+		addSynthesisRecipe(AddedItems.K93r, AddedItems.DivineRoseChain, AddedItems.DivineRoseMaterial, true, 900, AddedItems.BrightCrystal, AddedItems.BrightGem, AddedItems.DenseStone, AddedItems.BrightShard);
+		addSynthesisRecipe(AddedItems.K94r, AddedItems.FairyHarpChain, AddedItems.FairyHarpMaterial, true, 1050, AddedItems.TwilightCrystal, AddedItems.TranquilCrystal, AddedItems.MythrilCrystal, AddedItems.TranquilGem, AddedItems.DenseStone, AddedItems.TwilightStone, AddedItems.TranquilShard);
+		addSynthesisRecipe(AddedItems.K95r, AddedItems.CrabClawChain, AddedItems.CrabClawMaterial, true, 750, AddedItems.FrostCrystal, AddedItems.MythrilGem, AddedItems.FrostGem, AddedItems.FrostStone, AddedItems.MythrilStone, AddedItems.FrostShard);
+		addSynthesisRecipe(AddedItems.K96r, AddedItems.WishingStarChain, AddedItems.WishingStarMaterial, true, 1350, AddedItems.DenseCrystal, AddedItems.RemembranceCrystal, AddedItems.DenseGem, AddedItems.RemembranceGem, AddedItems.RemembranceStone, AddedItems.RemembranceShard);
+		addSynthesisRecipe(AddedItems.K97r, AddedItems.PumpkinHeadChain, AddedItems.PumpkinHeadMaterial, true, 1500, AddedItems.DarkCrystal, AddedItems.LucidCrystal, AddedItems.DarkGem, AddedItems.LucidGem, AddedItems.DarkStone, AddedItems.LucidShard);
+		addSynthesisRecipe(AddedItems.K98r, AddedItems.ThreeWishesChain, AddedItems.ThreeWishesMaterial, true, 1200, AddedItems.DenseCrystal, AddedItems.SerenityCrystal, AddedItems.MythrilCrystal, AddedItems.MythrilGem, AddedItems.DenseGem, AddedItems.SerenityGem, AddedItems.DenseStone, AddedItems.SerenityStone, AddedItems.MythrilShard, AddedItems.DenseShard, AddedItems.SerenityShard);
+		addSynthesisRecipe(AddedItems.K99r, AddedItems.JungleKingChain, AddedItems.JungleKingMaterial, true, 1050, AddedItems.EnergyCrystal, AddedItems.EnergyStone, AddedItems.EnergyShard, AddedItems.PowerCrystal, AddedItems.PowerGem, AddedItems.EnergyCrystal, AddedItems.PowerShard, AddedItems.PowerStone);
+		addSynthesisRecipe(AddedItems.K100r, AddedItems.OlympiaChain, AddedItems.OlympiaMaterial, true, 1350, AddedItems.OrichalcumPlus, AddedItems.Orichalcum, AddedItems.MythrilGem, AddedItems.SerenityGem, AddedItems.SerenityShard, AddedItems.PowerCrystal, AddedItems.PowerGem);
+		addSynthesisRecipe(AddedItems.K101r, AddedItems.LadyLuckChain, AddedItems.LadyLuckMaterial, true, 900, AddedItems.TranquilGem, AddedItems.SerenityGem, AddedItems.BrightCrystal, AddedItems.TranquilStone, AddedItems.SerenityShard, AddedItems.TranquilShard, AddedItems.BrightShard);
+		addSynthesisRecipe(AddedItems.K102r, AddedItems.PeoplesHeartsChain, AddedItems.PeoplesHeartsMaterial, true, 1950,  AddedItems.DarkMatter, AddedItems.DarkCrystal, AddedItems.OrichalcumPlus, AddedItems.LucidGem, AddedItems.LucidStone, AddedItems.DarkGem, AddedItems.DarkStone, AddedItems.TwilightCrystal, AddedItems.Heart);
+		//addSynthesisRecipe(AddedItems.K103r, AddedItems.UltimaWeaponChain, AddedItems.UltimaWeaponMaterial, true, 2700  item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11);
 		//addSynthesisRecipe(AddedItems.K104r, AddedItems.K104c, AddedItems.K104m, true, item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11);
 		//addSynthesisRecipe(AddedItems.K105r, AddedItems.K105c, AddedItems.K105m, true, item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11);
 		//addSynthesisRecipe(AddedItems.K106r, AddedItems.K106c, AddedItems.K106m, true, item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11);
 		//addSynthesisRecipe(AddedItems.K107r, AddedItems.K107c, AddedItems.K107m, true, item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11);
 		//addSynthesisRecipe(AddedItems.K108r, AddedItems.K108c, AddedItems.K108m, true, item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11);
 		//addSynthesisRecipe(AddedItems.K109r, AddedItems.K109c, AddedItems.K109m, true, item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11);
-		addSynthesisRecipe(AddedItems.K110r, AddedItems.K110c, AddedItems.K110m, true, AddedItems.LightningCrystal, AddedItems.LightningStone, AddedItems.DenseShard, AddedItems.LightningGem, AddedItems.PowerCrystal, AddedItems.PowerGem, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K111r, AddedItems.K111c, AddedItems.K111m, true, AddedItems.SerenityCrystal, AddedItems.BrightGem, AddedItems.DenseStone, AddedItems.BrightStone, AddedItems.BrightShard, null, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K112r, AddedItems.K112c, AddedItems.K112m, true, AddedItems.SerenityCrystal, AddedItems.BrightGem, AddedItems.DenseStone, AddedItems.BrightStone, AddedItems.BrightShard, null, null, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K113r, AddedItems.K113c, AddedItems.K113m, true, AddedItems.SerenityCrystal, AddedItems.BrightGem, AddedItems.DenseStone, AddedItems.BrightStone, AddedItems.BrightShard, AddedItems.PowerCrystal, AddedItems.DenseGem, null, null, null, null);
-		addSynthesisRecipe(AddedItems.K114r, AddedItems.K114c, AddedItems.K114m, true, AddedItems.OrichalcumPlus, AddedItems.DarkCrystal, AddedItems.DenseCrystal, AddedItems.PowerGem, AddedItems.TwilightCrystal, AddedItems.TwilightStone, AddedItems.DarkShard, AddedItems.LucidStone, AddedItems.DarkMatter, null, null);
+		addSynthesisRecipe(AddedItems.K110r, AddedItems.WaywardWindChain, AddedItems.WaywardWindMaterial, true, 1200, AddedItems.LightningCrystal, AddedItems.LightningStone, AddedItems.DenseShard, AddedItems.LightningGem, AddedItems.PowerCrystal, AddedItems.PowerGem);
+		addSynthesisRecipe(AddedItems.K111r, AddedItems.KingdomKeyChain, AddedItems.KingdomKeyMaterial, true, 750, AddedItems.SerenityCrystal, AddedItems.BrightGem, AddedItems.DenseStone, AddedItems.BrightStone, AddedItems.BrightShard);
+		addSynthesisRecipe(AddedItems.K112r, AddedItems.OathkeeperChain, AddedItems.OathkeeperMaterial, true, 1650, AddedItems.SerenityCrystal, AddedItems.BrightGem, AddedItems.DenseStone, AddedItems.BrightStone, AddedItems.BrightShard);
+		addSynthesisRecipe(AddedItems.K113r, AddedItems.KingdomKeyDChain, AddedItems.KingdomKeyDMaterial, true, 1650, AddedItems.SerenityCrystal, AddedItems.BrightGem, AddedItems.DenseStone, AddedItems.BrightStone, AddedItems.BrightShard, AddedItems.PowerCrystal, AddedItems.DenseGem);
+		addSynthesisRecipe(AddedItems.K114r, AddedItems.OblivionChain, AddedItems.OblivionMaterial, true, 1950, AddedItems.OrichalcumPlus, AddedItems.DarkCrystal, AddedItems.DenseCrystal, AddedItems.PowerGem, AddedItems.TwilightCrystal, AddedItems.TwilightStone, AddedItems.DarkShard, AddedItems.LucidStone, AddedItems.DarkMatter);
+		addSynthesisRecipe(AddedItems.MythrilShardRecipe, AddedItems.MythrilShard, null, false, 100, Items.diamond, AddedItems.PureHeart);
 
 		if(ClickedTab1){
 			Tab2SrcY = 0;
 			Tab1SrcY = 17;
 			mc.renderEngine.bindTexture(texture);
-			//drawTexturedModalRect(28, 28, 0, 166, 16, 16);
 		}else if(ClickedTab2){
 			Tab1SrcY = 0;
 			Tab2SrcY = 17;
@@ -384,312 +356,54 @@ public class GuiSynthesis extends GuiContainer {
 		return mouseY;
 	}
 
-	/**
-	 * 
-	 * @param recipe The item for the recipe that goes in the slot on the gui
-	 * @param result The item made when clicking 'Synthesize'
-	 * @param resultName The name of the item
-	 * @param texture The resource location for the item
-	 * @param material The EnumToolMaterial for the item
-	 * @param isKeyblade If the result is a keyblade
-	 * @param item1 The first material required for the recipe
-	 * @param item2 The second material required for the recipe
-	 * @param item3 The third material required for the recipe
-	 * @param item4 The fourth material required for the recipe
-	 * @param item5 The fifth material required for the recipe
-	 * @param item6 The sixth material required for the recipe
-	 * @param item7 The seventh material required for the recipe
-	 * @param item8 The eighth material required for the recipe
-	 * @param item9 The ninth material required for the recipe
-	 * @param item10 The tenth material required for the recipe
-	 * @param item11 The eleventh material required for the recipe
-	 */
-	public void addSynthesisRecipe(Item recipe, Item result, ToolMaterial material, boolean isKeyblade, Item item1, Item item2, Item item3, Item item4, Item item5, Item item6, Item item7, Item item8, Item item9, Item item10, Item item11){
-		//Boolean for checking items
-		boolean hasItems = false;
-		//Colour for colour changing text
-		int colour = 0x404040;
+	//Boolean for checking items
+	boolean hasItems = false;
+	//Colour for colour changing text
+	int colour = 0x404040;
 
-		int resultXY = 28;
-		int item1X = 26;
-		int item1Y = 32;
-		int item2X = 43;
-		int item2Y = 32;
-		int item3X = 60;
-		int item3Y = 32;
-		int item4X = 77;
-		int item4Y = 32;
-		int item5X = 94;
-		int item5Y = 32;
-		int item6X = 111;
-		int item6Y = 32;
-		int item7X = 128;
-		int item7Y = 32;
-		int item8X = 26;
-		int item8Y = 49;
-		int item9X = 43;
-		int item9Y = 49;
-		int item10X = 60;
-		int item10Y = 49;
-		int item11X = 77;
-		int item11Y = 49;
-
-		//Checking item1 only if only one is specified
-		if(item1 != null && item2 == null){
-			if(synthesis.getStackInSlot(0) != null ){
-				if(synthesis.getStackInSlot(0).getItem() == recipe && ClickedTab2){
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item1), item1X, item1Y);
-					//if(item1X + guiLeft <= getX() && getX() <= item1X + guiLeft + 16 && item1Y + guiTop <= getY() && getY() <= item1Y + guiTop + 16){
-					//ArrayList<String> Item1ToolTip = new ArrayList<String>();
-					//Item1ToolTip.add(item1.getItemStackDisplayName(new ItemStack(item1)));
-					//drawHoveringText(Item1ToolTip, getX() - guiLeft, getY() - guiTop, fontRendererObj);
-					//}
-				}
-			}
-			if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1)){
-				hasItems = true;
-				SynthesizeText = "You have the materials required to Synthesize";
-				colour = 0x00B330;
-			}else{
-				hasItems = false;
-				SynthesizeText = "You lack the required materials to Synthesize";
-				colour = 0xFF0000;
-			}
-		}
-		//Checking item1 and item2 if only 2 are specified
-		if(item2 != null && item3 == null){
-			if(synthesis.getStackInSlot(0) != null){
-				if(synthesis.getStackInSlot(0).getItem() == recipe && ClickedTab2){
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item1), item1X, item1Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item2), item2X, item2Y);
-				}
-			}
-			if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2)){
-				hasItems = true;
-				SynthesizeText = "You have the materials required to Synthesise";
-				colour = 0x00B330;
-			}else{
-				hasItems = false;
-				SynthesizeText = "You lack the required materials to Synthesise";
-				colour = 0xFF0000;
-			}
-		}
-		//Checking item1, item2 and item3 if only 3 are specified
-		if(item3 != null && item4 == null){
-			if(synthesis.getStackInSlot(0) != null){
-				if(synthesis.getStackInSlot(0).getItem() == recipe && ClickedTab2){
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item1), item1X, item1Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item2), item2X, item2Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item3), item3X, item3Y);
-				}	
-			}
-			if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3)){
-				hasItems = true;
-				SynthesizeText = "You have the materials required to Synthesise";
-				colour = 0x00B330;
-			}else{
-				hasItems = false;
-				SynthesizeText = "You lack the required materials to Synthesise";
-				colour = 0xFF0000;
-			}
-		}
-		//Checking item1, item2, item3 and item4 if only 4 are specified	
-		if(item4 != null && item5 == null){
-			if(synthesis.getStackInSlot(0) != null){
-				if(synthesis.getStackInSlot(0).getItem() == recipe && ClickedTab2){
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item1), item1X, item1Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item2), item2X, item2Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item3), item3X, item3Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item4), item4X, item4Y);
-				}
-			}
-			if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4)){
-				hasItems = true;
-				SynthesizeText = "You have the materials required to Synthesise";
-				colour = 0x00B330;
-			}else{
-				hasItems = false;
-				SynthesizeText = "You lack the required materials to Synthesise";
-				colour = 0xFF0000;
-			}
-		}
-		//Check item1, item2, item3, item4 and item5 if only 5 are specified
-		if(item5 != null && item6 == null){
-			if(synthesis.getStackInSlot(0) != null){
-				if(synthesis.getStackInSlot(0).getItem() == recipe && ClickedTab2){
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item1), item1X, item1Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item2), item2X, item2Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item3), item3X, item3Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item4), item4X, item4Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item5), item5X, item5Y);
-				}
-			}
-			if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5)){
-				hasItems = true;
-				SynthesizeText = "You have the materials required to Synthesise";
-				colour = 0x00B330;
-			}else{
-				hasItems = false;
-				SynthesizeText = "You lack the required materials to Synthesise";
-				colour = 0xFF0000;
-			}
-		}
-		//Check item1, item2, item3, item4, item5 and item6 if only 6 are specified
-		if(item6 != null && item7 == null){
-			if(synthesis.getStackInSlot(0) != null){
-				if(synthesis.getStackInSlot(0).getItem() == recipe && ClickedTab2){
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item1), item1X, item1Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item2), item2X, item2Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item3), item3X, item3Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item4), item4X, item4Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item5), item5X, item5Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item6), item6X, item6Y);
-
-				}
-			}
-			if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6)){
-				hasItems = true;
-				SynthesizeText = "You have the materials required to Synthesise";
-				colour = 0x00B330;
-			}else{
-				hasItems = false;
-				SynthesizeText = "You lack the required materials to Synthesise";
-				colour = 0xFF0000;
-			}
-		}
-		//Check item1, item2, item3, item4, item5, item6 and item7 if only 7 are specified
-		if(item7 != null && item8 == null){
-			if(synthesis.getStackInSlot(0) != null){
-				if(synthesis.getStackInSlot(0).getItem() == recipe && ClickedTab2){
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item1), item1X, item1Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item2), item2X, item2Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item3), item3X, item3Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item4), item4X, item4Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item5), item5X, item5Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item6), item6X, item6Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item7), item7X, item7Y);
-				}
-			}
-			if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7)){
-				hasItems = true;
-				SynthesizeText = "You have the materials required to Synthesize";
-				colour = 0x00B330;
-			}else{
-				hasItems = false;
-				SynthesizeText = "You lack the required materials to Synthesize";
-				colour = 0xFF0000;
-			}
-		}
-		//Check item1, item2, item3, item4, item5, item6, item7 and item8 if only 8 are specified
-		if(item8 != null && item9 == null){
-			if(synthesis.getStackInSlot(0) != null){
-				if(synthesis.getStackInSlot(0).getItem() == recipe && ClickedTab2){
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item1), item1X, item1Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item2), item2X, item2Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item3), item3X, item3Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item4), item4X, item4Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item5), item5X, item5Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item6), item6X, item6Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item7), item7X, item7Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item8), item8X, item8Y);
-				}
-			}
-			if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8)){
-				hasItems = true;
-				SynthesizeText = "You have the materials required to Synthesise";
-				colour = 0x00B330;
-			}else{
-				hasItems = false;
-				SynthesizeText = "You lack the required materials to Synthesise";
-				colour = 0xFF0000;
-			}
-		}
-		//Checks item1, item2, item3, item4, item5, item6, item7, item8 and item9 if only 9 are specified
-		if(item9 != null && item10 == null){
-			if(synthesis.getStackInSlot(0) != null){
-				if(synthesis.getStackInSlot(0).getItem() == recipe && ClickedTab2){
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item1), item1X, item1Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item2), item2X, item2Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item3), item3X, item3Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item4), item4X, item4Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item5), item5X, item5Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item6), item6X, item6Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item7), item7X, item7Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item8), item8X, item8Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item9), item9X, item9Y);
-				}
-			}
-			if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item9)){
-				hasItems = true;
-				SynthesizeText = "You have the materials required to Synthesise";
-				colour = 0x00B330;
-			}else{
-				hasItems = false;
-				SynthesizeText = "You lack the required materials to Synthesise";
-				colour = 0xFF0000;
-			}
-		}
-		//Checks item1, item2, item3, item4, item5, item6, item7, item8, item9 and item10 if only 10 are specified
-		if(item10 != null && item11 == null){
-			if(synthesis.getStackInSlot(0) != null)
-				if(synthesis.getStackInSlot(0).getItem() == recipe && ClickedTab2){
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item1), item1X, item1Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item2), item2X, item2Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item3), item3X, item3Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item4), item4X, item4Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item5), item5X, item5Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item6), item6X, item6Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item7), item7X, item7Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item8), item8X, item8Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item9), item9X, item9Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item10), item10X, item10Y);
-				}
-			if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item9) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item10)){
-				hasItems = true;
-				SynthesizeText = "You have the materials required to Synthesize";
-				colour = 0x00B330;
-			}else{
-				hasItems = false;
-				SynthesizeText = "You lack the required materials to Synthesize";
-				colour = 0xFF0000;
-			}
-		}
-		//Checks all items if 11 are specified
-		if(item11 != null){
-			if(synthesis.getStackInSlot(0) != null){
-				if(synthesis.getStackInSlot(0).getItem() == recipe && ClickedTab2){
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item1), item1X, item1Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item2), item2X, item2Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item3), item3X, item3Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item4), item4X, item4Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item5), item5X, item5Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item6), item6X, item6Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item7), item7X, item7Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item8), item8X, item8Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item9), item9X, item9Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item10), item10X, item10Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item11), item11X, item11Y);
-				}
-			}
-			if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item9) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item10) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item11)){
-				hasItems = true;
-				SynthesizeText = "You have the materials required to Synthesize";
-				colour = 0x00B330;
-			}else{
-				hasItems = false;
-				SynthesizeText = "You lack the required materials to Synthesize";
-				colour = 0xFF0000;
-			}
-
-		}
-
-		if(synthesis.getStackInSlot(0) != null){
+	int resultXY = 28;
+	int item1X = 26;
+	int item1Y = 34;
+	int item2X = 43;
+	int item2Y = 34;
+	int item3X = 60;
+	int item3Y = 34;
+	int item4X = 77;
+	int item4Y = 34;
+	int item5X = 94;
+	int item5Y = 34;
+	int item6X = 111;
+	int item6Y = 34;
+	int item7X = 128;
+	int item7Y = 34;
+	int item8X = 26;
+	int item8Y = 51;
+	int item9X = 43;
+	int item9Y = 51;
+	int item10X = 60;
+	int item10Y = 51;
+	int item11X = 77;
+	int item11Y = 51;
+	
+	//1
+	public void addSynthesisRecipe(Item recipe, Item result, ToolMaterial material, boolean isKeyblade, int cost, Item item1){
+		EntityPropertyMunny props = EntityPropertyMunny.get(mc.thePlayer);
+		if(synthesis.getStackInSlot(0) != null)
+		{
 			if(synthesis.getStackInSlot(0).getItem() == recipe){
 				GL11.glColor3f(1, 1, 1);
 				GL11.glDisable(GL11.GL_LIGHTING);
+				fontRendererObj.drawString("Cost: " + cost, 38, 5, 0xFFF000);
 
 				//Stuff displayed on the first tab
 				if(GuiSynthesis.ClickedTab1){
+					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1)){
+						SynthesizeText = "You have the materials required to Synthesize";
+						colour = 0x00B330;
+					}else{
+						SynthesizeText = "You lack the required materials to Synthesize";
+						colour = 0xFF0000;
+					}
 					fontRendererObj.drawSplitString(SynthesizeText, 28, 60, 120, colour);
 					fontRendererObj.drawSplitString(result.getItemStackDisplayName(new ItemStack(result)).replace(" Chain", "") , 46, 28, 120, 0x404040);
 					if(isKeyblade){
@@ -701,8 +415,14 @@ public class GuiSynthesis extends GuiContainer {
 
 					//Stuff displayed on the second tab
 				}else if(GuiSynthesis.ClickedTab2){
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item1), item1X, item1Y);
 					GL11.glColor3f(1, 1, 1);
 					GL11.glDisable(GL11.GL_LIGHTING);
+					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1)){
+						colour = 0x00B330;
+					}else{
+						colour = 0xFF0000;
+					}
 					fontRendererObj.drawString("Required Materials", 30, 27, colour);
 					//Stuff displayed on the third tab
 				}else if(GuiSynthesis.ClickedTab3){
@@ -716,20 +436,881 @@ public class GuiSynthesis extends GuiContainer {
 				}
 			}
 		}
-		//Checking if the player has all the items required
+		if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && props.getMunny() >= cost){
+			hasItems = true;
+			SynthesizeText = "You have the materials and munny required to Synthesize";
+			colour = 0x00B330;
+		}else if(props.getMunny() < cost){
+			hasItems = false;
+			SynthesizeText = "You lack the required materials and munny to Synthesize";
+			colour = 0xFF0000;
+		}else if(props.getMunny() >= cost){
+			hasItems = false;
+			SynthesizeText = "You lack the required materialsto Synthesize";
+			colour = 0xFF0000;
+		}
+
 		if(hasItems){
 			if(ButtonPressed){
-				System.out.println("SYNTH");
-				Minecraft.getMinecraft().theWorld.playSoundAtEntity(Minecraft.getMinecraft().thePlayer, "kk:summon", 1, 1F);
-				if(synthesis.getStackInSlot(0) != null){
-					if(synthesis.getStackInSlot(0).getItem() == recipe){
-						System.out.println("YEP");
-						IPacket packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), new ItemStack(item2), new ItemStack(item3), new ItemStack(item4), new ItemStack(item5), new ItemStack(item6), new ItemStack(item7), new ItemStack(item8), new ItemStack(item9), new ItemStack(item10), new ItemStack(item11));
-						KingdomKeys.channelHandler.sendToServer(packetsynth);
+				if (!Minecraft.getMinecraft().inGameHasFocus && Minecraft.getMinecraft().currentScreen instanceof GuiSynthesis){
+					Minecraft.getMinecraft().theWorld.playSoundAtEntity(Minecraft.getMinecraft().thePlayer, "kk:summon", 1, 1F);
+					if(synthesis.getStackInSlot(0) != null){
+						if(synthesis.getStackInSlot(0).getItem() == recipe){
+							IMessage packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), cost);
+							KingdomKeys.network.sendToServer(packetsynth);
+						}
 					}
 				}
-				ButtonPressed = false;
 			}
+			ButtonPressed = false;
+		}
+	}
+
+	//2
+	public void addSynthesisRecipe(Item recipe, Item result, ToolMaterial material, boolean isKeyblade, int cost, Item item1, Item item2){
+		EntityPropertyMunny props = EntityPropertyMunny.get(mc.thePlayer);
+		if(synthesis.getStackInSlot(0) != null)
+		{
+			if(synthesis.getStackInSlot(0).getItem() == recipe){
+				GL11.glColor3f(1, 1, 1);
+				GL11.glDisable(GL11.GL_LIGHTING);
+				fontRendererObj.drawString("Cost: " + cost, 38, 5, 0xFFF000);
+				
+				//Stuff displayed on the first tab
+				if(GuiSynthesis.ClickedTab1){
+					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2)){
+						SynthesizeText = "You have the materials required to Synthesize";
+						colour = 0x00B330;
+					}else{
+						SynthesizeText = "You lack the required materials to Synthesize";
+						colour = 0xFF0000;
+					}
+					fontRendererObj.drawSplitString(SynthesizeText, 28, 60, 120, colour);
+					fontRendererObj.drawSplitString(result.getItemStackDisplayName(new ItemStack(result)).replace(" Chain", "") , 46, 28, 120, 0x404040);
+					if(isKeyblade){
+						fontRendererObj.drawString("+" + ((int)material.getDamageVsEntity() + 4) + " Attack Damage", 28, 48, 0x004CFF);
+					}else{
+						fontRendererObj.drawString("Material", 28, 40, 0x004CFF);
+					}
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(result), resultXY, resultXY);
+
+					//Stuff displayed on the second tab
+				}else if(GuiSynthesis.ClickedTab2){
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item1), item1X, item1Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item2), item2X, item2Y);
+					GL11.glColor3f(1, 1, 1);
+					GL11.glDisable(GL11.GL_LIGHTING);
+					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2)){
+						colour = 0x00B330;
+					}else{
+						colour = 0xFF0000;
+					}
+					fontRendererObj.drawString("Required Materials", 30, 27, colour);
+					//Stuff displayed on the third tab
+				}else if(GuiSynthesis.ClickedTab3){
+					GL11.glColor3f(1, 1, 1);
+					GL11.glDisable(GL11.GL_LIGHTING);
+					if(isKeyblade){
+						fontRendererObj.drawSplitString("This keyblade has the enchantment Vanquish. It allows you to collect hearts from mobs when they are slain.", 30, 30, 120, 0x004CFF);
+					}else{
+						fontRendererObj.drawSplitString("This item is material used for crafting or another synthesis recipe.", 30, 30, 120, 0x004CFF);
+					}
+				}
+			}
+		}
+		if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && props.getMunny() >= cost){
+			hasItems = true;
+			SynthesizeText = "You have the materials and munny required to Synthesize";
+			colour = 0x00B330;
+		}else if(props.getMunny() < cost){
+			hasItems = false;
+			SynthesizeText = "You lack the required materials and munny to Synthesize";
+			colour = 0xFF0000;
+		}else if(props.getMunny() >= cost){
+			hasItems = false;
+			SynthesizeText = "You lack the required materialsto Synthesize";
+			colour = 0xFF0000;
+		}
+
+		if(hasItems){
+			if(ButtonPressed){
+				if (!Minecraft.getMinecraft().inGameHasFocus && Minecraft.getMinecraft().currentScreen instanceof GuiSynthesis){
+					Minecraft.getMinecraft().theWorld.playSoundAtEntity(Minecraft.getMinecraft().thePlayer, "kk:summon", 1, 1F);
+					if(synthesis.getStackInSlot(0) != null){
+						if(synthesis.getStackInSlot(0).getItem() == recipe){
+							IMessage packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), new ItemStack(item2), cost);
+							KingdomKeys.network.sendToServer(packetsynth);
+						}
+					}
+				}
+			}
+			ButtonPressed = false;
+		}
+	}
+
+	//3
+	public void addSynthesisRecipe(Item recipe, Item result, ToolMaterial material, boolean isKeyblade, int cost, Item item1, Item item2, Item item3){
+		EntityPropertyMunny props = EntityPropertyMunny.get(mc.thePlayer);
+		if(synthesis.getStackInSlot(0) != null)
+		{
+			if(synthesis.getStackInSlot(0).getItem() == recipe){
+				GL11.glColor3f(1, 1, 1);
+				GL11.glDisable(GL11.GL_LIGHTING);
+				fontRendererObj.drawString("Cost: " + cost, 38, 5, 0xFFF000);
+
+				//Stuff displayed on the first tab
+				if(GuiSynthesis.ClickedTab1){
+					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3)){
+						SynthesizeText = "You have the materials required to Synthesize";
+						colour = 0x00B330;
+					}else{
+						SynthesizeText = "You lack the required materials to Synthesize";
+						colour = 0xFF0000;
+					}
+					fontRendererObj.drawSplitString(SynthesizeText, 28, 60, 120, colour);
+					fontRendererObj.drawSplitString(result.getItemStackDisplayName(new ItemStack(result)).replace(" Chain", "") , 46, 28, 120, 0x404040);
+					if(isKeyblade){
+						fontRendererObj.drawString("+" + ((int)material.getDamageVsEntity() + 4) + " Attack Damage", 28, 48, 0x004CFF);
+					}else{
+						fontRendererObj.drawString("Material", 28, 40, 0x004CFF);
+					}
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(result), resultXY, resultXY);
+
+					//Stuff displayed on the second tab
+				}else if(GuiSynthesis.ClickedTab2){
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item1), item1X, item1Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item2), item2X, item2Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item3), item3X, item3Y);
+					GL11.glColor3f(1, 1, 1);
+					GL11.glDisable(GL11.GL_LIGHTING);
+					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3)){
+						colour = 0x00B330;
+					}else{
+						colour = 0xFF0000;
+					}
+					fontRendererObj.drawString("Required Materials", 30, 27, colour);
+					//Stuff displayed on the third tab
+				}else if(GuiSynthesis.ClickedTab3){
+					GL11.glColor3f(1, 1, 1);
+					GL11.glDisable(GL11.GL_LIGHTING);
+					if(isKeyblade){
+						fontRendererObj.drawSplitString("This keyblade has the enchantment Vanquish. It allows you to collect hearts from mobs when they are slain.", 30, 30, 120, 0x004CFF);
+					}else{
+						fontRendererObj.drawSplitString("This item is material used for crafting or another synthesis recipe.", 30, 30, 120, 0x004CFF);
+					}
+				}
+			}
+		}
+		if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && props.getMunny() >= cost){
+			hasItems = true;
+			SynthesizeText = "You have the materials and munny required to Synthesize";
+			colour = 0x00B330;
+		}else if(props.getMunny() < cost){
+			hasItems = false;
+			SynthesizeText = "You lack the required materials and munny to Synthesize";
+			colour = 0xFF0000;
+		}else if(props.getMunny() >= cost){
+			hasItems = false;
+			SynthesizeText = "You lack the required materialsto Synthesize";
+			colour = 0xFF0000;
+		}
+
+		if(hasItems){
+			if(ButtonPressed){
+				if (!Minecraft.getMinecraft().inGameHasFocus && Minecraft.getMinecraft().currentScreen instanceof GuiSynthesis){
+					Minecraft.getMinecraft().theWorld.playSoundAtEntity(Minecraft.getMinecraft().thePlayer, "kk:summon", 1, 1F);
+					if(synthesis.getStackInSlot(0) != null){
+						if(synthesis.getStackInSlot(0).getItem() == recipe){
+							IMessage packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), new ItemStack(item2), new ItemStack(item3), cost);
+							KingdomKeys.network.sendToServer(packetsynth);
+						}
+					}
+				}
+			}
+			ButtonPressed = false;
+		}
+	}
+
+	//4
+	public void addSynthesisRecipe(Item recipe, Item result, ToolMaterial material, boolean isKeyblade, int cost, Item item1, Item item2, Item item3, Item item4){
+		EntityPropertyMunny props = EntityPropertyMunny.get(mc.thePlayer);
+		if(synthesis.getStackInSlot(0) != null)
+		{
+			if(synthesis.getStackInSlot(0).getItem() == recipe){
+				GL11.glColor3f(1, 1, 1);
+				GL11.glDisable(GL11.GL_LIGHTING);
+				fontRendererObj.drawString("Cost: " + cost, 38, 5, 0xFFF000);
+				
+				//Stuff displayed on the first tab
+				if(GuiSynthesis.ClickedTab1){
+					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4)){
+						SynthesizeText = "You have the materials required to Synthesize";
+						colour = 0x00B330;
+					}else{
+						SynthesizeText = "You lack the required materials to Synthesize";
+						colour = 0xFF0000;
+					}
+					fontRendererObj.drawSplitString(SynthesizeText, 28, 60, 120, colour);
+					fontRendererObj.drawSplitString(result.getItemStackDisplayName(new ItemStack(result)).replace(" Chain", "") , 46, 28, 120, 0x404040);
+					if(isKeyblade){
+						fontRendererObj.drawString("+" + ((int)material.getDamageVsEntity() + 4) + " Attack Damage", 28, 48, 0x004CFF);
+					}else{
+						fontRendererObj.drawString("Material", 28, 40, 0x004CFF);
+					}
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(result), resultXY, resultXY);
+
+					//Stuff displayed on the second tab
+				}else if(GuiSynthesis.ClickedTab2){
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item1), item1X, item1Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item2), item2X, item2Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item3), item3X, item3Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item4), item4X, item4Y);
+					GL11.glColor3f(1, 1, 1);
+					GL11.glDisable(GL11.GL_LIGHTING);
+					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4)){
+						colour = 0x00B330;
+					}else{
+						colour = 0xFF0000;
+					}
+					fontRendererObj.drawString("Required Materials", 30, 27, colour);
+					//Stuff displayed on the third tab
+				}else if(GuiSynthesis.ClickedTab3){
+					GL11.glColor3f(1, 1, 1);
+					GL11.glDisable(GL11.GL_LIGHTING);
+					if(isKeyblade){
+						fontRendererObj.drawSplitString("This keyblade has the enchantment Vanquish. It allows you to collect hearts from mobs when they are slain.", 30, 30, 120, 0x004CFF);
+					}else{
+						fontRendererObj.drawSplitString("This item is material used for crafting or another synthesis recipe.", 30, 30, 120, 0x004CFF);
+					}
+				}
+			}
+		}
+		if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && props.getMunny() >= cost){
+			hasItems = true;
+			SynthesizeText = "You have the materials and munny required to Synthesize";
+			colour = 0x00B330;
+		}else if(props.getMunny() < cost){
+			hasItems = false;
+			SynthesizeText = "You lack the required materials and munny to Synthesize";
+			colour = 0xFF0000;
+		}else if(props.getMunny() >= cost){
+			hasItems = false;
+			SynthesizeText = "You lack the required materialsto Synthesize";
+			colour = 0xFF0000;
+		}
+
+		if(hasItems){
+			if(ButtonPressed){
+				if (!Minecraft.getMinecraft().inGameHasFocus && Minecraft.getMinecraft().currentScreen instanceof GuiSynthesis){
+					Minecraft.getMinecraft().theWorld.playSoundAtEntity(Minecraft.getMinecraft().thePlayer, "kk:summon", 1, 1F);
+					if(synthesis.getStackInSlot(0) != null){
+						if(synthesis.getStackInSlot(0).getItem() == recipe){
+							IMessage packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), new ItemStack(item2), new ItemStack(item3), new ItemStack(item4), cost);
+							KingdomKeys.network.sendToServer(packetsynth);
+						}
+					}
+				}
+			}
+			ButtonPressed = false;
+		}
+	}
+
+	//5
+	public void addSynthesisRecipe(Item recipe, Item result, ToolMaterial material, boolean isKeyblade, int cost, Item item1, Item item2, Item item3, Item item4, Item item5){
+		EntityPropertyMunny props = EntityPropertyMunny.get(mc.thePlayer);
+		if(synthesis.getStackInSlot(0) != null)
+		{
+			if(synthesis.getStackInSlot(0).getItem() == recipe){
+				GL11.glColor3f(1, 1, 1);
+				GL11.glDisable(GL11.GL_LIGHTING);
+				fontRendererObj.drawString("Cost: " + cost, 38, 5, 0xFFF000);
+				
+				//Stuff displayed on the first tab
+				if(GuiSynthesis.ClickedTab1){
+					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5)){
+						SynthesizeText = "You have the materials required to Synthesize";
+						colour = 0x00B330;
+					}else{
+						SynthesizeText = "You lack the required materials to Synthesize";
+						colour = 0xFF0000;
+					}
+					fontRendererObj.drawSplitString(SynthesizeText, 28, 60, 120, colour);
+					fontRendererObj.drawSplitString(result.getItemStackDisplayName(new ItemStack(result)).replace(" Chain", "") , 46, 28, 120, 0x404040);
+					if(isKeyblade){
+						fontRendererObj.drawString("+" + ((int)material.getDamageVsEntity() + 4) + " Attack Damage", 28, 48, 0x004CFF);
+					}else{
+						fontRendererObj.drawString("Material", 28, 40, 0x004CFF);
+					}
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(result), resultXY, resultXY);
+
+					//Stuff displayed on the second tab
+				}else if(GuiSynthesis.ClickedTab2){
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item1), item1X, item1Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item2), item2X, item2Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item3), item3X, item3Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item4), item4X, item4Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item5), item5X, item5Y);
+					GL11.glColor3f(1, 1, 1);
+					GL11.glDisable(GL11.GL_LIGHTING);
+					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5)){
+						colour = 0x00B330;
+					}else{
+						colour = 0xFF0000;
+					}
+					fontRendererObj.drawString("Required Materials", 30, 27, colour);
+					//Stuff displayed on the third tab
+				}else if(GuiSynthesis.ClickedTab3){
+					GL11.glColor3f(1, 1, 1);
+					GL11.glDisable(GL11.GL_LIGHTING);
+					if(isKeyblade){
+						fontRendererObj.drawSplitString("This keyblade has the enchantment Vanquish. It allows you to collect hearts from mobs when they are slain.", 30, 30, 120, 0x004CFF);
+					}else{
+						fontRendererObj.drawSplitString("This item is material used for crafting or another synthesis recipe.", 30, 30, 120, 0x004CFF);
+					}
+				}
+			}
+		}
+		if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && props.getMunny() >= cost){
+			hasItems = true;
+			SynthesizeText = "You have the materials and munny required to Synthesize";
+			colour = 0x00B330;
+		}else if(props.getMunny() < cost){
+			hasItems = false;
+			SynthesizeText = "You lack the required materials and munny to Synthesize";
+			colour = 0xFF0000;
+		}else if(props.getMunny() >= cost){
+			hasItems = false;
+			SynthesizeText = "You lack the required materialsto Synthesize";
+			colour = 0xFF0000;
+		}
+
+		if(hasItems){
+			if(ButtonPressed){
+				if (!Minecraft.getMinecraft().inGameHasFocus && Minecraft.getMinecraft().currentScreen instanceof GuiSynthesis){
+					Minecraft.getMinecraft().theWorld.playSoundAtEntity(Minecraft.getMinecraft().thePlayer, "kk:summon", 1, 1F);
+					if(synthesis.getStackInSlot(0) != null){
+						if(synthesis.getStackInSlot(0).getItem() == recipe){
+							IMessage packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), new ItemStack(item2), new ItemStack(item3), new ItemStack(item4), new ItemStack(item5), cost);
+							KingdomKeys.network.sendToServer(packetsynth);
+						}
+					}
+				}
+			}
+			ButtonPressed = false;
+		}
+	}
+
+	//6
+	public void addSynthesisRecipe(Item recipe, Item result, ToolMaterial material, boolean isKeyblade, int cost, Item item1, Item item2, Item item3, Item item4, Item item5, Item item6){
+		EntityPropertyMunny props = EntityPropertyMunny.get(mc.thePlayer);
+		if(synthesis.getStackInSlot(0) != null)
+		{
+			if(synthesis.getStackInSlot(0).getItem() == recipe){
+				GL11.glColor3f(1, 1, 1);
+				GL11.glDisable(GL11.GL_LIGHTING);
+
+				//Stuff displayed on the first tab
+				fontRendererObj.drawString("Cost: " + cost, 38, 5, 0xFFF000);
+				if(GuiSynthesis.ClickedTab1){
+					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && props.getMunny() >= cost){
+						SynthesizeText = "You have the materials and munny required";
+						colour = 0x00B330;
+					}else if(props.getMunny() < cost){
+						SynthesizeText = "You lack the required materials and munny";
+						colour = 0xFF0000;
+					}else if(props.getMunny() >= cost){
+						SynthesizeText = "You lack the required materials";
+						colour = 0xFF0000;
+					}
+					fontRendererObj.drawSplitString(SynthesizeText, 28, 60, 120, colour);
+					fontRendererObj.drawSplitString(result.getItemStackDisplayName(new ItemStack(result)).replace(" Chain", "") , 46, 28, 120, 0x404040);
+					if(isKeyblade){
+						fontRendererObj.drawString("+" + ((int)material.getDamageVsEntity() + 4) + " Attack Damage", 28, 48, 0x004CFF);
+					}else{
+						fontRendererObj.drawString("Material", 28, 40, 0x004CFF);
+					}
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(result), resultXY, resultXY);
+
+					//Stuff displayed on the second tab
+				}else if(GuiSynthesis.ClickedTab2){
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item1), item1X, item1Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item2), item2X, item2Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item3), item3X, item3Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item4), item4X, item4Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item5), item5X, item5Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item6), item6X, item6Y);
+					GL11.glColor3f(1, 1, 1);
+					GL11.glDisable(GL11.GL_LIGHTING);
+					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6)){
+						colour = 0x00B330;
+					}else{
+						colour = 0xFF0000;
+					}
+					fontRendererObj.drawString("Required Materials", 30, 27, colour);
+					//Stuff displayed on the third tab
+				}else if(GuiSynthesis.ClickedTab3){
+					GL11.glColor3f(1, 1, 1);
+					GL11.glDisable(GL11.GL_LIGHTING);
+					if(isKeyblade){
+						fontRendererObj.drawSplitString("This keyblade has the enchantment Vanquish. It allows you to collect hearts from mobs when they are slain.", 30, 30, 120, 0x004CFF);
+					}else{
+						fontRendererObj.drawSplitString("This item is material used for crafting or another synthesis recipe.", 30, 30, 120, 0x004CFF);
+					}
+				}
+			}
+		}
+		if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && props.getMunny() >= cost){
+			hasItems = true;
+			SynthesizeText = "You have the materials and munny required to Synthesize";
+			colour = 0x00B330;
+		}else if(props.getMunny() < cost){
+			hasItems = false;
+			SynthesizeText = "You lack the required materials and munny to Synthesize";
+			colour = 0xFF0000;
+		}else if(props.getMunny() >= cost){
+			hasItems = false;
+			SynthesizeText = "You lack the required materials to Synthesize";
+			colour = 0xFF0000;
+		}
+
+		if(hasItems){
+			if(ButtonPressed){
+				if (!Minecraft.getMinecraft().inGameHasFocus && Minecraft.getMinecraft().currentScreen instanceof GuiSynthesis){
+					Minecraft.getMinecraft().theWorld.playSoundAtEntity(Minecraft.getMinecraft().thePlayer, "kk:summon", 1, 1F);
+					if(synthesis.getStackInSlot(0) != null){
+						if(synthesis.getStackInSlot(0).getItem() == recipe && props.getMunny() >= cost){
+							IMessage packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), new ItemStack(item2), new ItemStack(item3), new ItemStack(item4), new ItemStack(item5), new ItemStack(item6), cost);
+							KingdomKeys.network.sendToServer(packetsynth);
+						}
+					}
+				}
+			}
+			ButtonPressed = false;
+		}
+	}
+
+	//7
+	public void addSynthesisRecipe(Item recipe, Item result, ToolMaterial material, boolean isKeyblade, int cost, Item item1, Item item2, Item item3, Item item4, Item item5, Item item6, Item item7){
+		EntityPropertyMunny props = EntityPropertyMunny.get(mc.thePlayer);
+		if(synthesis.getStackInSlot(0) != null)
+		{
+			if(synthesis.getStackInSlot(0).getItem() == recipe){
+				GL11.glColor3f(1, 1, 1);
+				GL11.glDisable(GL11.GL_LIGHTING);
+				fontRendererObj.drawString("Cost: " + cost, 38, 5, 0xFFF000);
+				
+				//Stuff displayed on the first tab
+				if(GuiSynthesis.ClickedTab1){
+					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7)){
+						SynthesizeText = "You have the materials required to Synthesize";
+						colour = 0x00B330;
+					}else{
+						SynthesizeText = "You lack the required materials to Synthesize";
+						colour = 0xFF0000;
+					}
+					fontRendererObj.drawSplitString(SynthesizeText, 28, 60, 120, colour);
+					fontRendererObj.drawSplitString(result.getItemStackDisplayName(new ItemStack(result)).replace(" Chain", "") , 46, 28, 120, 0x404040);
+					if(isKeyblade){
+						fontRendererObj.drawString("+" + ((int)material.getDamageVsEntity() + 4) + " Attack Damage", 28, 48, 0x004CFF);
+					}else{
+						fontRendererObj.drawString("Material", 28, 40, 0x004CFF);
+					}
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(result), resultXY, resultXY);
+
+					//Stuff displayed on the second tab
+				}else if(GuiSynthesis.ClickedTab2){
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item1), item1X, item1Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item2), item2X, item2Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item3), item3X, item3Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item4), item4X, item4Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item5), item5X, item5Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item6), item6X, item6Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item7), item7X, item7Y);
+					GL11.glColor3f(1, 1, 1);
+					GL11.glDisable(GL11.GL_LIGHTING);
+					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7)){
+						colour = 0x00B330;
+					}else{
+						colour = 0xFF0000;
+					}
+					fontRendererObj.drawString("Required Materials", 30, 27, colour);
+					//Stuff displayed on the third tab
+				}else if(GuiSynthesis.ClickedTab3){
+					GL11.glColor3f(1, 1, 1);
+					GL11.glDisable(GL11.GL_LIGHTING);
+					if(isKeyblade){
+						fontRendererObj.drawSplitString("This keyblade has the enchantment Vanquish. It allows you to collect hearts from mobs when they are slain.", 30, 30, 120, 0x004CFF);
+					}else{
+						fontRendererObj.drawSplitString("This item is material used for crafting or another synthesis recipe.", 30, 30, 120, 0x004CFF);
+					}
+				}
+			}
+		}
+		if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7)){
+			hasItems = true;
+			SynthesizeText = "You have the materials required to Synthesize";
+			colour = 0x00B330;
+		}else{
+			hasItems = false;
+			SynthesizeText = "You lack the required materials to Synthesize";
+			colour = 0xFF0000;
+		}
+
+		if(hasItems){
+			if(ButtonPressed){
+				if (!Minecraft.getMinecraft().inGameHasFocus && Minecraft.getMinecraft().currentScreen instanceof GuiSynthesis){
+					Minecraft.getMinecraft().theWorld.playSoundAtEntity(Minecraft.getMinecraft().thePlayer, "kk:summon", 1, 1F);
+					if(synthesis.getStackInSlot(0) != null){
+						if(synthesis.getStackInSlot(0).getItem() == recipe){
+							IMessage packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), new ItemStack(item2), new ItemStack(item3), new ItemStack(item4), new ItemStack(item5), new ItemStack(item6), new ItemStack(item7), cost);
+							KingdomKeys.network.sendToServer(packetsynth);
+						}
+					}
+				}
+			}
+			ButtonPressed = false;
+		}
+	}
+
+	//8
+	public void addSynthesisRecipe(Item recipe, Item result, ToolMaterial material, boolean isKeyblade, int cost, Item item1, Item item2, Item item3, Item item4, Item item5, Item item6, Item item7, Item item8){
+		EntityPropertyMunny props = EntityPropertyMunny.get(mc.thePlayer);
+		if(synthesis.getStackInSlot(0) != null)
+		{
+			if(synthesis.getStackInSlot(0).getItem() == recipe){
+				GL11.glColor3f(1, 1, 1);
+				GL11.glDisable(GL11.GL_LIGHTING);
+				fontRendererObj.drawString("Cost: " + cost, 38, 5, 0xFFF000);
+				
+				//Stuff displayed on the first tab
+				if(GuiSynthesis.ClickedTab1){
+					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8)){
+						SynthesizeText = "You have the materials required to Synthesize";
+						colour = 0x00B330;
+					}else{
+						SynthesizeText = "You lack the required materials to Synthesize";
+						colour = 0xFF0000;
+					}
+					fontRendererObj.drawSplitString(SynthesizeText, 28, 60, 120, colour);
+					fontRendererObj.drawSplitString(result.getItemStackDisplayName(new ItemStack(result)).replace(" Chain", "") , 46, 28, 120, 0x404040);
+					if(isKeyblade){
+						fontRendererObj.drawString("+" + ((int)material.getDamageVsEntity() + 4) + " Attack Damage", 28, 48, 0x004CFF);
+					}else{
+						fontRendererObj.drawString("Material", 28, 40, 0x004CFF);
+					}
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(result), resultXY, resultXY);
+
+					//Stuff displayed on the second tab
+				}else if(GuiSynthesis.ClickedTab2){
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item1), item1X, item1Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item2), item2X, item2Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item3), item3X, item3Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item4), item4X, item4Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item5), item5X, item5Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item6), item6X, item6Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item7), item7X, item7Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item8), item8X, item8Y);
+					GL11.glColor3f(1, 1, 1);
+					GL11.glDisable(GL11.GL_LIGHTING);
+					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8)){
+						colour = 0x00B330;
+					}else{
+						colour = 0xFF0000;
+					}
+					fontRendererObj.drawString("Required Materials", 30, 27, colour);
+					//Stuff displayed on the third tab
+				}else if(GuiSynthesis.ClickedTab3){
+					GL11.glColor3f(1, 1, 1);
+					GL11.glDisable(GL11.GL_LIGHTING);
+					if(isKeyblade){
+						fontRendererObj.drawSplitString("This keyblade has the enchantment Vanquish. It allows you to collect hearts from mobs when they are slain.", 30, 30, 120, 0x004CFF);
+					}else{
+						fontRendererObj.drawSplitString("This item is material used for crafting or another synthesis recipe.", 30, 30, 120, 0x004CFF);
+					}
+				}
+			}
+		}
+		if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8)){
+			hasItems = true;
+			SynthesizeText = "You have the materials required to Synthesize";
+			colour = 0x00B330;
+		}else{
+			hasItems = false;
+			SynthesizeText = "You lack the required materials to Synthesize";
+			colour = 0xFF0000;
+		}
+
+		if(hasItems){
+			if(ButtonPressed){
+				if (!Minecraft.getMinecraft().inGameHasFocus && Minecraft.getMinecraft().currentScreen instanceof GuiSynthesis){
+					Minecraft.getMinecraft().theWorld.playSoundAtEntity(Minecraft.getMinecraft().thePlayer, "kk:summon", 1, 1F);
+					if(synthesis.getStackInSlot(0) != null){
+						if(synthesis.getStackInSlot(0).getItem() == recipe){
+							IMessage packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), new ItemStack(item2), new ItemStack(item3), new ItemStack(item4), new ItemStack(item5), new ItemStack(item6), new ItemStack(item7), new ItemStack(item8), cost);
+							KingdomKeys.network.sendToServer(packetsynth);
+						}
+					}
+				}
+			}
+			ButtonPressed = false;
+		}
+	}
+
+	//9
+	public void addSynthesisRecipe(Item recipe, Item result, ToolMaterial material, boolean isKeyblade, int cost, Item item1, Item item2, Item item3, Item item4, Item item5, Item item6, Item item7, Item item8, Item item9){
+		EntityPropertyMunny props = EntityPropertyMunny.get(mc.thePlayer);
+		if(synthesis.getStackInSlot(0) != null)
+		{
+			if(synthesis.getStackInSlot(0).getItem() == recipe){
+				GL11.glColor3f(1, 1, 1);
+				GL11.glDisable(GL11.GL_LIGHTING);
+				fontRendererObj.drawString("Cost: " + cost, 38, 5, 0xFFF000);
+
+				//Stuff displayed on the first tab
+				if(GuiSynthesis.ClickedTab1){
+					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item9)){
+						SynthesizeText = "You have the materials required to Synthesize";
+						colour = 0x00B330;
+					}else{
+						SynthesizeText = "You lack the required materials to Synthesize";
+						colour = 0xFF0000;
+					}
+					fontRendererObj.drawSplitString(SynthesizeText, 28, 60, 120, colour);
+					fontRendererObj.drawSplitString(result.getItemStackDisplayName(new ItemStack(result)).replace(" Chain", "") , 46, 28, 120, 0x404040);
+					if(isKeyblade){
+						fontRendererObj.drawString("+" + ((int)material.getDamageVsEntity() + 4) + " Attack Damage", 28, 48, 0x004CFF);
+					}else{
+						fontRendererObj.drawString("Material", 28, 40, 0x004CFF);
+					}
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(result), resultXY, resultXY);
+
+					//Stuff displayed on the second tab
+				}else if(GuiSynthesis.ClickedTab2){
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item1), item1X, item1Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item2), item2X, item2Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item3), item3X, item3Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item4), item4X, item4Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item5), item5X, item5Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item6), item6X, item6Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item7), item7X, item7Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item8), item8X, item8Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item9), item9X, item9Y);
+					GL11.glColor3f(1, 1, 1);
+					GL11.glDisable(GL11.GL_LIGHTING);
+					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item9)){
+						colour = 0x00B330;
+					}else{
+						colour = 0xFF0000;
+					}
+					fontRendererObj.drawString("Required Materials", 30, 27, colour);
+					//Stuff displayed on the third tab
+				}else if(GuiSynthesis.ClickedTab3){
+					GL11.glColor3f(1, 1, 1);
+					GL11.glDisable(GL11.GL_LIGHTING);
+					if(isKeyblade){
+						fontRendererObj.drawSplitString("This keyblade has the enchantment Vanquish. It allows you to collect hearts from mobs when they are slain.", 30, 30, 120, 0x004CFF);
+					}else{
+						fontRendererObj.drawSplitString("This item is material used for crafting or another synthesis recipe.", 30, 30, 120, 0x004CFF);
+					}
+				}
+			}
+		}
+		if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item9)){
+			hasItems = true;
+			SynthesizeText = "You have the materials required to Synthesize";
+			colour = 0x00B330;
+		}else{
+			hasItems = false;
+			SynthesizeText = "You lack the required materials to Synthesize";
+			colour = 0xFF0000;
+		}
+
+		if(hasItems){
+			if(ButtonPressed){
+				if (!Minecraft.getMinecraft().inGameHasFocus && Minecraft.getMinecraft().currentScreen instanceof GuiSynthesis){
+					Minecraft.getMinecraft().theWorld.playSoundAtEntity(Minecraft.getMinecraft().thePlayer, "kk:summon", 1, 1F);
+					if(synthesis.getStackInSlot(0) != null){
+						if(synthesis.getStackInSlot(0).getItem() == recipe){
+							IMessage packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), new ItemStack(item2), new ItemStack(item3), new ItemStack(item4), new ItemStack(item5), new ItemStack(item6), new ItemStack(item7), new ItemStack(item8), new ItemStack(item9), cost);
+							KingdomKeys.network.sendToServer(packetsynth);
+						}
+					}
+				}
+			}
+			ButtonPressed = false;
+		}
+	}
+
+	//10
+	public void addSynthesisRecipe(Item recipe, Item result, ToolMaterial material, boolean isKeyblade, int cost, Item item1, Item item2, Item item3, Item item4, Item item5, Item item6, Item item7, Item item8, Item item9, Item item10){
+		EntityPropertyMunny props = EntityPropertyMunny.get(mc.thePlayer);
+		if(synthesis.getStackInSlot(0) != null)
+		{
+			if(synthesis.getStackInSlot(0).getItem() == recipe){
+				GL11.glColor3f(1, 1, 1);
+				GL11.glDisable(GL11.GL_LIGHTING);
+				fontRendererObj.drawString("Cost: " + cost, 38, 5, 0xFFF000);
+
+				//Stuff displayed on the first tab
+				if(GuiSynthesis.ClickedTab1){
+					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item9) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item10)){
+						SynthesizeText = "You have the materials required to Synthesize";
+						colour = 0x00B330;
+					}else{
+						SynthesizeText = "You lack the required materials to Synthesize";
+						colour = 0xFF0000;
+					}
+					fontRendererObj.drawSplitString(SynthesizeText, 28, 60, 120, colour);
+					fontRendererObj.drawSplitString(result.getItemStackDisplayName(new ItemStack(result)).replace(" Chain", "") , 46, 28, 120, 0x404040);
+					if(isKeyblade){
+						fontRendererObj.drawString("+" + ((int)material.getDamageVsEntity() + 4) + " Attack Damage", 28, 48, 0x004CFF);
+					}else{
+						fontRendererObj.drawString("Material", 28, 40, 0x004CFF);
+					}
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(result), resultXY, resultXY);
+
+					//Stuff displayed on the second tab
+				}else if(GuiSynthesis.ClickedTab2){
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item1), item1X, item1Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item2), item2X, item2Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item3), item3X, item3Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item4), item4X, item4Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item5), item5X, item5Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item6), item6X, item6Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item7), item7X, item7Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item8), item8X, item8Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item9), item9X, item9Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item10), item10X, item10Y);
+					GL11.glColor3f(1, 1, 1);
+					GL11.glDisable(GL11.GL_LIGHTING);
+					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item9) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item10)){
+						colour = 0x00B330;
+					}else{
+						colour = 0xFF0000;
+					}
+					fontRendererObj.drawString("Required Materials", 30, 27, colour);
+					//Stuff displayed on the third tab
+				}else if(GuiSynthesis.ClickedTab3){
+					GL11.glColor3f(1, 1, 1);
+					GL11.glDisable(GL11.GL_LIGHTING);
+					if(isKeyblade){
+						fontRendererObj.drawSplitString("This keyblade has the enchantment Vanquish. It allows you to collect hearts from mobs when they are slain.", 30, 30, 120, 0x004CFF);
+					}else{
+						fontRendererObj.drawSplitString("This item is material used for crafting or another synthesis recipe.", 30, 30, 120, 0x004CFF);
+					}
+				}
+			}
+		}
+		if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item9) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item10)){
+			hasItems = true;
+			SynthesizeText = "You have the materials required to Synthesize";
+			colour = 0x00B330;
+		}else{
+			hasItems = false;
+			SynthesizeText = "You lack the required materials to Synthesize";
+			colour = 0xFF0000;
+		}
+
+		if(hasItems){
+			if(ButtonPressed){
+				if (!Minecraft.getMinecraft().inGameHasFocus && Minecraft.getMinecraft().currentScreen instanceof GuiSynthesis){
+					Minecraft.getMinecraft().theWorld.playSoundAtEntity(Minecraft.getMinecraft().thePlayer, "kk:summon", 1, 1F);
+					if(synthesis.getStackInSlot(0) != null){
+						if(synthesis.getStackInSlot(0).getItem() == recipe){
+							IMessage packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), new ItemStack(item2), new ItemStack(item3), new ItemStack(item4), new ItemStack(item5), new ItemStack(item6), new ItemStack(item7), new ItemStack(item8), new ItemStack(item9), new ItemStack(item10), cost);
+							KingdomKeys.network.sendToServer(packetsynth);
+						}
+					}
+				}
+			}
+			ButtonPressed = false;
+		}
+	}
+
+	//11
+	public void addSynthesisRecipe(Item recipe, Item result, ToolMaterial material, boolean isKeyblade, int cost, Item item1, Item item2, Item item3, Item item4, Item item5, Item item6, Item item7, Item item8, Item item9, Item item10, Item item11){
+		EntityPropertyMunny props = EntityPropertyMunny.get(mc.thePlayer);
+		if(synthesis.getStackInSlot(0) != null)
+		{
+			if(synthesis.getStackInSlot(0).getItem() == recipe){
+				GL11.glColor3f(1, 1, 1);
+				GL11.glDisable(GL11.GL_LIGHTING);
+				fontRendererObj.drawString("Cost: " + cost, 38, 5, 0xFFF000);
+
+				//Stuff displayed on the first tab
+				if(GuiSynthesis.ClickedTab1){
+					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item9) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item10) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item11)){
+						SynthesizeText = "You have the materials required to Synthesize";
+						colour = 0x00B330;
+					}else{
+						SynthesizeText = "You lack the required materials to Synthesize";
+						colour = 0xFF0000;
+					}
+					fontRendererObj.drawSplitString(SynthesizeText, 28, 60, 120, colour);
+					fontRendererObj.drawSplitString(result.getItemStackDisplayName(new ItemStack(result)).replace(" Chain", "") , 46, 28, 120, 0x404040);
+					if(isKeyblade){
+						fontRendererObj.drawString("+" + ((int)material.getDamageVsEntity() + 4) + " Attack Damage", 28, 48, 0x004CFF);
+					}else{
+						fontRendererObj.drawString("Material", 28, 40, 0x004CFF);
+					}
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(result), resultXY, resultXY);
+
+					//Stuff displayed on the second tab
+				}else if(GuiSynthesis.ClickedTab2){
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item1), item1X, item1Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item2), item2X, item2Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item3), item3X, item3Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item4), item4X, item4Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item5), item5X, item5Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item6), item6X, item6Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item7), item7X, item7Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item8), item8X, item8Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item9), item9X, item9Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item10), item10X, item10Y);
+					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item11), item11X, item11Y);
+					GL11.glColor3f(1, 1, 1);
+					GL11.glDisable(GL11.GL_LIGHTING);
+					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item9) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item10) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item11)){
+						colour = 0x00B330;
+					}else{
+						colour = 0xFF0000;
+					}
+					fontRendererObj.drawString("Required Materials", 30, 27, colour);
+					//Stuff displayed on the third tab
+				}else if(GuiSynthesis.ClickedTab3){
+					GL11.glColor3f(1, 1, 1);
+					GL11.glDisable(GL11.GL_LIGHTING);
+					if(isKeyblade){
+						fontRendererObj.drawSplitString("This keyblade has the enchantment Vanquish. It allows you to collect hearts from mobs when they are slain.", 30, 30, 120, 0x004CFF);
+					}else{
+						fontRendererObj.drawSplitString("This item is material used for crafting or another synthesis recipe.", 30, 30, 120, 0x004CFF);
+					}
+				}
+			}
+		}
+		if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item9) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item10) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item11)){
+			hasItems = true;
+			SynthesizeText = "You have the materials required to Synthesize";
+			colour = 0x00B330;
+		}else{
+			hasItems = false;
+			SynthesizeText = "You lack the required materials to Synthesize";
+			colour = 0xFF0000;
+		}
+
+		if(hasItems){
+			if(ButtonPressed){
+				if (!Minecraft.getMinecraft().inGameHasFocus && Minecraft.getMinecraft().currentScreen instanceof GuiSynthesis){
+					Minecraft.getMinecraft().theWorld.playSoundAtEntity(Minecraft.getMinecraft().thePlayer, "kk:summon", 1, 1F);
+					if(synthesis.getStackInSlot(0) != null){
+						if(synthesis.getStackInSlot(0).getItem() == recipe){
+							IMessage packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), new ItemStack(item2), new ItemStack(item3), new ItemStack(item4), new ItemStack(item5), new ItemStack(item6), new ItemStack(item7), new ItemStack(item8), new ItemStack(item9), new ItemStack(item10), new ItemStack(item11), cost);
+							KingdomKeys.network.sendToServer(packetsynth);
+						}
+					}
+				}
+			}
+			ButtonPressed = false;
 		}
 	}
 }

@@ -6,15 +6,13 @@ import io.netty.buffer.ByteBuf;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.server.MinecraftServer;
 import cpw.mods.fml.common.network.ByteBufUtils;
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
 
-public class SummonPacket implements IPacket {
+public class SummonPacket implements IMessage {
 	
 	ItemStack itemToSummon;
 	ItemStack itemToRemove;
@@ -28,7 +26,7 @@ public class SummonPacket implements IPacket {
     }
 	
 	@Override
-	public void readBytes(ByteBuf bytes) {
+	public void fromBytes(ByteBuf bytes) {
 		this.itemToSummon = ByteBufUtils.readItemStack(bytes);
 		this.itemToRemove = ByteBufUtils.readItemStack(bytes);
 		
@@ -46,19 +44,9 @@ public class SummonPacket implements IPacket {
 	}
 	
 	@Override
-	public void writeBytes(ByteBuf bytes) {
+	public void toBytes(ByteBuf bytes) {
 		ByteBufUtils.writeItemStack(bytes, this.itemToSummon);
 		ByteBufUtils.writeItemStack(bytes, this.itemToRemove);
-
-	}
-
-	@Override
-	public void handleClientSide(NetHandlerPlayClient nhClient) {
-		
-	}
-
-	@Override
-	public void handleServerSide(NetHandlerPlayServer nhServer) {
 
 	}
 

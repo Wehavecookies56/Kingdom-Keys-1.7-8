@@ -15,6 +15,6 @@ public class KHBBSTAB extends CreativeTabs {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getTabIconItem() {
-		return AddedItems.K108;
+		return AddedItems.Rainfell;
 	}
 }
