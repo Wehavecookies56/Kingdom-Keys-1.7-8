@@ -1,3 +1,7 @@
+#Kingdom Keys English(US) Translation 
+#Translated by Wehavecookies56
+#
+#Keyblade names
 item.kingdomKey.name=Kingdom Key
 item.kingdomKeyD.name=Kingdom Key D
 item.oathkeeper.name=Oathkeeper
@@ -12,7 +16,6 @@ item.ursusForetellersKeyblade.name=Ursus Forteleller's Keyblade
 item.unicornisForetellersKeyblade.name=Unicornis Forteller's Keyblade
 item.leopardosForetellersKeyblade.name=Leopardos Forteller's Keyblade
 item.anguisForetellersKeyblade.name=Anguis Forteller's Keyblade
-
 item.leasKeyblade.name=Lea's Keyblade
 item.youngXehanortsKeyblade.name=Young Xehanort's Keyblade
 item.oceanRage.name=Ocean Rage
@@ -27,7 +30,6 @@ item.ferrisGear.name=Ferris Gear
 item.dualDisc.name=Dual Disc
 item.guardianBell.name=Guardian Bell
 item.skullNoise.name=Skull Noise
-
 item.woodenKeyblade.name=Wooden Keyblade
 item.incompletekyeblade.name=Incomplete X(Kye)-blade
 item.kyeblade.name=X(Kye)-blade
@@ -49,9 +51,7 @@ item.strokeofMidnight.name=Stroke Of Midnight
 item.chaosRipper.name=Chaos Ripper
 item.masterXehanortsKeyblade.name=Master Xehanort's Keyblade
 item.darkgnaw.name=Darkgnaw
-
 item.zeroOne.name=Zero/One
-
 item.dreamSword.name=Dream Sword
 item.aubade.name=Aubade
 item.umbrella.name=Umbrella
@@ -75,7 +75,6 @@ item.painofSolitude.name=Pain Of Solitude
 item.abaddonPlasma.name=Abaddon Plasma
 item.ominousBlight.name=Ominous Blight
 item.missingAche.name=Missing Ache
-
 item.winnersProof.name=Winners Proof
 item.fatalCrest.name=Fatal Crest
 item.twoBecomeOne.name=Two Becomes One
@@ -97,7 +96,6 @@ item.rumblingRose.name=Rumbling Rose
 item.hiddenDragon.name=Hidden Dragon
 item.endsoftheEarth.name=Ends Of The Earth
 item.stormfall.name=Storm Fall
-
 item.destinysEmbrace.name=Destiny's Embrace
 item.waytotheDawn.name=Way To The Dawn
 item.oneWingedAngel.name=One Winged Angel
@@ -119,6 +117,7 @@ item.ultimaWeapon.name=Ultima Weapon
 item.treasureTrove.name=Treasure Trove
 item.starSeeker.name=Star Seeker
 
+#Keychain names
 item.kingdomKeyChain.name=Kingdom Key Chain
 item.kingdomKeyDChain.name=Kingdom Key D Chain
 item.oathkeeperChain.name=Oathkeeper Chain
@@ -127,14 +126,12 @@ item.waywardWindChain.name=Wayward Wind Chain
 item.rainFellChain.name=Rainfell Chain
 item.earthShakerChain.name=Earth Shaker Chain
 item.soulEaterChain.name=Soul Eater Chain
-
 item.starLightChain.name=Starlight Chain
 item.vulpeusForetellersKeybladeChain.name=Vulpeus Forteller's Keyblade Chain
 item.ursusForetellersKeybladeChain.name=Ursus Forteleller's Keyblade Chain
 item.unicornisForetellersKeybladeChain.name=Unicornis Forteller's Keyblade Chain
 item.leopardosForetellersKeybladeChain.name=Leopardos Forteller's Keyblade Chain
 item.anguisForetellersKeybladeChain.name=Anguis Forteller's Keyblade Chain
-
 item.leasKeybladeChain.name=Lea's Keyblade Chain
 item.youngXehanortsKeybladeChain.name=Young Xehanort's Keyblade Chain
 item.oceanRageChain.name=Ocean Rage Chain
@@ -149,7 +146,6 @@ item.ferrisGearChain.name=Summon Ferris Gear
 item.dualDiscChain.name=Summon Dual Disc
 item.guardianBellChain.name=Summon Guardian Bell
 item.skullNoiseChain.name=Skull Noise Chain
-
 item.incompletekyebladeChain.name=Incomplete X(Kye)-blade Chain
 item.kyebladeChain.name=X(Kye)-blade Chain
 item.lightSeekerChain.name=Light Seeker Chain
@@ -171,9 +167,7 @@ item.chaosRipperChain.name=Chaos Ripper Chain
 item.masterXehanortsKeybladeChain.name=Master Xehanort's Keyblade Chain
 item.darkgnawChain.name=Darkgnaw Chain
 item.woodenKeybladeChain.name=Summon Wooden Keyblade
-
 item.zeroOneChain.name=Zero/One Chain
-
 item.dreamSwordChain.name=Summon Dream Sword
 item.aubadeChain.name=Aubade Chain
 item.umbrellaChain.name=Umbrella Chain
@@ -197,7 +191,6 @@ item.painofSolitudeChain.name=Pain Of Solitude Chain
 item.abaddonPlasmaChain.name=Abaddon Plasma Chain
 item.ominousBlightChain.name=Ominous Blight Chain
 item.missingAcheChain.name=Missing Ache Chain
-
 item.winnersProofChain.name=Winners Proof Chain
 item.fatalCrestChain.name=Fatal Crest Chain
 item.twoBecomeOneChain.name=Two Becomes One Chain
@@ -219,7 +212,6 @@ item.rumblingRoseChain.name=Rumbling Rose Chain
 item.hiddenDragonChain.name=Hidden Dragon Chain
 item.endsoftheEarthChain.name=Ends Of The Earth Chain
 item.stormfallChain.name=Storm Fall Chain
-
 item.destinysEmbraceChain.name=Destiny's Embrace Chain
 item.waytotheDawnChain.name=Way To The Dawn Chain
 item.oneWingedAngelChain.name=One Winged Angel Chain
@@ -241,6 +233,7 @@ item.ultimaWeaponChain.name=Ultima Weapon Chain
 item.treasureTroveChain.name=Treasure Trove Chain
 item.starSeekerChain.name=Star Seeker Chain
 	
+#Org XIII weapon names
 item.eternalFlames.name=Eternal Flames
 item.bookOfRetribution.name=Book Of Retribution
 item.interdiction.name=Interdiction
@@ -254,14 +247,11 @@ item.fairGame.name=Fair Game
 item.gracefulDahlia.name=Graceful Dahlia
 item.foudre.name=Foudre
 
+#Misc item names
 item.pureHeart.name=Pure Heart
 item.darkHeart.name=Dark Heart
 item.heart.name=Heart
 item.kingdomHearts.name=Kingdom Hearts
-item.organizationHood.name=Dark Robe Hood
-item.organizationCoat.name=Dark Robe Coat
-item.organizationLegs.name=Dark Robe Leggings
-item.organizationBoots.name=Dark Robe Boots
 item.hPOrb.name=HP Orb
 item.1Munny.name=1 Munny
 item.5Munny.name=5 Munny
@@ -283,6 +273,14 @@ item.5000Munny.name=5000 Munny
 item.6000Munny.name=6000 Munny
 item.potion.name=Potion
 item.leatherDarkness.name=Leather Of The Darkness
+item.darkKnowledge.name=Dark Knowledge
+item.voidedKnowledge.name=Voided Knowledge
+
+#Armour names
+item.organizationHood.name=Dark Robe Hood
+item.organizationCoat.name=Dark Robe Coat
+item.organizationLegs.name=Dark Robe Leggings
+item.organizationBoots.name=Dark Robe Boots
 item.keybladeAHelm.name=Keyblade Armor Helmet
 item.keybladeAChest.name=Keyblade Armor Chestplate
 item.keybladeALegs.name=Keyblade Armor Leggings
@@ -299,6 +297,8 @@ item.keybladeEHelm.name=Armor Of The Master Helmet
 item.keybladeEChest.name=Armor Of The Master Chestplate
 item.keybladeELegs.name=Armor Of The Master Leggings
 item.keybladeEBoots.name=Armor Of The Master Boots
+
+#Synthesis material names
 item.blazingShard.name=Blazing Shard
 item.frostShard.name=Frost Shard
 item.lightningShard.name=Lightning Shard
@@ -359,7 +359,8 @@ item.shimmeringCrystal.name=Shimmering Crystal
 item.orichalcum.name=Orichalcum
 item.orichalcum+.name=Orichalcum+
 item.darkMatter.name=Dark Matter
-	
+
+#Block names	
 tile.normalBlox.name=Normal Blox
 tile.hardBlox.name=Hard Blox
 tile.metalBlox.name=Metal Blox
@@ -389,7 +390,8 @@ tile.darkOre.name=Dark Ore
 tile.darkOreN.name=Dark Ore
 tile.darkOreE.name=Dark Ore
 tile.lucidOre.name=Lucid Ore
-	
+
+#Creative tab names	
 itemGroup.KKTAB=Kingdom Keys
 itemGroup.KKSMTAB=Synthesis Materials
 itemGroup.KHTAB=Kingdom Hearts
@@ -399,7 +401,8 @@ itemGroup.KHRECODEDTAB=Kingdom Hearts Re:Coded
 itemGroup.KHBBSTAB=Kingdom Hearts BBS
 itemGroup.KHDDDTAB=Kingdom Hearts DDD
 itemGroup.KHDAYSTAB=Kingdom Hearts 358/2 Days
-	
+
+#Recipe item names	
 item.kingdomKeyRecipe.name=Attack Recipe
 item.kingdomKeyDRecipe.name=Attack Recipe
 item.oathkeeperRecipe.name=Attack Recipe
@@ -408,14 +411,12 @@ item.waywardWindRecipe.name=Attack Recipe
 item.rainFellRecipe.name=Attack Recipe
 item.earthShakerRecipe.name=Attack Recipe
 item.soulEaterRecipe.name=Attack Recipe
-
 item.starLightRecipe.name=Attack Recipe
 item.vulpeusForetellersKeybladeRecipe.name=Attack Recipe
 item.ursusForetellersKeybladeRecipe.name=Attack Recipe
 item.unicornisForetellersKeybladeRecipe.name=Attack Recipe
 item.leopardosForetellersKeybladeRecipe.name=Attack Recipe
 item.anguisForetellersKeybladeRecipe.name=Attack Recipe
-
 item.leasKeybladeRecipe.name=Attack Recipe
 item.youngXehanortsKeybladeRecipe.name=Attack Recipe
 item.oceanRageRecipe.name=Attack Recipe
@@ -430,7 +431,6 @@ item.ferrisGearRecipe.name=Attack Recipe
 item.dualDiscRecipe.name=Attack Recipe
 item.guardianBellRecipe.name=Attack Recipe
 item.skullNoiseRecipe.name=Attack Recipe
-
 item.incompletekyebladeRecipe.name=Attack Recipe
 item.kyebladeRecipe.name=Attack Recipe
 item.lightSeekerRecipe.name=Attack Recipe
@@ -452,9 +452,7 @@ item.chaosRipperRecipe.name=Attack Recipe
 item.masterXehanortsKeybladeRecipe.name=Attack Recipe
 item.darkgnawRecipe.name=Attack Recipe
 item.woodenKeybladeRecipe.name=Attack Recipe
-
 item.zeroOneRecipe.name=Attack Recipe
-
 item.dreamSwordRecipe.name=Attack Recipe
 item.aubadeRecipe.name=Attack Recipe
 item.umbrellaRecipe.name=Attack Recipe
@@ -478,7 +476,6 @@ item.painofSolitudeRecipe.name=Attack Recipe
 item.abaddonPlasmaRecipe.name=Attack Recipe
 item.ominousBlightRecipe.name=Attack Recipe
 item.missingAcheRecipe.name=Attack Recipe
-
 item.winnersProofRecipe.name=Attack Recipe
 item.fatalCrestRecipe.name=Attack Recipe
 item.twoBecomeOneRecipe.name=Attack Recipe
@@ -500,7 +497,6 @@ item.rumblingRoseRecipe.name=Attack Recipe
 item.hiddenDragonRecipe.name=Attack Recipe
 item.endsoftheEarthRecipe.name=Attack Recipe
 item.stormfallRecipe.name=Attack Recipe
-
 item.destinysEmbraceRecipe.name=Attack Recipe
 item.waytotheDawnRecipe.name=Attack Recipe
 item.oneWingedAngelRecipe.name=Attack Recipe
@@ -522,6 +518,14 @@ item.ultimaWeaponRecipe.name=Attack Recipe
 item.treasureTroveRecipe.name=Attack Recipe
 item.starSeekerRecipe.name=Attack Recipe
 
+item.mythrilStoneRecipe.name=Material Recipe
+item.mythrilShardRecipe.name=Material Recipe
+item.mythrilGemRecipe.name=Material Recipe
+item.mythrilCrystalRecipe.name=Material Recipe
+item.darkMatterRecipe.name=Material Recipe
+
+
+#Record names
 item.Sanctuary.name=Music Disc
 item.Simple And Clean PLANITb Remix.name=Music Disc
 item.Musique pour la tristesse de Xion.name=Music Disc
@@ -536,6 +540,7 @@ item.Dearly Beloved -Symphony Version-.name=Music Disc
 item.L'Oscurita Dell'Ignoto.name=Music Disc
 item.Darkness of the Unknown.name=Music Disc
 
+#Record item tool tips
 item.record.Musique pour la tristesse de Xion.desc=Musique pour la tristesse de Xion
 item.record.Simple And Clean PLANITb Remix.desc=Simple And Clean PLANITb Remix
 item.record.Sanctuary.desc=Sanctuary
@@ -550,9 +555,54 @@ item.record.Dearly Beloved -Symphony Version-.desc=Dearly Beloved -Symphony Vers
 item.record.L'Oscurita Dell'Ignoto.desc=L'Oscurita Dell'Ignoto
 item.record.Darkness of the Unknown.desc=Darkness of the Unknown
 
+#Achievement names
 achievement.bugBlox=Is this a bug?
-achievement.bugBlox.desc=Get a bug blox
 achievement.recipe=Let's see what this makes
-achievement.recipe.desc=Get a recipe
 achievement.kingdomKey=The key that lights the darkness
+achievement.orichalcum=Ori... What?
+achievement.orichalcumPlus=+ Means better!
+
+#Achievement tool tips
+achievement.bugBlox.desc=Get a bug blox
+achievement.recipe.desc=Get a recipe
 achievement.kingdomKey.desc=Get a keyblade for the first time
+achievement.orichalcum.desc=Obtain Orichalcum
+achievement.orichalcumPlus.desc=Obtain Orichalcum+
+
+#Gui text
+#
+#Synthesis table
+gui.synthesis.title=Synthesis
+gui.synthesis.munny=Munny
+gui.synthesis.place=Place an Attack Recipe or a Material Recipe in the slot
+gui.synthesis.tab1=Information
+gui.synthesis.tab2=Required Materials
+gui.synthesis.tab3=Help
+gui.synthesis.button.synthesize=Synthesize
+gui.synthesis.cost=Cost
+gui.synthesis.required1=You have the materials and munny required to Synthesize
+gui.synthesis.required2=You lack the materials and munny
+gui.synthesis.required3=You lack the materials to Synthesize
+gui.synthesis.required4=You lack the munny to Synthesize
+gui.synthesis.requiredmats=Required Materials
+gui.synthesis.tab3attack=This keyblade has the enchantment Vanquish. It allows you to collect hearts from mobs when they are slain.
+gui.synthesis.tab3mat=This item is material used for crafting or another synthesis recipe.
+gui.synthesis.material=Material
+gui.synthesis.attackdamage=Attack Damage
+
+#Menu
+gui.menu.title=Menu
+gui.menu.time=Time
+gui.menu.button.keyblade=Keyblades
+gui.menu.button.reports=Reports
+gui.menu.button.stats=Stats
+gui.menu.button.abilities=Abilities
+gui.menu.button.config=Config
+
+#Tooltips
+tooltip.voidedknowledge.desc=Unknown knowledge capable of materializing into strong weapons. 
+
+#Key bindings
+key.KingdomKeys.category=Kingdom Keys
+key.summon.desc=Summon
+key.menu.desc=Open Menu

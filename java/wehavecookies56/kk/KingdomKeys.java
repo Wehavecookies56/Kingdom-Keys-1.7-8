@@ -19,6 +19,8 @@ import wehavecookies56.kk.achievements.AddedAchievments;
 import wehavecookies56.kk.block.AddedBlocks;
 import wehavecookies56.kk.core.handlers.GiveMunny;
 import wehavecookies56.kk.core.handlers.GuiHandler;
+import wehavecookies56.kk.core.packet.KnowledgePacket;
+import wehavecookies56.kk.core.packet.KnowledgePacketHandler;
 import wehavecookies56.kk.core.packet.OpenSynthesisPacket;
 import wehavecookies56.kk.core.packet.OpenSynthesisPacketHandler;
 import wehavecookies56.kk.core.packet.SummonPacket;
@@ -58,6 +60,7 @@ import wehavecookies56.kk.event.OnPickUpEvent;
 import wehavecookies56.kk.event.PureHeartDrops;
 import wehavecookies56.kk.item.AddedItems;
 import wehavecookies56.kk.lib.ConfigBooleans;
+import wehavecookies56.kk.lib.LocalStrings;
 import wehavecookies56.kk.lib.Recipes;
 import wehavecookies56.kk.lib.Reference;
 import wehavecookies56.kk.lib.ints;
@@ -149,6 +152,7 @@ public class KingdomKeys {
         network.registerMessage(SummonPacketHandler.class, SummonPacket.class, 1, Side.SERVER);
         network.registerMessage(OpenSynthesisPacketHandler.class, OpenSynthesisPacket.class, 2, Side.CLIENT);
         network.registerMessage(SyncPlayerPropsPacketHandler.class, SyncPlayerPropsPacket.class, 3, Side.SERVER);
+        network.registerMessage(KnowledgePacketHandler.class, KnowledgePacket.class, 4, Side.CLIENT);
         
         int modEntityID = 0;
         EntityRegistry.registerModEntity(EntityEternalFlamesProjectile.class, "Sharpshooter Bullet", ++modEntityID, this, 64, 10, true);
@@ -242,13 +246,10 @@ public class KingdomKeys {
         if(ConfigBooleans.enableUpdateCheck){
         MinecraftForge.EVENT_BUS.register(new Update());
         final Side side = FMLCommonHandler.instance().getEffectiveSide();
-        ResourceLocation villagerTexture = new ResourceLocation("kk", "textures/entities/mobs/knowledgeVillager.png");
         addVillagePiece(ComponentRecipeHome.class, "SynthesistsHome");
         VillagerRegistry.instance().registerVillagerId(20);
-        VillagerRegistry.instance().registerVillagerSkin(20, villagerTexture);
         VillagerRegistry.instance().registerVillageTradeHandler(20, new VillagerTradeHandlerRecipes());
         VillagerRegistry.instance().registerVillageCreationHandler(new VillagerCreationHandler());
-        VillagerRegistry.getVillagerSkin(10, villagerTexture);
         VillagerRegistry.getRegisteredVillagers();
         
         }
@@ -271,7 +272,7 @@ public class KingdomKeys {
     	try{
     		MapGenStructureIO.func_143031_a(c, s);
     	}catch(Exception e){
-    		logger.log(Level.WARN, "Failed To Spawn The Extra Village Pieces With The ID: " + s);
+    		
     	}
     }
     

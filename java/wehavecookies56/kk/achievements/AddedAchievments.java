@@ -12,13 +12,18 @@ public class AddedAchievments {
 	public static Achievement recipe;
 	public static Achievement kingdomKey;
 	public static Achievement orichalcum;
+	public static Achievement orichalcumPlus;
 	public static AchievementPage kingdomKeysAchievement;
 	
 	public static void initAchievements(){
 
-		bugBlox = new Achievement("achievemnt.bugBlox", "bugBlox", 0, 0, AddedBlocks.NormalBlox, (Achievement)null).registerStat();
+		bugBlox = new Achievement("achievemnt.bugBlox", "bugBlox", 0, 0, AddedBlocks.NormalBlox, (Achievement)null).initIndependentStat().registerStat();
 		recipe = new Achievement("achievement.recipe", "recipe", 2, -1, AddedItems.K1r, (Achievement)null).initIndependentStat().registerStat();
-		kingdomKey = new Achievement("achievement.kingdomKey", "kingdomKey", 1, 2, AddedItems.KingdomKey, bugBlox).setSpecial().registerStat();
+		
+		kingdomKey = new Achievement("achievement.kingdomKey", "kingdomKey", 3, -2, AddedItems.KingdomKey, recipe).setSpecial().registerStat();
+		orichalcum = new Achievement("achievement.orichalcum", "orichalcum", -2, 3, AddedItems.Orichalcum, (Achievement)null).initIndependentStat().registerStat();
+		orichalcumPlus = new Achievement("achievement.orichalcumPlus", "orichalcumPlus", -3, 3, AddedItems.OrichalcumPlus, orichalcum).setSpecial().registerStat();
+
 		
 		AchievementPage.registerAchievementPage(kingdomKeysAchievement = new AchievementPage("Kingdom Keys", new Achievement[]{bugBlox, recipe, kingdomKey}));
 	}

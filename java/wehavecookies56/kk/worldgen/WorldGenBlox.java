@@ -41,8 +41,8 @@ public class WorldGenBlox implements IWorldGenerator
 			this.spawnOres(AddedBlocks.DenseOre, Blocks.stone, world, random, chunkX, chunkZ, 16, 16, 5, ints.DenseOreChance, 0, 15);
 			this.spawnOres(AddedBlocks.LightningOre, Blocks.stone, world, random, chunkX, chunkZ, 16, 16, 5, ints.LightningOreChance, 40, 60);
 			this.spawnOres(AddedBlocks.BlazingOre, Blocks.stone, world, random, chunkX, chunkZ, 16, 16, 5, ints.BlazingOreChance, 0, 20);
-			this.spawnOres(AddedBlocks.PrizeBlox, Blocks.dirt, world, random, chunkX, chunkZ, 16, 16, 3, ints.PrizeBloxChance, 0, 80);
-			this.spawnOres(AddedBlocks.RarePrizeBlox, Blocks.dirt, world, random, chunkX, chunkZ, 16, 16, 3, ints.RarePrizeBloxChance, 0, 80);
+			this.spawnOres(AddedBlocks.PrizeBlox, Blocks.dirt, world, random, chunkX, chunkZ, 16, 16, 3, 35, 0, 128);
+			this.spawnOres(AddedBlocks.RarePrizeBlox, Blocks.dirt, world, random, chunkX, chunkZ, 16, 16, 3, 15, 0, 128);
 			if (s.startsWith("Taiga")){
 				this.spawnOres(AddedBlocks.FrostOre, Blocks.stone, world, random, chunkX, chunkZ, 16, 16, 6, ints.FrostOreChance, 25, 40);
 			}

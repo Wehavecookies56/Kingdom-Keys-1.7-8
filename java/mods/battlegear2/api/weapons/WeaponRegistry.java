@@ -1,11 +1,16 @@
 package mods.battlegear2.api.weapons;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
-import net.minecraft.item.Item;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterators;
+import com.google.common.collect.Sets;
+import cpw.mods.fml.common.event.FMLInterModComms;
+import mods.battlegear2.api.ISensible;
+import mods.battlegear2.api.StackHolder;
+import mods.battlegear2.api.core.BattlegearUtils;
 import net.minecraft.item.ItemStack;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
+import net.minecraftforge.oredict.OreDictionary;
 
 /**
  * Registry for stacks which will be allowed in battle inventory,
@@ -17,78 +22,230 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  *
  */
 public class WeaponRegistry {
-	private static Set<StackHolder> weapons = new HashSet<StackHolder>();
-	private static Set<StackHolder> mainHand = new HashSet<StackHolder>();
-	private static Set<StackHolder> offHand = new HashSet<StackHolder>();
+    private static Map<StackHolder, Wield> wielding = new HashMap<StackHolder, Wield>();
+    private static Set<ISensible<StackHolder>> sensitivities = Sets.newHashSetWithExpectedSize(3);
+    static{
+        Collections.addAll(sensitivities, Sensitivity.ID, Sensitivity.DAMAGE, Sensitivity.NBT);
+    }
+
+    /**
+     * Called by a {@link FMLInterModComms.IMCMessage} with key as type, and the {@link ItemStack} as value
+     * @param type the key from the message, accepted values (case don't matter) are: "dual", "mainhand", "offhand", "both", "right", "left"
+     * @param stack registered as either dual-wieldable, wieldable only in mainhand or in offhand
+     */
+    public static boolean setWeapon(String type, ItemStack stack){
+        if(type.equalsIgnoreCase("Dual")){
+            return Wield.BOTH.setWeapon(stack);
+        }else if(type.equalsIgnoreCase("MainHand")){
+            return Wield.RIGHT.setWeapon(stack);
+        }else if(type.equalsIgnoreCase("OffHand")) {
+            return Wield.LEFT.setWeapon(stack);
+        }else{
+            try{
+                return Wield.valueOf(type.toUpperCase()).setWeapon(stack);
+            }catch (IllegalArgumentException ignored){
+                return false;
+            }
+        }
+    }
+
 	/**
-	 * Called by a {@link IMCMessage} with "Dual" as key, and the {@link ItemStack} as value
-	 * @param stack registered as dual wieldable
+	 * Helper method to set an {@link ItemStack} as dual-wieldable, bypassing right-click method check
 	 */
 	public static void addDualWeapon(ItemStack stack) {
-        weapons.add(new StackHolder(stack));
-        mainHand.add(new StackHolder(stack));
-        offHand.add(new StackHolder(stack));
+        wielding.put(new StackHolder(stack), Wield.BOTH);
 	}
 	
 	/**
-	 * Called by a {@link IMCMessage} with "MainHand" as key, and the {@link ItemStack} as value
-	 * @param stack registered as wieldable only in main hand
+	 * Helper method to set an {@link ItemStack} as wieldable only in mainhand
 	 */
 	public static void addTwoHanded(ItemStack stack) {
-        weapons.add(new StackHolder(stack));
-        mainHand.add(new StackHolder(stack));
+        wielding.put(new StackHolder(stack), Wield.RIGHT);
 	}
 
 	/**
-	 * Called by a {@link IMCMessage} with "OffHand" as key, and the {@link ItemStack} as value
-	 * @param stack registered as wieldable only in offhand
+	 * Helper method to set an {@link ItemStack} as wieldable only in offhand, bypassing right-click method check
 	 */
 	public static void addOffhandWeapon(ItemStack stack) {
-        weapons.add(new StackHolder(stack));
-        offHand.add(new StackHolder(stack));
+        wielding.put(new StackHolder(stack), Wield.LEFT);
 	}
-	
+
+    /**
+     * Adds a way to compare two {@link StackHolder} in this registry
+     * @param sensitivity the comparison to add
+     * @return true if this new comparison could be added
+     */
+    public static boolean addSensitivity(ISensible<StackHolder> sensitivity){
+        return sensitivities.add(sensitivity);
+    }
+
+    /**
+     * Removes a way to compare two {@link StackHolder} in this registry
+     * @param sensitivity the comparison to remove
+     * @return true if this comparison has been removed
+     */
+    public static boolean removeSensitivity(ISensible<StackHolder> sensitivity){
+        return sensitivities.remove(sensitivity);
+    }
+
+    /**
+     * Check if given {@link ItemStack} has been registered as any type of weapon
+     * @param stack the stack to check
+     * @return true if an equivalent stack as been found in this registry
+     */
 	public static boolean isWeapon(ItemStack stack) {
-		return weapons.contains(new StackHolder(stack));
+        StackHolder holder = new StackHolder(stack);
+        if(sensitivities==null)
+            return wielding.containsKey(holder);
+        else
+            return isWeapon(holder, sensitivities.iterator());
 	}
-	
+
+    /**
+     * Check if given {@link StackHolder} has been registered as any type of weapon,
+     * depending on given {@link Iterator} of comparisons
+     * @param holder the stack wrapper to check
+     * @return true if a comparable stack wrapper as been found in this registry
+     */
+    public static boolean isWeapon(StackHolder holder, Iterator<ISensible<StackHolder>> itr){
+        final Predicate<StackHolder> filter = new ISensible.Filter<StackHolder>(holder, itr);
+        return Iterators.any(wielding.keySet().iterator(), filter);
+    }
+
+    /**
+     * Check if given {@link ItemStack} has been registered as a mainhand weapon
+     * @param stack the stack to check
+     * @return true if an equivalent mainhand-wieldable stack as been found in this registry
+     */
 	public static boolean isMainHand(ItemStack stack) {
-		return mainHand.contains(new StackHolder(stack));
+        StackHolder holder = new StackHolder(stack);
+        if(sensitivities==null) {
+            Wield w = wielding.get(holder);
+            return w != null && w.isMainhand();
+        }else
+            return isMainHand(holder, sensitivities.iterator());
 	}
-	
+
+    /**
+     * Check if given {@link StackHolder} has been registered as a mainhand weapon,
+     * depending on given {@link Iterator} of comparisons
+     * @param holder the stack wrapper to check
+     * @return true if a comparable mainhand-wieldable stack wrapper as been found in this registry
+     */
+    public static boolean isMainHand(StackHolder holder, Iterator<ISensible<StackHolder>> itr){
+        final Predicate<StackHolder> filter = new ISensible.Filter<StackHolder>(holder, itr);
+        return Iterators.any(wielding.entrySet().iterator(), new Predicate<Map.Entry<StackHolder,Wield>>() {
+                    @Override
+                    public boolean apply(Map.Entry<StackHolder,Wield> input) {
+                        return input.getValue().isMainhand() && filter.apply(input.getKey());
+                    }
+                });
+    }
+
+    /**
+     * Check if given {@link ItemStack} has been registered as an offhand weapon
+     * @param stack the stack to check
+     * @return true if an equivalent offhand-wieldable stack as been found in this registry
+     */
 	public static boolean isOffHand(ItemStack stack) {
-		return offHand.contains(new StackHolder(stack));
+        StackHolder holder = new StackHolder(stack);
+        if(sensitivities==null) {
+            Wield w = wielding.get(holder);
+            return w != null && w.isOffhand();
+        }else
+            return isOffHand(holder, sensitivities.iterator());
 	}
-	
-	static class StackHolder{
-		private final ItemStack stack;
-        private int hash;
 
-		public StackHolder(ItemStack stack){
-			this.stack = stack;
-		}
-		
-		@Override
-		public int hashCode() {
-            int init = 17, mult = 37;
-            if(hash==0) {
-                if(stack==null)
-                    hash = new HashCodeBuilder(init, mult).toHashCode();
-                else
-                    hash = new HashCodeBuilder(init, mult).append(Item.getIdFromItem(stack.getItem())).append(stack.getItemDamage()).append(stack.getTagCompound()).toHashCode();
+    /**
+     * Check if given {@link StackHolder} has been registered as an offhand weapon
+     * depending on given {@link Iterator} of comparisons
+     * @param holder the stack wrapper to check
+     * @return true if a comparable offhand-wieldable stack wrapper as been found in this registry
+     */
+    public static boolean isOffHand(StackHolder holder, Iterator<ISensible<StackHolder>> itr){
+        final Predicate<StackHolder> filter = new ISensible.Filter<StackHolder>(holder, itr);
+        return Iterators.any(wielding.entrySet().iterator(), new Predicate<Map.Entry<StackHolder,Wield>>() {
+            @Override
+            public boolean apply(Map.Entry<StackHolder,Wield> input) {
+                return input.getValue().isOffhand() && filter.apply(input.getKey());
             }
-            return hash;
-		}
+        });
+    }
 
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj) {
-				return true;
-			}
-			if (obj == null) {
-				return false;
-			}
-			return obj instanceof StackHolder && ItemStack.areItemStacksEqual(stack, ((StackHolder) obj).stack);
-		}
-	}
+    /**
+     * Commonly used comparisons
+     */
+    public enum Sensitivity implements ISensible<StackHolder>{
+        ORE{
+            @Override
+            public boolean differenciate(StackHolder holder1, StackHolder holder2) {
+                return !Objects.deepEquals(OreDictionary.getOreIDs(holder1.stack), OreDictionary.getOreIDs(holder2.stack));
+            }
+        },
+        TYPE{
+            @Override
+            public boolean differenciate(StackHolder holder1, StackHolder holder2) {
+                return !holder1.stack.getItem().getClass().equals(holder2.stack.getItem().getClass());
+            }
+        },
+        ID{
+            @Override
+            public boolean differenciate(StackHolder holder1, StackHolder holder2) {
+                return holder1.stack.getItem() != holder2.stack.getItem();
+            }
+        },
+        DAMAGE {
+            @Override
+            public boolean differenciate(StackHolder holder1, StackHolder holder2) {
+                return holder1.stack.getItemDamage() != holder2.stack.getItemDamage();
+            }
+        },
+        NBT {
+            @Override
+            public boolean differenciate(StackHolder holder1, StackHolder holder2) {
+                if(holder1.stack.hasTagCompound())
+                    return !holder1.stack.getTagCompound().equals(holder2.stack.getTagCompound());
+                else if(holder1.stack.hasTagCompound())
+                    return true;
+                return false;
+            }
+        };
+    }
+
+    public enum Wield{
+        BOTH,
+        RIGHT{
+            @Override
+            public boolean setWeapon(ItemStack stack){
+                wielding.put(new StackHolder(stack), this);
+                return true;
+            }
+            @Override
+            public boolean isOffhand(){
+                return false;
+            }
+        },
+        LEFT{
+            @Override
+            public boolean isMainhand(){
+                return false;
+            }
+        };
+
+        public boolean isOffhand(){
+            return true;
+        }
+
+        public boolean isMainhand(){
+            return true;
+        }
+
+        public boolean setWeapon(ItemStack stack){
+            if(!BattlegearUtils.checkForRightClickFunction(stack)){
+                wielding.put(new StackHolder(stack), this);
+                return true;
+            }
+            return false;
+        }
+    }
 }

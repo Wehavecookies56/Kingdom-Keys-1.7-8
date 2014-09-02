@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import wehavecookies56.kk.item.ItemKingdomKeys;
 import wehavecookies56.kk.lib.LocalStrings;
 import wehavecookies56.kk.lib.Reference;
@@ -25,7 +26,7 @@ public class ItemOlympiaRecipe extends ItemKingdomKeys{
 	
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack itemStack, EntityPlayer player, List dataList, boolean bool){
-		dataList.add(LocalStrings.Olympia);
+		dataList.add(StatCollector.translateToLocal(LocalStrings.Olympia));
 	}
 	
 	public static final ResourceLocation texture = new ResourceLocation("kk", "textures/items/" + Strings.Olympia + ".png");

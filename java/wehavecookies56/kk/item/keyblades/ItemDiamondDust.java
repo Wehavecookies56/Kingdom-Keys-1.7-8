@@ -46,6 +46,7 @@ public class ItemDiamondDust extends ItemSword implements IBattlegearWeapon{
     	dataList.add("Kingdom Hearts");
     }
     
+    @Override
     public void onUpdate(ItemStack itemstack, World par2World, Entity par3Entity, int par4, boolean par5)
     {
     if(itemstack.isItemEnchanted() == false)

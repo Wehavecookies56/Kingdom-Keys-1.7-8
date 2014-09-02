@@ -9,6 +9,9 @@ import wehavecookies56.kk.core.extendedproperties.EntityPropertyMunny;
 
 public class Strings {
 	
+	public static final String VoidedKnowledge = "voidedKnowledge";
+	public static final String DarkKnowledge = "darkKnowledge";
+
     //Key Blades
 	public static final String Vulpeus = "vulpeusForetellersKeyblade";
 	public static final String Ursus = "ursusForetellersKeyblade";
@@ -558,4 +561,5 @@ public class Strings {
 	public static final String OathkeeperRecipe = "oathkeeperRecipe";
 	public static final String KingdomKeyDRecipe = "kingdomKeyDRecipe";
 	public static final String OblivionRecipe = "oblivionRecipe";
+	public static final String DarkMatterRecipe = "darkMatterRecipe";
 }

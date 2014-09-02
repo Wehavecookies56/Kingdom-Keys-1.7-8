@@ -12,6 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
@@ -21,6 +22,7 @@ import wehavecookies56.kk.core.extendedproperties.EntityPropertyMunny;
 import wehavecookies56.kk.core.packet.SynthesisPacket;
 import wehavecookies56.kk.entities.tileentities.TileEntitySynthesis;
 import wehavecookies56.kk.item.AddedItems;
+import wehavecookies56.kk.lib.LocalStrings;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -33,7 +35,7 @@ public class GuiSynthesis extends GuiContainer {
 	public static boolean ClickedTab2 = false;
 	public static boolean ClickedTab3 = false;
 	
-	public String SynthesizeText = "You lack the required materials to Synthesize";
+	public String SynthesizeText;
 
 	@SideOnly(Side.CLIENT)
 	public GuiSynthesis(InventoryPlayer invPlayer, TileEntitySynthesis synthesis) {
@@ -96,7 +98,7 @@ public class GuiSynthesis extends GuiContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	protected void drawGuiContainerForegroundLayer(int x, int y) {
-		mc.fontRenderer.drawString("Synthesis", 38, 14, 0x404040);
+		mc.fontRenderer.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Title), 38, 5, 0x404040);
 		GL11.glColor4f(1F, 1F, 1F, 1F);
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 		if(Tab1X + guiLeft <= x && x <= Tab1X + guiLeft + DimensionsOfTabW && Tab1Y + guiTop <= y && y <= Tab1Y + guiTop + DimensionsOfTabH){
@@ -129,17 +131,17 @@ public class GuiSynthesis extends GuiContainer {
 
 		EntityPropertyMunny props = EntityPropertyMunny.get(mc.thePlayer);
 
-		mc.fontRenderer.drawString("Munny: " + props.getMunny(), 0, 168, 0xFFF000);
+		mc.fontRenderer.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Munny) + ": " + props.getMunny(), 0, 168, 0xFFF000);
 		
 		if(synthesis.getStackInSlot(0) == null){
 			if(ClickedTab1){
-				mc.fontRenderer.drawSplitString("Place an Attack Recipe or a Material Recipe in the slot", 30, 48, 120, 0xFF0000);
+				mc.fontRenderer.drawSplitString(StatCollector.translateToLocal(LocalStrings.Synthesis_Place), 30, 48, 120, 0xFF0000);
 			}
 			else if(ClickedTab2){
-				mc.fontRenderer.drawSplitString("Place an Attack Recipe or a Material Recipe in the slot", 30, 30, 120, 0xFF0000);
+				mc.fontRenderer.drawSplitString(StatCollector.translateToLocal(LocalStrings.Synthesis_Place), 30, 30, 120, 0xFF0000);
 			}
 			else if(ClickedTab3){
-				mc.fontRenderer.drawSplitString("Place an Attack Recipe or a Material Recipe in the slot", 30, 30, 120, 0xFF0000);
+				mc.fontRenderer.drawSplitString(StatCollector.translateToLocal(LocalStrings.Synthesis_Place), 30, 30, 120, 0xFF0000);
 			}
 		}
 
@@ -245,20 +247,25 @@ public class GuiSynthesis extends GuiContainer {
 		addSynthesisRecipe(AddedItems.K100r, AddedItems.OlympiaChain, AddedItems.OlympiaMaterial, true, 1350, AddedItems.OrichalcumPlus, AddedItems.Orichalcum, AddedItems.MythrilGem, AddedItems.SerenityGem, AddedItems.SerenityShard, AddedItems.PowerCrystal, AddedItems.PowerGem);
 		addSynthesisRecipe(AddedItems.K101r, AddedItems.LadyLuckChain, AddedItems.LadyLuckMaterial, true, 900, AddedItems.TranquilGem, AddedItems.SerenityGem, AddedItems.BrightCrystal, AddedItems.TranquilStone, AddedItems.SerenityShard, AddedItems.TranquilShard, AddedItems.BrightShard);
 		addSynthesisRecipe(AddedItems.K102r, AddedItems.PeoplesHeartsChain, AddedItems.PeoplesHeartsMaterial, true, 1950,  AddedItems.DarkMatter, AddedItems.DarkCrystal, AddedItems.OrichalcumPlus, AddedItems.LucidGem, AddedItems.LucidStone, AddedItems.DarkGem, AddedItems.DarkStone, AddedItems.TwilightCrystal, AddedItems.Heart);
-		//addSynthesisRecipe(AddedItems.K103r, AddedItems.UltimaWeaponChain, AddedItems.UltimaWeaponMaterial, true, 2700  item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11);
-		//addSynthesisRecipe(AddedItems.K104r, AddedItems.K104c, AddedItems.K104m, true, item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11);
-		//addSynthesisRecipe(AddedItems.K105r, AddedItems.K105c, AddedItems.K105m, true, item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11);
-		//addSynthesisRecipe(AddedItems.K106r, AddedItems.K106c, AddedItems.K106m, true, item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11);
-		//addSynthesisRecipe(AddedItems.K107r, AddedItems.K107c, AddedItems.K107m, true, item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11);
-		//addSynthesisRecipe(AddedItems.K108r, AddedItems.K108c, AddedItems.K108m, true, item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11);
-		//addSynthesisRecipe(AddedItems.K109r, AddedItems.K109c, AddedItems.K109m, true, item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11);
+		addSynthesisRecipe(AddedItems.K103r, AddedItems.UltimaWeaponChain, AddedItems.UltimaWeaopnMaterial, true, 2700,  AddedItems.OrichalcumPlus, AddedItems.Orichalcum, AddedItems.EnergyCrystal, AddedItems.TwilightCrystal, AddedItems.DenseCrystal, AddedItems.MythrilCrystal, AddedItems.SerenityCrystal, AddedItems.ShinyCrystal);
+		addSynthesisRecipe(AddedItems.K104r, AddedItems.TreasureTroveChain, AddedItems.TreasureTroveMaterial, true, 1050, AddedItems.DenseCrystal, AddedItems.BlazingGem, AddedItems.FrostGem, AddedItems.LightningGem, AddedItems.BrightShard, AddedItems.BrightStone);
+		addSynthesisRecipe(AddedItems.K105r, AddedItems.StarseekerChain, AddedItems.StarseekerMaterial, true, 1800, AddedItems.Orichalcum, AddedItems.BrightCrystal, AddedItems.BrightGem, AddedItems.DarkStone, AddedItems.TwilightGem, AddedItems.TwilightStone);
+		addSynthesisRecipe(AddedItems.K106r, AddedItems.SoulEaterChain, AddedItems.SoulEaterMaterial, true, 1800, AddedItems.DarkMatter, AddedItems.DarkCrystal, AddedItems.RemembranceGem, AddedItems.SerenityGem, AddedItems.LucidShard, AddedItems.LucidStone, AddedItems.PowerGem);
+		//addSynthesisRecipe(AddedItems.K107r, AddedItems.K107c, AddedItems.K107m, true, 900, item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11);
+		//addSynthesisRecipe(AddedItems.K108r, AddedItems.K108c, AddedItems.K108m, true, 900, item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11);
+		//addSynthesisRecipe(AddedItems.K109r, AddedItems.K109c, AddedItems.K109m, true, 1500, item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11);
 		addSynthesisRecipe(AddedItems.K110r, AddedItems.WaywardWindChain, AddedItems.WaywardWindMaterial, true, 1200, AddedItems.LightningCrystal, AddedItems.LightningStone, AddedItems.DenseShard, AddedItems.LightningGem, AddedItems.PowerCrystal, AddedItems.PowerGem);
 		addSynthesisRecipe(AddedItems.K111r, AddedItems.KingdomKeyChain, AddedItems.KingdomKeyMaterial, true, 750, AddedItems.SerenityCrystal, AddedItems.BrightGem, AddedItems.DenseStone, AddedItems.BrightStone, AddedItems.BrightShard);
 		addSynthesisRecipe(AddedItems.K112r, AddedItems.OathkeeperChain, AddedItems.OathkeeperMaterial, true, 1650, AddedItems.SerenityCrystal, AddedItems.BrightGem, AddedItems.DenseStone, AddedItems.BrightStone, AddedItems.BrightShard);
 		addSynthesisRecipe(AddedItems.K113r, AddedItems.KingdomKeyDChain, AddedItems.KingdomKeyDMaterial, true, 1650, AddedItems.SerenityCrystal, AddedItems.BrightGem, AddedItems.DenseStone, AddedItems.BrightStone, AddedItems.BrightShard, AddedItems.PowerCrystal, AddedItems.DenseGem);
 		addSynthesisRecipe(AddedItems.K114r, AddedItems.OblivionChain, AddedItems.OblivionMaterial, true, 1950, AddedItems.OrichalcumPlus, AddedItems.DarkCrystal, AddedItems.DenseCrystal, AddedItems.PowerGem, AddedItems.TwilightCrystal, AddedItems.TwilightStone, AddedItems.DarkShard, AddedItems.LucidStone, AddedItems.DarkMatter);
-		addSynthesisRecipe(AddedItems.MythrilShardRecipe, AddedItems.MythrilShard, null, false, 100, Items.diamond, AddedItems.PureHeart);
+		addSynthesisRecipe(AddedItems.MythrilShardRecipe, AddedItems.MythrilShard, null, false, 200, AddedItems.DenseShard, AddedItems.DenseStone, AddedItems.DenseShard, AddedItems.TwilightShard, AddedItems.TwilightStone);
+		addSynthesisRecipe(AddedItems.MythrilStoneRecipe, AddedItems.MythrilStone, null, false, 200, AddedItems.DenseShard, AddedItems.DenseStone, AddedItems.DenseShard, AddedItems.TwilightShard, AddedItems.TwilightStone, AddedItems.SerenityShard);
+		addSynthesisRecipe(AddedItems.MythrilGemRecipe, AddedItems.MythrilGem, null, false, 200, AddedItems.DenseShard, AddedItems.DenseGem, AddedItems.DenseCrystal, AddedItems.TwilightGem, AddedItems.TwilightCrystal);
+		addSynthesisRecipe(AddedItems.MythrilCrystalRecipe, AddedItems.MythrilCrystal, null, false, 200, AddedItems.DenseShard, AddedItems.DenseGem, AddedItems.DenseCrystal, AddedItems.TwilightGem, AddedItems.TwilightCrystal, AddedItems.SerenityStone);
+		addSynthesisRecipe(AddedItems.DarkMatterRecipe, AddedItems.DarkMatter, null, false, 1000, AddedItems.DarkCrystal, AddedItems.LucidCrystal, AddedItems.DarkGem, AddedItems.LucidGem, AddedItems.DarkHeart);
 
+		
 		if(ClickedTab1){
 			Tab2SrcY = 0;
 			Tab1SrcY = 17;
@@ -272,19 +279,19 @@ public class GuiSynthesis extends GuiContainer {
 
 		if(Tab1X + guiLeft <= x && x <= Tab1X + guiLeft + DimensionsOfTabW && Tab1Y + guiTop <= y && y <= Tab1Y + guiTop + DimensionsOfTabH){
 			ArrayList<String> Tab1ToolTip = new ArrayList<String>();
-			Tab1ToolTip.add("Information");
+			Tab1ToolTip.add(StatCollector.translateToLocal(LocalStrings.Synthesis_Tab1));
 			drawHoveringText(Tab1ToolTip, x - guiLeft, y - guiTop, fontRendererObj);
 		}
 
 		if(Tab2X + guiLeft <= x && x <= Tab2X + guiLeft + DimensionsOfTabW && Tab2Y + guiTop <= y && y <= Tab2Y + guiTop + DimensionsOfTabH){
 			ArrayList<String> Tab2ToolTip = new ArrayList<String>();
-			Tab2ToolTip.add("Required Synthesis Materials");
+			Tab2ToolTip.add(StatCollector.translateToLocal(LocalStrings.Synthesis_Tab2));
 			drawHoveringText(Tab2ToolTip, x - guiLeft, y - guiTop, fontRendererObj);
 		}
 
 		if(Tab3X + guiLeft <= x && x <= Tab3X + guiLeft + DimensionsOfTabW && Tab3Y + guiTop <= y && y <= Tab3Y + guiTop + DimensionsOfTabH){
 			ArrayList<String> Tab3ToolTip = new ArrayList<String>();
-			Tab3ToolTip.add("Help");
+			Tab3ToolTip.add(StatCollector.translateToLocal(LocalStrings.Synthesis_Tab3));
 			drawHoveringText(Tab3ToolTip, x - guiLeft, y - guiTop, fontRendererObj);
 		}
 	}
@@ -296,7 +303,7 @@ public class GuiSynthesis extends GuiContainer {
 		ButtonPressed = false;
 		buttonList.clear();
 		Minecraft.getMinecraft().theWorld.playSoundAtEntity(Minecraft.getMinecraft().thePlayer, "kk:kupo", 1, 1F);
-		GuiButton Synthesize = new GuiButton(0, guiLeft + 108, guiTop + 4, 60, 20, "Synthesize");
+		GuiButton Synthesize = new GuiButton(0, guiLeft + 108, guiTop + 4, 60, 20, StatCollector.translateToLocal(LocalStrings.Synthesis_Button_Synthesize));
 		buttonList.add(Synthesize);
 	}
 
@@ -393,23 +400,33 @@ public class GuiSynthesis extends GuiContainer {
 			if(synthesis.getStackInSlot(0).getItem() == recipe){
 				GL11.glColor3f(1, 1, 1);
 				GL11.glDisable(GL11.GL_LIGHTING);
-				fontRendererObj.drawString("Cost: " + cost, 38, 5, 0xFFF000);
+				fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Cost) + ": " + cost, 38, 14, 0xFFF000);
 
 				//Stuff displayed on the first tab
 				if(GuiSynthesis.ClickedTab1){
-					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1)){
-						SynthesizeText = "You have the materials required to Synthesize";
+					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && props.getMunny() >= cost){
+						hasItems = true;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required1);
 						colour = 0x00B330;
-					}else{
-						SynthesizeText = "You lack the required materials to Synthesize";
+					}else if(props.getMunny() < cost && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1)){
+						hasItems = false;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required4);
+						colour = 0xFF0000;
+					}else if(props.getMunny() < cost){
+						hasItems = false;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required2);
+						colour = 0xFF0000;
+					}else if(props.getMunny() >= cost){
+						hasItems = false;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required3);
 						colour = 0xFF0000;
 					}
 					fontRendererObj.drawSplitString(SynthesizeText, 28, 60, 120, colour);
 					fontRendererObj.drawSplitString(result.getItemStackDisplayName(new ItemStack(result)).replace(" Chain", "") , 46, 28, 120, 0x404040);
 					if(isKeyblade){
-						fontRendererObj.drawString("+" + ((int)material.getDamageVsEntity() + 4) + " Attack Damage", 28, 48, 0x004CFF);
+						fontRendererObj.drawString("+" + ((int)material.getDamageVsEntity() + 4) + " " + StatCollector.translateToLocal(LocalStrings.Synthesis_Attack_Damage), 28, 48, 0x004CFF);
 					}else{
-						fontRendererObj.drawString("Material", 28, 40, 0x004CFF);
+						fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Material), 28, 40, 0x004CFF);
 					}
 					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(result), resultXY, resultXY);
 
@@ -423,30 +440,34 @@ public class GuiSynthesis extends GuiContainer {
 					}else{
 						colour = 0xFF0000;
 					}
-					fontRendererObj.drawString("Required Materials", 30, 27, colour);
+					fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_RequiredMats), 30, 27, colour);
 					//Stuff displayed on the third tab
 				}else if(GuiSynthesis.ClickedTab3){
 					GL11.glColor3f(1, 1, 1);
 					GL11.glDisable(GL11.GL_LIGHTING);
 					if(isKeyblade){
-						fontRendererObj.drawSplitString("This keyblade has the enchantment Vanquish. It allows you to collect hearts from mobs when they are slain.", 30, 30, 120, 0x004CFF);
+						fontRendererObj.drawSplitString(StatCollector.translateToLocal(LocalStrings.Synthesis_Tab3_Attack), 30, 30, 120, 0x004CFF);
 					}else{
-						fontRendererObj.drawSplitString("This item is material used for crafting or another synthesis recipe.", 30, 30, 120, 0x004CFF);
+						fontRendererObj.drawSplitString(StatCollector.translateToLocal(LocalStrings.Synthesis_Tab3_Mat), 30, 30, 120, 0x004CFF);
 					}
 				}
 			}
 		}
 		if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && props.getMunny() >= cost){
 			hasItems = true;
-			SynthesizeText = "You have the materials and munny required to Synthesize";
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required1);
 			colour = 0x00B330;
+		}else if(props.getMunny() < cost && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1)){
+			hasItems = false;
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required4);
+			colour = 0xFF0000;
 		}else if(props.getMunny() < cost){
 			hasItems = false;
-			SynthesizeText = "You lack the required materials and munny to Synthesize";
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required2);
 			colour = 0xFF0000;
 		}else if(props.getMunny() >= cost){
 			hasItems = false;
-			SynthesizeText = "You lack the required materialsto Synthesize";
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required3);
 			colour = 0xFF0000;
 		}
 
@@ -474,23 +495,33 @@ public class GuiSynthesis extends GuiContainer {
 			if(synthesis.getStackInSlot(0).getItem() == recipe){
 				GL11.glColor3f(1, 1, 1);
 				GL11.glDisable(GL11.GL_LIGHTING);
-				fontRendererObj.drawString("Cost: " + cost, 38, 5, 0xFFF000);
+				fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Cost) + ": " + cost, 38, 14, 0xFFF000);
 				
 				//Stuff displayed on the first tab
 				if(GuiSynthesis.ClickedTab1){
-					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2)){
-						SynthesizeText = "You have the materials required to Synthesize";
+					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && props.getMunny() >= cost){
+						hasItems = true;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required1);
 						colour = 0x00B330;
-					}else{
-						SynthesizeText = "You lack the required materials to Synthesize";
+					}else if(props.getMunny() < cost && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2)){
+						hasItems = false;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required4);
+						colour = 0xFF0000;
+					}else if(props.getMunny() < cost){
+						hasItems = false;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required2);
+						colour = 0xFF0000;
+					}else if(props.getMunny() >= cost){
+						hasItems = false;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required3);
 						colour = 0xFF0000;
 					}
 					fontRendererObj.drawSplitString(SynthesizeText, 28, 60, 120, colour);
 					fontRendererObj.drawSplitString(result.getItemStackDisplayName(new ItemStack(result)).replace(" Chain", "") , 46, 28, 120, 0x404040);
 					if(isKeyblade){
-						fontRendererObj.drawString("+" + ((int)material.getDamageVsEntity() + 4) + " Attack Damage", 28, 48, 0x004CFF);
+						fontRendererObj.drawString("+" + ((int)material.getDamageVsEntity() + 4) + " " + StatCollector.translateToLocal(LocalStrings.Synthesis_Attack_Damage), 28, 48, 0x004CFF);
 					}else{
-						fontRendererObj.drawString("Material", 28, 40, 0x004CFF);
+						fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Material), 28, 40, 0x004CFF);
 					}
 					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(result), resultXY, resultXY);
 
@@ -505,30 +536,34 @@ public class GuiSynthesis extends GuiContainer {
 					}else{
 						colour = 0xFF0000;
 					}
-					fontRendererObj.drawString("Required Materials", 30, 27, colour);
+					fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_RequiredMats), 30, 27, colour);
 					//Stuff displayed on the third tab
 				}else if(GuiSynthesis.ClickedTab3){
 					GL11.glColor3f(1, 1, 1);
 					GL11.glDisable(GL11.GL_LIGHTING);
 					if(isKeyblade){
-						fontRendererObj.drawSplitString("This keyblade has the enchantment Vanquish. It allows you to collect hearts from mobs when they are slain.", 30, 30, 120, 0x004CFF);
+						fontRendererObj.drawSplitString(StatCollector.translateToLocal(LocalStrings.Synthesis_Tab3_Attack), 30, 30, 120, 0x004CFF);
 					}else{
-						fontRendererObj.drawSplitString("This item is material used for crafting or another synthesis recipe.", 30, 30, 120, 0x004CFF);
+						fontRendererObj.drawSplitString(StatCollector.translateToLocal(LocalStrings.Synthesis_Tab3_Mat), 30, 30, 120, 0x004CFF);
 					}
 				}
 			}
 		}
 		if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && props.getMunny() >= cost){
 			hasItems = true;
-			SynthesizeText = "You have the materials and munny required to Synthesize";
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required1);
 			colour = 0x00B330;
+		}else if(props.getMunny() < cost && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2)){
+			hasItems = false;
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required4);
+			colour = 0xFF0000;
 		}else if(props.getMunny() < cost){
 			hasItems = false;
-			SynthesizeText = "You lack the required materials and munny to Synthesize";
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required2);
 			colour = 0xFF0000;
 		}else if(props.getMunny() >= cost){
 			hasItems = false;
-			SynthesizeText = "You lack the required materialsto Synthesize";
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required3);
 			colour = 0xFF0000;
 		}
 
@@ -556,23 +591,33 @@ public class GuiSynthesis extends GuiContainer {
 			if(synthesis.getStackInSlot(0).getItem() == recipe){
 				GL11.glColor3f(1, 1, 1);
 				GL11.glDisable(GL11.GL_LIGHTING);
-				fontRendererObj.drawString("Cost: " + cost, 38, 5, 0xFFF000);
+				fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Cost) + ": " + cost, 38, 14, 0xFFF000);
 
 				//Stuff displayed on the first tab
 				if(GuiSynthesis.ClickedTab1){
-					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3)){
-						SynthesizeText = "You have the materials required to Synthesize";
+					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && props.getMunny() >= cost){
+						hasItems = true;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required1);
 						colour = 0x00B330;
-					}else{
-						SynthesizeText = "You lack the required materials to Synthesize";
+					}else if(props.getMunny() < cost && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3)){
+						hasItems = false;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required4);
+						colour = 0xFF0000;
+					}else if(props.getMunny() < cost){
+						hasItems = false;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required2);
+						colour = 0xFF0000;
+					}else if(props.getMunny() >= cost){
+						hasItems = false;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required3);
 						colour = 0xFF0000;
 					}
 					fontRendererObj.drawSplitString(SynthesizeText, 28, 60, 120, colour);
 					fontRendererObj.drawSplitString(result.getItemStackDisplayName(new ItemStack(result)).replace(" Chain", "") , 46, 28, 120, 0x404040);
 					if(isKeyblade){
-						fontRendererObj.drawString("+" + ((int)material.getDamageVsEntity() + 4) + " Attack Damage", 28, 48, 0x004CFF);
+						fontRendererObj.drawString("+" + ((int)material.getDamageVsEntity() + 4) + " " + StatCollector.translateToLocal(LocalStrings.Synthesis_Attack_Damage), 28, 48, 0x004CFF);
 					}else{
-						fontRendererObj.drawString("Material", 28, 40, 0x004CFF);
+						fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Material), 28, 40, 0x004CFF);
 					}
 					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(result), resultXY, resultXY);
 
@@ -588,30 +633,34 @@ public class GuiSynthesis extends GuiContainer {
 					}else{
 						colour = 0xFF0000;
 					}
-					fontRendererObj.drawString("Required Materials", 30, 27, colour);
+					fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_RequiredMats), 30, 27, colour);
 					//Stuff displayed on the third tab
 				}else if(GuiSynthesis.ClickedTab3){
 					GL11.glColor3f(1, 1, 1);
 					GL11.glDisable(GL11.GL_LIGHTING);
 					if(isKeyblade){
-						fontRendererObj.drawSplitString("This keyblade has the enchantment Vanquish. It allows you to collect hearts from mobs when they are slain.", 30, 30, 120, 0x004CFF);
+						fontRendererObj.drawSplitString(StatCollector.translateToLocal(LocalStrings.Synthesis_Tab3_Attack), 30, 30, 120, 0x004CFF);
 					}else{
-						fontRendererObj.drawSplitString("This item is material used for crafting or another synthesis recipe.", 30, 30, 120, 0x004CFF);
+						fontRendererObj.drawSplitString(StatCollector.translateToLocal(LocalStrings.Synthesis_Tab3_Mat), 30, 30, 120, 0x004CFF);
 					}
 				}
 			}
 		}
 		if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && props.getMunny() >= cost){
 			hasItems = true;
-			SynthesizeText = "You have the materials and munny required to Synthesize";
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required1);
 			colour = 0x00B330;
+		}else if(props.getMunny() < cost && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3)){
+			hasItems = false;
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required4);
+			colour = 0xFF0000;
 		}else if(props.getMunny() < cost){
 			hasItems = false;
-			SynthesizeText = "You lack the required materials and munny to Synthesize";
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required2);
 			colour = 0xFF0000;
 		}else if(props.getMunny() >= cost){
 			hasItems = false;
-			SynthesizeText = "You lack the required materialsto Synthesize";
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required3);
 			colour = 0xFF0000;
 		}
 
@@ -639,23 +688,33 @@ public class GuiSynthesis extends GuiContainer {
 			if(synthesis.getStackInSlot(0).getItem() == recipe){
 				GL11.glColor3f(1, 1, 1);
 				GL11.glDisable(GL11.GL_LIGHTING);
-				fontRendererObj.drawString("Cost: " + cost, 38, 5, 0xFFF000);
+				fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Cost) + ": " + cost, 38, 14, 0xFFF000);
 				
 				//Stuff displayed on the first tab
 				if(GuiSynthesis.ClickedTab1){
-					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4)){
-						SynthesizeText = "You have the materials required to Synthesize";
+					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && props.getMunny() >= cost){
+						hasItems = true;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required1);
 						colour = 0x00B330;
-					}else{
-						SynthesizeText = "You lack the required materials to Synthesize";
+					}else if(props.getMunny() < cost && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4)){
+						hasItems = false;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required4);
+						colour = 0xFF0000;
+					}else if(props.getMunny() < cost){
+						hasItems = false;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required2);
+						colour = 0xFF0000;
+					}else if(props.getMunny() >= cost){
+						hasItems = false;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required3);
 						colour = 0xFF0000;
 					}
 					fontRendererObj.drawSplitString(SynthesizeText, 28, 60, 120, colour);
 					fontRendererObj.drawSplitString(result.getItemStackDisplayName(new ItemStack(result)).replace(" Chain", "") , 46, 28, 120, 0x404040);
 					if(isKeyblade){
-						fontRendererObj.drawString("+" + ((int)material.getDamageVsEntity() + 4) + " Attack Damage", 28, 48, 0x004CFF);
+						fontRendererObj.drawString("+" + ((int)material.getDamageVsEntity() + 4) + " " + StatCollector.translateToLocal(LocalStrings.Synthesis_Attack_Damage), 28, 48, 0x004CFF);
 					}else{
-						fontRendererObj.drawString("Material", 28, 40, 0x004CFF);
+						fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Material), 28, 40, 0x004CFF);
 					}
 					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(result), resultXY, resultXY);
 
@@ -672,30 +731,34 @@ public class GuiSynthesis extends GuiContainer {
 					}else{
 						colour = 0xFF0000;
 					}
-					fontRendererObj.drawString("Required Materials", 30, 27, colour);
+					fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_RequiredMats), 30, 27, colour);
 					//Stuff displayed on the third tab
 				}else if(GuiSynthesis.ClickedTab3){
 					GL11.glColor3f(1, 1, 1);
 					GL11.glDisable(GL11.GL_LIGHTING);
 					if(isKeyblade){
-						fontRendererObj.drawSplitString("This keyblade has the enchantment Vanquish. It allows you to collect hearts from mobs when they are slain.", 30, 30, 120, 0x004CFF);
+						fontRendererObj.drawSplitString(StatCollector.translateToLocal(LocalStrings.Synthesis_Tab3_Attack), 30, 30, 120, 0x004CFF);
 					}else{
-						fontRendererObj.drawSplitString("This item is material used for crafting or another synthesis recipe.", 30, 30, 120, 0x004CFF);
+						fontRendererObj.drawSplitString(StatCollector.translateToLocal(LocalStrings.Synthesis_Tab3_Mat), 30, 30, 120, 0x004CFF);
 					}
 				}
 			}
 		}
 		if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && props.getMunny() >= cost){
 			hasItems = true;
-			SynthesizeText = "You have the materials and munny required to Synthesize";
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required1);
 			colour = 0x00B330;
+		}else if(props.getMunny() < cost && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4)){
+			hasItems = false;
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required4);
+			colour = 0xFF0000;
 		}else if(props.getMunny() < cost){
 			hasItems = false;
-			SynthesizeText = "You lack the required materials and munny to Synthesize";
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required2);
 			colour = 0xFF0000;
 		}else if(props.getMunny() >= cost){
 			hasItems = false;
-			SynthesizeText = "You lack the required materialsto Synthesize";
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required3);
 			colour = 0xFF0000;
 		}
 
@@ -723,23 +786,33 @@ public class GuiSynthesis extends GuiContainer {
 			if(synthesis.getStackInSlot(0).getItem() == recipe){
 				GL11.glColor3f(1, 1, 1);
 				GL11.glDisable(GL11.GL_LIGHTING);
-				fontRendererObj.drawString("Cost: " + cost, 38, 5, 0xFFF000);
+				fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Cost) + ": " + cost, 38, 14, 0xFFF000);
 				
 				//Stuff displayed on the first tab
 				if(GuiSynthesis.ClickedTab1){
-					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5)){
-						SynthesizeText = "You have the materials required to Synthesize";
+					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && props.getMunny() >= cost){
+						hasItems = true;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required1);
 						colour = 0x00B330;
-					}else{
-						SynthesizeText = "You lack the required materials to Synthesize";
+					}else if(props.getMunny() < cost && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5)){
+						hasItems = false;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required4);
+						colour = 0xFF0000;
+					}else if(props.getMunny() < cost){
+						hasItems = false;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required2);
+						colour = 0xFF0000;
+					}else if(props.getMunny() >= cost){
+						hasItems = false;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required3);
 						colour = 0xFF0000;
 					}
 					fontRendererObj.drawSplitString(SynthesizeText, 28, 60, 120, colour);
 					fontRendererObj.drawSplitString(result.getItemStackDisplayName(new ItemStack(result)).replace(" Chain", "") , 46, 28, 120, 0x404040);
 					if(isKeyblade){
-						fontRendererObj.drawString("+" + ((int)material.getDamageVsEntity() + 4) + " Attack Damage", 28, 48, 0x004CFF);
+						fontRendererObj.drawString("+" + ((int)material.getDamageVsEntity() + 4) + " " + StatCollector.translateToLocal(LocalStrings.Synthesis_Attack_Damage), 28, 48, 0x004CFF);
 					}else{
-						fontRendererObj.drawString("Material", 28, 40, 0x004CFF);
+						fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Material), 28, 40, 0x004CFF);
 					}
 					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(result), resultXY, resultXY);
 
@@ -757,30 +830,34 @@ public class GuiSynthesis extends GuiContainer {
 					}else{
 						colour = 0xFF0000;
 					}
-					fontRendererObj.drawString("Required Materials", 30, 27, colour);
+					fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_RequiredMats), 30, 27, colour);
 					//Stuff displayed on the third tab
 				}else if(GuiSynthesis.ClickedTab3){
 					GL11.glColor3f(1, 1, 1);
 					GL11.glDisable(GL11.GL_LIGHTING);
 					if(isKeyblade){
-						fontRendererObj.drawSplitString("This keyblade has the enchantment Vanquish. It allows you to collect hearts from mobs when they are slain.", 30, 30, 120, 0x004CFF);
+						fontRendererObj.drawSplitString(StatCollector.translateToLocal(LocalStrings.Synthesis_Tab3_Attack), 30, 30, 120, 0x004CFF);
 					}else{
-						fontRendererObj.drawSplitString("This item is material used for crafting or another synthesis recipe.", 30, 30, 120, 0x004CFF);
+						fontRendererObj.drawSplitString(StatCollector.translateToLocal(LocalStrings.Synthesis_Tab3_Mat), 30, 30, 120, 0x004CFF);
 					}
 				}
 			}
 		}
 		if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && props.getMunny() >= cost){
 			hasItems = true;
-			SynthesizeText = "You have the materials and munny required to Synthesize";
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required1);
 			colour = 0x00B330;
+		}else if(props.getMunny() < cost && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5)){
+			hasItems = false;
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required4);
+			colour = 0xFF0000;
 		}else if(props.getMunny() < cost){
 			hasItems = false;
-			SynthesizeText = "You lack the required materials and munny to Synthesize";
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required2);
 			colour = 0xFF0000;
 		}else if(props.getMunny() >= cost){
 			hasItems = false;
-			SynthesizeText = "You lack the required materialsto Synthesize";
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required3);
 			colour = 0xFF0000;
 		}
 
@@ -810,24 +887,31 @@ public class GuiSynthesis extends GuiContainer {
 				GL11.glDisable(GL11.GL_LIGHTING);
 
 				//Stuff displayed on the first tab
-				fontRendererObj.drawString("Cost: " + cost, 38, 5, 0xFFF000);
+				fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Cost) + ": " + cost, 38, 14, 0xFFF000);
 				if(GuiSynthesis.ClickedTab1){
 					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && props.getMunny() >= cost){
-						SynthesizeText = "You have the materials and munny required";
+						hasItems = true;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required1);
 						colour = 0x00B330;
+					}else if(props.getMunny() < cost && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6)){
+						hasItems = false;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required4);
+						colour = 0xFF0000;
 					}else if(props.getMunny() < cost){
-						SynthesizeText = "You lack the required materials and munny";
+						hasItems = false;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required2);
 						colour = 0xFF0000;
 					}else if(props.getMunny() >= cost){
-						SynthesizeText = "You lack the required materials";
+						hasItems = false;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required3);
 						colour = 0xFF0000;
 					}
 					fontRendererObj.drawSplitString(SynthesizeText, 28, 60, 120, colour);
 					fontRendererObj.drawSplitString(result.getItemStackDisplayName(new ItemStack(result)).replace(" Chain", "") , 46, 28, 120, 0x404040);
 					if(isKeyblade){
-						fontRendererObj.drawString("+" + ((int)material.getDamageVsEntity() + 4) + " Attack Damage", 28, 48, 0x004CFF);
+						fontRendererObj.drawString("+" + ((int)material.getDamageVsEntity() + 4) + " " + StatCollector.translateToLocal(LocalStrings.Synthesis_Attack_Damage), 28, 48, 0x004CFF);
 					}else{
-						fontRendererObj.drawString("Material", 28, 40, 0x004CFF);
+						fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Material), 28, 40, 0x004CFF);
 					}
 					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(result), resultXY, resultXY);
 
@@ -846,30 +930,34 @@ public class GuiSynthesis extends GuiContainer {
 					}else{
 						colour = 0xFF0000;
 					}
-					fontRendererObj.drawString("Required Materials", 30, 27, colour);
+					fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_RequiredMats), 30, 27, colour);
 					//Stuff displayed on the third tab
 				}else if(GuiSynthesis.ClickedTab3){
 					GL11.glColor3f(1, 1, 1);
 					GL11.glDisable(GL11.GL_LIGHTING);
 					if(isKeyblade){
-						fontRendererObj.drawSplitString("This keyblade has the enchantment Vanquish. It allows you to collect hearts from mobs when they are slain.", 30, 30, 120, 0x004CFF);
+						fontRendererObj.drawSplitString(StatCollector.translateToLocal(LocalStrings.Synthesis_Tab3_Attack), 30, 30, 120, 0x004CFF);
 					}else{
-						fontRendererObj.drawSplitString("This item is material used for crafting or another synthesis recipe.", 30, 30, 120, 0x004CFF);
+						fontRendererObj.drawSplitString(StatCollector.translateToLocal(LocalStrings.Synthesis_Tab3_Mat), 30, 30, 120, 0x004CFF);
 					}
 				}
 			}
 		}
 		if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && props.getMunny() >= cost){
 			hasItems = true;
-			SynthesizeText = "You have the materials and munny required to Synthesize";
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required1);
 			colour = 0x00B330;
+		}else if(props.getMunny() < cost && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6)){
+			hasItems = false;
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required4);
+			colour = 0xFF0000;
 		}else if(props.getMunny() < cost){
 			hasItems = false;
-			SynthesizeText = "You lack the required materials and munny to Synthesize";
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required2);
 			colour = 0xFF0000;
 		}else if(props.getMunny() >= cost){
 			hasItems = false;
-			SynthesizeText = "You lack the required materials to Synthesize";
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required3);
 			colour = 0xFF0000;
 		}
 
@@ -897,23 +985,33 @@ public class GuiSynthesis extends GuiContainer {
 			if(synthesis.getStackInSlot(0).getItem() == recipe){
 				GL11.glColor3f(1, 1, 1);
 				GL11.glDisable(GL11.GL_LIGHTING);
-				fontRendererObj.drawString("Cost: " + cost, 38, 5, 0xFFF000);
+				fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Cost) + ": " + cost, 38, 14, 0xFFF000);
 				
 				//Stuff displayed on the first tab
 				if(GuiSynthesis.ClickedTab1){
-					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7)){
-						SynthesizeText = "You have the materials required to Synthesize";
+					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && props.getMunny() >= cost){
+						hasItems = true;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required1);
 						colour = 0x00B330;
-					}else{
-						SynthesizeText = "You lack the required materials to Synthesize";
+					}else if(props.getMunny() < cost && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7)){
+						hasItems = false;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required4);
+						colour = 0xFF0000;
+					}else if(props.getMunny() < cost){
+						hasItems = false;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required2);
+						colour = 0xFF0000;
+					}else if(props.getMunny() >= cost){
+						hasItems = false;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required3);
 						colour = 0xFF0000;
 					}
 					fontRendererObj.drawSplitString(SynthesizeText, 28, 60, 120, colour);
 					fontRendererObj.drawSplitString(result.getItemStackDisplayName(new ItemStack(result)).replace(" Chain", "") , 46, 28, 120, 0x404040);
 					if(isKeyblade){
-						fontRendererObj.drawString("+" + ((int)material.getDamageVsEntity() + 4) + " Attack Damage", 28, 48, 0x004CFF);
+						fontRendererObj.drawString("+" + ((int)material.getDamageVsEntity() + 4) + " " + StatCollector.translateToLocal(LocalStrings.Synthesis_Attack_Damage), 28, 48, 0x004CFF);
 					}else{
-						fontRendererObj.drawString("Material", 28, 40, 0x004CFF);
+						fontRendererObj.drawString(LocalStrings.Synthesis_Material, 28, 40, 0x004CFF);
 					}
 					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(result), resultXY, resultXY);
 
@@ -933,26 +1031,34 @@ public class GuiSynthesis extends GuiContainer {
 					}else{
 						colour = 0xFF0000;
 					}
-					fontRendererObj.drawString("Required Materials", 30, 27, colour);
+					fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_RequiredMats), 30, 27, colour);
 					//Stuff displayed on the third tab
 				}else if(GuiSynthesis.ClickedTab3){
 					GL11.glColor3f(1, 1, 1);
 					GL11.glDisable(GL11.GL_LIGHTING);
 					if(isKeyblade){
-						fontRendererObj.drawSplitString("This keyblade has the enchantment Vanquish. It allows you to collect hearts from mobs when they are slain.", 30, 30, 120, 0x004CFF);
+						fontRendererObj.drawSplitString(LocalStrings.Synthesis_Tab3_Attack, 30, 30, 120, 0x004CFF);
 					}else{
-						fontRendererObj.drawSplitString("This item is material used for crafting or another synthesis recipe.", 30, 30, 120, 0x004CFF);
+						fontRendererObj.drawSplitString(LocalStrings.Synthesis_Tab3_Mat, 30, 30, 120, 0x004CFF);
 					}
 				}
 			}
 		}
-		if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7)){
+		if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && props.getMunny() >= cost){
 			hasItems = true;
-			SynthesizeText = "You have the materials required to Synthesize";
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required1);
 			colour = 0x00B330;
-		}else{
+		}else if(props.getMunny() < cost && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7)){
 			hasItems = false;
-			SynthesizeText = "You lack the required materials to Synthesize";
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required4);
+			colour = 0xFF0000;
+		}else if(props.getMunny() < cost){
+			hasItems = false;
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required2);
+			colour = 0xFF0000;
+		}else if(props.getMunny() >= cost){
+			hasItems = false;
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required3);
 			colour = 0xFF0000;
 		}
 
@@ -980,23 +1086,33 @@ public class GuiSynthesis extends GuiContainer {
 			if(synthesis.getStackInSlot(0).getItem() == recipe){
 				GL11.glColor3f(1, 1, 1);
 				GL11.glDisable(GL11.GL_LIGHTING);
-				fontRendererObj.drawString("Cost: " + cost, 38, 5, 0xFFF000);
+				fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Cost) + ": " + cost, 38, 14, 0xFFF000);
 				
 				//Stuff displayed on the first tab
 				if(GuiSynthesis.ClickedTab1){
-					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8)){
-						SynthesizeText = "You have the materials required to Synthesize";
+					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && props.getMunny() >= cost){
+						hasItems = true;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required1);
 						colour = 0x00B330;
-					}else{
-						SynthesizeText = "You lack the required materials to Synthesize";
+					}else if(props.getMunny() < cost && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8)){
+						hasItems = false;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required4);
+						colour = 0xFF0000;
+					}else if(props.getMunny() < cost){
+						hasItems = false;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required2);
+						colour = 0xFF0000;
+					}else if(props.getMunny() >= cost){
+						hasItems = false;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required3);
 						colour = 0xFF0000;
 					}
 					fontRendererObj.drawSplitString(SynthesizeText, 28, 60, 120, colour);
 					fontRendererObj.drawSplitString(result.getItemStackDisplayName(new ItemStack(result)).replace(" Chain", "") , 46, 28, 120, 0x404040);
 					if(isKeyblade){
-						fontRendererObj.drawString("+" + ((int)material.getDamageVsEntity() + 4) + " Attack Damage", 28, 48, 0x004CFF);
+						fontRendererObj.drawString("+" + ((int)material.getDamageVsEntity() + 4) + " " + StatCollector.translateToLocal(LocalStrings.Synthesis_Attack_Damage), 28, 48, 0x004CFF);
 					}else{
-						fontRendererObj.drawString("Material", 28, 40, 0x004CFF);
+						fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Material), 28, 40, 0x004CFF);
 					}
 					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(result), resultXY, resultXY);
 
@@ -1017,26 +1133,34 @@ public class GuiSynthesis extends GuiContainer {
 					}else{
 						colour = 0xFF0000;
 					}
-					fontRendererObj.drawString("Required Materials", 30, 27, colour);
+					fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_RequiredMats), 30, 27, colour);
 					//Stuff displayed on the third tab
 				}else if(GuiSynthesis.ClickedTab3){
 					GL11.glColor3f(1, 1, 1);
 					GL11.glDisable(GL11.GL_LIGHTING);
 					if(isKeyblade){
-						fontRendererObj.drawSplitString("This keyblade has the enchantment Vanquish. It allows you to collect hearts from mobs when they are slain.", 30, 30, 120, 0x004CFF);
+						fontRendererObj.drawSplitString(StatCollector.translateToLocal(LocalStrings.Synthesis_Tab3_Attack), 30, 30, 120, 0x004CFF);
 					}else{
-						fontRendererObj.drawSplitString("This item is material used for crafting or another synthesis recipe.", 30, 30, 120, 0x004CFF);
+						fontRendererObj.drawSplitString(StatCollector.translateToLocal(LocalStrings.Synthesis_Tab3_Mat), 30, 30, 120, 0x004CFF);
 					}
 				}
 			}
 		}
-		if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8)){
+		if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && props.getMunny() >= cost){
 			hasItems = true;
-			SynthesizeText = "You have the materials required to Synthesize";
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required1);
 			colour = 0x00B330;
-		}else{
+		}else if(props.getMunny() < cost && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8)){
 			hasItems = false;
-			SynthesizeText = "You lack the required materials to Synthesize";
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required4);
+			colour = 0xFF0000;
+		}else if(props.getMunny() < cost){
+			hasItems = false;
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required2);
+			colour = 0xFF0000;
+		}else if(props.getMunny() >= cost){
+			hasItems = false;
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required3);
 			colour = 0xFF0000;
 		}
 
@@ -1064,23 +1188,33 @@ public class GuiSynthesis extends GuiContainer {
 			if(synthesis.getStackInSlot(0).getItem() == recipe){
 				GL11.glColor3f(1, 1, 1);
 				GL11.glDisable(GL11.GL_LIGHTING);
-				fontRendererObj.drawString("Cost: " + cost, 38, 5, 0xFFF000);
+				fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Cost) + ": " + cost, 38, 14, 0xFFF000);
 
 				//Stuff displayed on the first tab
 				if(GuiSynthesis.ClickedTab1){
-					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item9)){
-						SynthesizeText = "You have the materials required to Synthesize";
+					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item9) && props.getMunny() >= cost){
+						hasItems = true;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required1);
 						colour = 0x00B330;
-					}else{
-						SynthesizeText = "You lack the required materials to Synthesize";
+					}else if(props.getMunny() < cost && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item9)){
+						hasItems = false;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required4);
+						colour = 0xFF0000;
+					}else if(props.getMunny() < cost){
+						hasItems = false;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required2);
+						colour = 0xFF0000;
+					}else if(props.getMunny() >= cost){
+						hasItems = false;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required3);
 						colour = 0xFF0000;
 					}
 					fontRendererObj.drawSplitString(SynthesizeText, 28, 60, 120, colour);
 					fontRendererObj.drawSplitString(result.getItemStackDisplayName(new ItemStack(result)).replace(" Chain", "") , 46, 28, 120, 0x404040);
 					if(isKeyblade){
-						fontRendererObj.drawString("+" + ((int)material.getDamageVsEntity() + 4) + " Attack Damage", 28, 48, 0x004CFF);
+						fontRendererObj.drawString("+" + ((int)material.getDamageVsEntity() + 4) + " " + StatCollector.translateToLocal(LocalStrings.Synthesis_Attack_Damage), 28, 48, 0x004CFF);
 					}else{
-						fontRendererObj.drawString("Material", 28, 40, 0x004CFF);
+						fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Material), 28, 40, 0x004CFF);
 					}
 					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(result), resultXY, resultXY);
 
@@ -1102,26 +1236,34 @@ public class GuiSynthesis extends GuiContainer {
 					}else{
 						colour = 0xFF0000;
 					}
-					fontRendererObj.drawString("Required Materials", 30, 27, colour);
+					fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_RequiredMats), 30, 27, colour);
 					//Stuff displayed on the third tab
 				}else if(GuiSynthesis.ClickedTab3){
 					GL11.glColor3f(1, 1, 1);
 					GL11.glDisable(GL11.GL_LIGHTING);
 					if(isKeyblade){
-						fontRendererObj.drawSplitString("This keyblade has the enchantment Vanquish. It allows you to collect hearts from mobs when they are slain.", 30, 30, 120, 0x004CFF);
+						fontRendererObj.drawSplitString(StatCollector.translateToLocal(LocalStrings.Synthesis_Tab3_Attack), 30, 30, 120, 0x004CFF);
 					}else{
-						fontRendererObj.drawSplitString("This item is material used for crafting or another synthesis recipe.", 30, 30, 120, 0x004CFF);
+						fontRendererObj.drawSplitString(StatCollector.translateToLocal(LocalStrings.Synthesis_Tab3_Mat), 30, 30, 120, 0x004CFF);
 					}
 				}
 			}
 		}
-		if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item9)){
+		if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item9) && props.getMunny() >= cost){
 			hasItems = true;
-			SynthesizeText = "You have the materials required to Synthesize";
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required1);
 			colour = 0x00B330;
-		}else{
+		}else if(props.getMunny() < cost && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item9)){
 			hasItems = false;
-			SynthesizeText = "You lack the required materials to Synthesize";
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required4);
+			colour = 0xFF0000;
+		}else if(props.getMunny() < cost){
+			hasItems = false;
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required2);
+			colour = 0xFF0000;
+		}else if(props.getMunny() >= cost){
+			hasItems = false;
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required3);
 			colour = 0xFF0000;
 		}
 
@@ -1149,23 +1291,33 @@ public class GuiSynthesis extends GuiContainer {
 			if(synthesis.getStackInSlot(0).getItem() == recipe){
 				GL11.glColor3f(1, 1, 1);
 				GL11.glDisable(GL11.GL_LIGHTING);
-				fontRendererObj.drawString("Cost: " + cost, 38, 5, 0xFFF000);
+				fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Cost) + ": " + cost, 38, 14, 0xFFF000);
 
 				//Stuff displayed on the first tab
 				if(GuiSynthesis.ClickedTab1){
-					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item9) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item10)){
-						SynthesizeText = "You have the materials required to Synthesize";
+					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item9) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item10) && props.getMunny() >= cost){
+						hasItems = true;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required1);
 						colour = 0x00B330;
-					}else{
-						SynthesizeText = "You lack the required materials to Synthesize";
+					}else if(props.getMunny() < cost && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item9) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item10)){
+						hasItems = false;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required4);
+						colour = 0xFF0000;
+					}else if(props.getMunny() < cost){
+						hasItems = false;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required2);
+						colour = 0xFF0000;
+					}else if(props.getMunny() >= cost){
+						hasItems = false;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required3);
 						colour = 0xFF0000;
 					}
 					fontRendererObj.drawSplitString(SynthesizeText, 28, 60, 120, colour);
 					fontRendererObj.drawSplitString(result.getItemStackDisplayName(new ItemStack(result)).replace(" Chain", "") , 46, 28, 120, 0x404040);
 					if(isKeyblade){
-						fontRendererObj.drawString("+" + ((int)material.getDamageVsEntity() + 4) + " Attack Damage", 28, 48, 0x004CFF);
+						fontRendererObj.drawString("+" + ((int)material.getDamageVsEntity() + 4) + " " + StatCollector.translateToLocal(LocalStrings.Synthesis_Attack_Damage), 28, 48, 0x004CFF);
 					}else{
-						fontRendererObj.drawString("Material", 28, 40, 0x004CFF);
+						fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Material), 28, 40, 0x004CFF);
 					}
 					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(result), resultXY, resultXY);
 
@@ -1188,26 +1340,34 @@ public class GuiSynthesis extends GuiContainer {
 					}else{
 						colour = 0xFF0000;
 					}
-					fontRendererObj.drawString("Required Materials", 30, 27, colour);
+					fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_RequiredMats), 30, 27, colour);
 					//Stuff displayed on the third tab
 				}else if(GuiSynthesis.ClickedTab3){
 					GL11.glColor3f(1, 1, 1);
 					GL11.glDisable(GL11.GL_LIGHTING);
 					if(isKeyblade){
-						fontRendererObj.drawSplitString("This keyblade has the enchantment Vanquish. It allows you to collect hearts from mobs when they are slain.", 30, 30, 120, 0x004CFF);
+						fontRendererObj.drawSplitString(StatCollector.translateToLocal(LocalStrings.Synthesis_Tab3_Attack), 30, 30, 120, 0x004CFF);
 					}else{
-						fontRendererObj.drawSplitString("This item is material used for crafting or another synthesis recipe.", 30, 30, 120, 0x004CFF);
+						fontRendererObj.drawSplitString(StatCollector.translateToLocal(LocalStrings.Synthesis_Tab3_Mat), 30, 30, 120, 0x004CFF);
 					}
 				}
 			}
 		}
-		if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item9) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item10)){
+		if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item9) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item10) && props.getMunny() >= cost){
 			hasItems = true;
-			SynthesizeText = "You have the materials required to Synthesize";
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required1);
 			colour = 0x00B330;
-		}else{
+		}else if(props.getMunny() < cost && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item9) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item10)){
 			hasItems = false;
-			SynthesizeText = "You lack the required materials to Synthesize";
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required4);
+			colour = 0xFF0000;
+		}else if(props.getMunny() < cost){
+			hasItems = false;
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required2);
+			colour = 0xFF0000;
+		}else if(props.getMunny() >= cost){
+			hasItems = false;
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required3);
 			colour = 0xFF0000;
 		}
 
@@ -1235,23 +1395,33 @@ public class GuiSynthesis extends GuiContainer {
 			if(synthesis.getStackInSlot(0).getItem() == recipe){
 				GL11.glColor3f(1, 1, 1);
 				GL11.glDisable(GL11.GL_LIGHTING);
-				fontRendererObj.drawString("Cost: " + cost, 38, 5, 0xFFF000);
+				fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Cost) + ": " + cost, 38, 14, 0xFFF000);
 
 				//Stuff displayed on the first tab
 				if(GuiSynthesis.ClickedTab1){
-					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item9) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item10) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item11)){
-						SynthesizeText = "You have the materials required to Synthesize";
+					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item9) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item10) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item11) && props.getMunny() >= cost){
+						hasItems = true;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required1);
 						colour = 0x00B330;
-					}else{
-						SynthesizeText = "You lack the required materials to Synthesize";
+					}else if(props.getMunny() < cost && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item9) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item10) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item11)){
+						hasItems = false;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required4);
+						colour = 0xFF0000;
+					}else if(props.getMunny() < cost){
+						hasItems = false;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required2);
+						colour = 0xFF0000;
+					}else if(props.getMunny() >= cost){
+						hasItems = false;
+						SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required3);
 						colour = 0xFF0000;
 					}
 					fontRendererObj.drawSplitString(SynthesizeText, 28, 60, 120, colour);
 					fontRendererObj.drawSplitString(result.getItemStackDisplayName(new ItemStack(result)).replace(" Chain", "") , 46, 28, 120, 0x404040);
 					if(isKeyblade){
-						fontRendererObj.drawString("+" + ((int)material.getDamageVsEntity() + 4) + " Attack Damage", 28, 48, 0x004CFF);
+						fontRendererObj.drawString("+" + ((int)material.getDamageVsEntity() + 4) + " " + StatCollector.translateToLocal(LocalStrings.Synthesis_Attack_Damage), 28, 48, 0x004CFF);
 					}else{
-						fontRendererObj.drawString("Material", 28, 40, 0x004CFF);
+						fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Material), 28, 40, 0x004CFF);
 					}
 					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(result), resultXY, resultXY);
 
@@ -1275,26 +1445,34 @@ public class GuiSynthesis extends GuiContainer {
 					}else{
 						colour = 0xFF0000;
 					}
-					fontRendererObj.drawString("Required Materials", 30, 27, colour);
+					fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_RequiredMats), 30, 27, colour);
 					//Stuff displayed on the third tab
 				}else if(GuiSynthesis.ClickedTab3){
 					GL11.glColor3f(1, 1, 1);
 					GL11.glDisable(GL11.GL_LIGHTING);
 					if(isKeyblade){
-						fontRendererObj.drawSplitString("This keyblade has the enchantment Vanquish. It allows you to collect hearts from mobs when they are slain.", 30, 30, 120, 0x004CFF);
+						fontRendererObj.drawSplitString(StatCollector.translateToLocal(LocalStrings.Synthesis_Tab3_Attack), 30, 30, 120, 0x004CFF);
 					}else{
-						fontRendererObj.drawSplitString("This item is material used for crafting or another synthesis recipe.", 30, 30, 120, 0x004CFF);
+						fontRendererObj.drawSplitString(StatCollector.translateToLocal(LocalStrings.Synthesis_Tab3_Mat), 30, 30, 120, 0x004CFF);
 					}
 				}
 			}
 		}
-		if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item9) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item10) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item11)){
+		if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item9) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item10) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item11) && props.getMunny() >= cost){
 			hasItems = true;
-			SynthesizeText = "You have the materials required to Synthesize";
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required1);
 			colour = 0x00B330;
-		}else{
+		}else if(props.getMunny() < cost && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item9) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item10) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item11)){
 			hasItems = false;
-			SynthesizeText = "You lack the required materials to Synthesize";
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required4);
+			colour = 0xFF0000;
+		}else if(props.getMunny() < cost){
+			hasItems = false;
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required2);
+			colour = 0xFF0000;
+		}else if(props.getMunny() >= cost){
+			hasItems = false;
+			SynthesizeText = StatCollector.translateToLocal(LocalStrings.Synthesis_Required3);
 			colour = 0xFF0000;
 		}
 

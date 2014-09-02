@@ -1,5 +1,6 @@
 package wehavecookies56.kk.core.proxies;
 
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.MinecraftForgeClient;
 import wehavecookies56.kk.client.KeyBind;
 import wehavecookies56.kk.client.render.BlockRenderBlastBlox;
@@ -21,6 +22,7 @@ import wehavecookies56.kk.client.render.ItemRenderSkysplitter;
 import wehavecookies56.kk.client.render.ItemRenderSoulEater;
 import wehavecookies56.kk.client.render.ItemRenderStarLight;
 import wehavecookies56.kk.client.render.ItemRenderTotalEclipse;
+import wehavecookies56.kk.client.render.ItemRenderVoidedKnowledge;
 import wehavecookies56.kk.client.render.ItemRenderWaywardWind;
 import wehavecookies56.kk.client.render.ItemRenderZeroOne;
 import wehavecookies56.kk.entities.EntityBlastBlox;
@@ -33,6 +35,7 @@ import com.jadarstudios.developercapes.DevCapes;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 //import com.jadarstudios.developercapes.DevCapesUtil;
+import cpw.mods.fml.common.registry.VillagerRegistry;
 
 
 public class ClientProxy extends CommonProxy {
@@ -58,13 +61,16 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(AddedItems.Interdiction, new ItemRenderInterdiction());
 		MinecraftForgeClient.registerItemRenderer(AddedItems.EternalFlames, new ItemRenderEternalFlames());
 		MinecraftForgeClient.registerItemRenderer(AddedItems.SkySplitter, new ItemRenderSkysplitter());
+		MinecraftForgeClient.registerItemRenderer(AddedItems.VoidedKnowledge, new ItemRenderVoidedKnowledge());
 
 		//Entities
 		RenderingRegistry.registerEntityRenderingHandler(EntityEternalFlames.class, new EntityRenderEternalFlames());
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityBlastBlox.class, new BlockRenderBlastBlox());
 		RenderingRegistry.registerEntityRenderingHandler(EntityEternalFlamesProjectile.class, new EntityRenderEternalFlamesProjectile(AddedItems.EternalFlames));
-				
+        ResourceLocation villagerTexture = new ResourceLocation("kk", "textures/entities/mobs/knowledgeVillager.png");
+		VillagerRegistry.instance().registerVillagerSkin(20, villagerTexture);
+        VillagerRegistry.getVillagerSkin(10, villagerTexture);
 	}
 
 	@Override

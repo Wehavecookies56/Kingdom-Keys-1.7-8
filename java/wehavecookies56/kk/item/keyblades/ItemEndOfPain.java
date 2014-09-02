@@ -6,6 +6,7 @@ import mods.battlegear2.api.weapons.IBattlegearWeapon;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -44,8 +45,7 @@ public class ItemEndOfPain extends ItemSword implements IBattlegearWeapon{
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack itemStack, EntityPlayer player, List dataList, boolean bool){
     	dataList.add("Kingdom Hearts Dream Drop Distance");
-    }
-    
+    } 
     
     public void onUpdate(ItemStack itemstack, World par2World, Entity par3Entity, int par4, boolean par5)
     {

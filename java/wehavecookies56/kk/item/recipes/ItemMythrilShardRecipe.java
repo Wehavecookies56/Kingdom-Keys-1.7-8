@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import wehavecookies56.kk.item.ItemKingdomKeys;
@@ -23,6 +24,6 @@ public class ItemMythrilShardRecipe extends ItemKingdomKeys {
 	
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack itemStack, EntityPlayer player, List dataList, boolean bool){
-		dataList.add(LocalStrings.Monochrome);
+		dataList.add(StatCollector.translateToLocal(LocalStrings.MythrilShard));
 	}
 }
