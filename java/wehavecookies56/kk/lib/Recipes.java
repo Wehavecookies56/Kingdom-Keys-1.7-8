@@ -16,6 +16,7 @@ public class Recipes {
 		ItemStack blueDye = new ItemStack(Items.dye, 1, 4);
 		ItemStack blackDye = new ItemStack(Items.dye, 1, 0);
 		ItemStack yellowDye = new ItemStack(Items.dye, 1, 11);
+		
 		if(ConfigBooleans.heartRecipe == false){
 			GameRegistry.addRecipe(new ItemStack(AddedItems.Heart), new Object[]{
 				" D ",
@@ -137,34 +138,131 @@ public class Recipes {
 			"MCM",
 			"H5N",
 			"OHO",
-			'M', AddedBlocks.MetalBlox, 'C', Blocks.crafting_table, 'H', AddedBlocks.HardBlox, '5', AddedItems.Orichalcum, 'N', AddedBlocks.NormalBlox, 'O', AddedItems.HP
+			'M', AddedBlocks.MetalBlox, 'C', Blocks.crafting_table, 'H', AddedBlocks.HardBlox, '5', Items.diamond, 'N', AddedBlocks.NormalBlox, 'O', AddedItems.HP
 		});
+		
+		GameRegistry.addRecipe(new ItemStack(AddedItems.DarkKnowledge), new Object[]{		
+			"BDB",		
+			"DOD",		
+			"BDB",		
+			'B', Items.book, 'D', AddedItems.DarkCrystal, 'O', Blocks.obsidian		
+		});		
+				
+		GameRegistry.addRecipe(new ItemStack(AddedItems.VoidedKnowledge), new Object[]{		
+			"ODO",		
+			"DKD",		
+			"ODO",		
+			'O', Blocks.obsidian, 'D', AddedItems.DarkMatter, 'K', AddedItems.DarkKnowledge		
+		});		
+				
+		GameRegistry.addRecipe(new ItemStack(AddedItems.KeybladeVHelm), new Object[]{		
+			"POP",		
+			"PKP",		
+			'P', AddedItems.PureHeart, 'O', AddedItems.Orichalcum, 'K', AddedItems.KingdomHearts		
+		});		
+				
+		GameRegistry.addRecipe(new ItemStack(AddedItems.KeybladeVChest), new Object[]{		
+			"POP",		
+			"PKP",		
+			"PKP",		
+			'P', AddedItems.PureHeart, 'O', AddedItems.OrichalcumPlus, 'K', AddedItems.KingdomHearts		
+		});		
+				
+		GameRegistry.addRecipe(new ItemStack(AddedItems.KeybladeVLegs), new Object[]{		
+			"PKP",		
+			"POP",		
+			"P P",		
+			'P', AddedItems.PureHeart, 'O', AddedItems.OrichalcumPlus, 'K', AddedItems.KingdomHearts		
+		});		
+				
+		GameRegistry.addRecipe(new ItemStack(AddedItems.KeybladeVBoots), new Object[]{		
+			"P P",		
+			"POP",		
+			'P', AddedItems.PureHeart, 'O', AddedItems.Orichalcum		
+		});		
+				
+		GameRegistry.addRecipe(new ItemStack(AddedItems.KeybladeAHelm), new Object[]{		
+			"POP",		
+			"HKH",		
+			'P', AddedItems.PureHeart, 'O', AddedItems.Orichalcum, 'K', AddedItems.KingdomHearts, 'H', AddedItems.Heart		
+		});		
+				
+		GameRegistry.addRecipe(new ItemStack(AddedItems.KeybladeAChest), new Object[]{		
+			"HOH",		
+			"PKP",		
+			"PKP",		
+			'P', AddedItems.PureHeart, 'O', AddedItems.OrichalcumPlus, 'K', AddedItems.KingdomHearts, 'H', AddedItems.Heart		
+		});		
+				
+		GameRegistry.addRecipe(new ItemStack(AddedItems.KeybladeALegs), new Object[]{		
+			"HKH",		
+			"POP",		
+			"P P",		
+			'P', AddedItems.PureHeart, 'O', AddedItems.OrichalcumPlus, 'K', AddedItems.KingdomHearts, 'H', AddedItems.Heart		
+		});		
+				
+		GameRegistry.addRecipe(new ItemStack(AddedItems.KeybladeABoots), new Object[]{		
+			"H H",		
+			"POP",		
+			'P', AddedItems.PureHeart, 'O', AddedItems.Orichalcum, 'H', AddedItems.Heart		
+		});		
+				
+		GameRegistry.addRecipe(new ItemStack(AddedItems.KeybladeTHelm), new Object[]{		
+			"DOD",		
+			"DKD",		
+			'D', AddedItems.DarkHeart, 'O', AddedItems.Orichalcum, 'K', AddedItems.KingdomHearts		
+		});		
+				
+		GameRegistry.addRecipe(new ItemStack(AddedItems.KeybladeTChest), new Object[]{		
+			"DOD",		
+			"DKD",		
+			"DKD",		
+			'D', AddedItems.DarkHeart, 'O', AddedItems.OrichalcumPlus, 'K', AddedItems.KingdomHearts		
+		});		
+				
+		GameRegistry.addRecipe(new ItemStack(AddedItems.KeybladeTLegs), new Object[]{		
+			"DKD",		
+			"DOD",		
+			"D D",		
+			'D', AddedItems.DarkHeart, 'O', AddedItems.OrichalcumPlus, 'K', AddedItems.KingdomHearts		
+		});		
+				
+		GameRegistry.addRecipe(new ItemStack(AddedItems.KeybladeTBoots), new Object[]{		
+			"D D",		
+			"DOD",		
+			'D', AddedItems.DarkHeart, 'O', AddedItems.Orichalcum		
+		});		
+				
+		GameRegistry.addRecipe(new ItemStack(AddedItems.KeybladeEHelm), new Object[]{		
+			"DOD",		
+			"PKP",		
+			'D', AddedItems.DarkHeart, 'O', AddedItems.OrichalcumPlus, 'K', AddedItems.KingdomHearts, 'P', AddedItems.PureHeart		
+		});		
+				
+		GameRegistry.addRecipe(new ItemStack(AddedItems.KeybladeEChest), new Object[]{		
+			"DOD",		
+			"PKP",		
+			"PKP",		
+			'D', AddedItems.DarkHeart, 'O', AddedItems.OrichalcumPlus, 'K', AddedItems.KingdomHearts, 'P', AddedItems.PureHeart		
+		});		
+				
+		GameRegistry.addRecipe(new ItemStack(AddedItems.KeybladeELegs), new Object[]{		
+			"DKD",		
+			"POP",		
+			"P P",		
+			'D', AddedItems.DarkHeart, 'O', AddedItems.OrichalcumPlus, 'K', AddedItems.KingdomHearts, 'P', AddedItems.PureHeart 		
+		});		
+				
+		GameRegistry.addRecipe(new ItemStack(AddedItems.KeybladeEBoots), new Object[]{		
+			"D D",		
+			"POP",		
+			'D', AddedItems.DarkHeart, 'O', AddedItems.Orichalcum, 'P', AddedItems.PureHeart		
+ 		});
+			
 	}
 	public static void initShapelessRecipes(){
-		GameRegistry.addShapelessRecipe(new ItemStack(AddedItems.Munny5), new ItemStack(AddedItems.Munny1), new ItemStack(AddedItems.Munny1), new ItemStack(AddedItems.Munny1), new ItemStack(AddedItems.Munny1), new ItemStack(AddedItems.Munny1));
-		GameRegistry.addShapelessRecipe(new ItemStack(AddedItems.Munny20), new ItemStack(AddedItems.Munny5), new ItemStack(AddedItems.Munny5), new ItemStack(AddedItems.Munny5), new ItemStack(AddedItems.Munny5));
-		GameRegistry.addShapelessRecipe(new ItemStack(AddedItems.Munny50), new ItemStack(AddedItems.Munny10), new ItemStack(AddedItems.Munny10), new ItemStack(AddedItems.Munny10, 1), new ItemStack(AddedItems.Munny10, 1), new ItemStack(AddedItems.Munny10, 1));
-		GameRegistry.addShapelessRecipe(new ItemStack(AddedItems.Munny10), new ItemStack(AddedItems.Munny5), new ItemStack(AddedItems.Munny5));
-		GameRegistry.addShapelessRecipe(new ItemStack(AddedItems.Munny20), new ItemStack(AddedItems.Munny10), new ItemStack(AddedItems.Munny10));
-		GameRegistry.addShapelessRecipe(new ItemStack(AddedItems.Munny50), new ItemStack(AddedItems.Munny20), new ItemStack(AddedItems.Munny20), new ItemStack(AddedItems.Munny10));
-		GameRegistry.addShapelessRecipe(new ItemStack(AddedItems.Munny100), new ItemStack(AddedItems.Munny50), new ItemStack(AddedItems.Munny50));
-		GameRegistry.addShapelessRecipe(new ItemStack(AddedItems.Munny100), new ItemStack(AddedItems.Munny20), new ItemStack(AddedItems.Munny20), new ItemStack(AddedItems.Munny20), new ItemStack(AddedItems.Munny20), new ItemStack(AddedItems.Munny20));
-		GameRegistry.addShapelessRecipe(new ItemStack(AddedItems.Munny200), new ItemStack(AddedItems.Munny100), new ItemStack(AddedItems.Munny100));
-		GameRegistry.addShapelessRecipe(new ItemStack(AddedItems.Munny200), new ItemStack(AddedItems.Munny50), new ItemStack(AddedItems.Munny50), new ItemStack(AddedItems.Munny50), new ItemStack(AddedItems.Munny50));
-		GameRegistry.addShapelessRecipe(new ItemStack(AddedItems.Munny500), new ItemStack(AddedItems.Munny100), new ItemStack(AddedItems.Munny100), new ItemStack(AddedItems.Munny100), new ItemStack(AddedItems.Munny100), new ItemStack(AddedItems.Munny100));
-		GameRegistry.addShapelessRecipe(new ItemStack(AddedItems.Munny800), new ItemStack(AddedItems.Munny200), new ItemStack(AddedItems.Munny200), new ItemStack(AddedItems.Munny200), new ItemStack(AddedItems.Munny200));
-		GameRegistry.addShapelessRecipe(new ItemStack(AddedItems.Munny1000), new ItemStack(AddedItems.Munny200), new ItemStack(AddedItems.Munny200), new ItemStack(AddedItems.Munny200), new ItemStack(AddedItems.Munny200), new ItemStack(AddedItems.Munny200));
-		GameRegistry.addShapelessRecipe(new ItemStack(AddedItems.Munny1200), new ItemStack(AddedItems.Munny1000), new ItemStack(AddedItems.Munny200));
-		GameRegistry.addShapelessRecipe(new ItemStack(AddedItems.Munny1500), new ItemStack(AddedItems.Munny1000), new ItemStack(AddedItems.Munny500));
-		GameRegistry.addShapelessRecipe(new ItemStack(AddedItems.Munny1800), new ItemStack(AddedItems.Munny1000), new ItemStack(AddedItems.Munny800));
-		GameRegistry.addShapelessRecipe(new ItemStack(AddedItems.Munny2000), new ItemStack(AddedItems.Munny1000), new ItemStack(AddedItems.Munny1000));
-		GameRegistry.addShapelessRecipe(new ItemStack(AddedItems.Munny3000), new ItemStack(AddedItems.Munny2000), new ItemStack(AddedItems.Munny1000));
-		GameRegistry.addShapelessRecipe(new ItemStack(AddedItems.Munny3000), new ItemStack(AddedItems.Munny1500), new ItemStack(AddedItems.Munny1500));
-		GameRegistry.addShapelessRecipe(new ItemStack(AddedItems.Munny4000), new ItemStack(AddedItems.Munny3000), new ItemStack(AddedItems.Munny1000));
-		GameRegistry.addShapelessRecipe(new ItemStack(AddedItems.Munny5000), new ItemStack(AddedItems.Munny4000), new ItemStack(AddedItems.Munny1000));
-		GameRegistry.addShapelessRecipe(new ItemStack(AddedItems.Munny5000), new ItemStack(AddedItems.Munny3000), new ItemStack(AddedItems.Munny2000));
-		GameRegistry.addShapelessRecipe(new ItemStack(AddedItems.Munny6000), new ItemStack(AddedItems.Munny5000), new ItemStack(AddedItems.Munny1000));
-		GameRegistry.addShapelessRecipe(new ItemStack(AddedItems.Munny6000), new ItemStack(AddedItems.Munny3000), new ItemStack(AddedItems.Munny3000));
+	
+		
 		GameRegistry.addShapelessRecipe(new ItemStack(AddedItems.KeybladeVHelm), new ItemStack(AddedItems.KeybladeVHelm), new ItemStack(AddedItems.OrichalcumPlus));
 		GameRegistry.addShapelessRecipe(new ItemStack(AddedItems.KeybladeVChest), new ItemStack(AddedItems.KeybladeVChest), new ItemStack(AddedItems.OrichalcumPlus));
 		GameRegistry.addShapelessRecipe(new ItemStack(AddedItems.KeybladeVLegs), new ItemStack(AddedItems.KeybladeVLegs), new ItemStack(AddedItems.OrichalcumPlus));
