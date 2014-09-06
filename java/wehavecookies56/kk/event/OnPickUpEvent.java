@@ -2,7 +2,6 @@ package wehavecookies56.kk.event;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.StatCollector;
 import wehavecookies56.kk.achievements.AddedAchievments;
 import wehavecookies56.kk.block.AddedBlocks;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyMunny;
@@ -19,8 +18,26 @@ public class OnPickUpEvent {
 	@SubscribeEvent
 	public void onPickUp(PlayerEvent.ItemPickupEvent event){
 		EntityPropertyMunny munny = EntityPropertyMunny.get((EntityPlayer) event.player);
+		//Bug Blox Achievments
 		if(Block.getBlockFromItem(event.pickedUp.getEntityItem().getItem()).equals(AddedBlocks.NormalBlox)){
 			event.player.addStat(AddedAchievments.bugBlox, 1);
+		}else if(Block.getBlockFromItem(event.pickedUp.getEntityItem().getItem()).equals(AddedBlocks.HardBlox)){
+			event.player.addStat(AddedAchievments.bugBlox, 1);
+		}else if(Block.getBlockFromItem(event.pickedUp.getEntityItem().getItem()).equals(AddedBlocks.MetalBlox)){
+			event.player.addStat(AddedAchievments.bugBlox, 1);
+		}else if(Block.getBlockFromItem(event.pickedUp.getEntityItem().getItem()).equals(AddedBlocks.HardBlox)){
+			event.player.addStat(AddedAchievments.bugBlox, 1);
+		}else if(Block.getBlockFromItem(event.pickedUp.getEntityItem().getItem()).equals(AddedBlocks.HardBlox)){
+			event.player.addStat(AddedAchievments.bugBlox, 1);
+		}else if(Block.getBlockFromItem(event.pickedUp.getEntityItem().getItem()).equals(AddedBlocks.DangerBlox)){
+			event.player.addStat(AddedAchievments.bugBlox, 1);
+		}else if(Block.getBlockFromItem(event.pickedUp.getEntityItem().getItem()).equals(AddedBlocks.BounceBlox)){
+			event.player.addStat(AddedAchievments.bugBlox, 1);
+		}else if(Block.getBlockFromItem(event.pickedUp.getEntityItem().getItem()).equals(AddedBlocks.PrizeBlox)){
+			event.player.addStat(AddedAchievments.bugBlox, 1);
+		}else if(Block.getBlockFromItem(event.pickedUp.getEntityItem().getItem()).equals(AddedBlocks.RarePrizeBlox)){
+			event.player.addStat(AddedAchievments.bugBlox, 1);
+			
 		}else if(event.pickedUp.getEntityItem().getItem().equals(AddedItems.Munny1)){
 			munny.addMunny(1);
 			event.player.inventory.consumeInventoryItem(AddedItems.Munny1);
@@ -75,10 +92,6 @@ public class OnPickUpEvent {
 		}else if(event.pickedUp.getEntityItem().getItem().equals(AddedItems.Munny1200)){
 			munny.addMunny(1200);
 			event.player.inventory.consumeInventoryItem(AddedItems.Munny1200);
-		}else if(event.pickedUp.getEntityItem().getItem().equals(AddedItems.Orichalcum)){
-			event.player.addStat(AddedAchievments.orichalcum, 1);
-		}else if(event.pickedUp.getEntityItem().getItem().equals(AddedItems.OrichalcumPlus)){
-			event.player.addStat(AddedAchievments.orichalcumPlus, 1);
 		}
 	}
 }
