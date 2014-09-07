@@ -79,14 +79,18 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 
 @Mod(name = Reference.MOD_NAME, modid = Reference.MOD_ID, version = Reference.MOD_VER, guiFactory = "wehavecookies56.kk.client.gui.KingdomKeysModGuiFactory") 
-
+/*
+ * TODO Clean up this file
+ * TODO Add more config options
+ * TODO Move some stuff to other files to reduce size
+ */
 public class KingdomKeys {
 
 	public static DamageSource causeChakramDamage(EntityEternalFlames par0EntityArrow, Entity par1Entity) {
         return (new EntityDamageSourceIndirect("chakram", par0EntityArrow, par1Entity)).setProjectile();
     }
 	
-    static Logger logger = FMLLog.getLogger();
+    public static Logger logger = FMLLog.getLogger();
     
 	//World gen
 	WorldGenBlox worldGen = new WorldGenBlox();
@@ -227,6 +231,7 @@ public class KingdomKeys {
     	network.initialise();
     	SynthesisRecipes.initSynthesisRecipes();
     	logger.info("Registered " + RecipeHandler.getTotalRegistered() + " Synthesis recipes");
+    	RecipeHandler.iterateRecipes();
         AddedAchievments.initAchievements();
         logger.info(Reference.MOD_NAME + ": Registered Added Achievements");
         MinecraftForge.EVENT_BUS.register(new HeartDrops());

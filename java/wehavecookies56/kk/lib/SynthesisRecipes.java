@@ -16,6 +16,6 @@ public class SynthesisRecipes {
 	public static void initSynthesisRecipes(){
 		recipes.registerRecipe(AddedItems.AbaddonPlasma.getUnlocalizedName().toString(), 
 				new Recipe(RecipeType.ATTACK, AddedItems.K62r, AddedItems.AbaddonPlasmaChain, 1050, 
-					materials = new ItemStack[]{new ItemStack(AddedItems.Orichalcum, 1, 0)}));
+					materials = new ItemStack[]{new ItemStack(AddedItems.Orichalcum, 2, 0)}));
 	}
 }
