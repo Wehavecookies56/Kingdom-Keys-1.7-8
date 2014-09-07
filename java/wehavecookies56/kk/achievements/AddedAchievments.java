@@ -13,6 +13,7 @@ public class AddedAchievments {
 	public static Achievement kingdomKey;
 	public static Achievement orichalcum;
 	public static Achievement orichalcumPlus;
+	public static Achievement munny;
 	public static AchievementPage kingdomKeysAchievement;
 	
 	public static void initAchievements(){
@@ -23,9 +24,10 @@ public class AddedAchievments {
 		kingdomKey = new Achievement("achievement.kingdomKey", "kingdomKey", 3, -2, AddedItems.KingdomKey, recipe).setSpecial().registerStat();
 		orichalcum = new Achievement("achievement.orichalcum", "orichalcum", -2, 3, AddedItems.Orichalcum, (Achievement)null).initIndependentStat().registerStat();
 		orichalcumPlus = new Achievement("achievement.orichalcumPlus", "orichalcumPlus", -3, 3, AddedItems.OrichalcumPlus, orichalcum).setSpecial().registerStat();
+		munny = new Achievement("achievement.munny", "munny", 4,3, AddedItems.Munny1, (Achievement)null).registerStat();
 
 		
-		AchievementPage.registerAchievementPage(kingdomKeysAchievement = new AchievementPage("Kingdom Keys", new Achievement[]{bugBlox, recipe, kingdomKey}));
+		AchievementPage.registerAchievementPage(kingdomKeysAchievement = new AchievementPage("Kingdom Keys", new Achievement[]{bugBlox, recipe, kingdomKey, orichalcum, orichalcumPlus, munny}));
 	}
 
 }

@@ -1,5 +1,6 @@
 package wehavecookies56.kk.entities;
 
+import wehavecookies56.kk.client.render.EntityRenderEternalFlamesProjectile;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.DamageSource;
@@ -19,10 +20,22 @@ public class EntityEternalFlamesProjectile extends EntityThrowable{
 	public EntityEternalFlamesProjectile(World world, double x, double y, double z) {
 		super(world, x, y, z);
 	}
-
-	/**
-	 * Called when this EntityThrowable hits a block or entity.
-	 */
+	
+	@Override
+	protected float getGravityVelocity() {
+		return 0.0F;
+	}
+		
+	@Override
+	public void onUpdate() {
+		int rotation = 0;
+		this.worldObj.spawnParticle("flame", this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
+		this.rotationYaw = (rotation + 1) % 360;
+		if(ticksExisted > 60){
+			setDead();
+		}
+		super.onUpdate();
+	}
 	@Override
 	protected void onImpact(MovingObjectPosition mop) {
 		if (mop.entityHit != null) {

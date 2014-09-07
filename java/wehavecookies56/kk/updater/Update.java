@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
+import wehavecookies56.kk.lib.ConfigBooleans;
 import wehavecookies56.kk.lib.Reference;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
@@ -22,20 +23,22 @@ public class Update
 	
 	@SubscribeEvent
 	public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) throws MalformedURLException, IOException {
-		if(isUpdateAvailable()){
-		BufferedReader versionFile = new BufferedReader(new InputStreamReader(new URL("https://raw.github.com/Wehavecookies56/Kingdom-Keys/master/Version.txt").openStream()));
+		if(ConfigBooleans.enableUpdateCheck && isUpdateAvailable()){
+		BufferedReader versionFile = new BufferedReader(new InputStreamReader(new URL("https://raw.github.com/Wehavecookies56/Kingdom-Keys-1.7-/master/Version.txt").openStream()));
 		String curVersion = versionFile.readLine();
 		event.player.addChatMessage(new ChatComponentText("["+EnumChatFormatting.RED +"Kingdom Keys"+EnumChatFormatting.RESET+"] An Update is available for this mod. Version " + curVersion + " Check http://goo.gl/40N4TP for more info."));
-		}else{
+		}else if(ConfigBooleans.enableUpdateCheck){
 			event.player.addChatMessage(new ChatComponentText("["+EnumChatFormatting.RED +"Kingdom Keys"+EnumChatFormatting.RESET+"] This mod is up to date"));
+		}else if(!ConfigBooleans.enableUpdateCheck){
+			event.player.addChatMessage(new ChatComponentText("["+EnumChatFormatting.RED +"Kingdom Keys"+EnumChatFormatting.RESET+"] The update checker is not enabled"));
 		}
 	}
 	
 	public static boolean isUpdateAvailable() throws IOException, MalformedURLException {
-		BufferedReader versionFile = new BufferedReader(new InputStreamReader(new URL("https://raw.github.com/Wehavecookies56/Kingdom-Keys/master/Version.txt").openStream()));
+		BufferedReader versionFile = new BufferedReader(new InputStreamReader(new URL("https://raw.github.com/Wehavecookies56/Kingdom-Keys-1.7-/master/Version.txt").openStream()));
 		String curVersion = versionFile.readLine();
 		
-		versionFile.close(); // YOU DONT NEED THE READER ANYMORE
+		versionFile.close();
 
 		currentVersion = Reference.MOD_VER;
 		if (!curVersion.contains(currentVersion)) {

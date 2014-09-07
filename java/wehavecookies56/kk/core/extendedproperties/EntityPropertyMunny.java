@@ -15,7 +15,8 @@ public class EntityPropertyMunny implements IExtendedEntityProperties {
 	public final static String EXT_PROP_NAME = "PlayerMunnyKK";
 	private final EntityPlayer player;
 	
-	private int currentMunny, maxMunny;
+	private int currentMunny;
+	public static int maxMunny;
 	
 	public static final int MUNNY_WATCHER = 20;
 	
@@ -97,8 +98,6 @@ public class EntityPropertyMunny implements IExtendedEntityProperties {
 		EntityPropertyMunny playerData = EntityPropertyMunny.get(player);
 		NBTTagCompound savedData = CommonProxy.getEntityData(getSaveKey(player));
 		if (savedData != null) { playerData.loadNBTData(savedData); }
-		IMessage packet = new SyncPlayerPropsPacket(player);
-		KingdomKeys.network.sendToServer(packet);
 	}
 	
 	private static final String getSaveKey(EntityPlayer player) {

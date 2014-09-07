@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
@@ -19,11 +17,11 @@ import org.lwjgl.opengl.GL11;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.container.ContainerSynthesis;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyMunny;
+import wehavecookies56.kk.core.packet.IPacket;
 import wehavecookies56.kk.core.packet.SynthesisPacket;
 import wehavecookies56.kk.entities.tileentities.TileEntitySynthesis;
 import wehavecookies56.kk.item.AddedItems;
 import wehavecookies56.kk.lib.LocalStrings;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -477,7 +475,7 @@ public class GuiSynthesis extends GuiContainer {
 					Minecraft.getMinecraft().theWorld.playSoundAtEntity(Minecraft.getMinecraft().thePlayer, "kk:summon", 1, 1F);
 					if(synthesis.getStackInSlot(0) != null){
 						if(synthesis.getStackInSlot(0).getItem() == recipe){
-							IMessage packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), cost);
+							IPacket packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), cost);
 							KingdomKeys.network.sendToServer(packetsynth);
 						}
 					}
@@ -573,7 +571,7 @@ public class GuiSynthesis extends GuiContainer {
 					Minecraft.getMinecraft().theWorld.playSoundAtEntity(Minecraft.getMinecraft().thePlayer, "kk:summon", 1, 1F);
 					if(synthesis.getStackInSlot(0) != null){
 						if(synthesis.getStackInSlot(0).getItem() == recipe){
-							IMessage packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), new ItemStack(item2), cost);
+							IPacket packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), new ItemStack(item2), cost);
 							KingdomKeys.network.sendToServer(packetsynth);
 						}
 					}
@@ -670,7 +668,7 @@ public class GuiSynthesis extends GuiContainer {
 					Minecraft.getMinecraft().theWorld.playSoundAtEntity(Minecraft.getMinecraft().thePlayer, "kk:summon", 1, 1F);
 					if(synthesis.getStackInSlot(0) != null){
 						if(synthesis.getStackInSlot(0).getItem() == recipe){
-							IMessage packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), new ItemStack(item2), new ItemStack(item3), cost);
+							IPacket packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), new ItemStack(item2), new ItemStack(item3), cost);
 							KingdomKeys.network.sendToServer(packetsynth);
 						}
 					}
@@ -768,7 +766,7 @@ public class GuiSynthesis extends GuiContainer {
 					Minecraft.getMinecraft().theWorld.playSoundAtEntity(Minecraft.getMinecraft().thePlayer, "kk:summon", 1, 1F);
 					if(synthesis.getStackInSlot(0) != null){
 						if(synthesis.getStackInSlot(0).getItem() == recipe){
-							IMessage packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), new ItemStack(item2), new ItemStack(item3), new ItemStack(item4), cost);
+							IPacket packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), new ItemStack(item2), new ItemStack(item3), new ItemStack(item4), cost);
 							KingdomKeys.network.sendToServer(packetsynth);
 						}
 					}
@@ -867,7 +865,7 @@ public class GuiSynthesis extends GuiContainer {
 					Minecraft.getMinecraft().theWorld.playSoundAtEntity(Minecraft.getMinecraft().thePlayer, "kk:summon", 1, 1F);
 					if(synthesis.getStackInSlot(0) != null){
 						if(synthesis.getStackInSlot(0).getItem() == recipe){
-							IMessage packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), new ItemStack(item2), new ItemStack(item3), new ItemStack(item4), new ItemStack(item5), cost);
+							IPacket packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), new ItemStack(item2), new ItemStack(item3), new ItemStack(item4), new ItemStack(item5), cost);
 							KingdomKeys.network.sendToServer(packetsynth);
 						}
 					}
@@ -967,7 +965,7 @@ public class GuiSynthesis extends GuiContainer {
 					Minecraft.getMinecraft().theWorld.playSoundAtEntity(Minecraft.getMinecraft().thePlayer, "kk:summon", 1, 1F);
 					if(synthesis.getStackInSlot(0) != null){
 						if(synthesis.getStackInSlot(0).getItem() == recipe && props.getMunny() >= cost){
-							IMessage packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), new ItemStack(item2), new ItemStack(item3), new ItemStack(item4), new ItemStack(item5), new ItemStack(item6), cost);
+							IPacket packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), new ItemStack(item2), new ItemStack(item3), new ItemStack(item4), new ItemStack(item5), new ItemStack(item6), cost);
 							KingdomKeys.network.sendToServer(packetsynth);
 						}
 					}
@@ -1068,7 +1066,7 @@ public class GuiSynthesis extends GuiContainer {
 					Minecraft.getMinecraft().theWorld.playSoundAtEntity(Minecraft.getMinecraft().thePlayer, "kk:summon", 1, 1F);
 					if(synthesis.getStackInSlot(0) != null){
 						if(synthesis.getStackInSlot(0).getItem() == recipe){
-							IMessage packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), new ItemStack(item2), new ItemStack(item3), new ItemStack(item4), new ItemStack(item5), new ItemStack(item6), new ItemStack(item7), cost);
+							IPacket packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), new ItemStack(item2), new ItemStack(item3), new ItemStack(item4), new ItemStack(item5), new ItemStack(item6), new ItemStack(item7), cost);
 							KingdomKeys.network.sendToServer(packetsynth);
 						}
 					}
@@ -1170,7 +1168,7 @@ public class GuiSynthesis extends GuiContainer {
 					Minecraft.getMinecraft().theWorld.playSoundAtEntity(Minecraft.getMinecraft().thePlayer, "kk:summon", 1, 1F);
 					if(synthesis.getStackInSlot(0) != null){
 						if(synthesis.getStackInSlot(0).getItem() == recipe){
-							IMessage packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), new ItemStack(item2), new ItemStack(item3), new ItemStack(item4), new ItemStack(item5), new ItemStack(item6), new ItemStack(item7), new ItemStack(item8), cost);
+							IPacket packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), new ItemStack(item2), new ItemStack(item3), new ItemStack(item4), new ItemStack(item5), new ItemStack(item6), new ItemStack(item7), new ItemStack(item8), cost);
 							KingdomKeys.network.sendToServer(packetsynth);
 						}
 					}
@@ -1273,7 +1271,7 @@ public class GuiSynthesis extends GuiContainer {
 					Minecraft.getMinecraft().theWorld.playSoundAtEntity(Minecraft.getMinecraft().thePlayer, "kk:summon", 1, 1F);
 					if(synthesis.getStackInSlot(0) != null){
 						if(synthesis.getStackInSlot(0).getItem() == recipe){
-							IMessage packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), new ItemStack(item2), new ItemStack(item3), new ItemStack(item4), new ItemStack(item5), new ItemStack(item6), new ItemStack(item7), new ItemStack(item8), new ItemStack(item9), cost);
+							IPacket packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), new ItemStack(item2), new ItemStack(item3), new ItemStack(item4), new ItemStack(item5), new ItemStack(item6), new ItemStack(item7), new ItemStack(item8), new ItemStack(item9), cost);
 							KingdomKeys.network.sendToServer(packetsynth);
 						}
 					}
@@ -1377,7 +1375,7 @@ public class GuiSynthesis extends GuiContainer {
 					Minecraft.getMinecraft().theWorld.playSoundAtEntity(Minecraft.getMinecraft().thePlayer, "kk:summon", 1, 1F);
 					if(synthesis.getStackInSlot(0) != null){
 						if(synthesis.getStackInSlot(0).getItem() == recipe){
-							IMessage packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), new ItemStack(item2), new ItemStack(item3), new ItemStack(item4), new ItemStack(item5), new ItemStack(item6), new ItemStack(item7), new ItemStack(item8), new ItemStack(item9), new ItemStack(item10), cost);
+							IPacket packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), new ItemStack(item2), new ItemStack(item3), new ItemStack(item4), new ItemStack(item5), new ItemStack(item6), new ItemStack(item7), new ItemStack(item8), new ItemStack(item9), new ItemStack(item10), cost);
 							KingdomKeys.network.sendToServer(packetsynth);
 						}
 					}
@@ -1482,7 +1480,7 @@ public class GuiSynthesis extends GuiContainer {
 					Minecraft.getMinecraft().theWorld.playSoundAtEntity(Minecraft.getMinecraft().thePlayer, "kk:summon", 1, 1F);
 					if(synthesis.getStackInSlot(0) != null){
 						if(synthesis.getStackInSlot(0).getItem() == recipe){
-							IMessage packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), new ItemStack(item2), new ItemStack(item3), new ItemStack(item4), new ItemStack(item5), new ItemStack(item6), new ItemStack(item7), new ItemStack(item8), new ItemStack(item9), new ItemStack(item10), new ItemStack(item11), cost);
+							IPacket packetsynth = new SynthesisPacket(new ItemStack(recipe), new ItemStack(result), new ItemStack(item1), new ItemStack(item2), new ItemStack(item3), new ItemStack(item4), new ItemStack(item5), new ItemStack(item6), new ItemStack(item7), new ItemStack(item8), new ItemStack(item9), new ItemStack(item10), new ItemStack(item11), cost);
 							KingdomKeys.network.sendToServer(packetsynth);
 						}
 					}

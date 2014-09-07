@@ -17,7 +17,7 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
-public class SyncPlayerPropsPacket implements IMessage, IMessageHandler<SyncPlayerPropsPacket, IMessage> {
+public class SyncPlayerPropsPacket implements IPacket{
 	
 	private NBTTagCompound data;
 	
@@ -29,7 +29,7 @@ public class SyncPlayerPropsPacket implements IMessage, IMessageHandler<SyncPlay
 	}
 	
 	@Override
-	public void fromBytes(ByteBuf bytes) {
+	public void readBytes(ByteBuf bytes) {
 		ByteBufUtils.readTag(bytes);
 		ArrayList list = (ArrayList) MinecraftServer.getServer().getConfigurationManager().playerEntityList;
 		Iterator iterator = list.iterator();
@@ -40,14 +40,20 @@ public class SyncPlayerPropsPacket implements IMessage, IMessageHandler<SyncPlay
 	}
 
 	@Override
-	public void toBytes(ByteBuf bytes) {
+	public void writeBytes(ByteBuf bytes) {
 		ByteBufUtils.writeTag(bytes, data);
 	}
 
 	@Override
-	public IMessage onMessage(SyncPlayerPropsPacket message, MessageContext ctx) {
-		// TODO Auto-generated method stub
-		return null;
+	public void handleClientSide(NetHandlerPlayClient nhClient) {
+		
 	}
+
+	@Override
+	public void handleServerSide(NetHandlerPlayServer nhServer) {
+		
+	}
+
+	
 	
 }

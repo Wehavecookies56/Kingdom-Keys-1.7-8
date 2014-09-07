@@ -7,6 +7,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyMunny;
+import wehavecookies56.kk.core.packet.IPacket;
 import wehavecookies56.kk.core.packet.KnowledgePacket;
 import wehavecookies56.kk.core.packet.SummonPacket;
 import wehavecookies56.kk.item.AddedItems;
@@ -33,7 +34,7 @@ public class ItemVoidedKnowledge extends ItemKingdomKeys {
 	@Override
 	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer entity) {
 		
-		IMessage packet = new KnowledgePacket(new ItemStack(AddedItems.VoidedKnowledge));
+		IPacket packet = new KnowledgePacket(new ItemStack(AddedItems.VoidedKnowledge));
 		KingdomKeys.network.sendToServer(packet);
 		entity.playSound("mob.enderman.portal", 1, 1);
 		return super.onItemRightClick(item, world, entity);

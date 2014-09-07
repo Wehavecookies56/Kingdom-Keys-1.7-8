@@ -12,6 +12,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumChatFormatting;
 
 public class GiveMunny implements ICommand {
 
@@ -46,13 +47,15 @@ public class GiveMunny implements ICommand {
 	
 	@Override
 	public void processCommand(ICommandSender commandSender, String[] str) {
-
-		if(str.length == 0){
-			commandSender.addChatMessage(new ChatComponentText("Invalid Arguments"));
+		EntityPropertyMunny props = EntityPropertyMunny.get((EntityPlayer)commandSender);
+		if(str.length == 0 || Integer.parseInt(str[0]) > props.maxMunny){
+			commandSender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "Invalid Arguments Enter a value below (" + props.maxMunny + ")"));
 			return;
 		}
 		
-		commandSender.addChatMessage(new ChatComponentText("Added: " + str[0] + " Munny"));
+		commandSender.addChatMessage(new ChatComponentText(EnumChatFormatting.YELLOW + "Added: " + str[0] + " Munny"));
+		props.addMunny(Integer.parseInt(str[0]));
+		
 	}
 
 	@Override

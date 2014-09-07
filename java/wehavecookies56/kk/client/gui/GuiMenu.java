@@ -35,8 +35,6 @@ public class GuiMenu extends GuiScreen {
 	private String locName;
 	private int locID;
 	private long worldTime;
-	private StatCollector stat = new StatCollector();
-
 	
 	Minecraft mc = Minecraft.getMinecraft();
 	
@@ -80,23 +78,23 @@ public class GuiMenu extends GuiScreen {
 		drawTexturedModalRect(0, 0, 0, 0, width * 2, 90);
 		drawTexturedModalRect(0, height * 2 - 90, 0, 90, width * 2, 90);
 		GL11.glScalef(2.5F, 2.5F, 2.5F);
-		fontRendererObj.drawString(stat.translateToLocal(LocalStrings.Menu_Title), 20, 20, 0xFFFFFF);
+		fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Menu_Title), 20, 20, 0xFFFFFF);
 		GL11.glScalef(0.8F, 0.8F, 0.8F);
 		locName = mc.thePlayer.worldObj.provider.getDimensionName();
 		locID = mc.thePlayer.worldObj.provider.dimensionId;
 		worldTime = mc.theWorld.getWorldTime();
 		System.currentTimeMillis();
 		fontRendererObj.drawString(locName + "(" + locID +")", width - (locName.length() * 8 + 4), 32, 0xFFFFFF);
-		fontRendererObj.drawString(stat.translateToLocal(LocalStrings.Synthesis_Munny) + ": " + props.getMunny(), 10, height - 20, 0xFFF000);
+		fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Munny) + ": " + props.getMunny(), 10, height - 20, 0xFFF000);
 		Long time = Long.valueOf(mc.theWorld.provider.getWorldTime());
-		String t = locName + " " + stat.translateToLocal(LocalStrings.Menu_Time) + ": " + formatTime(time);
+		String t = locName + " " + StatCollector.translateToLocal(LocalStrings.Menu_Time) + ": " + formatTime(time);
 		fontRendererObj.drawString(t, width - fontRendererObj.getStringWidth(t) - 10, height - 20, 0xFFFFFF);
 		this.buttonList.clear();
-        this.buttonList.add(Keyblade = new GuiButton(0, 5, 55, 80, 20, stat.translateToLocal(LocalStrings.Menu_Keyblade)));
-        this.buttonList.add(Reports = new GuiButton(1, 5, 80, 80, 20, stat.translateToLocal(LocalStrings.Menu_Reports)));
-        this.buttonList.add(Stats = new GuiButton(2, 5, 105, 80, 20, stat.translateToLocal(LocalStrings.Menu_Stats)));
-        this.buttonList.add(Abilities = new GuiButton(3, 5, 130, 80, 20, stat.translateToLocal(LocalStrings.Menu_Abilities)));
-        this.buttonList.add(Config = new GuiButton(5, 5, 155, 80, 20, stat.translateToLocal(LocalStrings.Menu_Config)));
+        this.buttonList.add(Keyblade = new GuiButton(0, 5, 55, 80, 20, StatCollector.translateToLocal(LocalStrings.Menu_Keyblade)));
+        this.buttonList.add(Reports = new GuiButton(1, 5, 80, 80, 20, StatCollector.translateToLocal(LocalStrings.Menu_Reports)));
+        this.buttonList.add(Stats = new GuiButton(2, 5, 105, 80, 20, StatCollector.translateToLocal(LocalStrings.Menu_Stats)));
+        this.buttonList.add(Abilities = new GuiButton(3, 5, 130, 80, 20, StatCollector.translateToLocal(LocalStrings.Menu_Abilities)));
+        this.buttonList.add(Config = new GuiButton(5, 5, 155, 80, 20, StatCollector.translateToLocal(LocalStrings.Menu_Config)));
         this.buttonList.add(Close = new GuiButton(4, width - 25, 5, 20, 20, "x"));
         Keyblade.enabled = false;
         Stats.enabled = false;

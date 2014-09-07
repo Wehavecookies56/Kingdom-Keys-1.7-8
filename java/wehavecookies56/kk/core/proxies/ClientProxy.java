@@ -80,7 +80,7 @@ public class ClientProxy extends CommonProxy {
 	
 	@Override
 	public void initCapes() {
-		DevCapes.getInstance().registerConfig("https://raw.githubusercontent.com/Wehavecookies56/Kingdom-Keys-1.7-/master/Capes.json");
+		DevCapes.getInstance().registerConfig("https://www.dropbox.com/s/hb0wg5ky5wblz9g/Capes.json?raw=1");
 	}
 	
 

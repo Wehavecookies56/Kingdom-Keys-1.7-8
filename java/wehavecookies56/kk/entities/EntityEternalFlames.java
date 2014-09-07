@@ -197,6 +197,8 @@ public class EntityEternalFlames extends Entity implements IProjectile
             this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(this.motionY, (double)var1) * 180.0D / Math.PI);
         }
 		
+        this.rotationYaw*=1.5;
+        
         Block var16 = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
  
         if (var16 != null)

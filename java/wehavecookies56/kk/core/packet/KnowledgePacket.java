@@ -7,16 +7,18 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
+import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
 import wehavecookies56.kk.item.AddedItems;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 
-public class KnowledgePacket implements IMessage {
+public class KnowledgePacket implements IPacket {
 	
 	ItemStack itemToRemove;
 
@@ -29,7 +31,7 @@ public class KnowledgePacket implements IMessage {
     
     
 	@Override
-	public void fromBytes(ByteBuf bytes) {
+	public void readBytes(ByteBuf bytes) {
 		this.itemToRemove = ByteBufUtils.readItemStack(bytes);
 		
 		ArrayList list = (ArrayList) MinecraftServer.getServer().getConfigurationManager().playerEntityList;
@@ -91,9 +93,19 @@ public class KnowledgePacket implements IMessage {
 	}
 	
 	@Override
-	public void toBytes(ByteBuf bytes) {
+	public void writeBytes(ByteBuf bytes) {
 		ByteBufUtils.writeItemStack(bytes, this.itemToRemove);
 
+	}
+
+	@Override
+	public void handleClientSide(NetHandlerPlayClient nhClient) {
+		
+	}
+
+	@Override
+	public void handleServerSide(NetHandlerPlayServer nhServer) {
+		
 	}
 
 }

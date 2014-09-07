@@ -41,8 +41,8 @@ public class WorldGenBlox implements IWorldGenerator
 			this.spawnOres(AddedBlocks.DenseOre, Blocks.stone, world, random, chunkX, chunkZ, 16, 16, 5, ints.DenseOreChance, 0, 15);
 			this.spawnOres(AddedBlocks.LightningOre, Blocks.stone, world, random, chunkX, chunkZ, 16, 16, 5, ints.LightningOreChance, 40, 60);
 			this.spawnOres(AddedBlocks.BlazingOre, Blocks.stone, world, random, chunkX, chunkZ, 16, 16, 5, ints.BlazingOreChance, 0, 20);
-			this.spawnOres(AddedBlocks.PrizeBlox, Blocks.dirt, world, random, chunkX, chunkZ, 16, 16, 3, 35, 0, 128);
-			this.spawnOres(AddedBlocks.RarePrizeBlox, Blocks.dirt, world, random, chunkX, chunkZ, 16, 16, 3, 15, 0, 128);
+			this.spawnOres(AddedBlocks.PrizeBlox, Blocks.dirt, world, random, chunkX, chunkZ, 16, 16, 3, ints.PrizeBlox, 0, 128);
+			this.spawnOres(AddedBlocks.RarePrizeBlox, Blocks.dirt, world, random, chunkX, chunkZ, 16, 16, 3, ints.RarePrizeBlox, 0, 128);
 			if (s.startsWith("Taiga")){
 				this.spawnOres(AddedBlocks.FrostOre, Blocks.stone, world, random, chunkX, chunkZ, 16, 16, 6, ints.FrostOreChance, 25, 40);
 			}
@@ -64,6 +64,12 @@ public class WorldGenBlox implements IWorldGenerator
 			this.spawnOres(AddedBlocks.EnergyOre, Blocks.stone, world, random, chunkX, chunkZ, 16, 16, 6, ints.EnergyOreChance, 0, 128);
 			this.spawnOres(AddedBlocks.RemembranceOre, Blocks.stone, world, random, chunkX, chunkZ, 16, 16, 4, ints.RemembranceOreChance, 0, 128);
 			this.spawnOres(AddedBlocks.TwilightOre, Blocks.stone, world, random, chunkX, chunkZ, 16, 16, 8, ints.TwilightOreChance, 0, 128);
+			
+			this.spawnOres(AddedBlocks.DangerBlox, Blocks.grass, world, random, chunkX, chunkZ, 1, 1, 3, 20, ints.DangerBlox, 100);
+			this.spawnOres(AddedBlocks.NormalBlox, Blocks.grass, world, random, chunkX, chunkZ, 1, 1, 3, 20, ints.NormalBlox, 100);
+			this.spawnOres(AddedBlocks.HardBlox, Blocks.grass, world, random, chunkX, chunkZ, 1, 1, 3, 20, ints.HardBlox, 100);
+			this.spawnOres(AddedBlocks.MetalBlox, Blocks.grass, world, random, chunkX, chunkZ, 1, 1, 3, 20, ints.MetalBlox, 100);
+			//Spawns BaseBlocks randomly in a 1x1 wide chunk, in vains of 3, with a 20 spawnchance, between levels 50 and 100
 			}
 		}
 
@@ -75,14 +81,11 @@ public class WorldGenBlox implements IWorldGenerator
 	 */
 	public void generateEnd (World world, Random random, int chunkX, int chunkZ){
 		if(ConfigBooleans.enableGenerate){
-		this.spawnOres(AddedBlocks.DangerBlox, Blocks.end_stone, world, random, chunkX, chunkZ, 16, 16, 6, 20, 0, 128);
-		this.spawnOres(AddedBlocks.NormalBlox, Blocks.end_stone, world, random, chunkX, chunkZ, 16, 16, 10, 60, 0, 128);
-		this.spawnOres(AddedBlocks.HardBlox, Blocks.end_stone, world, random, chunkX, chunkZ, 16, 16, 9, 40, 0, 128);
-		this.spawnOres(AddedBlocks.MetalBlox, Blocks.end_stone, world, random, chunkX, chunkZ, 16, 16, 8, 30, 0, 128);
-		//this.spawnOres(AddedBlocks.MetalBlox, Block.obsidian, world, random, chunkX, chunkZ, 16, 16, 30, 89, 0, 128);
-		//this.spawnOres(AddedBlocks.NormalBlox, Block.obsidian, world, random, chunkX, chunkZ, 16, 16, 15, 89, 0, 128);
-		//this.spawnOres(AddedBlocks.HardBlox, Block.obsidian, world, random, chunkX, chunkZ, 16, 16, 30, 89, 0, 128);
-		this.spawnOres(AddedBlocks.RarePrizeBlox, Blocks.end_stone, world, random, chunkX, chunkZ, 16, 16, 3, 20, 0, 128);
+		this.spawnOres(AddedBlocks.DangerBlox, Blocks.end_stone, world, random, chunkX, chunkZ, 16, 16, 6, ints.DangerBloxE, 0, 128);
+		this.spawnOres(AddedBlocks.NormalBlox, Blocks.end_stone, world, random, chunkX, chunkZ, 16, 16, 10, ints.NormalBloxE, 0, 128);
+		this.spawnOres(AddedBlocks.HardBlox, Blocks.end_stone, world, random, chunkX, chunkZ, 16, 16, 9, ints.HardBloxE, 0, 128);
+		this.spawnOres(AddedBlocks.MetalBlox, Blocks.end_stone, world, random, chunkX, chunkZ, 16, 16, 8, ints.MetalBloxE, 0, 128);
+		this.spawnOres(AddedBlocks.RarePrizeBlox, Blocks.end_stone, world, random, chunkX, chunkZ, 16, 16, 3, ints.RarePrizeBloxE, 0, 128);
 		this.spawnOres(AddedBlocks.DarkOreE, Blocks.end_stone, world, random, chunkX, chunkZ, 16, 16, 6, ints.DarkOreEChance, 0, 128);
 		this.spawnOres(AddedBlocks.PowerOreE, Blocks.end_stone, world, random, chunkX, chunkZ, 16, 16, 7, ints.PowerOreEChance, 0, 128);
 		

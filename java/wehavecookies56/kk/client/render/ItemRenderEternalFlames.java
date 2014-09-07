@@ -31,7 +31,7 @@ public class ItemRenderEternalFlames implements IItemRenderer {
 
         switch(type){
             case EQUIPPED_FIRST_PERSON: return true;
-            case EQUIPPED: return true; 
+            case EQUIPPED: return true;
             default: return false;
         }
     }

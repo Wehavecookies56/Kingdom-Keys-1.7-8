@@ -6,29 +6,23 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
 import wehavecookies56.kk.achievements.AddedAchievments;
+import wehavecookies56.kk.api.synthesis.RecipeHandler;
 import wehavecookies56.kk.block.AddedBlocks;
 import wehavecookies56.kk.core.handlers.GiveMunny;
 import wehavecookies56.kk.core.handlers.GuiHandler;
+import wehavecookies56.kk.core.packet.ChannelHandler;
 import wehavecookies56.kk.core.packet.KnowledgePacket;
-import wehavecookies56.kk.core.packet.KnowledgePacketHandler;
-import wehavecookies56.kk.core.packet.OpenSynthesisPacket;
-import wehavecookies56.kk.core.packet.OpenSynthesisPacketHandler;
 import wehavecookies56.kk.core.packet.SummonPacket;
-import wehavecookies56.kk.core.packet.SummonPacketHandler;
 import wehavecookies56.kk.core.packet.SyncPlayerPropsPacket;
-import wehavecookies56.kk.core.packet.SyncPlayerPropsPacketHandler;
 import wehavecookies56.kk.core.packet.SynthesisPacket;
-import wehavecookies56.kk.core.packet.SynthesisPacketHandler;
 import wehavecookies56.kk.core.proxies.ClientProxy;
 import wehavecookies56.kk.core.proxies.CommonProxy;
 import wehavecookies56.kk.creativetab.KHBBSTAB;
@@ -60,9 +54,9 @@ import wehavecookies56.kk.event.OnPickUpEvent;
 import wehavecookies56.kk.event.PureHeartDrops;
 import wehavecookies56.kk.item.AddedItems;
 import wehavecookies56.kk.lib.ConfigBooleans;
-import wehavecookies56.kk.lib.LocalStrings;
 import wehavecookies56.kk.lib.Recipes;
 import wehavecookies56.kk.lib.Reference;
+import wehavecookies56.kk.lib.SynthesisRecipes;
 import wehavecookies56.kk.lib.ints;
 import wehavecookies56.kk.updater.Update;
 import wehavecookies56.kk.worldgen.ComponentRecipeHome;
@@ -79,8 +73,6 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
@@ -94,8 +86,6 @@ public class KingdomKeys {
         return (new EntityDamageSourceIndirect("chakram", par0EntityArrow, par1Entity)).setProjectile();
     }
 	
-    public static SimpleNetworkWrapper network;
-    
     static Logger logger = FMLLog.getLogger();
     
 	//World gen
@@ -123,7 +113,9 @@ public class KingdomKeys {
     public static CreativeTabs KHDDDTAB = new KHDDDTAB(CreativeTabs.getNextID(), "KHDDDTAB");
     
     //Enchanment
-    public static final Enchantment HarvestHearts = new EnchantHeartHarvest(52, 1);
+    public static final Enchantment HarvestHearts = new EnchantHeartHarvest(ints.EnchantmentID, 1);
+    
+    public static ChannelHandler network;
     
     //Mob
     //public static int getUniqueEntityID
@@ -133,6 +125,8 @@ public class KingdomKeys {
     //Pre initialisation
     @Mod.EventHandler
     public void modConstruct(FMLConstructionEvent event) {
+        network = new ChannelHandler(Reference.MOD_ID, Reference.MOD_CHANNEL);
+
     }
     
     @Mod.EventHandler
@@ -147,12 +141,11 @@ public class KingdomKeys {
         AddedItems.initLoot();
         AddedBlocks.preinit();
         
-        network = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.MOD_CHANNEL);
-        network.registerMessage(SynthesisPacketHandler.class, SynthesisPacket.class, 0, Side.SERVER);
-        network.registerMessage(SummonPacketHandler.class, SummonPacket.class, 1, Side.SERVER);
-        network.registerMessage(OpenSynthesisPacketHandler.class, OpenSynthesisPacket.class, 2, Side.CLIENT);
-        network.registerMessage(SyncPlayerPropsPacketHandler.class, SyncPlayerPropsPacket.class, 3, Side.SERVER);
-        network.registerMessage(KnowledgePacketHandler.class, KnowledgePacket.class, 4, Side.CLIENT);
+        network.registerPacket(KnowledgePacket.class);
+        network.registerPacket(SummonPacket.class);
+        network.registerPacket(SynthesisPacket.class);
+        network.registerPacket(SyncPlayerPropsPacket.class);
+
         
         int modEntityID = 0;
         EntityRegistry.registerModEntity(EntityEternalFlamesProjectile.class, "Sharpshooter Bullet", ++modEntityID, this, 64, 10, true);
@@ -161,27 +154,19 @@ public class KingdomKeys {
         syncConfig();
     }
     
+    
+    //TODO Put this in a different file to make it look better
     public static void syncConfig(){
     	FMLCommonHandler.instance().bus().register(instance);
-    	final String WORLDGENERATION = ConfigCategory.getQualifiedName("World Generation", null);
-        final String OVERWORLD = WORLDGENERATION + config.CATEGORY_SPLITTER + "Overworld Spawn Chances";
-        final String END = WORLDGENERATION + config.CATEGORY_SPLITTER + "End Spawn Chances";
-        final String GENERATE = config.CATEGORY_GENERAL + config.CATEGORY_SPLITTER + "World Generation";
+        
+    	ints.EnchantmentID = config.get(config.CATEGORY_GENERAL, "Enchantment ID", ints.ENCHANTMENTID_DEFAULT).getInt(ints.ENCHANTMENTID_DEFAULT);
+    	ConfigBooleans.enableUpdateCheck = config.get(config.CATEGORY_GENERAL, ConfigBooleans.enableUpdateCheck_name, ConfigBooleans.enableUpdateCheck_default).getBoolean(ConfigBooleans.enableUpdateCheck_default);
+    	
+    	final String GENERATE = config.CATEGORY_GENERAL + config.CATEGORY_SPLITTER + "world generation";
         ConfigBooleans.enableGenerate = config.get(GENERATE, ConfigBooleans.enableGenerate_name, ConfigBooleans.enableGenerate_default).getBoolean(ConfigBooleans.enableGenerate_default);
         ConfigBooleans.enableOverworld = config.get(GENERATE, ConfigBooleans.enableOverworld_name, ConfigBooleans.enableOverworld_default).getBoolean(ConfigBooleans.enableOverworld_default);
-        final String UPDATECHECK = config.CATEGORY_GENERAL + config.CATEGORY_SPLITTER + "Update Check";
-        ConfigBooleans.enableUpdateCheck = config.get(UPDATECHECK, ConfigBooleans.enableUpdateCheck_name, ConfigBooleans.enableUpdateCheck_default).getBoolean(ConfigBooleans.enableUpdateCheck_default);
-        final String KEYBLADE = config.CATEGORY_GENERAL + config.CATEGORY_SPLITTER + "Keyblade Config";
-        ConfigBooleans.enable3D = config.get(KEYBLADE, ConfigBooleans.enable3D_name, ConfigBooleans.enable3D_default).getBoolean(ConfigBooleans.enable3D_default);
-        ConfigBooleans.altWaywardWind = config.get(KEYBLADE, ConfigBooleans.altWaywardWind_name, ConfigBooleans.altWaywardWind_default).getBoolean(ConfigBooleans.altWaywardWind_default);
-        final String RECIPE = config.CATEGORY_GENERAL + config.CATEGORY_SPLITTER + "Recipe Config";
-        ConfigBooleans.heartRecipe = config.get(RECIPE, ConfigBooleans.heartRecipe_name, ConfigBooleans.heartRecipe_default).getBoolean(ConfigBooleans.heartRecipe_default);
-        ConfigBooleans.bloxRecipe = config.get(RECIPE, ConfigBooleans.bloxRecipe_name, ConfigBooleans.bloxRecipe_default).getBoolean(ConfigBooleans.bloxRecipe_default);
-        final String MOBDROPS = config.CATEGORY_GENERAL + config.CATEGORY_SPLITTER + "Mob Drops";
-        ConfigBooleans.munnyDrops = config.get(RECIPE, ConfigBooleans.munnyDrops_name, ConfigBooleans.munnyDrops_default).getBoolean(ConfigBooleans.munnyDrops_default);
         
-        //OTHER
-        config.addCustomCategoryComment(END, "Higher number = higher spawn chance");
+        final String OVERWORLD = GENERATE + config.CATEGORY_SPLITTER + "overworld spawn chances";
         config.addCustomCategoryComment(OVERWORLD, "Higher number = higher spawn chance");
         ints.LucidOreChance = config.get(OVERWORLD, "Lucid Ore Spawn Chance", ints.LUCIDORECHANCE_DEFAULT).getInt(ints.LUCIDORECHANCE_DEFAULT);
         ints.SerenityOreChance = config.get(OVERWORLD, "Serenity Ore Spawn Chance", ints.SERENITYORECHANCE_DEFAULT).getInt(ints.SERENITYORECHANCE_DEFAULT);
@@ -197,9 +182,34 @@ public class KingdomKeys {
         ints.EnergyOreChance = config.get(OVERWORLD, "Energy Ore Spawn Chance", ints.ENERGYORECHANCE_DEFAULT).getInt(ints.ENERGYORECHANCE_DEFAULT);
         ints.RemembranceOreChance = config.get(OVERWORLD, "Remembrance Ore Spawn Chance", ints.REMEMBRANCEORECHANCE_DEFAULT).getInt(ints.REMEMBRANCEORECHANCE_DEFAULT);
         ints.TwilightOreChance = config.get(OVERWORLD, "Twilight Ore Spawn Chance", ints.TWILIGHTORECHANCE_DEFAULT).getInt(ints.TWILIGHTORECHANCE_DEFAULT);
+        ints.NormalBlox = config.get(OVERWORLD, "Normal Blox Spawn Chance", ints.NORMALBLOX_DEFAULT).getInt(ints.NORMALBLOX_DEFAULT);
+        ints.HardBlox = config.get(OVERWORLD, "Hard Blox Spawn Chance", ints.HARDBLOX_DEFAULT).getInt(ints.HARDBLOX_DEFAULT);
+        ints.MetalBlox = config.get(OVERWORLD, "Metal Blox Spawn Chance", ints.METALBLOX_DEFAULT).getInt(ints.METALBLOX_DEFAULT);
+        ints.DangerBlox = config.get(OVERWORLD, "Danger Blox Spawn Chance", ints.DANGERBLOX_DEFAULT).getInt(ints.DANGERBLOX_DEFAULT);
+        ints.RarePrizeBlox = config.get(OVERWORLD, "Rare Prize Blox Spawn Chance", ints.RAREPRIZEBLOX_DEFAULT).getInt(ints.RAREPRIZEBLOX_DEFAULT);
+        ints.PrizeBlox = config.get(OVERWORLD, "Prize Blox Spawn Chance", ints.PRIZEBLOX_DEFAULT).getInt(ints.PRIZEBLOX_DEFAULT);
+
+        final String END = GENERATE + config.CATEGORY_SPLITTER + "End Spawn Chances";
+        config.addCustomCategoryComment(END, "Higher number = higher spawn chance");
         ints.PowerOreEChance = config.get(END, "Power Ore Spawn Chance", ints.POWEROREECHANCE_DEFAULT).getInt(ints.POWEROREECHANCE_DEFAULT);
         ints.DarkOreEChance = config.get(END, "Dark Ore Spawn Chance", ints.DARKOREECHANCE_DEFAULT).getInt(ints.DARKOREECHANCE_DEFAULT);
-    	
+        ints.NormalBloxE = config.get(END, "Normal Blox Spawn Chance", ints.NORMALBLOXE_DEFAULT).getInt(ints.NORMALBLOXE_DEFAULT);
+        ints.HardBloxE = config.get(END, "Hard Blox Spawn Chance", ints.HARDBLOXE_DEFAULT).getInt(ints.HARDBLOXE_DEFAULT);
+        ints.MetalBloxE = config.get(END, "Metal Blox Spawn Chance", ints.METALBLOXE_DEFAULT).getInt(ints.METALBLOXE_DEFAULT);
+        ints.DangerBloxE = config.get(END, "Danger Blox Spawn Chance", ints.DANGERBLOXE_DEFAULT).getInt(ints.DANGERBLOXE_DEFAULT);
+        ints.RarePrizeBloxE = config.get(END, "Rare Prize Blox Spawn Chance", ints.RAREPRIZEBLOXE_DEFAULT).getInt(ints.RAREPRIZEBLOXE_DEFAULT);
+        
+        //TODO Make these work
+        final String KEYBLADE = config.CATEGORY_GENERAL + config.CATEGORY_SPLITTER + "Keyblade Config";
+        ConfigBooleans.enable3D = config.get(KEYBLADE, ConfigBooleans.enable3D_name, ConfigBooleans.enable3D_default).getBoolean(ConfigBooleans.enable3D_default);
+        ConfigBooleans.altWaywardWind = config.get(KEYBLADE, ConfigBooleans.altWaywardWind_name, ConfigBooleans.altWaywardWind_default).getBoolean(ConfigBooleans.altWaywardWind_default);
+        
+        //TODO Fix these too
+        final String RECIPE = config.CATEGORY_GENERAL + config.CATEGORY_SPLITTER + "Recipe Config";
+        ConfigBooleans.heartRecipe = config.get(RECIPE, ConfigBooleans.heartRecipe_name, ConfigBooleans.heartRecipe_default).getBoolean(ConfigBooleans.heartRecipe_default);
+        ConfigBooleans.bloxRecipe = config.get(RECIPE, ConfigBooleans.bloxRecipe_name, ConfigBooleans.bloxRecipe_default).getBoolean(ConfigBooleans.bloxRecipe_default);
+        ConfigBooleans.munnyDrops = config.get(RECIPE, ConfigBooleans.munnyDrops_name, ConfigBooleans.munnyDrops_default).getBoolean(ConfigBooleans.munnyDrops_default);       
+
     	if(config.hasChanged()){
     		config.save();
     	}
@@ -215,7 +225,11 @@ public class KingdomKeys {
     //Initialisation
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
+    	network.initialise();
+    	SynthesisRecipes.initSynthesisRecipes();
+    	logger.info("Registered " + RecipeHandler.getTotalRegistered() + " Synthesis recipes");
         AddedAchievments.initAchievements();
+        logger.info(Reference.MOD_NAME + ": Registered Added Achievements");
         MinecraftForge.EVENT_BUS.register(new HeartDrops());
         MinecraftForge.EVENT_BUS.register(new PureHeartDrops());
         MinecraftForge.EVENT_BUS.register(new DarkHeartDrops());
@@ -226,14 +240,15 @@ public class KingdomKeys {
         MinecraftForge.EVENT_BUS.register(new Munny20Drops());
         MinecraftForge.EVENT_BUS.register(new Munny50Drops());
         MinecraftForge.EVENT_BUS.register(new Munny1000Drops());
-
         MinecraftForge.EVENT_BUS.register(new EntityConstructEvent());
-        //MinecraftForge.EVENT_BUS.register(new RenderOverlayEvent());
-        //MinecraftForge.EVENT_BUS.register(new OpenGuiEvent());
     	FMLCommonHandler.instance().bus().register(instance);
-    	//FMLCommonHandler.instance().bus().register(new GuiHealthBar());
     	FMLCommonHandler.instance().bus().register(new OnCraftedEvent());
     	FMLCommonHandler.instance().bus().register(new OnPickUpEvent());
+    	FMLCommonHandler.instance().bus().register(new Update());
+    	logger.info(Reference.MOD_NAME + ": Registered Events");
+        //MinecraftForge.EVENT_BUS.register(new RenderOverlayEvent());
+        //MinecraftForge.EVENT_BUS.register(new OpenGuiEvent());
+    	//FMLCommonHandler.instance().bus().register(new GuiHealthBar());
     	new GuiHandler();
         Recipes.initShapedRecipes();
         Recipes.initShapelessRecipes();
@@ -266,6 +281,7 @@ public class KingdomKeys {
     //Post Initialisation
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
+        network.postInitialise();
     }
     
     public static void addVillagePiece(Class c, String s){

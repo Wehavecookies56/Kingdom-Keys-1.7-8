@@ -22,7 +22,7 @@ import net.minecraft.world.WorldServer;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 
-public class SynthesisPacket implements IMessage {
+public class SynthesisPacket implements IPacket {
 
 	ItemStack recipe;
 	ItemStack result;
@@ -174,7 +174,7 @@ public class SynthesisPacket implements IMessage {
 	}
 
 	@Override
-	public void fromBytes(ByteBuf bytes) {
+	public void readBytes(ByteBuf bytes) {
 		this.recipe = ByteBufUtils.readItemStack(bytes);
 		this.result = ByteBufUtils.readItemStack(bytes);
 		this.item1 = ByteBufUtils.readItemStack(bytes);
@@ -189,14 +189,35 @@ public class SynthesisPacket implements IMessage {
 		this.item10 = ByteBufUtils.readItemStack(bytes);
 		this.item11 = ByteBufUtils.readItemStack(bytes);
 		this.cost = bytes.readInt();
+		
+	}
 
-		ArrayList list = (ArrayList) MinecraftServer.getServer().getConfigurationManager().playerEntityList;
-		Iterator iterator = list.iterator();
+	@Override
+	public void writeBytes(ByteBuf bytes) {
+		ByteBufUtils.writeItemStack(bytes, this.recipe);
+		ByteBufUtils.writeItemStack(bytes, this.result);
+		ByteBufUtils.writeItemStack(bytes, this.item1);
+		ByteBufUtils.writeItemStack(bytes, this.item2);
+		ByteBufUtils.writeItemStack(bytes, this.item3);
+		ByteBufUtils.writeItemStack(bytes, this.item4);
+		ByteBufUtils.writeItemStack(bytes, this.item5);
+		ByteBufUtils.writeItemStack(bytes, this.item6);
+		ByteBufUtils.writeItemStack(bytes, this.item7);
+		ByteBufUtils.writeItemStack(bytes, this.item8);
+		ByteBufUtils.writeItemStack(bytes, this.item9);
+		ByteBufUtils.writeItemStack(bytes, this.item10);
+		ByteBufUtils.writeItemStack(bytes, this.item11);
+		bytes.writeInt(cost);
+	}
 
-		EntityPlayerMP player = (EntityPlayerMP) iterator.next();
+	@Override
+	public void handleClientSide(NetHandlerPlayClient nhClient) {
+		
+	}
 
-		TileEntitySynthesis synthesis = new TileEntitySynthesis();
-
+	@Override
+	public void handleServerSide(NetHandlerPlayServer nhServer) {
+		EntityPlayer player = nhServer.playerEntity;
 		player.inventory.addItemStackToInventory(result);
 
 		EntityPropertyMunny props = EntityPropertyMunny.get(player);
@@ -236,25 +257,6 @@ public class SynthesisPacket implements IMessage {
 		}
 		
 		props.consumeMunny(cost);
-		
-	}
-
-	@Override
-	public void toBytes(ByteBuf bytes) {
-		ByteBufUtils.writeItemStack(bytes, this.recipe);
-		ByteBufUtils.writeItemStack(bytes, this.result);
-		ByteBufUtils.writeItemStack(bytes, this.item1);
-		ByteBufUtils.writeItemStack(bytes, this.item2);
-		ByteBufUtils.writeItemStack(bytes, this.item3);
-		ByteBufUtils.writeItemStack(bytes, this.item4);
-		ByteBufUtils.writeItemStack(bytes, this.item5);
-		ByteBufUtils.writeItemStack(bytes, this.item6);
-		ByteBufUtils.writeItemStack(bytes, this.item7);
-		ByteBufUtils.writeItemStack(bytes, this.item8);
-		ByteBufUtils.writeItemStack(bytes, this.item9);
-		ByteBufUtils.writeItemStack(bytes, this.item10);
-		ByteBufUtils.writeItemStack(bytes, this.item11);
-		bytes.writeInt(cost);
 	}
 
 }
