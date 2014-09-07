@@ -17,6 +17,10 @@ public class OnCraftedEvent {
 		if(Block.getBlockFromItem(event.crafting.getItem()).equals(AddedBlocks.NormalBlox) || Block.getBlockFromItem(event.crafting.getItem()).equals(AddedBlocks.HardBlox) || Block.getBlockFromItem(event.crafting.getItem()).equals(AddedBlocks.MetalBlox) || Block.getBlockFromItem(event.crafting.getItem()).equals(AddedBlocks.DangerBlox)){
 			event.player.addStat(AddedAchievments.bugBlox, 1);
 		}
+		else if(Block.getBlockFromItem(event.crafting.getItem()).equals(AddedBlocks.Synthesiser))
+		{
+			event.player.addStat(AddedAchievments.synthesizer, 1);
+		}
 	}
 	
 }
