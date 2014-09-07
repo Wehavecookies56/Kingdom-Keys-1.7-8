@@ -112,10 +112,9 @@ public class KingdomKeys {
     public static CreativeTabs KHRECODEDTAB = new KHRECODEDTAB(CreativeTabs.getNextID(), "KHRECODEDTAB");
     public static CreativeTabs KHDDDTAB = new KHDDDTAB(CreativeTabs.getNextID(), "KHDDDTAB");
     
-    //Enchanment
-    public static final Enchantment HarvestHearts = new EnchantHeartHarvest(ints.EnchantmentID, 1);
-    
     public static ChannelHandler network;
+    
+    public static final Enchantment HarvestHearts = new EnchantHeartHarvest(ints.EnchantmentID, 1);
     
     //Mob
     //public static int getUniqueEntityID

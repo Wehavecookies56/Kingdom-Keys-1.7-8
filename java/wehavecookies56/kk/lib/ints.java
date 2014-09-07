@@ -3,7 +3,7 @@ package wehavecookies56.kk.lib;
 public class ints {
 
 	public static int LucidOreChance, SerenityOreChance, TranquilOreChance, BrightOreChance, DarkOreChance, DenseOreChance, LightningOreChance, BlazingOreChance, PrizeBloxChance, RarePrizeBloxChance, 
-	FrostOreChance, EnergyOreChance, RemembranceOreChance, TwilightOreChance, PowerOreEChance, DarkOreEChance, EnchantmentID, NormalBloxE, HardBloxE, MetalBloxE, DangerBloxE, RarePrizeBloxE, NormalBlox, HardBlox, MetalBlox, DangerBlox, PrizeBlox, RarePrizeBlox;
+	FrostOreChance, EnergyOreChance, RemembranceOreChance, TwilightOreChance, PowerOreEChance, DarkOreEChance, EnchantmentID = 52, NormalBloxE, HardBloxE, MetalBloxE, DangerBloxE, RarePrizeBloxE, NormalBlox, HardBlox, MetalBlox, DangerBlox, PrizeBlox, RarePrizeBlox;
 	
 	public static final int LUCIDORECHANCE_DEFAULT = 10;
 	public static final int SERENITYORECHANCE_DEFAULT = 10;
