@@ -38,6 +38,8 @@ public class OnPickUpEvent {
 					event.player.addStat(AddedAchievments.bugBlox, 1);
 				}else if(Block.getBlockFromItem(event.pickedUp.getEntityItem().getItem()).equals(AddedBlocks.RarePrizeBlox)){
 					event.player.addStat(AddedAchievments.bugBlox, 1);
+				}else if(Block.getBlockFromItem(event.pickedUp.getEntityItem().getItem()).equals(AddedBlocks.Synthesiser)){
+					event.player.addStat(AddedAchievments.synthesizer, 1);
 					
 				}else if(event.pickedUp.getEntityItem().getItem().equals(AddedItems.Munny1)){
 					munny.addMunny(1);
