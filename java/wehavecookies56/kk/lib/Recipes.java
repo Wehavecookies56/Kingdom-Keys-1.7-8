@@ -136,8 +136,8 @@ public class Recipes {
 		});
 		GameRegistry.addRecipe(new ItemStack(AddedBlocks.Synthesiser), new Object[]{
 			"MCM",
-			"H5N",
-			"OHO",
+			"H5H",
+			"ONO",
 			'M', AddedBlocks.MetalBlox, 'C', Blocks.crafting_table, 'H', AddedBlocks.HardBlox, '5', Items.diamond, 'N', AddedBlocks.NormalBlox, 'O', AddedItems.HP
 		});
 		
