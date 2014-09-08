@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 import static org.lwjgl.opengl.GL11.*;
 public class SharpshooterBullet extends EntityFX{
 
-	private static final ResourceLocation texture = new ResourceLocation(Reference.MOD_ID, "textures/particle/sharpShooterBullet.png");
+	private static final ResourceLocation texture = new ResourceLocation(Reference.MOD_ID, "textures/particles/sharpShooterBullet.png");
 	
 	public SharpshooterBullet(World par1World, double x, double y, double z) {
 		super(par1World, x, y, z);

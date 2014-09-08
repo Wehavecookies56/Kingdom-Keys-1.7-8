@@ -46,8 +46,6 @@ public class EntitySharpshooterBullet extends EntityThrowable{
 			mop.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), shotDamage);
 		}
 
-		this.worldObj.spawnParticle("flame", this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
-
 		if (!worldObj.isRemote) {
 			setDead();
 		}

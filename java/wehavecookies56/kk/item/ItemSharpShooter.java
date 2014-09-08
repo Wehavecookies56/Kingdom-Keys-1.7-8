@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.List;
 
 import mods.battlegear2.api.weapons.IBattlegearWeapon;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,6 +17,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.entities.EntityEternalFlamesProjectile;
+import wehavecookies56.kk.entities.EntitySharpshooterBullet;
 import wehavecookies56.kk.lib.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -45,8 +47,8 @@ public class ItemSharpShooter extends ItemSword implements IBattlegearWeapon{
 	}
 
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-		if (player.isSneaking()){
-    		Minecraft.getMinecraft().theWorld.playSoundAtEntity(player, "kk:SharpshooterBullet", 1, 0);
+		if (!player.isSneaking()){
+    		Minecraft.getMinecraft().theWorld.playSoundAtEntity(player, "kk:sharpshooterbullet", 1, 1);
 
 			if (!world.isRemote) {
 				world.spawnEntityInWorld(new EntitySharpshooterBullet(world, player));
