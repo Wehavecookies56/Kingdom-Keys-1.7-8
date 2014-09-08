@@ -29,6 +29,7 @@ public class ItemSharpShooter extends ItemSword implements IBattlegearWeapon{
 		this.setCreativeTab(KingdomKeys.KHDAYSTAB);
 		this.material = abaddonPlasmaMaterial;
 	}
+	private int timer = 0;
 	
     @SideOnly(Side.CLIENT)
     @Override
@@ -51,7 +52,15 @@ public class ItemSharpShooter extends ItemSword implements IBattlegearWeapon{
     		Minecraft.getMinecraft().theWorld.playSoundAtEntity(player, "kk:sharpshooterbullet", 1, 1);
 
 			if (!world.isRemote) {
-				world.spawnEntityInWorld(new EntitySharpshooterBullet(world, player));
+				 for (int i = 0; i > 10; i+=1.0)
+				 {
+					 timer = i;
+				 } 
+				 if(timer > 9)
+				 { 
+					 timer = 0; 
+					 world.spawnEntityInWorld(new EntitySharpshooterBullet(world, player));			
+				 }
 			}
 		}
 		else
@@ -102,6 +111,5 @@ public class ItemSharpShooter extends ItemSword implements IBattlegearWeapon{
 			ItemStack mainhandItem, ItemStack offhandItem) {
 		return false;
 	}
-
 
 }

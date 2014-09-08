@@ -70,6 +70,10 @@ public class WorldGenBlox implements IWorldGenerator
 			this.spawnOres(AddedBlocks.HardBlox, Blocks.grass, world, random, chunkX, chunkZ, 1, 1, 3, 20, ints.HardBlox, 100);
 			this.spawnOres(AddedBlocks.MetalBlox, Blocks.grass, world, random, chunkX, chunkZ, 1, 1, 3, 20, ints.MetalBlox, 100);
 			//Spawns BaseBlocks randomly in a 1x1 wide chunk, in vains of 3, with a 20 spawnchance, between levels 50 and 100
+			this.spawnOres(AddedBlocks.DangerBlox, Blocks.sand, world, random, chunkX, chunkZ, 1, 1, 3, 20, ints.DangerBlox, 100);
+			this.spawnOres(AddedBlocks.NormalBlox, Blocks.sand, world, random, chunkX, chunkZ, 1, 1, 3, 20, ints.NormalBlox, 100);
+			this.spawnOres(AddedBlocks.HardBlox, Blocks.sand, world, random, chunkX, chunkZ, 1, 1, 3, 20, ints.HardBlox, 100);
+			this.spawnOres(AddedBlocks.MetalBlox, Blocks.sand, world, random, chunkX, chunkZ, 1, 1, 3, 20, ints.MetalBlox, 100);
 			}
 		}
 
