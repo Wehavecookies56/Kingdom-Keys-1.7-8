@@ -2,6 +2,7 @@
     "kupo": {"category": "master", "sounds": [{"name": "kupo", "stream": false}]},
     "summon": {"category": "player","sounds": [{"name": "summon", "stream": false}]},
     "unsummon": {"category": "player", "sounds": [{"name": "unsummon", "stream": false}]},
+    "sharpshooterbullet": {"category": "player", "sounds": [{"name": "sharpshooterbullet", "stream": false}]},
     "records.Birth by Sleep -A Link to the Future-": {"category": "record", "sounds": [{"name": "records/Birth by Sleep -A Link to the Future-", "stream": "true"}]},
     "records.Dream Drop Distance -The Next Awakening-": {"category": "record", "sounds": [{"name": "records/Dream Drop Distance -The Next Awakening-", "stream": "true"}]},
     "records.Hikari -KINGDOM Instrumental Version-": {"category": "record", "sounds": [{"name": "records/Hikari -KINGDOM Instrumental Version-", "stream": "true"}]},
