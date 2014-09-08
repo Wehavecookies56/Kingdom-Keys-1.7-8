@@ -44,6 +44,24 @@ public class ItemSharpShooter extends ItemSword implements IBattlegearWeapon{
 		return EnumRarity.epic;
 	}
 
+	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+		if (player.isSneaking()){
+    		Minecraft.getMinecraft().theWorld.playSoundAtEntity(player, "kk:SharpshooterBullet", 1, 0);
+
+			if (!world.isRemote) {
+				world.spawnEntityInWorld(new EntitySharpshooterBullet(world, player));
+			}
+		}
+		else
+		{
+			player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
+	        return stack;
+		}
+		
+		
+	return stack;
+	}
+	
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack itemStack, EntityPlayer player, List dataList, boolean bool){
 		dataList.add("II Xigbar");
