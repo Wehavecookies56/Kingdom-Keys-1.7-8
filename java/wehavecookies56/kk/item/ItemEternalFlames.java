@@ -50,10 +50,17 @@ public class ItemEternalFlames extends ItemSword implements IBattlegearWeapon{
 	}
 
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-		world.playSoundAtEntity(player, "mob.ghast.fireball", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+		if (player.isSneaking()){
+			world.playSoundAtEntity(player, "mob.ghast.fireball", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 
-		if (!world.isRemote) {
-			world.spawnEntityInWorld(new EntityEternalFlamesProjectile(world, player));
+			if (!world.isRemote) {
+				world.spawnEntityInWorld(new EntityEternalFlamesProjectile(world, player));
+			}
+		}
+		else
+		{
+			player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
+	        return stack;
 		}
 		
 		
