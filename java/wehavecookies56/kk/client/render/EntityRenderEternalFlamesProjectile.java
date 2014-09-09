@@ -38,13 +38,10 @@ public class EntityRenderEternalFlamesProjectile extends Render {
 		GL11.glPushMatrix();
 
 		bindTexture(texture);
-		GL11.glTranslated(x - 0.5, 0, z - 0.5);
-		GL11.glTranslated(x + 0.5, y + 0.5, z + 0.5);
-		float rotation = entity.prevRotationYaw + (entity.rotationYaw) * partialTick;
-		GL11.glRotatef(rotation, 0F, 1F, 0F);
-		GL11.glTranslated(x - 0.5, y + 0.5, z - 0.5);
-		GL11.glRotatef(90F, 1F, 0F, 0F);
+		GL11.glTranslated(x, y, z);
+		GL11.glRotatef(yaw + 15 * partialTick, 0F, 1F, 0F);
 
+		GL11.glRotatef(90F, 1F, 0F, 0F);
 
 		model.render(entity, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 

@@ -41,17 +41,13 @@ public class MunnyPacket implements IPacket {
 			Iterator iterator = list.iterator();
 
 			EntityPlayerMP player = (EntityPlayerMP) iterator.next();
-			System.out.println("Packet");
 			
 			if(player.getHeldItem() != null){
 				if(player.getHeldItem().getItem() == itemToRemove.getItem()){
 					EntityPropertyMunny props = EntityPropertyMunny.get((EntityPlayer)player);
-					System.out.println("Stack size:"+itemToRemove.stackSize);
-					for(int i = 0; i > itemToRemove.stackSize; i++){
-						System.out.println("Removing items");
-						player.inventory.consumeInventoryItem(itemToRemove.getItem());
-					}
-					props.addMunny(munnyToGive * itemToRemove.stackSize);
+					props.addMunny(munnyToGive * player.getHeldItem().stackSize);
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
+
 				}
 			}
 		}
