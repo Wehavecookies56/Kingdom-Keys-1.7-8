@@ -13,11 +13,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.entities.EntityEternalFlamesProjectile;
 import wehavecookies56.kk.entities.EntitySharpshooterBullet;
+import wehavecookies56.kk.lib.ConfigBooleans;
 import wehavecookies56.kk.lib.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -37,16 +39,24 @@ public class ItemSharpShooter extends ItemSword implements IBattlegearWeapon{
 		itemIcon = par1IconRegister.registerIcon(Reference.MOD_ID + ":" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".")+1));
 	}
 
+    @Override
+    public boolean hasEffect(ItemStack par1ItemStack){
+    	if(ConfigBooleans.enableShine == true){
+        return true;
+    	}
+    	return false;
+    }
+
 	public ToolMaterial getMaterial() {
 		return this.material;
 	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public EnumRarity getRarity(ItemStack par1ItemStack){
-		return EnumRarity.epic;
-	}
-
+    
+    @Override
+    @SideOnly(Side.CLIENT)
+    public EnumRarity getRarity(ItemStack par1ItemStack){
+        return EnumRarity.uncommon;
+    }
+    
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		if (!player.isSneaking()){
     		Minecraft.getMinecraft().theWorld.playSoundAtEntity(player, "kk:sharpshooterbullet", 1, 1);
@@ -61,7 +71,6 @@ public class ItemSharpShooter extends ItemSword implements IBattlegearWeapon{
 			player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
 	        return stack;
 		}
-		
 		
 	return stack;
 	}

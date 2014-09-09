@@ -31,7 +31,7 @@ public class EntitySharpshooterBullet extends EntityThrowable{
 	@Override
 	public void onUpdate() {
 		Minecraft.getMinecraft().effectRenderer.addEffect(new SharpshooterBullet(worldObj, this.posX, this.posY, this.posZ));
-		if(ticksExisted > 60){
+		if(ticksExisted > 40){
 			setDead();
 		}
 		super.onUpdate();

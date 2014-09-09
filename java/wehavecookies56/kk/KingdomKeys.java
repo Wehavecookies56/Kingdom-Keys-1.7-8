@@ -21,6 +21,7 @@ import wehavecookies56.kk.core.handlers.GiveMunny;
 import wehavecookies56.kk.core.handlers.GuiHandler;
 import wehavecookies56.kk.core.packet.ChannelHandler;
 import wehavecookies56.kk.core.packet.KnowledgePacket;
+import wehavecookies56.kk.core.packet.MunnyPacket;
 import wehavecookies56.kk.core.packet.SummonPacket;
 import wehavecookies56.kk.core.packet.SyncPlayerPropsPacket;
 import wehavecookies56.kk.core.packet.SynthesisPacket;
@@ -150,6 +151,7 @@ public class KingdomKeys {
         network.registerPacket(SummonPacket.class);
         network.registerPacket(SynthesisPacket.class);
         network.registerPacket(SyncPlayerPropsPacket.class);
+        network.registerPacket(MunnyPacket.class);
 
         
         int modEntityID = 0;
@@ -208,7 +210,8 @@ public class KingdomKeys {
         final String KEYBLADE = config.CATEGORY_GENERAL + config.CATEGORY_SPLITTER + "Keyblade Config";
         ConfigBooleans.enable3D = config.get(KEYBLADE, ConfigBooleans.enable3D_name, ConfigBooleans.enable3D_default).getBoolean(ConfigBooleans.enable3D_default);
         ConfigBooleans.altWaywardWind = config.get(KEYBLADE, ConfigBooleans.altWaywardWind_name, ConfigBooleans.altWaywardWind_default).getBoolean(ConfigBooleans.altWaywardWind_default);
-        
+        ConfigBooleans.enableShine = config.get(KEYBLADE, ConfigBooleans.enableShine_name, ConfigBooleans.enableShine_default).getBoolean(ConfigBooleans.enableShine_default);
+
         //TODO Fix these too
         final String RECIPE = config.CATEGORY_GENERAL + config.CATEGORY_SPLITTER + "Recipe Config";
         ConfigBooleans.heartRecipe = config.get(RECIPE, ConfigBooleans.heartRecipe_name, ConfigBooleans.heartRecipe_default).getBoolean(ConfigBooleans.heartRecipe_default);

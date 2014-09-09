@@ -9,10 +9,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.entities.EntityEternalFlames;
+import wehavecookies56.kk.lib.ConfigBooleans;
 import wehavecookies56.kk.lib.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -46,6 +48,14 @@ public class ItemBookOfRetribution extends ItemSword implements IBattlegearWeapo
     	return super.onItemUse(par1ItemStack, par2EntityPlayer, par3World, par4, par5, par6, par7, par8, par9, par10);
     }
 
+    @Override
+    public boolean hasEffect(ItemStack par1ItemStack){
+    	if(ConfigBooleans.enableShine == true){
+        return true;
+    	}
+    	return false;
+    }
+
 	public ToolMaterial getMaterial() {
 		return this.material;
 	}
@@ -53,7 +63,7 @@ public class ItemBookOfRetribution extends ItemSword implements IBattlegearWeapo
     @Override
     @SideOnly(Side.CLIENT)
     public EnumRarity getRarity(ItemStack par1ItemStack){
-        return EnumRarity.epic;
+        return EnumRarity.uncommon;
     }
     
     @SideOnly(Side.CLIENT)
