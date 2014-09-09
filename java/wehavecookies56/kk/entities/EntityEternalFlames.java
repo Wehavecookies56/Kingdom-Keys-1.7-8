@@ -1,4 +1,4 @@
-package wehavecookies56.kk.entities;
+/*package wehavecookies56.kk.entities;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -38,19 +38,15 @@ public class EntityEternalFlames extends Entity implements IProjectile
     private int inData = 0;
     private boolean inGround = false;
  
-    /** 1 if the player can pick up the arrow */
     public int canBePickedUp = 0;
  
-    /** Seems to be some sort of timer for animating an arrow. */
     public int arrowShake = 0;
  
-    /** The owner of this arrow. */
     public Entity shootingEntity;
     private int ticksInGround;
     private int ticksInAir = 0;
     private double damage = 2.0D;
  
-    /** The amount of knockback an arrow applies when it hits a mob. */
     private int knockbackStrength;
  
     public EntityEternalFlames(World par1World)
@@ -123,10 +119,7 @@ public class EntityEternalFlames extends Entity implements IProjectile
     {
         this.dataWatcher.addObject(16, Byte.valueOf((byte)0));
     }
- 
-    /**
-     * Similar to setArrowHeading, it's point the throwable entity to a x, y, z direction.
-     */
+
     public void setThrowableHeading(double var1, double var3, double var5, float var7, float var8)
     {
         float var9 = MathHelper.sqrt_double(var1 * var1 + var3 * var3 + var5 * var5);
@@ -149,11 +142,6 @@ public class EntityEternalFlames extends Entity implements IProjectile
     }
  
     @SideOnly(Side.CLIENT)
- 
-    /**
-     * Sets the position and rotation. Only difference from the other one is no bounding on the rotation. Args: posX,
-     * posY, posZ, yaw, pitch
-     */
     public void setPositionAndRotation2(double par1, double par3, double par5, float par7, float par8, int par9)
     {
         this.setPosition(par1, par3, par5);
@@ -161,10 +149,6 @@ public class EntityEternalFlames extends Entity implements IProjectile
     }
  
     @SideOnly(Side.CLIENT)
- 
-    /**
-     * Sets the velocity to the args. Args: x, y, z
-     */
     public void setVelocity(double par1, double par3, double par5)
     {
         this.motionX = par1;
@@ -183,9 +167,6 @@ public class EntityEternalFlames extends Entity implements IProjectile
         }
     }
  
-    /**
-     * Called to update the entity's position/logic.
-     */
     public void onUpdate()
     {
         super.onUpdate();
@@ -426,10 +407,7 @@ public class EntityEternalFlames extends Entity implements IProjectile
             this.func_145775_I();
         }
     }
- 
-    /**
-     * (abstract) Protected helper method to write subclass entity data to NBT.
-     */
+
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
     {
         par1NBTTagCompound.setShort("xTile", (short)this.xTile);
@@ -443,9 +421,6 @@ public class EntityEternalFlames extends Entity implements IProjectile
         par1NBTTagCompound.setDouble("damage", this.damage);
     }
  
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
     public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
     {
         this.xTile = par1NBTTagCompound.getShort("xTile");
@@ -470,10 +445,7 @@ public class EntityEternalFlames extends Entity implements IProjectile
             this.canBePickedUp = par1NBTTagCompound.getBoolean("player") ? 1 : 0;
         }
     }
- 
-    /**
-     * Called by a player entity when they collide with an entity
-     */
+
     public void onCollideWithPlayer(EntityPlayer par1EntityPlayer)
     {
         if (!this.worldObj.isRemote && this.inGround && this.arrowShake <= 0)
@@ -481,11 +453,7 @@ public class EntityEternalFlames extends Entity implements IProjectile
             boolean var2 = this.canBePickedUp == 1 || this.canBePickedUp == 2 && par1EntityPlayer.capabilities.isCreativeMode;
         }
     }
- 
-    /**
-     * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
-     * prevent them from trampling crops
-     */
+
     protected boolean canTriggerWalking()
     {
         return false;
@@ -507,25 +475,16 @@ public class EntityEternalFlames extends Entity implements IProjectile
         return this.damage;
     }
  
-    /**
-     * Sets the amount of knockback the arrow applies when it hits a mob.
-     */
     public void setKnockbackStrength(int par1)
     {
         this.knockbackStrength = par1;
     }
  
-    /**
-     * If returns false, the item will not inflict any damage against entities.
-     */
     public boolean canAttackWithItem()
     {
         return false;
     }
  
-    /**
-     * Whether the arrow has a stream of critical hit particles flying behind it.
-     */
     public void setIsCritical(boolean par1)
     {
         byte var2 = this.dataWatcher.getWatchableObjectByte(16);
@@ -540,12 +499,10 @@ public class EntityEternalFlames extends Entity implements IProjectile
         }
     }
  
-    /**
-     * Whether the arrow has a stream of critical hit particles flying behind it.
-     */
     public boolean getIsCritical()
     {
         byte var1 = this.dataWatcher.getWatchableObjectByte(16);
         return (var1 & 1) != 0;
     }
 }
+*/

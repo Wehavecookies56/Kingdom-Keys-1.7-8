@@ -15,6 +15,8 @@ import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
 import wehavecookies56.kk.KingdomKeys;
+import wehavecookies56.kk.api.synthesis.Recipe;
+import wehavecookies56.kk.api.synthesis.RecipeHandler;
 import wehavecookies56.kk.container.ContainerSynthesis;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyMunny;
 import wehavecookies56.kk.core.packet.IPacket;
@@ -396,17 +398,17 @@ public class GuiSynthesis extends GuiContainer {
 		EntityPropertyMunny props = EntityPropertyMunny.get(mc.thePlayer);
 		RecipeHandler rh = new RecipeHandler();
 		if(synthesis.getStackInSlot(0) != null){
-			for(int i = 0; i > (rh.getTotalRegistered() + 1)){
+			for(int i = 0; i > (rh.getTotalRegistered() + 1); i++){
 				Recipe r = rh.getRecipe(Integer.toString(i));
-				if(synthesis.getStackInSlot(0).getItem() == r.getRecipe().getItem()){
+				if(synthesis.getStackInSlot(0).getItem() == r.getRecipe()){
 					//Make colour and lighting display correctly
 					GL11.glColor3f(1, 1, 1);
 					GL11.glDisable(GL11.GL_LIGHTING);
 					//Display recipe cost
 					fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Cost) + ": " + r.getCost(), 38, 14, 0xFFF000);
 					//Tab 1 Content
-					if(GuiSynthesis.Clickedtab1){
-						if(mc.thePlayer.inventory.hasItem(r.getMaterials(r.materialsAmount() - r.materialsAmount + 1)){
+					if(GuiSynthesis.ClickedTab1){
+						if(mc.thePlayer.inventory.hasItem(r.getMaterials(r.materialsAmount() - r.materialsAmount() + 1).getItem())){
 							
 						}
 					}

@@ -23,32 +23,35 @@ import cpw.mods.fml.common.gameevent.PlayerEvent;
 public class MunnyPacket implements IPacket {
 		
 		ItemStack itemToRemove;
+		int munnyToGive;
 
 		public MunnyPacket() { }
-
-	    public MunnyPacket(ItemStack itemToRemove) {
-	    	this.itemToRemove = itemToRemove;
-	    	
-	    }
 	    
+	    public MunnyPacket(ItemStack itemToRemove, int munnyToGive){
+	    	this.itemToRemove = itemToRemove;
+	    	this.munnyToGive = munnyToGive;
+	    }
 	    
 		@Override
 		public void readBytes(ByteBuf bytes) {
 			this.itemToRemove = ByteBufUtils.readItemStack(bytes);
+			this.munnyToGive = bytes.readInt();
 			
 			ArrayList list = (ArrayList) MinecraftServer.getServer().getConfigurationManager().playerEntityList;
 			Iterator iterator = list.iterator();
 
 			EntityPlayerMP player = (EntityPlayerMP) iterator.next();
+			System.out.println("Packet");
 			
-			Item i = AddedItems.KingdomKey;
 			if(player.getHeldItem() != null){
 				if(player.getHeldItem().getItem() == itemToRemove.getItem()){
 					EntityPropertyMunny props = EntityPropertyMunny.get((EntityPlayer)player);
-					props.addMunny(1);
-					player.inventory.consumeInventoryItem(AddedItems.Munny1);
-					
-					player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(i));
+					System.out.println("Stack size:"+itemToRemove.stackSize);
+					for(int i = 0; i > itemToRemove.stackSize; i++){
+						System.out.println("Removing items");
+						player.inventory.consumeInventoryItem(itemToRemove.getItem());
+					}
+					props.addMunny(munnyToGive * itemToRemove.stackSize);
 				}
 			}
 		}
@@ -56,6 +59,7 @@ public class MunnyPacket implements IPacket {
 		@Override
 		public void writeBytes(ByteBuf bytes) {
 			ByteBufUtils.writeItemStack(bytes, this.itemToRemove);
+			bytes.writeInt(this.munnyToGive);
 
 		}
 

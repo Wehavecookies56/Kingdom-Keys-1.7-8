@@ -8,7 +8,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
 
 import org.apache.logging.log4j.Logger;
@@ -16,7 +15,6 @@ import org.apache.logging.log4j.Logger;
 import wehavecookies56.kk.achievements.AddedAchievments;
 import wehavecookies56.kk.api.synthesis.RecipeHandler;
 import wehavecookies56.kk.block.AddedBlocks;
-import wehavecookies56.kk.client.DisplayOnHUD;
 import wehavecookies56.kk.core.handlers.GiveMunny;
 import wehavecookies56.kk.core.handlers.GuiHandler;
 import wehavecookies56.kk.core.packet.ChannelHandler;
@@ -38,7 +36,6 @@ import wehavecookies56.kk.creativetab.KKSMTAB;
 import wehavecookies56.kk.creativetab.KKTAB;
 import wehavecookies56.kk.enchantments.EnchantHeartHarvest;
 import wehavecookies56.kk.entities.EntityBlastBlox;
-import wehavecookies56.kk.entities.EntityEternalFlames;
 import wehavecookies56.kk.entities.EntityEternalFlamesProjectile;
 import wehavecookies56.kk.entities.mob.VillagerTradeHandlerRecipes;
 import wehavecookies56.kk.event.DarkHeartDrops;
@@ -89,7 +86,7 @@ import cpw.mods.fml.relauncher.Side;
  */
 public class KingdomKeys {
 
-	public static DamageSource causeChakramDamage(EntityEternalFlames par0EntityArrow, Entity par1Entity) {
+	public static DamageSource causeChakramDamage(EntityEternalFlamesProjectile par0EntityArrow, Entity par1Entity) {
         return (new EntityDamageSourceIndirect("chakram", par0EntityArrow, par1Entity)).setProjectile();
     }
 	

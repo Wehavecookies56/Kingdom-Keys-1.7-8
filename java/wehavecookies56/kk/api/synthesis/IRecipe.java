@@ -12,7 +12,7 @@ public interface IRecipe {
 	void setCost(int cost);
 	
 	RecipeType getType();
-	ItemStack[] getMaterials();
+	ItemStack getMaterials(int arrayPos);
 	Item getResult();
 	Item getRecipe();
 	int getCost();

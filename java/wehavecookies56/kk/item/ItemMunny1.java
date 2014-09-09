@@ -22,9 +22,9 @@ public class ItemMunny1 extends ItemKingdomKeys{
     }
 	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer entity) {
 			
-			IPacket packet = new MunnyPacket(new ItemStack(AddedItems.Munny1));
+			IPacket packet = new MunnyPacket(new ItemStack(AddedItems.Munny1), 1);
 			KingdomKeys.network.sendToServer(packet);
-			entity.playSound("mob.enderman.portal", 1, 1);
+			entity.playSound("random.orb", 1, 1);
 			return super.onItemRightClick(item, world, entity);
 		}
     @SideOnly(Side.CLIENT)

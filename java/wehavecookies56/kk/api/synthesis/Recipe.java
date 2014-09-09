@@ -78,7 +78,7 @@ public class Recipe implements IRecipe {
 			return false;
 		}
 		
-		return this.recipe.isItemEqual(testStack);
+		return true;
 	}
 	
 }

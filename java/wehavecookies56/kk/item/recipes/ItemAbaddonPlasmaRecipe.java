@@ -70,7 +70,7 @@ public class ItemAbaddonPlasmaRecipe extends ItemKingdomKeys implements IRecipe{
 	}
 
 	@Override
-	public ItemStack[] getMaterials() {
+	public ItemStack getMaterials(int arrayPos) {
 		// TODO Auto-generated method stub
 		return null;
 	}
