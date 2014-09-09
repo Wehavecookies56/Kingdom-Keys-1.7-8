@@ -392,6 +392,14 @@ public class GuiSynthesis extends GuiContainer {
 	
 	//1
 	public void addSynthesisRecipe(Item recipe, Item result, ToolMaterial material, boolean isKeyblade, int cost, Item item1){
+		//WIP
+		RecipeHandler rh = new RecipeHandler();
+		if(synthesis.getStackInSlot(0) != null){
+			for(int i = 0; i > (rh.getTotalRegistered() + 1)){
+				if(synthesis.getStackInSlot(0).getItem() == rh.getRecipe(i));
+			}
+		}
+
 		EntityPropertyMunny props = EntityPropertyMunny.get(mc.thePlayer);
 		if(synthesis.getStackInSlot(0) != null)
 		{
