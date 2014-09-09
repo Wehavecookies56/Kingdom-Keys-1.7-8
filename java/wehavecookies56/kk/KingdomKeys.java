@@ -166,12 +166,13 @@ public class KingdomKeys {
     	ints.EnchantmentID = config.get(config.CATEGORY_GENERAL, "Enchantment ID", ints.ENCHANTMENTID_DEFAULT).getInt(ints.ENCHANTMENTID_DEFAULT);
     	ConfigBooleans.enableUpdateCheck = config.get(config.CATEGORY_GENERAL, ConfigBooleans.enableUpdateCheck_name, ConfigBooleans.enableUpdateCheck_default).getBoolean(ConfigBooleans.enableUpdateCheck_default);
     	
-    	final String GENERATE = config.CATEGORY_GENERAL + config.CATEGORY_SPLITTER + "world generation";
+    	final String GENERATE = config.CATEGORY_GENERAL + config.CATEGORY_SPLITTER + "World Generation";
         ConfigBooleans.enableGenerate = config.get(GENERATE, ConfigBooleans.enableGenerate_name, ConfigBooleans.enableGenerate_default).getBoolean(ConfigBooleans.enableGenerate_default);
         ConfigBooleans.enableOverworld = config.get(GENERATE, ConfigBooleans.enableOverworld_name, ConfigBooleans.enableOverworld_default).getBoolean(ConfigBooleans.enableOverworld_default);
-        
-        final String OVERWORLD = GENERATE + config.CATEGORY_SPLITTER + "overworld spawn chances";
-        config.addCustomCategoryComment(OVERWORLD, "Higher number = higher spawn chance");
+        ConfigBooleans.discSpawn = config.get(GENERATE, "Enable the disc spawning in chests", ConfigBooleans.discSpawn_default).getBoolean(ConfigBooleans.discSpawn_default);
+
+        final String OVERWORLD = GENERATE + config.CATEGORY_SPLITTER + "Overworld Spawn Chances";
+        config.addCustomCategoryComment(OVERWORLD, "Higher number = Higher spawn chance");
         ints.LucidOreChance = config.get(OVERWORLD, "Lucid Ore Spawn Chance", ints.LUCIDORECHANCE_DEFAULT).getInt(ints.LUCIDORECHANCE_DEFAULT);
         ints.SerenityOreChance = config.get(OVERWORLD, "Serenity Ore Spawn Chance", ints.SERENITYORECHANCE_DEFAULT).getInt(ints.SERENITYORECHANCE_DEFAULT);
         ints.TranquilOreChance = config.get(OVERWORLD, "Tranquil Ore Spawn Chance", ints.TRANQUILORECHANCE_DEFAULT).getInt(ints.TRANQUILORECHANCE_DEFAULT);
@@ -192,9 +193,9 @@ public class KingdomKeys {
         ints.DangerBlox = config.get(OVERWORLD, "Danger Blox Spawn Chance", ints.DANGERBLOX_DEFAULT).getInt(ints.DANGERBLOX_DEFAULT);
         ints.RarePrizeBlox = config.get(OVERWORLD, "Rare Prize Blox Spawn Chance", ints.RAREPRIZEBLOX_DEFAULT).getInt(ints.RAREPRIZEBLOX_DEFAULT);
         ints.PrizeBlox = config.get(OVERWORLD, "Prize Blox Spawn Chance", ints.PRIZEBLOX_DEFAULT).getInt(ints.PRIZEBLOX_DEFAULT);
-
+        
         final String END = GENERATE + config.CATEGORY_SPLITTER + "End Spawn Chances";
-        config.addCustomCategoryComment(END, "Higher number = higher spawn chance");
+        config.addCustomCategoryComment(END, "Higher number = Higher spawn chance");
         ints.PowerOreEChance = config.get(END, "Power Ore Spawn Chance", ints.POWEROREECHANCE_DEFAULT).getInt(ints.POWEROREECHANCE_DEFAULT);
         ints.DarkOreEChance = config.get(END, "Dark Ore Spawn Chance", ints.DARKOREECHANCE_DEFAULT).getInt(ints.DARKOREECHANCE_DEFAULT);
         ints.NormalBloxE = config.get(END, "Normal Blox Spawn Chance", ints.NORMALBLOXE_DEFAULT).getInt(ints.NORMALBLOXE_DEFAULT);

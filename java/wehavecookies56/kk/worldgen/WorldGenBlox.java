@@ -60,6 +60,17 @@ public class WorldGenBlox implements IWorldGenerator
 			this.spawnOres(AddedBlocks.NormalBlox, Blocks.sand, world, random, chunkX, chunkZ, 1, 1, 3, 20, ints.NormalBlox, 200);
 			this.spawnOres(AddedBlocks.HardBlox, Blocks.sand, world, random, chunkX, chunkZ, 1, 1, 3, 20, ints.HardBlox, 200);
 			this.spawnOres(AddedBlocks.MetalBlox, Blocks.sand, world, random, chunkX, chunkZ, 1, 1, 3, 20, ints.MetalBlox, 200);
+			
+			this.spawnOres(AddedBlocks.DangerBlox, Blocks.tallgrass, world, random, chunkX, chunkZ, 1, 1, 3, 20, ints.DangerBlox, 200);
+			this.spawnOres(AddedBlocks.NormalBlox, Blocks.tallgrass, world, random, chunkX, chunkZ, 1, 1, 3, 20, ints.NormalBlox, 200);
+			this.spawnOres(AddedBlocks.HardBlox, Blocks.tallgrass, world, random, chunkX, chunkZ, 1, 1, 3, 20, ints.HardBlox, 200);
+			this.spawnOres(AddedBlocks.MetalBlox, Blocks.tallgrass, world, random, chunkX, chunkZ, 1, 1, 3, 20, ints.MetalBlox, 200);
+			
+			this.spawnOres(AddedBlocks.DangerBlox, Blocks.deadbush, world, random, chunkX, chunkZ, 1, 1, 3, 20, ints.DangerBlox, 200);
+			this.spawnOres(AddedBlocks.NormalBlox, Blocks.deadbush, world, random, chunkX, chunkZ, 1, 1, 3, 20, ints.NormalBlox, 200);
+			this.spawnOres(AddedBlocks.HardBlox, Blocks.deadbush, world, random, chunkX, chunkZ, 1, 1, 3, 20, ints.HardBlox, 200);
+			this.spawnOres(AddedBlocks.MetalBlox, Blocks.deadbush, world, random, chunkX, chunkZ, 1, 1, 3, 20, ints.MetalBlox, 200);
+			
 			}
 		}
 
