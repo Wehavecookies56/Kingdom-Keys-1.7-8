@@ -19,6 +19,10 @@ public class Recipe implements IRecipe {
 		this.materials = materials;
 	}
 
+	public int materialsAmount(){
+		return this.materials.length + 1;
+	}
+	
 	@Override
 	public void setType(RecipeType type) {
 		this.type = type;
@@ -67,6 +71,14 @@ public class Recipe implements IRecipe {
 	@Override
 	public int getCost() {
 		return cost;
+	}
+	
+	public boolean isRecipeItemForRecipe(ItemStack testStack){
+		if(testStack == null || this.recipe == null){
+			return false;
+		}
+		
+		return this.recipe.isItemEqual(testStack);
 	}
 	
 }
