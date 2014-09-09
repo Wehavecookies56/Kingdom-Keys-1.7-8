@@ -16,6 +16,7 @@ import org.apache.logging.log4j.Logger;
 import wehavecookies56.kk.achievements.AddedAchievments;
 import wehavecookies56.kk.api.synthesis.RecipeHandler;
 import wehavecookies56.kk.block.AddedBlocks;
+import wehavecookies56.kk.client.DisplayOnHUD;
 import wehavecookies56.kk.core.handlers.GiveMunny;
 import wehavecookies56.kk.core.handlers.GuiHandler;
 import wehavecookies56.kk.core.packet.ChannelHandler;

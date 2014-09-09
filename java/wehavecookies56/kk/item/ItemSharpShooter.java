@@ -51,16 +51,9 @@ public class ItemSharpShooter extends ItemSword implements IBattlegearWeapon{
 		if (!player.isSneaking()){
     		Minecraft.getMinecraft().theWorld.playSoundAtEntity(player, "kk:sharpshooterbullet", 1, 1);
 
-			if (!world.isRemote) {
-				 for (int i = 0; i > 10; i+=1.0)
-				 {
-					 timer = i;
-				 } 
-				 if(timer > 9)
-				 { 
-					 timer = 0; 
-					 world.spawnEntityInWorld(new EntitySharpshooterBullet(world, player));			
-				 }
+			if (!world.isRemote) 
+			{
+				 world.spawnEntityInWorld(new EntitySharpshooterBullet(world, player));			
 			}
 		}
 		else

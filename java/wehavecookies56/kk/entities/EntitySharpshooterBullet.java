@@ -30,9 +30,7 @@ public class EntitySharpshooterBullet extends EntityThrowable{
 		
 	@Override
 	public void onUpdate() {
-		int rotation = 0;
 		Minecraft.getMinecraft().effectRenderer.addEffect(new SharpshooterBullet(worldObj, this.posX, this.posY, this.posZ));
-		this.rotationYaw = (rotation + 1) % 360;
 		if(ticksExisted > 60){
 			setDead();
 		}
