@@ -15,29 +15,17 @@ import net.minecraft.item.ItemStack;
 
 public class RecipeHandler {
 
-	public static Map<String, IRecipe> synthesisRecipes = new HashMap();
+	public static Map<String, Recipe> synthesisRecipes = new HashMap();
 	
-	public static void registerRecipe(String id, IRecipe recipe){
+	public static void registerRecipe(String id, Recipe recipe){
 		synthesisRecipes.put(id, recipe);
 	}
 
-	public static IRecipe getRecipe(String id){
+	public static Recipe getRecipe(String id){
 		return synthesisRecipes.get(id);
 	}
 	
 	public static int getTotalRegistered(){
 		return synthesisRecipes.size();
 	}
-	
-	public static Iterator<String> recipeIterator = synthesisRecipes.keySet().iterator();
-	
-	public static void iterateRecipes(){
-		while (recipeIterator.hasNext()){
-			String key = recipeIterator.next();
-			System.out.println("Recipe id: " + key + " Materials: " + synthesisRecipes.get(key));
-		}
-	
-
-	}
-	
 }
