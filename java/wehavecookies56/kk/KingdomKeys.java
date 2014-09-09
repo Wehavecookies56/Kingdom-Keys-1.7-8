@@ -233,7 +233,7 @@ public class KingdomKeys {
     	network.initialise();
     	SynthesisRecipes.initSynthesisRecipes();
     	logger.info("Registered " + RecipeHandler.getTotalRegistered() + " Synthesis recipes");
-    	RecipeHandler.iterateRecipes();
+    	//RecipeHandler.iterateRecipes();
         AddedAchievments.initAchievements();
         logger.info(Reference.MOD_NAME + ": Registered Added Achievements");
         MinecraftForge.EVENT_BUS.register(new HeartDrops());

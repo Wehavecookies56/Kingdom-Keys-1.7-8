@@ -20,7 +20,13 @@ public class ItemMunny1 extends ItemKingdomKeys{
         super();       
         this.setUnlocalizedName(Strings.Munny1); 
     }
-    
+	/*public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer entity) {
+			
+			IPacket packet = new MunnyPacket(new ItemStack(AddedItems.Munny1));
+			KingdomKeys.network.sendToServer(packet);
+			entity.playSound("mob.enderman.portal", 1, 1);
+			return super.onItemRightClick(item, world, entity);
+		}*/
     @SideOnly(Side.CLIENT)
     @Override
     public void registerIcons(IIconRegister par1IconRegister) {
