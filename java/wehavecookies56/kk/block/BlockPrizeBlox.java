@@ -77,4 +77,23 @@ public class BlockPrizeBlox extends Block {
 		return 1;
 		}
     }
+	
+	public int quantityDroppedWithBonus(int fortune, Random random)
+    {
+        if (fortune > 0)
+        {
+            int j = random.nextInt(fortune + 2) - 1;
+
+            if (j < 0)
+            {
+                j = 0;
+            }
+
+            return quantityDropped(random) * (j + 1);
+        }
+        else
+        {
+            return quantityDropped(random);
+        }
+    }
 }        	
