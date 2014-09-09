@@ -42,7 +42,7 @@ public class WorldGenBlox implements IWorldGenerator
 			this.spawnOres(AddedBlocks.PrizeBlox, Blocks.dirt, world, random, chunkX, chunkZ, 16, 16, 3, ints.PrizeBlox, 0, 128);
 			this.spawnOres(AddedBlocks.RarePrizeBlox, Blocks.dirt, world, random, chunkX, chunkZ, 16, 16, 3, ints.RarePrizeBlox, 0, 128);
 			
-			if (s.startsWith("Taiga") || s.startsWith("Ice plains") || s.startsWith("Ice Mountains") || s.startsWith("Frozen Ocean") || s.startsWith("Frozen River") || s.startsWith("TaigaHills"))
+			if (s.startsWith("Taiga") || s.startsWith("Ice Plains") || s.startsWith("Ice Mountains") || s.startsWith("Frozen Ocean") || s.startsWith("Frozen River") || s.startsWith("TaigaHills"))
 			{
 					this.spawnOres(AddedBlocks.FrostOre, Blocks.stone, world, random, chunkX, chunkZ, 16, 16, 6, ints.FrostOreChance, 25, 40);
 			}
