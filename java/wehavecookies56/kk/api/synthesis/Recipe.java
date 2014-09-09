@@ -54,8 +54,8 @@ public class Recipe implements IRecipe {
 	}
 
 	@Override
-	public ItemStack[] getMaterials() {
-		return materials;
+	public ItemStack getMaterials(int arrayPos) {
+		return materials[arrayPos];
 	}
 
 	@Override
