@@ -98,7 +98,13 @@ public class Recipes {
 			"HHH",
 			"HHH",
 			"HPH",
-			'P', Items.glass_bottle, 'H', AddedItems.HP
+			'P', AddedItems.EmptyBottle, 'H', AddedItems.HP
+		});
+		GameRegistry.addRecipe(new ItemStack(AddedItems.EmptyBottle), new Object[]{
+			"G G",
+			"G G",
+			" G ",
+			'G', Blocks.glass
 		});
 		//Blast blox recipe
 		GameRegistry.addRecipe(new ItemStack(AddedBlocks.BlastBlox), new Object[]{

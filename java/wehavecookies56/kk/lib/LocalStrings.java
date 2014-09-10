@@ -162,5 +162,7 @@ public class LocalStrings {
 	public static final String Menu_Config = "gui.menu.button.config";
 	
 	public static final String VoidedKnowledge = "tooltip.voidedknowledge.desc";
+	public static final String EmptyBottle = "item.emptyBottle.name";
+
 
 }

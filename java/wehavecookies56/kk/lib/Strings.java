@@ -562,4 +562,5 @@ public class Strings {
 	public static final String KingdomKeyDRecipe = "kingdomKeyDRecipe";
 	public static final String OblivionRecipe = "oblivionRecipe";
 	public static final String DarkMatterRecipe = "darkMatterRecipe";
+	public static final String EmptyBottle = "emptyBottle";
 }
