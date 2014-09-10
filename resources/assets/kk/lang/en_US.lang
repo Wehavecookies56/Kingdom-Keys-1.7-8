@@ -275,6 +275,7 @@ item.potion.name=Potion
 item.leatherDarkness.name=Leather Of The Darkness
 item.darkKnowledge.name=Dark Knowledge
 item.voidedKnowledge.name=Voided Knowledge
+item.emptyBottle.name=Empty Bottle
 
 #Armour names
 item.organizationHood.name=Dark Robe Hood
@@ -561,6 +562,9 @@ achievement.recipe=Let's see what this makes
 achievement.kingdomKey=The key that lights the darkness
 achievement.orichalcum=Ori... What?
 achievement.orichalcumPlus=+ Means better!
+achievement.munny=Ooh shiny!
+achievement.synthesiser=Isn't that a musical instrument or something?
+achievement.menu=What does this button do?
 
 #Achievement tool tips
 achievement.bugBlox.desc=Get a bug blox
@@ -568,6 +572,9 @@ achievement.recipe.desc=Get a recipe
 achievement.kingdomKey.desc=Get a keyblade for the first time
 achievement.orichalcum.desc=Obtain Orichalcum
 achievement.orichalcumPlus.desc=Obtain Orichalcum+
+achievement.munny.desc=Obtain Munny
+achievement.synthesiser.desc=Obtain a Synthesis Table
+achievement.menu.desc=Open the menu
 
 #Gui text
 #

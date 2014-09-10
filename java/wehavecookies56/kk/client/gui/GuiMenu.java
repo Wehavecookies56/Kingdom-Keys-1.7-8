@@ -100,6 +100,7 @@ public class GuiMenu extends GuiScreen {
         Stats.enabled = false;
         Abilities.enabled = false;
         Config.enabled = false;
+        Reports.enabled = false;
         super.drawScreen(mouseX, mouseY, renderPartials);
 	}
 	
