@@ -1,4 +1,4 @@
-package wehavecookies56.kk.item;
+package wehavecookies56.kk.item.Org13;
 
 import java.util.List;
 
@@ -17,9 +17,9 @@ import wehavecookies56.kk.lib.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemFairGame extends ItemSword implements IBattlegearWeapon{
+public class ItemFrozenPride extends ItemSword implements IBattlegearWeapon{
 	protected final ToolMaterial material;
-    public ItemFairGame(ToolMaterial abaddonPlasmaMaterial) {
+    public ItemFrozenPride(ToolMaterial abaddonPlasmaMaterial) {
         super(abaddonPlasmaMaterial);
         this.setCreativeTab(KingdomKeys.KHDAYSTAB);
         this.material = abaddonPlasmaMaterial;
@@ -48,9 +48,10 @@ public class ItemFairGame extends ItemSword implements IBattlegearWeapon{
     public EnumRarity getRarity(ItemStack par1ItemStack){
         return EnumRarity.uncommon;
     }
+    
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack itemStack, EntityPlayer player, List dataList, boolean bool){
-    	dataList.add("X Luxord");
+    	dataList.add("IV Vexen");
     }
     
 	@Override
@@ -81,7 +82,8 @@ public class ItemFairGame extends ItemSword implements IBattlegearWeapon{
 		return true;
 	}
 	@Override
-	public boolean offhandAttackEntity(OffhandAttackEvent event,
+	public boolean offhandAttackEntity(
+			mods.battlegear2.api.PlayerEventChild.OffhandAttackEvent event,
 			ItemStack mainhandItem, ItemStack offhandItem) {
 		return false;
 	}

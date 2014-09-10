@@ -1,4 +1,4 @@
-package wehavecookies56.kk.item;
+package wehavecookies56.kk.item.Org13;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.lib.ConfigBooleans;
@@ -15,9 +16,9 @@ import wehavecookies56.kk.lib.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemLunatic extends ItemSword implements IBattlegearWeapon{
+public class ItemLindWorm extends ItemSword implements IBattlegearWeapon{
 	protected final ToolMaterial material;
-    public ItemLunatic(ToolMaterial abaddonPlasmaMaterial) {
+    public ItemLindWorm(ToolMaterial abaddonPlasmaMaterial) {
         super(abaddonPlasmaMaterial);
         this.setCreativeTab(KingdomKeys.KHDAYSTAB);
         this.material = abaddonPlasmaMaterial;
@@ -28,7 +29,7 @@ public class ItemLunatic extends ItemSword implements IBattlegearWeapon{
     public void registerIcons(IIconRegister par1IconRegister) {
         itemIcon = par1IconRegister.registerIcon(Reference.MOD_ID + ":" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".")+1));
         }
-    
+
     @Override
     public boolean hasEffect(ItemStack par1ItemStack){
     	if(ConfigBooleans.enableShine == true){
@@ -46,10 +47,10 @@ public class ItemLunatic extends ItemSword implements IBattlegearWeapon{
     public EnumRarity getRarity(ItemStack par1ItemStack){
         return EnumRarity.uncommon;
     }
-        
+    
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack itemStack, EntityPlayer player, List dataList, boolean bool){
-    	dataList.add("VII Saix");
+    	dataList.add("III Xaldin");
     }
     
 	@Override

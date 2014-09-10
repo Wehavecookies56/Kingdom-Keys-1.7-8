@@ -1,4 +1,4 @@
-package wehavecookies56.kk.item;
+package wehavecookies56.kk.item.Org13;
 
 import java.util.List;
 
@@ -17,9 +17,9 @@ import wehavecookies56.kk.lib.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemFrozenPride extends ItemSword implements IBattlegearWeapon{
+public class ItemGracefulDahlia extends ItemSword implements IBattlegearWeapon{
 	protected final ToolMaterial material;
-    public ItemFrozenPride(ToolMaterial abaddonPlasmaMaterial) {
+    public ItemGracefulDahlia(ToolMaterial abaddonPlasmaMaterial) {
         super(abaddonPlasmaMaterial);
         this.setCreativeTab(KingdomKeys.KHDAYSTAB);
         this.material = abaddonPlasmaMaterial;
@@ -51,7 +51,7 @@ public class ItemFrozenPride extends ItemSword implements IBattlegearWeapon{
     
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack itemStack, EntityPlayer player, List dataList, boolean bool){
-    	dataList.add("IV Vexen");
+    	dataList.add("XI Marluxia");
     }
     
 	@Override

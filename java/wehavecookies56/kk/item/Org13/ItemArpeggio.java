@@ -1,4 +1,4 @@
-package wehavecookies56.kk.item;
+package wehavecookies56.kk.item.Org13;
 
 import java.util.List;
 
@@ -16,9 +16,9 @@ import wehavecookies56.kk.lib.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemLindWorm extends ItemSword implements IBattlegearWeapon{
+public class ItemArpeggio extends ItemSword implements IBattlegearWeapon{
 	protected final ToolMaterial material;
-    public ItemLindWorm(ToolMaterial abaddonPlasmaMaterial) {
+    public ItemArpeggio(ToolMaterial abaddonPlasmaMaterial) {
         super(abaddonPlasmaMaterial);
         this.setCreativeTab(KingdomKeys.KHDAYSTAB);
         this.material = abaddonPlasmaMaterial;
@@ -29,7 +29,7 @@ public class ItemLindWorm extends ItemSword implements IBattlegearWeapon{
     public void registerIcons(IIconRegister par1IconRegister) {
         itemIcon = par1IconRegister.registerIcon(Reference.MOD_ID + ":" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".")+1));
         }
-
+    
     @Override
     public boolean hasEffect(ItemStack par1ItemStack){
     	if(ConfigBooleans.enableShine == true){
@@ -50,7 +50,7 @@ public class ItemLindWorm extends ItemSword implements IBattlegearWeapon{
     
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack itemStack, EntityPlayer player, List dataList, boolean bool){
-    	dataList.add("III Xaldin");
+    	dataList.add("IX Demyx");
     }
     
 	@Override

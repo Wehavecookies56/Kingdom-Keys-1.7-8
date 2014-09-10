@@ -334,6 +334,7 @@
 	item.5000Munny.name=5000 Platines
 	item.6000Munny.name=6000 Platines
 	item.potion.name=Poción
+	item.emptyBottle.name=Botella Vacía
 	item.leatherDarkness.name=Cuero de la Oscuridad
 	item.darkKnowledge.name=Conocimiento Oscuro
 	item.voidedKnowledge.name=Conocimiento Vacío

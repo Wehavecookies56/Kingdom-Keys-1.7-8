@@ -1,43 +1,33 @@
-package wehavecookies56.kk.item;
+package wehavecookies56.kk.item.Org13;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.List;
 
 import mods.battlegear2.api.weapons.IBattlegearWeapon;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import wehavecookies56.kk.KingdomKeys;
-import wehavecookies56.kk.entities.EntityEternalFlamesProjectile;
-import wehavecookies56.kk.entities.EntitySharpshooterBullet;
 import wehavecookies56.kk.lib.ConfigBooleans;
 import wehavecookies56.kk.lib.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemSharpShooter extends ItemSword implements IBattlegearWeapon{
+public class ItemBookOfRetribution extends ItemSword implements IBattlegearWeapon{
 	protected final ToolMaterial material;
-	public ItemSharpShooter(ToolMaterial abaddonPlasmaMaterial) {
-		super(abaddonPlasmaMaterial);
-		this.setCreativeTab(KingdomKeys.KHDAYSTAB);
-		this.material = abaddonPlasmaMaterial;
-	}
-	private int timer = 0;
-	
+    public ItemBookOfRetribution(ToolMaterial abaddonPlasmaMaterial) {
+        super(abaddonPlasmaMaterial);
+        this.setCreativeTab(KingdomKeys.KHDAYSTAB);
+        this.material = abaddonPlasmaMaterial;
+    }
+    
     @SideOnly(Side.CLIENT)
     @Override
-	public void registerIcons(IIconRegister par1IconRegister) {
-		itemIcon = par1IconRegister.registerIcon(Reference.MOD_ID + ":" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".")+1));
-	}
+    public void registerIcons(IIconRegister par1IconRegister) {
+        itemIcon = par1IconRegister.registerIcon(Reference.MOD_ID + ":" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".")+1));
+        }
 
     @Override
     public boolean hasEffect(ItemStack par1ItemStack){
@@ -57,29 +47,11 @@ public class ItemSharpShooter extends ItemSword implements IBattlegearWeapon{
         return EnumRarity.uncommon;
     }
     
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-		if (!player.isSneaking()){
-
-			if (!world.isRemote) 
-			{
-	    		player.playSound("kk:sharpshooterbullet", 1F, 1F);
-				world.spawnEntityInWorld(new EntitySharpshooterBullet(world, player));			
-			}
-		}
-		else
-		{
-			player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
-	        return stack;
-		}
-		
-	return stack;
-	}
-	
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack itemStack, EntityPlayer player, List dataList, boolean bool){
-		dataList.add("II Xigbar");
-	}
-
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack itemStack, EntityPlayer player, List dataList, boolean bool){
+    	dataList.add("VI Zexion");
+    }
+    
 	@Override
 	public boolean sheatheOnBack(ItemStack item) {
 		return true;
@@ -101,7 +73,7 @@ public class ItemSharpShooter extends ItemSword implements IBattlegearWeapon{
 	@Override
 	public void performPassiveEffects(Side effectiveSide,
 			ItemStack mainhandItem, ItemStack offhandItem) {
-
+		
 	}
 	@Override
 	public boolean allowOffhand(ItemStack mainhand, ItemStack offhand) {
@@ -113,5 +85,6 @@ public class ItemSharpShooter extends ItemSword implements IBattlegearWeapon{
 			ItemStack mainhandItem, ItemStack offhandItem) {
 		return false;
 	}
-
+	
+	
 }

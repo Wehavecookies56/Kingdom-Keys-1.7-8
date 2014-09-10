@@ -1,7 +1,8 @@
-package wehavecookies56.kk.item;
+package wehavecookies56.kk.item.Org13;
 
 import java.util.List;
 
+import mods.battlegear2.api.PlayerEventChild.OffhandAttackEvent;
 import mods.battlegear2.api.weapons.IBattlegearWeapon;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,16 +17,16 @@ import wehavecookies56.kk.lib.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemInterdiction extends ItemSword implements IBattlegearWeapon{
+public class ItemFairGame extends ItemSword implements IBattlegearWeapon{
 	protected final ToolMaterial material;
-    public ItemInterdiction(ToolMaterial abaddonPlasmaMaterial) {
+    public ItemFairGame(ToolMaterial abaddonPlasmaMaterial) {
         super(abaddonPlasmaMaterial);
         this.setCreativeTab(KingdomKeys.KHDAYSTAB);
         this.material = abaddonPlasmaMaterial;
     }
     
     @SideOnly(Side.CLIENT)
-    @Override
+	@Override
     public void registerIcons(IIconRegister par1IconRegister) {
         itemIcon = par1IconRegister.registerIcon(Reference.MOD_ID + ":" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".")+1));
         }
@@ -47,10 +48,9 @@ public class ItemInterdiction extends ItemSword implements IBattlegearWeapon{
     public EnumRarity getRarity(ItemStack par1ItemStack){
         return EnumRarity.uncommon;
     }
-    
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack itemStack, EntityPlayer player, List dataList, boolean bool){
-    	dataList.add("I Xenmas");
+    	dataList.add("X Luxord");
     }
     
 	@Override
@@ -81,8 +81,7 @@ public class ItemInterdiction extends ItemSword implements IBattlegearWeapon{
 		return true;
 	}
 	@Override
-	public boolean offhandAttackEntity(
-			mods.battlegear2.api.PlayerEventChild.OffhandAttackEvent event,
+	public boolean offhandAttackEntity(OffhandAttackEvent event,
 			ItemStack mainhandItem, ItemStack offhandItem) {
 		return false;
 	}

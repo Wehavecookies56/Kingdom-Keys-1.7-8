@@ -1,8 +1,7 @@
-package wehavecookies56.kk.item;
+package wehavecookies56.kk.item.Org13;
 
 import java.util.List;
 
-import mods.battlegear2.api.PlayerEventChild.OffhandAttackEvent;
 import mods.battlegear2.api.weapons.IBattlegearWeapon;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,16 +16,16 @@ import wehavecookies56.kk.lib.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemGracefulDahlia extends ItemSword implements IBattlegearWeapon{
+public class ItemInterdiction extends ItemSword implements IBattlegearWeapon{
 	protected final ToolMaterial material;
-    public ItemGracefulDahlia(ToolMaterial abaddonPlasmaMaterial) {
+    public ItemInterdiction(ToolMaterial abaddonPlasmaMaterial) {
         super(abaddonPlasmaMaterial);
         this.setCreativeTab(KingdomKeys.KHDAYSTAB);
         this.material = abaddonPlasmaMaterial;
     }
     
     @SideOnly(Side.CLIENT)
-	@Override
+    @Override
     public void registerIcons(IIconRegister par1IconRegister) {
         itemIcon = par1IconRegister.registerIcon(Reference.MOD_ID + ":" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".")+1));
         }
@@ -51,7 +50,7 @@ public class ItemGracefulDahlia extends ItemSword implements IBattlegearWeapon{
     
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack itemStack, EntityPlayer player, List dataList, boolean bool){
-    	dataList.add("XI Marluxia");
+    	dataList.add("I Xenmas");
     }
     
 	@Override
