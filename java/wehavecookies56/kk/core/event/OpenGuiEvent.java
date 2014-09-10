@@ -1,4 +1,4 @@
-package wehavecookies56.kk.event;
+package wehavecookies56.kk.core.event;
 
 import com.jcraft.jorbis.Block;
 

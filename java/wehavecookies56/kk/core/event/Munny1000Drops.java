@@ -1,4 +1,4 @@
-package wehavecookies56.kk.event;
+package wehavecookies56.kk.core.event;
 
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;

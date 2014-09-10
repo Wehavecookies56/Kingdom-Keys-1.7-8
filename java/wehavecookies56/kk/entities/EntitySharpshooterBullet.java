@@ -1,10 +1,6 @@
 package wehavecookies56.kk.entities;
 
-import wehavecookies56.kk.client.particles.SharpshooterBullet;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
@@ -30,7 +26,6 @@ public class EntitySharpshooterBullet extends EntityThrowable{
 		
 	@Override
 	public void onUpdate() {
-		Minecraft.getMinecraft().effectRenderer.addEffect(new SharpshooterBullet(worldObj, this.posX, this.posY, this.posZ));
 		if(ticksExisted > 40){
 			setDead();
 		}

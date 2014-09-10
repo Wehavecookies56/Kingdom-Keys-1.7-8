@@ -43,6 +43,7 @@ public class EntityRenderEternalFlamesProjectile extends Render {
 
 		GL11.glRotatef(90F, 1F, 0F, 0F);
 
+
 		model.render(entity, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 
 		GL11.glPopMatrix();

@@ -6,16 +6,16 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 import wehavecookies56.kk.KingdomKeys;
+import wehavecookies56.kk.core.packet.IPacket;
 import wehavecookies56.kk.core.packet.SyncPlayerPropsPacket;
 import wehavecookies56.kk.core.proxies.CommonProxy;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
 
 public class EntityPropertyMunny implements IExtendedEntityProperties {
 
 	public final static String EXT_PROP_NAME = "PlayerMunnyKK";
 	private final EntityPlayer player;
 	
-	private int currentMunny;
+	public static int currentMunny;
 	public static int maxMunny;
 	
 	public static final int MUNNY_WATCHER = 20;
@@ -98,9 +98,17 @@ public class EntityPropertyMunny implements IExtendedEntityProperties {
 		EntityPropertyMunny playerData = EntityPropertyMunny.get(player);
 		NBTTagCompound savedData = CommonProxy.getEntityData(getSaveKey(player));
 		if (savedData != null) { playerData.loadNBTData(savedData); }
+		
+		
+		
+		IPacket packet = new SyncPlayerPropsPacket(maxMunny, currentMunny);
+		KingdomKeys.network.sendToServer(packet);
+		
+		
 	}
 	
 	private static final String getSaveKey(EntityPlayer player) {
 		return player.getCommandSenderName() + ":" + EXT_PROP_NAME;
 	}
+
 }

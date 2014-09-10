@@ -1,5 +1,5 @@
-package wehavecookies56.kk.event;
-
+package wehavecookies56.kk.core.event;
+ 
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityCaveSpider;
@@ -29,8 +29,8 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import wehavecookies56.kk.item.AddedItems;
 import wehavecookies56.kk.lib.ConfigBooleans;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-
-public class Munny20Drops {
+ 
+public class HPOrbDrops {
 	public static double rand; 
 	
 	/*
@@ -43,23 +43,23 @@ public class Munny20Drops {
 			rand = Math.random();
 			if (event.entityLiving instanceof EntityBat || event.entityLiving instanceof EntitySheep || event.entityLiving instanceof EntityCow || event.entityLiving instanceof EntityPig || event.entityLiving instanceof EntityChicken || event.entityLiving instanceof EntityHorse || event.entityLiving instanceof EntityOcelot || event.entityLiving instanceof EntitySquid || event.entityLiving instanceof EntityWolf || event.entityLiving instanceof EntitySnowman) {
 				//The integer at the end relates to how many Items will be dropped(percentage). 
-				if (rand < 0.10d && ConfigBooleans.munnyDrops){
+				if (rand < 0.10d){
 					//The integer at the end relates to how many Items will be dropped(amount). 
-					event.entityLiving.dropItem(AddedItems.Munny20, 1);
+					event.entityLiving.dropItem(AddedItems.HP, 1);
 				}
 			}
 		}
 	}
+ 
 	@SubscribeEvent
 	public void onHostileEntityDrop(LivingDropsEvent event) {
 		if (event.source.getDamageType().equals("player")) {
 			rand = Math.random();
 			if (event.entityLiving instanceof EntitySkeleton || event.entityLiving instanceof EntityCreeper || event.entityLiving instanceof EntitySpider || event.entityLiving instanceof EntityCaveSpider || event.entityLiving instanceof EntityEnderman || event.entityLiving instanceof EntityZombie || event.entityLiving instanceof EntityPigZombie || event.entityLiving instanceof EntityIronGolem || event.entityLiving instanceof EntityBlaze || event.entityLiving instanceof EntitySlime || event.entityLiving instanceof EntityMagmaCube || event.entityLiving instanceof EntityWitch || event.entityLiving instanceof EntitySilverfish || event.entityLiving instanceof EntityGhast) {
 				//The integer at the end relates to how many Items will be dropped(percentage). 
-				if (rand < 0.10d && ConfigBooleans.munnyDrops){
+				if (rand < 0.20d){
 					//The integer at the end relates to how many Items will be dropped(amount). 
-					event.entityLiving.dropItem(AddedItems.Munny20, 1);
-				}
+					event.entityLiving.dropItem(AddedItems.HP, 1);				}
 			}
 		}
 	}
@@ -69,12 +69,10 @@ public class Munny20Drops {
 			rand = Math.random();
 			if (event.entityLiving instanceof EntityDragon) {
 				//The integer at the end relates to how many Items will be dropped(percentage). 
-				if (rand < 0.75d && ConfigBooleans.munnyDrops){
+				if (rand < 1.00d && ConfigBooleans.munnyDrops){
 					//The integer at the end relates to how many Items will be dropped(amount). 
-					event.entityLiving.dropItem(AddedItems.Munny20, 10);
-				}
+					event.entityLiving.dropItem(AddedItems.HP, 6);				}
 			}
 		}
 	}
 }
-

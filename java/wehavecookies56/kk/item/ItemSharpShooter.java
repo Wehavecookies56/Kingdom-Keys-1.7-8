@@ -59,11 +59,11 @@ public class ItemSharpShooter extends ItemSword implements IBattlegearWeapon{
     
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		if (!player.isSneaking()){
-    		Minecraft.getMinecraft().theWorld.playSoundAtEntity(player, "kk:sharpshooterbullet", 1, 1);
 
 			if (!world.isRemote) 
 			{
-				 world.spawnEntityInWorld(new EntitySharpshooterBullet(world, player));			
+	    		player.playSound("kk:sharpshooterbullet", 1F, 1F);
+				world.spawnEntityInWorld(new EntitySharpshooterBullet(world, player));			
 			}
 		}
 		else
