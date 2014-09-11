@@ -215,7 +215,7 @@ public class KingdomKeys {
         ConfigBooleans.heartRecipe = config.get(RECIPE, ConfigBooleans.heartRecipe_name, ConfigBooleans.heartRecipe_default).getBoolean(ConfigBooleans.heartRecipe_default);
         ConfigBooleans.bloxRecipe = config.get(RECIPE, ConfigBooleans.bloxRecipe_name, ConfigBooleans.bloxRecipe_default).getBoolean(ConfigBooleans.bloxRecipe_default);
         ConfigBooleans.munnyDrops = config.get(RECIPE, ConfigBooleans.munnyDrops_name, ConfigBooleans.munnyDrops_default).getBoolean(ConfigBooleans.munnyDrops_default);       
-
+        ConfigBooleans.expensiveDarkMatter = config.get(RECIPE, ConfigBooleans.expensiveDarkMatter_name, ConfigBooleans.expensiveDarkMatter_default).getBoolean(ConfigBooleans.expensiveDarkMatter_default);
     	if(config.hasChanged()){
     		config.save();
     	}

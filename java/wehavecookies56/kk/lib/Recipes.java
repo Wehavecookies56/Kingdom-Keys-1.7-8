@@ -17,6 +17,15 @@ public class Recipes {
 		ItemStack blackDye = new ItemStack(Items.dye, 1, 0);
 		ItemStack yellowDye = new ItemStack(Items.dye, 1, 11);
 		
+		if(ConfigBooleans.expensiveDarkMatter == true){
+			GameRegistry.addRecipe(new ItemStack(AddedItems.DarkMatter,8), new Object[]{
+				"DDD",
+				"DOD",
+				"DDD",
+				'D', Blocks.diamond_block, 'O', Blocks.obsidian
+			});
+		}
+		
 		if(ConfigBooleans.heartRecipe == false){
 			GameRegistry.addRecipe(new ItemStack(AddedItems.Heart), new Object[]{
 				" D ",

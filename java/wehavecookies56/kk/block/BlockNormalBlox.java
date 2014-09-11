@@ -11,7 +11,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockNormalBlox extends Block {
 
     public BlockNormalBlox() {
-        super(Material.ground);
+        super(Material.rock);
         this.setBlockName(Strings.NBlox);
         this.setStepSound(soundTypeMetal);
         this.setHardness(2.5F);
