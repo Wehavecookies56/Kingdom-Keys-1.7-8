@@ -18,11 +18,11 @@ public class Recipes {
 		ItemStack yellowDye = new ItemStack(Items.dye, 1, 11);
 		
 		if(ConfigBooleans.expensiveDarkMatter == true){
-			GameRegistry.addRecipe(new ItemStack(AddedItems.DarkMatter,8), new Object[]{
+			GameRegistry.addRecipe(new ItemStack(AddedItems.DarkMatter,2), new Object[]{
 				"DDD",
 				"DOD",
 				"DDD",
-				'D', Blocks.diamond_block, 'O', Blocks.obsidian
+				'D', Items.diamond, 'O', Blocks.obsidian
 			});
 		}
 		
