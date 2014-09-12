@@ -13,6 +13,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.entities.tileentities.TileEntitySynthesis;
@@ -32,7 +34,7 @@ public class BlockSynthesis extends BlockContainer{
 		this.setResistance(0.5F);
 		this.setHardness(1.5F);
 	}
-
+	
 	@SideOnly(Side.CLIENT)
     private IIcon synthIconTop;
     @SideOnly(Side.CLIENT)

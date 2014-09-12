@@ -2,6 +2,7 @@ package wehavecookies56.kk.core.event;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.util.StatCollector;
 import wehavecookies56.kk.achievements.AddedAchievments;
 import wehavecookies56.kk.block.AddedBlocks;
@@ -19,6 +20,7 @@ public class OnPickUpEvent {
 	@SubscribeEvent
 	public void onPickUp(PlayerEvent.ItemPickupEvent event){
 		EntityPropertyMunny munny = EntityPropertyMunny.get((EntityPlayer) event.player);
+
 		//Bug Blox Achievments
 				if(Block.getBlockFromItem(event.pickedUp.getEntityItem().getItem()).equals(AddedBlocks.NormalBlox)){
 					event.player.addStat(AddedAchievments.bugBlox, 1);

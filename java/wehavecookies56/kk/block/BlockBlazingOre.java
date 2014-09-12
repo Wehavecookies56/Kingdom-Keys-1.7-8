@@ -6,8 +6,13 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.item.EntityXPOrb;
+import net.minecraft.entity.monster.EntitySilverfish;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import wehavecookies56.kk.item.AddedItems;
 import wehavecookies56.kk.lib.Reference;
@@ -24,6 +29,19 @@ public class BlockBlazingOre extends Block {
         this.setHardness(3.0F);
         this.setResistance(5.0F);
         this.setHarvestLevel("pickaxe", 1);
+    }
+    
+    private Random rand = new Random();
+    @Override
+    public int getExpDrop(IBlockAccess p_149690_1_, int p_149690_5_, int p_149690_7_)
+    {
+        if (this.getItemDropped(p_149690_5_, rand, p_149690_7_) != Item.getItemFromBlock(this))
+        {
+            int j1;
+                j1 = MathHelper.getRandomIntegerInRange(rand, 2, 4);
+            return j1;
+        }
+        return 0;
     }
 
     @SideOnly(Side.CLIENT)

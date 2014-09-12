@@ -8,6 +8,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import wehavecookies56.kk.item.AddedItems;
 import wehavecookies56.kk.lib.Reference;
@@ -25,6 +27,18 @@ public class BlockPrizeBlox extends Block {
         this.setResistance(0.0F);
     }
 
+    private Random rand = new Random();
+    @Override
+    public int getExpDrop(IBlockAccess p_149690_1_, int p_149690_5_, int p_149690_7_)
+    {
+        if (this.getItemDropped(p_149690_5_, rand, p_149690_7_) != Item.getItemFromBlock(this))
+        {
+            int j1 = 5;
+            return j1;
+        }
+        return 0;
+    }
+    
     @SideOnly(Side.CLIENT)
     @Override
     public void registerBlockIcons(IIconRegister par1IconRegister) {
