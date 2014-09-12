@@ -8,6 +8,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -24,11 +25,18 @@ public class ItemPotion extends ItemFood{
         this.setUnlocalizedName(Strings.Potion);
         this.setCreativeTab(KingdomKeys.KKTAB);
         this.setAlwaysEdible();
-        this.setPotionEffect(Potion.heal.id, 1, 1, 1.0F);
+        //this.setPotionEffect(Potion.heal.id, 1, 1, 1.0F);
+    }
+    
+    public EnumAction getItemUseAction(ItemStack p_77661_1_)
+    {
+        return EnumAction.drink;
     }
     
     public ItemStack onEaten(ItemStack item, World world, EntityPlayer player)
     {
+		player.heal(16);
+    	
         if (!player.capabilities.isCreativeMode)
         {
             --item.stackSize;

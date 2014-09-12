@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import org.lwjgl.input.Keyboard;
 
 import wehavecookies56.kk.KingdomKeys;
+import wehavecookies56.kk.achievements.AddedAchievments;
 import wehavecookies56.kk.client.gui.GuiMenu;
 import wehavecookies56.kk.core.packet.IPacket;
 import wehavecookies56.kk.core.packet.SummonPacket;
@@ -39,10 +40,8 @@ public class KeyBind{
 	 * KeyInputEvent is in the FML package, so we must register to the FML event bus
 	 */
 	@SubscribeEvent
-	public void onKeyInput(KeyInputEvent event) {
-		
+	public void onKeyInput(KeyInputEvent event) {	
 		EntityPlayer player = (EntityPlayer) Minecraft.getMinecraft().thePlayer;
-		
 		if (keys[MENU].isPressed()) {
 			if(Minecraft.getMinecraft().currentScreen == new GuiMenu()){
 				Minecraft.getMinecraft().displayGuiScreen(null);

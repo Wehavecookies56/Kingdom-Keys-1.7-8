@@ -24,7 +24,6 @@ public class AddedAchievments {
 		munny = new Achievement("achievement.munny", "munny", 1,2, AddedItems.Munny1, menu).registerStat();
 		synthesizer = new Achievement("achievement.synthetizer","synthesizer", 3, 2, AddedBlocks.Synthesiser, munny).registerStat();
 
-		
 		bugBlox = new Achievement("achievemnt.bugBlox", "bugBlox", -3, -2, AddedBlocks.NormalBlox, menu).initIndependentStat().registerStat();
 		recipe = new Achievement("achievement.recipe", "recipe", 3, -2, AddedItems.K1r, menu).initIndependentStat().registerStat();
 		
