@@ -2,6 +2,7 @@ package wehavecookies56.kk.core.event;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.StatCollector;
 import wehavecookies56.kk.achievements.AddedAchievments;
@@ -203,5 +204,28 @@ public class OnPickUpEvent {
 				{
 					event.player.addStat(AddedAchievments.hp, 1);
 				}
+				
+				else if(event.pickedUp.getEntityItem().getItem().equals(AddedItems.DarkHeart))
+				{
+					event.player.addStat(AddedAchievments.dheart, 1);
+				}
+				
+				else if(event.pickedUp.getEntityItem().getItem().equals(AddedItems.Heart))
+				{
+					event.player.addStat(AddedAchievments.heart, 1);
+				}
+
+				
+				else if(event.pickedUp.getEntityItem().getItem().equals(AddedItems.PureHeart))
+				{
+					event.player.addStat(AddedAchievments.pheart, 1);
+				}
+
+				
+				else if(event.pickedUp.getEntityItem().getItem().equals(AddedItems.KingdomHearts))
+				{
+					event.player.addStat(AddedAchievments.khearts, 1);
+				}
+				
 	}
 }

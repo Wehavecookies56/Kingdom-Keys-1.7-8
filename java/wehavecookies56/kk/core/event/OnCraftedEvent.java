@@ -28,6 +28,21 @@ public class OnCraftedEvent {
 		{
 			event.player.addStat(AddedAchievments.kkpotion, 1);
 		}
+		
+		else if(Block.getBlockFromItem(event.crafting.getItem()).equals(AddedItems.Heart))
+		{
+			event.player.addStat(AddedAchievments.heart, 1);
+		}
+		
+		else if(Block.getBlockFromItem(event.crafting.getItem()).equals(AddedItems.PureHeart))
+		{
+			event.player.addStat(AddedAchievments.pheart, 1);
+		}
+		
+		else if(Block.getBlockFromItem(event.crafting.getItem()).equals(AddedItems.KingdomHearts))
+		{
+			event.player.addStat(AddedAchievments.khearts, 1);
+		}
 	}
 	
 }
