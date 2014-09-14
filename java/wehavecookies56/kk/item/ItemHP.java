@@ -30,9 +30,9 @@ public class ItemHP extends Item{
 	{
 		if(!(entity.getHealth() == 20))
 		{
-		entity.heal(2);
-		
-		entity.inventory.consumeInventoryItem(AddedItems.HP);
+			entity.heal(2);
+			//entity.inventory.setInventorySlotContents(entity.inventory.currentItem, null);
+			entity.inventory.consumeInventoryItem(AddedItems.HP);
 		}
 		return item;	
 	}

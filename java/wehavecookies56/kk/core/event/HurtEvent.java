@@ -20,7 +20,7 @@ public class HurtEvent
 		if(event.entityLiving instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer) event.entityLiving;
-			if(player.getHeldItem().getItem() != null && player.getHeldItem().getItem() == AddedItems.FrozenPride)
+			if(player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.FrozenPride)
 			{
 				if(player.isBlocking())
 				{	

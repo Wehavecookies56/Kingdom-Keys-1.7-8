@@ -51,7 +51,7 @@ public class ItemFrozenPride extends ItemSword implements IBattlegearWeapon{
 	{
 		EntityPlayer player = (EntityPlayer) entity;
 
-		if(player.getHeldItem().getItem() != null && player.getHeldItem().getItem() == AddedItems.FrozenPride)
+		if(player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.FrozenPride)
 		{
 			if(player.isBlocking())
 			{	
