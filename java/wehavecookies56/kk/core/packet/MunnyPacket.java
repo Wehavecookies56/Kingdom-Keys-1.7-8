@@ -42,14 +42,7 @@ public class MunnyPacket implements IPacket {
 
 			EntityPlayerMP player = (EntityPlayerMP) iterator.next();
 			
-			if(player.getHeldItem() != null){
-				if(player.getHeldItem().getItem() == itemToRemove.getItem()){
-					EntityPropertyMunny props = EntityPropertyMunny.get((EntityPlayer)player);
-					props.addMunny(munnyToGive * player.getHeldItem().stackSize);
-					player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
-
-				}
-			}
+			
 		}
 		
 		@Override
@@ -66,7 +59,15 @@ public class MunnyPacket implements IPacket {
 
 		@Override
 		public void handleServerSide(NetHandlerPlayServer nhServer) {
-			
+			EntityPlayer player = nhServer.playerEntity;
+			if(player.getHeldItem() != null){
+				if(player.getHeldItem().getItem() == itemToRemove.getItem()){
+					EntityPropertyMunny props = EntityPropertyMunny.get((EntityPlayer)player);
+					props.addMunny(munnyToGive * player.getHeldItem().stackSize);
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
+
+				}
+			}
 		}
 
 	}

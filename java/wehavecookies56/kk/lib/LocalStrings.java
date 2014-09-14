@@ -153,16 +153,16 @@ public class LocalStrings {
 	public static final String Synthesis_Material = "gui.synthesis.material";
 	public static final String Synthesis_Attack_Damage = "gui.synthesis.attackdamage";
 
-	public static final String Menu_Title = "gui.menu.title";
 	public static final String Menu_Time = "gui.menu.time";
-	public static final String Menu_Keyblade = "gui.menu.button.keyblade";
+	public static final String Menu_Keyblades = "gui.menu.button.keyblades";
+	public static final String Menu_Items = "gui.menu.button.items";
 	public static final String Menu_Reports = "gui.menu.button.reports";
 	public static final String Menu_Stats = "gui.menu.button.stats";
 	public static final String Menu_Abilities = "gui.menu.button.abilities";
 	public static final String Menu_Config = "gui.menu.button.config";
+	public static final String Menu_Back = "gui.menu.button.back";
 	
 	public static final String VoidedKnowledge = "tooltip.voidedknowledge.desc";
 	public static final String EmptyBottle = "item.emptyBottle.name";
-
 
 }
