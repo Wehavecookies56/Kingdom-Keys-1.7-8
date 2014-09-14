@@ -39,11 +39,13 @@ public class BlockBounceBlox extends Block {
 
         blockIcon = par1IconRegister.registerIcon(Reference.MOD_ID + ":" + (this.getUnlocalizedName().substring(5)));
     }
+        
     @Override
     protected boolean canSilkHarvest()
     {
             return true;
     }
+    
     @Override
     public void onFallenUpon(World par1World,int par2,int par3,int par4,Entity par5Entity,float par6)
     {

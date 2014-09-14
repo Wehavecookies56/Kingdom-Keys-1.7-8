@@ -14,6 +14,7 @@ import wehavecookies56.kk.client.render.ItemRenderInterdiction;
 import wehavecookies56.kk.client.render.ItemRenderKingdomKey;
 import wehavecookies56.kk.client.render.ItemRenderKingdomKeyD;
 import wehavecookies56.kk.client.render.ItemRenderLunarEclipse;
+import wehavecookies56.kk.client.render.ItemRenderMasterKeeper;
 import wehavecookies56.kk.client.render.ItemRenderOathKeeper;
 import wehavecookies56.kk.client.render.ItemRenderOblivion;
 import wehavecookies56.kk.client.render.ItemRenderRainFell;
@@ -61,7 +62,8 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(AddedItems.EternalFlames, new ItemRenderEternalFlames());
 		MinecraftForgeClient.registerItemRenderer(AddedItems.SkySplitter, new ItemRenderSkysplitter());
 		MinecraftForgeClient.registerItemRenderer(AddedItems.VoidedKnowledge, new ItemRenderVoidedKnowledge());
-
+		MinecraftForgeClient.registerItemRenderer(AddedItems.MasterKeeper, new ItemRenderMasterKeeper());
+		
 		//Entities
 		RenderingRegistry.registerEntityRenderingHandler(EntityBlastBlox.class, new BlockRenderBlastBlox());
 		RenderingRegistry.registerEntityRenderingHandler(EntityEternalFlamesProjectile.class, new EntityRenderEternalFlamesProjectile(AddedItems.EternalFlames));
