@@ -37,7 +37,7 @@ public class GuiMenu extends GuiMenuBase {
 	private String locName;
 	private int locID;
 	private long worldTime;
-	private int section = 0;;
+	private int section = 0;
 
 	Minecraft mc = Minecraft.getMinecraft();
 
@@ -116,19 +116,15 @@ public class GuiMenu extends GuiMenuBase {
 		case 5:
 			//TODO Config GUI, Change certain settings, Character customisation, Other stuff
 			mc.displayGuiScreen(new GuiHair());
+			break;
 		case 6:
 			section = 0;
+			break;
+		case 7:
+			mc.displayGuiScreen(new GuiDrives());
+			break;
 		}
 		super.actionPerformed(button);
-	}
-
-	public static String formatTime(Long time) {
-		int hours24 = (int)(time.longValue() / 1000L + 6L) % 24;
-		int hours = hours24 % 12;
-		int minutes = (int)((float)time.longValue() / 16.666666F % 60.0F);
-
-		String Time = String.format("%02d:%02d %s", new Object[] { Integer.valueOf(hours < 1 ? 12 : hours), Integer.valueOf(minutes), hours24 < 12 ? "AM" : "PM" });
-		return Time;
 	}
 
 }
