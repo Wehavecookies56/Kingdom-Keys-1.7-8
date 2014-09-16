@@ -50,7 +50,7 @@ public class ItemInterdiction extends ItemSword implements IBattlegearWeapon{
     
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack itemStack, EntityPlayer player, List dataList, boolean bool){
-    	dataList.add("I Xenmas");
+    	dataList.add("I Xemnas");
     }
     
 	@Override

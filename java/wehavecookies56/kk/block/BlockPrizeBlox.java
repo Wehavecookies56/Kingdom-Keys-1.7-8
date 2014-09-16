@@ -85,10 +85,13 @@ public class BlockPrizeBlox extends Block {
 	@Override
     public int quantityDropped(Random par1Random)
     {
-		if(d==AddedItems.HP || d==AddedItems.Munny1 || d==AddedItems.Munny5 || d==AddedItems.Munny10 || d==AddedItems.Munny20){
-		return 4 + par1Random.nextInt(2);
-		}else{
-		return 1;
+		if(d==AddedItems.HP || d==AddedItems.Munny1 || d==AddedItems.Munny5 || d==AddedItems.Munny10 || d==AddedItems.Munny20)
+		{
+			return 4 + par1Random.nextInt(2);
+		}
+		else
+		{
+			return 1;
 		}
     }
 	

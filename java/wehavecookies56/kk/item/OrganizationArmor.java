@@ -15,8 +15,7 @@ public class OrganizationArmor extends ItemArmor{
     
     public OrganizationArmor(ArmorMaterial par2EnumArmorMaterial, int par3, int par4, String armorFile, String name) {
       super(par2EnumArmorMaterial, par3, par4);
-      this.armorFile = armorFile; // sets this instance of the armor file to
-      // what's in the constructor
+      this.armorFile = armorFile; // sets this instance of the armor file to what's in the constructor
       this.setCreativeTab(KingdomKeys.KKTAB);
       this.name = name;
       this.setUnlocalizedName(this.name);
@@ -27,6 +26,15 @@ public class OrganizationArmor extends ItemArmor{
 		if(slot == 2)return "kk:textures/armor/ORGANIZATION_2.png";
 		else return "kk:textures/armor/ORGANIZATION_1.png";
 	}
+	    
+	@Override
+	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
+	{
+		return AddedItems.DarkLeather == par2ItemStack.getItem() ? true :
+		super.getIsRepairable(par1ItemStack, par2ItemStack);
+	}
+
+    
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconReg) {
