@@ -121,7 +121,7 @@ public class GuiMenu extends GuiMenuBase {
 			section = 0;
 			break;
 		case 7:
-			mc.displayGuiScreen(new GuiDrives());
+			mc.displayGuiScreen(new GuiDrive());
 			break;
 		}
 		super.actionPerformed(button);

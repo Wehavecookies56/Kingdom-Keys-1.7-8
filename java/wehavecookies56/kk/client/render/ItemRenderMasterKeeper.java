@@ -48,14 +48,12 @@ public class ItemRenderMasterKeeper implements IItemRenderer {
             case EQUIPPED: {
                 GL11.glPushMatrix();
                 
-                Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/entities/Master Keeper.png"));
+                GL11.glTranslatef(0.6F, 0.4F, -0.05F);
+                GL11.glRotatef(180F, 1, 0, 0);
+                GL11.glRotatef(180F, 0, 1, 0);
+                GL11.glRotatef(45F, 0, 0, 1);
                 
-                GL11.glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
-                GL11.glRotatef(45.0F, 0.0F, 0.0F, 1.0F);
-                
-                GL11.glTranslatef(0.0F, -0.8F, 0.0F);
-                
-                GL11.glScalef(1.2F, 1.2F, 1.2F);
+                Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/entities/MasterKeeper.png"));
                 
                 modelMasterKeeper.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
                 
@@ -66,14 +64,12 @@ public class ItemRenderMasterKeeper implements IItemRenderer {
             case EQUIPPED_FIRST_PERSON: {
                 GL11.glPushMatrix();
                 
-                Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/entities/Master Keeper.png"));
-                
-                GL11.glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
-                GL11.glRotatef(45.0F, 0.0F, 0.0F, 1.0F);
-                
-                GL11.glTranslatef(0.0F, -0.8F, 0.0F);
-                
-                GL11.glScalef(1.2F, 1.2F, 1.2F);
+                GL11.glTranslatef(0.6F, 0.4F, -0.05F);
+                GL11.glRotatef(180F, 1, 0, 0);
+                GL11.glRotatef(180F, 0, 1, 0);
+                GL11.glRotatef(45F, 0, 0, 1);
+
+                Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/entities/MasterKeeper.png"));
                 
                 modelMasterKeeper.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
                 

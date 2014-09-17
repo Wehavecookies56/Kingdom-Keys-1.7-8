@@ -5,8 +5,8 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
@@ -16,9 +16,10 @@ import net.minecraft.world.gen.structure.StructureVillagePieces;
 import net.minecraft.world.gen.structure.StructureVillagePieces.Start;
 import net.minecraftforge.common.ChestGenHooks;
 import wehavecookies56.kk.block.AddedBlocks;
+import wehavecookies56.kk.entities.tileentities.TileEntitySynthesis;
 import wehavecookies56.kk.item.AddedItems;
 
-public class ComponentRecipeHome extends StructureVillagePieces.House1 {
+public class ComponentRecipeHome extends StructureVillagePieces.Village {
 
 	public static final String SYNTHESIS_CHEST = "synthesisChest";
 	ChestGenHooks chest = ChestGenHooks.getInfo(SYNTHESIS_CHEST);
@@ -256,10 +257,10 @@ public class ComponentRecipeHome extends StructureVillagePieces.House1 {
 		this.placeBlockAtCurrentPosition(world, Blocks.wool, getMetadataWithOffset(Blocks.wool, 15), 4, 0, 4, sbb);
 
 		//Synthesiser
-		this.placeBlockAtCurrentPosition(world, AddedBlocks.Synthesiser, 0, 1, 1, 5, sbb);
+		//this.placeBlockAtCurrentPosition(world, AddedBlocks.Synthesiser, 0, 1, 1, 5, sbb);
 		
 		//Crafting Table
-		this.placeBlockAtCurrentPosition(world, Blocks.crafting_table, 0, 1, 1, 4, sbb);
+		//this.placeBlockAtCurrentPosition(world, Blocks.crafting_table, 0, 1, 1, 4, sbb);
 
 		//Bookshelves
 		this.placeBlockAtCurrentPosition(world, Blocks.bookshelf, 0, 1, 1, 3, sbb);
@@ -434,7 +435,7 @@ public class ComponentRecipeHome extends StructureVillagePieces.House1 {
 		this.fillWithAir(world, sbb, 2, 4, 5, 4, 4, 5);
 		
 		ChestGenHooks info = new ChestGenHooks(SYNTHESIS_CHEST, synthesisChestContents, 3, 9);
-		this.generateStructureChestContents(world, sbb, random, 5,1,5, info.getItems(random), info.getCount(random));
+		//this.generateStructureChestContents(world, sbb, random, 5,1,5, info.getItems(random), info.getCount(random));
 		
 		return true;
 	}
