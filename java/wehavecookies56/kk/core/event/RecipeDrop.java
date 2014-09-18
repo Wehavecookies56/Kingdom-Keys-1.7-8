@@ -26,6 +26,8 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class RecipeDrop {
 
+	public static double rand; 
+
 	@SubscribeEvent
 	public void onDeath(LivingDeathEvent ev) 
 	{ 
@@ -44,7 +46,8 @@ public class RecipeDrop {
 		ItemStack wpn = epl.getHeldItem();
 		if (EnchantmentHelper.getEnchantmentLevel(KingdomKeys.HarvestHearts.effectId, wpn) > 0)
 		{
-			/*if(ev.entityLiving instanceof EntityCaveSpider || (ev.entityLiving instanceof EntitySpider) || 
+			rand = Math.random();
+			if(ev.entityLiving instanceof EntityCaveSpider || (ev.entityLiving instanceof EntitySpider) || 
 			ev.entityLiving instanceof EntityIronGolem || ev.entityLiving instanceof EntitySkeleton ||
 			ev.entityLiving instanceof EntityBlaze || ev.entityLiving instanceof EntityMagmaCube ||
 			ev.entityLiving instanceof EntitySlime || ev.entityLiving instanceof EntityZombie ||
@@ -52,8 +55,30 @@ public class RecipeDrop {
 			ev.entityLiving instanceof EntityGhast || ev.entityLiving instanceof EntityPigZombie ||
 			ev.entityLiving instanceof EntityWitch || ev.entityLiving instanceof EntitySilverfish)
 			{
-				ev.entityLiving.entityDropItem(new ItemStack(AddedItems.MythrilCrystalRecipe, 1, 0), 0.5F);
-			}*/
+				if (rand > 0.0d && rand < 0.1d)
+				{
+					ev.entityLiving.entityDropItem(new ItemStack(AddedItems.MythrilCrystalRecipe, 1, 0), 0.01F);
+				}
+				
+				if (rand > 0.5d && rand < 0.6d)
+				{
+					ev.entityLiving.entityDropItem(new ItemStack(AddedItems.MythrilGemRecipe, 1, 0), 0.01F);
+				}
+				
+				if (rand > 0.10d && rand < 0.11d)
+				{
+					ev.entityLiving.entityDropItem(new ItemStack(AddedItems.MythrilStoneRecipe, 1, 0), 0.01F);
+				}
+				
+				if (rand > 0.15d && rand < 0.16d)
+				{
+					ev.entityLiving.entityDropItem(new ItemStack(AddedItems.MythrilShardRecipe, 1, 0), 0.01F);
+				}
+				
+				if (rand > 0.20d && rand < 0.21d){
+					ev.entityLiving.entityDropItem(new ItemStack(AddedItems.DarkMatterRecipe, 1, 0), 0.01F);
+				}
+			}
 					
 		}
 	}
