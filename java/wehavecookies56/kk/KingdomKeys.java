@@ -9,9 +9,7 @@ import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
-
 import org.apache.logging.log4j.Logger;
-
 import wehavecookies56.kk.achievements.AddedAchievments;
 import wehavecookies56.kk.api.synthesis.RecipeHandler;
 import wehavecookies56.kk.block.AddedBlocks;
