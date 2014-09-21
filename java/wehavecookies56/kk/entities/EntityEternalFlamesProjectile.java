@@ -39,10 +39,10 @@ public class EntityEternalFlamesProjectile extends EntityThrowable{
 	@Override
 	protected void onImpact(MovingObjectPosition mop) {
 		if (mop.entityHit != null) {
-			
+			mop.entityHit.setFire(8);
 			float shotDamage = 8;
 			mop.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), shotDamage);
-			mop.entityHit.setFire(8);
+			
 		}
 
 		this.worldObj.spawnParticle("flame", this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);

@@ -55,12 +55,12 @@ public class RecipeDrop {
 			ev.entityLiving instanceof EntityGhast || ev.entityLiving instanceof EntityPigZombie ||
 			ev.entityLiving instanceof EntityWitch || ev.entityLiving instanceof EntitySilverfish)
 			{
-				if (rand > 0.00d && rand < 0.01d)
+				if (rand > 0.000d && rand < 0.001d)
 				{
 					ev.entityLiving.entityDropItem(new ItemStack(AddedItems.MythrilCrystalRecipe, 1, 0), 0.01F);
 				}
 				
-				if (rand > 0.50d && rand < 0.51d)
+				if (rand > 0.500d && rand < 0.501d)
 				{
 					ev.entityLiving.entityDropItem(new ItemStack(AddedItems.MythrilGemRecipe, 1, 0), 0.01F);
 				}
