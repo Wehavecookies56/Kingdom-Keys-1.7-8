@@ -13,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 import wehavecookies56.kk.achievements.AddedAchievments;
 import wehavecookies56.kk.api.synthesis.RecipeHandler;
 import wehavecookies56.kk.block.AddedBlocks;
+import wehavecookies56.kk.client.gui.GuiHealthBar;
 import wehavecookies56.kk.core.event.DarkHeartDrops;
 import wehavecookies56.kk.core.event.EntityConstructEvent;
 import wehavecookies56.kk.core.event.HPOrbDrops;
@@ -152,7 +153,7 @@ public class KingdomKeys {
 
         
         int modEntityID = 0;
-        EntityRegistry.registerModEntity(EntityEternalFlamesProjectile.class, "Sharpshooter Bullet", ++modEntityID, this, 64, 10, true);
+        EntityRegistry.registerModEntity(EntityEternalFlamesProjectile.class, "EternalFlamesProjectile", ++modEntityID, this, 64, 10, true);
         
         config = new Configuration(event.getSuggestedConfigurationFile());
         syncConfig();
@@ -163,6 +164,7 @@ public class KingdomKeys {
     public static void syncConfig(){
     	FMLCommonHandler.instance().bus().register(instance);
         
+    	//TODO Make this work
     	ints.EnchantmentID = config.get(config.CATEGORY_GENERAL, "Enchantment ID", ints.ENCHANTMENTID_DEFAULT).getInt(ints.ENCHANTMENTID_DEFAULT);
     	ConfigBooleans.enableUpdateCheck = config.get(config.CATEGORY_GENERAL, ConfigBooleans.enableUpdateCheck_name, ConfigBooleans.enableUpdateCheck_default).getBoolean(ConfigBooleans.enableUpdateCheck_default);
     	
@@ -233,10 +235,11 @@ public class KingdomKeys {
     public void init(FMLInitializationEvent event) {
     	network.initialise();
     	SynthesisRecipes.initSynthesisRecipes();
-    	logger.info("Registered " + RecipeHandler.getTotalRegistered() + " Synthesis recipes");
+    	logger.info(Reference.MOD_NAME + ": Registered " + RecipeHandler.getTotalRegistered() + " Synthesis recipes");
     	//RecipeHandler.iterateRecipes();
         AddedAchievments.initAchievements();
         logger.info(Reference.MOD_NAME + ": Registered Added Achievements");
+    	logger.info(Reference.MOD_NAME + ": Registering Events");
         MinecraftForge.EVENT_BUS.register(new HeartDrops());
         MinecraftForge.EVENT_BUS.register(new PureHeartDrops());
         MinecraftForge.EVENT_BUS.register(new DarkHeartDrops());
@@ -251,6 +254,7 @@ public class KingdomKeys {
         MinecraftForge.EVENT_BUS.register(new RecipeDrop());
         MinecraftForge.EVENT_BUS.register(new EntityConstructEvent());
         MinecraftForge.EVENT_BUS.register(new HurtEvent());
+        MinecraftForge.EVENT_BUS.register(new GuiHealthBar());
     	FMLCommonHandler.instance().bus().register(instance);
     	FMLCommonHandler.instance().bus().register(new OnCraftedEvent());
     	FMLCommonHandler.instance().bus().register(new OnPickUpEvent());
