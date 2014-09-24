@@ -20,8 +20,8 @@ public class GuiHealthBar extends Gui{
 		
 		if(event.type == RenderGameOverlayEvent.ElementType.TEXT){
 		
-		int guiWidth = 164;
-		int guiHeight = 6;
+		int guiWidth = 165;
+		int guiHeight = 9;
 		
 		Minecraft mc = Minecraft.getMinecraft();		
 		mc.renderEngine.bindTexture(new ResourceLocation("kk", "textures/gui/HPBar.png"));
@@ -33,7 +33,7 @@ public class GuiHealthBar extends Gui{
 		int currHealth = guiWidth - (int) (oneHeart * player.getHealth());
 		GL11.glPushMatrix();
 		this.drawTexturedModalRect(screenWidth - guiWidth, screenHeight - guiHeight, 0, 0, guiWidth, guiHeight);
-		this.drawTexturedModalRect((screenWidth - guiWidth) + currHealth, screenHeight - guiHeight, 0, 7, (guiWidth - currHealth) - 2, guiHeight);
+		this.drawTexturedModalRect((screenWidth - guiWidth) + currHealth, screenHeight - guiHeight, 0, 8, (guiWidth - currHealth) - 2, guiHeight);
 
 		GL11.glPopMatrix();
 		}
