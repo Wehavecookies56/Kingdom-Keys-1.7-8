@@ -2,9 +2,11 @@ package wehavecookies56.kk.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
@@ -38,7 +40,15 @@ public class BlockDangerBlox extends Block {
     @Override
     public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity)
     {
-        par5Entity.attackEntityFrom(DamageSource.magic, 3);
+    	if (Minecraft.getMinecraft().thePlayer.inventory.armorItemInSlot(0) != null)
+    	{
+    		ItemStack itemstack = Minecraft.getMinecraft().thePlayer.inventory.armorItemInSlot(0);
+    		
+    	}
+    	else
+    	{
+    		par5Entity.attackEntityFrom(DamageSource.magic, 3);
+        }
     }
 
     @SideOnly(Side.CLIENT)
