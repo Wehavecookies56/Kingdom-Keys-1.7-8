@@ -9,6 +9,7 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 
 import org.lwjgl.opengl.GL11;
 
+import wehavecookies56.kk.core.event.OnHitEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.common.gameevent.TickEvent.Type;
@@ -26,7 +27,6 @@ public class GuiHealthBar extends Gui{
 			int screenHeight = event.resolution.getScaledHeight();
 			Minecraft mc = Minecraft.getMinecraft();
 			EntityPlayer player = mc.thePlayer;
-			
 			mc.renderEngine.bindTexture(new ResourceLocation("kk", "textures/gui/HPBar.png"));
 			float oneHeart = (guiWidth / player.getMaxHealth());
 			int currHealth = guiWidth - (int) (oneHeart * player.getHealth());

@@ -9,7 +9,9 @@ import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
+
 import org.apache.logging.log4j.Logger;
+
 import wehavecookies56.kk.achievements.AddedAchievments;
 import wehavecookies56.kk.api.synthesis.RecipeHandler;
 import wehavecookies56.kk.block.AddedBlocks;
@@ -27,6 +29,7 @@ import wehavecookies56.kk.core.event.Munny20Drops;
 import wehavecookies56.kk.core.event.Munny50Drops;
 import wehavecookies56.kk.core.event.Munny5Drops;
 import wehavecookies56.kk.core.event.OnCraftedEvent;
+import wehavecookies56.kk.core.event.OnHitEvent;
 import wehavecookies56.kk.core.event.OnPickUpEvent;
 import wehavecookies56.kk.core.event.PureHeartDrops;
 import wehavecookies56.kk.core.event.RecipeDrop;
@@ -255,6 +258,7 @@ public class KingdomKeys {
         MinecraftForge.EVENT_BUS.register(new EntityConstructEvent());
         MinecraftForge.EVENT_BUS.register(new HurtEvent());
         MinecraftForge.EVENT_BUS.register(new GuiHealthBar());
+        MinecraftForge.EVENT_BUS.register(new OnHitEvent());
     	FMLCommonHandler.instance().bus().register(instance);
     	FMLCommonHandler.instance().bus().register(new OnCraftedEvent());
     	FMLCommonHandler.instance().bus().register(new OnPickUpEvent());
