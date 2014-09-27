@@ -12,7 +12,6 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 public class OnHitEvent
 {
-	public static int currDrive;
 	@SubscribeEvent
 	public void LivingAttackEvent (LivingEvent EntityEvent)
 	{

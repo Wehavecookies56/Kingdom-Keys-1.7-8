@@ -10,6 +10,7 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import org.lwjgl.opengl.GL11;
 
 import wehavecookies56.kk.core.event.OnHitEvent;
+import wehavecookies56.kk.core.extendedproperties.EntityPropertyDrivePoints;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.common.gameevent.TickEvent.Type;
@@ -25,16 +26,24 @@ public class GuiDriveBar extends Gui{
 			int maxBars = 9;
 			int currBar = 1;
 
+			Minecraft mc = Minecraft.getMinecraft();
+			EntityPropertyDrivePoints props = EntityPropertyDrivePoints.get(mc.thePlayer);
+			
 			int guiWidth = 100;
 			int guiHeight = 20;
 			int screenWidth = event.resolution.getScaledWidth();
 			int screenHeight = event.resolution.getScaledHeight();
-			Minecraft mc = Minecraft.getMinecraft();
 			EntityPlayer player = mc.thePlayer;
 			float oneValue = (guiWidth / maxDrive);
-			int currDrive = guiWidth + (int) (oneValue * OnHitEvent.currDrive);
+			int currDrive = guiWidth + (int) (oneValue * props.maxDrivePoints);
 
 			mc.renderEngine.bindTexture(new ResourceLocation("kk", "textures/gui/DriveBar.png"));
+			
+			if(currDrive >= 10 && currBar != 9)
+			{
+			currDrive-=10;
+			currBar+=1;
+			}
 
 			GL11.glPushMatrix();
 			//Background
