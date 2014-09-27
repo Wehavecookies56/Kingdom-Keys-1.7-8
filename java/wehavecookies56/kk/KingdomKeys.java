@@ -260,8 +260,7 @@ public class KingdomKeys {
 		MinecraftForge.EVENT_BUS.register(new RecipeDrop());
 		MinecraftForge.EVENT_BUS.register(new EntityConstructEvent());
 		MinecraftForge.EVENT_BUS.register(new HurtEvent());
-		MinecraftForge.EVENT_BUS.register(new GuiHealthBar());
-		MinecraftForge.EVENT_BUS.register(new GuiDriveBar());
+		
 		MinecraftForge.EVENT_BUS.register(new OnHitEvent());
 		MinecraftForge.EVENT_BUS.register(new EntityDamagedEvent());
 		MinecraftForge.EVENT_BUS.register(new LivingUpdateEevent());
@@ -279,7 +278,8 @@ public class KingdomKeys {
 		proxy.initCapes();
 		proxy.registerKeybinds();
 		EntityRegistry.registerModEntity(EntityBlastBlox.class, "BlastBlox", EntityRegistry.findGlobalUniqueEntityId(), this, 128, 1, true);
-		if(ConfigBooleans.enableUpdateCheck){
+		if(ConfigBooleans.enableUpdateCheck)
+		{
 			MinecraftForge.EVENT_BUS.register(new Update());
 			final Side side = FMLCommonHandler.instance().getEffectiveSide();
 			addVillagePiece(ComponentRecipeHome.class, "SynthesistsHome");

@@ -40,21 +40,23 @@ public class BlockDangerBlox extends Block {
     @Override
     public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity)
     {
-    	if (Minecraft.getMinecraft().thePlayer.inventory.armorItemInSlot(0) != null)
-    	{
-    		ItemStack itemstack = Minecraft.getMinecraft().thePlayer.inventory.armorItemInSlot(0);
-    		
-    	}
-    	else
-    	{
-    		par5Entity.attackEntityFrom(DamageSource.magic, 3);
+    	if(par5Entity instanceof EntityPlayer)
+		{
+			EntityPlayer player = (EntityPlayer) par5Entity;
+			if (player.inventory.armorItemInSlot(0) != null)
+			{
+				ItemStack itemstack = Minecraft.getMinecraft().thePlayer.inventory.armorItemInSlot(0);
+			}
+			else
+			{
+				par5Entity.attackEntityFrom(DamageSource.magic, 3);
+			}
         }
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public void registerBlockIcons(IIconRegister par1IconRegister) {
-
         blockIcon = par1IconRegister.registerIcon(Reference.MOD_ID + ":" + (this.getUnlocalizedName().substring(5)));
     }
     

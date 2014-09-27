@@ -2,7 +2,10 @@ package wehavecookies56.kk.core.proxies;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.common.MinecraftForge;
 import wehavecookies56.kk.client.KeyBind;
+import wehavecookies56.kk.client.gui.GuiDriveBar;
+import wehavecookies56.kk.client.gui.GuiHealthBar;
 import wehavecookies56.kk.client.render.BlockRenderBlastBlox;
 import wehavecookies56.kk.client.render.EntityRenderEternalFlamesProjectile;
 import wehavecookies56.kk.client.render.EntityRenderSharpShooterBullet;
@@ -63,6 +66,10 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(AddedItems.SkySplitter, new ItemRenderSkysplitter());
 		MinecraftForgeClient.registerItemRenderer(AddedItems.VoidedKnowledge, new ItemRenderVoidedKnowledge());
 		MinecraftForgeClient.registerItemRenderer(AddedItems.MasterKeeper, new ItemRenderMasterKeeper());
+		
+		//Events
+		MinecraftForge.EVENT_BUS.register(new GuiHealthBar());
+		MinecraftForge.EVENT_BUS.register(new GuiDriveBar());
 		
 		//Entities
 		RenderingRegistry.registerEntityRenderingHandler(EntityBlastBlox.class, new BlockRenderBlastBlox());

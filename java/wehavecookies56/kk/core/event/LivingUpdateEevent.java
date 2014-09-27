@@ -14,8 +14,10 @@ public class LivingUpdateEevent {
 	@SubscribeEvent
 	public void onLivingUpdate(LivingUpdateEvent event)
 	{
-		if(event.entity instanceof EntityPlayer){
-			if(Minecraft.getMinecraft().thePlayer.getHealth() <= 4)
+		if(event.entity instanceof EntityPlayer)
+		{
+			EntityPlayer player = (EntityPlayer) event.entityLiving;
+			if(player.getHealth() <= 4)
 			{
 				//Minecraft.getMinecraft().thePlayer.playSound("kk:alarm", 1F, 1F);
 			}

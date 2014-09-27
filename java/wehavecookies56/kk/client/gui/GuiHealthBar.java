@@ -16,6 +16,7 @@ import cpw.mods.fml.common.gameevent.TickEvent.Type;
 
 public class GuiHealthBar extends Gui
 {
+	
 	@SubscribeEvent
 	public void onRenderOverlayPost(RenderGameOverlayEvent event){
 		
