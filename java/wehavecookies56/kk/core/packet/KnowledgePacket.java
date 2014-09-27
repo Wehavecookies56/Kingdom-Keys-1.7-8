@@ -2,21 +2,14 @@ package wehavecookies56.kk.core.packet;
 
 
 import io.netty.buffer.ByteBuf;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Random;
-
 import net.minecraft.client.network.NetHandlerPlayClient;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.NetHandlerPlayServer;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
 import wehavecookies56.kk.item.AddedItems;
 import cpw.mods.fml.common.network.ByteBufUtils;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
 
 public class KnowledgePacket implements IPacket {
 	
@@ -33,12 +26,22 @@ public class KnowledgePacket implements IPacket {
 	@Override
 	public void readBytes(ByteBuf bytes) {
 		this.itemToRemove = ByteBufUtils.readItemStack(bytes);
-		
-		ArrayList list = (ArrayList) MinecraftServer.getServer().getConfigurationManager().playerEntityList;
-		Iterator iterator = list.iterator();
+	}
+	
+	@Override
+	public void writeBytes(ByteBuf bytes) {
+		ByteBufUtils.writeItemStack(bytes, this.itemToRemove);
 
-		EntityPlayerMP player = (EntityPlayerMP) iterator.next();
+	}
+
+	@Override
+	public void handleClientSide(NetHandlerPlayClient nhClient) {
 		
+	}
+
+	@Override
+	public void handleServerSide(NetHandlerPlayServer nhServer) {
+		EntityPlayer player = nhServer.playerEntity;
 		Item i = AddedItems.KingdomKey;
 		String s = "The voided knowledge forms substance in the form of the ";
 		if(player.getHeldItem() != null){
@@ -90,22 +93,6 @@ public class KnowledgePacket implements IPacket {
 				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(i));
 			}
 		}
-	}
-	
-	@Override
-	public void writeBytes(ByteBuf bytes) {
-		ByteBufUtils.writeItemStack(bytes, this.itemToRemove);
-
-	}
-
-	@Override
-	public void handleClientSide(NetHandlerPlayClient nhClient) {
-		
-	}
-
-	@Override
-	public void handleServerSide(NetHandlerPlayServer nhServer) {
-		
 	}
 
 }

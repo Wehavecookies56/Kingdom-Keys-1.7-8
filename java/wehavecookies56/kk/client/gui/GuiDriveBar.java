@@ -16,27 +16,32 @@ import cpw.mods.fml.common.gameevent.TickEvent.Type;
 
 public class GuiDriveBar extends Gui{
 
-		@SubscribeEvent
-		public void onRenderOverlayPost(RenderGameOverlayEvent event){
-			
-			if(event.type == RenderGameOverlayEvent.ElementType.TEXT)
-			{
-				int guiWidth = 165;
-				int guiHeight = 9;
-				int screenWidth = event.resolution.getScaledWidth();
-				int screenHeight = event.resolution.getScaledHeight();
-				Minecraft mc = Minecraft.getMinecraft();
-				EntityPlayer player = mc.thePlayer;
-				int currDrive = OnHitEvent.currDrive;
-			
-				mc.renderEngine.bindTexture(new ResourceLocation("kk", "textures/gui/DriveBar.png"));
-				
-				GL11.glPushMatrix();
-				//Background
-				this.drawTexturedModalRect(screenWidth - guiWidth, screenHeight - guiHeight, 0, 0, guiWidth, guiHeight);
-				//Yellow meter
-				this.drawTexturedModalRect((screenWidth - guiWidth) + currDrive, screenHeight - guiHeight, 0, 8, (guiWidth - currDrive) - 2, guiHeight);
-				GL11.glPopMatrix();
-			}
+	@SubscribeEvent
+	public void onRenderOverlayPost(RenderGameOverlayEvent event){
+
+		if(event.type == RenderGameOverlayEvent.ElementType.TEXT) {
+			//Temp will be an extended entity property
+			int maxDrive = 100;
+			int maxBars = 9;
+			int currBar = 1;
+
+			int guiWidth = 95;
+			int guiHeight = 18;
+			int screenWidth = event.resolution.getScaledWidth();
+			int screenHeight = event.resolution.getScaledHeight();
+			Minecraft mc = Minecraft.getMinecraft();
+			EntityPlayer player = mc.thePlayer;
+			float oneValue = (guiWidth / maxDrive);
+			int currDrive = guiWidth + (int) (oneValue * OnHitEvent.currDrive);
+
+			mc.renderEngine.bindTexture(new ResourceLocation("kk", "textures/gui/DriveBar.png"));
+
+			GL11.glPushMatrix();
+			//Background
+			this.drawTexturedModalRect(screenWidth - guiWidth, screenHeight - guiHeight, 0, 0, guiWidth, guiHeight);
+			//Yellow meter
+			this.drawTexturedModalRect((screenWidth - guiWidth) + currDrive, screenHeight - guiHeight, 0, 18, (guiWidth - currDrive), guiHeight);
+			GL11.glPopMatrix();
 		}
 	}
+}
