@@ -21,17 +21,17 @@ public class OnHitEvent
 		{
 			//System.out.println("It's a player");
 			EntityPlayer player = (EntityPlayer) EntityEvent.entityLiving;
-			System.out.println(Arrays.keyblades.length);
-			for(int i = 0; i > 114; i++)
+			for(int i = 0; i < 113; i++)
 			{
-
-				if(player.getHeldItem() != null && player.getHeldItem().getItem() == Arrays.keyblades[i])
+				/*if(player.getHeldItem() != null && player.getHeldItem().getItem() == Arrays.keyblades[i])
 				{
+					System.out.println(Arrays.keyblades.length);
+
 					System.out.println("Holding keyblade");
 					currDrive +=1;
 					player.addChatMessage(new ChatComponentText("You have "+currDrive+" Drive points"));
 
-				}
+				}*/
 			}
 		}
 	}

@@ -24,6 +24,7 @@ import wehavecookies56.kk.core.event.HPOrbDrops;
 import wehavecookies56.kk.core.event.HeartDrops;
 import wehavecookies56.kk.core.event.HurtEvent;
 import wehavecookies56.kk.core.event.KingdomHeartsDrops;
+import wehavecookies56.kk.core.event.LivingUpdateEevent;
 import wehavecookies56.kk.core.event.Munny10Drops;
 import wehavecookies56.kk.core.event.Munny1Drops;
 import wehavecookies56.kk.core.event.Munny20Drops;
@@ -263,6 +264,7 @@ public class KingdomKeys {
 		MinecraftForge.EVENT_BUS.register(new GuiDriveBar());
 		MinecraftForge.EVENT_BUS.register(new OnHitEvent());
 		MinecraftForge.EVENT_BUS.register(new EntityDamagedEvent());
+		MinecraftForge.EVENT_BUS.register(new LivingUpdateEevent());
 		FMLCommonHandler.instance().bus().register(instance);
 		FMLCommonHandler.instance().bus().register(new OnCraftedEvent());
 		FMLCommonHandler.instance().bus().register(new OnPickUpEvent());

@@ -1,6 +1,7 @@
 {
     "kupo": {"category": "master", "sounds": [{"name": "kupo", "stream": false}]},
     "summon": {"category": "player","sounds": [{"name": "summon", "stream": false}]},
+	"alarm": {"category": "player","sounds": [{"name": "alarm", "stream": false}]},
     "unsummon": {"category": "player", "sounds": [{"name": "unsummon", "stream": false}]},
     "sharpshooterbullet": {"category": "player", "sounds": [{"name": "sharpshooterbullet", "stream": false}]},
     "records.Birth by Sleep -A Link to the Future-": {"category": "record", "sounds": [{"name": "records/Birth by Sleep -A Link to the Future-", "stream": "true"}]},

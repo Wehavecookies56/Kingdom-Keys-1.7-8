@@ -25,8 +25,8 @@ public class GuiDriveBar extends Gui{
 			int maxBars = 9;
 			int currBar = 1;
 
-			int guiWidth = 95;
-			int guiHeight = 18;
+			int guiWidth = 100;
+			int guiHeight = 20;
 			int screenWidth = event.resolution.getScaledWidth();
 			int screenHeight = event.resolution.getScaledHeight();
 			Minecraft mc = Minecraft.getMinecraft();
@@ -38,9 +38,9 @@ public class GuiDriveBar extends Gui{
 
 			GL11.glPushMatrix();
 			//Background
-			this.drawTexturedModalRect(screenWidth - guiWidth, screenHeight - guiHeight, 0, 0, guiWidth, guiHeight);
+			this.drawTexturedModalRect(screenWidth - guiWidth - 65, screenHeight - guiHeight - 10, 0, 0, guiWidth, guiHeight);
 			//Yellow meter
-			this.drawTexturedModalRect((screenWidth - guiWidth) + currDrive, screenHeight - guiHeight, 0, 18, (guiWidth - currDrive), guiHeight);
+			this.drawTexturedModalRect((screenWidth - guiWidth - 65) + currDrive, screenHeight - guiHeight - 10, 0, 18, (guiWidth - currDrive), guiHeight);
 			GL11.glPopMatrix();
 		}
 	}

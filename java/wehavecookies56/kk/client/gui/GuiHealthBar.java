@@ -14,8 +14,8 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.common.gameevent.TickEvent.Type;
 
-public class GuiHealthBar extends Gui{
-
+public class GuiHealthBar extends Gui
+{
 	@SubscribeEvent
 	public void onRenderOverlayPost(RenderGameOverlayEvent event){
 		
