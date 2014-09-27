@@ -51,7 +51,6 @@ public class ItemEternalFlames extends ItemSword implements IBattlegearWeapon{
         return EnumRarity.uncommon;
     }
 
-    
     @Override
     public boolean hitEntity(ItemStack p_77644_1_, EntityLivingBase p_77644_2_,
     		EntityLivingBase p_77644_3_) {
@@ -60,10 +59,11 @@ public class ItemEternalFlames extends ItemSword implements IBattlegearWeapon{
     }
 	
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-		if (!player.isSneaking()){
+		if (!player.isSneaking())
+		{
 			world.playSoundAtEntity(player, "mob.ghast.fireball", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-
-			if (!world.isRemote) {
+			if (!world.isRemote)
+			{
 				world.spawnEntityInWorld(new EntityEternalFlamesProjectile(world, player));
 			}
 		}

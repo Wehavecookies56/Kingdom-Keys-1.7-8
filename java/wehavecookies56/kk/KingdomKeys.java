@@ -18,6 +18,7 @@ import wehavecookies56.kk.block.AddedBlocks;
 import wehavecookies56.kk.client.gui.GuiDriveBar;
 import wehavecookies56.kk.client.gui.GuiHealthBar;
 import wehavecookies56.kk.core.event.DarkHeartDrops;
+import wehavecookies56.kk.core.event.DriveOrbDrops;
 import wehavecookies56.kk.core.event.EntityConstructEvent;
 import wehavecookies56.kk.core.event.EntityDamagedEvent;
 import wehavecookies56.kk.core.event.HPOrbDrops;
@@ -260,7 +261,7 @@ public class KingdomKeys {
 		MinecraftForge.EVENT_BUS.register(new RecipeDrop());
 		MinecraftForge.EVENT_BUS.register(new EntityConstructEvent());
 		MinecraftForge.EVENT_BUS.register(new HurtEvent());
-		
+		MinecraftForge.EVENT_BUS.register(new DriveOrbDrops());
 		MinecraftForge.EVENT_BUS.register(new OnHitEvent());
 		MinecraftForge.EVENT_BUS.register(new EntityDamagedEvent());
 		MinecraftForge.EVENT_BUS.register(new LivingUpdateEevent());

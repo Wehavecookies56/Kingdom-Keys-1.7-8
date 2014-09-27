@@ -563,4 +563,5 @@ public class Strings {
 	public static final String OblivionRecipe = "oblivionRecipe";
 	public static final String DarkMatterRecipe = "darkMatterRecipe";
 	public static final String EmptyBottle = "emptyBottle";
+	public static final String DriveOrb = "driveOrb";
 }

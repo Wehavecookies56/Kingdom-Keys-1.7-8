@@ -5,6 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
 import wehavecookies56.kk.achievements.AddedAchievments;
 import wehavecookies56.kk.block.AddedBlocks;
@@ -229,6 +230,14 @@ public class OnPickUpEvent {
 		else if(event.pickedUp.getEntityItem().getItem().equals(AddedItems.KingdomHearts))
 		{
 			event.player.addStat(AddedAchievments.khearts, 1);
+		}
+		
+		else if(event.pickedUp.getEntityItem().getItem().equals(AddedItems.DriveOrb))
+		{
+			int currDrive = OnHitEvent.currDrive;
+			currDrive +=1;
+			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("You have "+currDrive+" Drive points"));
+
 		}	
 	}
 }
