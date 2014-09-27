@@ -16,19 +16,21 @@ public class OnHitEvent
 	@SubscribeEvent
 	public void LivingAttackEvent (LivingEvent EntityEvent)
 	{
-		System.out.println("Event Triggered");
+		//System.out.println("Event Triggered");
 		if(EntityEvent.entityLiving instanceof EntityPlayer)
 		{
-			System.out.println("It's a player");
+			//System.out.println("It's a player");
 			EntityPlayer player = (EntityPlayer) EntityEvent.entityLiving;
-			
+			System.out.println(Arrays.keyblades.length);
 			for(int i = 0; i > 114; i++)
 			{
+
 				if(player.getHeldItem() != null && player.getHeldItem().getItem() == Arrays.keyblades[i])
 				{
 					System.out.println("Holding keyblade");
-					player.addChatMessage(new ChatComponentText("This has to give me drive"));
 					currDrive +=1;
+					player.addChatMessage(new ChatComponentText("You have "+currDrive+" Drive points"));
+
 				}
 			}
 		}
