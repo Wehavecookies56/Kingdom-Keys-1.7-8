@@ -27,9 +27,9 @@ public class GuiDriveBar extends Gui{
 			//Temp will be an extended entity property
 			int maxDrive = 100;
 			int maxBars = 9;
-			int currBar = 1;
+			int currBar = 0;
 			CommonProxy.getEntityData(props.EXT_PROP_NAME);			
-			//System.out.println("Drive points:" + props.getCurrDrivePoints());
+			System.out.println("Drive points:" + props.getCurrDrivePoints());
 			int guiWidth = 95;
 			int guiBarWidth = 83;
 			int guiHeight = 18;
@@ -40,22 +40,66 @@ public class GuiDriveBar extends Gui{
 			int currDrive = (int) (oneValue * props.getCurrDrivePoints());
 
 			mc.renderEngine.bindTexture(new ResourceLocation("kk", "textures/gui/DriveBar.png"));
-			if(currDrive >= 100 && currBar != 9)
+			if(currDrive >= maxDrive && currBar <= maxBars)
 			{
+				System.out.println("this should be tiggered");
 				props.setCurrDrivePoints(0);
 				currBar += 1;
-			}else if(currDrive >= maxDrive && currBar == maxBars){
+			}
+			else if(currDrive >= maxDrive && currBar == maxBars)
+			{
 				currBar = maxBars;
 				props.setCurrDrivePoints(maxDrive);
 			}
-
-			//System.out.println(currBar);
-			//System.out.println(props.getCurrDrivePoints());
+			System.out.println("Current Drive: "+currDrive);
+			System.out.println("Current Bar: "+currBar);
+			System.out.println("Current Points: "+props.getCurrDrivePoints());
 			GL11.glPushMatrix();
 			//Background
-			this.drawTexturedModalRect(screenWidth - guiWidth - 65, screenHeight - guiHeight - 10, 0, 0, guiWidth, guiHeight);
+			this.drawTexturedModalRect(screenWidth - guiWidth - 70, screenHeight - guiHeight - 10, 0, 0, guiWidth, guiHeight);
 			//Yellow meter
-			this.drawTexturedModalRect((screenWidth - guiWidth - 65), screenHeight - guiHeight - 12, 0, 18, currDrive, guiHeight);
+			this.drawTexturedModalRect((screenWidth - guiWidth - 70), screenHeight - guiHeight - 12, 0, 18, currDrive, guiHeight);
+			//Level
+			if(currBar == 0)
+			{
+				this.drawTexturedModalRect((screenWidth - guiWidth + 15), screenHeight - guiHeight - 12, 0, 38, 8, guiHeight);
+			}
+			else if(currBar == 1)
+			{
+				this.drawTexturedModalRect((screenWidth - guiWidth + 15), screenHeight - guiHeight - 12, 10, 38, 8, guiHeight);
+			}
+			else if(currBar == 2)
+			{
+				this.drawTexturedModalRect((screenWidth - guiWidth + 15), screenHeight - guiHeight - 12, 20, 38, 8, guiHeight);
+			}
+			else if(currBar == 3)
+			{
+				this.drawTexturedModalRect((screenWidth - guiWidth + 15), screenHeight - guiHeight - 12, 30, 38, 8, guiHeight);
+			}
+			else if(currBar == 4)
+			{
+				this.drawTexturedModalRect((screenWidth - guiWidth + 15), screenHeight - guiHeight - 12, 40, 38, 8, guiHeight);
+			}
+			else if(currBar == 5)
+			{
+				this.drawTexturedModalRect((screenWidth - guiWidth + 15), screenHeight - guiHeight - 12, 50, 38, 8, guiHeight);
+			}
+			else if(currBar == 6)
+			{
+				this.drawTexturedModalRect((screenWidth - guiWidth + 15), screenHeight - guiHeight - 12, 60, 38, 8, guiHeight);
+			}
+			else if(currBar == 7)
+			{
+				this.drawTexturedModalRect((screenWidth - guiWidth + 15), screenHeight - guiHeight - 12, 70, 38, 8, guiHeight);
+			}
+			else if(currBar == 8)
+			{
+				this.drawTexturedModalRect((screenWidth - guiWidth + 15), screenHeight - guiHeight - 12, 80, 38, 8, guiHeight);
+			}
+			else if(currBar == 9)
+			{
+				this.drawTexturedModalRect((screenWidth - guiWidth + 15), screenHeight - guiHeight - 12, 90, 38, 8, guiHeight);
+			}
 			GL11.glPopMatrix();
 		}
 	}
