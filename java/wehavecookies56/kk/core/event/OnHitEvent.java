@@ -16,13 +16,13 @@ public class OnHitEvent
 	public void LivingAttackEvent (LivingEvent EntityEvent)
 	{
 		//System.out.println("Event Triggered");
-		if(EntityEvent.entityLiving instanceof EntityPlayer)
+		/*if(EntityEvent.entityLiving instanceof EntityPlayer)
 		{
 			//System.out.println("It's a player");
 			EntityPlayer player = (EntityPlayer) EntityEvent.entityLiving;
 			for(int i = 0; i < 113; i++)
 			{
-				/*if(player.getHeldItem() != null && player.getHeldItem().getItem() == Arrays.keyblades[i])
+				if(player.getHeldItem() != null && player.getHeldItem().getItem() == Arrays.keyblades[i])
 				{
 					System.out.println(Arrays.keyblades.length);
 
@@ -30,8 +30,8 @@ public class OnHitEvent
 					currDrive +=1;
 					player.addChatMessage(new ChatComponentText("You have "+currDrive+" Drive points"));
 
-				}*/
+				}
 			}
-		}
+		}*/
 	}
 }

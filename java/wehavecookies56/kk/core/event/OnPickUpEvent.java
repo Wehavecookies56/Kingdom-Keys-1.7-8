@@ -234,10 +234,10 @@ public class OnPickUpEvent {
 		
 		else if(event.pickedUp.getEntityItem().getItem().equals(AddedItems.DriveOrb))
 		{
-			int currDrive = OnHitEvent.currDrive;
+			/*int currDrive = OnHitEvent.currDrive;
 			currDrive +=1;
 			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("You have "+currDrive+" Drive points"));
-
+*/
 		}	
 	}
 }
