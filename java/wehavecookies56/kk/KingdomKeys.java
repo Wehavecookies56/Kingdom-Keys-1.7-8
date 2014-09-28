@@ -15,8 +15,6 @@ import org.apache.logging.log4j.Logger;
 import wehavecookies56.kk.achievements.AddedAchievments;
 import wehavecookies56.kk.api.synthesis.RecipeHandler;
 import wehavecookies56.kk.block.AddedBlocks;
-import wehavecookies56.kk.client.gui.GuiDriveBar;
-import wehavecookies56.kk.client.gui.GuiHealthBar;
 import wehavecookies56.kk.core.event.DarkHeartDrops;
 import wehavecookies56.kk.core.event.DriveOrbDrops;
 import wehavecookies56.kk.core.event.EntityConstructEvent;
@@ -43,7 +41,6 @@ import wehavecookies56.kk.core.packet.ChannelHandler;
 import wehavecookies56.kk.core.packet.KnowledgePacket;
 import wehavecookies56.kk.core.packet.MunnyPacket;
 import wehavecookies56.kk.core.packet.SummonPacket;
-import wehavecookies56.kk.core.packet.SyncPlayerPropsPacket;
 import wehavecookies56.kk.core.packet.SynthesisPacket;
 import wehavecookies56.kk.core.proxies.ClientProxy;
 import wehavecookies56.kk.core.proxies.CommonProxy;
@@ -155,7 +152,6 @@ public class KingdomKeys {
 		network.registerPacket(KnowledgePacket.class);
 		network.registerPacket(SummonPacket.class);
 		network.registerPacket(SynthesisPacket.class);
-		network.registerPacket(SyncPlayerPropsPacket.class);
 		network.registerPacket(MunnyPacket.class);
 
 

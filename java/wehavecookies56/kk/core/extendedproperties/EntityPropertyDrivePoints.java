@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
+import wehavecookies56.kk.core.proxies.CommonProxy;
 
 public class EntityPropertyDrivePoints implements IExtendedEntityProperties {
 
@@ -14,62 +15,91 @@ public class EntityPropertyDrivePoints implements IExtendedEntityProperties {
 	public int currDrivePoints;
 	public int maxDrivePoints;
 
+	public static final int DRIVE_WATCHER = 21;
+
 	public EntityPropertyDrivePoints(EntityPlayer player) {
 		this.player = player;
 
 		this.currDrivePoints = 0;
-		this.maxDrivePoints = 900;
+		this.maxDrivePoints = 100;
+		this.player.getDataWatcher().addObject(DRIVE_WATCHER, 0);
 	}
 
-	public static final void register(EntityPlayer player){
+
+	public static final void register(EntityPlayer player)
+	{
 		player.registerExtendedProperties(EntityPropertyDrivePoints.EXT_PROP_NAME, new EntityPropertyDrivePoints(player));
 	}
 
-	public static final EntityPropertyDrivePoints get(EntityPlayer player){
+	public static final EntityPropertyDrivePoints get(EntityPlayer player)
+	{
 		return (EntityPropertyDrivePoints) player.getExtendedProperties(EXT_PROP_NAME);
 	}
 
 	@Override
 	public void saveNBTData(NBTTagCompound compound) {
+
 		NBTTagCompound properties = new NBTTagCompound();
 
-		properties.setInteger("CurrentDrivePoints", this.currDrivePoints);
-		properties.setInteger("MaxDrivePoints", this.maxDrivePoints);
-
+		properties.setInteger("CurrentDrivePoints", this.player.getDataWatcher().getWatchableObjectInt(DRIVE_WATCHER));
 		compound.setTag(EXT_PROP_NAME, properties);
 	}
 
 	@Override
 	public void loadNBTData(NBTTagCompound compound) {
+
 		NBTTagCompound properties = (NBTTagCompound) compound.getTag(EXT_PROP_NAME);
 
-		this.currDrivePoints = properties.getInteger("CurrentDrivePoints");
-		this.maxDrivePoints = properties.getInteger("MaxDrivePoints");
+		this.player.getDataWatcher().updateObject(DRIVE_WATCHER, properties.getInteger("CurrentDrivePoints"));
 
-		System.out.println("Drive Points from NBT: " + this.currDrivePoints + "/" + this.maxDrivePoints);
 	}
 
 	@Override
 	public void init(Entity entity, World world) {
 
 	}
-	
-	public int getCurrDrivePoints(){
-		return currDrivePoints;
-		
-	}
-	
-	public int getMaxDrivePoints(){
-		return maxDrivePoints;
-		
-	}
 
-	public boolean consumeMana(int amount){
-		boolean sufficient = amount <= this.currDrivePoints;
+	public boolean consumeDrivePoints(int amount){
+		int drivePoints = this.player.getDataWatcher().getWatchableObjectInt(DRIVE_WATCHER);
 
-		this.currDrivePoints -= (amount < this.currDrivePoints ? amount : this.currDrivePoints);
-		
+		boolean sufficient = amount <= drivePoints;
+
+		drivePoints -= (amount < drivePoints ? amount : drivePoints);
+
+		this.player.getDataWatcher().updateObject(DRIVE_WATCHER, drivePoints);
+
 		return sufficient;
+
+	}
+
+	public int getCurrDrivePoints(){
+		return this.player.getDataWatcher().getWatchableObjectInt(DRIVE_WATCHER);
+	}
+
+	public void addDrivePoints(int amount){
+		setCurrDrivePoints(amount += getCurrDrivePoints());
+	}
+
+	public void setCurrDrivePoints(int amount)
+	{
+		this.player.getDataWatcher().updateObject(DRIVE_WATCHER, (amount < this.maxDrivePoints ? amount : this.maxDrivePoints));
+	}
+
+
+	public static final void saveProxyData(EntityPlayer player) {
+		NBTTagCompound savedData = new NBTTagCompound();
+		EntityPropertyDrivePoints.get(player).saveNBTData(savedData);
+		CommonProxy.storeEntityData(getSaveKey(player), savedData);
+	}
+
+	public static final void loadProxyData(EntityPlayer player) {
+		EntityPropertyDrivePoints playerData = EntityPropertyDrivePoints.get(player);
+		NBTTagCompound savedData = CommonProxy.getEntityData(getSaveKey(player));
+		if (savedData != null) { playerData.loadNBTData(savedData); }
+	}
+
+	private static final String getSaveKey(EntityPlayer player) {
+		return player.getCommandSenderName() + ":" + EXT_PROP_NAME;
 	}
 
 }

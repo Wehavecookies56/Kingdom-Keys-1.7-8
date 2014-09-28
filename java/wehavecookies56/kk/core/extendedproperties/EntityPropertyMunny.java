@@ -5,9 +5,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
-import wehavecookies56.kk.KingdomKeys;
-import wehavecookies56.kk.core.packet.IPacket;
-import wehavecookies56.kk.core.packet.SyncPlayerPropsPacket;
 import wehavecookies56.kk.core.proxies.CommonProxy;
 
 public class EntityPropertyMunny implements IExtendedEntityProperties {
@@ -101,8 +98,8 @@ public class EntityPropertyMunny implements IExtendedEntityProperties {
 		
 		
 		
-		IPacket packet = new SyncPlayerPropsPacket(maxMunny, currentMunny);
-		KingdomKeys.network.sendToServer(packet);
+		//IPacket packet = new SyncPlayerPropsPacket(maxMunny, currentMunny);
+		//KingdomKeys.network.sendToServer(packet);
 		
 		
 	}
