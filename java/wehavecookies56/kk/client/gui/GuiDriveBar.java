@@ -18,16 +18,41 @@ public class GuiDriveBar extends Gui{
 
 	Minecraft mc = Minecraft.getMinecraft();
 
+	int currBar = 0;
+	int maxDrive = 100;
+	int maxBars = 9;
+
+	float oneValue = (83F / 100F);
+	
+	int currDrive;
+	
+	public GuiDriveBar(){
+
+		
+	}
 	@SubscribeEvent
 	public void onRenderOverlayPost(RenderGameOverlayEvent event){
 
 		EntityPropertyDrivePoints props = EntityPropertyDrivePoints.get(mc.thePlayer);
 
+		currDrive = (int) (oneValue * props.getCurrDrivePoints());
+
+		if(props.getCurrDrivePoints() >= maxDrive)
+		{
+			System.out.println("Tweaking bar");
+			props.setCurrDrivePoints(0);
+			currDrive = (int) (oneValue * props.getCurrDrivePoints());
+			currBar += 1;
+		}
+		else if(props.getCurrDrivePoints() >= maxDrive && currBar == maxBars)
+		{
+			props.setCurrDrivePoints(maxDrive);
+			currDrive = (int) (oneValue * props.getCurrDrivePoints());
+		}
+		
 		if(event.type == RenderGameOverlayEvent.ElementType.TEXT) {
 			//Temp will be an extended entity property
-			int maxDrive = 100;
-			int maxBars = 9;
-			int currBar = 0;
+
 			//CommonProxy.getEntityData(props.EXT_PROP_NAME);			
 			System.out.println("Drive points:" + props.getCurrDrivePoints());
 			int guiWidth = 95;
@@ -36,32 +61,10 @@ public class GuiDriveBar extends Gui{
 			int screenWidth = event.resolution.getScaledWidth();
 			int screenHeight = event.resolution.getScaledHeight();
 			EntityPlayer player = mc.thePlayer;
-			float oneValue = (83F / 100F);
-			int currDrive = (int) (oneValue * props.getCurrDrivePoints());
+
 
 			mc.renderEngine.bindTexture(new ResourceLocation("kk", "textures/gui/DriveBar.png"));
-			System.out.println("Current Drive: "+currDrive);
-			System.out.println("Max Drive: "+maxDrive);
-			System.out.println("Current Bar: "+currBar);
-			System.out.println("Max Bar: "+maxBars);
-			System.out.println("Soposed Points: "+props.getCurrDrivePoints());
-			
-			if(props.getCurrDrivePoints() == maxDrive)
-			{
-				System.out.println("Tweaking bar");
-				props.setCurrDrivePoints(0);
-				currDrive = (int) (oneValue * props.getCurrDrivePoints());
-				currBar += 1;
 
-				System.out.println("this should be tiggered");
-
-			}
-			else if(props.getCurrDrivePoints() >= maxDrive && currBar == maxBars)
-			{
-				props.setCurrDrivePoints(maxDrive);
-				currDrive = (int) (oneValue * props.getCurrDrivePoints());
-			}
-			
 			GL11.glPushMatrix();
 			//Background
 			this.drawTexturedModalRect(screenWidth - guiWidth - 70, screenHeight - guiHeight - 10, 0, 0, guiWidth, guiHeight);
@@ -107,6 +110,9 @@ public class GuiDriveBar extends Gui{
 			else if(currBar == 9)
 			{
 				this.drawTexturedModalRect((screenWidth - guiWidth + 15), screenHeight - guiHeight - 12, 90, 38, 8, guiHeight);
+			}
+			else if(currBar > 9){
+				currBar = 9;
 			}
 			GL11.glPopMatrix();
 		}
