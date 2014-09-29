@@ -40,6 +40,12 @@ public class GuiDriveBar extends Gui{
 			int currDrive = (int) (oneValue * props.getCurrDrivePoints());
 
 			mc.renderEngine.bindTexture(new ResourceLocation("kk", "textures/gui/DriveBar.png"));
+			System.out.println("Current Drive: "+currDrive);
+			System.out.println("Max Drive: "+maxDrive);
+			System.out.println("Current Bar: "+currBar);
+			System.out.println("Max Bar: "+maxBars);
+			System.out.println("Soposed Points: "+props.getCurrDrivePoints());
+
 			if(currDrive >= maxDrive && currBar <= maxBars)
 			{
 				System.out.println("this should be tiggered");
@@ -51,9 +57,6 @@ public class GuiDriveBar extends Gui{
 				currBar = maxBars;
 				props.setCurrDrivePoints(maxDrive);
 			}
-			System.out.println("Current Drive: "+currDrive);
-			System.out.println("Current Bar: "+currBar);
-			System.out.println("Current Points: "+props.getCurrDrivePoints());
 			GL11.glPushMatrix();
 			//Background
 			this.drawTexturedModalRect(screenWidth - guiWidth - 70, screenHeight - guiHeight - 10, 0, 0, guiWidth, guiHeight);
