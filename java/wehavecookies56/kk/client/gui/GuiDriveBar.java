@@ -48,9 +48,14 @@ public class GuiDriveBar extends Gui{
 
 			if(currDrive >= maxDrive && currBar <= maxBars)
 			{
+				if(props.getCurrDrivePoints() != 0)
+				{
+					System.out.println("Tewaking bar");
+					props.setCurrDrivePoints(0);
+					currBar += 1;
+				}
 				System.out.println("this should be tiggered");
-				props.setCurrDrivePoints(0);
-				currBar += 1;
+				
 			}
 			else if(currDrive >= maxDrive && currBar == maxBars)
 			{
