@@ -54,7 +54,7 @@ public class GuiDriveBar extends Gui{
 			//Temp will be an extended entity property
 
 			//CommonProxy.getEntityData(props.EXT_PROP_NAME);			
-			System.out.println("Drive points:" + props.getCurrDrivePoints());
+			System.out.println("Drive points: " + props.getCurrDrivePoints());
 			int guiWidth = 95;
 			int guiBarWidth = 83;
 			int guiHeight = 18;
@@ -62,14 +62,13 @@ public class GuiDriveBar extends Gui{
 			int screenHeight = event.resolution.getScaledHeight();
 			EntityPlayer player = mc.thePlayer;
 
-
 			mc.renderEngine.bindTexture(new ResourceLocation("kk", "textures/gui/DriveBar.png"));
 
 			GL11.glPushMatrix();
 			//Background
 			this.drawTexturedModalRect(screenWidth - guiWidth - 70, screenHeight - guiHeight - 10, 0, 0, guiWidth, guiHeight);
 			//Yellow meter
-			this.drawTexturedModalRect((screenWidth - guiWidth - 70), screenHeight - guiHeight - 12, 0, 18, currDrive, guiHeight);
+			this.drawTexturedModalRect((screenWidth - guiWidth - 34), screenHeight - guiHeight - 12, 0, 18, currDrive, guiHeight);
 			//Level
 			if(currBar == 0)
 			{
