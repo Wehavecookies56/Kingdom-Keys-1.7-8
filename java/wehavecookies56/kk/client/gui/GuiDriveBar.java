@@ -17,7 +17,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class GuiDriveBar extends Gui{
 
 	Minecraft mc = Minecraft.getMinecraft();
-	
+
 	@SubscribeEvent
 	public void onRenderOverlayPost(RenderGameOverlayEvent event){
 
@@ -28,7 +28,7 @@ public class GuiDriveBar extends Gui{
 			int maxDrive = 100;
 			int maxBars = 9;
 			int currBar = 0;
-			CommonProxy.getEntityData(props.EXT_PROP_NAME);			
+			//CommonProxy.getEntityData(props.EXT_PROP_NAME);			
 			System.out.println("Drive points:" + props.getCurrDrivePoints());
 			int guiWidth = 95;
 			int guiBarWidth = 83;
@@ -45,23 +45,23 @@ public class GuiDriveBar extends Gui{
 			System.out.println("Current Bar: "+currBar);
 			System.out.println("Max Bar: "+maxBars);
 			System.out.println("Soposed Points: "+props.getCurrDrivePoints());
+			
+			if(props.getCurrDrivePoints() == maxDrive)
+			{
+				System.out.println("Tweaking bar");
+				props.setCurrDrivePoints(0);
+				currDrive = (int) (oneValue * props.getCurrDrivePoints());
+				currBar += 1;
 
-			if(currDrive >= maxDrive && currBar <= maxBars)
-			{
-				if(props.getCurrDrivePoints() != 0)
-				{
-					System.out.println("Tewaking bar");
-					props.setCurrDrivePoints(0);
-					currBar += 1;
-				}
 				System.out.println("this should be tiggered");
-				
+
 			}
-			else if(currDrive >= maxDrive && currBar == maxBars)
+			else if(props.getCurrDrivePoints() >= maxDrive && currBar == maxBars)
 			{
-				currBar = maxBars;
 				props.setCurrDrivePoints(maxDrive);
+				currDrive = (int) (oneValue * props.getCurrDrivePoints());
 			}
+			
 			GL11.glPushMatrix();
 			//Background
 			this.drawTexturedModalRect(screenWidth - guiWidth - 70, screenHeight - guiHeight - 10, 0, 0, guiWidth, guiHeight);
