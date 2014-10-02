@@ -31,7 +31,7 @@ public class GuiDriveBar extends Gui{
 	int maxDrive9 = 1000;
 	int maxBars = 9;
 
-	double oneValue = (47D / 100D);
+	double oneValue = (46D / 100D);
 	
 	int currDrive;
 	
@@ -65,12 +65,12 @@ public class GuiDriveBar extends Gui{
 
 		else if(props.getCurrDrivePoints()<= maxDrive4 && props.getCurrDrivePoints()> maxDrive3)
 		{
-			currDrive = (int) (oneValue * props.getCurrDrivePoints()-400);
+			currDrive = (int) (oneValue * props.getCurrDrivePoints()-200);
 		}
 
 		else if(props.getCurrDrivePoints()<= maxDrive5 && props.getCurrDrivePoints()> maxDrive4)
 		{
-			currDrive = (int) (oneValue * props.getCurrDrivePoints()-500);
+			currDrive = (int) (oneValue * props.getCurrDrivePoints()-400);
 		}
 
 		else if(props.getCurrDrivePoints()<= maxDrive6 && props.getCurrDrivePoints()> maxDrive5)
