@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
 import wehavecookies56.kk.achievements.AddedAchievments;
 import wehavecookies56.kk.block.AddedBlocks;
+import wehavecookies56.kk.client.gui.GuiDriveBar;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyDrivePoints;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyMunny;
 import wehavecookies56.kk.item.AddedItems;

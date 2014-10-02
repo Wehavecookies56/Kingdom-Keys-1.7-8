@@ -19,15 +19,23 @@ public class GuiDriveBar extends Gui{
 	Minecraft mc = Minecraft.getMinecraft();
 
 	int currBar = 0;
-	int maxDrive = 100;
+	int maxDrive0 = 100;
+	int maxDrive1 = 200;
+	int maxDrive2 = 300;
+	int maxDrive3 = 400;
+	int maxDrive4 = 500;
+	int maxDrive5 = 600;
+	int maxDrive6 = 700;
+	int maxDrive7 = 800;
+	int maxDrive8 = 900;
+	int maxDrive9 = 1000;
 	int maxBars = 9;
 
-	float oneValue = (83F / 100F);
+	double oneValue = (47D / 100D);
 	
 	int currDrive;
 	
 	public GuiDriveBar(){
-
 		
 	}
 	@SubscribeEvent
@@ -35,18 +43,111 @@ public class GuiDriveBar extends Gui{
 
 		EntityPropertyDrivePoints props = EntityPropertyDrivePoints.get(mc.thePlayer);
 
-		currDrive = (int) (oneValue * props.getCurrDrivePoints());
-
-		if(props.getCurrDrivePoints() >= maxDrive)
+		if (props.getCurrDrivePoints()<= maxDrive0)
 		{
-			System.out.println("Tweaking bar");
-			props.setCurrDrivePoints(0);
-			currDrive = (int) (oneValue * props.getCurrDrivePoints());
-			currBar += 1;
+			currDrive = (int) (oneValue * props.getCurrDrivePoints()-32);
 		}
-		else if(props.getCurrDrivePoints() >= maxDrive && currBar == maxBars)
+		
+		else if(props.getCurrDrivePoints()<= maxDrive1 && props.getCurrDrivePoints()> maxDrive0)
 		{
-			props.setCurrDrivePoints(maxDrive);
+			currDrive = (int) (oneValue * props.getCurrDrivePoints()-116);
+		}
+
+		else if(props.getCurrDrivePoints()<= maxDrive2 && props.getCurrDrivePoints()> maxDrive1)
+		{
+			currDrive = (int) (oneValue * props.getCurrDrivePoints()-170);
+		}
+
+		else if(props.getCurrDrivePoints()<= maxDrive3 && props.getCurrDrivePoints()> maxDrive2)
+		{
+			currDrive = (int) (oneValue * props.getCurrDrivePoints()-250);
+		}
+
+		else if(props.getCurrDrivePoints()<= maxDrive4 && props.getCurrDrivePoints()> maxDrive3)
+		{
+			currDrive = (int) (oneValue * props.getCurrDrivePoints()-400);
+		}
+
+		else if(props.getCurrDrivePoints()<= maxDrive5 && props.getCurrDrivePoints()> maxDrive4)
+		{
+			currDrive = (int) (oneValue * props.getCurrDrivePoints()-500);
+		}
+
+		else if(props.getCurrDrivePoints()<= maxDrive6 && props.getCurrDrivePoints()> maxDrive5)
+		{
+			currDrive = (int) (oneValue * props.getCurrDrivePoints()-600);
+		}
+
+		else if(props.getCurrDrivePoints()<= maxDrive7 && props.getCurrDrivePoints()> maxDrive6)
+		{
+			currDrive = (int) (oneValue * props.getCurrDrivePoints()-700);
+		}
+
+		else if(props.getCurrDrivePoints()<= maxDrive8 && props.getCurrDrivePoints()> maxDrive7)
+		{
+			currDrive = (int) (oneValue * props.getCurrDrivePoints()-800);
+		}
+		
+		else if(props.getCurrDrivePoints()<= maxDrive9 && props.getCurrDrivePoints()> maxDrive8)
+		{
+			currDrive = (int) (oneValue * props.getCurrDrivePoints()-900);
+		}
+		if(props.getCurrDrivePoints() == maxDrive0)
+		{
+			currDrive = 0;
+			currBar = 1;
+		}
+		
+		else if(props.getCurrDrivePoints() == maxDrive1)
+		{
+			currDrive = 0;
+			currBar = 2;
+		}
+		
+		else if(props.getCurrDrivePoints() == maxDrive2)
+		{
+			currDrive = 0;
+			currBar = 3;
+		}
+		
+		else if(props.getCurrDrivePoints() == maxDrive3)
+		{
+			currDrive = 0;
+			currBar = 4;
+		}
+		else if(props.getCurrDrivePoints() == maxDrive4)
+		{
+			currDrive = 0;
+			currBar = 5;
+		}
+		
+		else if(props.getCurrDrivePoints() == maxDrive5)
+		{
+			currDrive = 0;
+			currBar = 6;
+		}
+		
+		else if(props.getCurrDrivePoints() == maxDrive6)
+		{
+			currDrive = 0;
+			currBar = 7;
+		}
+		
+		else if(props.getCurrDrivePoints() == maxDrive7)
+		{
+			currDrive = 0;
+			currBar = 8;
+		}
+		
+		else if(props.getCurrDrivePoints() == maxDrive8)
+		{
+			currDrive = 0;
+			currBar = 9;
+		}
+		
+		else if(props.getCurrDrivePoints() >= maxDrive9 && currBar == maxBars)
+		{
+			props.setCurrDrivePoints(maxDrive9);
 			currDrive = (int) (oneValue * props.getCurrDrivePoints());
 		}
 		
@@ -54,6 +155,9 @@ public class GuiDriveBar extends Gui{
 			//Temp will be an extended entity property
 
 			//CommonProxy.getEntityData(props.EXT_PROP_NAME);			
+			System.out.println("Drive points: " + props.getCurrDrivePoints());
+			System.out.println("Current Bar: " + currBar);
+			System.out.println("currDrive: " + currDrive);
 			System.out.println("Drive points: " + props.getCurrDrivePoints());
 			int guiWidth = 95;
 			int guiBarWidth = 83;
