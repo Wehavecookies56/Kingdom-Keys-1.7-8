@@ -19,135 +19,127 @@ public class GuiDriveBar extends Gui{
 	Minecraft mc = Minecraft.getMinecraft();
 
 	int currBar = 0;
-	int maxDrive0 = 100;
-	int maxDrive1 = 200;
-	int maxDrive2 = 300;
-	int maxDrive3 = 400;
-	int maxDrive4 = 500;
-	int maxDrive5 = 600;
-	int maxDrive6 = 700;
-	int maxDrive7 = 800;
-	int maxDrive8 = 900;
-	int maxDrive9 = 1000;
+	int maxDrive = 1000;
+	int maxLength = 100;
 	int maxBars = 9;
 
 	double oneValue = (46D / 100D);
 	
-	int currDrive;
+	float currDrive;
 	
 	public GuiDriveBar(){
-		
+		int currBar = 0;
 	}
 	@SubscribeEvent
 	public void onRenderOverlayPost(RenderGameOverlayEvent event){
 
 		EntityPropertyDrivePoints props = EntityPropertyDrivePoints.get(mc.thePlayer);
 
-		if (props.getCurrDrivePoints()<= maxDrive0)
+		if (props.getCurrDrivePoints()<= 100)
 		{
-			currDrive = (int) (oneValue * props.getCurrDrivePoints()-32);
+			currDrive = (int) (oneValue * props.getCurrDrivePoints());
 		}
 		
-		else if(props.getCurrDrivePoints()<= maxDrive1 && props.getCurrDrivePoints()> maxDrive0)
+		else if(props.getCurrDrivePoints()<= 200 && props.getCurrDrivePoints()> 100)
 		{
-			currDrive = (int) (oneValue * props.getCurrDrivePoints()-116);
+			currDrive = (float) ((oneValue * props.getCurrDrivePoints()) / 2);
 		}
 
-		else if(props.getCurrDrivePoints()<= maxDrive2 && props.getCurrDrivePoints()> maxDrive1)
+		else if(props.getCurrDrivePoints()<= 300 && props.getCurrDrivePoints()> 200)
 		{
-			currDrive = (int) (oneValue * props.getCurrDrivePoints()-170);
+			currDrive = (float) ((oneValue * (props.getCurrDrivePoints()) / 3));
 		}
 
-		else if(props.getCurrDrivePoints()<= maxDrive3 && props.getCurrDrivePoints()> maxDrive2)
+		else if(props.getCurrDrivePoints()<= 400 && props.getCurrDrivePoints()> 300)
 		{
-			currDrive = (int) (oneValue * props.getCurrDrivePoints()-250);
+			currDrive = (int) (oneValue * (props.getCurrDrivePoints() / 4));
 		}
 
-		else if(props.getCurrDrivePoints()<= maxDrive4 && props.getCurrDrivePoints()> maxDrive3)
+		else if(props.getCurrDrivePoints()<= 500 && props.getCurrDrivePoints()> 400)
 		{
-			currDrive = (int) (oneValue * props.getCurrDrivePoints()-200);
+			currDrive = (int) (oneValue * (props.getCurrDrivePoints() / 5));
 		}
 
-		else if(props.getCurrDrivePoints()<= maxDrive5 && props.getCurrDrivePoints()> maxDrive4)
+		else if(props.getCurrDrivePoints()<= 600 && props.getCurrDrivePoints()> 500)
 		{
-			currDrive = (int) (oneValue * props.getCurrDrivePoints()-400);
+			currDrive = (int) (oneValue * (props.getCurrDrivePoints() / 6));
 		}
 
-		else if(props.getCurrDrivePoints()<= maxDrive6 && props.getCurrDrivePoints()> maxDrive5)
+		else if(props.getCurrDrivePoints()<= 700 && props.getCurrDrivePoints()> 600)
 		{
-			currDrive = (int) (oneValue * props.getCurrDrivePoints()-600);
+			currDrive = (int) (oneValue * (props.getCurrDrivePoints() / 7));
 		}
 
-		else if(props.getCurrDrivePoints()<= maxDrive7 && props.getCurrDrivePoints()> maxDrive6)
+		else if(props.getCurrDrivePoints()<= 800 && props.getCurrDrivePoints()> 700)
 		{
-			currDrive = (int) (oneValue * props.getCurrDrivePoints()-700);
+			currDrive = (int) (oneValue * (props.getCurrDrivePoints() / 8));
 		}
 
-		else if(props.getCurrDrivePoints()<= maxDrive8 && props.getCurrDrivePoints()> maxDrive7)
+		else if(props.getCurrDrivePoints()<= 900 && props.getCurrDrivePoints()> 800)
 		{
-			currDrive = (int) (oneValue * props.getCurrDrivePoints()-800);
+			currDrive = (int) (oneValue * (props.getCurrDrivePoints() / 9));
 		}
 		
-		else if(props.getCurrDrivePoints()<= maxDrive9 && props.getCurrDrivePoints()> maxDrive8)
+		else if(props.getCurrDrivePoints()<= 1000 && props.getCurrDrivePoints()> 900)
 		{
-			currDrive = (int) (oneValue * props.getCurrDrivePoints()-900);
+			currDrive = (int) (oneValue * (props.getCurrDrivePoints() / 10));
 		}
-		if(props.getCurrDrivePoints() == maxDrive0)
+		if(props.getCurrDrivePoints() == 100)
 		{
-			currDrive = 0;
+			//currDrive = 0;
 			currBar = 1;
 		}
 		
-		else if(props.getCurrDrivePoints() == maxDrive1)
+		else if(props.getCurrDrivePoints() == 200)
 		{
-			currDrive = 0;
+			//currDrive = 0;
 			currBar = 2;
 		}
 		
-		else if(props.getCurrDrivePoints() == maxDrive2)
+		else if(props.getCurrDrivePoints() == 300)
 		{
-			currDrive = 0;
+			//currDrive = 0;
 			currBar = 3;
 		}
 		
-		else if(props.getCurrDrivePoints() == maxDrive3)
+		else if(props.getCurrDrivePoints() == 400)
 		{
 			currDrive = 0;
 			currBar = 4;
 		}
-		else if(props.getCurrDrivePoints() == maxDrive4)
+		else if(props.getCurrDrivePoints() == 500)
 		{
 			currDrive = 0;
 			currBar = 5;
 		}
 		
-		else if(props.getCurrDrivePoints() == maxDrive5)
+		else if(props.getCurrDrivePoints() == 600)
 		{
 			currDrive = 0;
 			currBar = 6;
 		}
 		
-		else if(props.getCurrDrivePoints() == maxDrive6)
+		else if(props.getCurrDrivePoints() == 700)
 		{
 			currDrive = 0;
 			currBar = 7;
 		}
 		
-		else if(props.getCurrDrivePoints() == maxDrive7)
+		else if(props.getCurrDrivePoints() == 800)
 		{
 			currDrive = 0;
 			currBar = 8;
 		}
 		
-		else if(props.getCurrDrivePoints() == maxDrive8)
+		else if(props.getCurrDrivePoints() == 900)
 		{
 			currDrive = 0;
 			currBar = 9;
 		}
 		
-		else if(props.getCurrDrivePoints() >= maxDrive9 && currBar == maxBars)
+		else if(props.getCurrDrivePoints() >= maxDrive && currBar == maxBars)
 		{
-			props.setCurrDrivePoints(maxDrive9);
+			props.setCurrDrivePoints(maxDrive);
 			currDrive = (int) (oneValue * props.getCurrDrivePoints());
 		}
 		
@@ -172,7 +164,7 @@ public class GuiDriveBar extends Gui{
 			//Background
 			this.drawTexturedModalRect(screenWidth - guiWidth - 70, screenHeight - guiHeight - 10, 0, 0, guiWidth, guiHeight);
 			//Yellow meter
-			this.drawTexturedModalRect((screenWidth - guiWidth - 34), screenHeight - guiHeight - 12, 0, 18, currDrive, guiHeight);
+			this.drawTexturedModalRect((screenWidth - guiWidth - 34), screenHeight - guiHeight - 12, 0, 18, (int) currDrive, guiHeight);
 			//Level
 			if(currBar == 0)
 			{

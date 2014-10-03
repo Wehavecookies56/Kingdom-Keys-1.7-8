@@ -21,6 +21,10 @@ import wehavecookies56.kk.item.AddedItems;
 
 public class ComponentRecipeHome extends StructureVillagePieces.Village {
 
+	public ComponentRecipeHome() {
+		
+	}
+	
 	public static final String SYNTHESIS_CHEST = "synthesisChest";
 	ChestGenHooks chest = ChestGenHooks.getInfo(SYNTHESIS_CHEST);
 	
