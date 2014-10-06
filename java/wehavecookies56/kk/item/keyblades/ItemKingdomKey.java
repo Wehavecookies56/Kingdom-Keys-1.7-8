@@ -3,10 +3,12 @@ package wehavecookies56.kk.item.keyblades;
 import java.util.List;
 
 import mods.battlegear2.api.weapons.IBattlegearWeapon;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
@@ -60,8 +62,46 @@ public class ItemKingdomKey extends ItemSword implements IBattlegearWeapon{
     	}
 	}
 
+	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10) 
 	{
-	}
+		// TODO Auto-generated method stub
+		if(par3World.getBlock(par4, par5, par6) == Blocks.iron_door)
+		{
+
+		int id = par3World.getBlockMetadata(par4, par5, par6);
+
+		     int j1 = 10 & 7;
+		     j1 ^= 4;
+		         switch(id){
+		         case 0:
+		         par3World.setBlockMetadataWithNotify(par4, par5, par6, j1 - 2, 2);
+		         break;
+		         case 1:
+		         par3World.setBlockMetadataWithNotify(par4, par5, par6, j1 - 1, 2);
+		         break;
+		         case 2:
+		         par3World.setBlockMetadataWithNotify(par4, par5, par6, j1, 2);
+		         break;
+		         case 3:
+		         par3World.setBlockMetadataWithNotify(par4, par5, par6, j1 + 1, 2);
+		         break;
+		         case 4:
+		         par3World.setBlockMetadataWithNotify(par4, par5, par6, j1 + 10, 2);
+		         break;
+		         case 5:
+		         par3World.setBlockMetadataWithNotify(par4, par5, par6, j1 + 11, 2);
+		         break;
+		         case 6:
+		         par3World.setBlockMetadataWithNotify(par4, par5, par6, j1 - 4, 2);
+		         break;
+		         case 7:
+		         par3World.setBlockMetadataWithNotify(par4, par5, par6, j1 - 3, 2);
+		         break;
+		         }
+		         par3World.markBlockRangeForRenderUpdate(par4, par5, par6, par4, par5, par6);
+			}
+			return true;
+		}
 
 	@Override
 	public boolean sheatheOnBack(ItemStack item) {
