@@ -62,7 +62,7 @@ public class ItemKingdomKey extends ItemSword implements IBattlegearWeapon{
     	}
 	}
 
-	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10) 
+	/*public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10) 
 	{
 		// TODO Auto-generated method stub
 		if(par3World.getBlock(par4, par5, par6) == Blocks.iron_door)
@@ -101,7 +101,7 @@ public class ItemKingdomKey extends ItemSword implements IBattlegearWeapon{
 		         par3World.markBlockRangeForRenderUpdate(par4, par5, par6, par4, par5, par6);
 			}
 			return true;
-		}
+		}*/
 
 	@Override
 	public boolean sheatheOnBack(ItemStack item) {

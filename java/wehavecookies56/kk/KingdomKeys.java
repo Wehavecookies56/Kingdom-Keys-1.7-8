@@ -132,9 +132,9 @@ public class KingdomKeys {
 
 	//Pre initialisation
 	@Mod.EventHandler
-	public void modConstruct(FMLConstructionEvent event) {
+	public void modConstruct(FMLConstructionEvent event)
+	{
 		network = new ChannelHandler(Reference.MOD_ID, Reference.MOD_CHANNEL);
-
 	}
 
 	@Mod.EventHandler
