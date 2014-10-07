@@ -45,12 +45,12 @@ public class BlockBounceBlox extends Block {
 			double y = player.posY;
 			double z = player.posZ-1;
 			
-			System.out.println(par1World.getBlock((int)x, (int)y, (int)z));
+			//System.out.println(par1World.getBlock((int)x, (int)y, (int)z));
 			//par1World.setBlockToAir((int)x, (int)y, (int)z);
 			if (par1World.getBlock((int)x, (int)y, (int)z) == AddedBlocks.BounceBlox)
 			{
 				player.motionY += 1.0D;
-				player.addChatMessage(new ChatComponentText("Jump?"));
+				//player.addChatMessage(new ChatComponentText("Jump?"));
 				//Why doesen't this one work?
 				System.out.println("Hop");
 			}
@@ -61,7 +61,7 @@ public class BlockBounceBlox extends Block {
 			double y = entity.posY;
 			double z = entity.posZ-1;
 			
-			System.out.println(par1World.getBlock((int)x, (int)y, (int)z));
+			//System.out.println(par1World.getBlock((int)x, (int)y, (int)z));
 			if (par1World.getBlock((int)x, (int)y, (int)z) == AddedBlocks.BounceBlox)
 			{
 				entity.motionY+=1.0D;
