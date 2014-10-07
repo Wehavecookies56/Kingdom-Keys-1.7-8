@@ -18,19 +18,16 @@ public class GuiDriveBar extends Gui{
 
 	Minecraft mc = Minecraft.getMinecraft();
 
-	int currBar = 0;
+	int currBar = EntityPropertyDrivePoints.currBar;
 	int maxDrive = 1000;
 	int maxLength = 100;
 	int maxBars = 9;
 	public static boolean max = false;
 	double oneValue = (46D / 100D);
-	
-	float currDrive;
-	
+	double currDrive;
 	public GuiDriveBar(){
 		int currBar = 0;
 	}
-	
 	@SubscribeEvent
 	public void onRenderOverlayPost(RenderGameOverlayEvent event){
 
@@ -148,10 +145,9 @@ public class GuiDriveBar extends Gui{
 		
 		if(event.type == RenderGameOverlayEvent.ElementType.TEXT) {
 			//Temp will be an extended entity property
-
 			//CommonProxy.getEntityData(props.EXT_PROP_NAME);			
 			System.out.println("Drive points: " + props.getCurrDrivePoints());
-		//	System.out.println("Current Bar: " + currBar);
+			System.out.println("Current Bar: " + currBar);
 			System.out.println("currDrive: " + currDrive);
 			int guiWidth = 95;
 			int guiBarWidth = 83;
@@ -159,6 +155,7 @@ public class GuiDriveBar extends Gui{
 			int screenWidth = event.resolution.getScaledWidth();
 			int screenHeight = event.resolution.getScaledHeight();
 			EntityPlayer player = mc.thePlayer;
+
 
 			mc.renderEngine.bindTexture(new ResourceLocation("kk", "textures/gui/DriveBar.png"));
 
@@ -211,7 +208,10 @@ public class GuiDriveBar extends Gui{
 			
 			if(max == true)
 			{
-				this.drawTexturedModalRect((screenWidth - guiWidth - 20), screenHeight - guiHeight - 5, 0, 57, 20, guiHeight);
+				//GL11.glPushMatrix();
+				//GL11.glScalef(1.5F,1.5F,0);
+				this.drawTexturedModalRect((screenWidth - guiWidth - 23), screenHeight - guiHeight - 5, 0, 57, 30, guiHeight);
+				//GL11.glPopMatrix();
 			}
 			
 			GL11.glPopMatrix();

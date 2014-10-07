@@ -13,7 +13,7 @@ public class EntityPropertyDrivePoints implements IExtendedEntityProperties {
 	private final EntityPlayer player;
 
 	public int currDrivePoints;
-	//public int maxDrivePoints;
+	public static int currBar;
 
 	public static final int DRIVE_WATCHER = 21;
 
@@ -21,7 +21,7 @@ public class EntityPropertyDrivePoints implements IExtendedEntityProperties {
 		this.player = player;
 
 		this.currDrivePoints = 0;
-		//this.maxDrivePoints = 100;
+		this.currBar = 0;
 		this.player.getDataWatcher().addObject(DRIVE_WATCHER, 0);
 	}
 
