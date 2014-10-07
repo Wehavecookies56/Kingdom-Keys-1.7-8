@@ -33,7 +33,14 @@ public class GuiHealthBar extends Gui
 			int currHealth = guiWidth - (int) (oneHeart * player.getHealth());
 			GL11.glPushMatrix();
 			this.drawTexturedModalRect(screenWidth - guiWidth, screenHeight - guiHeight, 0, 0, guiWidth, guiHeight);
-			this.drawTexturedModalRect((screenWidth - guiWidth) + currHealth, screenHeight - guiHeight, 0, 8, (guiWidth - currHealth) - 2, guiHeight);
+			if (player.getHealth() <= 6)
+			{
+				this.drawTexturedModalRect((screenWidth - guiWidth) + currHealth, screenHeight - guiHeight, 0, 15, (guiWidth - currHealth) - 2, guiHeight);
+			}
+			else
+			{
+				this.drawTexturedModalRect((screenWidth - guiWidth) + currHealth, screenHeight - guiHeight, 0, 8, (guiWidth - currHealth) - 2, guiHeight);
+			}
 			GL11.glPopMatrix();
 		}
 	}
