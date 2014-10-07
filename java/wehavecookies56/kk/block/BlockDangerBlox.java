@@ -52,6 +52,10 @@ public class BlockDangerBlox extends Block {
 				par5Entity.attackEntityFrom(DamageSource.magic, 3);
 			}
         }
+    	else
+    	{
+    		par5Entity.attackEntityFrom(DamageSource.magic, 3);
+    	}
     }
 
     @SideOnly(Side.CLIENT)

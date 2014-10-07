@@ -8,7 +8,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import wehavecookies56.kk.lib.Reference;
@@ -39,14 +41,32 @@ public class BlockBounceBlox extends Block {
     	if(entity instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer) entity;
-			if (par1World.getBlock((int)player.posX, (int)player.posY, (int)player.posZ) == AddedBlocks.BounceBlox)
+			double x = player.posX-1;
+			double y = player.posY;
+			double z = player.posZ-1;
+			
+			System.out.println(par1World.getBlock((int)x, (int)y, (int)z));
+			//par1World.setBlockToAir((int)x, (int)y, (int)z);
+			if (par1World.getBlock((int)x, (int)y, (int)z) == AddedBlocks.BounceBlox)
 			{
-				//player.motionY += 1.0D;
+				player.motionY += 1.0D;
+				player.addChatMessage(new ChatComponentText("Jump?"));
 				//Why doesen't this one work?
 				System.out.println("Hop");
 			}
-			player.motionY += 1.0D;
         }
+    	else
+    	{
+    		double x = entity.posX-1;
+			double y = entity.posY;
+			double z = entity.posZ-1;
+			
+			System.out.println(par1World.getBlock((int)x, (int)y, (int)z));
+			if (par1World.getBlock((int)x, (int)y, (int)z) == AddedBlocks.BounceBlox)
+			{
+				entity.motionY+=1.0D;
+			}
+    	}
     }
 
    /*@Override
