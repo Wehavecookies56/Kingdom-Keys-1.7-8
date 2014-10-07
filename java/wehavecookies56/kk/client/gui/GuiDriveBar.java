@@ -22,7 +22,7 @@ public class GuiDriveBar extends Gui{
 	int maxDrive = 1000;
 	int maxLength = 100;
 	int maxBars = 9;
-
+	public static boolean max = false;
 	double oneValue = (46D / 100D);
 	
 	float currDrive;
@@ -38,52 +38,52 @@ public class GuiDriveBar extends Gui{
 
 		if (props.getCurrDrivePoints()<= 100)
 		{
-			currDrive = (int) (oneValue * props.getCurrDrivePoints());
+			currDrive = (float) (oneValue * props.getCurrDrivePoints());
 		}
 		
 		else if(props.getCurrDrivePoints()<= 200 && props.getCurrDrivePoints()> 100)
 		{
-			currDrive = (float) ((oneValue * props.getCurrDrivePoints()) / 2);
+			currDrive = (float) (oneValue * (props.getCurrDrivePoints() -100));
 		}
 
 		else if(props.getCurrDrivePoints()<= 300 && props.getCurrDrivePoints()> 200)
 		{
-			currDrive = (float) ((oneValue * (props.getCurrDrivePoints()) / 3));
+			currDrive = (float) (oneValue * (props.getCurrDrivePoints() -200));
 		}
 
 		else if(props.getCurrDrivePoints()<= 400 && props.getCurrDrivePoints()> 300)
 		{
-			currDrive = (int) (oneValue * (props.getCurrDrivePoints() / 4));
+			currDrive = (float) (oneValue * (props.getCurrDrivePoints() -300));
 		}
 
 		else if(props.getCurrDrivePoints()<= 500 && props.getCurrDrivePoints()> 400)
 		{
-			currDrive = (int) (oneValue * (props.getCurrDrivePoints() / 5));
+			currDrive = (float) (oneValue * (props.getCurrDrivePoints() -400));
 		}
 
 		else if(props.getCurrDrivePoints()<= 600 && props.getCurrDrivePoints()> 500)
 		{
-			currDrive = (int) (oneValue * (props.getCurrDrivePoints() / 6));
+			currDrive = (float) (oneValue * (props.getCurrDrivePoints() -500));
 		}
 
 		else if(props.getCurrDrivePoints()<= 700 && props.getCurrDrivePoints()> 600)
 		{
-			currDrive = (int) (oneValue * (props.getCurrDrivePoints() / 7));
+			currDrive = (float) (oneValue * (props.getCurrDrivePoints() -600));
 		}
 
 		else if(props.getCurrDrivePoints()<= 800 && props.getCurrDrivePoints()> 700)
 		{
-			currDrive = (int) (oneValue * (props.getCurrDrivePoints() / 8));
+			currDrive = (float) (oneValue * (props.getCurrDrivePoints() -700));
 		}
 
 		else if(props.getCurrDrivePoints()<= 900 && props.getCurrDrivePoints()> 800)
 		{
-			currDrive = (int) (oneValue * (props.getCurrDrivePoints() / 9));
+			currDrive = (float) (oneValue * (props.getCurrDrivePoints() -800));
 		}
 		
 		else if(props.getCurrDrivePoints()<= 1000 && props.getCurrDrivePoints()> 900)
 		{
-			currDrive = (int) (oneValue * (props.getCurrDrivePoints() / 10));
+			currDrive = (float) (oneValue * (props.getCurrDrivePoints() -900));
 		}
 		
 		if(props.getCurrDrivePoints() == 100)
@@ -143,15 +143,16 @@ public class GuiDriveBar extends Gui{
 		{
 			props.setCurrDrivePoints(maxDrive);
 			currDrive = (int) (oneValue * props.getCurrDrivePoints());
+			max = true;
 		}
 		
 		if(event.type == RenderGameOverlayEvent.ElementType.TEXT) {
 			//Temp will be an extended entity property
 
 			//CommonProxy.getEntityData(props.EXT_PROP_NAME);			
-		//	System.out.println("Drive points: " + props.getCurrDrivePoints());
+			System.out.println("Drive points: " + props.getCurrDrivePoints());
 		//	System.out.println("Current Bar: " + currBar);
-		//	System.out.println("currDrive: " + currDrive);
+			System.out.println("currDrive: " + currDrive);
 			int guiWidth = 95;
 			int guiBarWidth = 83;
 			int guiHeight = 18;
@@ -207,9 +208,12 @@ public class GuiDriveBar extends Gui{
 			{
 				this.drawTexturedModalRect((screenWidth - guiWidth + 15), screenHeight - guiHeight - 12, 90, 38, 8, guiHeight);
 			}
-			else if(currBar > 9){
-				currBar = 9;
+			
+			if(max == true)
+			{
+				this.drawTexturedModalRect((screenWidth - guiWidth - 20), screenHeight - guiHeight - 5, 0, 57, 20, guiHeight);
 			}
+			
 			GL11.glPopMatrix();
 		}
 	}

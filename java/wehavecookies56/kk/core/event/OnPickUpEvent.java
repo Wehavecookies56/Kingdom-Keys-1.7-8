@@ -230,8 +230,11 @@ public class OnPickUpEvent {
 
 		else if(event.pickedUp.getEntityItem().getItem().equals(AddedItems.DriveOrb))
 		{
-			event.player.inventory.consumeInventoryItem(AddedItems.DriveOrb);
-			drive.addDrivePoints(10);
+			if (GuiDriveBar.max == false)
+			{
+				event.player.inventory.consumeInventoryItem(AddedItems.DriveOrb);
+				drive.addDrivePoints(10);
+			}
 		}	
 	}
 }
