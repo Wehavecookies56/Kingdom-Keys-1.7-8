@@ -37,6 +37,7 @@ import wehavecookies56.kk.core.event.PureHeartDrops;
 import wehavecookies56.kk.core.event.RecipeDrop;
 import wehavecookies56.kk.core.handlers.GiveMunny;
 import wehavecookies56.kk.core.handlers.GuiHandler;
+import wehavecookies56.kk.core.packet.AchievementPacket;
 import wehavecookies56.kk.core.packet.ChannelHandler;
 import wehavecookies56.kk.core.packet.KnowledgePacket;
 import wehavecookies56.kk.core.packet.MunnyPacket;
@@ -153,6 +154,7 @@ public class KingdomKeys {
 		network.registerPacket(SummonPacket.class);
 		network.registerPacket(SynthesisPacket.class);
 		network.registerPacket(MunnyPacket.class);
+		network.registerPacket(AchievementPacket.class);
 
 
 		int modEntityID = 0;

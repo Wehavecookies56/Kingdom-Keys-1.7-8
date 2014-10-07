@@ -4,12 +4,14 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.stats.StatFileWriter;
 
 import org.lwjgl.input.Keyboard;
 
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.achievements.AddedAchievments;
 import wehavecookies56.kk.client.gui.GuiMenu;
+import wehavecookies56.kk.core.packet.AchievementPacket;
 import wehavecookies56.kk.core.packet.IPacket;
 import wehavecookies56.kk.core.packet.SummonPacket;
 import wehavecookies56.kk.item.AddedItems;
@@ -28,6 +30,7 @@ public class KeyBind{
 	public static final int MENU = 1;
 	private static final int[] keyValues = {Keyboard.KEY_G, Keyboard.KEY_M};
 	private final KeyBinding[] keys;
+	StatFileWriter sfw;
 	@SideOnly(Side.CLIENT)
 	public KeyBind() {
 		keys = new KeyBinding[desc.length];
@@ -43,6 +46,12 @@ public class KeyBind{
 	public void onKeyInput(KeyInputEvent event) {	
 		EntityPlayer player = (EntityPlayer) Minecraft.getMinecraft().thePlayer;
 		if (keys[MENU].isPressed()) {
+			boolean hasMenuAchv = false;
+			if(!hasMenuAchv){
+				hasMenuAchv = true;
+				IPacket packet = new AchievementPacket(1);
+				KingdomKeys.network.sendToServer(packet);
+			}
 			if(Minecraft.getMinecraft().currentScreen == new GuiMenu()){
 				Minecraft.getMinecraft().displayGuiScreen(null);
 			}else if(Minecraft.getMinecraft().currentScreen == null){
@@ -56,7 +65,7 @@ public class KeyBind{
 						IPacket packet = new SummonPacket(new ItemStack(AddedItems.VulpeusChain), new ItemStack(AddedItems.Vulpeus));
 						KingdomKeys.network.sendToServer(packet);
 						Minecraft.getMinecraft().thePlayer.playSound("kk:unsummon", 1F, 1F);
-
+						
 					}
 					if(Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() == AddedItems.VulpeusChain){
 						IPacket packet = new SummonPacket(new ItemStack(AddedItems.Vulpeus), new ItemStack(AddedItems.VulpeusChain));

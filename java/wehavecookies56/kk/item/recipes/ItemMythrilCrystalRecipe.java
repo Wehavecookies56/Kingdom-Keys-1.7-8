@@ -24,6 +24,6 @@ public class ItemMythrilCrystalRecipe extends ItemKingdomKeys {
 	
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack itemStack, EntityPlayer player, List dataList, boolean bool){
-		dataList.add(StatCollector.translateToLocal(LocalStrings.MythrilGem));
+		dataList.add(StatCollector.translateToLocal(LocalStrings.MythrilCrystal));
 	}
 }
