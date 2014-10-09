@@ -133,7 +133,6 @@ public class LocalStrings {
 	public static final String MythrilGem = "item.mythrilGem.name";
 	public static final String MythrilCrystal = "item.mythrilCrystal.name";
 
-	
 	//GUI Text
 	public static final String Synthesis_Title = "gui.synthesis.title";
 	public static final String Synthesis_Munny = "gui.synthesis.munny";

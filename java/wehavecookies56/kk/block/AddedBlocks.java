@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import wehavecookies56.kk.KingdomKeys;
+import wehavecookies56.kk.entities.tileentities.TileEntityKKChest;
 import wehavecookies56.kk.entities.tileentities.TileEntitySynthesis;
 import wehavecookies56.kk.lib.Strings;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -11,7 +12,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class AddedBlocks {
 
     public static Block
-    NormalBlox, HardBlox, MetalBlox, PrizeBlox, RarePrizeBlox, BounceBlox, DangerBlox, BlastBlox, Synthesiser, BlazingOre, BlazingOreN, LightningOre, FrostOre, DenseOre, PowerOre, PowerOreE, EnergyOre, EnergyOreN, RemembranceOre, RemembranceOreN, SerenityOre, TwilightOre, TwilightOreN, TranquilOre, BrightOre, DarkOre, DarkOreN, DarkOreE, LucidOre;
+    NormalBlox, HardBlox, MetalBlox, PrizeBlox, RarePrizeBlox, BounceBlox, DangerBlox, BlastBlox, Synthesiser, BlazingOre, BlazingOreN, LightningOre, FrostOre, DenseOre, PowerOre, PowerOreE, EnergyOre, EnergyOreN, RemembranceOre, RemembranceOreN, SerenityOre, TwilightOre, TwilightOreN, TranquilOre, BrightOre, DarkOre, DarkOreN, DarkOreE, LucidOre, KKChest;
 
     public static void preinit(){
     	//Bug Blox
@@ -24,6 +25,7 @@ public class AddedBlocks {
         DangerBlox = new BlockDangerBlox().setCreativeTab(KingdomKeys.KKTAB); GameRegistry.registerBlock(DangerBlox, Strings.DBlox);
         BlastBlox = new BlockBlastBlox().setCreativeTab(KingdomKeys.KKTAB); GameRegistry.registerBlock(BlastBlox, Strings.BLBlox);
         Synthesiser = new BlockSynthesis().setCreativeTab(KingdomKeys.KKTAB); GameRegistry.registerBlock(Synthesiser, Strings.Synthesiser);      
+      
         //Synthesis ores
         BlazingOre = new BlockBlazingOre().setCreativeTab(KingdomKeys.KKTAB); GameRegistry.registerBlock(BlazingOre, Strings.BlazingOre);
         LightningOre = new BlockLightningOre().setCreativeTab(KingdomKeys.KKTAB); GameRegistry.registerBlock(LightningOre, Strings.LightningOre);
@@ -41,13 +43,14 @@ public class AddedBlocks {
         DarkOreE = new BlockDarkOreE().setCreativeTab(KingdomKeys.KKTAB); GameRegistry.registerBlock(DarkOreE, Strings.DarkOreE);
         LucidOre = new BlockLucidOre().setCreativeTab(KingdomKeys.KKTAB); GameRegistry.registerBlock(LucidOre, Strings.LucidOre);
         
+        KKChest = new BlockKKChest().setCreativeTab(KingdomKeys.KKTAB); GameRegistry.registerBlock(KKChest, Strings.KKChest);
         //BlazingOreN = new BlockBlazingOreN(); GameRegistry.registerBlock(BlazingOreN, Strings.BlazingOreN);
         //RemembranceOreN = new BlockRemembranceOreN(); GameRegistry.registerBlock(RemembranceOreN, Strings.RemembranceOreN);
         //DarkOreN = new BlockDarkOreN(); GameRegistry.registerBlock(DarkOreN, Strings.DarkOreN);
         //TwilightOreN = new BlockTwilightOreN(); GameRegistry.registerBlock(TwilightOreN, Strings.TwilightOreN);
         //EnergyOreN = new BlockEnergyOreN(); GameRegistry.registerBlock(EnergyOreN, Strings.EnergyOreN);
         GameRegistry.registerTileEntity(TileEntitySynthesis.class, Strings.Synthesiser);
-        
+        GameRegistry.registerTileEntity(TileEntityKKChest.class, Strings.KKChest);        
     } 
     
 }

@@ -37,9 +37,9 @@ public class ConfigBooleans {
 	public static final boolean munnyDrops_default = true;
 	public static final String munnyDrops_name = "Enable Munny drops from mobs";
 	
-	public static boolean discSpawn;
+/*	public static boolean discSpawn;
 	public static final boolean discSpawn_default = true;
-	public static final String discSpawn_name = "Enable the disc spawning in chests";
+	public static final String discSpawn_name = "Enable the disc spawning in chests";*/
 	
 	public static boolean expensiveDarkMatter;
 	public static final boolean expensiveDarkMatter_default = true;

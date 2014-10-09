@@ -176,7 +176,7 @@ public class KingdomKeys {
 		final String GENERATE = config.CATEGORY_GENERAL + config.CATEGORY_SPLITTER + "World Generation";
 		ConfigBooleans.enableGenerate = config.get(GENERATE, ConfigBooleans.enableGenerate_name, ConfigBooleans.enableGenerate_default).getBoolean(ConfigBooleans.enableGenerate_default);
 		ConfigBooleans.enableOverworld = config.get(GENERATE, ConfigBooleans.enableOverworld_name, ConfigBooleans.enableOverworld_default).getBoolean(ConfigBooleans.enableOverworld_default);
-		ConfigBooleans.discSpawn = config.get(GENERATE, "Enable the disc spawning in chests", ConfigBooleans.discSpawn_default).getBoolean(ConfigBooleans.discSpawn_default);
+		//ConfigBooleans.discSpawn = config.get(GENERATE, "Enable the disc spawning in chests", ConfigBooleans.discSpawn_default).getBoolean(ConfigBooleans.discSpawn_default);
 
 		final String OVERWORLD = GENERATE + config.CATEGORY_SPLITTER + "Overworld Spawn Chances";
 		config.addCustomCategoryComment(OVERWORLD, "Higher number = Higher spawn chance");
@@ -286,7 +286,6 @@ public class KingdomKeys {
 			VillagerRegistry.instance().registerVillageTradeHandler(20, new VillagerTradeHandlerRecipes());
 			VillagerRegistry.instance().registerVillageCreationHandler(new VillagerCreationHandler());
 			VillagerRegistry.getRegisteredVillagers();
-
 		}
 	}
 
@@ -305,11 +304,13 @@ public class KingdomKeys {
 	}
 
 	public static void addVillagePiece(Class c, String s){
-		try{
+		try
+		{
 			MapGenStructureIO.func_143031_a(c, s);
-		}catch(Exception e){
+		}
+		catch(Exception e)
+		{
 
 		}
 	}
-
 }
