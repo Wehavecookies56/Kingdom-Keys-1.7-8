@@ -37,7 +37,7 @@ public class BlockKKChest extends BlockContainer
 	
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float a, float b, float c)
 	{
-		player.openGui(KingdomKeys.instance, 0, world, x, y, z);
+		player.openGui(KingdomKeys.instance, 1, world, x, y, z);
 		return true;
 	}
     

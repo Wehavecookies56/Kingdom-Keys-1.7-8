@@ -7,15 +7,16 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
 import wehavecookies56.kk.client.gui.GuiTabs;
+import wehavecookies56.kk.entities.tileentities.TileEntityKKChest;
 import wehavecookies56.kk.entities.tileentities.TileEntitySynthesis;
 import wehavecookies56.kk.item.AddedItems;
 import wehavecookies56.kk.slot.SlotSynthesis;
 
 public class ContainerKKChest extends Container {
 	
-	private TileEntityChest KKChest;
+	private TileEntityKKChest KKChest;
 
-	public ContainerKKChest(InventoryPlayer invPlayer, TileEntityChest KKChest){
+	public ContainerKKChest(InventoryPlayer invPlayer, TileEntityKKChest KKChest){
 		this.KKChest = KKChest;
 		
 		for(int x = 0; x< 9; x++){
@@ -28,7 +29,7 @@ public class ContainerKKChest extends Container {
 			}
 		}
 		
-		for (int x = 0; x < 1; x++){
+		for (int x = 0; x < 9; x++){
 			addSlotToContainer(new SlotSynthesis(KKChest, x, 7 + 14 * x, 7));
 		}
 	}
