@@ -35,8 +35,7 @@ public class BlockBounceBlox extends Block {
         return AxisAlignedBB.getBoundingBox((double)((float)par2 + f), (double)par3, (double)((float)par4 + f), (double)((float)(par2 + 1) - f), (double)((float)(par3 + 1) - f), (double)((float)(par4 + 1) - f));
     }
         
-    public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity entity)
-  //public void onUpdate(World par1World, int par2, int par3, int par4, Entity par5Entity)
+   /* public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity entity)
     {
     	if(entity instanceof EntityPlayer)
 		{
@@ -61,18 +60,17 @@ public class BlockBounceBlox extends Block {
 			double y = entity.posY;
 			double z = entity.posZ-1;
 			
-			//System.out.println(par1World.getBlock((int)x, (int)y, (int)z));
 			if (par1World.getBlock((int)x, (int)y, (int)z) == AddedBlocks.BounceBlox)
 			{
 				entity.motionY+=1.0D;
 			}
     	}
-    }
+    }*/
 
-   /*@Override
+   @Override
     public void onEntityWalking(World world, int x, int y, int z, Entity entity){
         entity.motionY += 1.0;
-    }*/
+    }
     
 
     @SideOnly(Side.CLIENT)

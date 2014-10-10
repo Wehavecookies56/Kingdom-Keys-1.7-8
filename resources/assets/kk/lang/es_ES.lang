@@ -338,6 +338,7 @@ item.leatherDarkness.name=Cuero de la Oscuridad
 item.darkKnowledge.name=Conocimiento Oscuro
 item.voidedKnowledge.name=Conocimiento Vacío
 item.emptyBottle.name=Botella Vacía
+item.driveOrb.name=Orbe de Fusión
 
 #Bloques
 tile.normalBlox.name=Bloque de Error
@@ -349,6 +350,8 @@ tile.dangerBlox.name=Bloque de Error Peligroso
 tile.bounceBlox.name=Bloque de Error Blando
 tile.blastBlox.name=Bloque Bomba
 tile.synthesiser.name=Sintetizador
+tile.kkChest.name=Cofre de Llave Espada
+
 
 #Ores
 tile.blazingOre.name=Mena Ígnea
@@ -423,7 +426,7 @@ item.powerCrystal.name=Cristal de Poder
 item.darkCrystal.name=Cristal Oscuro
 item.denseCrystal.name=Cristal Denso
 item.twilightCrystal.name=Cristal Crepuscular
-item.mythrilCrystal.name=Cristal de Mirtilo
+item.mythrilCrystal.name=Cristal de Mitrilo
 item.brightCrystal.name=Cristal Claro
 item.energyCrystal.name=Cristal Vital
 item.serenityCrystal.name=Cristal Sereno
@@ -595,9 +598,11 @@ gui.synthesis.material=Material
 gui.synthesis.attackdamage=Daño de Ataque
 
 #Menú
-gui.menu.title=Menú
+gui.menu.menu=Menú
 gui.menu.time=Hora
-gui.menu.button.keyblade=Llaves Espada
+gui.menu.button.items=Objetos
+gui.menu.button.back=Atrás
+gui.menu.button.keyblades=Llaves Espada
 gui.menu.button.reports=Informes
 gui.menu.button.stats=Estado
 gui.menu.button.abilities=Habilidades
@@ -612,7 +617,7 @@ achievement.kingdomKey=La llave que ilumina la oscuridad
 achievement.kingdomKey.desc=Obtén tu primera Llave Espada
 achievement.orichalcum=Ori... ¿Que?
 achievement.orichalcum.desc=Obtén Orichalcum
-achievement.orichalcumPlus=+ Significa mejor!
+achievement.orichalcumPlus=¡+ Significa mejor!
 achievement.orichalcumPlus.desc=Obtén Orichalcum+
 achievement.munny=Oooh Brillante!
 achievement.munny.desc=Obtén Platines
@@ -620,6 +625,14 @@ achievement.synthesiser=¿Eso no es un instrumento musical?
 achievement.synthesiser.desc=Obtén un Sintetizador
 achievement.menu=¿Que hace ese botón?
 achievement.menu.desc=Abre el menú
+achievement.dheart=¿Hay oscuridad por ahí?
+achievement.dheart.desc=Obtén un Corazón Oscuro
+achievement.heart=No son cómo pensé que eran
+achievement.heart.desc=Obtén un Corazón
+achievement.pheart=¿Corazón Puro? Entonces no debería haberlos matado
+achievement.pheart.desc=Obtén un Corazón Puro
+achievement.kheart=Necesito más rabia... Necesito más corazones...
+achievement.kheart.desc=Obtén Kingdom Hearts
 
 #Tooltip
 tooltip.voidedknowledge.desc=Conocimiento desconocido capaz de materializarse en fuertes armas.

@@ -391,6 +391,7 @@ tile.darkOre.name=Dark Ore
 tile.darkOreN.name=Dark Ore
 tile.darkOreE.name=Dark Ore
 tile.lucidOre.name=Lucid Ore
+tile.kkChest.name=Keyblade Chest
 
 #Creative tab names	
 itemGroup.KKTAB=Kingdom Keys
@@ -565,6 +566,10 @@ achievement.orichalcumPlus=+ Means better!
 achievement.munny=Ooh shiny!
 achievement.synthesiser=Isn't that a musical instrument or something?
 achievement.menu=What does this button do?
+achievement.dheart=Is dakness out there?
+achievement.heart=They aren't like I thought they wer
+achievement.pheart=Pure heart? Maybe I shouldn't have to kill them
+achievement.kheart=I need more rage... I need more hearts...
 
 #Achievement tool tips
 achievement.bugBlox.desc=Get a bug blox
@@ -575,6 +580,10 @@ achievement.orichalcumPlus.desc=Obtain Orichalcum+
 achievement.munny.desc=Obtain Munny
 achievement.synthesiser.desc=Obtain a Synthesis Table
 achievement.menu.desc=Open the menu
+achievement.dheart.desc=Get a Dark Heart
+achievement.heart.desc=Get a Heart
+achievement.pheart.desc=Get a Pure Heart
+achievement.kheart.desc=Get Kingdom Hearts
 
 #Gui text
 #

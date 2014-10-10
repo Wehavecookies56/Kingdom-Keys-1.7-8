@@ -76,8 +76,55 @@ public class BlockKKChest extends BlockContainer
 		player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.ZeroOne
 		)
 		{
-			Minecraft.getMinecraft().thePlayer.playSound("kk:kupo", 0.3F, 1.1F);
-			player.openGui(KingdomKeys.instance, 1, world, x, y, z);
+			//if(player.isSneaking())
+			//{
+				Minecraft.getMinecraft().thePlayer.playSound("kk:kupo", 0.3F, 1.1F);
+				player.openGui(KingdomKeys.instance, 1, world, x, y, z);
+			//}
+			/*else
+			{
+				TileEntityKKChest tileentitykkchest = (TileEntityKKChest)world.getTileEntity(x, y, z);
+
+		        if (tileentitykkchest != null)
+		        {
+		            for (int i1 = 0; i1 < tileentitykkchest.getSizeInventory(); ++i1)
+		            {
+		                ItemStack itemstack = tileentitykkchest.getStackInSlot(i1);
+
+		                if (itemstack != null)
+		                {
+		                    float f = this.rand.nextFloat() * 0.8F + 0.1F;
+		                    float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
+		                    float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
+
+		                    while (itemstack.stackSize > 0)
+		                    {
+		                        int j1 = this.rand.nextInt(21) + 10;
+
+		                        if (j1 > itemstack.stackSize)
+		                        {
+		                            j1 = itemstack.stackSize;
+		                        }
+
+		                        itemstack.stackSize -= j1;
+		                        EntityItem entityitem = new EntityItem(world, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
+
+		                        if (itemstack.hasTagCompound())
+		                        {
+		                            entityitem.getEntityItem().setTagCompound((NBTTagCompound)itemstack.getTagCompound().copy());
+		                        }
+
+		                        float f3 = 0.05F;
+		                        entityitem.motionX = (double)((float)this.rand.nextGaussian() * f3);
+		                        entityitem.motionY = (double)((float)this.rand.nextGaussian() * f3 + 0.2F);
+		                        entityitem.motionZ = (double)((float)this.rand.nextGaussian() * f3);
+		                        world.spawnEntityInWorld(entityitem);
+		                    }
+		                }
+		            }
+		            world.func_147453_f(x, y, z, AddedBlocks.KKChest);
+		        }
+			}*/
 		}
     	return true;
 	}
@@ -94,9 +141,9 @@ public class BlockKKChest extends BlockContainer
 	        return true;
 	}
 	
-	public void breakBlock(World p_149749_1_, int p_149749_2_, int p_149749_3_, int p_149749_4_, Block p_149749_5_, int p_149749_6_)
+	public void breakBlock(World world, int x, int y, int z, Block p_149749_5_, int p_149749_6_)
     {
-        TileEntityKKChest tileentitykkchest = (TileEntityKKChest)p_149749_1_.getTileEntity(p_149749_2_, p_149749_3_, p_149749_4_);
+        TileEntityKKChest tileentitykkchest = (TileEntityKKChest)world.getTileEntity(x, y, z);
 
         if (tileentitykkchest != null)
         {
@@ -120,7 +167,7 @@ public class BlockKKChest extends BlockContainer
                         }
 
                         itemstack.stackSize -= j1;
-                        EntityItem entityitem = new EntityItem(p_149749_1_, (double)((float)p_149749_2_ + f), (double)((float)p_149749_3_ + f1), (double)((float)p_149749_4_ + f2), new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
+                        EntityItem entityitem = new EntityItem(world, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
 
                         if (itemstack.hasTagCompound())
                         {
@@ -131,12 +178,12 @@ public class BlockKKChest extends BlockContainer
                         entityitem.motionX = (double)((float)this.rand.nextGaussian() * f3);
                         entityitem.motionY = (double)((float)this.rand.nextGaussian() * f3 + 0.2F);
                         entityitem.motionZ = (double)((float)this.rand.nextGaussian() * f3);
-                        p_149749_1_.spawnEntityInWorld(entityitem);
+                        world.spawnEntityInWorld(entityitem);
                     }
                 }
             }
 
-            p_149749_1_.func_147453_f(p_149749_2_, p_149749_3_, p_149749_4_, p_149749_5_);
+            world.func_147453_f(x, y, z, p_149749_5_);
         }
     }
 

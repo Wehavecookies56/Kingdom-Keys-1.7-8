@@ -38,7 +38,6 @@ public class GuiKKChest extends GuiContainer{
 	@SideOnly(Side.CLIENT)
 	protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
 		GL11.glColor4f(1F, 1F, 1F, 1F);
-
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
