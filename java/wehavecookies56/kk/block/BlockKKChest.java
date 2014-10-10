@@ -36,12 +36,16 @@ public class BlockKKChest extends BlockContainer
     this.setHardness(25.0F);
     this.setResistance(5.0F);
     this.setHarvestLevel("pickaxe", 3);
-    this.setBlockBounds(0.2F, 0.0F, 0.2F, 1.0F, 0.5F, 1.0F);
+    this.setBlockBounds(0.2F, 0.0F, 0.1F, 0.8F, 0.6F, 0.9F);
     }
 	
-    public boolean renderAsNormalBlock()
+   /* public boolean renderAsNormalBlock()
     {
     	return false;
+    }*/
+    public boolean isOpaque()
+    {
+    	return true;
     }
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float a, float b, float c)
 	{
