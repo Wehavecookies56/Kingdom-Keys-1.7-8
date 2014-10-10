@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -59,6 +60,7 @@ public class BlockSynthesis extends BlockContainer{
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float a, float b, float c)
 	{
+		Minecraft.getMinecraft().thePlayer.playSound("kk:kupo", 0.3F, 2.0F);
 		player.openGui(KingdomKeys.instance, 0, world, x, y, z);
 		return true;
 	}

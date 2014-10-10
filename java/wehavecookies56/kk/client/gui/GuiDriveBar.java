@@ -146,9 +146,6 @@ public class GuiDriveBar extends Gui{
 		if(event.type == RenderGameOverlayEvent.ElementType.TEXT) {
 			//Temp will be an extended entity property
 			//CommonProxy.getEntityData(props.EXT_PROP_NAME);			
-			System.out.println("Drive points: " + props.getCurrDrivePoints());
-			System.out.println("Current Bar: " + currBar);
-			System.out.println("currDrive: " + currDrive);
 			int guiWidth = 95;
 			int guiBarWidth = 83;
 			int guiHeight = 18;
