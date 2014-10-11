@@ -41,21 +41,31 @@ public class BlockKKChest extends BlockContainer
     this.setBlockBounds(0.2F, 0.0F, 0.1F, 0.8F, 0.6F, 0.9F);
     }
     
+    @Override
     public void onBlockPlacedBy(World par1World, int x, int y, int z, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
     {
         int whichDirectionFacing = MathHelper.floor_double((double)(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
         par1World.setBlockMetadataWithNotify(x, y, z, whichDirectionFacing, 2);
     }
 
-	
-   /* public boolean renderAsNormalBlock()
+    @Override
+    public int getRenderType() {
+    	return -1;
+    }
+    
+	@Override
+    public boolean renderAsNormalBlock()
     {
     	return false;
-    }*/
-    public boolean isOpaque()
-    {
-    	return true;
     }
+    
+    @Override
+    public boolean isOpaqueCube()
+    {
+    	return false;
+    }
+    
+    @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float a, float b, float c)
 	{
 		if(

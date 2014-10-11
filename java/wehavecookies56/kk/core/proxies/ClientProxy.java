@@ -29,13 +29,16 @@ import wehavecookies56.kk.client.render.ItemRenderTotalEclipse;
 import wehavecookies56.kk.client.render.ItemRenderVoidedKnowledge;
 import wehavecookies56.kk.client.render.ItemRenderWaywardWind;
 import wehavecookies56.kk.client.render.ItemRenderZeroOne;
+import wehavecookies56.kk.client.render.TileEntityRendererKKChest;
 import wehavecookies56.kk.entities.EntityBlastBlox;
 import wehavecookies56.kk.entities.EntityEternalFlamesProjectile;
 import wehavecookies56.kk.entities.EntitySharpshooterBullet;
+import wehavecookies56.kk.entities.tileentities.TileEntityKKChest;
 import wehavecookies56.kk.item.AddedItems;
 
 import com.jadarstudios.developercapes.DevCapes;
 
+import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.VillagerRegistry;
@@ -72,6 +75,7 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForge.EVENT_BUS.register(new GuiDriveBar());
 		
 		//Entities
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityKKChest.class, new TileEntityRendererKKChest());
 		RenderingRegistry.registerEntityRenderingHandler(EntityBlastBlox.class, new BlockRenderBlastBlox());
 		RenderingRegistry.registerEntityRenderingHandler(EntityEternalFlamesProjectile.class, new EntityRenderEternalFlamesProjectile(AddedItems.EternalFlames));
         RenderingRegistry.registerEntityRenderingHandler(EntitySharpshooterBullet.class, new EntityRenderSharpShooterBullet());

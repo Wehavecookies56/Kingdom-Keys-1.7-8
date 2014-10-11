@@ -58,6 +58,7 @@ import wehavecookies56.kk.enchantments.EnchantHeartHarvest;
 import wehavecookies56.kk.entities.EntityBlastBlox;
 import wehavecookies56.kk.entities.EntityEternalFlamesProjectile;
 import wehavecookies56.kk.entities.mob.VillagerTradeHandlerRecipes;
+import wehavecookies56.kk.entities.tileentities.TileEntityKKChest;
 import wehavecookies56.kk.item.AddedItems;
 import wehavecookies56.kk.lib.ConfigBooleans;
 import wehavecookies56.kk.lib.Recipes;
@@ -276,6 +277,7 @@ public class KingdomKeys {
 		proxy.registerRenderers();
 		proxy.initCapes();
 		proxy.registerKeybinds();
+		GameRegistry.registerTileEntity(TileEntityKKChest.class, "teKKChest");
 		EntityRegistry.registerModEntity(EntityBlastBlox.class, "BlastBlox", EntityRegistry.findGlobalUniqueEntityId(), this, 128, 1, true);
 		if(ConfigBooleans.enableUpdateCheck)
 		{

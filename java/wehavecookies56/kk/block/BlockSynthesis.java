@@ -56,7 +56,6 @@ public class BlockSynthesis extends BlockContainer{
         this.synthIconTop = par1IconRegister.registerIcon("kk:synth_top");
     }
 
-
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float a, float b, float c)
 	{
