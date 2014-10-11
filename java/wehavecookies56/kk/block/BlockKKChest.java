@@ -7,6 +7,7 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -14,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityDispenser;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.entities.tileentities.TileEntityKKChest;
@@ -38,6 +40,13 @@ public class BlockKKChest extends BlockContainer
     this.setHarvestLevel("pickaxe", 3);
     this.setBlockBounds(0.2F, 0.0F, 0.1F, 0.8F, 0.6F, 0.9F);
     }
+    
+    public void onBlockPlacedBy(World par1World, int x, int y, int z, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
+    {
+        int whichDirectionFacing = MathHelper.floor_double((double)(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
+        par1World.setBlockMetadataWithNotify(x, y, z, whichDirectionFacing, 2);
+    }
+
 	
    /* public boolean renderAsNormalBlock()
     {
