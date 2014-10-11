@@ -31,14 +31,13 @@ public class BlockKKChest extends BlockContainer
     protected Random rand = new Random();
 
     public BlockKKChest() {
-
     super(Material.rock);
     this.setBlockName(Strings.KKChest);
     this.setStepSound(soundTypeStone);
     this.setHardness(25.0F);
     this.setResistance(5.0F);
     this.setHarvestLevel("pickaxe", 3);
-    this.setBlockBounds(0.2F, 0.0F, 0.1F, 0.8F, 0.6F, 0.9F);
+    this.setBlockBounds(0.1F, 0.0F, 0.2F, 0.9F, 0.6F, 0.9F);
     }
     
     @Override

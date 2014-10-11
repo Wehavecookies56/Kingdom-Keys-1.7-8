@@ -22,14 +22,21 @@ public class Update
 	public static String url;
 	
 	@SubscribeEvent
-	public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) throws MalformedURLException, IOException {
+	public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) throws MalformedURLException, IOException
+	{
 		if(ConfigBooleans.enableUpdateCheck && isUpdateAvailable()){
-		BufferedReader versionFile = new BufferedReader(new InputStreamReader(new URL("https://raw.github.com/Wehavecookies56/Kingdom-Keys-1.7-/master/Version.txt").openStream()));
-		String curVersion = versionFile.readLine();
-		event.player.addChatMessage(new ChatComponentText("["+EnumChatFormatting.RED +"Kingdom Keys"+EnumChatFormatting.RESET+"] An Update is available for this mod. Version " + curVersion + " Check http://goo.gl/40N4TP for more info."));
-		}else if(ConfigBooleans.enableUpdateCheck){
+			BufferedReader versionFile = new BufferedReader(new InputStreamReader(new URL("https://raw.github.com/Wehavecookies56/Kingdom-Keys-1.7-/master/Version.txt").openStream()));
+			String curVersion = versionFile.readLine();
+			event.player.addChatMessage(new ChatComponentText("["+EnumChatFormatting.RED +"Kingdom Keys"+EnumChatFormatting.RESET+"] An Update is available for this mod. Version " + curVersion + " Check http://goo.gl/40N4TP for more info."));
+		}
+		
+		else if(ConfigBooleans.enableUpdateCheck)
+		{
 			event.player.addChatMessage(new ChatComponentText("["+EnumChatFormatting.RED +"Kingdom Keys"+EnumChatFormatting.RESET+"] This mod is up to date"));
-		}else if(!ConfigBooleans.enableUpdateCheck){
+		}
+		
+		else if(!ConfigBooleans.enableUpdateCheck)
+		{
 			event.player.addChatMessage(new ChatComponentText("["+EnumChatFormatting.RED +"Kingdom Keys"+EnumChatFormatting.RESET+"] The update checker is not enabled"));
 		}
 	}
