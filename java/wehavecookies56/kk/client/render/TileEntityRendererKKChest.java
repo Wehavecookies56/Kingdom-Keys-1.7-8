@@ -1,8 +1,5 @@
 package wehavecookies56.kk.client.render;
 
-import org.lwjgl.opengl.GL11;
-
-import wehavecookies56.kk.client.model.ModelKeybladeChest;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -12,6 +9,10 @@ import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+
+import org.lwjgl.opengl.GL11;
+
+import wehavecookies56.kk.client.model.ModelKeybladeChest;
 
 public class TileEntityRendererKKChest extends TileEntitySpecialRenderer{
 
@@ -27,7 +28,7 @@ public class TileEntityRendererKKChest extends TileEntitySpecialRenderer{
 		GL11.glRotatef(meta * (-90), 0.0F, 0.0F, 1.0F);
 		GL11.glPopMatrix();
 	}
-
+	
 	@Override
 	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale) {
 		GL11.glPushMatrix();
@@ -38,6 +39,7 @@ public class TileEntityRendererKKChest extends TileEntitySpecialRenderer{
 
 		GL11.glPushMatrix();
 		GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
+		adjustRotatePivotViaMeta(Minecraft.getMinecraft().theWorld, (int) x, (int) y, (int) z);
 		this.modelKKChest.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
 		GL11.glPopMatrix();
 		GL11.glPopMatrix();

@@ -73,13 +73,11 @@ public class TileEntityKKChest extends TileEntity implements IInventory
 
 	@Override
 	public void openInventory() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void closeInventory() {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -115,19 +113,17 @@ public class TileEntityKKChest extends TileEntity implements IInventory
 	}
 	@Override
 	public String getInventoryName() {
-		return "tco.tileentitytiny";
+		return "kkChest";
 	}
 
 	@Override
 	public boolean hasCustomInventoryName() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean isItemValidForSlot(int p_94041_1_,
 			ItemStack p_94041_2_) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

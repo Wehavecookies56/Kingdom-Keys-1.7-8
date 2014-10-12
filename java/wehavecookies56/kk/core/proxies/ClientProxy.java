@@ -1,8 +1,10 @@
 package wehavecookies56.kk.core.proxies;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
+import wehavecookies56.kk.block.AddedBlocks;
 import wehavecookies56.kk.client.KeyBind;
 import wehavecookies56.kk.client.gui.GuiDriveBar;
 import wehavecookies56.kk.client.gui.GuiHealthBar;
@@ -14,6 +16,7 @@ import wehavecookies56.kk.client.render.ItemRenderEarthShaker;
 import wehavecookies56.kk.client.render.ItemRenderEternalFlames;
 import wehavecookies56.kk.client.render.ItemRenderFenrir;
 import wehavecookies56.kk.client.render.ItemRenderInterdiction;
+import wehavecookies56.kk.client.render.ItemRenderKKChest;
 import wehavecookies56.kk.client.render.ItemRenderKingdomKey;
 import wehavecookies56.kk.client.render.ItemRenderKingdomKeyD;
 import wehavecookies56.kk.client.render.ItemRenderLunarEclipse;
@@ -69,6 +72,7 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(AddedItems.SkySplitter, new ItemRenderSkysplitter());
 		MinecraftForgeClient.registerItemRenderer(AddedItems.VoidedKnowledge, new ItemRenderVoidedKnowledge());
 		MinecraftForgeClient.registerItemRenderer(AddedItems.MasterKeeper, new ItemRenderMasterKeeper());
+		MinecraftForgeClient.registerItemRenderer(new ItemStack(AddedBlocks.KKChest).getItem(), new ItemRenderKKChest());
 		
 		//Events
 		MinecraftForge.EVENT_BUS.register(new GuiHealthBar());

@@ -94,12 +94,11 @@ public class BlockKKChest extends BlockContainer
 		player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.ZeroOne
 		)
 		{
-			//if(player.isSneaking())
-			//{
+			if(player.isSneaking()){
 				Minecraft.getMinecraft().thePlayer.playSound("kk:kupo", 0.3F, 1.1F);
 				player.openGui(KingdomKeys.instance, 1, world, x, y, z);
-			//}
-			/*else
+			}
+			else
 			{
 				TileEntityKKChest tileentitykkchest = (TileEntityKKChest)world.getTileEntity(x, y, z);
 
@@ -142,7 +141,7 @@ public class BlockKKChest extends BlockContainer
 		            }
 		            world.func_147453_f(x, y, z, AddedBlocks.KKChest);
 		        }
-			}*/
+			}
 		}
     	return true;
 	}
@@ -159,6 +158,7 @@ public class BlockKKChest extends BlockContainer
 	        return true;
 	}
 	
+	@Override
 	public void breakBlock(World world, int x, int y, int z, Block p_149749_5_, int p_149749_6_)
     {
         TileEntityKKChest tileentitykkchest = (TileEntityKKChest)world.getTileEntity(x, y, z);
