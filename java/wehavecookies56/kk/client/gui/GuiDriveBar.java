@@ -85,6 +85,10 @@ public class GuiDriveBar extends Gui{
 		{
 			currDrive = (float) (oneValue * (dp -900));
 		}
+		if(dp >= 1000){
+			currDrive = 100;
+			currBar = 9;
+		}
 		if(dp < 100){
 			currBar = 0;
 		}
@@ -133,7 +137,7 @@ public class GuiDriveBar extends Gui{
 			currBar = 9;
 		}
 		
-		else if(dp >= maxDrive && currBar == maxBars)
+		else if(dp >= 1000)
 		{
 			props.setCurrDrivePoints(maxDrive);
 			currDrive = maxLength;
@@ -144,9 +148,7 @@ public class GuiDriveBar extends Gui{
 			currDrive = 0;
 		}
 		
-		if(event.type == RenderGameOverlayEvent.ElementType.TEXT) {
-			//Temp will be an extended entity property
-			//CommonProxy.getEntityData(props.EXT_PROP_NAME);			
+		if(event.type == RenderGameOverlayEvent.ElementType.TEXT) {			
 			int guiWidth = 95;
 			int guiBarWidth = 83;
 			int guiHeight = 18;

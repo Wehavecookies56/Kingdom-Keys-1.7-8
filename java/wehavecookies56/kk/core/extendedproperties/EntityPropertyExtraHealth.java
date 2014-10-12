@@ -45,8 +45,6 @@ public class EntityPropertyExtraHealth implements IExtendedEntityProperties {
 
 		this.currExtraHealth = properties.getInteger("CurrentExtraHealth");
 		this.currExtraHealth = properties.getInteger("MaxExtraHealth");
-
-		System.out.println("Health from NBT: " + this.currExtraHealth + "/" + this.currExtraHealth);
 	}
 
 	@Override
@@ -54,7 +52,7 @@ public class EntityPropertyExtraHealth implements IExtendedEntityProperties {
 
 	}
 
-	public boolean consumeMana(int amount){
+	public boolean consumeHP(int amount){
 		boolean sufficient = amount <= this.currExtraHealth;
 
 		this.currExtraHealth -= (amount < this.currExtraHealth ? amount : this.currExtraHealth);

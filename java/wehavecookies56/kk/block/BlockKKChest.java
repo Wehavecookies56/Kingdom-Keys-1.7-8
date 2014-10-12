@@ -48,7 +48,7 @@ public class BlockKKChest extends BlockContainer
 
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess p_149719_1_, int p_149719_2_, int p_149719_3_, int p_149719_4_) {
-		
+
 		int l = p_149719_1_.getBlockMetadata(p_149719_2_, p_149719_3_, p_149719_4_) & 3;
 		if(l != 0 && l != 2){
 			this.setBlockBounds(0.2F, 0.0F, 0.1F, 0.9F, 0.6F, 0.9F);
@@ -57,7 +57,7 @@ public class BlockKKChest extends BlockContainer
 			this.setBlockBounds(0.1F, 0.0F, 0.2F, 0.9F, 0.6F, 0.9F);
 		}
 	}
-	
+
 	@Override
 	public void onBlockPlacedBy(World par1World, int x, int y, int z, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
 	{
@@ -66,12 +66,11 @@ public class BlockKKChest extends BlockContainer
 		if(te != null && te instanceof TileEntityKKChest){
 			int dir = MathHelper.floor_double((double)((par5EntityLivingBase.rotationYaw * 4F) / 360F) + 0.5D) & 3;
 			TileEntityKKChest teKK = (TileEntityKKChest) te;
-			System.out.println(dir);
 			teKK.setFacingDirection(dir);
 			par1World.setBlockMetadataWithNotify(x, y, z, dir, 0);
 			par1World.markBlockForUpdate(x, y, z);
 		}
-		
+
 
 	}
 
@@ -122,11 +121,11 @@ public class BlockKKChest extends BlockContainer
 				player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.ZeroOne
 				)
 		{
-			if(!player.isSneaking()){
-				player.openGui(KingdomKeys.instance, 1, world, x, y, z);
-			}
-			if(!world.isRemote){
-				Minecraft.getMinecraft().thePlayer.playSound("kk:kupo", 0.3F, 1.1F);
+			if(world.isRemote){
+				if(!player.isSneaking()){
+					player.openGui(KingdomKeys.instance, 1, world, x, y, z);
+					Minecraft.getMinecraft().thePlayer.playSound("kk:kupo", 0.3F, 1.1F);
+				}
 			}
 			/*else
 			{

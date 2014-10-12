@@ -29,7 +29,7 @@ public class ItemDriveOrb extends Item{
 	@Override
 	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer entity)
 	{
-		if(!world.isRemote){
+		if(world.isRemote){
 			IPacket packet = new MunnyPacket(new ItemStack(AddedItems.DriveOrb), 1);
 			KingdomKeys.network.sendToServer(packet);
 		}

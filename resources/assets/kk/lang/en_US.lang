@@ -276,6 +276,7 @@ item.leatherDarkness.name=Leather Of The Darkness
 item.darkKnowledge.name=Dark Knowledge
 item.voidedKnowledge.name=Voided Knowledge
 item.emptyBottle.name=Empty Bottle
+item.driveOrb.name=Drive Orb
 
 #Armour names
 item.organizationHood.name=Dark Robe Hood
@@ -564,12 +565,14 @@ achievement.kingdomKey=The key that lights the darkness
 achievement.orichalcum=Ori... What?
 achievement.orichalcumPlus=+ Means better!
 achievement.munny=Ooh shiny!
-achievement.synthesiser=Isn't that a musical instrument or something?
+achievement.synthesizer=Isn't that a musical instrument or something?
 achievement.menu=What does this button do?
 achievement.dheart=Is dakness out there?
-achievement.heart=They aren't like I thought they wer
+achievement.heart=They aren't like I thought they were
 achievement.pheart=Pure heart? Maybe I shouldn't have to kill them
 achievement.kheart=I need more rage... I need more hearts...
+achievement.hp=I wonder if I should eat this
+achievement.kkpotion=Wonder what this tastes like
 
 #Achievement tool tips
 achievement.bugBlox.desc=Get a bug blox
@@ -578,12 +581,14 @@ achievement.kingdomKey.desc=Get a keyblade for the first time
 achievement.orichalcum.desc=Obtain Orichalcum
 achievement.orichalcumPlus.desc=Obtain Orichalcum+
 achievement.munny.desc=Obtain Munny
-achievement.synthesiser.desc=Obtain a Synthesis Table
+achievement.synthesizer.desc=Obtain a Synthesis Table
 achievement.menu.desc=Open the menu
-achievement.dheart.desc=Get a Dark Heart
-achievement.heart.desc=Get a Heart
-achievement.pheart.desc=Get a Pure Heart
-achievement.kheart.desc=Get Kingdom Hearts
+achievement.dheart.desc=Obtain a Dark Heart
+achievement.heart.desc=Obtain a Heart
+achievement.pheart.desc=Obtain a Pure Heart
+achievement.kheart.desc=Obtain Kingdom Hearts
+achievement.hp.desc=Obtain a HP orb
+achievement.kkpotion.desc=Obtain a potion
 
 #Gui text
 #
@@ -607,9 +612,13 @@ gui.synthesis.material=Material
 gui.synthesis.attackdamage=Attack Damage
 
 #Menu
-gui.menu.title=Menu
+gui.menu.menu=Menu
+gui.menu.items=Items
+gui.menu.keyblades=Keyblades
 gui.menu.time=Time
-gui.menu.button.keyblade=Keyblades
+gui.menu.button.items=Items
+gui.menu.button.keyblades=Keyblades
+gui.menu.button.back=Back
 gui.menu.button.reports=Reports
 gui.menu.button.stats=Stats
 gui.menu.button.abilities=Abilities
