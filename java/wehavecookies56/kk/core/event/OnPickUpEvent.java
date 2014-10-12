@@ -230,7 +230,7 @@ public class OnPickUpEvent {
 
 		else if(event.pickedUp.getEntityItem().getItem().equals(AddedItems.DriveOrb))
 		{
-			if (drive.getCurrDrivePoints() >= 1000)
+			if (drive.getCurrDrivePoints() < 1000)
 			{
 				event.player.inventory.consumeInventoryItem(AddedItems.DriveOrb);
 				drive.addDrivePoints(10);
