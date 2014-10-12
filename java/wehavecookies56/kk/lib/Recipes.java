@@ -1,5 +1,7 @@
 package wehavecookies56.kk.lib;
 
+import com.typesafe.config.Config;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -34,6 +36,12 @@ public class Recipes {
 				'S', Blocks.soul_sand, 'D', AddedItems.DarkHeart
 			});
 		}
+		GameRegistry.addRecipe(new ItemStack(AddedBlocks.KKChest), new Object[]{
+			"HGH",
+			"GCG",
+			"HGH",
+			'H', AddedItems.Heart, 'G', Items.gold_ingot, 'C', Blocks.chest
+		});
 		if(ConfigBooleans.heartRecipe == true){
 			GameRegistry.addRecipe(new ItemStack(AddedItems.Heart), new Object[]{
 				"DDD",
