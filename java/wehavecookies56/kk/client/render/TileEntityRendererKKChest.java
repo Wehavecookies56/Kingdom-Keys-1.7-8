@@ -12,7 +12,9 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
+import wehavecookies56.kk.block.AddedBlocks;
 import wehavecookies56.kk.client.model.ModelKeybladeChest;
+import wehavecookies56.kk.entities.tileentities.TileEntityKKChest;
 
 public class TileEntityRendererKKChest extends TileEntitySpecialRenderer{
 
@@ -23,10 +25,7 @@ public class TileEntityRendererKKChest extends TileEntitySpecialRenderer{
 	}
 
 	private void adjustRotatePivotViaMeta(World world, int x, int y, int z) {
-		int meta = world.getBlockMetadata(x, y, z);
-		GL11.glPushMatrix();
-		GL11.glRotatef(meta * (-90), 0.0F, 0.0F, 1.0F);
-		GL11.glPopMatrix();
+		
 	}
 	
 	@Override
@@ -34,17 +33,37 @@ public class TileEntityRendererKKChest extends TileEntitySpecialRenderer{
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
 
-		ResourceLocation texture = new ResourceLocation("kk", "textures/entities/KeybladeChest.png");
-		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
+        TileEntityKKChest teKK = (TileEntityKKChest)te;
+		
+		renderBlock(teKK, te.getWorldObj(), te.xCoord, te.yCoord, te.zCoord, AddedBlocks.KKChest);
 
-		GL11.glPushMatrix();
-		GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
-		adjustRotatePivotViaMeta(Minecraft.getMinecraft().theWorld, (int) x, (int) y, (int) z);
-		this.modelKKChest.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
-		GL11.glPopMatrix();
 		GL11.glPopMatrix();
 	}
 
+	public void renderBlock(TileEntityKKChest te, World world, int x, int y, int z, Block block){
+        int dir = te.getFacingDirection();
+        GL11.glPushMatrix();
+        GL11.glTranslatef(0.5F, 0, 0.5F);
+        GL11.glRotatef(dir * (-90F), 0F, 1F, 0F);
+        if(dir == 1){
+        	//Back
+        	GL11.glTranslatef(0F, 0F, 0.9F);
+        }
+        if(dir == 2){
+        	GL11.glTranslatef(1F, 0F, 0.9F);
+        }
+        if(dir == 3){
+        	GL11.glTranslatef(1F, 0F, 0F);
+        }
+        GL11.glTranslatef(-0.5F, 0, -0.5F);
+
+		ResourceLocation texture = new ResourceLocation("kk", "textures/entities/KeybladeChest.png");
+		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
+    	GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
+		this.modelKKChest.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+        GL11.glPopMatrix();
+	}
+	
 	private void adjustLightFixture(World world, int i, int j, int k, Block block) {
 		Tessellator tess = Tessellator.instance;
 		float brightness = block.getLightValue(world, i, j, k);

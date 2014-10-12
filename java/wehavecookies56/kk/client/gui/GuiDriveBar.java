@@ -128,7 +128,7 @@ public class GuiDriveBar extends Gui{
 			currBar = 8;
 		}
 		
-		else if(dp >= 900)
+		else if(dp >= 900 && dp < 1000)
 		{
 			currBar = 9;
 		}

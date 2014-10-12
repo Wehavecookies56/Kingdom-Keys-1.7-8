@@ -12,6 +12,7 @@ public class TileEntityKKChest extends TileEntity implements IInventory
 {
 
 	private ItemStack[] inv;
+	public int Direction;
 
 	public TileEntityKKChest(){
 		inv = new ItemStack[9];
@@ -25,6 +26,16 @@ public class TileEntityKKChest extends TileEntity implements IInventory
 	@Override
 	public ItemStack getStackInSlot(int slot) {
 		return inv[slot];
+	}
+
+	public int getFacingDirection()
+	{
+		return this.Direction;
+	}
+
+	public void setFacingDirection(int par1)
+	{
+		this.Direction = par1;
 	}
 
 	@Override
@@ -92,6 +103,7 @@ public class TileEntityKKChest extends TileEntity implements IInventory
 			if(stack != null){
 				NBTTagCompound item = new NBTTagCompound();
 				item.setByte("Slot", (byte)i);
+				item.setInteger("Direction", Direction);
 				stack.writeToNBT(item);
 				items.appendTag(item);
 			}
@@ -106,6 +118,7 @@ public class TileEntityKKChest extends TileEntity implements IInventory
 		for(int i = 0; i < items.tagCount(); i++){
 			NBTTagCompound item = (NBTTagCompound)items.getCompoundTagAt(i);
 			int slot = item.getByte("Slot");
+			Direction = item.getInteger("Direction");
 			if(slot >= 0 && slot < getSizeInventory()){
 				setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(item));
 			}
@@ -122,8 +135,7 @@ public class TileEntityKKChest extends TileEntity implements IInventory
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int p_94041_1_,
-			ItemStack p_94041_2_) {
+	public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
 		return false;
 	}
 
