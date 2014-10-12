@@ -601,8 +601,10 @@ gui.synthesis.attackdamage=Daño de Ataque
 gui.menu.menu=Menú
 gui.menu.time=Hora
 gui.menu.button.items=Objetos
+gui.menu.items=Objetos
 gui.menu.button.back=Atrás
 gui.menu.button.keyblades=Llaves Espada
+gui.menu.keyblades=Llave Espada
 gui.menu.button.reports=Informes
 gui.menu.button.stats=Estado
 gui.menu.button.abilities=Habilidades
@@ -633,6 +635,11 @@ achievement.pheart=¿Corazón Puro? Entonces no debería haberlos matado
 achievement.pheart.desc=Obtén un Corazón Puro
 achievement.kheart=Necesito más rabia... Necesito más corazones...
 achievement.kheart.desc=Obtén Kingdom Hearts
+achievement.hp=Me pregunto si debería comer esto
+achievement.hp.desc=Obtén un Orbe de HP
+achievement.kkpotion=Me pregunto a que sabe
+achievement.kkpotion.desc=Obtén una Poción
+
 
 #Tooltip
 tooltip.voidedknowledge.desc=Conocimiento desconocido capaz de materializarse en fuertes armas.
