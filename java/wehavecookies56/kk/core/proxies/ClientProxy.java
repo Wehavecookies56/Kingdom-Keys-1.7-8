@@ -21,6 +21,7 @@ import wehavecookies56.kk.client.render.ItemRenderKingdomKey;
 import wehavecookies56.kk.client.render.ItemRenderKingdomKeyD;
 import wehavecookies56.kk.client.render.ItemRenderLunarEclipse;
 import wehavecookies56.kk.client.render.ItemRenderMasterKeeper;
+import wehavecookies56.kk.client.render.ItemRenderMetalChocobo;
 import wehavecookies56.kk.client.render.ItemRenderOathKeeper;
 import wehavecookies56.kk.client.render.ItemRenderOblivion;
 import wehavecookies56.kk.client.render.ItemRenderRainFell;
@@ -31,6 +32,7 @@ import wehavecookies56.kk.client.render.ItemRenderStarLight;
 import wehavecookies56.kk.client.render.ItemRenderTotalEclipse;
 import wehavecookies56.kk.client.render.ItemRenderVoidedKnowledge;
 import wehavecookies56.kk.client.render.ItemRenderWaywardWind;
+import wehavecookies56.kk.client.render.ItemRenderWoodenKeyblade;
 import wehavecookies56.kk.client.render.ItemRenderZeroOne;
 import wehavecookies56.kk.client.render.TileEntityRendererKKChest;
 import wehavecookies56.kk.entities.EntityBlastBlox;
@@ -72,6 +74,8 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(AddedItems.SkySplitter, new ItemRenderSkysplitter());
 		MinecraftForgeClient.registerItemRenderer(AddedItems.VoidedKnowledge, new ItemRenderVoidedKnowledge());
 		MinecraftForgeClient.registerItemRenderer(AddedItems.MasterKeeper, new ItemRenderMasterKeeper());
+		MinecraftForgeClient.registerItemRenderer(AddedItems.MetalChocobo, new ItemRenderMetalChocobo());
+		MinecraftForgeClient.registerItemRenderer(AddedItems.WoodenKeyblade, new ItemRenderWoodenKeyblade());
 		MinecraftForgeClient.registerItemRenderer(new ItemStack(AddedBlocks.KKChest).getItem(), new ItemRenderKKChest());
 		
 		//Events
