@@ -6,6 +6,7 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 import wehavecookies56.kk.block.AddedBlocks;
 import wehavecookies56.kk.client.KeyBind;
+import wehavecookies56.kk.client.gui.GuiCommands;
 import wehavecookies56.kk.client.gui.GuiDriveBar;
 import wehavecookies56.kk.client.gui.GuiHealthBar;
 import wehavecookies56.kk.client.render.BlockRenderBlastBlox;
@@ -81,6 +82,7 @@ public class ClientProxy extends CommonProxy {
 		//Events
 		MinecraftForge.EVENT_BUS.register(new GuiHealthBar());
 		MinecraftForge.EVENT_BUS.register(new GuiDriveBar());
+		MinecraftForge.EVENT_BUS.register(new GuiCommands());
 		
 		//Entities
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityKKChest.class, new TileEntityRendererKKChest());

@@ -12,6 +12,14 @@ public class Strings {
 	public static final String VoidedKnowledge = "voidedKnowledge";
 	public static final String DarkKnowledge = "darkKnowledge";
 
+	//Drive forms
+	public static final String ValorForm = "valorForm";
+	public static final String WisdomForm = "wisdomForm";
+	public static final String MasterForm = "masterForm";
+	public static final String FinalForm = "finalForm";
+	public static final String LimitForm = "limitForm";
+	public static final String AntiForm = "antiForm";
+
     //Key Blades
 	public static final String Vulpeus = "vulpeusForetellersKeyblade";
 	public static final String Ursus = "ursusForetellersKeyblade";

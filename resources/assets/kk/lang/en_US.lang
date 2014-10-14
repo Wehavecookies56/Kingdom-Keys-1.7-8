@@ -624,6 +624,13 @@ gui.menu.button.stats=Stats
 gui.menu.button.abilities=Abilities
 gui.menu.button.config=Config
 
+#Command Menu
+gui.command.command=COMMAND
+gui.command.attack=ATTACK
+gui.command.magic=MAGIC
+gui.command.items=ITEMS
+gui.command.drive=DRIVE
+
 #Tooltips
 tooltip.voidedknowledge.desc=Unknown knowledge capable of materializing into strong weapons. 
 

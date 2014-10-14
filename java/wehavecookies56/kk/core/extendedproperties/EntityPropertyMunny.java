@@ -85,25 +85,6 @@ public class EntityPropertyMunny implements IExtendedEntityProperties {
 	}
 
 	
-	public static final void saveProxyData(EntityPlayer player) {
-		NBTTagCompound savedData = new NBTTagCompound();
-		EntityPropertyMunny.get(player).saveNBTData(savedData);
-		CommonProxy.storeEntityData(getSaveKey(player), savedData);
-	}
-
-	public static final void loadProxyData(EntityPlayer player) {
-		EntityPropertyMunny playerData = EntityPropertyMunny.get(player);
-		NBTTagCompound savedData = CommonProxy.getEntityData(getSaveKey(player));
-		if (savedData != null) { playerData.loadNBTData(savedData); }
-		
-		
-		
-		//IPacket packet = new SyncPlayerPropsPacket(maxMunny, currentMunny);
-		//KingdomKeys.network.sendToServer(packet);
-		
-		
-	}
-	
 	private static final String getSaveKey(EntityPlayer player) {
 		return player.getCommandSenderName() + ":" + EXT_PROP_NAME;
 	}

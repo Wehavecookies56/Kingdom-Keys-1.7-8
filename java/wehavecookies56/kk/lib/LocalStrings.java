@@ -161,6 +161,12 @@ public class LocalStrings {
 	public static final String Menu_Config = "gui.menu.button.config";
 	public static final String Menu_Back = "gui.menu.button.back";
 	
+	public static final String Command_Command = "gui.command.command";
+	public static final String Command_Attack = "gui.command.attack";
+	public static final String Command_Magic = "gui.command.magic";
+	public static final String Command_Items = "gui.command.items";
+	public static final String Command_Drive = "gui.command.drive";
+
 	public static final String VoidedKnowledge = "tooltip.voidedknowledge.desc";
 	public static final String EmptyBottle = "item.emptyBottle.name";
 

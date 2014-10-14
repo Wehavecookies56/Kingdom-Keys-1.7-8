@@ -29,16 +29,29 @@ public class DriveForm {
 		return true;
 		
 	}
+	
+	public boolean isDriveFormActive(){
+		//TODO IEEP for storing whether the form is active or not
+		return false;		
+	}
+	
+	public void onActivateForm(){
+		
+	}
+	
+	public void onDeactivateForm(){
+		
+	}
 
 	public void setArmourRender(){
 		//TODO Make armour rendering
 	}
 	
-	public String getName() {
-		return name;
+	public String getUnlocalizedName() {
+		return "drive." + name;
 	}
 
-	public void setName(String name) {
+	public void setUnlocalizedName(String name) {
 		this.name = name;
 	}
 

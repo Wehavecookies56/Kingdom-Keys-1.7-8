@@ -5,7 +5,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
-import wehavecookies56.kk.core.proxies.CommonProxy;
 
 public class EntityPropertyDrivePoints implements IExtendedEntityProperties {
 
@@ -83,19 +82,6 @@ public class EntityPropertyDrivePoints implements IExtendedEntityProperties {
 	public void setCurrDrivePoints(int amount)
 	{
 		this.player.getDataWatcher().updateObject(DRIVE_WATCHER, amount);
-	}
-
-
-	public static final void saveProxyData(EntityPlayer player) {
-		NBTTagCompound savedData = new NBTTagCompound();
-		EntityPropertyDrivePoints.get(player).saveNBTData(savedData);
-		CommonProxy.storeEntityData(getSaveKey(player), savedData);
-	}
-
-	public static final void loadProxyData(EntityPlayer player) {
-		EntityPropertyDrivePoints playerData = EntityPropertyDrivePoints.get(player);
-		NBTTagCompound savedData = CommonProxy.getEntityData(getSaveKey(player));
-		if (savedData != null) { playerData.loadNBTData(savedData); }
 	}
 
 	private static final String getSaveKey(EntityPlayer player) {
