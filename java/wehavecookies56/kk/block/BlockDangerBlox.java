@@ -45,7 +45,7 @@ public class BlockDangerBlox extends Block {
 			EntityPlayer player = (EntityPlayer) par5Entity;
 			if (player.inventory.armorItemInSlot(0) != null)
 			{
-				ItemStack itemstack = Minecraft.getMinecraft().thePlayer.inventory.armorItemInSlot(0);
+				ItemStack itemstack = player.inventory.armorItemInSlot(0);
 			}
 			else
 			{
