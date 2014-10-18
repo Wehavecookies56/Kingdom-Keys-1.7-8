@@ -19,7 +19,14 @@ public class Strings {
 	public static final String FinalForm = "finalForm";
 	public static final String LimitForm = "limitForm";
 	public static final String AntiForm = "antiForm";
-
+	
+	//Drive form Orbs
+	public static final String ValorFormOrb = "valorFormOrb";
+	public static final String WisdomFormOrb = "wisdomFormOrb";
+	public static final String MasterFormOrb = "masterFormOrb";
+	public static final String LimitFormOrb = "limitFormOrb";
+	public static final String FinalFormOrb = "finalFormOrb";
+	
     //Key Blades
 	public static final String Vulpeus = "vulpeusForetellersKeyblade";
 	public static final String Ursus = "ursusForetellersKeyblade";

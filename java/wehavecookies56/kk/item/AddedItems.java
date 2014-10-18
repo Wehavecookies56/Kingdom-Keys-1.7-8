@@ -881,6 +881,12 @@ public class AddedItems {
 		Disc12 = new ItemDisc12(Strings.Disc12).setUnlocalizedName(Strings.Disc12); GameRegistry.registerItem(Disc12, Strings.Disc12);
 		Disc13 = new ItemDisc13(Strings.Disc13).setUnlocalizedName(Strings.Disc13); GameRegistry.registerItem(Disc13, Strings.Disc13);
 
+		ValorFormOrb = new ItemValorFormOrb(); GameRegistry.registerItem(ValorFormOrb, Strings.ValorFormOrb);
+		WisdomFormOrb = new ItemWisdomFormOrb(); GameRegistry.registerItem(WisdomFormOrb, Strings.WisdomFormOrb);
+		MasterFormOrb = new ItemMasterFormOrb(); GameRegistry.registerItem(MasterFormOrb, Strings.MasterFormOrb);
+		LimitFormOrb = new ItemLimitFormOrb(); GameRegistry.registerItem(LimitFormOrb, Strings.LimitFormOrb);
+		FinalFormOrb = new ItemFinalFormOrb(); GameRegistry.registerItem(FinalFormOrb, Strings.FinalFormOrb);
+		
 		DarkLeather = new ItemDarkLeather(); GameRegistry.registerItem(DarkLeather, Strings.DLeather);
 		HP = new ItemHP(); GameRegistry.registerItem(HP, Strings.HP);
 		DriveOrb = new ItemDriveOrb(); GameRegistry.registerItem(DriveOrb, Strings.DriveOrb);
