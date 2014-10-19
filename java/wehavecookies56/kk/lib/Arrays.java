@@ -32,4 +32,8 @@ public class Arrays
 		AddedItems.YoungXehanortsKeyblade,
 		AddedItems.ZeroOne
 	};
+	public static Item[] OrgXIII = 
+	{
+		
+	};
 }

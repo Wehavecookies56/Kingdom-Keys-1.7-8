@@ -1,5 +1,6 @@
 package wehavecookies56.kk.core.event;
 
+import wehavecookies56.kk.item.AddedItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
