@@ -15,6 +15,7 @@ import org.apache.logging.log4j.Logger;
 import wehavecookies56.kk.achievements.AddedAchievments;
 import wehavecookies56.kk.api.synthesis.RecipeHandler;
 import wehavecookies56.kk.block.AddedBlocks;
+import wehavecookies56.kk.client.render.PlayerRender;
 import wehavecookies56.kk.core.event.DarkHeartDrops;
 import wehavecookies56.kk.core.event.DriveOrbDrops;
 import wehavecookies56.kk.core.event.EntityConstructEvent;
@@ -69,6 +70,7 @@ import wehavecookies56.kk.updater.Update;
 import wehavecookies56.kk.worldgen.ComponentRecipeHome;
 import wehavecookies56.kk.worldgen.VillagerCreationHandler;
 import wehavecookies56.kk.worldgen.WorldGenBlox;
+import api.player.render.RenderPlayerAPI;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
@@ -142,7 +144,7 @@ public class KingdomKeys {
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		//ModelPlayerAPI.register("kk", PlayerModel.class);
-		//RenderPlayerAPI.register("kk", PlayerRender.class);
+		RenderPlayerAPI.register("kk", PlayerRender.class);
 		AddedItems.initKeyBlades();
 		AddedItems.initHearts();
 		AddedItems.initOthers();
