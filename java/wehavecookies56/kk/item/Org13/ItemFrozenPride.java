@@ -55,8 +55,7 @@ public class ItemFrozenPride extends ItemSword implements IBattlegearWeapon{
 		{
 			if(player.isBlocking())
 			{	
-				//player.capabilities.setPlayerWalkSpeed(0);
-				//player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1, 6));
+				player.setInWeb();
 			}
 			else
 			{

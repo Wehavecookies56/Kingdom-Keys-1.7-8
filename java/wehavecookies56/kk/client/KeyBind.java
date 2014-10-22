@@ -1,5 +1,6 @@
 package wehavecookies56.kk.client;
 
+import net.java.games.input.Mouse;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,6 +9,7 @@ import net.minecraft.stats.StatFileWriter;
 
 import org.lwjgl.input.Keyboard;
 
+import scala.swing.event.MouseButtonEvent;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.achievements.AddedAchievments;
 import wehavecookies56.kk.client.gui.GuiMenu;
@@ -24,11 +26,15 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class KeyBind{
 
-	private static final String[] desc = {"key.summon.desc", "key.menu.desc"};
+	private static final String[] desc = {"key.summon.desc", "key.menu.desc", "key.command.desc"};
 
 	public static final int SUMMON = 0;
 	public static final int MENU = 1;
-	private static final int[] keyValues = {Keyboard.KEY_G, Keyboard.KEY_M};
+	public static final int COMMAND = 2;
+	
+	public static int selected = 0;
+	
+	private static final int[] keyValues = {Keyboard.KEY_G, Keyboard.KEY_M, Keyboard.KEY_C};
 	private final KeyBinding[] keys;
 	StatFileWriter sfw;
 	@SideOnly(Side.CLIENT)
@@ -45,6 +51,19 @@ public class KeyBind{
 	@SubscribeEvent
 	public void onKeyInput(KeyInputEvent event) {	
 		EntityPlayer player = (EntityPlayer) Minecraft.getMinecraft().thePlayer;
+		if (keys[COMMAND].isPressed())
+		{
+		//	System.out.println("It was "+selected);
+			if (selected >=0 && selected < 3)
+			{
+				selected = selected+1;
+			}
+			else if (selected ==3)
+			{
+				selected = 0;
+			}
+		//	System.out.println("It should be "+selected);
+		}
 		if (keys[MENU].isPressed()) {
 			boolean hasMenuAchv = false;
 			if(!hasMenuAchv){
