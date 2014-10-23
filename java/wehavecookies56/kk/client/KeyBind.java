@@ -52,17 +52,29 @@ public class KeyBind{
 	public void onKeyInput(KeyInputEvent event) {	
 		EntityPlayer player = (EntityPlayer) Minecraft.getMinecraft().thePlayer;
 		if (keys[COMMAND].isPressed())
-		{
-		//	System.out.println("It was "+selected);
-			if (selected >=0 && selected < 3)
+		{ //	0 = attack, 1 = magic, 2 = Items, 3 = Drive
+			if (player.isSneaking())
 			{
-				selected = selected+1;
+				if (selected >0 && selected <= 3)
+				{
+					selected = selected-1;
+				}
+				else if (selected ==0)
+				{
+					selected = 3;
+				}
 			}
-			else if (selected ==3)
+			else
 			{
-				selected = 0;
+				if (selected >=0 && selected < 3)
+				{
+					selected = selected+1;
+				}
+				else if (selected ==3)
+				{
+					selected = 0;
+				}
 			}
-		//	System.out.println("It should be "+selected);
 		}
 		if (keys[MENU].isPressed()) {
 			boolean hasMenuAchv = false;
