@@ -26,15 +26,17 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class KeyBind{
 
-	private static final String[] desc = {"key.summon.desc", "key.menu.desc", "key.command.desc"};
+	private static final String[] desc = {"key.summon.desc", "key.menu.desc", "key.command.desc", "key.enter.desc"};
 
 	public static final int SUMMON = 0;
 	public static final int MENU = 1;
 	public static final int COMMAND = 2;
+	public static final int ENTER = 3;
 	
 	public static int selected = 0;
-	
-	private static final int[] keyValues = {Keyboard.KEY_G, Keyboard.KEY_M, Keyboard.KEY_C};
+	public static int submenu;
+
+	private static final int[] keyValues = {Keyboard.KEY_G, Keyboard.KEY_M, Keyboard.KEY_C, Keyboard.KEY_F};
 	private final KeyBinding[] keys;
 	StatFileWriter sfw;
 	@SideOnly(Side.CLIENT)
@@ -55,26 +57,53 @@ public class KeyBind{
 		{ //	0 = attack, 1 = magic, 2 = Items, 3 = Drive
 			if (player.isSneaking())
 			{
-				if (selected >0 && selected <= 3)
+				if (selected > 0 && selected <= 3)
 				{
 					selected = selected-1;
+					submenu = 0;
+
 				}
-				else if (selected ==0)
+				else if (selected == 0)
 				{
 					selected = 3;
 				}
 			}
 			else
 			{
-				if (selected >=0 && selected < 3)
+				if (selected >= 0 && selected < 3)
 				{
 					selected = selected+1;
+					submenu = 0;
+
 				}
-				else if (selected ==3)
+				else if (selected == 3)
 				{
 					selected = 0;
 				}
 			}
+		}
+		if (keys[ENTER].isPressed())
+		{
+			System.out.println("F key pressed");
+			System.out.println(selected);
+
+
+			switch(selected) //Case 0 not necessary as it is attack
+			{
+			case 0: 
+				submenu = 0;
+				break;
+			case 1:
+				submenu = 1;
+				break;
+			case 2:
+				submenu = 2;
+				break;
+			case 3:
+				submenu = 3;
+				break;
+			}
+			System.out.println("Case "+submenu);
 		}
 		if (keys[MENU].isPressed()) {
 			boolean hasMenuAchv = false;

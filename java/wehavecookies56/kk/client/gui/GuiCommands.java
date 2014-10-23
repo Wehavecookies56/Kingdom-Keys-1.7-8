@@ -18,6 +18,7 @@ public class GuiCommands extends Gui {
 
 	Minecraft mc = Minecraft.getMinecraft();
 	final int TOP = 5, ATTACK = 4, MAGIC = 3, ITEMS = 2, DRIVE = 1;
+	final int FIRE = 7, BLIZZARD = 6, THUNDER = 5, CURE = 4, GRAVITY = 3, AERO = 2, STOP = 1;
 	int selected = ATTACK;
 	
 	@SubscribeEvent(priority = EventPriority.NORMAL)
@@ -44,6 +45,43 @@ public class GuiCommands extends Gui {
 			else if(KeyBind.selected == 3)
 			{
 				selected = DRIVE;
+			}
+			
+			//Submenus
+			switch (KeyBind.submenu)
+			{
+			case 1:
+				mc.renderEngine.bindTexture(new ResourceLocation("kk", "textures/gui/CommandMenu.png"));
+
+				//System.out.println("Should submenu");
+				this.drawTexturedModalRect(60, screenHeight - (commandHeight * FIRE), 70, 15, commandWidth, commandHeight);
+				this.drawTexturedModalRect(60, screenHeight - (commandHeight * BLIZZARD), 70, 0, commandWidth, commandHeight);
+				this.drawTexturedModalRect(60, screenHeight - (commandHeight * THUNDER), 70, 0, commandWidth, commandHeight);
+				this.drawTexturedModalRect(60, screenHeight - (commandHeight * CURE), 70, 0, commandWidth, commandHeight);
+				this.drawTexturedModalRect(60, screenHeight - (commandHeight * GRAVITY), 70, 0, commandWidth, commandHeight);
+				this.drawTexturedModalRect(60, screenHeight - (commandHeight * AERO), 70, 0, commandWidth, commandHeight);
+				this.drawTexturedModalRect(60, screenHeight - (commandHeight * STOP), 70, 0, commandWidth, commandHeight);
+
+				GL11.glPushMatrix();
+				GL11.glScalef(1.1F, 1.1F, 1.1F);
+				
+				GuiDrawText.drawString(StatCollector.translateToLocal("Fire"), 70, screenHeight - (commandHeight * FIRE) - 13, 0xFFFFFF);
+				GuiDrawText.drawString(StatCollector.translateToLocal("Blizzard"), 70, screenHeight - (commandHeight * BLIZZARD) - 13, 0xFFFFFF);
+				GuiDrawText.drawString(StatCollector.translateToLocal("Thunder"), 70, screenHeight - (commandHeight * THUNDER) - 13, 0xFFFFFF);
+				GuiDrawText.drawString(StatCollector.translateToLocal("Cure"), 70, screenHeight - (commandHeight * CURE) - 13, 0xFFFFFF);
+				GuiDrawText.drawString(StatCollector.translateToLocal("Gravity"), 70, screenHeight - (commandHeight * GRAVITY) - 13, 0xFFFFFF);
+				GuiDrawText.drawString(StatCollector.translateToLocal("Aero"), 70, screenHeight - (commandHeight * AERO) - 13, 0xFFFFFF);
+				GuiDrawText.drawString(StatCollector.translateToLocal("Stop"), 70, screenHeight - (commandHeight * STOP) - 13, 0xFFFFFF);
+
+				GL11.glPopMatrix();
+				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+				break;
+			case 2:
+				
+				break;
+			case 3:
+				
+				break;
 			}
 			
 			mc.renderEngine.bindTexture(new ResourceLocation("kk", "textures/gui/CommandMenu.png"));
