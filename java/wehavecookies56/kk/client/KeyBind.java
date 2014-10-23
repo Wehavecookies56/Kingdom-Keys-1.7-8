@@ -4,6 +4,7 @@ import net.java.games.input.Mouse;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntitySmallFireball;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatFileWriter;
 
@@ -26,17 +27,22 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class KeyBind{
 
-	private static final String[] desc = {"key.summon.desc", "key.menu.desc", "key.command.desc", "key.enter.desc"};
+	private static final String[] desc = {"key.summon.desc", "key.menu.desc", "key.command.desc", "key.enter.desc", "key.back.desc"};
 
 	public static final int SUMMON = 0;
 	public static final int MENU = 1;
 	public static final int COMMAND = 2;
 	public static final int ENTER = 3;
+	public static final int BACK = 4;
 	
 	public static int selected = 0;
 	public static int submenu;
+	public static int magicselected;
+	public static int itemselected;
+	public static int driveselected;
 
-	private static final int[] keyValues = {Keyboard.KEY_G, Keyboard.KEY_M, Keyboard.KEY_C, Keyboard.KEY_F};
+
+	private static final int[] keyValues = {Keyboard.KEY_G, Keyboard.KEY_M, Keyboard.KEY_C, Keyboard.KEY_F, Keyboard.KEY_B};
 	private final KeyBinding[] keys;
 	StatFileWriter sfw;
 	@SideOnly(Side.CLIENT)
@@ -53,41 +59,149 @@ public class KeyBind{
 	@SubscribeEvent
 	public void onKeyInput(KeyInputEvent event) {	
 		EntityPlayer player = (EntityPlayer) Minecraft.getMinecraft().thePlayer;
-		if (keys[COMMAND].isPressed())
-		{ //	0 = attack, 1 = magic, 2 = Items, 3 = Drive
-			if (player.isSneaking())
+		if (keys[BACK].isPressed())
+		{
+			if (submenu == 0)
 			{
-				if (selected > 0 && selected <= 3)
+				submenu = 0;
+			}
+			else if (submenu == 1)
+			{
+				submenu = submenu - 1;
+			}
+			else if (submenu == 2)
+			{
+				submenu = submenu - 2;
+			}
+			else if (submenu == 3)
+			{
+				submenu = submenu - 3;
+			}
+		}
+		if (keys[COMMAND].isPressed())
+		{
+//Main command menu	
+//Attack
+			if(submenu == 0)
+			{//	0 = attack, 1 = magic, 2 = Items, 3 = Drive
+				if (player.isSneaking())
 				{
-					selected = selected-1;
-					submenu = 0;
-
+					if (selected > 0 && selected <= 3)
+					{
+						selected = selected-1;
+						submenu = 0;
+	
+					}
+					else if (selected == 0)
+					{
+						selected = 3;
+					}
 				}
-				else if (selected == 0)
+				else
 				{
-					selected = 3;
+					if (selected >= 0 && selected < 3)
+					{
+						selected = selected+1;
+						submenu = 0;
+	
+					}
+					else if (selected == 3)
+					{
+						selected = 0;
+					}
 				}
 			}
-			else
+//Magic
+			else if (submenu == 1)
 			{
-				if (selected >= 0 && selected < 3)
+				if (player.isSneaking())
 				{
-					selected = selected+1;
-					submenu = 0;
-
+					if (magicselected > 0 && magicselected <= 6)
+					{
+						magicselected = magicselected-1;
+						submenu = 1;
+	
+					}
+					else if (magicselected == 0)
+					{
+						magicselected = 6;
+					}
 				}
-				else if (selected == 3)
+				else
 				{
-					selected = 0;
+					if (magicselected >= 0 && magicselected < 6)
+					{
+						magicselected = magicselected+1;
+						submenu = 1;
+	
+					}
+					else if (magicselected == 6)
+					{
+						magicselected = 0;
+					}
+				}
+			}
+//Items
+			else if (submenu == 2)
+			{
+			/*	if (player.isSneaking())
+				{
+					if (driveselected > 0 && magicselected <= 6)
+					{
+						magicselected = magicselected-1;
+						submenu = 1;
+					}
+					else if (magicselected == 0)
+					{
+						magicselected = 6;
+					}
+				}
+				else
+				{
+					if (magicselected >= 0 && magicselected < 6)
+					{
+						magicselected = magicselected+1;
+						submenu = 1;
+					}
+					else if (magicselected == 6)
+					{
+						magicselected = 0;
+					}
+				}*/
+			}
+//DRIVE
+			else if (submenu == 3)
+			{
+				if (player.isSneaking())
+				{
+					if (driveselected > 0 && driveselected <= 4)
+					{
+						driveselected = driveselected-1;
+						submenu = 3;
+	
+					}
+					else if (driveselected == 0)
+					{
+						driveselected = 4;
+					}
+				}
+				else
+				{
+					if (driveselected >= 0 && driveselected < 4)
+					{
+						driveselected = driveselected+1;
+						submenu = 3;
+	
+					}
+					else if (driveselected == 4)
+					{
+						driveselected = 0;
+					}
 				}
 			}
 		}
 		if (keys[ENTER].isPressed())
 		{
-			System.out.println("F key pressed");
-			System.out.println(selected);
-
-
 			switch(selected) //Case 0 not necessary as it is attack
 			{
 			case 0: 
@@ -103,7 +217,8 @@ public class KeyBind{
 				submenu = 3;
 				break;
 			}
-			System.out.println("Case "+submenu);
+
+			//System.out.println("Case "+submenu);
 		}
 		if (keys[MENU].isPressed()) {
 			boolean hasMenuAchv = false;
