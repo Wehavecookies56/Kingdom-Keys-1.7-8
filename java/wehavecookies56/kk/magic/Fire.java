@@ -14,12 +14,12 @@ public class Fire extends MagicAttack{
 		super(name, magiccost, unlockItem);
 	}
 	
-	public static void doFireball(EntityPlayer par1EntityPlayer, World par2World){
+	public static void shoot(EntityPlayer par1EntityPlayer, World par2World){
 		EntityPlayer player = (EntityPlayer) par1EntityPlayer;
 		//Magic execution
 		System.out.println(currMagic);
 		MagicAttack.currMagic = 100;
-		if(MagicAttack.currMagic >= fireCost)
+		if(MagicAttack.currMagic >= fireCost && KeyBind.submenu == 1)
 		{
 			EntitySmallFireball entitysmallfireball = new EntitySmallFireball(par2World);
 	        par2World.spawnEntityInWorld(new EntitySmallFireball(par2World, player, player.posX, player.posY, player.posZ));

@@ -208,22 +208,26 @@ public class KeyBind{
 			switch(selected) //Case 0 not necessary as it is attack
 			{
 			case 0: 
+				//Attack
 				submenu = 0;
 				break;
 			case 1:
+				//Magic
 				submenu = 1;
 				break;
 			case 2:
+				//Items
 				submenu = 2;
 				break;
 			case 3:
+				//Drive
 				submenu = 3;
 				break;
 			}
 //Fire			
-			if(KeyBind.magicselected == 0)
+			if(KeyBind.magicselected == 0 && submenu == 1)
 			{
-				Fire.doFireball(player, Minecraft.getMinecraft().theWorld);
+				Fire.shoot(player, Minecraft.getMinecraft().theWorld);
 			}
 		}
 		
