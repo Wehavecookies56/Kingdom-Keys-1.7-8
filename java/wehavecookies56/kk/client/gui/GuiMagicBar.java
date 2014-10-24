@@ -35,7 +35,7 @@ public class GuiMagicBar extends Gui
 			this.drawTexturedModalRect(screenWidth - guiWidth, screenHeight - guiHeight, 0, 0, guiWidth, guiHeight);
 			if (player.getHealth() <= 6)
 			{
-				this.drawTexturedModalRect((screenWidth - guiWidth) + currMagic, screenHeight - guiHeight-10, 0, 15, (guiWidth - currMagic) - 2, guiHeight);
+				this.drawTexturedModalRect((screenWidth - guiWidth) + currMagic, screenHeight - guiHeight - 10, 0, 15, (guiWidth - currMagic) - 2, guiHeight);
 			}
 			else
 			{
