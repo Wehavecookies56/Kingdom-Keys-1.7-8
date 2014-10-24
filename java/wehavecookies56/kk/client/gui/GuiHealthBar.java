@@ -22,8 +22,9 @@ public class GuiHealthBar extends Gui
 		
 		if(event.type == RenderGameOverlayEvent.ElementType.TEXT)
 		{
-			int guiWidth = 165;
-			int guiHeight = 9;
+			int guiWidth = 189;
+			int guiHeight = 12;
+			int noborderguiwidth = 171;
 			int screenWidth = event.resolution.getScaledWidth();
 			int screenHeight = event.resolution.getScaledHeight();
 			Minecraft mc = Minecraft.getMinecraft();
@@ -35,11 +36,11 @@ public class GuiHealthBar extends Gui
 			this.drawTexturedModalRect(screenWidth - guiWidth, screenHeight - guiHeight, 0, 0, guiWidth, guiHeight);
 			if (player.getHealth() <= 6)
 			{
-				this.drawTexturedModalRect((screenWidth - guiWidth) + currHealth, screenHeight - guiHeight, 0, 15, (guiWidth - currHealth) - 2, guiHeight);
+				this.drawTexturedModalRect((screenWidth - noborderguiwidth-16) + currHealth, screenHeight - guiHeight+2, 0, 24, (noborderguiwidth - currHealth) - 2, guiHeight);
 			}
 			else
 			{
-				this.drawTexturedModalRect((screenWidth - guiWidth) + currHealth, screenHeight - guiHeight, 0, 8, (guiWidth - currHealth) - 2, guiHeight);
+				this.drawTexturedModalRect((screenWidth - noborderguiwidth-16) + currHealth, screenHeight - guiHeight, 0, 12, (noborderguiwidth - currHealth) - 2, guiHeight);
 			}
 			GL11.glPopMatrix();
 		}

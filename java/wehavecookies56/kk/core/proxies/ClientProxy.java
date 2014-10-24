@@ -9,6 +9,7 @@ import wehavecookies56.kk.client.KeyBind;
 import wehavecookies56.kk.client.gui.GuiCommands;
 import wehavecookies56.kk.client.gui.GuiDriveBar;
 import wehavecookies56.kk.client.gui.GuiHealthBar;
+import wehavecookies56.kk.client.gui.GuiMagicBar;
 import wehavecookies56.kk.client.render.BlockRenderBlastBlox;
 import wehavecookies56.kk.client.render.EntityRenderEternalFlamesProjectile;
 import wehavecookies56.kk.client.render.EntityRenderSharpShooterBullet;
@@ -81,6 +82,7 @@ public class ClientProxy extends CommonProxy {
 		
 		//Events
 		MinecraftForge.EVENT_BUS.register(new GuiHealthBar());
+		MinecraftForge.EVENT_BUS.register(new GuiMagicBar());
 		MinecraftForge.EVENT_BUS.register(new GuiDriveBar());
 		MinecraftForge.EVENT_BUS.register(new GuiCommands());
 		

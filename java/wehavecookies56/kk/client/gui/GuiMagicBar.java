@@ -10,6 +10,7 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import org.lwjgl.opengl.GL11;
 
 import wehavecookies56.kk.core.event.OnHitEvent;
+import wehavecookies56.kk.magic.MagicAttack;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.common.gameevent.TickEvent.Type;
@@ -22,25 +23,18 @@ public class GuiMagicBar extends Gui
 		
 		if(event.type == RenderGameOverlayEvent.ElementType.TEXT)
 		{
-			int guiWidth = 165;
-			int guiHeight = 9;
+			int guiWidth = 123;
+			int guiHeight = 13;
 			int screenWidth = event.resolution.getScaledWidth();
 			int screenHeight = event.resolution.getScaledHeight();
 			Minecraft mc = Minecraft.getMinecraft();
 			EntityPlayer player = mc.thePlayer;
 			mc.renderEngine.bindTexture(new ResourceLocation("kk", "textures/gui/MPBar.png"));
-			float oneMP = (guiWidth / player.getMaxHealth());
+			float oneMP = (guiWidth / MagicAttack.currMagic);
 			int currMagic = guiWidth - (int) (oneMP);
 			GL11.glPushMatrix();
-			this.drawTexturedModalRect(screenWidth - guiWidth, screenHeight - guiHeight, 0, 0, guiWidth, guiHeight);
-			if (player.getHealth() <= 6)
-			{
-				this.drawTexturedModalRect((screenWidth - guiWidth) + currMagic, screenHeight - guiHeight - 10, 0, 15, (guiWidth - currMagic) - 2, guiHeight);
-			}
-			else
-			{
-				this.drawTexturedModalRect((screenWidth - guiWidth) + currMagic, screenHeight - guiHeight, 0, 8, (guiWidth - currMagic) - 2, guiHeight);
-			}
+			this.drawTexturedModalRect(screenWidth - guiWidth - 67, screenHeight - guiHeight- 12, 0, 0, guiWidth, guiHeight);
+			this.drawTexturedModalRect((screenWidth - guiWidth) + currMagic, screenHeight - guiHeight, 0, 8, (guiWidth - currMagic) - 2, guiHeight);
 			GL11.glPopMatrix();
 		}
 	}
