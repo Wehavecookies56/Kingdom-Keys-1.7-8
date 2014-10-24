@@ -631,6 +631,22 @@ gui.command.magic=MAGIC
 gui.command.items=ITEMS
 gui.command.drive=DRIVE
 
+#Magic
+gui.command.magic.fire=FIRE
+gui.command.magic.blizzard=BLIZZARD
+gui.command.magic.thunder=THUNDER
+gui.command.magic.cure=CURE
+gui.command.magic.gravity=GRAVITY
+gui.command.magic.stop=STOP
+gui.command.magic.aero=AERO
+
+#Drive
+gui.command.drive.valor=VALOR
+gui.command.drive.wisdom=WISDOM
+gui.command.drive.master=MASTER
+gui.command.drive.limit=LIMIT
+gui.command.drive.final=FINAL
+
 #Tooltips
 tooltip.voidedknowledge.desc=Unknown knowledge capable of materializing into strong weapons. 
 

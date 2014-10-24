@@ -166,6 +166,20 @@ public class LocalStrings {
 	public static final String Command_Magic = "gui.command.magic";
 	public static final String Command_Items = "gui.command.items";
 	public static final String Command_Drive = "gui.command.drive";
+	public static final String Command_Magic_Fire = "gui.command.magic.fire";
+	public static final String Command_Magic_Blizzard = "gui.command.magic.blizzard";
+	public static final String Command_Magic_Thunder = "gui.command.magic.thunder";
+	public static final String Command_Magic_Cure = "gui.command.magic.cure";
+	public static final String Command_Magic_Gravity = "gui.command.magic.gravity";
+	public static final String Command_Magic_Aero = "gui.command.magic.aero";
+	public static final String Command_Magic_Stop = "gui.command.magic.stop";
+	
+	public static final String Command_Drive_Valor = "gui.command.drive.valor";
+	public static final String Command_Drive_Wisdom = "gui.command.drive.wisdom";
+	public static final String Command_Drive_Master = "gui.command.drive.master";
+	public static final String Command_Drive_Final = "gui.command.drive.final";
+	public static final String Command_Drive_Limit = "gui.command.drive.limit";
+
 
 	public static final String VoidedKnowledge = "tooltip.voidedknowledge.desc";
 	public static final String EmptyBottle = "item.emptyBottle.name";

@@ -137,13 +137,13 @@ public class GuiCommands extends Gui {
 				GL11.glPushMatrix();
 				//GL11.glScalef(1.1F, 1.1F, 1.1F);
 				
-				GuiDrawText.drawString(StatCollector.translateToLocal("Fire"), 75, screenHeight - (commandHeight * (FIRE-1)-2) - 13, 0xFFFFFF);
-				GuiDrawText.drawString(StatCollector.translateToLocal("Blizzard"), 75, screenHeight - (commandHeight * (BLIZZARD-1)-2) - 13, 0xFFFFFF);
-				GuiDrawText.drawString(StatCollector.translateToLocal("Thunder"), 75, screenHeight - (commandHeight * (THUNDER-1)-2) - 13, 0xFFFFFF);
-				GuiDrawText.drawString(StatCollector.translateToLocal("Cure"), 75, screenHeight - (commandHeight * (CURE-1)-2) - 13, 0xFFFFFF);
-				GuiDrawText.drawString(StatCollector.translateToLocal("Gravity"), 75, screenHeight - (commandHeight * (GRAVITY-1)-2) - 13, 0xFFFFFF);
-				GuiDrawText.drawString(StatCollector.translateToLocal("Aero"), 75, screenHeight - (commandHeight * (AERO-1)-2) - 13, 0xFFFFFF);
-				GuiDrawText.drawString(StatCollector.translateToLocal("Stop"), 75, screenHeight - (commandHeight * (STOP-1)-2) - 13, 0xFFFFFF);
+				GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Magic_Fire), 75, screenHeight - (commandHeight * (FIRE-1)-2) - 13, 0xFFFFFF);
+				GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Magic_Blizzard), 75, screenHeight - (commandHeight * (BLIZZARD-1)-2) - 13, 0xFFFFFF);
+				GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Magic_Thunder), 75, screenHeight - (commandHeight * (THUNDER-1)-2) - 13, 0xFFFFFF);
+				GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Magic_Cure), 75, screenHeight - (commandHeight * (CURE-1)-2) - 13, 0xFFFFFF);
+				GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Magic_Gravity), 75, screenHeight - (commandHeight * (GRAVITY-1)-2) - 13, 0xFFFFFF);
+				GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Magic_Aero), 75, screenHeight - (commandHeight * (AERO-1)-2) - 13, 0xFFFFFF);
+				GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Magic_Stop), 75, screenHeight - (commandHeight * (STOP-1)-2) - 13, 0xFFFFFF);
 
 				GL11.glPopMatrix();
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -199,11 +199,11 @@ public class GuiCommands extends Gui {
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * FINAL), 70, 15, commandWidth, commandHeight);
 
 				}
-				GuiDrawText.drawString(StatCollector.translateToLocal("Valor"), 75, screenHeight - (commandHeight * (VALOR-1)-2) - 13, 0xFFFFFF);
-				GuiDrawText.drawString(StatCollector.translateToLocal("Wisdom"), 75, screenHeight - (commandHeight * (WISDOM-1)-2) - 13, 0xFFFFFF);
-				GuiDrawText.drawString(StatCollector.translateToLocal("Limit"), 75, screenHeight - (commandHeight * (LIMIT-1)-2) - 13, 0xFFFFFF);
-				GuiDrawText.drawString(StatCollector.translateToLocal("Master"), 75, screenHeight - (commandHeight * (MASTER-1)-2) - 13, 0xFFFFFF);
-				GuiDrawText.drawString(StatCollector.translateToLocal("Final"), 75, screenHeight - (commandHeight * (FINAL-1)-2) - 13, 0xFFFFFF);
+				GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Valor), 75, screenHeight - (commandHeight * (VALOR-1)-2) - 13, 0xFFFFFF);
+				GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Wisdom), 75, screenHeight - (commandHeight * (WISDOM-1)-2) - 13, 0xFFFFFF);
+				GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Limit), 75, screenHeight - (commandHeight * (LIMIT-1)-2) - 13, 0xFFFFFF);
+				GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Master), 75, screenHeight - (commandHeight * (MASTER-1)-2) - 13, 0xFFFFFF);
+				GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Final), 75, screenHeight - (commandHeight * (FINAL-1)-2) - 13, 0xFFFFFF);
 
 				break;
 			}
