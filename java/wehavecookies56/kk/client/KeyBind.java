@@ -18,6 +18,8 @@ import wehavecookies56.kk.core.packet.AchievementPacket;
 import wehavecookies56.kk.core.packet.IPacket;
 import wehavecookies56.kk.core.packet.SummonPacket;
 import wehavecookies56.kk.item.AddedItems;
+import wehavecookies56.kk.magic.Fire;
+import wehavecookies56.kk.magic.MagicAttack;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
@@ -41,7 +43,8 @@ public class KeyBind{
 	public static int itemselected;
 	public static int driveselected;
 
-
+	public static boolean shootFire = false;
+	
 	private static final int[] keyValues = {Keyboard.KEY_G, Keyboard.KEY_M, Keyboard.KEY_C, Keyboard.KEY_F, Keyboard.KEY_B};
 	private final KeyBinding[] keys;
 	StatFileWriter sfw;
@@ -217,9 +220,13 @@ public class KeyBind{
 				submenu = 3;
 				break;
 			}
-
-			//System.out.println("Case "+submenu);
+//Fire			
+			if(KeyBind.magicselected == 0)
+			{
+				Fire.doFireball(player, Minecraft.getMinecraft().theWorld);
+			}
 		}
+		
 		if (keys[MENU].isPressed()) {
 			boolean hasMenuAchv = false;
 			if(!hasMenuAchv){

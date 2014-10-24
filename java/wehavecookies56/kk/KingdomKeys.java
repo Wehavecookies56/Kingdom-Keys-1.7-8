@@ -66,6 +66,7 @@ import wehavecookies56.kk.lib.Recipes;
 import wehavecookies56.kk.lib.Reference;
 import wehavecookies56.kk.lib.SynthesisRecipes;
 import wehavecookies56.kk.lib.ints;
+import wehavecookies56.kk.magic.AddedMagic;
 import wehavecookies56.kk.updater.Update;
 import wehavecookies56.kk.worldgen.ComponentRecipeHome;
 import wehavecookies56.kk.worldgen.VillagerCreationHandler;
@@ -152,6 +153,7 @@ public class KingdomKeys {
 		AddedItems.intiArmour();
 		AddedItems.initLoot();
 		AddedBlocks.preinit();
+		AddedMagic.initMagic();
 
 		network.registerPacket(KnowledgePacket.class);
 		network.registerPacket(SummonPacket.class);
