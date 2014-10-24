@@ -640,7 +640,6 @@ achievement.hp.desc=Obtén un Orbe de HP
 achievement.kkpotion=Me pregunto a que sabe
 achievement.kkpotion.desc=Obtén una Poción
 
-
 #Tooltip
 tooltip.voidedknowledge.desc=Conocimiento desconocido capaz de materializarse en fuertes armas.
 
@@ -648,3 +647,19 @@ tooltip.voidedknowledge.desc=Conocimiento desconocido capaz de materializarse en
 key.KingdomKeys.category=Kingdom Keys
 key.summon.desc=Invocar llave espada
 key.menu.desc=Abrir Menú
+
+#Magic
+gui.command.magic.fire=PIRO
+gui.command.magic.blizzard=HIELO
+gui.command.magic.thunder=ELECTRO
+gui.command.magic.cure=CURA
+gui.command.magic.gravity=GRAVEDAD
+gui.command.magic.stop=PARO
+gui.command.magic.aero=AERO
+
+#Drive
+gui.command.drive.valor=VALIENTE
+gui.command.drive.wisdom=SABIA
+gui.command.drive.master=MAESTRA
+gui.command.drive.limit=LÍMITE
+gui.command.drive.final=FINAL
