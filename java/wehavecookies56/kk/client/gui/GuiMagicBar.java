@@ -30,7 +30,7 @@ public class GuiMagicBar extends Gui
 			Minecraft mc = Minecraft.getMinecraft();
 			EntityPlayer player = mc.thePlayer;
 			mc.renderEngine.bindTexture(new ResourceLocation("kk", "textures/gui/MPBar.png"));
-			float oneMP = (guiWidth / MagicAttack.currMagic);
+			float oneMP = (guiWidth / MagicAttack.maxMagic);
 			int currMagic = guiWidth - (int) (oneMP);
 			GL11.glPushMatrix();
 			this.drawTexturedModalRect(screenWidth - guiWidth - 67, screenHeight - guiHeight- 12, 0, 0, guiWidth, guiHeight);

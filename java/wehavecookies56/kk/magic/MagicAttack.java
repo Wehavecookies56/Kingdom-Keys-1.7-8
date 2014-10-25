@@ -9,6 +9,7 @@ public class MagicAttack {
 	Item unlockItem;
 	
 	public static int currMagic = 100;
+	public static int maxMagic = 100;
 	
 	public static final int fireCost = 10;
 	public static final int cureCost = 100;
