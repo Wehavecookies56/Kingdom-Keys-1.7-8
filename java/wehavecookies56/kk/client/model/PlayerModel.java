@@ -26,26 +26,24 @@ public class PlayerModel extends ModelPlayerBase {
 	}
 	
 	Minecraft mc = Minecraft.getMinecraft();
-	//EntityPropertyDriveForm df = EntityPropertyDriveForm.get(mc.thePlayer);
-	/*TEMP*/public static int df = KeyBind.driveselected;
-	
+	//EntityPropertyDriveForm df = EntityPropertyDriveForm.get(mc.thePlayer);	
+	int df = 0;
 	@Override
 	public void afterRender(Entity paramEntity, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6) {
-		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Valor_A.png"));
-		if(df/*.getActive()*/ != 1){	
+		if(KeyBind.driveselected == 0){	
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Valor_A.png"));
-		}else if(df/*.getActive()*/ == 2){
+		}else if(KeyBind.driveselected == 1){
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Wisdom_A.png"));
-		}else if(df/*.getActive()*/ == 3){
+		}else if(KeyBind.driveselected == 2){
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Limit_A.png"));
-		}else if(df/*.getActive()*/ == 4){
+		}else if(KeyBind.driveselected == 3){
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Master_A.png"));
-		}else if(df/*.getActive()*/ == 5){
+		}else if(KeyBind.driveselected == 4){
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Final_A.png"));
-		}else if(df/*.getActive()*/ == 6){
+		}else if(KeyBind.driveselected == 5){
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Anti_A.png"));
 		}else{
-			//super.afterRender(paramEntity, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
+			super.afterRender(paramEntity, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
 		}
 		modelPlayer.bipedLeftArm.render(0.0625F);
 		modelPlayer.bipedRightArm.render(0.0625F);		
