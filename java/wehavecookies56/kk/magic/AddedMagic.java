@@ -8,6 +8,6 @@ public class AddedMagic {
 	
 	public static void initMagic()
 	{
-	
+		fire = new Fire("Fire", 0, null);
 	}
 }

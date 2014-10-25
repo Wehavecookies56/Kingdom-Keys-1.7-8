@@ -9,6 +9,7 @@ public class DriveForm {
 	String name;
 	int cost;
 	Item unlockItem;
+	boolean active = false;
 	
 	public DriveForm(String name, int cost, Item unlockItem) {
 		this.name = name;
@@ -32,7 +33,19 @@ public class DriveForm {
 	
 	public boolean isDriveFormActive(){
 		//TODO IEEP for storing whether the form is active or not
-		return false;		
+		return active;		
+	}
+	
+	public boolean activate(EntityPlayer player){
+		EntityPropertyDrivePoints dp = EntityPropertyDrivePoints.get(player);
+
+		if(dp.currDrivePoints >= cost){
+			active = true;
+			return true;
+		}else{
+			active = false;
+			return false;
+		}
 	}
 	
 	public void onActivateForm(){

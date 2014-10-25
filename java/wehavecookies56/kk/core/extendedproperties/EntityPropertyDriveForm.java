@@ -10,11 +10,11 @@ public class EntityPropertyDriveForm implements IExtendedEntityProperties {
 
 	public static final String ACTIVE_NAME = "DriveActive";
 	private final EntityPlayer player;
-	private boolean isActive;
+	private int Active;
 	
 	public EntityPropertyDriveForm(EntityPlayer player) {
 		this.player = player;
-		this.isActive = false;
+		this.Active = 0;
 	}
 	
 	public static final void register(EntityPlayer player){
@@ -29,7 +29,7 @@ public class EntityPropertyDriveForm implements IExtendedEntityProperties {
 	public void saveNBTData(NBTTagCompound compound){
 		NBTTagCompound properties = new NBTTagCompound();
 		
-		properties.setBoolean("IsActive", this.isActive);
+		properties.setInteger("IsActive", this.Active);
 
 		compound.setTag(ACTIVE_NAME, properties);
 		
@@ -38,7 +38,7 @@ public class EntityPropertyDriveForm implements IExtendedEntityProperties {
 	@Override
 	public void loadNBTData(NBTTagCompound compound){
 		NBTTagCompound properties = (NBTTagCompound) compound.getTag(ACTIVE_NAME);
-		this.isActive = properties.getBoolean(ACTIVE_NAME);
+		this.Active = properties.getInteger(ACTIVE_NAME);
 	}
 
 	@Override

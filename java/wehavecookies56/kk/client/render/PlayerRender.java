@@ -22,7 +22,7 @@ public class PlayerRender extends RenderPlayerBase {
 	
 	@Override
 	public void renderModel(EntityLivingBase paramEntityLivingBase, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6) {
-		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/armor/KEYBLADEA_1.png"));
+		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Valor_A.png"));
 		ModelBiped armour = renderPlayer.modelArmor;
 		armour.onGround = 0.0F;
 		armour.setRotationAngles(paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6, paramEntityLivingBase);
@@ -47,7 +47,7 @@ public class PlayerRender extends RenderPlayerBase {
 		armour.bipedRightArm.showModel = true;
 		armour.bipedRightArm.render(0.0625F);
 		
-		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/armor/KEYBLADEA_2.png"));
+		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Valor_B.png"));
 		
 		armour.bipedLeftLeg.showModel = true;
 		armour.bipedLeftLeg.render(0.0625F);
@@ -74,10 +74,10 @@ public class PlayerRender extends RenderPlayerBase {
 	
 	@Override
 	public void renderFirstPersonArm(EntityPlayer paramEntityPlayer) {
-		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/armor/KEYBLADEA_1.png"));
 		ModelBiped armour = renderPlayer.modelArmor;
-		
+		armour.bipedRightArm.render(0.0625F);
 		armour.bipedRightArm.showModel = true;
+		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Valor_A.png"));
 		armour.bipedRightArm.render(0.0625F);
 		super.renderFirstPersonArm(paramEntityPlayer);
 	}

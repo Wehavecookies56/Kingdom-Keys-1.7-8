@@ -17,6 +17,8 @@ import wehavecookies56.kk.client.gui.GuiMenu;
 import wehavecookies56.kk.core.packet.AchievementPacket;
 import wehavecookies56.kk.core.packet.IPacket;
 import wehavecookies56.kk.core.packet.SummonPacket;
+import wehavecookies56.kk.driveforms.AddedDrives;
+import wehavecookies56.kk.driveforms.DriveValor;
 import wehavecookies56.kk.item.AddedItems;
 import wehavecookies56.kk.magic.Fire;
 import wehavecookies56.kk.magic.MagicAttack;
@@ -62,6 +64,7 @@ public class KeyBind{
 	@SubscribeEvent
 	public void onKeyInput(KeyInputEvent event) {	
 		EntityPlayer player = (EntityPlayer) Minecraft.getMinecraft().thePlayer;
+		System.out.print(magicselected);
 		if (keys[BACK].isPressed())
 		{
 			if (submenu == 0)
@@ -70,15 +73,15 @@ public class KeyBind{
 			}
 			else if (submenu == 1)
 			{
-				submenu = submenu - 1;
+				submenu -= 1;
 			}
 			else if (submenu == 2)
 			{
-				submenu = submenu - 2;
+				submenu -= 2;
 			}
 			else if (submenu == 3)
 			{
-				submenu = submenu - 3;
+				submenu -= 3;
 			}
 		}
 		if (keys[COMMAND].isPressed())
@@ -91,7 +94,7 @@ public class KeyBind{
 				{
 					if (selected > 0 && selected <= 3)
 					{
-						selected = selected-1;
+						selected -= 1;
 						submenu = 0;
 	
 					}
@@ -104,7 +107,7 @@ public class KeyBind{
 				{
 					if (selected >= 0 && selected < 3)
 					{
-						selected = selected+1;
+						selected += 1;
 						submenu = 0;
 	
 					}
@@ -113,15 +116,17 @@ public class KeyBind{
 						selected = 0;
 					}
 				}
+				magicselected = -1;
 			}
 //Magic
 			else if (submenu == 1)
 			{
+				if(magicselected == -1){magicselected = 0;}
 				if (player.isSneaking())
 				{
 					if (magicselected > 0 && magicselected <= 6)
 					{
-						magicselected = magicselected-1;
+						magicselected -= 1;
 						submenu = 1;
 	
 					}
@@ -134,7 +139,7 @@ public class KeyBind{
 				{
 					if (magicselected >= 0 && magicselected < 6)
 					{
-						magicselected = magicselected+1;
+						magicselected += 1;
 						submenu = 1;
 	
 					}
@@ -179,7 +184,7 @@ public class KeyBind{
 				{
 					if (driveselected > 0 && driveselected <= 4)
 					{
-						driveselected = driveselected-1;
+						driveselected -= 1;
 						submenu = 3;
 	
 					}
@@ -192,7 +197,7 @@ public class KeyBind{
 				{
 					if (driveselected >= 0 && driveselected < 4)
 					{
-						driveselected = driveselected+1;
+						driveselected += 1;
 						submenu = 3;
 	
 					}
@@ -228,6 +233,10 @@ public class KeyBind{
 			if(KeyBind.magicselected == 0 && submenu == 1)
 			{
 				Fire.shoot(player, Minecraft.getMinecraft().theWorld);
+			}
+			
+			if(KeyBind.driveselected == 0 && submenu == 1){
+				AddedDrives.valor.activate(player);
 			}
 		}
 		

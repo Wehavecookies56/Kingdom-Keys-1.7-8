@@ -55,6 +55,7 @@ import wehavecookies56.kk.creativetab.KHRECODEDTAB;
 import wehavecookies56.kk.creativetab.KHTAB;
 import wehavecookies56.kk.creativetab.KKSMTAB;
 import wehavecookies56.kk.creativetab.KKTAB;
+import wehavecookies56.kk.driveforms.AddedDrives;
 import wehavecookies56.kk.enchantments.EnchantHeartHarvest;
 import wehavecookies56.kk.entities.EntityBlastBlox;
 import wehavecookies56.kk.entities.EntityEternalFlamesProjectile;
@@ -154,6 +155,7 @@ public class KingdomKeys {
 		AddedItems.initLoot();
 		AddedBlocks.preinit();
 		AddedMagic.initMagic();
+		AddedDrives.initDrives();
 
 		network.registerPacket(KnowledgePacket.class);
 		network.registerPacket(SummonPacket.class);

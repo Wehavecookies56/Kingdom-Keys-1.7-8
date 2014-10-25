@@ -54,7 +54,7 @@ public class GuiCommands extends Gui {
 			case 1:
 				mc.renderEngine.bindTexture(new ResourceLocation("kk", "textures/gui/CommandMenu.png"));
 
-				if (KeyBind.magicselected==0)
+				if (KeyBind.magicselected==0 || KeyBind.magicselected == -1)
 				{
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * FIRE), 70, 15, commandWidth, commandHeight);
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * BLIZZARD), 70, 0, commandWidth, commandHeight);
