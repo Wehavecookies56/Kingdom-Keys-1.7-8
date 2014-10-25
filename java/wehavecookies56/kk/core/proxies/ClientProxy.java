@@ -1,9 +1,15 @@
 package wehavecookies56.kk.core.proxies;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
+
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.glu.GLU;
+import org.lwjgl.util.glu.Sphere;
+
 import wehavecookies56.kk.block.AddedBlocks;
 import wehavecookies56.kk.client.KeyBind;
 import wehavecookies56.kk.client.gui.GuiCommands;
@@ -53,6 +59,10 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 
 public class ClientProxy extends CommonProxy {
 
+
+	public static int sphereIdOutside;
+	public static int sphereIdInside;
+	
 	@Override
 	public void registerRenderers() {
 		//3D Model renders
@@ -79,39 +89,59 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(AddedItems.MetalChocobo, new ItemRenderMetalChocobo());
 		MinecraftForgeClient.registerItemRenderer(AddedItems.WoodenKeyblade, new ItemRenderWoodenKeyblade());
 		MinecraftForgeClient.registerItemRenderer(new ItemStack(AddedBlocks.KKChest).getItem(), new ItemRenderKKChest());
-		
+
 		//Events
 		MinecraftForge.EVENT_BUS.register(new GuiHealthBar());
 		MinecraftForge.EVENT_BUS.register(new GuiMagicBar());
 		MinecraftForge.EVENT_BUS.register(new GuiDriveBar());
 		MinecraftForge.EVENT_BUS.register(new GuiCommands());
-		
+
 		//Entities
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityKKChest.class, new TileEntityRendererKKChest());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityKKChest.class, new TileEntityRendererKKChest());
 		RenderingRegistry.registerEntityRenderingHandler(EntityBlastBlox.class, new BlockRenderBlastBlox());
 		RenderingRegistry.registerEntityRenderingHandler(EntityEternalFlamesProjectile.class, new EntityRenderEternalFlamesProjectile(AddedItems.EternalFlames));
-        RenderingRegistry.registerEntityRenderingHandler(EntitySharpshooterBullet.class, new EntityRenderSharpShooterBullet());
+		RenderingRegistry.registerEntityRenderingHandler(EntitySharpshooterBullet.class, new EntityRenderSharpShooterBullet());
 		ResourceLocation villagerTexture = new ResourceLocation("kk", "textures/entities/mobs/knowledgeVillager.png");
 		VillagerRegistry.instance().registerVillagerSkin(20, villagerTexture);
-        VillagerRegistry.getVillagerSkin(10, villagerTexture);
+		VillagerRegistry.getVillagerSkin(10, villagerTexture);
+
+		Sphere sphere = new Sphere();
+
+		sphere.setDrawStyle(GLU.GLU_FILL);
+		sphere.setNormals(GLU.GLU_SMOOTH);
+
+		sphere.setOrientation(GLU.GLU_OUTSIDE);
+
+		sphereIdOutside = GL11.glGenLists(1);
+		GL11.glNewList(sphereIdOutside, GL11.GL_COMPILE);
+		ResourceLocation rL = new ResourceLocation("kk", "textures/entities/sphere.png");
+		Minecraft.getMinecraft().getTextureManager().bindTexture(rL);
+		sphere.draw(1.5F, 32, 32);
+		GL11.glEndList();
+		sphere.setOrientation(GLU.GLU_INSIDE);
+		sphereIdInside = GL11.glGenLists(1);
+		GL11.glNewList(sphereIdInside, GL11.GL_COMPILE);
+		Minecraft.getMinecraft().getTextureManager().bindTexture(rL);
+		sphere.draw(1.5F, 32, 32);
+		GL11.glEndList();
 	}
 
 	@Override
 	public int addArmor(String armor) {
 		return RenderingRegistry.addNewArmourRendererPrefix(armor);
 	}
-	
+
 	@Override
 	public void initCapes() {
 		DevCapes.getInstance().registerConfig("https://www.dropbox.com/s/hb0wg5ky5wblz9g/Capes.json?raw=1");
 	}
-	
+
 
 	public static KeyBind KeyBind = new KeyBind();
-	
+
 	@Override
 	public void registerKeybinds() {
-    	FMLCommonHandler.instance().bus().register(this.KeyBind);
+		FMLCommonHandler.instance().bus().register(this.KeyBind);
 	}
-	
+
 }

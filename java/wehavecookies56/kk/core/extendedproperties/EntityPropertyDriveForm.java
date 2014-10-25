@@ -8,6 +8,8 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 
 public class EntityPropertyDriveForm implements IExtendedEntityProperties {
 
+	//0 = None, 1 Valor, 2 Wisdom, 3 Limit, 4 Master, 5 Final, 6 Anti
+	
 	public static final String ACTIVE_NAME = "DriveActive";
 	private final EntityPlayer player;
 	private int Active;
@@ -35,12 +37,16 @@ public class EntityPropertyDriveForm implements IExtendedEntityProperties {
 		
 	}
 
+	public int getActive(){
+		return Active;
+	}
+	
 	@Override
 	public void loadNBTData(NBTTagCompound compound){
 		NBTTagCompound properties = (NBTTagCompound) compound.getTag(ACTIVE_NAME);
 		this.Active = properties.getInteger(ACTIVE_NAME);
 	}
-
+	
 	@Override
 	public void init(Entity entity, World world) {
 		

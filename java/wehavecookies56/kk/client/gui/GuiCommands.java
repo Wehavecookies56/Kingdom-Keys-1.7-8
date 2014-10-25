@@ -53,77 +53,50 @@ public class GuiCommands extends Gui {
 			{
 			case 1:
 				mc.renderEngine.bindTexture(new ResourceLocation("kk", "textures/gui/CommandMenu.png"));
-
+				
 				if (KeyBind.magicselected==0 || KeyBind.magicselected == -1)
 				{
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * FIRE), 70, 15, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * BLIZZARD), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * THUNDER), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * CURE), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * GRAVITY), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * AERO), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * STOP), 70, 0, commandWidth, commandHeight);
-				}
-				else if (KeyBind.magicselected==1)
-				{
+				}else{
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * FIRE), 70, 0, commandWidth, commandHeight);
+				}
+				if (KeyBind.magicselected==1)
+				{
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * BLIZZARD), 70, 15, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * THUNDER), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * CURE), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * GRAVITY), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * AERO), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * STOP), 70, 0, commandWidth, commandHeight);	
-				}
-				else if (KeyBind.magicselected==2)
-				{
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * FIRE), 70, 0, commandWidth, commandHeight);
+				}else{
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * BLIZZARD), 70, 0, commandWidth, commandHeight);
+				}
+				if (KeyBind.magicselected==2)
+				{
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * THUNDER), 70, 15, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * CURE), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * GRAVITY), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * AERO), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * STOP), 70, 0, commandWidth, commandHeight);	
-				}
-				else if (KeyBind.magicselected==3)
-				{
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * FIRE), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * BLIZZARD), 70, 0, commandWidth, commandHeight);
+				}else{
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * THUNDER), 70, 0, commandWidth, commandHeight);
+				}
+				if (KeyBind.magicselected==3)
+				{
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * CURE), 70, 15, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * GRAVITY), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * AERO), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * STOP), 70, 0, commandWidth, commandHeight);	
-				}
-				else if (KeyBind.magicselected==4)
-				{
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * FIRE), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * BLIZZARD), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * THUNDER), 70, 0, commandWidth, commandHeight);
+				}else{
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * CURE), 70, 0, commandWidth, commandHeight);
+				}
+				if (KeyBind.magicselected==4)
+				{
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * GRAVITY), 70, 15, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * AERO), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * STOP), 70, 0, commandWidth, commandHeight);	
-				}
-				else if (KeyBind.magicselected==5)
-				{
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * FIRE), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * BLIZZARD), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * THUNDER), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * CURE), 70, 0, commandWidth, commandHeight);
+				}else{
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * GRAVITY), 70, 0, commandWidth, commandHeight);
+				}
+				if (KeyBind.magicselected==5)
+				{
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * AERO), 70, 15, commandWidth, commandHeight);
+				}else{
+					this.drawTexturedModalRect(70, screenHeight - (commandHeight * AERO), 70, 0, commandWidth, commandHeight);
+				}
+				if (KeyBind.magicselected==6)
+				{
+					this.drawTexturedModalRect(70, screenHeight - (commandHeight * STOP), 70, 15, commandWidth, commandHeight);	
+				}else{
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * STOP), 70, 0, commandWidth, commandHeight);	
 				}
-				else if (KeyBind.magicselected==6)
-				{
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * FIRE), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * BLIZZARD), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * THUNDER), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * CURE), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * GRAVITY), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * AERO), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * STOP), 70, 15, commandWidth, commandHeight);	
-				}
+				/*
 				else if (KeyBind.magicselected==7)
 				{
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * FIRE), 70, 0, commandWidth, commandHeight);
@@ -134,7 +107,9 @@ public class GuiCommands extends Gui {
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * AERO), 70, 0, commandWidth, commandHeight);
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * STOP), 70, 0, commandWidth, commandHeight);	
 				}
+				*/
 				GL11.glPushMatrix();
+				
 				//GL11.glScalef(1.1F, 1.1F, 1.1F);
 				
 				GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Magic_Fire), 75, screenHeight - (commandHeight * (FIRE-1)-2) - 13, 0xFFFFFF);
