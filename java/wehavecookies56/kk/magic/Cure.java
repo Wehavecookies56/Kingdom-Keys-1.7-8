@@ -23,6 +23,7 @@ public class Cure extends MagicAttack{
 		MagicAttack.currMagic = 100;
 		if(MagicAttack.currMagic >= cureCost && KeyBind.submenu == 1)
 		{
+			System.out.println("Cure");
 			player.heal(player.getMaxHealth()/3);
 			MagicAttack.currMagic = MagicAttack.currMagic - MagicAttack.cureCost;
 		}
