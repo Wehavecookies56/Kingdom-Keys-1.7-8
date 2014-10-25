@@ -11,6 +11,8 @@ public class MagicAttack {
 	public static int currMagic = 100;
 	
 	public static final int fireCost = 10;
+	public static final int cureCost = 100;
+
 	
 	public MagicAttack(String name, int magiccost, Item unlockItem) 
 	{

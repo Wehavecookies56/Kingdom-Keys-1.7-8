@@ -20,6 +20,7 @@ import wehavecookies56.kk.core.packet.SummonPacket;
 import wehavecookies56.kk.driveforms.AddedDrives;
 import wehavecookies56.kk.driveforms.DriveValor;
 import wehavecookies56.kk.item.AddedItems;
+import wehavecookies56.kk.magic.Cure;
 import wehavecookies56.kk.magic.Fire;
 import wehavecookies56.kk.magic.MagicAttack;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -32,7 +33,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class KeyBind{
 
 	private static final String[] desc = {"key.summon.desc", "key.menu.desc", "key.command.desc", "key.enter.desc", "key.back.desc"};
-
+	Minecraft mc = Minecraft.getMinecraft();
 	public static final int SUMMON = 0;
 	public static final int MENU = 1;
 	public static final int COMMAND = 2;
@@ -84,7 +85,9 @@ public class KeyBind{
 				submenu -= 3;
 			}
 		}
+		
 		if (keys[COMMAND].isPressed())
+	//	if(mc.gameSettings.keyBindPickBlock.getIsKeyPressed())
 		{
 //Main command menu	
 //Attack
@@ -199,7 +202,6 @@ public class KeyBind{
 					{
 						driveselected += 1;
 						submenu = 3;
-	
 					}
 					else if (driveselected == 4)
 					{
@@ -209,6 +211,7 @@ public class KeyBind{
 			}
 		}
 		if (keys[ENTER].isPressed())
+	//	if (mc.gameSettings.keyBindAttack.isPressed())
 		{
 			switch(selected) //Case 0 not necessary as it is attack
 			{
@@ -233,6 +236,10 @@ public class KeyBind{
 			if(KeyBind.magicselected == 0 && submenu == 1)
 			{
 				Fire.shoot(player, Minecraft.getMinecraft().theWorld);
+			}
+			else if (KeyBind.magicselected == 3 && submenu == 1)
+			{
+				Cure.cure(player);
 			}
 			
 //Drive Forms
