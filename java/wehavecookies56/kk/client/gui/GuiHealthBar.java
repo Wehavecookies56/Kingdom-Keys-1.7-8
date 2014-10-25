@@ -19,7 +19,6 @@ public class GuiHealthBar extends Gui
 	
 	@SubscribeEvent
 	public void onRenderOverlayPost(RenderGameOverlayEvent event){
-		
 		if(event.type == RenderGameOverlayEvent.ElementType.TEXT)
 		{
 			int guiWidth = 189;

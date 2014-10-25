@@ -235,8 +235,13 @@ public class KeyBind{
 				Fire.shoot(player, Minecraft.getMinecraft().theWorld);
 			}
 			
-			if(KeyBind.driveselected == 0 && submenu == 1){
+			if(KeyBind.driveselected == 0 && submenu == 3)
+			{
 				AddedDrives.valor.activate(player);
+			}
+			else if(KeyBind.driveselected == 1 && submenu == 3)
+			{
+				AddedDrives.wisdom.activate(player);
 			}
 		}
 		
