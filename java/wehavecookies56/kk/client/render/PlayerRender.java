@@ -52,7 +52,7 @@ public class PlayerRender extends RenderPlayerBase {
 
 	@Override
 	public void renderModel(EntityLivingBase paramEntityLivingBase, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6) {
-		if(KeyBind.driveselected == 0){	
+		if(KeyBind.driveselected == 0  && KeyBind.submenu == 3){	
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Valor_A.png"));
 		}else if(KeyBind.driveselected == 1){
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Wisdom_A.png"));
@@ -86,7 +86,7 @@ public class PlayerRender extends RenderPlayerBase {
 		armour.bipedRightLeg.showModel = true;
 		armour.bipedRightLeg.render(0.0625F);
 
-		if(KeyBind.selected == 0){	
+		if(KeyBind.driveselected == 0){
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Valor_B.png"));
 		}else if(KeyBind.driveselected == 1){
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Wisdom_B.png"));

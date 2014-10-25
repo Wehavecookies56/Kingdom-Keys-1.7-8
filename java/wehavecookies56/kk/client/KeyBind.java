@@ -235,13 +235,26 @@ public class KeyBind{
 				Fire.shoot(player, Minecraft.getMinecraft().theWorld);
 			}
 			
-			if(KeyBind.driveselected == 0 && submenu == 3)
+//Drive Forms
+			if(driveselected == 0 && submenu == 3)
 			{
 				AddedDrives.valor.activate(player);
 			}
-			else if(KeyBind.driveselected == 1 && submenu == 3)
+			else if(driveselected == 1 && submenu == 3)
 			{
 				AddedDrives.wisdom.activate(player);
+			}
+			else if(driveselected == 2 && submenu == 3)
+			{
+				AddedDrives.limit.activate(player);
+			}
+			else if(driveselected == 3 && submenu == 3)
+			{
+				AddedDrives.master.activate(player);
+			}
+			else if(driveselected == 4 && submenu == 3)
+			{
+				AddedDrives.Final.activate(player);
 			}
 		}
 		
