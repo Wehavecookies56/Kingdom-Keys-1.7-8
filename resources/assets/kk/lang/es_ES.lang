@@ -648,7 +648,14 @@ key.KingdomKeys.category=Kingdom Keys
 key.summon.desc=Invocar llave espada
 key.menu.desc=Abrir Menú
 
-#Magic
+#Menú de Comandos
+gui.command.command=COMANDO
+gui.command.attack=ATAQUE
+gui.command.magic=MAGIA
+gui.command.items=OBJETOS
+gui.command.drive=FUSIÓN
+
+#Magia
 gui.command.magic.fire=PIRO
 gui.command.magic.blizzard=HIELO
 gui.command.magic.thunder=ELECTRO
@@ -657,7 +664,7 @@ gui.command.magic.gravity=GRAVEDAD
 gui.command.magic.stop=PARO
 gui.command.magic.aero=AERO
 
-#Drive
+#Fusión
 gui.command.drive.valor=VALIENTE
 gui.command.drive.wisdom=SABIA
 gui.command.drive.master=MAESTRA
