@@ -66,7 +66,7 @@ public class PlayerRender extends RenderPlayerBase {
 		}else if(df/*.getActive()*/ == 6){
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Anti_A.png"));
 		}else{
-			super.renderModel(paramEntityLivingBase, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
+			//super.renderModel(paramEntityLivingBase, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
 
 		}
 		ModelBiped armour = renderPlayer.modelArmor;
@@ -102,7 +102,7 @@ public class PlayerRender extends RenderPlayerBase {
 		}else if(df/*.getActive()*/ == 6){
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Anti_B.png"));
 		}else{
-			return;
+			//super.renderModel(paramEntityLivingBase, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
 		}
 		armour.bipedLeftLeg.showModel = true;
 		armour.bipedLeftLeg.render(0.0625F);

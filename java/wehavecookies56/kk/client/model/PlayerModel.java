@@ -45,7 +45,7 @@ public class PlayerModel extends ModelPlayerBase {
 		}else if(df/*.getActive()*/ == 6){
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Anti_A.png"));
 		}else{
-			super.afterRender(paramEntity, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
+			//super.afterRender(paramEntity, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
 		}
 		modelPlayer.bipedLeftArm.render(0.0625F);
 		modelPlayer.bipedRightArm.render(0.0625F);		
