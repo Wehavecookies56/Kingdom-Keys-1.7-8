@@ -31,7 +31,8 @@ public class PlayerModel extends ModelPlayerBase {
 	
 	@Override
 	public void afterRender(Entity paramEntity, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6) {
-		if(df/*.getActive()*/ == 1){	
+		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Valor_A.png"));
+		if(df/*.getActive()*/ != 1){	
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Valor_A.png"));
 		}else if(df/*.getActive()*/ == 2){
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Wisdom_A.png"));

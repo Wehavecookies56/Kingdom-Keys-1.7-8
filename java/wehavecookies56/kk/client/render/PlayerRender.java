@@ -52,6 +52,7 @@ public class PlayerRender extends RenderPlayerBase {
 
 	@Override
 	public void renderModel(EntityLivingBase paramEntityLivingBase, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6) {
+		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Valor_A.png"));
 		if(df/*.getActive()*/ == 1){	
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Valor_A.png"));
 		}else if(df/*.getActive()*/ == 2){
@@ -86,6 +87,7 @@ public class PlayerRender extends RenderPlayerBase {
 		armour.bipedRightLeg.showModel = true;
 		armour.bipedRightLeg.render(0.0625F);
 
+		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Valor_B.png"));
 
 		if(df/*.getActive()*/ == 1){	
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Valor_B.png"));
