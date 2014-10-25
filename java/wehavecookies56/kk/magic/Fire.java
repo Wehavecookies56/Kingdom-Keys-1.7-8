@@ -2,6 +2,8 @@ package wehavecookies56.kk.magic;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityFireball;
+import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.entity.projectile.EntitySmallFireball;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
@@ -21,8 +23,9 @@ public class Fire extends MagicAttack{
 		MagicAttack.currMagic = 100;
 		if(MagicAttack.currMagic >= fireCost && KeyBind.submenu == 1)
 		{
-			EntitySmallFireball entitysmallfireball = new EntitySmallFireball(par2World);
-	        par2World.spawnEntityInWorld(new EntitySmallFireball(par2World, player.posX, player.posY, player.posZ, player.getLookVec().xCoord, player.getLookVec().yCoord, player.getLookVec().zCoord));
+			EntitySmallFireball entitysmallfireball = new EntitySmallFireball(par2World, player.posX, player.posY, player.posZ, player.getLookVec().xCoord, player.getLookVec().yCoord, player.getLookVec().zCoord);
+	        par2World.spawnEntityInWorld(entitysmallfireball);
+			//EntityLargeFireball entitylargefireball = new EntityLargeFireball(par2World, player, d5, d6, d7);
 	        KeyBind.shootFire = false;
 			MagicAttack.currMagic = MagicAttack.currMagic - MagicAttack.fireCost;			
 		}
