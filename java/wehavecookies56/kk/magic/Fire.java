@@ -22,11 +22,9 @@ public class Fire extends MagicAttack{
 		if(MagicAttack.currMagic >= fireCost && KeyBind.submenu == 1)
 		{
 			EntitySmallFireball entitysmallfireball = new EntitySmallFireball(par2World);
-	        par2World.spawnEntityInWorld(new EntitySmallFireball(par2World, player, player.posX, player.posY, player.posZ));
+	        par2World.spawnEntityInWorld(new EntitySmallFireball(par2World, player.posX, player.posY, player.posZ, player.getLookVec().xCoord, player.getLookVec().yCoord, player.getLookVec().zCoord));
 	        KeyBind.shootFire = false;
-			System.out.println("Boom");
-			MagicAttack.currMagic = MagicAttack.currMagic - MagicAttack.fireCost;
-			
+			MagicAttack.currMagic = MagicAttack.currMagic - MagicAttack.fireCost;			
 		}
 	}
 }

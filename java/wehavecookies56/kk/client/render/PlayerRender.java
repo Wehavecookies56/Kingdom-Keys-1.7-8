@@ -66,7 +66,6 @@ public class PlayerRender extends RenderPlayerBase {
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Anti_A.png"));
 		}else{
 			super.renderModel(paramEntityLivingBase, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
-
 		}
 		ModelBiped armour = renderPlayer.modelArmor;
 		armour.onGround = 0.0F;
