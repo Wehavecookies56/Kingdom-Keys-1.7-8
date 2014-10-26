@@ -65,7 +65,7 @@ public class KeyBind{
 	@SubscribeEvent
 	public void onKeyInput(KeyInputEvent event) {	
 		EntityPlayer player = (EntityPlayer) Minecraft.getMinecraft().thePlayer;
-		System.out.print(magicselected);
+		//System.out.print(magicselected);
 		if (keys[BACK].isPressed())
 		{
 			if (submenu == 0)
@@ -246,6 +246,7 @@ public class KeyBind{
 			if(driveselected == 0 && submenu == 3)
 			{
 				AddedDrives.valor.activate(player);
+				System.out.println("Active");
 			}
 			else if(driveselected == 1 && submenu == 3)
 			{

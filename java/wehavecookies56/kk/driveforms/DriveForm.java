@@ -20,27 +20,34 @@ public class DriveForm {
 	public boolean consumePoints(int cost, EntityPlayer player){
 		EntityPropertyDrivePoints dp = EntityPropertyDrivePoints.get(player);
 		if(dp.getCurrDrivePoints() < cost){return false;}
-		double cons = 0.1D;
-		double toCons = dp.getCurrDrivePoints() - cost;
-		if(dp.getCurrDrivePoints() - cost <= 0){
-			dp.setCurrDrivePoints(0);
-		}else if(dp.getCurrDrivePoints() > toCons){
-			dp.setCurrDrivePoints((int) cons--);
-		}
+		System.out.println(dp.getCurrDrivePoints());
+		System.out.println(cost);
+		dp.removeDrivePoints(cost);
+		System.out.println(dp.getCurrDrivePoints());
+		//double cons = 0.1D;
+		//double toCons = dp.getCurrDrivePoints() - cost;
+		//if(dp.getCurrDrivePoints() - cost < 0){
+		//	return false;
+		//}else if(dp.getCurrDrivePoints() > toCons){
+		//	dp.removeDrivePoints((int) cons--);
+		//}
 		return true;
 		
 	}
 	
 	public boolean isDriveFormActive(){
-		//TODO IEEP for storing whether the form is active or not
+		
 		return active;		
 	}
 	
 	public boolean activate(EntityPlayer player){
 		EntityPropertyDrivePoints dp = EntityPropertyDrivePoints.get(player);
 
-		if(dp.currDrivePoints >= cost){
+		if(dp.getCurrDrivePoints() >= cost){
+			System.out.println("Got da points");
 			active = true;
+			consumePoints(getCost(), player);
+			onActivateForm(player);
 			return true;
 		}else{
 			active = false;
@@ -48,12 +55,13 @@ public class DriveForm {
 		}
 	}
 	
-	public void onActivateForm(){
+	public void onActivateForm(EntityPlayer player){
+		onDeactivateForm();
 		
 	}
 	
 	public void onDeactivateForm(){
-		
+		active = false;
 	}
 
 	public void setArmourRender(){

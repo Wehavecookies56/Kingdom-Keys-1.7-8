@@ -78,6 +78,11 @@ public class EntityPropertyDrivePoints implements IExtendedEntityProperties {
 	public void addDrivePoints(int amount){
 		setCurrDrivePoints(amount += getCurrDrivePoints());
 	}
+	
+	public void removeDrivePoints(int amount){
+		setCurrDrivePoints(amount -= getCurrDrivePoints());
+		if(getCurrDrivePoints() < 0){setCurrDrivePoints(0);}
+	}
 
 	public void setCurrDrivePoints(int amount)
 	{

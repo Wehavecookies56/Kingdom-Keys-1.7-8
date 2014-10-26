@@ -4,6 +4,8 @@ import org.lwjgl.opengl.GL11;
 
 import wehavecookies56.kk.client.KeyBind;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyDriveForm;
+import wehavecookies56.kk.driveforms.AddedDrives;
+import wehavecookies56.kk.driveforms.DriveValor;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
@@ -30,7 +32,7 @@ public class PlayerModel extends ModelPlayerBase {
 	int df = 0;
 	@Override
 	public void afterRender(Entity paramEntity, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6) {
-		if(KeyBind.driveselected == 0){	
+		if(AddedDrives.valor.isDriveFormActive()){	
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Valor_A.png"));
 		}else if(KeyBind.driveselected == 1){
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Wisdom_A.png"));
