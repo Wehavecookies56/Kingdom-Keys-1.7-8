@@ -23,6 +23,7 @@ import wehavecookies56.kk.item.AddedItems;
 import wehavecookies56.kk.magic.Cure;
 import wehavecookies56.kk.magic.Fire;
 import wehavecookies56.kk.magic.MagicAttack;
+import wehavecookies56.kk.magic.Thunder;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
@@ -42,9 +43,9 @@ public class KeyBind{
 	
 	public static int selected = 0;
 	public static int submenu;
-	public static int magicselected;
-	public static int itemselected;
-	public static int driveselected;
+	public static int magicselected = -1;
+	public static int itemselected = -1;
+	public static int driveselected = -1;
 
 	//public static boolean shootFire = false;
 	
@@ -233,9 +234,14 @@ public class KeyBind{
 				break;
 			}
 //Fire			
+			//MagicAttack.currMagic=100;
 			if(KeyBind.magicselected == 0 && submenu == 1)
 			{
 				Fire.shoot(player, Minecraft.getMinecraft().theWorld);
+			}
+			else if (KeyBind.magicselected == 2 && submenu == 1)
+			{
+				Thunder.ray(player, Minecraft.getMinecraft().theWorld);
 			}
 			else if (KeyBind.magicselected == 3 && submenu == 1)
 			{

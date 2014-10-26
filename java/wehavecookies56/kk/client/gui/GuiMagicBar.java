@@ -25,16 +25,27 @@ public class GuiMagicBar extends Gui
 		{
 			int guiWidth = 123;
 			int guiHeight = 13;
+			int noborderguiwidth = 101;
 			int screenWidth = event.resolution.getScaledWidth();
 			int screenHeight = event.resolution.getScaledHeight();
+			float oneMP;
 			Minecraft mc = Minecraft.getMinecraft();
 			EntityPlayer player = mc.thePlayer;
 			mc.renderEngine.bindTexture(new ResourceLocation("kk", "textures/gui/MPBar.png"));
-			float oneMP = (guiWidth / MagicAttack.maxMagic);
-			int currMagic = guiWidth - (int) (oneMP);
+			if (MagicAttack.currMagic != 0)
+			{
+				oneMP = (guiWidth / MagicAttack.maxMagic);
+			}
+			else
+			{
+				oneMP = 0;
+			}
+			int cMagic = guiWidth - (int) (oneMP * MagicAttack.currMagic);
+			MagicAttack.currMagic = 100;
 			GL11.glPushMatrix();
-			this.drawTexturedModalRect(screenWidth - guiWidth - 67, screenHeight - guiHeight- 12, 0, 0, guiWidth, guiHeight);
-			this.drawTexturedModalRect((screenWidth - guiWidth) + currMagic, screenHeight - guiHeight, 0, 8, (guiWidth - currMagic) - 2, guiHeight);
+			this.drawTexturedModalRect(screenWidth - guiWidth - 66, screenHeight - guiHeight- 12, 0, 0, guiWidth, guiHeight);
+			this.drawTexturedModalRect((screenWidth - noborderguiwidth-111) + cMagic, screenHeight - guiHeight - 12, 0, 13, (noborderguiwidth - cMagic) + 25, guiHeight);
+			//this.drawTexturedModalRect((screenWidth - noborderguiwidth-16) + currHealth, screenHeight - guiHeight, 0, 12, (noborderguiwidth - currHealth) - 2, guiHeight);
 			GL11.glPopMatrix();
 		}
 	}

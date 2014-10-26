@@ -6,6 +6,7 @@ import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.entity.projectile.EntitySmallFireball;
 import net.minecraft.item.Item;
+import net.minecraft.potion.Potion;
 import net.minecraft.world.World;
 import wehavecookies56.kk.client.KeyBind;
 
@@ -24,7 +25,7 @@ public class Cure extends MagicAttack{
 		if(MagicAttack.currMagic >= cureCost && KeyBind.submenu == 1)
 		{
 			System.out.println("Cure");
-			player.heal(player.getMaxHealth()/3);
+			player.heal(20);
 			MagicAttack.currMagic = MagicAttack.currMagic - MagicAttack.cureCost;
 		}
 	}

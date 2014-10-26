@@ -2,11 +2,12 @@ package wehavecookies56.kk.client.model;
 
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import wehavecookies56.kk.client.KeyBind;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyDriveForm;
 import wehavecookies56.kk.driveforms.AddedDrives;
 import wehavecookies56.kk.driveforms.DriveValor;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBiped;
@@ -22,6 +23,7 @@ import api.player.render.RenderPlayerBase;
 public class PlayerModel extends ModelPlayerBase {
 
 	protected ModelFenrir modelFenrir;
+	@SideOnly(Side.CLIENT)
 
 	public PlayerModel(ModelPlayerAPI renderPlayerAPI) {
 		super(renderPlayerAPI);

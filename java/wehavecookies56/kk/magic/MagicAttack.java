@@ -12,6 +12,8 @@ public class MagicAttack {
 	public static int maxMagic = 100;
 	
 	public static final int fireCost = 10;
+	
+	public static final int thunderCost = 30;
 	public static final int cureCost = 100;
 
 	

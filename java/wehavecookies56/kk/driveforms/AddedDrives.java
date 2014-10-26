@@ -16,6 +16,7 @@ public class AddedDrives {
 		master = new DriveMaster(Strings.MasterForm, 400, AddedItems.MasterFormOrb);
 		Final = new DriveFinal(Strings.FinalForm, 500, AddedItems.FinalFormOrb);
 		limit = new DriveLimit(Strings.LimitForm, 400, AddedItems.LimitFormOrb);
-		anti = new DriveAnti(Strings.AntiForm, EntityPropertyDrivePoints.get(Minecraft.getMinecraft().thePlayer).getCurrDrivePoints(), null);
+		anti = new DriveAnti(Strings.AntiForm, 900, null);
+	//	anti = new DriveAnti(Strings.AntiForm, EntityPropertyDrivePoints.get(Minecraft.getMinecraft().thePlayer).getCurrDrivePoints(), null);
 	}
 }

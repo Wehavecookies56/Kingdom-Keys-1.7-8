@@ -4,12 +4,13 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.GLU;
 import org.lwjgl.util.glu.Sphere;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import wehavecookies56.kk.client.KeyBind;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyDriveForm;
 import wehavecookies56.kk.core.proxies.ClientProxy;
 import wehavecookies56.kk.driveforms.AddedDrives;
 import wehavecookies56.kk.item.AddedItems;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBiped;
@@ -31,7 +32,7 @@ public class PlayerRender extends RenderPlayerBase {
 		super(renderPlayerAPI);
 
 	}
-
+@SideOnly(Side.CLIENT)
 	Minecraft mc = Minecraft.getMinecraft();
 	//EntityPropertyDriveForm df = EntityPropertyDriveForm.get(mc.thePlayer);
 	int df = 0;

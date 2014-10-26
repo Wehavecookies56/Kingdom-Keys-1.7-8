@@ -16,6 +16,7 @@ import wehavecookies56.kk.client.gui.GuiCommands;
 import wehavecookies56.kk.client.gui.GuiDriveBar;
 import wehavecookies56.kk.client.gui.GuiHealthBar;
 import wehavecookies56.kk.client.gui.GuiMagicBar;
+import wehavecookies56.kk.client.model.PlayerModel;
 import wehavecookies56.kk.client.render.BlockRenderBlastBlox;
 import wehavecookies56.kk.client.render.EntityRenderEternalFlamesProjectile;
 import wehavecookies56.kk.client.render.EntityRenderSharpShooterBullet;
@@ -42,12 +43,15 @@ import wehavecookies56.kk.client.render.ItemRenderVoidedKnowledge;
 import wehavecookies56.kk.client.render.ItemRenderWaywardWind;
 import wehavecookies56.kk.client.render.ItemRenderWoodenKeyblade;
 import wehavecookies56.kk.client.render.ItemRenderZeroOne;
+import wehavecookies56.kk.client.render.PlayerRender;
 import wehavecookies56.kk.client.render.TileEntityRendererKKChest;
 import wehavecookies56.kk.entities.EntityBlastBlox;
 import wehavecookies56.kk.entities.EntityEternalFlamesProjectile;
 import wehavecookies56.kk.entities.EntitySharpshooterBullet;
 import wehavecookies56.kk.entities.tileentities.TileEntityKKChest;
 import wehavecookies56.kk.item.AddedItems;
+import api.player.model.ModelPlayerAPI;
+import api.player.render.RenderPlayerAPI;
 
 import com.jadarstudios.developercapes.DevCapes;
 
@@ -89,6 +93,7 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(AddedItems.MetalChocobo, new ItemRenderMetalChocobo());
 		MinecraftForgeClient.registerItemRenderer(AddedItems.WoodenKeyblade, new ItemRenderWoodenKeyblade());
 		MinecraftForgeClient.registerItemRenderer(new ItemStack(AddedBlocks.KKChest).getItem(), new ItemRenderKKChest());
+		
 
 		//Events
 		MinecraftForge.EVENT_BUS.register(new GuiHealthBar());
