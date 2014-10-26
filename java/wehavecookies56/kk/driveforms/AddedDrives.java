@@ -1,5 +1,7 @@
 package wehavecookies56.kk.driveforms;
 
+import net.minecraft.client.Minecraft;
+import wehavecookies56.kk.core.extendedproperties.EntityPropertyDrivePoints;
 import wehavecookies56.kk.item.AddedItems;
 import wehavecookies56.kk.lib.Strings;
 
@@ -14,6 +16,6 @@ public class AddedDrives {
 		master = new DriveMaster(Strings.MasterForm, 400, AddedItems.MasterFormOrb);
 		Final = new DriveFinal(Strings.FinalForm, 500, AddedItems.FinalFormOrb);
 		limit = new DriveLimit(Strings.LimitForm, 400, AddedItems.LimitFormOrb);
-		anti = new DriveAnti(Strings.AntiForm, 900, null);
+		anti = new DriveAnti(Strings.AntiForm, EntityPropertyDrivePoints.get(Minecraft.getMinecraft().thePlayer).getCurrDrivePoints(), null);
 	}
 }

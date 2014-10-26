@@ -35,12 +35,13 @@ public class DriveForm {
 		
 	}
 	
-	public boolean isDriveFormActive(){
-		
+	public boolean isDriveFormActive()
+	{	
 		return active;		
 	}
 	
 	public boolean activate(EntityPlayer player){
+		System.out.println("Trying to activate");
 		EntityPropertyDrivePoints dp = EntityPropertyDrivePoints.get(player);
 
 		if(dp.getCurrDrivePoints() >= cost){
@@ -49,15 +50,17 @@ public class DriveForm {
 			consumePoints(getCost(), player);
 			onActivateForm(player);
 			return true;
-		}else{
+		}
+		else
+		{
 			active = false;
 			return false;
 		}
 	}
 	
-	public void onActivateForm(EntityPlayer player){
-		onDeactivateForm();
-		
+	public void onActivateForm(EntityPlayer player)
+	{
+		onDeactivateForm();	
 	}
 	
 	public void onDeactivateForm(){
