@@ -53,8 +53,11 @@ public class GuiCommands extends Gui {
 			{
 			case 1:
 				mc.renderEngine.bindTexture(new ResourceLocation("kk", "textures/gui/CommandMenu.png"));
-				
-				if (KeyBind.magicselected==0 || KeyBind.magicselected == -1)
+				if (KeyBind.magicselected == -1)
+				{
+					this.drawTexturedModalRect(70, screenHeight - (commandHeight * FIRE), 70, 0, commandWidth, commandHeight);
+				}
+				if (KeyBind.magicselected==0)
 				{
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * FIRE), 70, 15, commandWidth, commandHeight);
 				}else{
@@ -123,63 +126,68 @@ public class GuiCommands extends Gui {
 				GL11.glPopMatrix();
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				break;
+				
 			case 2:
 				mc.renderEngine.bindTexture(new ResourceLocation("kk", "textures/gui/CommandMenu.png"));
 
 				//items
 				break;
+				
 			case 3:
 				mc.renderEngine.bindTexture(new ResourceLocation("kk", "textures/gui/CommandMenu.png"));
+				
+				if(KeyBind.driveselected == -1)
+				{
+					this.drawTexturedModalRect(70, screenHeight - (commandHeight * VALOR), 70, 0, commandWidth, commandHeight);
+				}
 				if(KeyBind.driveselected == 0)
 				{
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * VALOR), 70, 15, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * WISDOM), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * LIMIT), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * MASTER), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * FINAL), 70, 0, commandWidth, commandHeight);
 				}
-				else if(KeyBind.driveselected == 1)
+				else
 				{
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * VALOR), 70, 0, commandWidth, commandHeight);
+				}
+				
+				if(KeyBind.driveselected == 1)
+				{
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * WISDOM), 70, 15, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * LIMIT), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * MASTER), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * FINAL), 70, 0, commandWidth, commandHeight);
-
 				}
-				else if(KeyBind.driveselected == 2)
+				else
 				{
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * VALOR), 70, 0, commandWidth, commandHeight);
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * WISDOM), 70, 0, commandWidth, commandHeight);
+				}
+				if(KeyBind.driveselected == 2)
+				{
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * LIMIT), 70, 15, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * MASTER), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * FINAL), 70, 0, commandWidth, commandHeight);
-
 				}
-				else if(KeyBind.driveselected == 3)
+				
+				else
 				{
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * VALOR), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * WISDOM), 70, 0, commandWidth, commandHeight);
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * LIMIT), 70, 0, commandWidth, commandHeight);
+				}
+				if(KeyBind.driveselected == 3)
+				{
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * MASTER), 70, 15, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * FINAL), 70, 0, commandWidth, commandHeight);
-
 				}
-				else if(KeyBind.driveselected == 4)
+				else
 				{
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * VALOR), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * WISDOM), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * LIMIT), 70, 0, commandWidth, commandHeight);
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * MASTER), 70, 0, commandWidth, commandHeight);
-					this.drawTexturedModalRect(70, screenHeight - (commandHeight * FINAL), 70, 15, commandWidth, commandHeight);
-
 				}
+				if(KeyBind.driveselected == 4)
+				{
+					this.drawTexturedModalRect(70, screenHeight - (commandHeight * FINAL), 70, 15, commandWidth, commandHeight);
+				}
+				else
+				{
+					this.drawTexturedModalRect(70, screenHeight - (commandHeight * FINAL), 70, 0, commandWidth, commandHeight);
+				}
+				
 				GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Valor), 75, screenHeight - (commandHeight * (VALOR-1)-2) - 13, 0xFFFFFF);
 				GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Wisdom), 75, screenHeight - (commandHeight * (WISDOM-1)-2) - 13, 0xFFFFFF);
 				GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Limit), 75, screenHeight - (commandHeight * (LIMIT-1)-2) - 13, 0xFFFFFF);
 				GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Master), 75, screenHeight - (commandHeight * (MASTER-1)-2) - 13, 0xFFFFFF);
 				GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Final), 75, screenHeight - (commandHeight * (FINAL-1)-2) - 13, 0xFFFFFF);
-
 				break;
 			}
 			

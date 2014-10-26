@@ -46,7 +46,7 @@ public class KeyBind{
 	public static int itemselected;
 	public static int driveselected;
 
-	public static boolean shootFire = false;
+	//public static boolean shootFire = false;
 	
 	private static final int[] keyValues = {Keyboard.KEY_G, Keyboard.KEY_M, Keyboard.KEY_C, Keyboard.KEY_F, Keyboard.KEY_B};
 	private final KeyBinding[] keys;
@@ -84,6 +84,8 @@ public class KeyBind{
 			{
 				submenu -= 3;
 			}
+			magicselected = -1;
+			driveselected = -1;
 		}
 		
 		if (keys[COMMAND].isPressed())
@@ -119,28 +121,26 @@ public class KeyBind{
 						selected = 0;
 					}
 				}
-				magicselected = -1;
 			}
 //Magic
 			else if (submenu == 1)
 			{
-				if(magicselected == -1){magicselected = 0;}
 				if (player.isSneaking())
 				{
-					if (magicselected > 0 && magicselected <= 6)
+					if (magicselected > -1 && magicselected <= 6)
 					{
 						magicselected -= 1;
 						submenu = 1;
 	
 					}
-					else if (magicselected == 0)
+					else if (magicselected == -1)
 					{
 						magicselected = 6;
 					}
 				}
 				else
 				{
-					if (magicselected >= 0 && magicselected < 6)
+					if (magicselected >= -1 && magicselected < 6)
 					{
 						magicselected += 1;
 						submenu = 1;
@@ -148,7 +148,7 @@ public class KeyBind{
 					}
 					else if (magicselected == 6)
 					{
-						magicselected = 0;
+						magicselected = -1;
 					}
 				}
 			}
@@ -185,27 +185,27 @@ public class KeyBind{
 			{
 				if (player.isSneaking())
 				{
-					if (driveselected > 0 && driveselected <= 4)
+					if (driveselected > -1 && driveselected <= 4)
 					{
 						driveselected -= 1;
 						submenu = 3;
 	
 					}
-					else if (driveselected == 0)
+					else if (driveselected == -1)
 					{
 						driveselected = 4;
 					}
 				}
 				else
 				{
-					if (driveselected >= 0 && driveselected < 4)
+					if (driveselected >= -1 && driveselected < 4)
 					{
 						driveselected += 1;
 						submenu = 3;
 					}
 					else if (driveselected == 4)
 					{
-						driveselected = 0;
+						driveselected = -1;
 					}
 				}
 			}

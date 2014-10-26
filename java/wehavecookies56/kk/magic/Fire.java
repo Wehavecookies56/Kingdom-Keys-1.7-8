@@ -26,7 +26,7 @@ public class Fire extends MagicAttack{
 			EntitySmallFireball entitysmallfireball = new EntitySmallFireball(par2World, player.posX, player.posY, player.posZ, player.getLookVec().xCoord, player.getLookVec().yCoord, player.getLookVec().zCoord);
 	        par2World.spawnEntityInWorld(entitysmallfireball);
 			//EntityLargeFireball entitylargefireball = new EntityLargeFireball(par2World, player, d5, d6, d7);
-	        KeyBind.shootFire = false;
+	       // KeyBind.shootFire = false;
 			MagicAttack.currMagic = MagicAttack.currMagic - MagicAttack.fireCost;			
 		}
 	}
