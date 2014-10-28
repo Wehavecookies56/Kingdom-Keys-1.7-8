@@ -231,7 +231,14 @@ public class KeyBind{
 				break;
 			case 3:
 				//Drive
-				submenu = 3;
+				if (EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 1 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 2 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 3 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 4 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 5)
+				{
+					EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).changeState(0);
+				}
+				else
+				{
+					submenu = 3;
+				}
 				break;
 			}
 //Fire			
@@ -276,6 +283,14 @@ public class KeyBind{
 			{
 				df.changeState(5);
 				AddedDrives.Final.activate(player);
+			}
+			
+			if (EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 1 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 2 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 3 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 4 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 5)
+			{
+				submenu -= 3;
+				magicselected = -1;
+				selected = 0;
+				driveselected = -1;
 			}
 		}
 		
