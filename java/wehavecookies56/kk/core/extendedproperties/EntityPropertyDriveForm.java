@@ -10,46 +10,47 @@ public class EntityPropertyDriveForm implements IExtendedEntityProperties {
 
 	//0 = None, 1 Valor, 2 Wisdom, 3 Limit, 4 Master, 5 Final, 6 Anti
 	
-	public static final String ACTIVE_NAME = "DriveActive";
+	public final static String EXT_PROP_NAME = "DriveForm";
 	private final EntityPlayer player;
-	private int Active;
-	
+	private int currentState;
+
 	public EntityPropertyDriveForm(EntityPlayer player) {
 		this.player = player;
-		this.Active = 0;
+		this.currentState = 0;
 	}
 	
-	public static final void register(EntityPlayer player){
-		player.registerExtendedProperties(EntityPropertyDriveForm.ACTIVE_NAME, new EntityPropertyDriveForm(player));
+	public int getCurrentState(){
+		return this.currentState;
 	}
 	
-	public static final EntityPropertyDriveForm get(EntityPlayer player){
-		return (EntityPropertyDriveForm) player.getExtendedProperties(ACTIVE_NAME);
+	public void changeState(int state){
+		this.currentState = state;
+	}
+	
+	public static final void register(EntityPlayer player) {
+		player.registerExtendedProperties(EntityPropertyDriveForm.EXT_PROP_NAME, new EntityPropertyDriveForm(player));
+	}
+	
+	public static final EntityPropertyDriveForm get(EntityPlayer player) {
+		return (EntityPropertyDriveForm) player.getExtendedProperties(EXT_PROP_NAME);
 	}
 	
 	@Override
-	public void saveNBTData(NBTTagCompound compound){
+	public void saveNBTData(NBTTagCompound compound) {
 		NBTTagCompound properties = new NBTTagCompound();
-		
-		properties.setInteger("IsActive", this.Active);
-
-		compound.setTag(ACTIVE_NAME, properties);
+		properties.setInteger("CurrentState", this.currentState);
+		compound.setTag(EXT_PROP_NAME, properties);
 		
 	}
 
-	public int getActive(){
-		return Active;
-	}
-	
 	@Override
-	public void loadNBTData(NBTTagCompound compound){
-		NBTTagCompound properties = (NBTTagCompound) compound.getTag(ACTIVE_NAME);
-		this.Active = properties.getInteger(ACTIVE_NAME);
-	}
-	
-	@Override
-	public void init(Entity entity, World world) {
+	public void loadNBTData(NBTTagCompound compound) {
+		NBTTagCompound properties = (NBTTagCompound) compound.getTag(EXT_PROP_NAME);
+		
+		this.currentState = properties.getInteger("CurrentState");
 		
 	}
 
+	@Override
+	public void init(Entity entity, World world) {}
 }

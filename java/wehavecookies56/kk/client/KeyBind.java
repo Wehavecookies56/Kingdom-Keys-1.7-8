@@ -14,6 +14,7 @@ import scala.swing.event.MouseButtonEvent;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.achievements.AddedAchievments;
 import wehavecookies56.kk.client.gui.GuiMenu;
+import wehavecookies56.kk.core.extendedproperties.EntityPropertyDriveForm;
 import wehavecookies56.kk.core.packet.AchievementPacket;
 import wehavecookies56.kk.core.packet.IPacket;
 import wehavecookies56.kk.core.packet.SummonPacket;
@@ -249,25 +250,31 @@ public class KeyBind{
 			}
 			
 //Drive Forms
+			EntityPropertyDriveForm df = EntityPropertyDriveForm.get(mc.thePlayer);	
 			if(driveselected == 0 && submenu == 3)
 			{
+				df.changeState(1);
 				AddedDrives.valor.activate(player);
 				System.out.println("Active");
 			}
 			else if(driveselected == 1 && submenu == 3)
 			{
+				df.changeState(2);
 				AddedDrives.wisdom.activate(player);
 			}
 			else if(driveselected == 2 && submenu == 3)
 			{
+				df.changeState(3);
 				AddedDrives.limit.activate(player);
 			}
 			else if(driveselected == 3 && submenu == 3)
 			{
+				df.changeState(4);
 				AddedDrives.master.activate(player);
 			}
 			else if(driveselected == 4 && submenu == 3)
 			{
+				df.changeState(5);
 				AddedDrives.Final.activate(player);
 			}
 		}

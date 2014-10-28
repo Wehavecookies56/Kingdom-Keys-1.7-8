@@ -32,7 +32,7 @@ public class PlayerRender extends RenderPlayerBase {
 		super(renderPlayerAPI);
 
 	}
-@SideOnly(Side.CLIENT)
+//@SideOnly(Side.CLIENT)
 	Minecraft mc = Minecraft.getMinecraft();
 	//EntityPropertyDriveForm df = EntityPropertyDriveForm.get(mc.thePlayer);
 	int df = 0;
@@ -54,17 +54,19 @@ public class PlayerRender extends RenderPlayerBase {
 
 	@Override
 	public void renderModel(EntityLivingBase paramEntityLivingBase, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6) {
-		if(AddedDrives.valor.isDriveFormActive()){	
+		EntityPropertyDriveForm df = EntityPropertyDriveForm.get(mc.thePlayer);	
+		System.out.println(df.getCurrentState());
+		if(df.getCurrentState() == 1){	
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Valor_A.png"));
-		}else if(KeyBind.driveselected == 1){
+		}else if(df.getCurrentState() == 2){
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Wisdom_A.png"));
-		}else if(KeyBind.driveselected == 2){
+		}else if(df.getCurrentState() == 3){
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Limit_A.png"));
-		}else if(KeyBind.driveselected == 3){
+		}else if(df.getCurrentState() == 4){
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Master_A.png"));
-		}else if(KeyBind.driveselected == 4){
+		}else if(df.getCurrentState() == 5){
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Final_A.png"));
-		}else if(KeyBind.driveselected == 5){
+		}else if(df.getCurrentState() == 6){
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Anti_A.png"));
 		}else{
 			super.renderModel(paramEntityLivingBase, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
@@ -87,27 +89,27 @@ public class PlayerRender extends RenderPlayerBase {
 		armour.bipedRightLeg.showModel = true;
 		armour.bipedRightLeg.render(0.0625F);
 
-		if(AddedDrives.valor.isDriveFormActive()){
+		if(df.getCurrentState() == 1){	
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Valor_B.png"));
-		}else if(KeyBind.driveselected == 1){
+		}else if(df.getCurrentState() == 2){
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Wisdom_B.png"));
-		}else if(KeyBind.driveselected == 2){
+		}else if(df.getCurrentState() == 3){
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Limit_B.png"));
-		}else if(KeyBind.driveselected == 3){
+		}else if(df.getCurrentState() == 4){
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Master_B.png"));
-		}else if(KeyBind.driveselected == 4){
+		}else if(df.getCurrentState() == 5){
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Final_B.png"));
-		}else if(KeyBind.driveselected == 5){
+		}else if(df.getCurrentState() == 6){
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Anti_B.png"));
 		}else{
-			//super.renderModel(paramEntityLivingBase, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
+			super.renderModel(paramEntityLivingBase, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
 		}
 		armour.bipedLeftLeg.showModel = true;
 		armour.bipedLeftLeg.render(0.0625F);
 
 		armour.bipedRightLeg.showModel = true;
 		armour.bipedRightLeg.render(0.0625F);
-
+		
 		super.renderModel(paramEntityLivingBase, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
 
 	}
