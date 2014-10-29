@@ -233,11 +233,12 @@ public class KeyBind{
 				break;
 			case 3:
 				//Drive
-				if (EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 0 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 1 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 2 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 3 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 4) {
-					EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).changeState(-1);
+				EntityPropertyDriveForm df = EntityPropertyDriveForm.get(mc.thePlayer);	
+				if (df.getCurrentState() == 0 || df.getCurrentState() == 1 || df.getCurrentState() == 2 || df.getCurrentState() == 3 || df.getCurrentState() == 4) {
+					df.changeState(-1);
 				}
 				
-				else if (EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 5){
+				else if (df.getCurrentState() == 5){
 					player.addChatMessage(new ChatComponentText("You can't revert right now."));
 				}
 				
