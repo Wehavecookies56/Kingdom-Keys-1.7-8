@@ -221,10 +221,10 @@ public class KeyBind{
 		{
 			switch(selected) //Case 0 not necessary as it is attack
 			{
-			case 0: 
+		/*	case 0: 
 				//Attack
 				submenu = 0;
-				break;
+				break;*/
 			case 1:
 				//Magic
 				submenu = 1;
