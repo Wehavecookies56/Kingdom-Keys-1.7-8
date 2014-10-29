@@ -233,18 +233,16 @@ public class KeyBind{
 				break;
 			case 3:
 				//Drive
-				if (EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 0 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 1 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 2 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 3 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 4 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 5)
+				if (EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 0 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 1 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 2 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 3 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 4)
 				{
-					if (EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 5);
-					{
-						player.addChatMessage(new ChatComponentText("You can't revert right now."));
-					}
-					else if (EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() != 5)
-					{
-						EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).changeState(-1);
-					}
+					EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).changeState(-1);
 				}
-								
+				
+				else if (EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 5);
+				{
+					player.addChatMessage(new ChatComponentText("You can't revert right now."));
+				}
+				
 				else
 				{
 					submenu = 3;
