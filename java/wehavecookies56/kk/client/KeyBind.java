@@ -1,5 +1,7 @@
 package wehavecookies56.kk.client;
 
+import java.util.Random;
+
 import net.java.games.input.Mouse;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
@@ -234,15 +236,25 @@ public class KeyBind{
 			case 3:
 				//Drive
 				EntityPropertyDriveForm df = EntityPropertyDriveForm.get(mc.thePlayer);	
-				if (df.getCurrentState() == 0 || df.getCurrentState() == 1 || df.getCurrentState() == 2 || df.getCurrentState() == 3 || df.getCurrentState() == 4) {
+				if (df.getCurrentState() == 0 || df.getCurrentState() == 1 || df.getCurrentState() == 2 || df.getCurrentState() == 3 || df.getCurrentState() == 4)
+				{
 					df.changeState(-1);
 				}
 				
-				else if (df.getCurrentState() == 5){
-					player.addChatMessage(new ChatComponentText("You can't revert right now."));
+				else if (df.getCurrentState() == 5)
+				{
+					if(player.isBurning())
+					{
+						player.addChatMessage(new ChatComponentText("You can't revert right now."));
+					}
+					else
+					{
+						df.changeState(-1);
+					}
 				}
 				
-				else {
+				else
+				{
 					submenu = 3;
 				}
 				break;
@@ -297,7 +309,14 @@ public class KeyBind{
 			{
 				df.changeState(4);
 				AddedDrives.Final.activate(player);
-				DriveAnti.antipoints -=10;
+				if (DriveAnti.antipoints < 10)
+				{
+					DriveAnti.antipoints = 0;
+				}
+				else
+				{
+					DriveAnti.antipoints -=10;
+				}
 			}
 			
 			if(driveselected == 0 || driveselected == 1 || driveselected == 2 || driveselected == 3)
@@ -316,11 +335,19 @@ public class KeyBind{
 				{
 					DriveAnti.prob = 40;
 				}
-				
-				if (Math.random() < DriveAnti.prob/10)
+				Random rand = new Random();
+
+				if (Math.random() < DriveAnti.prob/100)
 				{
 					df.changeState(5);
-					DriveAnti.antipoints -=4;
+					if (DriveAnti.antipoints < 4)
+					{
+						DriveAnti.antipoints = 0;
+					}
+					else
+					{
+						DriveAnti.antipoints -=4;
+					}
 				}
 			}
 			
