@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntitySmallFireball;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatFileWriter;
+import net.minecraft.util.ChatComponentText;
 
 import org.lwjgl.input.Keyboard;
 
@@ -19,6 +20,7 @@ import wehavecookies56.kk.core.packet.AchievementPacket;
 import wehavecookies56.kk.core.packet.IPacket;
 import wehavecookies56.kk.core.packet.SummonPacket;
 import wehavecookies56.kk.driveforms.AddedDrives;
+import wehavecookies56.kk.driveforms.DriveAnti;
 import wehavecookies56.kk.driveforms.DriveValor;
 import wehavecookies56.kk.item.AddedItems;
 import wehavecookies56.kk.magic.Cure;
@@ -231,10 +233,18 @@ public class KeyBind{
 				break;
 			case 3:
 				//Drive
-				if (EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 1 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 2 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 3 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 4 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 5)
+				if (EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 0 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 1 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 2 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 3 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 4 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 5)
 				{
-					EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).changeState(0);
+					if (EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 5);
+					{
+						player.addChatMessage(new ChatComponentText("You can't revert right now."));
+					}
+					else if (EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() != 5)
+					{
+						EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).changeState(-1);
+					}
 				}
+								
 				else
 				{
 					submenu = 3;
@@ -246,6 +256,10 @@ public class KeyBind{
 			if(KeyBind.magicselected == 0 && submenu == 1)
 			{
 				Fire.shoot(player, Minecraft.getMinecraft().theWorld);
+			}
+			else if (KeyBind.magicselected == 1 && submenu == 1)
+			{
+				//Blizzard.ice();
 			}
 			else if (KeyBind.magicselected == 2 && submenu == 1)
 			{
@@ -260,32 +274,64 @@ public class KeyBind{
 			EntityPropertyDriveForm df = EntityPropertyDriveForm.get(mc.thePlayer);	
 			if(driveselected == 0 && submenu == 3)
 			{
-				df.changeState(1);
+				df.changeState(0);
 				AddedDrives.valor.activate(player);
 				System.out.println("Active");
+				DriveAnti.antipoints +=1;
 			}
 			else if(driveselected == 1 && submenu == 3)
 			{
-				df.changeState(2);
+				df.changeState(1);
 				AddedDrives.wisdom.activate(player);
+				DriveAnti.antipoints +=1;
 			}
 			else if(driveselected == 2 && submenu == 3)
 			{
-				df.changeState(3);
+				df.changeState(2);
 				AddedDrives.limit.activate(player);
+				DriveAnti.antipoints +=1;
 			}
 			else if(driveselected == 3 && submenu == 3)
 			{
-				df.changeState(4);
+				df.changeState(3);
 				AddedDrives.master.activate(player);
+				DriveAnti.antipoints +=1;
 			}
 			else if(driveselected == 4 && submenu == 3)
 			{
-				df.changeState(5);
+				df.changeState(4);
 				AddedDrives.Final.activate(player);
+				DriveAnti.antipoints -=10;
 			}
 			
-			if (EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 1 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 2 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 3 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 4 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 5)
+			if(driveselected == 0 || driveselected == 1 || driveselected == 2 || driveselected == 3)
+			{
+				if(DriveAnti.antipoints > 0 && DriveAnti.antipoints <=4)
+				{
+					DriveAnti.prob = 10;
+				}
+				
+				else if(DriveAnti.antipoints > 4 && DriveAnti.antipoints <=9)
+				{
+					DriveAnti.prob = 25;
+				}
+					
+				else if(DriveAnti.antipoints >= 10)
+				{
+					DriveAnti.prob = 40;
+				}
+				
+				if (Math.random() < DriveAnti.prob/10)
+				{
+					df.changeState(5);
+					DriveAnti.antipoints -=4;
+				}
+			}
+			
+			System.out.println("Points "+DriveAnti.antipoints);
+			System.out.println("Prob "+DriveAnti.prob);
+
+			if (EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 0 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 1 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 2 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 3 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 4)
 			{
 				submenu -= 3;
 				magicselected = -1;

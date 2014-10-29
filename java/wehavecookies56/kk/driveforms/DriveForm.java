@@ -19,7 +19,10 @@ public class DriveForm {
 	
 	public boolean consumePoints(int cost, EntityPlayer player){
 		EntityPropertyDrivePoints dp = EntityPropertyDrivePoints.get(player);
-		if(dp.getCurrDrivePoints() < cost){return false;}
+		if(dp.getCurrDrivePoints() < cost)
+		{
+			return false;
+		}
 		System.out.println(dp.getCurrDrivePoints());
 		System.out.println(cost);
 		dp.removeDrivePoints(cost);

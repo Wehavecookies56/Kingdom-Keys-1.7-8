@@ -35,17 +35,17 @@ public class PlayerModel extends ModelPlayerBase {
 	public void afterRender(Entity paramEntity, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6) {
 		EntityPropertyDriveForm df = EntityPropertyDriveForm.get(mc.thePlayer);	
 		System.out.println(df.getCurrentState());
-		if(df.getCurrentState() == 1){
+		if(df.getCurrentState() == 0){
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Valor_A.png"));
-		}else if(df.getCurrentState() == 2){
+		}else if(df.getCurrentState() == 1){
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Wisdom_A.png"));
-		}else if(df.getCurrentState() == 3){
+		}else if(df.getCurrentState() == 2){
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Limit_A.png"));
-		}else if(df.getCurrentState() == 4){
+		}else if(df.getCurrentState() == 3){
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Master_A.png"));
-		}else if(df.getCurrentState() == 5){
+		}else if(df.getCurrentState() == 4){
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Final_A.png"));
-		}else if(df.getCurrentState() == 6){
+		}else if(df.getCurrentState() == 5){
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Anti_A.png"));
 		}else{
 			//super.afterRender(paramEntity, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);

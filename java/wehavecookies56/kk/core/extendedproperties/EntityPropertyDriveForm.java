@@ -16,7 +16,7 @@ public class EntityPropertyDriveForm implements IExtendedEntityProperties {
 
 	public EntityPropertyDriveForm(EntityPlayer player) {
 		this.player = player;
-		this.currentState = 0;
+		this.currentState = -1;
 	}
 	
 	public int getCurrentState(){
