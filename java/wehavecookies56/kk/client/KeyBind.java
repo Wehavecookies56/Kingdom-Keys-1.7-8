@@ -227,7 +227,7 @@ public class KeyBind{
 				break;*/
 			case 1:
 				//Magic
-				submenu = 1;
+//				submenu = 1;
 				break;
 			case 2:
 				//Items

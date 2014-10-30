@@ -55,7 +55,7 @@ public class PlayerRender extends RenderPlayerBase {
 	@Override
 	public void renderModel(EntityLivingBase paramEntityLivingBase, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6) {
 		EntityPropertyDriveForm df = EntityPropertyDriveForm.get(mc.thePlayer);	
-		System.out.println(df.getCurrentState());
+	//	System.out.println(df.getCurrentState());
 		if(df.getCurrentState() == 0){	
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Valor_A.png"));
 		}else if(df.getCurrentState() == 1){
