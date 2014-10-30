@@ -47,7 +47,7 @@ public class KeyBind{
 	public static final int BACK = 4;
 	
 	public static int selected = 0;
-	public static int submenu;
+	public static int submenu = 0;
 	public static int magicselected = -1;
 	public static int itemselected = -1;
 	public static int driveselected = -1;
