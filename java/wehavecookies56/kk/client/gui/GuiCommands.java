@@ -25,7 +25,7 @@ public class GuiCommands extends Gui {
 	
 	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public void onRenderOverlayPost(RenderGameOverlayEvent event){
-		if(event.type == RenderGameOverlayEvent.ElementType.TEXT) {		
+		if(event.type == RenderGameOverlayEvent.ElementType.TEXT && !mc.ingameGUI.getChatGUI().getChatOpen()) {		
 			int commandWidth = 70;
 			int commandHeight = 15;
 			int screenWidth = event.resolution.getScaledWidth();
