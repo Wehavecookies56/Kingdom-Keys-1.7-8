@@ -311,8 +311,8 @@ public class GuiCommands extends Gui {
 				break;
 			}
 		
-			System.out.println("Selected: "+KeyBind.selected);
-			System.out.println("Submenu: "+KeyBind.submenu);
+		/*	System.out.println("Selected: "+KeyBind.selected);
+			System.out.println("Submenu: "+KeyBind.submenu);*/
 			GL11.glPushMatrix();
 
 			//GL11.glScalef(1.1F, 1.1F, 1.1F);
