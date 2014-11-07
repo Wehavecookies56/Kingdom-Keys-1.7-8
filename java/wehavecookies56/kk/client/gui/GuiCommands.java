@@ -141,6 +141,7 @@ public class GuiCommands extends Gui {
 				{
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * VALOR), 70, 0, commandWidth, commandHeight);
 				}
+				
 				if(KeyBind.driveselected == 0)
 				{
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * VALOR), 70, 15, commandWidth, commandHeight);
@@ -167,6 +168,7 @@ public class GuiCommands extends Gui {
 				{
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * LIMIT), 70, 0, commandWidth, commandHeight);
 				}
+				
 				if(KeyBind.driveselected == 3)
 				{
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * MASTER), 70, 15, commandWidth, commandHeight);
@@ -175,6 +177,7 @@ public class GuiCommands extends Gui {
 				{
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * MASTER), 70, 0, commandWidth, commandHeight);
 				}
+				
 				if(KeyBind.driveselected == 4)
 				{
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * FINAL), 70, 15, commandWidth, commandHeight);
@@ -296,13 +299,20 @@ public class GuiCommands extends Gui {
 				{
 					GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive), 10, screenHeight - (commandHeight * (FINAL-1)-2) - 13, 0xFFFFFF);
 				}
+				System.out.println("Selected: "+KeyBind.selected);
+				System.out.println("Submenu: "+KeyBind.submenu);
+				//System.out.println("Selected: "+KeyBind.);
+
+
 				//GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive), 10, screenHeight - (commandHeight * DRIVE) +4, 0xFFFFFF);
 
 				GL11.glPopMatrix();
-
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				break;
 			}
+		
+			System.out.println("Selected: "+KeyBind.selected);
+			System.out.println("Submenu: "+KeyBind.submenu);
 			GL11.glPushMatrix();
 
 			//GL11.glScalef(1.1F, 1.1F, 1.1F);

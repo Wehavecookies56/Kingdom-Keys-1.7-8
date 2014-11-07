@@ -227,7 +227,8 @@ public class KeyBind{
 				break;*/
 			case 1:
 				//Magic
-//				submenu = 1;
+//remove comment to allow magic
+			//	submenu = 1;
 				break;
 			case 2:
 				//Items
@@ -243,6 +244,7 @@ public class KeyBind{
 				
 				else if (df.getCurrentState() == 5)
 				{
+					//This is to not allow them to revert
 					if(player.isBurning())
 					{
 						player.addChatMessage(new ChatComponentText("You can't revert right now."));
@@ -259,7 +261,7 @@ public class KeyBind{
 				}
 				break;
 			}
-//Fire			
+//Magics			
 			//MagicAttack.currMagic=100;
 			if(KeyBind.magicselected == 0 && submenu == 1)
 			{
@@ -361,6 +363,11 @@ public class KeyBind{
 				selected = 0;
 				driveselected = -1;
 			}
+		}
+		
+		if (submenu < 0)
+		{
+			submenu = 0;
 		}
 		
 		if (keys[MENU].isPressed()) {
