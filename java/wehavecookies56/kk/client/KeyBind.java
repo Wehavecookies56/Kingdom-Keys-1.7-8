@@ -51,6 +51,8 @@ public class KeyBind{
 	public static int magicselected = -1;
 	public static int itemselected = -1;
 	public static int driveselected = -1;
+	
+	public static boolean canRevert;
 
 	//public static boolean shootFire = false;
 	
@@ -97,6 +99,7 @@ public class KeyBind{
 		if (keys[COMMAND].isPressed())
 	//	if(mc.gameSettings.keyBindPickBlock.getIsKeyPressed())
 		{
+			
 //Main command menu	
 //Attack
 			if(submenu == 0)
@@ -239,6 +242,7 @@ public class KeyBind{
 				EntityPropertyDriveForm df = EntityPropertyDriveForm.get(mc.thePlayer);	
 				if (df.getCurrentState() == 0 || df.getCurrentState() == 1 || df.getCurrentState() == 2 || df.getCurrentState() == 3 || df.getCurrentState() == 4)
 				{
+					canRevert = true;
 					df.changeState(-1);
 				}
 				
@@ -248,9 +252,11 @@ public class KeyBind{
 					if(player.isBurning())
 					{
 						player.addChatMessage(new ChatComponentText("You can't revert right now."));
+						canRevert = false;
 					}
 					else
 					{
+						canRevert = true;
 						df.changeState(-1);
 					}
 				}
@@ -352,11 +358,11 @@ public class KeyBind{
 					}
 				}
 			}
-			
+		/*	
 			System.out.println("Points "+DriveAnti.antipoints);
 			System.out.println("Prob "+DriveAnti.prob);
-
-			if (EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 0 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 1 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 2 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 3 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 4)
+*/
+			if (EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 0 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 1 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 2 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 3 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 4 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 5)
 			{
 				submenu -= 3;
 				magicselected = -1;
