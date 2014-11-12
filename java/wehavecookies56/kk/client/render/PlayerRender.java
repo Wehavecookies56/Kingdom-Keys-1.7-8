@@ -56,6 +56,7 @@ public class PlayerRender extends RenderPlayerBase {
 	public void renderModel(EntityLivingBase paramEntityLivingBase, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6) {
 		EntityPropertyDriveForm df = EntityPropertyDriveForm.get(mc.thePlayer);	
 	//	System.out.println(df.getCurrentState());
+		GL11.glColor4f(1F, 1F, 1F, 1F);
 		if(df.getCurrentState() == 0){	
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Valor_A.png"));
 		}else if(df.getCurrentState() == 1){
@@ -68,6 +69,7 @@ public class PlayerRender extends RenderPlayerBase {
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Final_A.png"));
 		}else if(df.getCurrentState() == 5){
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Anti_A.png"));
+			GL11.glColor4f(0.3F, 0.3F, 0.3F, 1F);
 		}else{
 			super.renderModel(paramEntityLivingBase, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
 		}

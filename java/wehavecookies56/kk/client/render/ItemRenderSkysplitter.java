@@ -16,11 +16,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class ItemRenderSkysplitter implements IItemRenderer {
 
-    protected ModelSkysplitter modelSkysplitter;
+    protected ModelSkysplitter model;
 
     public ItemRenderSkysplitter() {
 
-        modelSkysplitter = new ModelSkysplitter();
+        model = new ModelSkysplitter();
     }
 
     
@@ -45,42 +45,23 @@ public class ItemRenderSkysplitter implements IItemRenderer {
 
         switch (type) {
          
-            case EQUIPPED: {
-                GL11.glPushMatrix();
-                
-                Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/entities/Skysplitter.png"));
-                
-                GL11.glRotatef(45.0F, 0.0F, 0.0F, 1.0F);
-                //GL11.glRotatef(90.0F, 1.0F, 0.0F, 0.0F);
-                GL11.glRotatef(-90.0F, 0.0F, 0.0F, 1.0F);
-                
-                GL11.glTranslatef(0.0F, 0.5F, -0.1F); 
-                
-                //GL11.glScalef(0.8F, 0.8F, 0.8F);
-                
-                modelSkysplitter.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-                
-                GL11.glPopMatrix();
-
-            }
+            case EQUIPPED: 
             case EQUIPPED_FIRST_PERSON: {
                 GL11.glPushMatrix();
                 
                 Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/entities/Skysplitter.png"));
                 
                 GL11.glRotatef(45.0F, 0.0F, 0.0F, 1.0F);
-                //GL11.glRotatef(90.0F, 1.0F, 0.0F, 0.0F);
                 GL11.glRotatef(-90.0F, 0.0F, 0.0F, 1.0F);
                 
-                GL11.glTranslatef(0.0F, 0.5F, -0.1F);
-                
-                //GL11.glScalef(0.8F, 0.8F, 0.8F);
-                
-                modelSkysplitter.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+                GL11.glTranslatef(0.0F, 0.5F, -0.1F); 
+                                
+                model.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
                 
                 GL11.glPopMatrix();
 
             }
+
             default:
                 break;
         }

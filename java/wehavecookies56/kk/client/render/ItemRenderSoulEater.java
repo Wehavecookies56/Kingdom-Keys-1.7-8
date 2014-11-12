@@ -16,11 +16,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class ItemRenderSoulEater implements IItemRenderer {
 
-    protected ModelSoulEater modelSoulEater;
+    protected ModelSoulEater model;
 
     public ItemRenderSoulEater() {
 
-        modelSoulEater = new ModelSoulEater();
+        model = new ModelSoulEater();
     }
 
     
@@ -45,23 +45,7 @@ public class ItemRenderSoulEater implements IItemRenderer {
 
         switch (type) {
          
-            case EQUIPPED: {
-                GL11.glPushMatrix();
-                
-                Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/entities/SoulEater.png"));
-                
-                GL11.glRotatef(90.0F, 0.0F, 0.0F, 1.0F);
-                GL11.glRotatef(45.0F, 0.0F, 0.0F, 1.0F);
-                
-                GL11.glTranslatef(-0.1F, -1.3F, 0.0F); 
-                
-                GL11.glScalef(0.6F, 0.6F, 0.6F);
-                
-                modelSoulEater.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-                
-                GL11.glPopMatrix();
-
-            }
+            case EQUIPPED: 
             case EQUIPPED_FIRST_PERSON: {
                 GL11.glPushMatrix();
                 
@@ -74,11 +58,12 @@ public class ItemRenderSoulEater implements IItemRenderer {
                 
                 GL11.glScalef(0.6F, 0.6F, 0.6F);
                 
-                modelSoulEater.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+                model.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
                 
                 GL11.glPopMatrix();
 
             }
+
             default:
                 break;
         }

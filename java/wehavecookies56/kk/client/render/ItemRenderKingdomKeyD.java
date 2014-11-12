@@ -17,11 +17,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class ItemRenderKingdomKeyD implements IItemRenderer {
 
-    protected ModelKingdomKey modelKingdomKeyD;
+    protected ModelKingdomKey model;
 
     public ItemRenderKingdomKeyD() {
 
-        modelKingdomKeyD = new ModelKingdomKey();
+        model = new ModelKingdomKey();
     }
 
     @Override
@@ -45,22 +45,7 @@ public class ItemRenderKingdomKeyD implements IItemRenderer {
 
         switch (type) {
          
-            case EQUIPPED: {
-                GL11.glPushMatrix();
-                
-                Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/entities/Kingdom Key D.png"));
-                
-                GL11.glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
-                GL11.glRotatef(45.0F, 0.0F, 0.0F, 1.0F);
-                
-                GL11.glTranslatef(0.0F, -0.8F, 0.0F);
-                
-                GL11.glScalef(1.2F, 1.2F, 1.2F);
-                
-                modelKingdomKeyD.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-                
-                GL11.glPopMatrix();
-            }
+            case EQUIPPED: 
             case EQUIPPED_FIRST_PERSON: {
                 GL11.glPushMatrix();
                 
@@ -73,13 +58,11 @@ public class ItemRenderKingdomKeyD implements IItemRenderer {
                 
                 GL11.glScalef(1.2F, 1.2F, 1.2F);
                 
-                modelKingdomKeyD.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+                model.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
                 
                 GL11.glPopMatrix();
-                
-            
-
             }
+            
             default:
                 break;
         }

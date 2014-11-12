@@ -16,11 +16,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class ItemRenderFenrir implements IItemRenderer {
 
-    protected ModelFenrir modelFenrir;
+    protected ModelFenrir model;
 
     public ItemRenderFenrir() {
 
-        modelFenrir = new ModelFenrir();
+        model = new ModelFenrir();
     }
 
     
@@ -45,24 +45,7 @@ public class ItemRenderFenrir implements IItemRenderer {
 
         switch (type) {
          
-            case EQUIPPED: {
-                GL11.glPushMatrix();
-                
-                Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/entities/Fenrir.png"));
-                
-                GL11.glRotatef(45.0F, 0.0F, 0.0F, 1.0F);
-                GL11.glRotatef(90.0F, 1.0F, 0.0F, 0.0F);
-                GL11.glRotatef(-90.0F, 0.0F, 0.0F, 1.0F);
-                
-                GL11.glTranslatef(0.0F, 0.4F, 0.2F); 
-                
-                //GL11.glScalef(0.8F, 0.8F, 0.8F);
-                
-                modelFenrir.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-                
-                GL11.glPopMatrix();
-
-            }
+            case EQUIPPED: 
             case EQUIPPED_FIRST_PERSON: {
                 GL11.glPushMatrix();
                 
@@ -72,15 +55,14 @@ public class ItemRenderFenrir implements IItemRenderer {
                 GL11.glRotatef(90.0F, 1.0F, 0.0F, 0.0F);
                 GL11.glRotatef(-90.0F, 0.0F, 0.0F, 1.0F);
                 
-                GL11.glTranslatef(0.0F, 0.4F, 0.2F);
-                
-                //GL11.glScalef(0.8F, 0.8F, 0.8F);
-                
-                modelFenrir.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+                GL11.glTranslatef(0.0F, 0.4F, 0.2F); 
+                                
+                model.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
                 
                 GL11.glPopMatrix();
 
             }
+
             default:
                 break;
         }

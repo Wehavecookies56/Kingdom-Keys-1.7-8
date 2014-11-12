@@ -1,29 +1,22 @@
 package wehavecookies56.kk.client.render;
 
-import org.lwjgl.opengl.GL11;
-import wehavecookies56.kk.client.model.ModelMasterKeeper;
-import wehavecookies56.kk.client.model.ModelMetalChocobo;
-import wehavecookies56.kk.client.model.ModelWoodenKeyblade;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.inventory.GuiContainerCreative;
-import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
-import net.minecraftforge.client.IItemRenderer.ItemRenderType;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+
+import org.lwjgl.opengl.GL11;
+
+import wehavecookies56.kk.client.model.ModelWoodenKeyblade;
 	
 public class ItemRenderWoodenKeyblade implements IItemRenderer {
 
-    protected ModelWoodenKeyblade modelWoodenKeyblade;
+    protected ModelWoodenKeyblade model;
 
     public ItemRenderWoodenKeyblade() {
 
-    	modelWoodenKeyblade = new ModelWoodenKeyblade();
+    	model = new ModelWoodenKeyblade();
     }
 
     @Override
@@ -47,22 +40,7 @@ public class ItemRenderWoodenKeyblade implements IItemRenderer {
 
         switch (type) {
          
-            case EQUIPPED: {
-                GL11.glPushMatrix();
-                
-                GL11.glTranslatef(0.6F, 0.4F, -0.05F);
-                GL11.glRotatef(180F, 1, 0, 0);
-                GL11.glRotatef(180F, 0, 1, 0);
-                GL11.glRotatef(45F, 0, 0, 1);
-                
-                Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/entities/WoodenKeyblade.png"));
-                
-                modelWoodenKeyblade.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-                
-                GL11.glPopMatrix();
-
-            }
-            
+            case EQUIPPED: 
             case EQUIPPED_FIRST_PERSON: {
                 GL11.glPushMatrix();
                 
@@ -70,14 +48,15 @@ public class ItemRenderWoodenKeyblade implements IItemRenderer {
                 GL11.glRotatef(180F, 1, 0, 0);
                 GL11.glRotatef(180F, 0, 1, 0);
                 GL11.glRotatef(45F, 0, 0, 1);
-
+                
                 Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/entities/WoodenKeyblade.png"));
                 
-                modelWoodenKeyblade.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+                model.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
                 
                 GL11.glPopMatrix();
 
             }
+
             default:
                 break;
         }

@@ -16,11 +16,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class ItemRenderOathKeeper implements IItemRenderer {
 
-    protected ModelOathKeeper modelOathKeeper;
+    protected ModelOathKeeper model;
 
     public ItemRenderOathKeeper() {
 
-        modelOathKeeper = new ModelOathKeeper();
+        model = new ModelOathKeeper();
     }
 
     
@@ -45,21 +45,7 @@ public class ItemRenderOathKeeper implements IItemRenderer {
 
         switch (type) {
          
-            case EQUIPPED: {
-                GL11.glPushMatrix();
-                
-                Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/entities/OathKeeper.png"));
-                
-                GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
-                GL11.glRotatef(45.0F, 1.0F, 0.0F, 0.0F);
-                
-                GL11.glTranslatef(0.0F, -0.4F, 0.0F);
-                
-                modelOathKeeper.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-                
-                GL11.glPopMatrix();
-
-            }
+            case EQUIPPED: 
             case EQUIPPED_FIRST_PERSON: {
                 GL11.glPushMatrix();
                 
@@ -70,11 +56,12 @@ public class ItemRenderOathKeeper implements IItemRenderer {
                 
                 GL11.glTranslatef(0.0F, -0.4F, 0.0F);
                 
-                modelOathKeeper.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+                model.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
                 
                 GL11.glPopMatrix();
 
             }
+
             default:
                 break;
         }

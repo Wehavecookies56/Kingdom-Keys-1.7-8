@@ -18,11 +18,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 	
 public class ItemRenderMetalChocobo implements IItemRenderer {
 
-    protected ModelMetalChocobo modelMetalChocobo;
+    protected ModelMetalChocobo model;
 
     public ItemRenderMetalChocobo() {
 
-    	modelMetalChocobo = new ModelMetalChocobo();
+    	model = new ModelMetalChocobo();
     }
 
     @Override
@@ -46,22 +46,7 @@ public class ItemRenderMetalChocobo implements IItemRenderer {
 
         switch (type) {
          
-            case EQUIPPED: {
-                GL11.glPushMatrix();
-                
-                GL11.glTranslatef(0.6F, 0.4F, -0.05F);
-                GL11.glRotatef(180F, 1, 0, 0);
-                GL11.glRotatef(180F, 0, 1, 0);
-                GL11.glRotatef(45F, 0, 0, 1);
-                
-                Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/entities/MetalChocobo.png"));
-                
-                modelMetalChocobo.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-                
-                GL11.glPopMatrix();
-
-            }
-            
+            case EQUIPPED: 
             case EQUIPPED_FIRST_PERSON: {
                 GL11.glPushMatrix();
                 
@@ -69,14 +54,15 @@ public class ItemRenderMetalChocobo implements IItemRenderer {
                 GL11.glRotatef(180F, 1, 0, 0);
                 GL11.glRotatef(180F, 0, 1, 0);
                 GL11.glRotatef(45F, 0, 0, 1);
-
+                
                 Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/entities/MetalChocobo.png"));
                 
-                modelMetalChocobo.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+                model.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
                 
                 GL11.glPopMatrix();
 
             }
+
             default:
                 break;
         }

@@ -24,10 +24,13 @@ import wehavecookies56.kk.client.render.ItemRenderBookOfRetribution;
 import wehavecookies56.kk.client.render.ItemRenderEarthShaker;
 import wehavecookies56.kk.client.render.ItemRenderEternalFlames;
 import wehavecookies56.kk.client.render.ItemRenderFenrir;
+import wehavecookies56.kk.client.render.ItemRenderFollowTheWind;
 import wehavecookies56.kk.client.render.ItemRenderInterdiction;
 import wehavecookies56.kk.client.render.ItemRenderKKChest;
+import wehavecookies56.kk.client.render.ItemRenderKeybladeOfPeoplesHearts;
 import wehavecookies56.kk.client.render.ItemRenderKingdomKey;
 import wehavecookies56.kk.client.render.ItemRenderKingdomKeyD;
+import wehavecookies56.kk.client.render.ItemRenderLionHeart;
 import wehavecookies56.kk.client.render.ItemRenderLunarEclipse;
 import wehavecookies56.kk.client.render.ItemRenderMasterKeeper;
 import wehavecookies56.kk.client.render.ItemRenderMetalChocobo;
@@ -92,6 +95,10 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(AddedItems.MasterKeeper, new ItemRenderMasterKeeper());
 		MinecraftForgeClient.registerItemRenderer(AddedItems.MetalChocobo, new ItemRenderMetalChocobo());
 		MinecraftForgeClient.registerItemRenderer(AddedItems.WoodenKeyblade, new ItemRenderWoodenKeyblade());
+		MinecraftForgeClient.registerItemRenderer(AddedItems.FollowTheWind, new ItemRenderFollowTheWind());
+		MinecraftForgeClient.registerItemRenderer(AddedItems.LionHeart, new ItemRenderLionHeart());
+		MinecraftForgeClient.registerItemRenderer(AddedItems.PeoplesHearts, new ItemRenderKeybladeOfPeoplesHearts());
+
 		MinecraftForgeClient.registerItemRenderer(new ItemStack(AddedBlocks.KKChest).getItem(), new ItemRenderKKChest());
 		
 

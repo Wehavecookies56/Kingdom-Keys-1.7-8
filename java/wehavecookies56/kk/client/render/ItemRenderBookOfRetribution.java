@@ -17,11 +17,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class ItemRenderBookOfRetribution implements IItemRenderer {
 
-    protected ModelBookOfRetribution modelBookOfRetribution;
+    protected ModelBookOfRetribution model;
 
     public ItemRenderBookOfRetribution() {
 
-        modelBookOfRetribution = new ModelBookOfRetribution();
+        model = new ModelBookOfRetribution();
     }
 
     
@@ -46,7 +46,8 @@ public class ItemRenderBookOfRetribution implements IItemRenderer {
 
         switch (type) {
          
-            case EQUIPPED: {
+            case EQUIPPED:
+            case EQUIPPED_FIRST_PERSON: {
                 GL11.glPushMatrix();
                 
                 Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/entities/BookOfRetribution.png"));
@@ -57,31 +58,12 @@ public class ItemRenderBookOfRetribution implements IItemRenderer {
                 
                 GL11.glTranslatef(-0.6F, 0.0F, 0.0F); 
                 
-                //GL11.glScalef(0.8F, 0.8F, 0.8F);
-                
-                modelBookOfRetribution.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+                model.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
                 
                 GL11.glPopMatrix();
 
             }
-            case EQUIPPED_FIRST_PERSON: {
-                GL11.glPushMatrix();
-                
-                Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/entities/BookOfRetribution.png"));
-                
-                GL11.glRotatef(90.0F, 0.0F, 0.0F, 1.0F);
-                GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
-                GL11.glRotatef(-120.0F, 0.0F, 0.0F, 1.0F);
-                
-                GL11.glTranslatef(-0.6F, 0.0F, 0.0F);
-                
-                //GL11.glScalef(0.8F, 0.8F, 0.8F);
-                
-                modelBookOfRetribution.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-                
-                GL11.glPopMatrix();
 
-            }
             default:
                 break;
         }

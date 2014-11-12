@@ -46,7 +46,6 @@ public class TileEntityRendererKKChest extends TileEntitySpecialRenderer{
         GL11.glTranslatef(0.5F, 0, 0.5F);
         GL11.glRotatef(dir * (-90F), 0F, 1F, 0F);
         if(dir == 1){
-        	//Back
         	GL11.glTranslatef(0F, 0F, 0.9F);
         }
         if(dir == 2){

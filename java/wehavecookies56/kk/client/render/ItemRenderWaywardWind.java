@@ -17,11 +17,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class ItemRenderWaywardWind implements IItemRenderer {
 
-	protected ModelWaywardWind modelWaywardWind;
+	protected ModelWaywardWind model;
 
 	public ItemRenderWaywardWind() {
 
-		modelWaywardWind = new ModelWaywardWind();
+		model = new ModelWaywardWind();
 	}
 
 
@@ -46,34 +46,7 @@ public class ItemRenderWaywardWind implements IItemRenderer {
 
 		switch (type) {
 
-		case EQUIPPED: {
-			GL11.glPushMatrix();
-
-			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/entities/WaywardWind.png"));
-
-			if(ConfigBooleans.altWaywardWind == false){
-				GL11.glRotatef(90.0F, 0.0F, 0.0F, 1.0F);
-				GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
-				GL11.glRotatef(-45.0F, 0.0F, 0.0F, 1.0F);
-
-				GL11.glTranslatef(-0.6F, 0.5F, 0.0F); 
-
-				modelWaywardWind.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-			}
-
-			if(ConfigBooleans.altWaywardWind == true){
-				GL11.glRotatef(-80.0F, 0.0F, 0.0F, 1.0F);
-				GL11.glRotatef(-180.0F, 1.0F, 0.0F, 0.0F);
-				GL11.glRotatef(45.0F, 0.0F, 0.0F, 1.0F);
-
-				GL11.glTranslatef(-0.8F, -0.8F, 0.0F); 
-
-				modelWaywardWind.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-			}
-
-			GL11.glPopMatrix();
-
-		}
+		case EQUIPPED: 
 		case EQUIPPED_FIRST_PERSON: {
 			GL11.glPushMatrix();
 
@@ -86,7 +59,7 @@ public class ItemRenderWaywardWind implements IItemRenderer {
 
 				GL11.glTranslatef(-0.6F, 0.5F, 0.0F); 
 
-				modelWaywardWind.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+				model.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 			}
 
 			if(ConfigBooleans.altWaywardWind == true){
@@ -96,12 +69,13 @@ public class ItemRenderWaywardWind implements IItemRenderer {
 
 				GL11.glTranslatef(-0.8F, -0.8F, 0.0F); 
 
-				modelWaywardWind.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+				model.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 			}
 
 			GL11.glPopMatrix();
 
 		}
+
 		default:
 			break;
 		}
