@@ -327,8 +327,8 @@ public class GuiCommands extends Gui {
 				{
 					GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive), 10, screenHeight - (commandHeight * (FINAL-1)-2) - 13, 0xFFFFFF);
 				}
-				System.out.println("Selected: "+KeyBind.selected);
-				System.out.println("Submenu: "+KeyBind.submenu);
+			//	System.out.println("Selected: "+KeyBind.selected);
+			//	System.out.println("Submenu: "+KeyBind.submenu);
 				//System.out.println("Selected: "+KeyBind.);
 
 

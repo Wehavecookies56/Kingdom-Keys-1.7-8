@@ -248,6 +248,7 @@ public class KeyBind{
 				
 				else if (df.getCurrentState() == 5)
 				{
+					System.out.println("Antiform?");
 					//This is to not allow them to revert
 					if(player.isBurning())
 					{
@@ -292,7 +293,6 @@ public class KeyBind{
 			{
 				df.changeState(0);
 				AddedDrives.valor.activate(player);
-				System.out.println("Active");
 				DriveAnti.antipoints +=1;
 			}
 			else if(driveselected == 1 && submenu == 3)
@@ -358,10 +358,7 @@ public class KeyBind{
 					}
 				}
 			}
-		/*	
-			System.out.println("Points "+DriveAnti.antipoints);
-			System.out.println("Prob "+DriveAnti.prob);
-*/
+			
 			if (EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 0 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 1 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 2 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 3 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 4 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 5)
 			{
 				submenu -= 3;

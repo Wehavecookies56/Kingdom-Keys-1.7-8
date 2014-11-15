@@ -25,17 +25,14 @@ public class LivingUpdateEevent {
 				//Minecraft.getMinecraft().thePlayer.playSound("kk:alarm", 1F, 1F);
 			}
 			//TODO Drive forms
-			EntityPropertyDriveForm df = EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer);	
-			if (df.getCurrentState() == 5)
+			EntityPropertyDriveForm df = EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer);
+			if (player.isBurning() && df.getCurrentState()==5)
 			{
-				if(player.isBurning())
-				{
-					KeyBind.canRevert = false;
-				}
-				else
-				{
-					KeyBind.canRevert = true;
-				}
+				KeyBind.canRevert = false;
+			}
+			else
+			{
+				KeyBind.canRevert = true;
 			}
 		}
 	}
