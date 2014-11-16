@@ -248,7 +248,6 @@ public class KeyBind{
 				
 				else if (df.getCurrentState() == 5)
 				{
-					System.out.println("Antiform?");
 					//This is to not allow them to revert
 					if(player.isBurning())
 					{
@@ -348,6 +347,7 @@ public class KeyBind{
 				if (Math.random() < DriveAnti.prob/100)
 				{
 					df.changeState(5);
+					
 					if (DriveAnti.antipoints < 4)
 					{
 						DriveAnti.antipoints = 0;
