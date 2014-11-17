@@ -63,7 +63,7 @@ public class MunnyPacket implements IPacket {
 					if (!(props.getCurrDrivePoints() >= 1000))
 					{
 						player.playSound("random.orb", 1, 1);
-						props.addDrivePoints(10);
+						EntityPropertyDrivePoints.get(player).addDrivePoints(10);
 						player.inventory.consumeInventoryItem(AddedItems.DriveOrb);
 						System.out.println(props.getCurrDrivePoints());
 					}

@@ -17,16 +17,41 @@ public class DriveForm {
 		this.unlockItem = unlockItem;
 	}
 	
+	public boolean activate(EntityPlayer player){
+		System.out.println("Trying to activate");
+		EntityPropertyDrivePoints dp = EntityPropertyDrivePoints.get(player);
+
+		System.out.println("Drive Points: "+dp.getCurrDrivePoints());
+		
+		if(dp.getCurrDrivePoints() >= cost){
+			System.out.println("Got da points");
+			active = true;
+			System.out.println("Cost: "+getCost());
+			consumePoints(getCost(), player);
+			onActivateForm(player);
+			return true;
+		}
+		
+		else
+		{
+			System.out.println("Not activating");
+			active = false;
+			return false;
+		}
+		
+
+	}
+	
 	public boolean consumePoints(int cost, EntityPlayer player){
 		EntityPropertyDrivePoints dp = EntityPropertyDrivePoints.get(player);
-		if(dp.getCurrDrivePoints() < cost)
+		if(EntityPropertyDrivePoints.get(player).getCurrDrivePoints() < cost)
 		{
 			return false;
 		}
-		System.out.println(dp.getCurrDrivePoints());
+		System.out.println(EntityPropertyDrivePoints.get(player).getCurrDrivePoints());
 		System.out.println(cost);
-		dp.removeDrivePoints(cost);
-		System.out.println(dp.getCurrDrivePoints());
+		dp.setCurrDrivePoints(EntityPropertyDrivePoints.get(player).getCurrDrivePoints() - cost);
+		System.out.println(EntityPropertyDrivePoints.get(player).getCurrDrivePoints());
 		//double cons = 0.1D;
 		//double toCons = dp.getCurrDrivePoints() - cost;
 		//if(dp.getCurrDrivePoints() - cost < 0){
@@ -41,24 +66,6 @@ public class DriveForm {
 	public boolean isDriveFormActive()
 	{	
 		return active;		
-	}
-	
-	public boolean activate(EntityPlayer player){
-		System.out.println("Trying to activate");
-		EntityPropertyDrivePoints dp = EntityPropertyDrivePoints.get(player);
-
-		if(dp.getCurrDrivePoints() >= cost){
-			System.out.println("Got da points");
-			active = true;
-			consumePoints(getCost(), player);
-			onActivateForm(player);
-			return true;
-		}
-		else
-		{
-			active = false;
-			return false;
-		}
 	}
 	
 	public void onActivateForm(EntityPlayer player)
