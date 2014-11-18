@@ -39,106 +39,66 @@ public class GuiDriveBar extends Gui{
 		if (dp<= 100)
 		{
 			currDrive = (float) (oneValue * dp);
+			currBar = 0;
 		}
 		
-		else if(dp<= 200 && dp> 100)
+		else if(dp >= 100 && dp < 200)
 		{
+			currBar = 1;
 			currDrive = (float) (oneValue * (dp -100));
 		}
 
-		else if(dp<= 300 && dp> 200)
+		else if(dp >= 200 && dp < 300)
 		{
+			currBar = 2;
 			currDrive = (float) (oneValue * (dp -200));
 		}
 
-		else if(dp<= 400 && dp> 300)
+		else if(dp >= 300 && dp < 400)
 		{
+			currBar = 3;
 			currDrive = (float) (oneValue * (dp -300));
 		}
 
-		else if(dp<= 500 && dp> 400)
+
+		else if(dp >= 400 && dp < 500)
 		{
+			currBar = 4;
 			currDrive = (float) (oneValue * (dp -400));
 		}
 
-		else if(dp<= 600 && dp> 500)
+		else if(dp >= 500 && dp < 600)
 		{
+			currBar = 5;
 			currDrive = (float) (oneValue * (dp -500));
 		}
 
-		else if(dp<= 700 && dp> 600)
+		else if(dp >= 600 && dp < 700)
 		{
+			currBar = 6;
 			currDrive = (float) (oneValue * (dp -600));
 		}
 
-		else if(dp<= 800 && dp> 700)
+		else if(dp >= 700 && dp < 800)
 		{
+			currBar = 7;
 			currDrive = (float) (oneValue * (dp -700));
 		}
 
-		else if(dp<= 900 && dp> 800)
+		else if(dp >= 800 && dp < 900)
 		{
+			currBar = 8;
 			currDrive = (float) (oneValue * (dp -800));
 		}
-		
-		else if(dp<= 1000 && dp> 900)
+
+		else if(dp >= 900 && dp < 1000)
 		{
+			currBar = 9;
 			currDrive = (float) (oneValue * (dp -900));
 		}
 		if(dp >= 1000){
 			currDrive = 100;
 			currBar = 9;
-		}
-		if(dp < 100){
-			currBar = 0;
-		}
-		
-		if(dp >= 100 && dp < 200)
-		{
-			currBar = 1;
-		}
-		
-		else if(dp >= 200 && dp < 300)
-		{
-			currBar = 2;
-		}
-		
-		else if(dp >= 300 && dp < 400)
-		{
-			currBar = 3;
-		}
-		
-		else if(dp >= 400 && dp < 500)
-		{
-			currBar = 4;
-		}
-		else if(dp >= 500 && dp < 600)
-		{
-			currBar = 5;
-		}
-		
-		else if(dp >= 600 && dp < 700)
-		{
-			currBar = 6;
-		}
-		
-		else if(dp >= 700 && dp < 800)
-		{
-			currBar = 7;
-		}
-		
-		else if(dp >= 800 && dp < 900)
-		{
-			currBar = 8;
-		}
-		
-		else if(dp >= 900 && dp < 1000)
-		{
-			currBar = 9;
-		}
-		
-		else if(dp >= 1000)
-		{
 			props.setCurrDrivePoints(maxDrive);
 			currDrive = maxLength;
 			max = true;
@@ -155,7 +115,6 @@ public class GuiDriveBar extends Gui{
 			int screenWidth = event.resolution.getScaledWidth();
 			int screenHeight = event.resolution.getScaledHeight();
 			EntityPlayer player = mc.thePlayer;
-
 
 			mc.renderEngine.bindTexture(new ResourceLocation("kk", "textures/gui/DriveBar.png"));
 
@@ -205,12 +164,12 @@ public class GuiDriveBar extends Gui{
 			{
 				this.drawTexturedModalRect((screenWidth - guiWidth + 15), screenHeight - guiHeight - 27, 90, 38, 8, guiHeight);
 			}
-			
+			System.out.println("Max: "+max);
 			if(max == true)
 			{
 				GL11.glPushMatrix();
-				GL11.glScalef(1.5F,1.5F,0);
-				this.drawTexturedModalRect((screenWidth - guiWidth - 23), screenHeight - guiHeight - 25, 0, 57, 30, guiHeight);
+				//GL11.glScalef(1.5F,1.5F,0);
+				this.drawTexturedModalRect((screenWidth - guiWidth - 23), screenHeight - guiHeight - 20, 0, 57, 30, guiHeight);
 				GL11.glPopMatrix();
 			}
 			

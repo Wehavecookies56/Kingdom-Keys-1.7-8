@@ -7,7 +7,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import wehavecookies56.kk.client.KeyBind;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyDriveForm;
 import wehavecookies56.kk.driveforms.AddedDrives;
-import wehavecookies56.kk.driveforms.DriveValor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBiped;

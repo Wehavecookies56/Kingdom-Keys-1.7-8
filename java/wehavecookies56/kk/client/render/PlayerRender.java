@@ -127,12 +127,22 @@ public class PlayerRender extends RenderPlayerBase {
 		}else{
 			super.renderModel(paramEntityLivingBase, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
 		}
+		if(df.getCurrentState() == 0 || df.getCurrentState() == 1 || df.getCurrentState() == 2 || df.getCurrentState() == 3 || df.getCurrentState() == 4)
+		{
 		armour.bipedLeftLeg.showModel = true;
 		armour.bipedLeftLeg.render(0.0625F);
 
 		armour.bipedRightLeg.showModel = true;
 		armour.bipedRightLeg.render(0.0625F);
-		
+		}
+		else
+		{
+			armour.bipedLeftLeg.showModel = false;
+			armour.bipedLeftLeg.render(0.0625F);
+
+			armour.bipedRightLeg.showModel = false;
+			armour.bipedRightLeg.render(0.0625F);
+		}
 		super.renderModel(paramEntityLivingBase, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
 
 	}
