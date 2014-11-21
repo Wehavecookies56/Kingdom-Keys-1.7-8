@@ -10,6 +10,7 @@ import net.minecraft.entity.projectile.EntitySmallFireball;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatFileWriter;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumChatFormatting;
 
 import org.lwjgl.input.Keyboard;
 
@@ -18,6 +19,7 @@ import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.achievements.AddedAchievments;
 import wehavecookies56.kk.client.gui.GuiMenu;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyDriveForm;
+import wehavecookies56.kk.core.extendedproperties.EntityPropertyDrivePoints;
 import wehavecookies56.kk.core.packet.AchievementPacket;
 import wehavecookies56.kk.core.packet.IPacket;
 import wehavecookies56.kk.core.packet.SummonPacket;
@@ -51,6 +53,8 @@ public class KeyBind{
 	public static int magicselected = -1;
 	public static int itemselected = -1;
 	public static int driveselected = -1;
+	
+	public static int active;
 	
 	public static boolean onDrive;
 
@@ -244,6 +248,7 @@ public class KeyBind{
 				{
 					onDrive = true;
 					df.changeState(-1);
+					active = -1;
 				}
 				
 				else if (df.getCurrentState() == 5)
@@ -258,6 +263,7 @@ public class KeyBind{
 					{
 						onDrive = true;
 						df.changeState(-1);
+						active = -1;
 					}
 				}
 				
@@ -288,57 +294,118 @@ public class KeyBind{
 			
 //Drive Forms
 			EntityPropertyDriveForm df = EntityPropertyDriveForm.get(mc.thePlayer);	
+			EntityPropertyDrivePoints dp = EntityPropertyDrivePoints.get(player);
 			if(driveselected == 0 && submenu == 3)
-			{
-				//df.changeState(0);
-				submenu -= 3;
-				magicselected = -1;
-				selected = 0;
-				driveselected = -1;
-				
-				AddedDrives.valor.activate(player, 0);
-				DriveAnti.antipoints +=1;
+			{ 
+				if(dp.getCurrDrivePoints() < AddedDrives.valor.getCost())
+				{
+					submenu -= 3;
+					magicselected = -1;
+					selected = 0;
+					driveselected = -1;
+					player.addChatMessage(new ChatComponentText("You can't drive into valor form right now"));
+				}
+				else
+				{
+					active = 0;
+					submenu -= 3;
+					magicselected = -1;
+					selected = 0;
+					driveselected = -1;
+					
+					AddedDrives.valor.activate(player, 0);
+					DriveAnti.antipoints +=1;
+				}
 			}
 			else if(driveselected == 1 && submenu == 3)
 			{
-				//df.changeState(1);
-				submenu -= 3;
-				magicselected = -1;
-				selected = 0;
-				driveselected = -1;
-				
-				AddedDrives.wisdom.activate(player, 1);
-				DriveAnti.antipoints +=1;
+				if(dp.getCurrDrivePoints() < AddedDrives.wisdom.getCost())
+				{
+					submenu -= 3;
+					magicselected = -1;
+					selected = 0;
+					driveselected = -1;
+					player.addChatMessage(new ChatComponentText("You can't drive into wisdom form right now"));
+				}
+				else
+				{
+					active = 1;
+					submenu -= 3;
+					magicselected = -1;
+					selected = 0;
+					driveselected = -1;
+					
+					AddedDrives.wisdom.activate(player, 2);
+					DriveAnti.antipoints +=1;
+				}
 			}
 			else if(driveselected == 2 && submenu == 3)
 			{
-				//df.changeState(2);
-				submenu -= 3;
-				magicselected = -1;
-				selected = 0;
-				driveselected = -1;
-				
-				AddedDrives.limit.activate(player, 2);
-				DriveAnti.antipoints +=1;
+				if(dp.getCurrDrivePoints() < AddedDrives.limit.getCost())
+				{
+					submenu -= 3;
+					magicselected = -1;
+					selected = 0;
+					driveselected = -1;
+					player.addChatMessage(new ChatComponentText("You can't drive into limit form right now"));
+				}else
+				{
+					active = 2;
+					submenu -= 3;
+					magicselected = -1;
+					selected = 0;
+					driveselected = -1;
+					
+					AddedDrives.limit.activate(player, 3);
+					DriveAnti.antipoints +=1;
+				}
+
 			}
 			else if(driveselected == 3 && submenu == 3)
 			{
-				//df.changeState(3);
-				submenu -= 3;
-				magicselected = -1;
-				selected = 0;
-				driveselected = -1;
-				
-				AddedDrives.master.activate(player, 3);
-				DriveAnti.antipoints +=1;
+				if(dp.getCurrDrivePoints() < AddedDrives.master.getCost())
+				{
+					submenu -= 3;
+					magicselected = -1;
+					selected = 0;
+					driveselected = -1;
+					player.addChatMessage(new ChatComponentText("You can't drive into master form right now"));
+				}
+				else
+				{
+					active = 3;
+					submenu -= 3;
+					magicselected = -1;
+					selected = 0;
+					driveselected = -1;
+					
+					AddedDrives.master.activate(player, 4);
+					DriveAnti.antipoints +=1;
+				}
+
 			}
 			else if(driveselected == 4 && submenu == 3)
 			{
-				//df.changeState(4);
-				submenu -= 3;
-				magicselected = -1;
-				selected = 0;
-				driveselected = -1;
+				if(dp.getCurrDrivePoints() < AddedDrives.Final.getCost())
+				{
+					submenu -= 3;
+					magicselected = -1;
+					selected = 0;
+					driveselected = -1;
+					player.addChatMessage(new ChatComponentText("You can't drive into final form right now"));
+				}
+				else
+				{
+					active = 4;
+					submenu -= 3;
+					magicselected = -1;
+					selected = 0;
+					driveselected = -1;
+					
+					AddedDrives.Final.activate(player, 5);
+					DriveAnti.antipoints +=1;
+				}
+
 				
 				AddedDrives.Final.activate(player, 4);
 				if (DriveAnti.antipoints < 10)
