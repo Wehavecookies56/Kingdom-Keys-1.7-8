@@ -290,32 +290,32 @@ public class KeyBind{
 			EntityPropertyDriveForm df = EntityPropertyDriveForm.get(mc.thePlayer);	
 			if(driveselected == 0 && submenu == 3)
 			{
-				df.changeState(0);
-				AddedDrives.valor.activate(player);
+				//df.changeState(0);
+				AddedDrives.valor.activate(player, 0);
 				DriveAnti.antipoints +=1;
 			}
 			else if(driveselected == 1 && submenu == 3)
 			{
-				df.changeState(1);
-				AddedDrives.wisdom.activate(player);
+				//df.changeState(1);
+				AddedDrives.wisdom.activate(player, 1);
 				DriveAnti.antipoints +=1;
 			}
 			else if(driveselected == 2 && submenu == 3)
 			{
-				df.changeState(2);
-				AddedDrives.limit.activate(player);
+				//df.changeState(2);
+				AddedDrives.limit.activate(player, 2);
 				DriveAnti.antipoints +=1;
 			}
 			else if(driveselected == 3 && submenu == 3)
 			{
-				df.changeState(3);
-				AddedDrives.master.activate(player);
+				//df.changeState(3);
+				AddedDrives.master.activate(player, 3);
 				DriveAnti.antipoints +=1;
 			}
 			else if(driveselected == 4 && submenu == 3)
 			{
-				df.changeState(4);
-				AddedDrives.Final.activate(player);
+				//df.changeState(4);
+				AddedDrives.Final.activate(player, 4);
 				if (DriveAnti.antipoints < 10)
 				{
 					DriveAnti.antipoints = 0;

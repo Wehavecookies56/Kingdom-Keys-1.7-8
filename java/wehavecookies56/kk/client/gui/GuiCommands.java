@@ -283,11 +283,11 @@ public class GuiCommands extends Gui {
 				{
 					if (KeyBind.onDrive)
 					{
-						GuiDrawText.drawString(StatCollector.translateToLocal("REVERT"), 10, screenHeight - (commandHeight * (FINAL-1)-2) - 13, 0xFFFFFF);
+						GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Revert), 10, screenHeight - (commandHeight * (FINAL-1)-2) - 13, 0xFFFFFF);
 					}
 					else
 					{
-						GuiDrawText.drawString(StatCollector.translateToLocal("REVERT"), 10, screenHeight - (commandHeight * (FINAL-1)-2) - 13, 0x555555);
+						GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Revert), 10, screenHeight - (commandHeight * (FINAL-1)-2) - 13, 0x555555);
 					}
 				}
 				else
@@ -316,11 +316,11 @@ public class GuiCommands extends Gui {
 				{
 					if (KeyBind.onDrive)
 					{
-						GuiDrawText.drawString(StatCollector.translateToLocal("REVERT"), 10, screenHeight - (commandHeight * (FINAL-1)-2) - 13, 0xFFFFFF);
+						GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Revert), 10, screenHeight - (commandHeight * (FINAL-1)-2) - 13, 0xFFFFFF);
 					}
 					else
 					{
-						GuiDrawText.drawString(StatCollector.translateToLocal("REVERT"), 10, screenHeight - (commandHeight * (FINAL-1)-2) - 13, 0x555555);
+						GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Revert), 10, screenHeight - (commandHeight * (FINAL-1)-2) - 13, 0x555555);
 					}
 				}
 				else

@@ -646,6 +646,7 @@ gui.command.drive.wisdom=WISDOM
 gui.command.drive.master=MASTER
 gui.command.drive.limit=LIMIT
 gui.command.drive.final=FINAL
+gui.command.drive.revert=REVERT
 
 #Tooltips
 tooltip.voidedknowledge.desc=Unknown knowledge capable of materializing into strong weapons. 

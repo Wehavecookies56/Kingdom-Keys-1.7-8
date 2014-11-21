@@ -179,7 +179,7 @@ public class LocalStrings {
 	public static final String Command_Drive_Master = "gui.command.drive.master";
 	public static final String Command_Drive_Final = "gui.command.drive.final";
 	public static final String Command_Drive_Limit = "gui.command.drive.limit";
-
+	public static final String Command_Drive_Revert = "gui.command.drive.revert";
 
 	public static final String VoidedKnowledge = "tooltip.voidedknowledge.desc";
 	public static final String EmptyBottle = "item.emptyBottle.name";
