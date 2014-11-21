@@ -11,8 +11,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.NetHandlerPlayServer;
+import wehavecookies56.kk.client.KeyBind;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyDriveForm;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyDrivePoints;
+import wehavecookies56.kk.driveforms.AddedDrives;
 
 public class DriveActivatePacket implements IPacket {
 
@@ -66,7 +68,7 @@ public class DriveActivatePacket implements IPacket {
 		final long RECURRENCE_MILLIS = 50;
 
 		EntityPropertyDrivePoints dp = EntityPropertyDrivePoints.get(player);
-		EntityPropertyDriveForm df = EntityPropertyDriveForm.get(player);
+		final EntityPropertyDriveForm df = EntityPropertyDriveForm.get(player);
 		if(EntityPropertyDrivePoints.get(player).getCurrDrivePoints() < cost)
 		{
 			return false;
@@ -75,13 +77,18 @@ public class DriveActivatePacket implements IPacket {
 		final ScheduledFuture t = executor.scheduleAtFixedRate(new Runnable() {
 			@Override
 			public void run() {
-				EntityPropertyDrivePoints dp = EntityPropertyDrivePoints.get(player);
-				EntityPropertyDriveForm df = EntityPropertyDriveForm.get(player);
-				System.out.println(df.getCurrentState());
+				System.out.println(KeyBind.active);
 
-				if(dp.getCurrDrivePoints() >= 0){dp.setCurrDrivePoints((int)(EntityPropertyDrivePoints.get(player).getCurrDrivePoints() - 0.1));}
-				if(dp.getCurrDrivePoints() <= 0){df.changeState(-1); executor.shutdown();}
-				//if(df.getCurrentState() == -1){executor.shutdown();}
+				if(KeyBind.active != -1) 
+				{
+					EntityPropertyDrivePoints dp = EntityPropertyDrivePoints.get(player);
+					EntityPropertyDriveForm df = EntityPropertyDriveForm.get(player);
+					System.out.println(df.getCurrentState());
+				
+					if(dp.getCurrDrivePoints() >= 0){dp.setCurrDrivePoints((int)(EntityPropertyDrivePoints.get(player).getCurrDrivePoints() - 0.1));}
+					if(dp.getCurrDrivePoints() <= 0){df.changeState(-1); executor.shutdown();}
+					//if(df.getCurrentState() == -1){executor.shutdown();}
+				}
 			}
 		}, INITIAL_DELAY_MILLIS, RECURRENCE_MILLIS, TimeUnit.MILLISECONDS);
 		return true;

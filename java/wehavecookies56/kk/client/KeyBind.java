@@ -383,7 +383,6 @@ public class KeyBind{
 					}
 				}
 			}
-			
 		}
 		
 		if (submenu < 0)
