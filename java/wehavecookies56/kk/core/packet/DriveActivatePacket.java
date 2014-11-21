@@ -18,19 +18,19 @@ public class DriveActivatePacket implements IPacket {
 
 	private int amount;
 	private int state;
-	
+
 	public DriveActivatePacket() {}
-	
+
 	public DriveActivatePacket(int amount, int state) {
 		this.amount = amount;
 		this.state = state;
 	}
-	
+
 	@Override
 	public void readBytes(ByteBuf bytes) {
 		amount = bytes.readInt();
 		state = bytes.readInt();
-		
+
 	}
 
 	@Override
@@ -57,9 +57,9 @@ public class DriveActivatePacket implements IPacket {
 			consumePoints(amount, nhServer.playerEntity);
 		}
 	}
-	
+
 	public boolean consumePoints(int cost, final EntityPlayer player){
-		
+
 		final int THREAD_POOL_SIZE = 1;
 		final ScheduledThreadPoolExecutor executor = (ScheduledThreadPoolExecutor)Executors.newScheduledThreadPool(THREAD_POOL_SIZE);
 		final long INITIAL_DELAY_MILLIS = 0;
@@ -71,19 +71,21 @@ public class DriveActivatePacket implements IPacket {
 		{
 			return false;
 		}
-		
+
 		final ScheduledFuture t = executor.scheduleAtFixedRate(new Runnable() {
-		  @Override
-		  public void run() {
-			EntityPropertyDrivePoints dp = EntityPropertyDrivePoints.get(player);
-			EntityPropertyDriveForm df = EntityPropertyDriveForm.get(player);
-			if(dp.getCurrDrivePoints() >= 0){dp.setCurrDrivePoints((int)(EntityPropertyDrivePoints.get(player).getCurrDrivePoints() - 0.1));}
-			if(dp.getCurrDrivePoints() <= 0){df.changeState(-1); executor.shutdown();}
-			if(df.getCurrentState() == -1){executor.shutdown();}
-		  }
+			@Override
+			public void run() {
+				EntityPropertyDrivePoints dp = EntityPropertyDrivePoints.get(player);
+				EntityPropertyDriveForm df = EntityPropertyDriveForm.get(player);
+				System.out.println(df.getCurrentState());
+
+				if(dp.getCurrDrivePoints() >= 0){dp.setCurrDrivePoints((int)(EntityPropertyDrivePoints.get(player).getCurrDrivePoints() - 0.1));}
+				if(dp.getCurrDrivePoints() <= 0){df.changeState(-1); executor.shutdown();}
+				//if(df.getCurrentState() == -1){executor.shutdown();}
+			}
 		}, INITIAL_DELAY_MILLIS, RECURRENCE_MILLIS, TimeUnit.MILLISECONDS);
 		return true;
-		
+
 	}
 
 }
