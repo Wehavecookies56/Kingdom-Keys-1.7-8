@@ -84,6 +84,11 @@ public class EntityPropertyDrivePoints implements IExtendedEntityProperties {
 		if(getCurrDrivePoints() < 0){setCurrDrivePoints(0);}
 	}
 
+	public void setCurrDrivePoints(double amount)
+	{
+		this.player.getDataWatcher().updateObject(DRIVE_WATCHER, amount);
+	}
+	
 	public void setCurrDrivePoints(int amount)
 	{
 		this.player.getDataWatcher().updateObject(DRIVE_WATCHER, amount);

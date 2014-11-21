@@ -2,7 +2,10 @@ package wehavecookies56.kk.driveforms;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyDrivePoints;
+import wehavecookies56.kk.core.packet.DriveActivatePacket;
+import wehavecookies56.kk.core.packet.IPacket;
 
 public class DriveForm {
 	
@@ -17,7 +20,7 @@ public class DriveForm {
 		this.unlockItem = unlockItem;
 	}
 	
-	public boolean activate(EntityPlayer player){
+	public boolean activate(EntityPlayer player, int state){
 		System.out.println("Trying to activate");
 		EntityPropertyDrivePoints dp = EntityPropertyDrivePoints.get(player);
 
@@ -27,7 +30,7 @@ public class DriveForm {
 			System.out.println("Got da points");
 			active = true;
 			System.out.println("Cost: "+getCost());
-			consumePoints(getCost(), player);
+			consumePoints(getCost(), player, state);
 			onActivateForm(player);
 			return true;
 		}
@@ -42,23 +45,9 @@ public class DriveForm {
 
 	}
 	
-	public boolean consumePoints(int cost, EntityPlayer player){
-		EntityPropertyDrivePoints dp = EntityPropertyDrivePoints.get(player);
-		if(EntityPropertyDrivePoints.get(player).getCurrDrivePoints() < cost)
-		{
-			return false;
-		}
-		System.out.println(EntityPropertyDrivePoints.get(player).getCurrDrivePoints());
-		System.out.println(cost);
-		dp.setCurrDrivePoints(EntityPropertyDrivePoints.get(player).getCurrDrivePoints() - cost);
-		System.out.println(EntityPropertyDrivePoints.get(player).getCurrDrivePoints());
-		//double cons = 0.1D;
-		//double toCons = dp.getCurrDrivePoints() - cost;
-		//if(dp.getCurrDrivePoints() - cost < 0){
-		//	return false;
-		//}else if(dp.getCurrDrivePoints() > toCons){
-		//	dp.removeDrivePoints((int) cons--);
-		//}
+	public boolean consumePoints(int cost, EntityPlayer player, int state){
+		IPacket packet = new DriveActivatePacket(cost, state);
+		KingdomKeys.network.sendToServer(packet);
 		return true;
 		
 	}
