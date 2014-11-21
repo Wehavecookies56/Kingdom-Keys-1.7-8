@@ -291,30 +291,55 @@ public class KeyBind{
 			if(driveselected == 0 && submenu == 3)
 			{
 				//df.changeState(0);
+				submenu -= 3;
+				magicselected = -1;
+				selected = 0;
+				driveselected = -1;
+				
 				AddedDrives.valor.activate(player, 0);
 				DriveAnti.antipoints +=1;
 			}
 			else if(driveselected == 1 && submenu == 3)
 			{
 				//df.changeState(1);
+				submenu -= 3;
+				magicselected = -1;
+				selected = 0;
+				driveselected = -1;
+				
 				AddedDrives.wisdom.activate(player, 1);
 				DriveAnti.antipoints +=1;
 			}
 			else if(driveselected == 2 && submenu == 3)
 			{
 				//df.changeState(2);
+				submenu -= 3;
+				magicselected = -1;
+				selected = 0;
+				driveselected = -1;
+				
 				AddedDrives.limit.activate(player, 2);
 				DriveAnti.antipoints +=1;
 			}
 			else if(driveselected == 3 && submenu == 3)
 			{
 				//df.changeState(3);
+				submenu -= 3;
+				magicselected = -1;
+				selected = 0;
+				driveselected = -1;
+				
 				AddedDrives.master.activate(player, 3);
 				DriveAnti.antipoints +=1;
 			}
 			else if(driveselected == 4 && submenu == 3)
 			{
 				//df.changeState(4);
+				submenu -= 3;
+				magicselected = -1;
+				selected = 0;
+				driveselected = -1;
+				
 				AddedDrives.Final.activate(player, 4);
 				if (DriveAnti.antipoints < 10)
 				{
