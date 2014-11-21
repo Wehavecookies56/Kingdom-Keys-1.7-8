@@ -52,7 +52,7 @@ public class KeyBind{
 	public static int itemselected = -1;
 	public static int driveselected = -1;
 	
-	public static boolean canRevert;
+	public static boolean onDrive;
 
 	//public static boolean shootFire = false;
 	
@@ -242,7 +242,7 @@ public class KeyBind{
 				EntityPropertyDriveForm df = EntityPropertyDriveForm.get(mc.thePlayer);	
 				if (df.getCurrentState() == 0 || df.getCurrentState() == 1 || df.getCurrentState() == 2 || df.getCurrentState() == 3 || df.getCurrentState() == 4)
 				{
-					canRevert = true;
+					onDrive = true;
 					df.changeState(-1);
 				}
 				
@@ -252,11 +252,11 @@ public class KeyBind{
 					if(player.isBurning())
 					{
 						player.addChatMessage(new ChatComponentText("You can't revert right now."));
-						canRevert = false;
+						onDrive = false;
 					}
 					else
 					{
-						canRevert = true;
+						onDrive = true;
 						df.changeState(-1);
 					}
 				}

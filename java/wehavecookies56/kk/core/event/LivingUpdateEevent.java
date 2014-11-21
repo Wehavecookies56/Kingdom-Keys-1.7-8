@@ -28,11 +28,11 @@ public class LivingUpdateEevent {
 			EntityPropertyDriveForm df = EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer);
 			if (player.isBurning() && df.getCurrentState()==5)
 			{
-				KeyBind.canRevert = false;
+				KeyBind.onDrive = false;
 			}
 			else
 			{
-				KeyBind.canRevert = true;
+				KeyBind.onDrive = true;
 			}
 		}
 	}

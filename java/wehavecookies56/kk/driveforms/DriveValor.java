@@ -7,5 +7,10 @@ public class DriveValor extends DriveForm {
 	public DriveValor(String name, int cost, Item unlockItem) {
 		super(name, cost, unlockItem);
 	}
+	
+	public static final int Attack = 2;
+	public static final int Magic = 1;
+	public static final double Speed = 1.5;
+
 
 }

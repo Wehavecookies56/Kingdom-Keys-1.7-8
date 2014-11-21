@@ -164,7 +164,7 @@ public class GuiDriveBar extends Gui{
 			{
 				this.drawTexturedModalRect((screenWidth - guiWidth + 15), screenHeight - guiHeight - 27, 90, 38, 8, guiHeight);
 			}
-			System.out.println("Max: "+max);
+
 			if(max == true)
 			{
 				GL11.glPushMatrix();
