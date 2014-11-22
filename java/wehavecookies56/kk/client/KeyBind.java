@@ -100,8 +100,8 @@ public class KeyBind{
 			driveselected = -1;
 		}
 		
-		if (keys[COMMAND].isPressed())
-	//	if(mc.gameSettings.keyBindPickBlock.getIsKeyPressed())
+	//	if (keys[COMMAND].isPressed())
+		if(mc.gameSettings.keyBindPickBlock.getIsKeyPressed())
 		{
 			
 //Main command menu	
@@ -223,8 +223,8 @@ public class KeyBind{
 				}
 			}
 		}
+	//	System.out.println(mc.gameSettings.keyBindAttack);
 		if (keys[ENTER].isPressed())
-	//	if (mc.gameSettings.keyBindAttack.isPressed())
 		{
 			switch(selected) //Case 0 not necessary as it is attack
 			{
@@ -335,7 +335,7 @@ public class KeyBind{
 					selected = 0;
 					driveselected = -1;
 					
-					AddedDrives.wisdom.activate(player, 2);
+					AddedDrives.wisdom.activate(player, 1);
 					DriveAnti.antipoints +=1;
 				}
 			}
@@ -356,7 +356,7 @@ public class KeyBind{
 					selected = 0;
 					driveselected = -1;
 					
-					AddedDrives.limit.activate(player, 3);
+					AddedDrives.limit.activate(player, 2);
 					DriveAnti.antipoints +=1;
 				}
 
@@ -379,7 +379,7 @@ public class KeyBind{
 					selected = 0;
 					driveselected = -1;
 					
-					AddedDrives.master.activate(player, 4);
+					AddedDrives.master.activate(player, 3);
 					DriveAnti.antipoints +=1;
 				}
 
@@ -402,7 +402,7 @@ public class KeyBind{
 					selected = 0;
 					driveselected = -1;
 					
-					AddedDrives.Final.activate(player, 5);
+					AddedDrives.Final.activate(player, 4);
 					DriveAnti.antipoints +=1;
 				}
 
@@ -438,7 +438,7 @@ public class KeyBind{
 
 				if (Math.random() < DriveAnti.prob/100)
 				{
-					df.changeState(5);
+					AddedDrives.anti.activate(player, 5);
 					
 					if (DriveAnti.antipoints < 4)
 					{
