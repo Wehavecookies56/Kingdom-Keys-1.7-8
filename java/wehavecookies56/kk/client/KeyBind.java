@@ -60,7 +60,8 @@ public class KeyBind{
 
 	//public static boolean shootFire = false;
 	
-	private static final int[] keyValues = {Keyboard.KEY_G, Keyboard.KEY_M, Keyboard.KEY_C, Keyboard.KEY_F, Keyboard.KEY_B};
+	//private static final int[] keyValues = {Keyboard.KEY_G, Keyboard.KEY_M, Keyboard.KEY_C, Keyboard.KEY_F, Keyboard.KEY_B};
+	private static final int[] keyValues = {Keyboard.KEY_G, Keyboard.KEY_M};
 	private final KeyBinding[] keys;
 	StatFileWriter sfw;
 	@SideOnly(Side.CLIENT)
@@ -78,7 +79,7 @@ public class KeyBind{
 	public void onKeyInput(KeyInputEvent event) {	
 		EntityPlayer player = (EntityPlayer) Minecraft.getMinecraft().thePlayer;
 		//System.out.print(magicselected);
-		if (keys[BACK].isPressed())
+		if (mc.gameSettings.keyBindUseItem.getIsKeyPressed())
 		{
 			if (submenu == 0)
 			{
@@ -224,7 +225,8 @@ public class KeyBind{
 			}
 		}
 	//	System.out.println(mc.gameSettings.keyBindAttack);
-		if (keys[ENTER].isPressed())
+	//	if (keys[ENTER].isPressed())
+		if (mc.gameSettings.keyBindAttack.getIsKeyPressed())
 		{
 			switch(selected) //Case 0 not necessary as it is attack
 			{
@@ -457,7 +459,8 @@ public class KeyBind{
 			submenu = 0;
 		}
 		
-		if (keys[MENU].isPressed()) {
+		if (keys[MENU].isPressed())
+		{
 			boolean hasMenuAchv = false;
 			if(!hasMenuAchv){
 				hasMenuAchv = true;
