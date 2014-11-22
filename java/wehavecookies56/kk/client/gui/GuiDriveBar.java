@@ -22,7 +22,6 @@ public class GuiDriveBar extends Gui{
 	int maxDrive = 1000;
 	int maxLength = 100;
 	int maxBars = 9;
-	public static boolean max = false;
 	double oneValue = (46D / 100D);
 	double currDrive;
 	
@@ -101,7 +100,7 @@ public class GuiDriveBar extends Gui{
 			currBar = 9;
 			props.setCurrDrivePoints(maxDrive);
 			currDrive = maxLength;
-			max = true;
+
 		}
 		
 		if(dp == 100 || dp == 200 || dp == 300 || dp == 400 || dp == 500 || dp == 600 || dp == 700 || dp == 800 || dp == 900){
@@ -165,11 +164,16 @@ public class GuiDriveBar extends Gui{
 				this.drawTexturedModalRect((screenWidth - guiWidth + 15), screenHeight - guiHeight - 27, 90, 38, 8, guiHeight);
 			}
 
-			if(max == true)
+			if(dp >= 1000 == true)
 			{
 				GL11.glPushMatrix();
-				//GL11.glScalef(1.5F,1.5F,0);
 				this.drawTexturedModalRect((screenWidth - guiWidth - 23), screenHeight - guiHeight - 20, 0, 57, 30, guiHeight);
+				GL11.glPopMatrix();
+			}
+			else
+			{
+				GL11.glPushMatrix();
+				this.drawTexturedModalRect((screenWidth - guiWidth - 23), screenHeight - guiHeight - 20, 0, 100, 30, guiHeight);
 				GL11.glPopMatrix();
 			}
 			
