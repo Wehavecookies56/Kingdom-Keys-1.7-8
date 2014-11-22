@@ -148,8 +148,7 @@ public class KingdomKeys {
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		ModelPlayerAPI.register("kk", PlayerModel.class);
-		RenderPlayerAPI.register("kk", PlayerRender.class);
+		
 		AddedItems.initKeyBlades();
 		AddedItems.initHearts();
 		AddedItems.initOthers();

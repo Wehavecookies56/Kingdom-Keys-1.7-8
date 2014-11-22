@@ -72,6 +72,8 @@ public class ClientProxy extends CommonProxy {
 	
 	@Override
 	public void registerRenderers() {
+		ModelPlayerAPI.register("kk", PlayerModel.class);
+		RenderPlayerAPI.register("kk", PlayerRender.class);
 		//3D Model renders
 		MinecraftForgeClient.registerItemRenderer(AddedItems.KingdomKey, new ItemRenderKingdomKey());
 		MinecraftForgeClient.registerItemRenderer(AddedItems.Oathkeeper, new ItemRenderOathKeeper());
