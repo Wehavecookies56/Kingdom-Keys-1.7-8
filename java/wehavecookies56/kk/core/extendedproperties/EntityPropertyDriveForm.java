@@ -14,12 +14,22 @@ public class EntityPropertyDriveForm implements IExtendedEntityProperties {
 	public static final int DRIVE_WATCHER = 22;
 	private final EntityPlayer player;
 	private int currentState;
+	public static boolean valorUnlocked;
+	public static boolean wisdomUnlocked;
+	public static boolean limitUnlocked;
+	public static boolean masterUnlocked;
+	public static boolean finalUnlocked;
 
 	public EntityPropertyDriveForm(EntityPlayer player) {
 		this.player = player;
 		this.currentState = -1;
 		this.player.getDataWatcher().addObject(DRIVE_WATCHER, 0);
 		this.player.getDataWatcher().updateObject(DRIVE_WATCHER, -1);
+		this.valorUnlocked = false;
+		this.wisdomUnlocked = false;
+		this.limitUnlocked = false;
+		this.masterUnlocked = false;
+		this.finalUnlocked = false;
 	}
 	
 	public int getCurrentState(){
@@ -42,22 +52,17 @@ public class EntityPropertyDriveForm implements IExtendedEntityProperties {
 	public void saveNBTData(NBTTagCompound compound) {
 		NBTTagCompound properties = new NBTTagCompound();
 		properties.setInteger("CurrentState", this.player.getDataWatcher().getWatchableObjectInt(DRIVE_WATCHER));
-		compound.setTag(EXT_PROP_NAME, properties);
-		
+		compound.setTag(EXT_PROP_NAME, properties);		
 	}
 
 	@Override
 	public void loadNBTData(NBTTagCompound compound) {
 		NBTTagCompound properties = (NBTTagCompound) compound.getTag(EXT_PROP_NAME);
-				
-		this.player.getDataWatcher().updateObject(DRIVE_WATCHER, properties.getInteger("CurrentState"));
-
-		
+		this.player.getDataWatcher().updateObject(DRIVE_WATCHER, properties.getInteger("CurrentState"));		
 	}
 
 	@Override
 	public void init(Entity entity, World world) {
 		this.player.getDataWatcher().updateObject(DRIVE_WATCHER, -1);
-
 	}
 }

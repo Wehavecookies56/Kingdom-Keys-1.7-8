@@ -77,9 +77,7 @@ public class KeyBind{
 	@SubscribeEvent
 	public void onKeyInput(KeyInputEvent event) {	
 		EntityPlayer player = (EntityPlayer) Minecraft.getMinecraft().thePlayer;
-		//System.out.print(magicselected);
-		//if (keys[BACK].isPressed())
-		if (mc.gameSettings.keyBindUseItem.isPressed())
+		if (mc.gameSettings.keyBindUseItem.isPressed() || keys[BACK].isPressed())
 		{
 			if (submenu == 0)
 			{
@@ -101,8 +99,7 @@ public class KeyBind{
 			driveselected = -1;
 		}
 		
-	//	if (keys[COMMAND].isPressed())
-		if(mc.gameSettings.keyBindPickBlock.getIsKeyPressed())
+		if(mc.gameSettings.keyBindPickBlock.getIsKeyPressed() || keys[COMMAND].isPressed())
 		{
 			
 //Main command menu	
@@ -226,8 +223,7 @@ public class KeyBind{
 		}
 		System.out.println(mc.gameSettings.keyBindAttack);
 	//	if (keys[ENTER].isPressed())
-		// if (mc.gameSettings.keyBindAttack.isPressed())
-		if (mc.gameSettings.keyBindAttack.isPressed())
+		if (mc.gameSettings.keyBindAttack.isPressed() || keys[ENTER].isPressed())
 		{
 			switch(selected) //Case 0 not necessary as it is attack
 			{
@@ -300,7 +296,7 @@ public class KeyBind{
 			EntityPropertyDrivePoints dp = EntityPropertyDrivePoints.get(player);
 			if(driveselected == 0 && submenu == 3)
 			{ 
-				if(dp.getCurrDrivePoints() < AddedDrives.valor.getCost())
+				if(dp.getCurrDrivePoints() < AddedDrives.valor.getCost() || !EntityPropertyDriveForm.valorUnlocked)
 				{
 					submenu -= 3;
 					magicselected = -1;
@@ -322,7 +318,7 @@ public class KeyBind{
 			}
 			else if(driveselected == 1 && submenu == 3)
 			{
-				if(dp.getCurrDrivePoints() < AddedDrives.wisdom.getCost())
+				if(dp.getCurrDrivePoints() < AddedDrives.wisdom.getCost() || !EntityPropertyDriveForm.wisdomUnlocked)
 				{
 					submenu -= 3;
 					magicselected = -1;
@@ -344,7 +340,7 @@ public class KeyBind{
 			}
 			else if(driveselected == 2 && submenu == 3)
 			{
-				if(dp.getCurrDrivePoints() < AddedDrives.limit.getCost())
+				if(dp.getCurrDrivePoints() < AddedDrives.limit.getCost() || !EntityPropertyDriveForm.limitUnlocked)
 				{
 					submenu -= 3;
 					magicselected = -1;
@@ -366,7 +362,7 @@ public class KeyBind{
 			}
 			else if(driveselected == 3 && submenu == 3)
 			{
-				if(dp.getCurrDrivePoints() < AddedDrives.master.getCost())
+				if(dp.getCurrDrivePoints() < AddedDrives.master.getCost() || !EntityPropertyDriveForm.masterUnlocked)
 				{
 					submenu -= 3;
 					magicselected = -1;
@@ -389,7 +385,7 @@ public class KeyBind{
 			}
 			else if(driveselected == 4 && submenu == 3)
 			{
-				if(dp.getCurrDrivePoints() < AddedDrives.Final.getCost())
+				if(dp.getCurrDrivePoints() < AddedDrives.Final.getCost() || !EntityPropertyDriveForm.finalUnlocked)
 				{
 					submenu -= 3;
 					magicselected = -1;
