@@ -51,10 +51,10 @@ public class BlockKKChest extends BlockContainer
 
 		int l = p_149719_1_.getBlockMetadata(p_149719_2_, p_149719_3_, p_149719_4_) & 3;
 		if(l != 0 && l != 2){
-			this.setBlockBounds(0.2F, 0.0F, 0.1F, 0.9F, 0.6F, 0.9F);
+			this.setBlockBounds(0.2F, 0.0F, 0.1F, 0.9F, 0.75F, 0.9F);
 		}
 		else{
-			this.setBlockBounds(0.1F, 0.0F, 0.2F, 0.9F, 0.6F, 0.9F);
+			this.setBlockBounds(0.1F, 0.0F, 0.25F, 0.9F, 0.75F, 0.9F);
 		}
 	}
 
@@ -94,8 +94,7 @@ public class BlockKKChest extends BlockContainer
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float a, float b, float c)
 	{
-		if(
-				player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.AbaddonPlasma|| player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.AbyssalTide|| player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.AllForOne|| player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.Anguis|| player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.Aubade||
+		if(		player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.AbaddonPlasma|| player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.AbyssalTide|| player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.AllForOne|| player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.Anguis|| player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.Aubade||
 				player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.BondOfFlames|| player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.BrightCrest||
 				player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.ChaosRipper|| player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.CircleOfLife|| player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.Counterpoint|| player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.CrabClaw|| player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.CrownOfGuilt|| player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.CrownUnlimit||
 				player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.DarkerThanDark|| player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.Darkgnaw|| player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.DecisivePumpkin|| player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.DestinysEmbrace|| player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.DiamondDust|| player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.DiveWing|| player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.DivineRose|| player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.DreamSword|| player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.DualDisc||
@@ -118,59 +117,20 @@ public class BlockKKChest extends BlockContainer
 				player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.WayToDawn|| player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.WaywardWind|| player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.WinnersProof|| player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.WishingLamp|| player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.WishingStar||
 				player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.XehanortsKeyblade||
 				player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.YoungXehanortsKeyblade||
-				player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.ZeroOne
-				)
+				player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.ZeroOne)
 		{
 			if(world.isRemote){
+                TileEntity tileEntityKKChest = world.getTileEntity(x, y, z);
+
+				if (tileEntityKKChest == null)
+				{
+                    return false;
+				}
 				if(!player.isSneaking()){
 					player.openGui(KingdomKeys.instance, 1, world, x, y, z);
 					Minecraft.getMinecraft().thePlayer.playSound("kk:kupo", 0.3F, 1.1F);
 				}
 			}
-			/*else
-			{
-				TileEntityKKChest tileentitykkchest = (TileEntityKKChest)world.getTileEntity(x, y, z);
-
-				if (tileentitykkchest != null)
-				{
-					for (int i1 = 0; i1 < tileentitykkchest.getSizeInventory(); ++i1)
-					{
-						ItemStack itemstack = tileentitykkchest.getStackInSlot(i1);
-
-						if (itemstack != null)
-						{
-							float f = this.rand.nextFloat() * 0.8F + 0.1F;
-							float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
-							float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
-
-							while (itemstack.stackSize > 0)
-							{
-								int j1 = this.rand.nextInt(21) + 10;
-
-								if (j1 > itemstack.stackSize)
-								{
-									j1 = itemstack.stackSize;
-								}
-
-								itemstack.stackSize -= j1;
-								EntityItem entityitem = new EntityItem(world, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
-
-								if (itemstack.hasTagCompound())
-								{
-									entityitem.getEntityItem().setTagCompound((NBTTagCompound)itemstack.getTagCompound().copy());
-								}
-
-								float f3 = 0.05F;
-								entityitem.motionX = (double)((float)this.rand.nextGaussian() * f3);
-								entityitem.motionY = (double)((float)this.rand.nextGaussian() * f3 + 0.2F);
-								entityitem.motionZ = (double)((float)this.rand.nextGaussian() * f3);
-								world.spawnEntityInWorld(entityitem);
-							}
-						}
-					}
-					world.func_147453_f(x, y, z, AddedBlocks.KKChest);
-				}
-			}*/
 		}
 		return true;
 	}
