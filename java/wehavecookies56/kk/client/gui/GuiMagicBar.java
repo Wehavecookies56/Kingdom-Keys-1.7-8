@@ -43,10 +43,18 @@ public class GuiMagicBar extends Gui
 			int cMagic = guiWidth - (int) (oneMP * MagicAttack.currMagic);
 			MagicAttack.currMagic = 100;
 			GL11.glPushMatrix();
-			this.drawTexturedModalRect(screenWidth - guiWidth - 66, screenHeight - guiHeight- 12, 0, 0, guiWidth, guiHeight);
-			this.drawTexturedModalRect((screenWidth - noborderguiwidth-111) + cMagic, screenHeight - guiHeight - 12, 0, 13, (noborderguiwidth - cMagic) + 25, guiHeight);
+			GL11.glTranslatef(screenWidth - guiWidth - 66 + 46, screenHeight - guiHeight - 6, 0);
+			GL11.glScalef(0.75F, 0.75F, 0.75F);
+			this.drawTexturedModalRect(0, 0, 0, 0, guiWidth, guiHeight);
+			GL11.glPopMatrix();
+			
+			GL11.glPushMatrix();
+			GL11.glTranslatef((screenWidth - noborderguiwidth-111) + cMagic + 46, screenHeight - guiHeight - 6, 0);
+			GL11.glScalef(0.75F, 0.75F, 0.75F);
+			this.drawTexturedModalRect(0, 0, 0, 13, (noborderguiwidth - cMagic) + 25, guiHeight);
 			//this.drawTexturedModalRect((screenWidth - noborderguiwidth-16) + currHealth, screenHeight - guiHeight, 0, 12, (noborderguiwidth - currHealth) - 2, guiHeight);
 			GL11.glPopMatrix();
+
 		}
 	}
 }

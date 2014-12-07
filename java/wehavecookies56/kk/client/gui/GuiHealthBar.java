@@ -1,22 +1,19 @@
 package wehavecookies56.kk.client.gui;
 
-import mods.battlegear2.api.IDefaultRender.RenderType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 
 import org.lwjgl.opengl.GL11;
 
-import wehavecookies56.kk.core.event.OnHitEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.Phase;
-import cpw.mods.fml.common.gameevent.TickEvent.Type;
 
 public class GuiHealthBar extends Gui
 {
-	
+
 	@SubscribeEvent
 	public void onRenderOverlayPost(RenderGameOverlayEvent event){
 		if(event.type == RenderGameOverlayEvent.ElementType.TEXT)
@@ -24,21 +21,41 @@ public class GuiHealthBar extends Gui
 			int guiWidth = 189;
 			int guiHeight = 12;
 			int noborderguiwidth = 171;
-			int screenWidth = event.resolution.getScaledWidth();
-			int screenHeight = event.resolution.getScaledHeight();
+
 			Minecraft mc = Minecraft.getMinecraft();
 			EntityPlayer player = mc.thePlayer;
+			ScaledResolution res = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
+			int screenWidth = res.getScaledWidth();
+			int screenHeight = res.getScaledHeight();
+
 			mc.renderEngine.bindTexture(new ResourceLocation("kk", "textures/gui/HPBar.png"));
+
 			float oneHeart = (noborderguiwidth / player.getMaxHealth());
 			int currHealth = noborderguiwidth - (int) (oneHeart * player.getHealth());
 			GL11.glPushMatrix();
-			this.drawTexturedModalRect(screenWidth - guiWidth, screenHeight - guiHeight, 0, 0, guiWidth, guiHeight);
+			GL11.glPushMatrix();
+			GL11.glTranslatef(screenWidth - guiWidth + 46, screenHeight - guiHeight + 2, 0);
+			GL11.glScalef(0.75F, 0.75F, 0.75F);
+			this.drawTexturedModalRect(0, 0, 0, 0, guiWidth, guiHeight);
+			GL11.glPopMatrix();
+			//GL11.glTranslated(event.resolution.getScaledWidth_double(), 0, 0);
+			//this.drawTexturedModalRect(screenWidth - guiWidth, screenHeight - guiHeight, 0, 0, guiWidth, guiHeight);
+			//GL11.glScalef(2F, 2F, 2F);
 			if (player.getHealth() >= 6)
 			{
-				this.drawTexturedModalRect((screenWidth - noborderguiwidth - 16) + currHealth, screenHeight - guiHeight, 0, 12, (noborderguiwidth - currHealth) - 2, guiHeight);
+				//GL11.glScalef(0.75F, 0.75F, 0.75F);
+
+				GL11.glPushMatrix();
+				GL11.glTranslatef((screenWidth - noborderguiwidth + 30) + currHealth, screenHeight - guiHeight + 2, 0);
+				GL11.glScalef(0.75F, 0.75F, 0.75F);
+				this.drawTexturedModalRect(0, 0, 0, 12, (noborderguiwidth - currHealth) - 2, guiHeight);
+				GL11.glPopMatrix();
+
+
 			}
 			else
 			{
+				GL11.glScalef(0.5F, 0.5F, 0.5F);
 				this.drawTexturedModalRect((screenWidth - noborderguiwidth - 16) + currHealth, screenHeight - guiHeight+2, 0, 24, (noborderguiwidth - currHealth) - 2, guiHeight);
 			}
 			GL11.glPopMatrix();

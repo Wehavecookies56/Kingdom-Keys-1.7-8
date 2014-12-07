@@ -36,6 +36,14 @@ public class EntityPropertyDriveForm implements IExtendedEntityProperties {
 		return this.player.getDataWatcher().getWatchableObjectInt(DRIVE_WATCHER);
 	}
 	
+	public void setValorUnlocked(boolean unlocked){
+		this.valorUnlocked = unlocked;
+	}
+	
+	public boolean getValorUnlocked(){
+		return this.valorUnlocked;
+	}
+	
 	public void changeState(int state){
 		this.player.getDataWatcher().updateObject(DRIVE_WATCHER, state);
 	}
@@ -53,12 +61,14 @@ public class EntityPropertyDriveForm implements IExtendedEntityProperties {
 		NBTTagCompound properties = new NBTTagCompound();
 		properties.setInteger("CurrentState", this.player.getDataWatcher().getWatchableObjectInt(DRIVE_WATCHER));
 		compound.setTag(EXT_PROP_NAME, properties);		
+		properties.setBoolean("ValorUnlocked", valorUnlocked);
 	}
 
 	@Override
 	public void loadNBTData(NBTTagCompound compound) {
 		NBTTagCompound properties = (NBTTagCompound) compound.getTag(EXT_PROP_NAME);
-		this.player.getDataWatcher().updateObject(DRIVE_WATCHER, properties.getInteger("CurrentState"));		
+		this.player.getDataWatcher().updateObject(DRIVE_WATCHER, properties.getInteger("CurrentState"));	
+		valorUnlocked = properties.getBoolean("ValorUnlocked");
 	}
 
 	@Override
