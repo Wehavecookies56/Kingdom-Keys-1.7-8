@@ -118,7 +118,7 @@ public class GuiDriveBar extends Gui{
 			mc.renderEngine.bindTexture(new ResourceLocation("kk", "textures/gui/DriveBar.png"));
 
 			GL11.glPushMatrix();
-			GL11.glTranslatef(screenWidth - guiWidth - 34, screenHeight - guiHeight - 15, 0);
+			GL11.glTranslatef(screenWidth - guiWidth - 33, screenHeight - guiHeight - 15, 0);
 			GL11.glScalef(0.75F, 0.75F, 0.75F);
 			//Background
 			this.drawTexturedModalRect(0, 0, 0, 0, guiWidth, guiHeight);
@@ -135,47 +135,47 @@ public class GuiDriveBar extends Gui{
 			GL11.glScalef(0.75F, 0.75F, 0.75F);
 			if(currBar == 0)
 			{
-				this.drawTexturedModalRect(0, 0, 0, 38, 8, guiHeight);
+				this.drawTexturedModalRect(1, 0, 0, 38, 8, guiHeight);
 			}
 			else if(currBar == 1)
 			{
-				this.drawTexturedModalRect(0, 0, 10, 38, 8, guiHeight);
+				this.drawTexturedModalRect(1, 0, 10, 38, 8, guiHeight);
 			}
 			else if(currBar == 2)
 			{
-				this.drawTexturedModalRect(0, 0, 20, 38, 8, guiHeight);
+				this.drawTexturedModalRect(1, 0, 20, 38, 8, guiHeight);
 			}
 			else if(currBar == 3)
 			{
-				this.drawTexturedModalRect(0, 0, 30, 38, 8, guiHeight);
+				this.drawTexturedModalRect(1, 0, 30, 38, 8, guiHeight);
 			}
 			else if(currBar == 4)
 			{
-				this.drawTexturedModalRect(0, 0, 40, 38, 8, guiHeight);
+				this.drawTexturedModalRect(1, 0, 40, 38, 8, guiHeight);
 			}
 			else if(currBar == 5)
 			{
-				this.drawTexturedModalRect(0, 0, 50, 38, 8, guiHeight);
+				this.drawTexturedModalRect(1, 0, 50, 38, 8, guiHeight);
 			}
 			else if(currBar == 6)
 			{
-				this.drawTexturedModalRect(0, 0, 60, 38, 8, guiHeight);
+				this.drawTexturedModalRect(1, 0, 60, 38, 8, guiHeight);
 			}
 			else if(currBar == 7)
 			{
-				this.drawTexturedModalRect(0, 0, 70, 38, 8, guiHeight);
+				this.drawTexturedModalRect(1, 0, 70, 38, 8, guiHeight);
 			}
 			else if(currBar == 8)
 			{
-				this.drawTexturedModalRect(0, 0, 80, 38, 8, guiHeight);
+				this.drawTexturedModalRect(1, 0, 80, 38, 8, guiHeight);
 			}
 			else if(currBar == 9)
 			{
-				this.drawTexturedModalRect(0, 0, 90, 38, 8, guiHeight);
+				this.drawTexturedModalRect(1, 0, 90, 38, 8, guiHeight);
 			}
 
 			GL11.glPopMatrix();
-			if(dp >= 1000 == true)
+			if(dp >= 1000)
 			{
 				GL11.glPushMatrix();
 				this.drawTexturedModalRect((screenWidth - guiWidth - 23), screenHeight - guiHeight - 20, 0, 57, 30, guiHeight);
@@ -187,6 +187,6 @@ public class GuiDriveBar extends Gui{
 				this.drawTexturedModalRect((screenWidth - guiWidth - 23), screenHeight - guiHeight - 20, 0, 100, 30, guiHeight);
 				GL11.glPopMatrix();
 			}
-					}
+		}
 	}
 }
