@@ -107,6 +107,8 @@ public class GuiDriveBar extends Gui{
 			currDrive = 0;
 		}
 		
+		
+		
 		if(event.type == RenderGameOverlayEvent.ElementType.TEXT) {			
 			int guiWidth = 95;
 			int guiBarWidth = 83;
