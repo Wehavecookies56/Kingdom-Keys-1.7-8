@@ -22,8 +22,8 @@ public class ItemValorFormOrb extends Item {
 
 	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer entity)
 	{
-		EntityPropertyDriveForm props = EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer);
 		if(!world.isRemote){
+			EntityPropertyDriveForm props = EntityPropertyDriveForm.get(entity);
 			System.out.println(props.getValorUnlocked());
 			props.setValorUnlocked(true);
 			System.out.println(props.getValorUnlocked());

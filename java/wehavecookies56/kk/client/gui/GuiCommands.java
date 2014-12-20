@@ -3,6 +3,7 @@ package wehavecookies56.kk.client.gui;
 import org.lwjgl.opengl.GL11;
 
 import wehavecookies56.kk.client.KeyBind;
+import wehavecookies56.kk.core.event.LivingUpdateEevent;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyDriveForm;
 import wehavecookies56.kk.lib.LocalStrings;
 import cpw.mods.fml.common.eventhandler.EventPriority;
@@ -215,7 +216,7 @@ public class GuiCommands extends Gui {
 				GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Items), 10, screenHeight - (commandHeight * ITEMS) +4, 0xFFFFFF);
 				if (EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 0 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 1 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 2 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 3 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 4 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 5)
 				{
-					if (KeyBind.onDrive)
+					if (LivingUpdateEevent.onDrive)
 					{
 						GuiDrawText.drawString(StatCollector.translateToLocal("REVERT"), 10, screenHeight - (commandHeight * (FINAL-1)-2) - 13, 0xFFFFFF);
 					}
@@ -248,7 +249,7 @@ public class GuiCommands extends Gui {
 				GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Items), 10, screenHeight - (commandHeight * ITEMS) +4, 0xFFFFFF);
 				if (EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 0 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 1 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 2 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 3 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 4 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 5)
 				{
-					if (KeyBind.onDrive)
+					if (LivingUpdateEevent.onDrive)
 					{
 						GuiDrawText.drawString(StatCollector.translateToLocal("REVERT"), 10, screenHeight - (commandHeight * (FINAL-1)-2) - 13, 0xFFFFFF);
 					}
@@ -281,7 +282,7 @@ public class GuiCommands extends Gui {
 				GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Items), 10, screenHeight - (commandHeight * ITEMS) +4, 0xFFFFFF);
 				if (EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 0 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 1 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 2 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 3 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 4 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 5)
 				{
-					if (KeyBind.onDrive)
+					if (LivingUpdateEevent.onDrive)
 					{
 						GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Revert), 10, screenHeight - (commandHeight * (FINAL-1)-2) - 13, 0xFFFFFF);
 					}
@@ -314,7 +315,7 @@ public class GuiCommands extends Gui {
 				GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Items), 10, screenHeight - (commandHeight * ITEMS) +4, 0xFFFFFF);
 				if (EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 0 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 1 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 2 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 3 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 4 || EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer).getCurrentState() == 5)
 				{
-					if (KeyBind.onDrive)
+					if (LivingUpdateEevent.onDrive)
 					{
 						GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Revert), 10, screenHeight - (commandHeight * (FINAL-1)-2) - 13, 0xFFFFFF);
 					}

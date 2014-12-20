@@ -18,6 +18,7 @@ import scala.swing.event.MouseButtonEvent;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.achievements.AddedAchievments;
 import wehavecookies56.kk.client.gui.GuiMenu;
+import wehavecookies56.kk.core.event.LivingUpdateEevent;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyDriveForm;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyDrivePoints;
 import wehavecookies56.kk.core.packet.AchievementPacket;
@@ -56,8 +57,6 @@ public class KeyBind{
 	
 	public static int active;
 	
-	public static boolean onDrive;
-
 	//public static boolean shootFire = false;
 	
 	private static final int[] keyValues = {Keyboard.KEY_G, Keyboard.KEY_M, Keyboard.KEY_C, Keyboard.KEY_F, Keyboard.KEY_B};
@@ -245,7 +244,7 @@ public class KeyBind{
 				EntityPropertyDriveForm df = EntityPropertyDriveForm.get(mc.thePlayer);	
 				if (df.getCurrentState() == 0 || df.getCurrentState() == 1 || df.getCurrentState() == 2 || df.getCurrentState() == 3 || df.getCurrentState() == 4)
 				{
-					onDrive = true;
+					LivingUpdateEevent.onDrive = true;
 					df.changeState(-1);
 					active = -1;
 				}
@@ -256,11 +255,11 @@ public class KeyBind{
 					if(player.isBurning())
 					{
 						player.addChatMessage(new ChatComponentText("You can't revert right now."));
-						onDrive = false;
+						LivingUpdateEevent.onDrive = false;
 					}
 					else
 					{
-						onDrive = true;
+						LivingUpdateEevent.onDrive = true;
 						df.changeState(-1);
 						active = -1;
 					}

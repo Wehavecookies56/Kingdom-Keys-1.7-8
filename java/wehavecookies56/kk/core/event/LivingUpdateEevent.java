@@ -14,6 +14,8 @@ public class LivingUpdateEevent {
 	 * Fired when an EntityLiving is about to update
 	 */
 	
+	public static boolean onDrive;
+	
 	@SubscribeEvent
 	public void onLivingUpdate(LivingUpdateEvent event)
 	{
@@ -25,14 +27,14 @@ public class LivingUpdateEevent {
 				//Minecraft.getMinecraft().thePlayer.playSound("kk:alarm", 1F, 1F);
 			}
 			//TODO Drive forms
-			EntityPropertyDriveForm df = EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer);
+			EntityPropertyDriveForm df = EntityPropertyDriveForm.get(player);
 			if (player.isBurning() && df.getCurrentState()==5)
 			{
-				KeyBind.onDrive = false;
+				onDrive = false;
 			}
 			else
 			{
-				KeyBind.onDrive = true;
+				onDrive = true;
 			}
 		}
 	}
