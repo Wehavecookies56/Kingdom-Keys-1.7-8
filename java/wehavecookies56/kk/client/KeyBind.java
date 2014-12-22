@@ -240,7 +240,8 @@ public class KeyBind{
 				submenu = 2;
 				break;
 			case 3:
-				//Drive
+				//Drive Option
+				//Revert
 				EntityPropertyDriveForm df = EntityPropertyDriveForm.get(mc.thePlayer);	
 				if (df.getCurrentState() == 0 || df.getCurrentState() == 1 || df.getCurrentState() == 2 || df.getCurrentState() == 3 || df.getCurrentState() == 4)
 				{
@@ -257,6 +258,7 @@ public class KeyBind{
 						player.addChatMessage(new ChatComponentText("You can't revert right now."));
 						LivingUpdateEevent.onDrive = false;
 					}
+					//You can revert now
 					else
 					{
 						LivingUpdateEevent.onDrive = true;
@@ -264,7 +266,7 @@ public class KeyBind{
 						active = -1;
 					}
 				}
-				
+				//Drive
 				else
 				{
 					submenu = 3;
@@ -297,6 +299,7 @@ public class KeyBind{
 			{ 
 				if(dp.getCurrDrivePoints() < AddedDrives.valor.getCost() || !EntityPropertyDriveForm.valorUnlocked)
 				{
+					System.out.println(EntityPropertyDriveForm.valorUnlocked);
 					submenu -= 3;
 					magicselected = -1;
 					selected = 0;
@@ -404,8 +407,6 @@ public class KeyBind{
 					DriveAnti.antipoints +=1;
 				}
 
-				
-				AddedDrives.Final.activate(player, 4);
 				if (DriveAnti.antipoints < 10)
 				{
 					DriveAnti.antipoints = 0;
