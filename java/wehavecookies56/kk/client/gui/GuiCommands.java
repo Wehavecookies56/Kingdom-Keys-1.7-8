@@ -5,6 +5,8 @@ import org.lwjgl.opengl.GL11;
 import wehavecookies56.kk.client.KeyBind;
 import wehavecookies56.kk.core.event.LivingUpdateEevent;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyDriveForm;
+import wehavecookies56.kk.core.extendedproperties.EntityPropertyDrivePoints;
+import wehavecookies56.kk.driveforms.AddedDrives;
 import wehavecookies56.kk.lib.LocalStrings;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -188,11 +190,54 @@ public class GuiCommands extends Gui {
 					this.drawTexturedModalRect(70, screenHeight - (commandHeight * FINAL), 70, 0, commandWidth, commandHeight);
 				}
 				
-				GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Valor), 75, screenHeight - (commandHeight * (VALOR-1)-2) - 13, 0xFFFFFF);
-				GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Wisdom), 75, screenHeight - (commandHeight * (WISDOM-1)-2) - 13, 0xFFFFFF);
-				GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Limit), 75, screenHeight - (commandHeight * (LIMIT-1)-2) - 13, 0xFFFFFF);
-				GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Master), 75, screenHeight - (commandHeight * (MASTER-1)-2) - 13, 0xFFFFFF);
-				GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Final), 75, screenHeight - (commandHeight * (FINAL-1)-2) - 13, 0xFFFFFF);
+				EntityPropertyDrivePoints dp = EntityPropertyDrivePoints.get(player);
+				if(dp.getCurrDrivePoints() < AddedDrives.valor.getCost())
+				{
+					GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Valor), 75, screenHeight - (commandHeight * (VALOR-1)-2) - 13, 0x555555);
+				}
+				else
+				{
+					GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Valor), 75, screenHeight - (commandHeight * (VALOR-1)-2) - 13, 0xFFFFFF);
+				}
+				
+				if(dp.getCurrDrivePoints() < AddedDrives.wisdom.getCost())
+				{
+					GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Wisdom), 75, screenHeight - (commandHeight * (WISDOM-1)-2) - 13, 0x555555);
+				}
+				else
+				{
+					GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Wisdom), 75, screenHeight - (commandHeight * (WISDOM-1)-2) - 13, 0xFFFFFF);
+				}
+				
+				if(dp.getCurrDrivePoints() < AddedDrives.limit.getCost())
+				{
+					GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Limit), 75, screenHeight - (commandHeight * (LIMIT-1)-2) - 13, 0x555555);
+				}
+				else
+				{
+					GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Limit), 75, screenHeight - (commandHeight * (LIMIT-1)-2) - 13, 0xFFFFFF);
+				}
+				
+				if(dp.getCurrDrivePoints() < AddedDrives.master.getCost())
+				{
+					GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Master), 75, screenHeight - (commandHeight * (MASTER-1)-2) - 13, 0x555555);
+				}
+				else
+				{
+					GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Master), 75, screenHeight - (commandHeight * (MASTER-1)-2) - 13, 0xFFFFFF);
+				}
+				
+				//If you comment this if statement you can fix the bug.
+				if(dp.getCurrDrivePoints() < AddedDrives.Final.getCost())
+				{
+					GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Final), 75, screenHeight - (commandHeight * (FINAL-1)-2) - 13, 0x555555);
+				}
+				else
+				{
+					GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Final), 75, screenHeight - (commandHeight * (FINAL-1)-2) - 13, 0xFFFFFF);
+				}
+				//GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Final), 75, screenHeight - (commandHeight * (FINAL-1)-2) - 13, 0xFFFFFF);
+
 				break;
 			}
 			
