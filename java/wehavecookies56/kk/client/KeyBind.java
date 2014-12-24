@@ -54,11 +54,8 @@ public class KeyBind{
 	public static int magicselected = -1;
 	public static int itemselected = -1;
 	public static int driveselected = -1;
-	
 	public static int active;
-	
-	//public static boolean shootFire = false;
-	
+		
 	private static final int[] keyValues = {Keyboard.KEY_G, Keyboard.KEY_M, Keyboard.KEY_C, Keyboard.KEY_F, Keyboard.KEY_B};
 	private final KeyBinding[] keys;
 	StatFileWriter sfw;
@@ -167,27 +164,11 @@ public class KeyBind{
 			{
 			/*	if (player.isSneaking())
 				{
-					if (driveselected > 0 && magicselected <= 6)
-					{
-						magicselected = magicselected-1;
-						submenu = 1;
-					}
-					else if (magicselected == 0)
-					{
-						magicselected = 6;
-					}
+					backwards
 				}
 				else
 				{
-					if (magicselected >= 0 && magicselected < 6)
-					{
-						magicselected = magicselected+1;
-						submenu = 1;
-					}
-					else if (magicselected == 6)
-					{
-						magicselected = 0;
-					}
+					normalwards
 				}*/
 			}
 //DRIVE
@@ -304,7 +285,7 @@ public class KeyBind{
 					magicselected = -1;
 					selected = 0;
 					driveselected = -1;
-					player.addChatMessage(new ChatComponentText("You can't drive into valor form right now"));
+					//player.addChatMessage(new ChatComponentText("You can't drive into valor form right now"));
 				}
 				else
 				{
@@ -326,7 +307,7 @@ public class KeyBind{
 					magicselected = -1;
 					selected = 0;
 					driveselected = -1;
-					player.addChatMessage(new ChatComponentText("You can't drive into wisdom form right now"));
+					//player.addChatMessage(new ChatComponentText("You can't drive into wisdom form right now"));
 				}
 				else
 				{
@@ -348,7 +329,7 @@ public class KeyBind{
 					magicselected = -1;
 					selected = 0;
 					driveselected = -1;
-					player.addChatMessage(new ChatComponentText("You can't drive into limit form right now"));
+					//player.addChatMessage(new ChatComponentText("You can't drive into limit form right now"));
 				}else
 				{
 					active = 2;
@@ -370,7 +351,7 @@ public class KeyBind{
 					magicselected = -1;
 					selected = 0;
 					driveselected = -1;
-					player.addChatMessage(new ChatComponentText("You can't drive into master form right now"));
+					//player.addChatMessage(new ChatComponentText("You can't drive into master form right now"));
 				}
 				else
 				{
@@ -393,7 +374,7 @@ public class KeyBind{
 					magicselected = -1;
 					selected = 0;
 					driveselected = -1;
-					player.addChatMessage(new ChatComponentText("You can't drive into final form right now"));
+				//	player.addChatMessage(new ChatComponentText("You can't drive into final form right now"));
 				}
 				else
 				{
@@ -1846,8 +1827,3 @@ public class KeyBind{
 	}
 
 }
-
-
-
-
-
