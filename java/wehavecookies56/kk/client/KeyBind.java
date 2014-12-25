@@ -201,6 +201,8 @@ public class KeyBind{
 				}
 			}
 		}
+		System.out.println("AntiProb: "+DriveAnti.prob);
+		System.out.println("AntiPoints: "+DriveAnti.antipoints);
 		//System.out.println(mc.gameSettings.keyBindAttack);
 	//	if (keys[ENTER].isPressed())
 		if (mc.gameSettings.keyBindAttack.isPressed() || keys[ENTER].isPressed())
@@ -293,8 +295,7 @@ public class KeyBind{
 			}
 			
 			Random rand = new Random();
-			System.out.println("AntiProb: "+DriveAnti.prob);
-			System.out.println("AntiPoints: "+DriveAnti.antipoints);
+			
 			//System.out.println(DriveAnti.prob);
 			if(driveselected == 0 && submenu == 3)
 			{ 
@@ -309,7 +310,7 @@ public class KeyBind{
 				}
 				else
 				{
-					if (true)//Math.random() < DriveAnti.prob/100)
+					if (Math.random() < DriveAnti.prob/100)
 					{
 						AddedDrives.anti.activate(player, 5);
 						
