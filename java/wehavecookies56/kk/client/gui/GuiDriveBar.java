@@ -180,7 +180,7 @@ public class GuiDriveBar extends Gui{
 			if(dp >= 1000)
 			{
 				GL11.glPushMatrix();
-				this.drawTexturedModalRect((screenWidth - guiWidth - 23), screenHeight - guiHeight - 20, 0, 57, 30, guiHeight);
+				this.drawTexturedModalRect((screenWidth - guiWidth - 2), screenHeight - guiHeight - 16, 0, 57, 30, guiHeight);
 				GL11.glPopMatrix();
 			}
 			else

@@ -201,7 +201,7 @@ public class KeyBind{
 				}
 			}
 		}
-		System.out.println(mc.gameSettings.keyBindAttack);
+		//System.out.println(mc.gameSettings.keyBindAttack);
 	//	if (keys[ENTER].isPressed())
 		if (mc.gameSettings.keyBindAttack.isPressed() || keys[ENTER].isPressed())
 		{
@@ -214,11 +214,11 @@ public class KeyBind{
 			case 1:
 				//Magic
 //remove comment to allow magic
-			//	submenu = 1;
+				submenu = 1;
 				break;
 			case 2:
 				//Items
-				submenu = 2;
+				//submenu = 2;
 				break;
 			case 3:
 				//Drive Option
@@ -276,19 +276,59 @@ public class KeyBind{
 //Drive Forms
 			EntityPropertyDriveForm df = EntityPropertyDriveForm.get(mc.thePlayer);	
 			EntityPropertyDrivePoints dp = EntityPropertyDrivePoints.get(player);
+		//Antiform probability
+			if(DriveAnti.antipoints > 0 && DriveAnti.antipoints <=4)
+			{
+				DriveAnti.prob = 10;
+			}
+			
+			else if(DriveAnti.antipoints > 4 && DriveAnti.antipoints <=9)
+			{
+				DriveAnti.prob = 25;
+			}
+				
+			else if(DriveAnti.antipoints >= 10)
+			{
+				DriveAnti.prob = 40;
+			}
+			
+			Random rand = new Random();
+			System.out.println("AntiProb: "+DriveAnti.prob);
+			System.out.println("AntiPoints: "+DriveAnti.antipoints);
+			//System.out.println(DriveAnti.prob);
 			if(driveselected == 0 && submenu == 3)
 			{ 
 				if(dp.getCurrDrivePoints() < AddedDrives.valor.getCost() || !EntityPropertyDriveForm.valorUnlocked)
 				{
-					System.out.println(EntityPropertyDriveForm.valorUnlocked);
 					submenu -= 3;
 					magicselected = -1;
 					selected = 0;
 					driveselected = -1;
 					//player.addChatMessage(new ChatComponentText("You can't drive into valor form right now"));
+					
 				}
 				else
 				{
+					if (true)//Math.random() < DriveAnti.prob/100)
+					{
+						AddedDrives.anti.activate(player, 5);
+						
+						submenu -= 3;
+						magicselected = -1;
+						selected = 0;
+						driveselected = -1;
+						
+						if (DriveAnti.antipoints < 4)
+						{
+							DriveAnti.antipoints = 0;
+						}
+						else
+						{
+							DriveAnti.antipoints -=4;
+						}
+					}
+					else
+					{
 					active = 0;
 					submenu -= 3;
 					magicselected = -1;
@@ -296,7 +336,8 @@ public class KeyBind{
 					driveselected = -1;
 					
 					AddedDrives.valor.activate(player, 0);
-					DriveAnti.antipoints +=1;
+					DriveAnti.antipoints++;
+					}
 				}
 			}
 			else if(driveselected == 1 && submenu == 3)
@@ -318,7 +359,7 @@ public class KeyBind{
 					driveselected = -1;
 					
 					AddedDrives.wisdom.activate(player, 1);
-					DriveAnti.antipoints +=1;
+					DriveAnti.antipoints++;
 				}
 			}
 			else if(driveselected == 2 && submenu == 3)
@@ -339,7 +380,7 @@ public class KeyBind{
 					driveselected = -1;
 					
 					AddedDrives.limit.activate(player, 2);
-					DriveAnti.antipoints +=1;
+					DriveAnti.antipoints++;
 				}
 
 			}
@@ -362,7 +403,7 @@ public class KeyBind{
 					driveselected = -1;
 					
 					AddedDrives.master.activate(player, 3);
-					DriveAnti.antipoints +=1;
+					DriveAnti.antipoints++;
 				}
 
 			}
@@ -385,7 +426,6 @@ public class KeyBind{
 					driveselected = -1;
 					
 					AddedDrives.Final.activate(player, 4);
-					DriveAnti.antipoints +=1;
 				}
 
 				if (DriveAnti.antipoints < 10)
@@ -395,39 +435,6 @@ public class KeyBind{
 				else
 				{
 					DriveAnti.antipoints -=10;
-				}
-			}
-		
-			if(driveselected == 0 || driveselected == 1 || driveselected == 2 || driveselected == 3)
-			{
-				if(DriveAnti.antipoints > 0 && DriveAnti.antipoints <=4)
-				{
-					DriveAnti.prob = 10;
-				}
-				
-				else if(DriveAnti.antipoints > 4 && DriveAnti.antipoints <=9)
-				{
-					DriveAnti.prob = 25;
-				}
-					
-				else if(DriveAnti.antipoints >= 10)
-				{
-					DriveAnti.prob = 40;
-				}
-				Random rand = new Random();
-
-				if (Math.random() < DriveAnti.prob/100)
-				{
-					AddedDrives.anti.activate(player, 5);
-					
-					if (DriveAnti.antipoints < 4)
-					{
-						DriveAnti.antipoints = 0;
-					}
-					else
-					{
-						DriveAnti.antipoints -=4;
-					}
 				}
 			}
 		}
