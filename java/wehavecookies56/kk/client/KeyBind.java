@@ -201,9 +201,8 @@ public class KeyBind{
 				}
 			}
 		}
-		System.out.println("AntiProb: "+DriveAnti.prob);
-		System.out.println("AntiPoints: "+DriveAnti.antipoints);
-		//System.out.println(mc.gameSettings.keyBindAttack);
+//		System.out.println("AntiProb: "+DriveAnti.prob);
+	//	System.out.println("AntiPoints: "+DriveAnti.antipoints);
 	//	if (keys[ENTER].isPressed())
 		if (mc.gameSettings.keyBindAttack.isPressed() || keys[ENTER].isPressed())
 		{

@@ -277,6 +277,8 @@ public class KingdomKeys {
 		FMLCommonHandler.instance().bus().register(new OnCraftedEvent());
 		FMLCommonHandler.instance().bus().register(new OnPickUpEvent());
 		FMLCommonHandler.instance().bus().register(new Update());
+		AddedDrives.driveStats();
+		
 		logger.info(Reference.MOD_NAME + ": Registered Events");
 		new GuiHandler();
 		Recipes.initShapedRecipes();

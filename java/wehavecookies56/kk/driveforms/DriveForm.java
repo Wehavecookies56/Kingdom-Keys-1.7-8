@@ -13,7 +13,7 @@ public class DriveForm {
 	int cost;
 	Item unlockItem;
 	boolean active = false;
-	
+	static int actualForm;
 	public DriveForm(String name, int cost, Item unlockItem) {
 		this.name = name;
 		this.cost = cost;
@@ -31,6 +31,9 @@ public class DriveForm {
 			active = true;
 			System.out.println("Cost: "+getCost());
 			consumePoints(getCost(), player, state);
+			actualForm = state;
+			System.out.println("ActualForm: "+actualForm);
+
 			onActivateForm(player);
 			return true;
 		}
@@ -94,4 +97,8 @@ public class DriveForm {
 		this.unlockItem = unlockItem;
 	}
 	
+/*	public static int getActiveForm()
+	{
+		return actualForm;
+	}*/
 }

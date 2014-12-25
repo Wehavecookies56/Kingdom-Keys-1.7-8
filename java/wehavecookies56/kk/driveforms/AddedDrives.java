@@ -1,6 +1,8 @@
 package wehavecookies56.kk.driveforms;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ChatComponentText;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyDrivePoints;
 import wehavecookies56.kk.item.AddedItems;
 import wehavecookies56.kk.lib.Strings;
@@ -8,7 +10,9 @@ import wehavecookies56.kk.lib.Strings;
 public class AddedDrives {
 
 	public static DriveForm valor, wisdom, master, Final, limit, anti;
-	
+	Minecraft mc = Minecraft.getMinecraft();
+	static EntityPlayer player = (EntityPlayer) Minecraft.getMinecraft().thePlayer;
+
 	public static void initDrives()
 	{
 		valor = new DriveValor(Strings.ValorForm, 300, AddedItems.ValorFormOrb);
@@ -18,5 +22,41 @@ public class AddedDrives {
 		limit = new DriveLimit(Strings.LimitForm, 400, AddedItems.LimitFormOrb);
 		anti = new DriveAnti(Strings.AntiForm, 300, null);
 	//	anti = new DriveAnti(Strings.AntiForm, EntityPropertyDrivePoints.get(Minecraft.getMinecraft().thePlayer).getCurrDrivePoints(), null);
+	}
+	
+	public static void driveStats()
+	{
+		
+		System.out.println("XD");
+		if (true)//DriveForm.actualForm == 0)
+		{
+			player.addChatMessage(new ChatComponentText("XDD"));
+			player.capabilities.setPlayerWalkSpeed(2);
+		}
+		
+		else if(DriveForm.actualForm == 1)
+		{
+			
+		}
+		
+		else if(DriveForm.actualForm == 2)
+		{
+			
+		}
+		
+		else if(DriveForm.actualForm == 3)
+		{
+			
+		}
+		
+		else if(DriveForm.actualForm == 4)
+		{
+			
+		}
+		
+		else if(DriveForm.actualForm == 5)
+		{
+			
+		}
 	}
 }
