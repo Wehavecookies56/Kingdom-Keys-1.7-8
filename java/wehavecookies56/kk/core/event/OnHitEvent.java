@@ -1,24 +1,38 @@
 package wehavecookies56.kk.core.event;
 
-import wehavecookies56.kk.KingdomKeys;
-import wehavecookies56.kk.core.extendedproperties.EntityPropertyDrivePoints;
-import wehavecookies56.kk.item.AddedItems;
-import wehavecookies56.kk.lib.Arrays;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import wehavecookies56.kk.core.extendedproperties.EntityPropertyDriveForm;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class OnHitEvent
 {
+
+	final int valorAmmount = 2;
+	boolean valorActive = false;
 	
 	@SubscribeEvent
-	public void LivingAttackEvent (LivingEvent EntityEvent)
+	public void LivingAttackEvent (LivingHurtEvent event)
 	{
-		if(EntityEvent.entityLiving instanceof EntityPlayer)
+		if(event.entity instanceof EntityPlayer){
+			EntityPlayer player = (EntityPlayer) event.entityLiving;
+			EntityPropertyDriveForm df = EntityPropertyDriveForm.get(player);
+
+			if(df.getCurrentState() == 0){
+				valorActive = true;
+			}else{
+				valorActive = false;
+			}
+		}
+		if(event.entity instanceof EntityLivingBase){			
+			if(valorActive){
+				event.ammount += valorAmmount;
+			}
+		}
+		
+		if(event.entityLiving instanceof EntityPlayer)
 		{
 			/*EntityPlayer player = (EntityPlayer) EntityEvent.entityLiving;
 			EntityPropertyDrivePoints drive = EntityPropertyDrivePoints.get((EntityPlayer) player);

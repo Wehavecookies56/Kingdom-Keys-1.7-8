@@ -24,7 +24,7 @@ public class AddedDrives {
 	//	anti = new DriveAnti(Strings.AntiForm, EntityPropertyDrivePoints.get(Minecraft.getMinecraft().thePlayer).getCurrDrivePoints(), null);
 	}
 	
-	public static void driveStats()
+	/*public static void driveStats()
 	{
 		
 		System.out.println("XD");
@@ -58,5 +58,5 @@ public class AddedDrives {
 		{
 			
 		}
-	}
+	}*/
 }

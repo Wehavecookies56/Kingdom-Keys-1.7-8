@@ -44,6 +44,38 @@ public class EntityPropertyDriveForm implements IExtendedEntityProperties {
 		return this.valorUnlocked;
 	}
 	
+	public void setWisdomUnlocked(boolean unlocked){
+		this.wisdomUnlocked = unlocked;
+	}
+	
+	public boolean getWisdomUnlocked(){
+		return this.wisdomUnlocked;
+	}
+	
+	public void setLimitUnlocked(boolean unlocked){
+		this.limitUnlocked = unlocked;
+	}
+	
+	public boolean getLimitUnlocked(){
+		return this.limitUnlocked;
+	}
+	
+	public void setMasterUnlocked(boolean unlocked){
+		this.masterUnlocked = unlocked;
+	}
+	
+	public boolean getMasterUnlocked(){
+		return this.masterUnlocked;
+	}
+	
+	public void setFinalUnlocked(boolean unlocked){
+		this.finalUnlocked = unlocked;
+	}
+	
+	public boolean getFinalUnlocked(){
+		return this.finalUnlocked;
+	}
+	
 	public void changeState(int state){
 		this.player.getDataWatcher().updateObject(DRIVE_WATCHER, state);
 	}
@@ -60,15 +92,27 @@ public class EntityPropertyDriveForm implements IExtendedEntityProperties {
 	public void saveNBTData(NBTTagCompound compound) {
 		NBTTagCompound properties = new NBTTagCompound();
 		properties.setInteger("CurrentState", this.player.getDataWatcher().getWatchableObjectInt(DRIVE_WATCHER));
+		properties.setBoolean("ValorUnlocked", getValorUnlocked());
+		properties.setBoolean("WisdomUnlocked", getWisdomUnlocked());
+		properties.setBoolean("LimitUnlocked", getLimitUnlocked());
+		properties.setBoolean("MasterUnlocked", getMasterUnlocked());
+		properties.setBoolean("FinalUnlocked", getFinalUnlocked());
 		compound.setTag(EXT_PROP_NAME, properties);		
-		properties.setBoolean("ValorUnlocked", valorUnlocked);
+		System.out.println("Data saved");
+		
 	}
 
 	@Override
 	public void loadNBTData(NBTTagCompound compound) {
 		NBTTagCompound properties = (NBTTagCompound) compound.getTag(EXT_PROP_NAME);
-		this.player.getDataWatcher().updateObject(DRIVE_WATCHER, properties.getInteger("CurrentState"));	
-		valorUnlocked = properties.getBoolean("ValorUnlocked");
+		this.player.getDataWatcher().updateObject(DRIVE_WATCHER, properties.getInteger("CurrentState"));
+		setValorUnlocked(properties.getBoolean("ValorUnlocked"));
+		setWisdomUnlocked(properties.getBoolean("WisdomUnlocked"));
+		setLimitUnlocked(properties.getBoolean("LimitUnlocked"));
+		setMasterUnlocked(properties.getBoolean("MasterUnlocked"));
+		setFinalUnlocked(properties.getBoolean("FinalUnlocked"));
+		System.out.println("Valor is " +getValorUnlocked());
+		
 	}
 
 	@Override

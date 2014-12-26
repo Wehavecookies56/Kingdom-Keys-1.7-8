@@ -62,10 +62,10 @@ public class DriveForm {
 	
 	public void onActivateForm(EntityPlayer player)
 	{
-		onDeactivateForm();	
+		onDeactivateForm(player);	
 	}
 	
-	public void onDeactivateForm(){
+	public void onDeactivateForm(EntityPlayer player){
 		active = false;
 	}
 

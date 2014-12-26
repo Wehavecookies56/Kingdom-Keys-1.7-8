@@ -36,6 +36,25 @@ public class LivingUpdateEevent {
 			{
 				onDrive = true;
 			}
+			if(df.getCurrentState() == 0){
+				if(player.onGround){
+					player.motionX *= 1.2D;
+					player.motionZ *= 1.2D;
+				}
+				//player.capabilities.setPlayerWalkSpeed(0.01F);
+				
+				player.motionY *= 1.2D;
+
+			}else if(df.getCurrentState() == 1){
+				if(player.onGround){
+					player.motionX *= 1.5D;
+					player.motionZ *= 1.5D;
+				}
+			}else if(df.getCurrentState() == 4){
+			}else{
+				//player.capabilities.setPlayerWalkSpeed(0.1F);
+			}
 		}
+		
 	}
 }
