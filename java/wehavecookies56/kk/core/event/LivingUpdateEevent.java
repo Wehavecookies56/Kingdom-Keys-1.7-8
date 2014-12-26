@@ -5,6 +5,8 @@ import wehavecookies56.kk.core.extendedproperties.EntityPropertyDriveForm;
 import wehavecookies56.kk.item.AddedItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
@@ -39,7 +41,7 @@ public class LivingUpdateEevent {
 			
 			if(df.getCurrentState() == 0)
 			{
-				if(player.onGround)
+				if(player.onGround && !player.isInWater())
 				{
 					player.motionX *= 1.3D;
 					player.motionZ *= 1.3D;
@@ -49,7 +51,7 @@ public class LivingUpdateEevent {
 			
 			else if(df.getCurrentState() == 1)
 			{
-				if(player.onGround){
+				if(player.onGround && !player.isInWater()){
 					player.motionX *= 1.6D;
 					player.motionZ *= 1.6D;
 				}
@@ -57,7 +59,7 @@ public class LivingUpdateEevent {
 			
 			else if(df.getCurrentState() == 3)
 			{
-				if(player.onGround && !player.isWet()){
+				if(player.onGround && !player.isInWater()){
 					player.motionX *= 1.3D;
 					player.motionZ *= 1.3D;
 				}
@@ -65,19 +67,43 @@ public class LivingUpdateEevent {
 				{
 					player.motionY *= 1.18D;
 				}
-				boolean jumped = false;
-				if(player.isAirBorne && jumped == false && Minecraft.getMinecraft().gameSettings.keyBindJump.isPressed())
-				{
-					jumped = true;
-					player.jump();
-				}
-				else
-				{
-					jumped = false;
+//W.I.P.
+				int jumps=0;
+				if(!player.onGround)
+				{				
+					System.out.println("On air");
+					if(Minecraft.getMinecraft().gameSettings.keyBindJump.isPressed())							
+					{
+						System.out.println("Jumps: "+jumps);
+						if(jumps<2)
+						{
+							player.addChatMessage(new ChatComponentText("Hola"));
+							jumps++;
+							player.jump();
+						}
+					}
 				}
 			}
 			
 			else if(df.getCurrentState() == 4)
+			{
+				player.motionY *= 1.15D;
+				if(player.onGround && !player.isInWater()){
+					player.motionX *= 1.3D;
+					player.motionZ *= 1.3D;
+				}
+				else
+				{
+					//If there isnt a way to detect if player is falling then use this method xD
+				
+					if(Minecraft.getMinecraft().gameSettings.keyBindJump.getIsKeyPressed() && Minecraft.getMinecraft().gameSettings.keyBindSprint.getIsKeyPressed())		
+					{
+						player.motionY *= 0.6D;
+					}
+				}
+			}
+			
+			else if(df.getCurrentState() == 5)
 			{
 				
 			}
