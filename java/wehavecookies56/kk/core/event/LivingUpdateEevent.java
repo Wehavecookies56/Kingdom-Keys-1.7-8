@@ -36,25 +36,51 @@ public class LivingUpdateEevent {
 			{
 				onDrive = true;
 			}
-			if(df.getCurrentState() == 0){
-				if(player.onGround){
-					player.motionX *= 1.2D;
-					player.motionZ *= 1.2D;
-				}
-				//player.capabilities.setPlayerWalkSpeed(0.01F);
-				
+			
+			if(df.getCurrentState() == 0)
+			{
+				if(player.onGround)
+				{
+					player.motionX *= 1.3D;
+					player.motionZ *= 1.3D;
+				}				
 				player.motionY *= 1.2D;
-
-			}else if(df.getCurrentState() == 1){
+			}
+			
+			else if(df.getCurrentState() == 1)
+			{
 				if(player.onGround){
-					player.motionX *= 1.5D;
-					player.motionZ *= 1.5D;
+					player.motionX *= 1.6D;
+					player.motionZ *= 1.6D;
 				}
-			}else if(df.getCurrentState() == 4){
-			}else{
-				//player.capabilities.setPlayerWalkSpeed(0.1F);
+			}
+			
+			else if(df.getCurrentState() == 3)
+			{
+				if(player.onGround && !player.isWet()){
+					player.motionX *= 1.3D;
+					player.motionZ *= 1.3D;
+				}
+				else
+				{
+					player.motionY *= 1.18D;
+				}
+				boolean jumped = false;
+				if(player.isAirBorne && jumped == false && Minecraft.getMinecraft().gameSettings.keyBindJump.isPressed())
+				{
+					jumped = true;
+					player.jump();
+				}
+				else
+				{
+					jumped = false;
+				}
+			}
+			
+			else if(df.getCurrentState() == 4)
+			{
+				
 			}
 		}
-		
 	}
 }
