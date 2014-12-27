@@ -11,10 +11,11 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class LivingUpdateEevent {
-	
-	/*
-	 * Fired when an EntityLiving is about to update
-	 */
+	double vJump = 1.2D;
+	double wSprint = 1.6D;
+	double lDodge;
+	int mDoubleJumps = 2; //Limit of doubleJumps
+	double fGlide = 0.6D;
 	
 	public static boolean onDrive;
 	
@@ -39,35 +40,64 @@ public class LivingUpdateEevent {
 				onDrive = true;
 			}
 			
+			//Level multiplier
+		/*	switch(valorLevel){
+			
+			case 1:
+				sd
+				break;
+			
+			case 2:
+				break;
+				
+			case3:
+				break;
+			}
+			
+			*/
+			
+			//Valor
 			if(df.getCurrentState() == 0)
 			{
 				if(player.onGround && !player.isInWater())
 				{
 					player.motionX *= 1.3D;
 					player.motionZ *= 1.3D;
-				}				
-				player.motionY *= 1.2D;
+				}		
+				player.motionY *= 1.23D;
+
 			}
 			
+			//Wisdom
 			else if(df.getCurrentState() == 1)
 			{
 				if(player.onGround && !player.isInWater()){
-					player.motionX *= 1.6D;
-					player.motionZ *= 1.6D;
+					player.motionX *= wSprint;
+					player.motionZ *= wSprint;
 				}
 			}
 			
+			//Limit
+			else if(df.getCurrentState() == 2)
+			{
+				if(player.onGround && !player.isInWater()){
+					player.motionX *= 1.0;
+					player.motionZ *= 1.0;
+				}
+			}
+			
+			//Master
 			else if(df.getCurrentState() == 3)
 			{
 				if(player.onGround && !player.isInWater()){
 					player.motionX *= 1.3D;
 					player.motionZ *= 1.3D;
 				}
-				else
+				else if(!player.onGround)
 				{
 					player.motionY *= 1.18D;
 				}
-//W.I.P.
+//W.I.P.		
 				int jumps=0;
 				if(!player.onGround)
 				{				
@@ -75,7 +105,7 @@ public class LivingUpdateEevent {
 					if(Minecraft.getMinecraft().gameSettings.keyBindJump.isPressed())							
 					{
 						System.out.println("Jumps: "+jumps);
-						if(jumps<2)
+						if(jumps<mDoubleJumps)
 						{
 							player.addChatMessage(new ChatComponentText("Hola"));
 							jumps++;
@@ -85,6 +115,7 @@ public class LivingUpdateEevent {
 				}
 			}
 			
+			//Final
 			else if(df.getCurrentState() == 4)
 			{
 				player.motionY *= 1.15D;
@@ -92,18 +123,24 @@ public class LivingUpdateEevent {
 					player.motionX *= 1.3D;
 					player.motionZ *= 1.3D;
 				}
-				else
-				{
-					//If there isnt a way to detect if player is falling then use this method xD
 				
-					if(Minecraft.getMinecraft().gameSettings.keyBindJump.getIsKeyPressed() && Minecraft.getMinecraft().gameSettings.keyBindSprint.getIsKeyPressed())		
+				else
+				{				
+					if(player.motionY < 0 && Minecraft.getMinecraft().gameSettings.keyBindJump.getIsKeyPressed())		
 					{
-						player.motionY *= 0.6D;
+						player.motionY *= fGlide;
 					}
 				}
 			}
 			
+			//Antiform?
 			else if(df.getCurrentState() == 5)
+			{
+				
+			}
+			
+			//Normal
+			else
 			{
 				
 			}
