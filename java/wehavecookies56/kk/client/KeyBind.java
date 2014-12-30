@@ -31,6 +31,7 @@ import wehavecookies56.kk.item.AddedItems;
 import wehavecookies56.kk.magic.Cure;
 import wehavecookies56.kk.magic.Fire;
 import wehavecookies56.kk.magic.MagicAttack;
+import wehavecookies56.kk.magic.Magics;
 import wehavecookies56.kk.magic.Thunder;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -215,7 +216,7 @@ public class KeyBind{
 			case 1:
 				//Magic
 //remove comment to allow magic
-				submenu = 1;
+			//	submenu = 1;
 				break;
 			case 2:
 				//Items
@@ -259,7 +260,7 @@ public class KeyBind{
 			//MagicAttack.currMagic=100;
 			if(KeyBind.magicselected == 0 && submenu == 1)
 			{
-				Fire.shoot(player, Minecraft.getMinecraft().theWorld);
+				Magics.Fire(player, Minecraft.getMinecraft().theWorld);
 			}
 			else if (KeyBind.magicselected == 1 && submenu == 1)
 			{
@@ -267,7 +268,7 @@ public class KeyBind{
 			}
 			else if (KeyBind.magicselected == 2 && submenu == 1)
 			{
-				Thunder.ray(player, Minecraft.getMinecraft().theWorld);
+				Magics.Thunder(player, Minecraft.getMinecraft().theWorld);
 			}
 			else if (KeyBind.magicselected == 3 && submenu == 1)
 			{
@@ -298,13 +299,12 @@ public class KeyBind{
 			//System.out.println(DriveAnti.prob);
 			if(driveselected == 0 && submenu == 3)
 			{ 
-				if(dp.getCurrDrivePoints() < AddedDrives.valor.getCost() || !EntityPropertyDriveForm.valorUnlocked)
+				if(dp.getCurrDrivePoints() < AddedDrives.valor.getCost() && !EntityPropertyDriveForm.valorUnlocked)
 				{
 					submenu -= 3;
 					magicselected = -1;
 					selected = 0;
 					driveselected = -1;
-					//player.addChatMessage(new ChatComponentText("You can't drive into valor form right now"));
 					
 				}
 				else

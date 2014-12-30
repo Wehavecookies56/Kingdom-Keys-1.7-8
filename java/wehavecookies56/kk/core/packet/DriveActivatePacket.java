@@ -81,10 +81,18 @@ public class DriveActivatePacket implements IPacket {
 				{
 					EntityPropertyDrivePoints dp = EntityPropertyDrivePoints.get(player);
 					EntityPropertyDriveForm df = EntityPropertyDriveForm.get(player);
-					System.out.println(dp.getCurrDrivePoints());
-					if(dp.getCurrDrivePoints() >= 0){dp.setCurrDrivePoints((int)(EntityPropertyDrivePoints.get(player).getCurrDrivePoints() - 0.1));}
-					if(dp.getCurrDrivePoints() <= 0){df.changeState(-1); executor.shutdown();}
-				}else{
+					//System.out.println(dp.getCurrDrivePoints());
+					if(dp.getCurrDrivePoints() >= 0)
+					{
+						dp.setCurrDrivePoints((int)(EntityPropertyDrivePoints.get(player).getCurrDrivePoints() - 0.1));
+					}
+					if(dp.getCurrDrivePoints() == 0)
+					{
+						df.changeState(-1); executor.shutdown();
+					}
+				}
+				else
+				{
 					executor.shutdown();
 				}
 			}

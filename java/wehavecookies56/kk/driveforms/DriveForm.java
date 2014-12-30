@@ -96,9 +96,4 @@ public class DriveForm {
 	public void setUnlockItem(Item unlockItem) {
 		this.unlockItem = unlockItem;
 	}
-	
-/*	public static int getActiveForm()
-	{
-		return actualForm;
-	}*/
 }

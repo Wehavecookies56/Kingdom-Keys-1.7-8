@@ -16,6 +16,7 @@ public class LivingUpdateEevent {
 	double lDodge;
 	int mDoubleJumps = 2; //Limit of doubleJumps
 	double fGlide = 0.6D;
+	double fSpeed = 1.5D;
 	
 	public static boolean onDrive;
 	
@@ -63,8 +64,13 @@ public class LivingUpdateEevent {
 				{
 					player.motionX *= 1.3D;
 					player.motionZ *= 1.3D;
-				}		
-				player.motionY *= 1.23D;
+				}	
+				
+				if(player.motionY > 0)
+				{
+					player.motionY *= 1.23D;
+				}
+				
 
 			}
 			
@@ -95,7 +101,10 @@ public class LivingUpdateEevent {
 				}
 				else if(!player.onGround)
 				{
-					player.motionY *= 1.18D;
+					if(player.motionY > 0)
+					{
+						player.motionY *= 1.18D;
+					}
 				}
 //W.I.P.		
 				int jumps=0;
@@ -108,7 +117,7 @@ public class LivingUpdateEevent {
 						if(jumps<mDoubleJumps)
 						{
 							player.addChatMessage(new ChatComponentText("Hola"));
-							jumps++;
+							jumps = jumps + 1;
 							player.jump();
 						}
 					}
@@ -118,7 +127,13 @@ public class LivingUpdateEevent {
 			//Final
 			else if(df.getCurrentState() == 4)
 			{
-				player.motionY *= 1.15D;
+				player.fallDistance = 0;
+				
+				if(player.motionY > 0)
+				{
+					player.motionY *= 1.17D;
+				}
+				
 				if(player.onGround && !player.isInWater()){
 					player.motionX *= 1.3D;
 					player.motionZ *= 1.3D;
@@ -129,6 +144,11 @@ public class LivingUpdateEevent {
 					if(player.motionY < 0 && Minecraft.getMinecraft().gameSettings.keyBindJump.getIsKeyPressed())		
 					{
 						player.motionY *= fGlide;
+						player.motionX += 0.5D;
+						player.motionZ += 0.5D;
+						player.motionX -= 0.5D;
+						player.motionZ -= 0.5D;
+						player.fallDistance = 0F;
 					}
 				}
 			}

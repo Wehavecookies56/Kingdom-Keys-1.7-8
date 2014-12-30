@@ -23,40 +23,4 @@ public class AddedDrives {
 		anti = new DriveAnti(Strings.AntiForm, 300, null);
 	//	anti = new DriveAnti(Strings.AntiForm, EntityPropertyDrivePoints.get(Minecraft.getMinecraft().thePlayer).getCurrDrivePoints(), null);
 	}
-	
-	/*public static void driveStats()
-	{
-		
-		System.out.println("XD");
-		if (true)//DriveForm.actualForm == 0)
-		{
-			player.addChatMessage(new ChatComponentText("XDD"));
-			player.capabilities.setPlayerWalkSpeed(2);
-		}
-		
-		else if(DriveForm.actualForm == 1)
-		{
-			
-		}
-		
-		else if(DriveForm.actualForm == 2)
-		{
-			
-		}
-		
-		else if(DriveForm.actualForm == 3)
-		{
-			
-		}
-		
-		else if(DriveForm.actualForm == 4)
-		{
-			
-		}
-		
-		else if(DriveForm.actualForm == 5)
-		{
-			
-		}
-	}*/
 }

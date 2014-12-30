@@ -17,20 +17,4 @@ public class Thunder extends MagicAttack{
 	{
 		super(name, magiccost, unlockItem);
 	}
-	
-	public static EntityPlayer ray(EntityPlayer par1EntityPlayer, World par2World){
-		EntityPlayer player = (EntityPlayer) par1EntityPlayer;
-		//Magic execution
-		
-		if(MagicAttack.currMagic >= thunderCost && KeyBind.submenu == 1)
-		{
-			EntityLightningBolt entitylightningbolt = new EntityLightningBolt(MinecraftServer.getServer().getEntityWorld(),0,0,0);
-			//entitylightningbolt.setPosition(player.getLookVec().xCoord, player.getLookVec().yCoord, player.getLookVec().zCoord);
-			//entitylightningbolt.setPosition(player.posX, player.posY-1, player.posZ);
-			par2World.spawnEntityInWorld(entitylightningbolt);
-	        player.addChatMessage(new ChatComponentText("Light!"));
-			MagicAttack.currMagic = MagicAttack.currMagic - MagicAttack.thunderCost;
-		}
-		return player;
-	}
 }
