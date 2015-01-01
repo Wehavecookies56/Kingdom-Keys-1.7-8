@@ -45,6 +45,8 @@ import wehavecookies56.kk.client.render.ItemRenderTotalEclipse;
 import wehavecookies56.kk.client.render.ItemRenderVoidedKnowledge;
 import wehavecookies56.kk.client.render.ItemRenderWaywardWind;
 import wehavecookies56.kk.client.render.ItemRenderWoodenKeyblade;
+import wehavecookies56.kk.client.render.ItemRenderXBlade;
+import wehavecookies56.kk.client.render.ItemRenderXBladeIncomplete;
 import wehavecookies56.kk.client.render.ItemRenderZeroOne;
 import wehavecookies56.kk.client.render.PlayerRender;
 import wehavecookies56.kk.client.render.TileEntityRendererKKChest;
@@ -100,6 +102,9 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(AddedItems.FollowTheWind, new ItemRenderFollowTheWind());
 		MinecraftForgeClient.registerItemRenderer(AddedItems.LionHeart, new ItemRenderLionHeart());
 		MinecraftForgeClient.registerItemRenderer(AddedItems.PeoplesHearts, new ItemRenderKeybladeOfPeoplesHearts());
+		MinecraftForgeClient.registerItemRenderer(AddedItems.Kyeblade, new ItemRenderXBlade());
+		MinecraftForgeClient.registerItemRenderer(AddedItems.KyebladeBroken, new ItemRenderXBladeIncomplete());
+
 
 		MinecraftForgeClient.registerItemRenderer(new ItemStack(AddedBlocks.KKChest).getItem(), new ItemRenderKKChest());
 		
