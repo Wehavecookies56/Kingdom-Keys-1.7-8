@@ -22,11 +22,14 @@ public class ItemValorFormOrb extends Item {
 
 	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer entity)
 	{
-		if(!world.isRemote){
-			EntityPropertyDriveForm props = EntityPropertyDriveForm.get(entity);
-			props.setValorUnlocked(true);
-		}
+		EntityPropertyDriveForm.valorUnlocked = true;
 		return item;
+		
+	//	if(!world.isRemote){
+	//		EntityPropertyDriveForm props = EntityPropertyDriveForm.get(entity);
+	//		props.setValorUnlocked(true);
+	//	}
+	//	return item;
 	}
 	
 	@Override

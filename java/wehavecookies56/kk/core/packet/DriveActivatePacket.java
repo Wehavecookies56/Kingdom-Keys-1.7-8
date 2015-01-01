@@ -79,15 +79,15 @@ public class DriveActivatePacket implements IPacket {
 		final ScheduledFuture t = executor.scheduleAtFixedRate(new Runnable() {
 			@Override
 			public void run() {
-				if(DriveForm.actualForm != -1) 
+				if(KeyBind.active != -1)
 				{
 					EntityPropertyDrivePoints dp = EntityPropertyDrivePoints.get(player);
 					EntityPropertyDriveForm df = EntityPropertyDriveForm.get(player);
-					//System.out.println(dp.getCurrDrivePoints());
-					if(dp.getCurrDrivePoints() >= 0)
+					if(dp.getCurrDrivePoints() > 0 )
 					{
 						dp.setCurrDrivePoints((int)(EntityPropertyDrivePoints.get(player).getCurrDrivePoints() - 0.1));
 					}
+					
 					if(dp.getCurrDrivePoints() == 0)
 					{
 						executor.shutdown();
