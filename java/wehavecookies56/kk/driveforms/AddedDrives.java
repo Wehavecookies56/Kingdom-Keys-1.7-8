@@ -10,8 +10,6 @@ import wehavecookies56.kk.lib.Strings;
 public class AddedDrives {
 
 	public static DriveForm valor, wisdom, master, Final, limit, anti, normal;
-	Minecraft mc = Minecraft.getMinecraft();
-	static EntityPlayer player = (EntityPlayer) Minecraft.getMinecraft().thePlayer;
 
 	public static void initDrives()
 	{
