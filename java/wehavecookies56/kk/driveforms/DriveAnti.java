@@ -4,8 +4,8 @@ import net.minecraft.item.Item;
 
 public class DriveAnti extends DriveForm {
 	
-	public static int antipoints;
-	public static int prob;
+	public static double antipoints;
+	public static double prob;
 	
 	public DriveAnti(String name, int cost, Item unlockItem) {
 		super(name, cost, unlockItem);

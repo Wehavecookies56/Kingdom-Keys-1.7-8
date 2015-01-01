@@ -12,6 +12,7 @@ import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.NetHandlerPlayServer;
 import wehavecookies56.kk.client.KeyBind;
+import wehavecookies56.kk.core.event.LivingUpdateEevent;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyDriveForm;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyDrivePoints;
 import wehavecookies56.kk.driveforms.AddedDrives;
@@ -92,7 +93,6 @@ public class DriveActivatePacket implements IPacket {
 						executor.shutdown();
 						AddedDrives.normal.activate(player, -1);
 						df.changeState(-1);
-						
 					}
 				}
 				else

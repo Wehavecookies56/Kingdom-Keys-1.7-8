@@ -278,10 +278,14 @@ public class KeyBind{
 //Drive Forms
 			EntityPropertyDriveForm df = EntityPropertyDriveForm.get(mc.thePlayer);	
 			EntityPropertyDrivePoints dp = EntityPropertyDrivePoints.get(player);
-		//Antiform probability
+
+	//Antiform probability
+			double random = Math.random();
+			
 			if(DriveAnti.antipoints > 0 && DriveAnti.antipoints <=4)
 			{
 				DriveAnti.prob = 10;
+				System.out.println("AntiProb: "+DriveAnti.prob/100);
 			}
 			
 			else if(DriveAnti.antipoints > 4 && DriveAnti.antipoints <=9)
@@ -294,151 +298,215 @@ public class KeyBind{
 				DriveAnti.prob = 40;
 			}
 			
-			Random rand = new Random();
+		/*	System.out.println("Antipoints: "+DriveAnti.antipoints);
+			System.out.println("Random number: "+random);
+			System.out.println("AntiProb: "+DriveAnti.prob/100);*/
 			
-			//System.out.println(DriveAnti.prob);
-			if(driveselected == 0 && submenu == 3)
-			{ 
-				if(dp.getCurrDrivePoints() < AddedDrives.valor.getCost() && !EntityPropertyDriveForm.valorUnlocked)
-				{
-					submenu -= 3;
-					magicselected = -1;
-					selected = 0;
-					driveselected = -1;
-					
-				}
-				else
-				{
-					double random = Math.random();
-					System.out.println("Random number: "+random);
-					System.out.println("AntiProb: "+DriveAnti.prob/100);
-
-					if (random < DriveAnti.prob/100)
+			if(submenu == 3)
+			{
+				if(driveselected == 0)
+				{ 
+					if(dp.getCurrDrivePoints() < AddedDrives.valor.getCost() || !EntityPropertyDriveForm.valorUnlocked)
 					{
-						AddedDrives.anti.activate(player, 5);
-						
+						submenu -= 3;
+						magicselected = -1;
+						selected = 0;
+						driveselected = -1;
+					}
+					else
+					{
+						if (random < DriveAnti.prob/100)
+						{
+							AddedDrives.anti.activate(player, 5);
+							
+							submenu -= 3;
+							magicselected = -1;
+							selected = 0;
+							driveselected = -1;
+							
+							if (DriveAnti.antipoints < 4)
+							{
+								DriveAnti.antipoints = 0;
+							}
+							else
+							{
+								DriveAnti.antipoints -=4;
+							}
+						}
+						else
+						{
+						active = 0;
 						submenu -= 3;
 						magicselected = -1;
 						selected = 0;
 						driveselected = -1;
 						
-						if (DriveAnti.antipoints < 4)
-						{
-							DriveAnti.antipoints = 0;
+						AddedDrives.valor.activate(player, 0);
+						DriveAnti.antipoints++;
+		/**				Minecraft.getMinecraft().theWorld.playSoundAtEntity(player, "minecraft:glass", 1.0F, 1.0F);
+	*/
 						}
-						else
-						{
-							DriveAnti.antipoints -=4;
-						}
+					}
+				}
+				else if(driveselected == 1)
+				{
+					if(dp.getCurrDrivePoints() < AddedDrives.wisdom.getCost() || !EntityPropertyDriveForm.wisdomUnlocked)
+					{
+						submenu -= 3;
+						magicselected = -1;
+						selected = 0;
+						driveselected = -1;
+						//player.addChatMessage(new ChatComponentText("You can't drive into wisdom form right now"));
 					}
 					else
 					{
-					active = 0;
-					submenu -= 3;
-					magicselected = -1;
-					selected = 0;
-					driveselected = -1;
-					
-					AddedDrives.valor.activate(player, 0);
-					DriveAnti.antipoints++;
+						if (random < DriveAnti.prob/100)
+						{
+							AddedDrives.anti.activate(player, 5);
+							
+							submenu -= 3;
+							magicselected = -1;
+							selected = 0;
+							driveselected = -1;
+							
+							if (DriveAnti.antipoints < 4)
+							{
+								DriveAnti.antipoints = 0;
+							}
+							else
+							{
+								DriveAnti.antipoints -=4;
+							}
+						}
+						else
+						{
+							active = 1;
+							submenu -= 3;
+							magicselected = -1;
+							selected = 0;
+							driveselected = -1;
+							
+							AddedDrives.wisdom.activate(player, 1);
+							DriveAnti.antipoints++;
+						}
 					}
 				}
-			}
-			else if(driveselected == 1 && submenu == 3)
-			{
-				if(dp.getCurrDrivePoints() < AddedDrives.wisdom.getCost() || !EntityPropertyDriveForm.wisdomUnlocked)
+				else if(driveselected == 2)
 				{
-					submenu -= 3;
-					magicselected = -1;
-					selected = 0;
-					driveselected = -1;
-					//player.addChatMessage(new ChatComponentText("You can't drive into wisdom form right now"));
+					if(dp.getCurrDrivePoints() < AddedDrives.limit.getCost() || !EntityPropertyDriveForm.limitUnlocked)
+					{
+						submenu -= 3;
+						magicselected = -1;
+						selected = 0;
+						driveselected = -1;
+						//player.addChatMessage(new ChatComponentText("You can't drive into limit form right now"));
+					}
+					else
+					{
+						if (random < DriveAnti.prob/100)
+						{
+							AddedDrives.anti.activate(player, 5);
+							
+							submenu -= 3;
+							magicselected = -1;
+							selected = 0;
+							driveselected = -1;
+							
+							if (DriveAnti.antipoints < 4)
+							{
+								DriveAnti.antipoints = 0;
+							}
+							else
+							{
+								DriveAnti.antipoints -=4;
+							}
+						}
+						else
+						{
+							active = 2;
+							submenu -= 3;
+							magicselected = -1;
+							selected = 0;
+							driveselected = -1;
+						
+							AddedDrives.limit.activate(player, 2);
+							DriveAnti.antipoints++;
+						}
+					}
+	
 				}
-				else
+				else if(driveselected == 3)
 				{
-					active = 1;
-					submenu -= 3;
-					magicselected = -1;
-					selected = 0;
-					driveselected = -1;
-					
-					AddedDrives.wisdom.activate(player, 1);
-					DriveAnti.antipoints++;
+					if(dp.getCurrDrivePoints() < AddedDrives.master.getCost() || !EntityPropertyDriveForm.masterUnlocked)
+					{
+						submenu -= 3;
+						magicselected = -1;
+						selected = 0;
+						driveselected = -1;
+						//player.addChatMessage(new ChatComponentText("You can't drive into master form right now"));
+					}
+					else
+					{
+						if (random < DriveAnti.prob/100)
+						{
+							AddedDrives.anti.activate(player, 5);
+							
+							submenu -= 3;
+							magicselected = -1;
+							selected = 0;
+							driveselected = -1;
+							
+							if (DriveAnti.antipoints < 4)
+							{
+								DriveAnti.antipoints = 0;
+							}
+							else
+							{
+								DriveAnti.antipoints -=4;
+							}
+						}
+						else
+						{
+							active = 3;
+							submenu -= 3;
+							magicselected = -1;
+							selected = 0;
+							driveselected = -1;
+							
+							AddedDrives.master.activate(player, 3);
+							DriveAnti.antipoints++;
+						}
+					}
 				}
-			}
-			else if(driveselected == 2 && submenu == 3)
-			{
-				if(dp.getCurrDrivePoints() < AddedDrives.limit.getCost() || !EntityPropertyDriveForm.limitUnlocked)
+				else if(driveselected == 4)
 				{
-					submenu -= 3;
-					magicselected = -1;
-					selected = 0;
-					driveselected = -1;
-					//player.addChatMessage(new ChatComponentText("You can't drive into limit form right now"));
-				}else
-				{
-					active = 2;
-					submenu -= 3;
-					magicselected = -1;
-					selected = 0;
-					driveselected = -1;
-					
-					AddedDrives.limit.activate(player, 2);
-					DriveAnti.antipoints++;
-				}
-
-			}
-			else if(driveselected == 3 && submenu == 3)
-			{
-				if(dp.getCurrDrivePoints() < AddedDrives.master.getCost() || !EntityPropertyDriveForm.masterUnlocked)
-				{
-					submenu -= 3;
-					magicselected = -1;
-					selected = 0;
-					driveselected = -1;
-					//player.addChatMessage(new ChatComponentText("You can't drive into master form right now"));
-				}
-				else
-				{
-					active = 3;
-					submenu -= 3;
-					magicselected = -1;
-					selected = 0;
-					driveselected = -1;
-					
-					AddedDrives.master.activate(player, 3);
-					DriveAnti.antipoints++;
-				}
-
-			}
-			else if(driveselected == 4 && submenu == 3)
-			{
-				if(dp.getCurrDrivePoints() < AddedDrives.Final.getCost() || !EntityPropertyDriveForm.finalUnlocked)
-				{
-					submenu -= 3;
-					magicselected = -1;
-					selected = 0;
-					driveselected = -1;
-				//	player.addChatMessage(new ChatComponentText("You can't drive into final form right now"));
-				}
-				else
-				{
-					active = 4;
-					submenu -= 3;
-					magicselected = -1;
-					selected = 0;
-					driveselected = -1;
-					
-					AddedDrives.Final.activate(player, 4);
-				}
-
-				if (DriveAnti.antipoints < 10)
-				{
-					DriveAnti.antipoints = 0;
-				}
-				else
-				{
-					DriveAnti.antipoints -=10;
+					if(dp.getCurrDrivePoints() < AddedDrives.Final.getCost() || !EntityPropertyDriveForm.finalUnlocked)
+					{
+						submenu -= 3;
+						magicselected = -1;
+						selected = 0;
+						driveselected = -1;
+					//	player.addChatMessage(new ChatComponentText("You can't drive into final form right now"));
+					}
+					else
+					{
+						active = 4;
+						submenu -= 3;
+						magicselected = -1;
+						selected = 0;
+						driveselected = -1;
+						
+						AddedDrives.Final.activate(player, 4);
+					}
+	
+					if (DriveAnti.antipoints < 10)
+					{
+						DriveAnti.antipoints = 0;
+					}
+					else
+					{
+						DriveAnti.antipoints -=10;
+					}
 				}
 			}
 		}

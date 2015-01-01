@@ -24,9 +24,7 @@ public class ItemValorFormOrb extends Item {
 	{
 		if(!world.isRemote){
 			EntityPropertyDriveForm props = EntityPropertyDriveForm.get(entity);
-			System.out.println(props.getValorUnlocked());
 			props.setValorUnlocked(true);
-			System.out.println(props.getValorUnlocked());
 		}
 		return item;
 	}
