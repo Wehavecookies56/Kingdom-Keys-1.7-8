@@ -55,7 +55,7 @@ public class DriveActivatePacket implements IPacket {
 	@Override
 	public void handleServerSide(NetHandlerPlayServer nhServer) {
 		EntityPropertyDrivePoints dp = EntityPropertyDrivePoints.get(nhServer.playerEntity);
-		EntityPropertyDriveForm df = EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer);
+		EntityPropertyDriveForm df = EntityPropertyDriveForm.get(nhServer.playerEntity);
 		if(dp.getCurrDrivePoints() >= amount){
 			df.changeState(state);
 			consumePoints(amount, nhServer.playerEntity);
