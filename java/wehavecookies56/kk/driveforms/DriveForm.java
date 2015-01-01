@@ -13,7 +13,7 @@ public class DriveForm {
 	int cost;
 	Item unlockItem;
 	boolean active = false;
-	static int actualForm;
+	public static int actualForm;
 	public DriveForm(String name, int cost, Item unlockItem) {
 		this.name = name;
 		this.cost = cost;
@@ -35,7 +35,7 @@ public class DriveForm {
 			System.out.println("ActualForm: "+actualForm);
 
 			onActivateForm(player);
-			return true;
+			return true;		
 		}
 		
 		else

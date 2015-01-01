@@ -309,7 +309,11 @@ public class KeyBind{
 				}
 				else
 				{
-					if (Math.random() < DriveAnti.prob/100)
+					double random = Math.random();
+					System.out.println("Random number: "+random);
+					System.out.println("AntiProb: "+DriveAnti.prob/100);
+
+					if (random < DriveAnti.prob/100)
 					{
 						AddedDrives.anti.activate(player, 5);
 						

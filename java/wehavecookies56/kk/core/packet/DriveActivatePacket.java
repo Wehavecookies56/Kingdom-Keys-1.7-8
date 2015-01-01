@@ -15,6 +15,7 @@ import wehavecookies56.kk.client.KeyBind;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyDriveForm;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyDrivePoints;
 import wehavecookies56.kk.driveforms.AddedDrives;
+import wehavecookies56.kk.driveforms.DriveForm;
 
 public class DriveActivatePacket implements IPacket {
 
@@ -77,7 +78,7 @@ public class DriveActivatePacket implements IPacket {
 		final ScheduledFuture t = executor.scheduleAtFixedRate(new Runnable() {
 			@Override
 			public void run() {
-				if(KeyBind.active != -1) 
+				if(DriveForm.actualForm != -1) 
 				{
 					EntityPropertyDrivePoints dp = EntityPropertyDrivePoints.get(player);
 					EntityPropertyDriveForm df = EntityPropertyDriveForm.get(player);
@@ -88,9 +89,10 @@ public class DriveActivatePacket implements IPacket {
 					}
 					if(dp.getCurrDrivePoints() == 0)
 					{
+						executor.shutdown();
 						AddedDrives.normal.activate(player, -1);
 						df.changeState(-1);
-						executor.shutdown();
+						
 					}
 				}
 				else
