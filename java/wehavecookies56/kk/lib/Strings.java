@@ -19,6 +19,8 @@ public class Strings {
 	public static final String FinalForm = "finalForm";
 	public static final String LimitForm = "limitForm";
 	public static final String AntiForm = "antiForm";
+	public static final String Normal = "normalForm";
+
 	
 	//Drive form Orbs
 	public static final String ValorFormOrb = "valorFormOrb";

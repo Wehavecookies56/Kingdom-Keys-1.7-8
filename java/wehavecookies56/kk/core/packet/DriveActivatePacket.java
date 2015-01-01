@@ -88,7 +88,9 @@ public class DriveActivatePacket implements IPacket {
 					}
 					if(dp.getCurrDrivePoints() == 0)
 					{
-						df.changeState(-1); executor.shutdown();
+						AddedDrives.normal.activate(player, -1);
+						df.changeState(-1);
+						executor.shutdown();
 					}
 				}
 				else

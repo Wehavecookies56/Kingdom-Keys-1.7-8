@@ -9,7 +9,7 @@ import wehavecookies56.kk.lib.Strings;
 
 public class AddedDrives {
 
-	public static DriveForm valor, wisdom, master, Final, limit, anti;
+	public static DriveForm valor, wisdom, master, Final, limit, anti, normal;
 	Minecraft mc = Minecraft.getMinecraft();
 	static EntityPlayer player = (EntityPlayer) Minecraft.getMinecraft().thePlayer;
 
@@ -21,6 +21,7 @@ public class AddedDrives {
 		Final = new DriveFinal(Strings.FinalForm, 500, AddedItems.FinalFormOrb);
 		limit = new DriveLimit(Strings.LimitForm, 400, AddedItems.LimitFormOrb);
 		anti = new DriveAnti(Strings.AntiForm, 300, null);
+		normal = new DriveNormal(Strings.Normal, 0, null);
 	//	anti = new DriveAnti(Strings.AntiForm, EntityPropertyDrivePoints.get(Minecraft.getMinecraft().thePlayer).getCurrDrivePoints(), null);
 	}
 }
