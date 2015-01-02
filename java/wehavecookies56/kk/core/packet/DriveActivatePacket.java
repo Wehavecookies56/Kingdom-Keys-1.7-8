@@ -7,6 +7,9 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.entity.player.EntityPlayer;
@@ -44,6 +47,7 @@ public class DriveActivatePacket implements IPacket {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void handleClientSide(NetHandlerPlayClient nhClient) {
 		EntityPropertyDrivePoints dp = EntityPropertyDrivePoints.get(Minecraft.getMinecraft().thePlayer);
 		EntityPropertyDriveForm df = EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer);

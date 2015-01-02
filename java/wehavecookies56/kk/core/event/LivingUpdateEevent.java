@@ -92,6 +92,9 @@ public class LivingUpdateEevent {
 				}
 			}
 			
+			//Can't use Minecraft.getMinecraft() here
+			
+			/*
 			//Master
 			else if(df.getCurrentState() == 3)
 			{
@@ -147,6 +150,7 @@ public class LivingUpdateEevent {
 					}
 				}
 			}
+			*/
 			
 			//Antiform?
 			else if(df.getCurrentState() == 5)
