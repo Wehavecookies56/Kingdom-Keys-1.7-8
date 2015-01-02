@@ -91,7 +91,7 @@ public class DriveActivatePacket implements IPacket {
 					{
 						dp.setCurrDrivePoints((int)(EntityPropertyDrivePoints.get(player).getCurrDrivePoints() - 0.1));
 					}
-					
+
 					if(dp.getCurrDrivePoints() == 0)
 					{
 						executor.shutdown();
