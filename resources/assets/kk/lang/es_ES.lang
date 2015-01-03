@@ -627,11 +627,11 @@ achievement.synthesiser=¿Eso no es un instrumento musical?
 achievement.synthesiser.desc=Obtén un Sintetizador
 achievement.menu=¿Que hace ese botón?
 achievement.menu.desc=Abre el menú
-achievement.dheart=¿Hay oscuridad por ahí?
+achievement.dheart=¿Hay oscuridad cerca?
 achievement.dheart.desc=Obtén un Corazón Oscuro
 achievement.heart=No son cómo pensé que eran
 achievement.heart.desc=Obtén un Corazón
-achievement.pheart=¿Corazón Puro? Entonces no debería haberlos matado
+achievement.pheart=¿Corazón Puro? Entonces no debería haberlos liquidado
 achievement.pheart.desc=Obtén un Corazón Puro
 achievement.kheart=Necesito más rabia... Necesito más corazones...
 achievement.kheart.desc=Obtén Kingdom Hearts
@@ -675,5 +675,7 @@ gui.command.drive.wisdom=SABIA
 gui.command.drive.master=MAESTRA
 gui.command.drive.limit=LÍMITE
 gui.command.drive.final=FINAL
++gui.command.drive.revert=REVERTIR
+
 
 

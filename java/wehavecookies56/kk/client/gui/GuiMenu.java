@@ -84,7 +84,7 @@ public class GuiMenu extends GuiMenuBase {
 			drawBars("items");
 			this.buttonList.add(Keyblades = new GuiButton(7, 5, 55, 80, 20, StatCollector.translateToLocal(LocalStrings.Menu_Keyblades)));
 			this.buttonList.add(Back = new GuiButton(6, 5, 80, 80, 20, StatCollector.translateToLocal(LocalStrings.Menu_Back)));
-
+			Keyblades.enabled = false;
 		}
 		this.buttonList.add(Close = new GuiButton(4, width - 25, 5, 20, 20, "x"));
 		Stats.enabled = false;
