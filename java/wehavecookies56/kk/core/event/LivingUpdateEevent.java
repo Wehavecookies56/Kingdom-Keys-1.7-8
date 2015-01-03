@@ -12,7 +12,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class LivingUpdateEevent {
 	double vJump = 1.2D;
-	double wSprint = 1.6D;
+	double wSprint = 1.5D;
 	double lDodge;
 	int mDoubleJumps = 2; //Limit of doubleJumps
 	double fGlide = 0.6D;
@@ -68,7 +68,7 @@ public class LivingUpdateEevent {
 				
 				if(player.motionY > 0)
 				{
-					player.motionY *= 1.23D;
+					player.motionY *= 1.2D;
 				}
 				
 
@@ -94,7 +94,7 @@ public class LivingUpdateEevent {
 			
 			//Can't use Minecraft.getMinecraft() here
 			
-			/*
+			
 			//Master
 			else if(df.getCurrentState() == 3)
 			{
@@ -109,7 +109,8 @@ public class LivingUpdateEevent {
 						player.motionY *= 1.18D;
 					}
 				}
-//W.I.P.		
+//W.I.P.
+				/*				
 				int jumps=0;
 				if(!player.onGround)
 				{				
@@ -119,19 +120,16 @@ public class LivingUpdateEevent {
 						System.out.println("Jumps: "+jumps);
 						if(jumps<mDoubleJumps)
 						{
-							player.addChatMessage(new ChatComponentText("Hola"));
-							jumps = jumps + 1;
+							jumps++;
 							player.jump();
 						}
 					}
 				}
+				*/
 			}
-			
 			//Final
 			else if(df.getCurrentState() == 4)
-			{
-				player.fallDistance = 0;
-				
+			{				
 				if(player.motionY > 0)
 				{
 					player.motionY *= 1.17D;
@@ -142,20 +140,27 @@ public class LivingUpdateEevent {
 					player.motionZ *= 1.3D;
 				}
 				
-				else
+				/*else
 				{				
 					if(player.motionY < 0 && Minecraft.getMinecraft().gameSettings.keyBindJump.getIsKeyPressed())		
 					{
 						player.motionY *= fGlide;
 					}
-				}
+				}*/
 			}
-			*/
 			
 			//Antiform?
 			else if(df.getCurrentState() == 5)
 			{
+				if(player.motionY > 0)
+				{
+					player.motionY *= 1.05D;
+				}
 				
+				if(player.onGround && !player.isInWater()){
+					player.motionX *= 1.6D;
+					player.motionZ *= 1.6D;
+				}	
 			}
 			
 			//Normal
