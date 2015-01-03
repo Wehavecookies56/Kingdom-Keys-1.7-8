@@ -53,7 +53,6 @@ public class DriveActivatePacket implements IPacket {
 		EntityPropertyDriveForm df = EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer);
 		if(dp.getCurrDrivePoints() >= amount){
 			df.changeState(state);
-			consumePoints(amount, Minecraft.getMinecraft().thePlayer);
 		}
 	}
 
