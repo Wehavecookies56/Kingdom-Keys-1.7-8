@@ -277,6 +277,11 @@ item.darkKnowledge.name=Dark Knowledge
 item.voidedKnowledge.name=Voided Knowledge
 item.emptyBottle.name=Empty Bottle
 item.driveOrb.name=Drive Orb
+item.valorFormOrb.name=Valor Form Orb
+item.wisdomFormOrb.name=Wisdom Form Orb
+item.masterFormOrb.name=Master Form Orb
+item.finalFormOrb.name=Final Form Orb
+item.limitFormOrb.name=Limit Form Orb
 
 #Armour names
 item.organizationHood.name=Dark Robe Hood
