@@ -8,15 +8,15 @@ import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-import wehavecookies56.kk.client.model.ModelXBladeIncomplete;
+import wehavecookies56.kk.client.model.ModelSpellBinder;
 	
-public class ItemRenderXBladeIncomplete implements IItemRenderer {
+public class ItemRenderSpellBinder implements IItemRenderer {
 
-    protected ModelXBladeIncomplete model;
+    protected ModelSpellBinder model;
 
-    public ItemRenderXBladeIncomplete() {
+    public ItemRenderSpellBinder() {
 
-    	model = new ModelXBladeIncomplete();
+    	model = new ModelSpellBinder();
     }
 
     @Override
@@ -49,9 +49,7 @@ public class ItemRenderXBladeIncomplete implements IItemRenderer {
                 GL11.glRotatef(180F, 0, 1, 0);
                 GL11.glRotatef(45F, 0, 0, 1);
                 
-                GL11.glScalef(0.8F, 0.8F, 0.8F);
-                
-                Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/entities/XBladeIncomplete.png"));
+                Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/entities/SpellBinder.png"));
                 
                 model.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
                 

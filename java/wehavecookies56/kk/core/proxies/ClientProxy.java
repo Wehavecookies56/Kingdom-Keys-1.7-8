@@ -40,8 +40,10 @@ import wehavecookies56.kk.client.render.ItemRenderRainFell;
 import wehavecookies56.kk.client.render.ItemRenderRumblingRose;
 import wehavecookies56.kk.client.render.ItemRenderSkysplitter;
 import wehavecookies56.kk.client.render.ItemRenderSoulEater;
+import wehavecookies56.kk.client.render.ItemRenderSpellBinder;
 import wehavecookies56.kk.client.render.ItemRenderStarLight;
 import wehavecookies56.kk.client.render.ItemRenderTotalEclipse;
+import wehavecookies56.kk.client.render.ItemRenderUltimaWeapon;
 import wehavecookies56.kk.client.render.ItemRenderVoidedKnowledge;
 import wehavecookies56.kk.client.render.ItemRenderWaywardWind;
 import wehavecookies56.kk.client.render.ItemRenderWoodenKeyblade;
@@ -104,6 +106,9 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(AddedItems.PeoplesHearts, new ItemRenderKeybladeOfPeoplesHearts());
 		MinecraftForgeClient.registerItemRenderer(AddedItems.Kyeblade, new ItemRenderXBlade());
 		MinecraftForgeClient.registerItemRenderer(AddedItems.KyebladeBroken, new ItemRenderXBladeIncomplete());
+		MinecraftForgeClient.registerItemRenderer(AddedItems.Lightseeker, new ItemRenderKingdomKeyD());
+		MinecraftForgeClient.registerItemRenderer(AddedItems.UltimaWeaopon, new ItemRenderUltimaWeapon());
+		MinecraftForgeClient.registerItemRenderer(AddedItems.SpellBinder, new ItemRenderSpellBinder());
 
 
 		MinecraftForgeClient.registerItemRenderer(new ItemStack(AddedBlocks.KKChest).getItem(), new ItemRenderKKChest());

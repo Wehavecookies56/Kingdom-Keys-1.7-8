@@ -49,6 +49,8 @@ public class ItemRenderXBlade implements IItemRenderer {
                 GL11.glRotatef(180F, 0, 1, 0);
                 GL11.glRotatef(45F, 0, 0, 1);
                 
+                GL11.glScalef(0.8F, 0.8F, 0.8F);
+                
                 Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/entities/XBlade.png"));
                 
                 model.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);

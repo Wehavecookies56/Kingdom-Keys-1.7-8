@@ -167,7 +167,7 @@ public class ModelXBladeIncomplete extends ModelBase
       setRotation(Shape19, 0F, 0F, -3.001966F);
       Shape19.mirror = true;
       Shape20 = new ModelRenderer(this, 41, 4);
-      Shape20.addBox(0F, 0F, 0F, 1, 4, 1);
+      Shape20.addBox(-2F, -3F, 0F, 1, 4, 1);
       Shape20.setRotationPoint(-7F, -2F, 1F);
       Shape20.setTextureSize(120, 60);
       Shape20.mirror = true;
