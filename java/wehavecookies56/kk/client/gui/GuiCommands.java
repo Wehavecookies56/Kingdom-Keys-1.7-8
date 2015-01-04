@@ -290,11 +290,11 @@ public class GuiCommands extends Gui {
 				{
 					if (LivingUpdateEevent.onDrive)
 					{
-						GuiDrawText.drawString(StatCollector.translateToLocal("REVERT"), 10, screenHeight - (commandHeight * (FINAL-1)-2) - 13, 0xFFFFFF);
+						GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Revert), 10, screenHeight - (commandHeight * (FINAL-1)-2) - 13, 0xFFFFFF);
 					}
 					else
 					{
-						GuiDrawText.drawString(StatCollector.translateToLocal("REVERT"), 10, screenHeight - (commandHeight * (FINAL-1)-2) - 13, 0x555555);
+						GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Revert), 10, screenHeight - (commandHeight * (FINAL-1)-2) - 13, 0x555555);
 					}
 				}
 				else
@@ -323,21 +323,19 @@ public class GuiCommands extends Gui {
 				{
 					if (LivingUpdateEevent.onDrive)
 					{
-						GuiDrawText.drawString(StatCollector.translateToLocal("REVERT"), 10, screenHeight - (commandHeight * (FINAL-1)-2) - 13, 0xFFFFFF);
+						GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Revert), 10, screenHeight - (commandHeight * (FINAL-1)-2) - 13, 0xFFFFFF);
 					}
 					else
 					{
-						GuiDrawText.drawString(StatCollector.translateToLocal("REVERT"), 10, screenHeight - (commandHeight * (FINAL-1)-2) - 13, 0x555555);
+						GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive_Revert), 10, screenHeight - (commandHeight * (FINAL-1)-2) - 13, 0x555555);
 					}
 				}
 				else
 				{
 					GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive), 10, screenHeight - (commandHeight * (FINAL-1)-2) - 13, 0xFFFFFF);
 				}
-				//GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Drive), 10, screenHeight - (commandHeight * DRIVE) +4, 0xFFFFFF);
 
 				GL11.glPopMatrix();
-
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				break;
 			case ITEMS:
@@ -419,9 +417,7 @@ public class GuiCommands extends Gui {
 			//GL11.glScalef(1.1F, 1.1F, 1.1F);
 			GuiDrawText.drawString(StatCollector.translateToLocal(LocalStrings.Command_Command), 7, screenHeight - (commandHeight * TOP) +4, 0x0069D1);
 			GL11.glPopMatrix();
-
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			
 			GL11.glPopMatrix();
 		}
 	}

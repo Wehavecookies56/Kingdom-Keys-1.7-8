@@ -15,28 +15,30 @@ public class DriveForm {
 	Item unlockItem;
 	boolean active = false;
 	public static int actualForm;
-	public DriveForm(String name, int cost, Item unlockItem) {
+	public DriveForm(String name, int cost, Item unlockItem)
+	{
 		this.name = name;
 		this.cost = cost;
 		this.unlockItem = unlockItem;
 	}
 	
-	public boolean activate(EntityPlayer player, int state){
+	public boolean activate(EntityPlayer player, int state)
+	{
 		
-		System.out.println("Trying to activate");
+	//	System.out.println("Trying to activate");
 		EntityPropertyDrivePoints dp = EntityPropertyDrivePoints.get(player);
 		EntityPropertyDriveForm df = EntityPropertyDriveForm.get(player);	
 
-		System.out.println("Drive Points: "+dp.getCurrDrivePoints());
+	//	System.out.println("Drive Points: "+dp.getCurrDrivePoints());
 		
 		if(dp.getCurrDrivePoints() >= cost && df.getCurrentState() == -1)
 		{
-			System.out.println("Got da points");
+		//	System.out.println("Got da points");
 			active = true;
-			System.out.println("Cost: "+getCost());
+		//	System.out.println("Cost: "+getCost());
 			consumePoints(getCost(), player, state);
 			actualForm = state;
-			System.out.println("ActualForm: "+actualForm);
+		//	System.out.println("ActualForm: "+actualForm);
 
 			onActivateForm(player);
 			return true;		
