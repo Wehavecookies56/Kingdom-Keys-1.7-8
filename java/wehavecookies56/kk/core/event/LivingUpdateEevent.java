@@ -144,9 +144,9 @@ public class LivingUpdateEevent {
 					player.motionZ *= 1.3D;
 				}
 				
-				/*else
+			/*	else
 				{				
-					if(player.motionY < 0 && Minecraft.getMinecraft().gameSettings.keyBindJump.getIsKeyPressed())		
+					if(player.motionY < 0 && ())		
 					{
 						player.motionY *= fGlide;
 					}

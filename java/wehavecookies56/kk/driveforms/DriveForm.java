@@ -3,6 +3,7 @@ package wehavecookies56.kk.driveforms;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import wehavecookies56.kk.KingdomKeys;
+import wehavecookies56.kk.core.extendedproperties.EntityPropertyDriveForm;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyDrivePoints;
 import wehavecookies56.kk.core.packet.DriveActivatePacket;
 import wehavecookies56.kk.core.packet.IPacket;
@@ -21,12 +22,15 @@ public class DriveForm {
 	}
 	
 	public boolean activate(EntityPlayer player, int state){
+		
 		System.out.println("Trying to activate");
 		EntityPropertyDrivePoints dp = EntityPropertyDrivePoints.get(player);
+		EntityPropertyDriveForm df = EntityPropertyDriveForm.get(player);	
 
 		System.out.println("Drive Points: "+dp.getCurrDrivePoints());
 		
-		if(dp.getCurrDrivePoints() >= cost){
+		if(dp.getCurrDrivePoints() >= cost && df.getCurrentState() == -1)
+		{
 			System.out.println("Got da points");
 			active = true;
 			System.out.println("Cost: "+getCost());

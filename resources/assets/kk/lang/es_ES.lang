@@ -665,17 +665,14 @@ gui.command.magic.stop=PARO
 gui.command.magic.aero=AERO
 
 #Fusión
-item.valorFormOrb.name=Valor Form Orb
-item.wisdomFormOrb.name=Wisdom Form Orb
-item.masterFormOrb.name=Master Form Orb
-item.finalFormOrb.name=Final Form Orb
-item.limitFormOrb.name=Limit Form Orb
+item.valorFormOrb.name=Orbe de Forma Valiente
+item.wisdomFormOrb.name=Orbe de Forma Sabia
+item.masterFormOrb.name=Orbe de Forma Maestra
+item.finalFormOrb.name=Orbe de Forma Final
+item.limitFormOrb.name=Orbe de Forma Límite
 gui.command.drive.valor=VALIENTE
 gui.command.drive.wisdom=SABIA
 gui.command.drive.master=MAESTRA
 gui.command.drive.limit=LÍMITE
 gui.command.drive.final=FINAL
-+gui.command.drive.revert=REVERTIR
-
-
-
+gui.command.drive.revert=REVERTIR
