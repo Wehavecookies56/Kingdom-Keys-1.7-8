@@ -41,7 +41,10 @@ public class TileEntityRendererKKChest extends TileEntitySpecialRenderer{
 	}
 
 	public void renderBlock(TileEntityKKChest te, World world, int x, int y, int z, Block block){
-        int dir = te.getFacingDirection();
+        int dir = 0;
+        if(te.getWorldObj() != null){
+        	dir = te.getBlockMetadata();
+        }
         GL11.glPushMatrix();
         GL11.glTranslatef(0.5F, 0, 0.5F);
         GL11.glRotatef(dir * (-90F), 0F, 1F, 0F);

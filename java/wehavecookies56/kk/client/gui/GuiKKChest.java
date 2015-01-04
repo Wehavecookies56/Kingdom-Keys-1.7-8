@@ -21,6 +21,9 @@ public class GuiKKChest extends GuiContainer{
 
 	TileEntityKKChest chest = new TileEntityKKChest();
 
+	protected int xSize = 176;
+	protected int ySize = 166;
+	
 	@SideOnly(Side.CLIENT)
 	public GuiKKChest(InventoryPlayer invPlayer, TileEntityKKChest chest) {
 		super(new ContainerKKChest(invPlayer, chest));
@@ -34,12 +37,21 @@ public class GuiKKChest extends GuiContainer{
 
 	private static final ResourceLocation texture = new ResourceLocation("kk", "textures/gui/KKChest.png");
 
+	
+	@Override
+	protected void drawGuiContainerForegroundLayer(int p_146979_1_,
+			int p_146979_2_) {
+		super.drawGuiContainerForegroundLayer(p_146979_1_, p_146979_2_);
+	}
+	
 	@Override
 	@SideOnly(Side.CLIENT)
 	protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
 		GL11.glColor4f(1F, 1F, 1F, 1F);
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
-		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+		int xPos = (width - xSize) / 2;
+        int yPos = (height - ySize) / 2;
+		drawTexturedModalRect(xPos, yPos, 0, 0, xSize, ySize);
 
 	}
 }

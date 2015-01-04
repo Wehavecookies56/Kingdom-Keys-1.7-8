@@ -251,9 +251,9 @@ public class GuiSynthesis extends GuiContainer {
 		addSynthesisRecipe(AddedItems.K104r, AddedItems.TreasureTroveChain, AddedItems.TreasureTroveMaterial, true, 1050, AddedItems.DenseCrystal, AddedItems.BlazingGem, AddedItems.FrostGem, AddedItems.LightningGem, AddedItems.BrightShard, AddedItems.BrightStone);
 		addSynthesisRecipe(AddedItems.K105r, AddedItems.StarseekerChain, AddedItems.StarseekerMaterial, true, 1800, AddedItems.Orichalcum, AddedItems.BrightCrystal, AddedItems.BrightGem, AddedItems.DarkStone, AddedItems.TwilightGem, AddedItems.TwilightStone);
 		addSynthesisRecipe(AddedItems.K106r, AddedItems.SoulEaterChain, AddedItems.SoulEaterMaterial, true, 1800, AddedItems.DarkMatter, AddedItems.DarkCrystal, AddedItems.RemembranceGem, AddedItems.SerenityGem, AddedItems.LucidShard, AddedItems.LucidStone, AddedItems.PowerGem);
-		//addSynthesisRecipe(AddedItems.K107r, AddedItems.K107c, AddedItems.K107m, true, 900, item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11);
-		//addSynthesisRecipe(AddedItems.K108r, AddedItems.K108c, AddedItems.K108m, true, 900, item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11);
-		//addSynthesisRecipe(AddedItems.K109r, AddedItems.K109c, AddedItems.K109m, true, 1500, item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11);
+		addSynthesisRecipe(AddedItems.K107r, AddedItems.StarlightChain, AddedItems.StarlightMaterial, true, 900, AddedItems.ShinyCrystal, AddedItems.BrightStone, AddedItems.BrightShard, AddedItems.EnergyGem, AddedItems.PowerGem);
+		addSynthesisRecipe(AddedItems.K108r, AddedItems.RainfellChain, AddedItems.RainfellMaterial, true, 900, AddedItems.BrightCrystal, AddedItems.FrostCrystal, AddedItems.FrostGem, AddedItems.BrightShard, AddedItems.DenseShard, AddedItems.FrostShard, AddedItems.BrightStone);
+		addSynthesisRecipe(AddedItems.K109r, AddedItems.EarthShakerChain, AddedItems.EarthshakerMaterial, true, 1500, AddedItems.PowerCrystal, AddedItems.DarkCrystal, AddedItems.BrightStone, AddedItems.DenseGem, AddedItems.DarkShard, AddedItems.DarkStone);
 		addSynthesisRecipe(AddedItems.K110r, AddedItems.WaywardWindChain, AddedItems.WaywardWindMaterial, true, 1200, AddedItems.LightningCrystal, AddedItems.LightningStone, AddedItems.DenseShard, AddedItems.LightningGem, AddedItems.PowerCrystal, AddedItems.PowerGem);
 		addSynthesisRecipe(AddedItems.K111r, AddedItems.KingdomKeyChain, AddedItems.KingdomKeyMaterial, true, 750, AddedItems.SerenityCrystal, AddedItems.BrightGem, AddedItems.DenseStone, AddedItems.BrightStone, AddedItems.BrightShard);
 		addSynthesisRecipe(AddedItems.K112r, AddedItems.OathkeeperChain, AddedItems.OathkeeperMaterial, true, 1650, AddedItems.SerenityCrystal, AddedItems.BrightGem, AddedItems.DenseStone, AddedItems.BrightStone, AddedItems.BrightShard);
@@ -1058,9 +1058,9 @@ public class GuiSynthesis extends GuiContainer {
 					GL11.glColor3f(1, 1, 1);
 					GL11.glDisable(GL11.GL_LIGHTING);
 					if(isKeyblade){
-						fontRendererObj.drawSplitString(LocalStrings.Synthesis_Tab3_Attack, 30, 30, 120, 0x004CFF);
+						fontRendererObj.drawSplitString(StatCollector.translateToLocal(LocalStrings.Synthesis_Tab3_Attack), 30, 30, 120, 0x004CFF);
 					}else{
-						fontRendererObj.drawSplitString(LocalStrings.Synthesis_Tab3_Mat, 30, 30, 120, 0x004CFF);
+						fontRendererObj.drawSplitString(StatCollector.translateToLocal(LocalStrings.Synthesis_Tab3_Mat), 30, 30, 120, 0x004CFF);
 					}
 				}
 			}

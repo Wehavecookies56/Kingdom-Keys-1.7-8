@@ -119,7 +119,7 @@ public class BlockKKChest extends BlockContainer
 				player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.YoungXehanortsKeyblade||
 				player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.ZeroOne)
 		{
-			if(world.isRemote){
+			if(!world.isRemote){
                 TileEntity tileEntityKKChest = world.getTileEntity(x, y, z);
 
 				if (tileEntityKKChest == null)
