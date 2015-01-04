@@ -83,7 +83,8 @@ public class DriveActivatePacket implements IPacket {
 
 		final ScheduledFuture t = executor.scheduleAtFixedRate(new Runnable() {
 			@Override
-			public void run() {
+			public void run() 
+			{
 				if(KeyBind.active != -1)
 				{
 					EntityPropertyDrivePoints dp = EntityPropertyDrivePoints.get(player);

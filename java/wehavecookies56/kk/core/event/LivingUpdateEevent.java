@@ -5,6 +5,8 @@ import wehavecookies56.kk.core.extendedproperties.EntityPropertyDriveForm;
 import wehavecookies56.kk.item.AddedItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
@@ -70,7 +72,7 @@ public class LivingUpdateEevent {
 				{
 					player.motionY *= 1.2D;
 				}
-				
+				player.addPotionEffect(new PotionEffect(Potion.damageBoost.getId(),2,0));
 
 			}
 			
@@ -81,6 +83,7 @@ public class LivingUpdateEevent {
 					player.motionX *= wSprint;
 					player.motionZ *= wSprint;
 				}
+				
 			}
 			
 			//Limit
@@ -90,6 +93,7 @@ public class LivingUpdateEevent {
 					player.motionX *= 1.0;
 					player.motionZ *= 1.0;
 				}
+				player.addPotionEffect(new PotionEffect(Potion.damageBoost.getId(),2,1));
 			}
 			
 			//Can't use Minecraft.getMinecraft() here

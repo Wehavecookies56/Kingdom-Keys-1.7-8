@@ -16,18 +16,23 @@ public class OnHitEvent
 	@SubscribeEvent
 	public void LivingAttackEvent (LivingHurtEvent event)
 	{
-		if(event.entity instanceof EntityPlayer){
+		if(event.entity instanceof EntityPlayer)
+		{
 			EntityPlayer player = (EntityPlayer) event.entityLiving;
 			EntityPropertyDriveForm df = EntityPropertyDriveForm.get(player);
 
-			if(df.getCurrentState() == 0){
+			if(df.getCurrentState() == 0)
+			{
 				valorActive = true;
-			}else{
+			}
+			else
+			{
 				valorActive = false;
 			}
 		}
-		if(event.entity instanceof EntityLivingBase){			
-			if(valorActive){
+		if(event.entity instanceof EntityLivingBase)
+		{			
+				if(valorActive){
 				event.ammount += valorAmmount;
 			}
 		}
