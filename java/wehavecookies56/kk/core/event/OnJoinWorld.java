@@ -28,7 +28,7 @@ public class OnJoinWorld
 		{
 			EntityPropertyDriveForm df = EntityPropertyDriveForm.get((EntityPlayer) event.entity);
 			LivingUpdateEevent.onDrive = true;
-			KeyBind.active = -1;
+			//KeyBind.active = -1;
 			df.changeState(-1);
 			
 		}
