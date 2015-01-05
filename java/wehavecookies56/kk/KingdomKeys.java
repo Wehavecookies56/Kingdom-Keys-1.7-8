@@ -272,7 +272,7 @@ public class KingdomKeys {
 		MinecraftForge.EVENT_BUS.register(new EntityDamagedEvent());
 		MinecraftForge.EVENT_BUS.register(new LivingUpdateEevent());
 		MinecraftForge.EVENT_BUS.register(new LivingFallEvent(entityplayer, 0));
-		MinecraftForge.EVENT_BUS.register(new OnJoinWorld(entityplayer, World));
+		MinecraftForge.EVENT_BUS.register(new OnJoinWorld());
 
 		FMLCommonHandler.instance().bus().register(instance);
 		FMLCommonHandler.instance().bus().register(new OnCraftedEvent());
