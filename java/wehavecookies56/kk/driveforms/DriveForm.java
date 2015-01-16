@@ -29,16 +29,16 @@ public class DriveForm {
 		EntityPropertyDrivePoints dp = EntityPropertyDrivePoints.get(player);
 		EntityPropertyDriveForm df = EntityPropertyDriveForm.get(player);	
 
-	//	System.out.println("Drive Points: "+dp.getCurrDrivePoints());
+		System.out.println("Drive Points: "+dp.getCurrDrivePoints());
 		
 		if(dp.getCurrDrivePoints() >= cost && df.getCurrentState() == -1)
 		{
-		//	System.out.println("Got da points");
+			System.out.println("Got da points");
 			active = true;
-		//	System.out.println("Cost: "+getCost());
+			System.out.println("Cost: "+getCost());
 			consumePoints(getCost(), player, state);
 			actualForm = state;
-		//	System.out.println("ActualForm: "+actualForm);
+			System.out.println("ActualForm: "+actualForm);
 
 			onActivateForm(player);
 			return true;		

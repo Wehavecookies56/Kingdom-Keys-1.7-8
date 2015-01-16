@@ -72,7 +72,7 @@ public class LivingUpdateEevent {
 				{
 					player.motionY *= 1.2D;
 				}
-				player.addPotionEffect(new PotionEffect(Potion.damageBoost.getId(),2,0));
+				player.addPotionEffect(new PotionEffect(Potion.damageBoost.getId(),2,2));
 
 			}
 			
@@ -170,7 +170,7 @@ public class LivingUpdateEevent {
 			//Normal
 			else
 			{
-				
+				 
 			}
 		}
 	}
