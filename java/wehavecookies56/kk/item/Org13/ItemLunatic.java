@@ -26,7 +26,7 @@ public class ItemLunatic extends ItemSword implements IBattlegearWeapon{
     @SideOnly(Side.CLIENT)
     @Override
     public void registerIcons(IIconRegister par1IconRegister) {
-        itemIcon = par1IconRegister.registerIcon(Reference.MOD_ID + ":" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".")+1));
+        itemIcon = par1IconRegister.registerIcon(Reference.MOD_ID + ":orgxiii/" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".")+1));
         }
     
     @Override

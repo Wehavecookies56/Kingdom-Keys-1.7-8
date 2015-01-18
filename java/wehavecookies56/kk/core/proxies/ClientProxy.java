@@ -129,7 +129,7 @@ public class ClientProxy extends CommonProxy {
 		VillagerRegistry.instance().registerVillagerSkin(20, villagerTexture);
 		VillagerRegistry.getVillagerSkin(10, villagerTexture);
 
-		Sphere sphere = new Sphere();
+		/*Sphere sphere = new Sphere();
 
 		sphere.setDrawStyle(GLU.GLU_FILL);
 		sphere.setNormals(GLU.GLU_SMOOTH);
@@ -148,6 +148,7 @@ public class ClientProxy extends CommonProxy {
 		Minecraft.getMinecraft().getTextureManager().bindTexture(rL);
 		sphere.draw(1.5F, 32, 32);
 		GL11.glEndList();
+		*/
 	}
 
 	@Override

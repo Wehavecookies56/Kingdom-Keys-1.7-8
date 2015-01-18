@@ -39,6 +39,6 @@ public class KeybladeTArmor extends ItemArmor{
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconReg) {
-      this.itemIcon = iconReg.registerIcon(Reference.MOD_ID + ":" + this.name);
+      this.itemIcon = iconReg.registerIcon(Reference.MOD_ID + ":misc/" + this.name);
     }
 }

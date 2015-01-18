@@ -26,6 +26,6 @@ public class ItemFinalFormOrb extends Item {
 	
 	@Override
 	public void registerIcons(IIconRegister par1IconRegister) {
-		itemIcon = par1IconRegister.registerIcon(Reference.MOD_ID + ":" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".")+1));
+		itemIcon = par1IconRegister.registerIcon(Reference.MOD_ID + ":misc/" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".")+1));
 	}
 }

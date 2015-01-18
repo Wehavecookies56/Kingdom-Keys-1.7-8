@@ -58,7 +58,7 @@ public class BlockSynthesis extends BlockContainer{
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float a, float b, float c)
 	{
 		if(world.isRemote){
-			Minecraft.getMinecraft().thePlayer.playSound("kk:kupo", 0.3F, 2.0F);
+			Minecraft.getMinecraft().thePlayer.playSound("kk:kupo", 0.3F, 1.1F);
 			player.openGui(KingdomKeys.instance, 0, world, x, y, z);
 		}
 		return true;

@@ -39,6 +39,6 @@ public class OrganizationArmor extends ItemArmor{
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconReg) {
       // sets the icon of this armor whenever it is in any inventory
-      this.itemIcon = iconReg.registerIcon(Reference.MOD_ID + ":" + this.name);
+      this.itemIcon = iconReg.registerIcon(Reference.MOD_ID + ":misc/" + this.name);
     }
 }
