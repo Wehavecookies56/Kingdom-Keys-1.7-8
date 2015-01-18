@@ -8,7 +8,6 @@ import java.util.Iterator;
 
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyMunny;
 import wehavecookies56.kk.entities.tileentities.TileEntitySynthesis;
-
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -21,8 +20,10 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.WorldServer;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
-public class SynthesisPacket implements IPacket {
+public class SynthesisPacket implements IMessage {
 
 	ItemStack recipe;
 	ItemStack result;
@@ -174,7 +175,7 @@ public class SynthesisPacket implements IPacket {
 	}
 
 	@Override
-	public void readBytes(ByteBuf bytes) {
+	public void fromBytes(ByteBuf bytes) {
 		this.recipe = ByteBufUtils.readItemStack(bytes);
 		this.result = ByteBufUtils.readItemStack(bytes);
 		this.item1 = ByteBufUtils.readItemStack(bytes);
@@ -193,7 +194,7 @@ public class SynthesisPacket implements IPacket {
 	}
 
 	@Override
-	public void writeBytes(ByteBuf bytes) {
+	public void toBytes(ByteBuf bytes) {
 		ByteBufUtils.writeItemStack(bytes, this.recipe);
 		ByteBufUtils.writeItemStack(bytes, this.result);
 		ByteBufUtils.writeItemStack(bytes, this.item1);
@@ -210,53 +211,53 @@ public class SynthesisPacket implements IPacket {
 		bytes.writeInt(cost);
 	}
 
-	@Override
-	public void handleClientSide(NetHandlerPlayClient nhClient) {
-		
-	}
+	public static class Handler implements IMessageHandler<SynthesisPacket, IMessage>{
 
-	@Override
-	public void handleServerSide(NetHandlerPlayServer nhServer) {
-		EntityPlayer player = nhServer.playerEntity;
-		player.inventory.addItemStackToInventory(result);
+		@Override
+		public IMessage onMessage(SynthesisPacket message, MessageContext ctx) {
+			EntityPlayer player = ctx.getServerHandler().playerEntity;
+			player.inventory.addItemStackToInventory(message.result);
 
-		EntityPropertyMunny props = EntityPropertyMunny.get(player);
+			EntityPropertyMunny props = EntityPropertyMunny.get(player);
+			
+			if(message.item1 != null){
+				player.inventory.consumeInventoryItem(message.item1.getItem());
+			}
+			if(message.item2 != null){
+				player.inventory.consumeInventoryItem(message.item2.getItem());
+			}
+			if(message.item3 != null){
+				player.inventory.consumeInventoryItem(message.item3.getItem());
+			}
+			if(message.item4 != null){
+				player.inventory.consumeInventoryItem(message.item4.getItem());
+			}
+			if(message.item5 != null){
+				player.inventory.consumeInventoryItem(message.item5.getItem());
+			}
+			if(message.item6 != null){
+				player.inventory.consumeInventoryItem(message.item6.getItem());
+			}
+			if(message.item7 != null){
+				player.inventory.consumeInventoryItem(message.item7.getItem());
+			}
+			if(message.item8 != null){
+				player.inventory.consumeInventoryItem(message.item8.getItem());
+			}
+			if(message.item9 != null){
+				player.inventory.consumeInventoryItem(message.item9.getItem());
+			}
+			if(message.item10 != null){
+				player.inventory.consumeInventoryItem(message.item10.getItem());
+			}
+			if(message.item11 != null){
+				player.inventory.consumeInventoryItem(message.item11.getItem());
+			}
+			
+			props.consumeMunny(message.cost);
+			return null;
+		}
 		
-		if(this.item1 != null){
-			player.inventory.consumeInventoryItem(this.item1.getItem());
-		}
-		if(item2 != null){
-			player.inventory.consumeInventoryItem(this.item2.getItem());
-		}
-		if(item3 != null){
-			player.inventory.consumeInventoryItem(this.item3.getItem());
-		}
-		if(item4 != null){
-			player.inventory.consumeInventoryItem(this.item4.getItem());
-		}
-		if(item5 != null){
-			player.inventory.consumeInventoryItem(this.item5.getItem());
-		}
-		if(item6 != null){
-			player.inventory.consumeInventoryItem(this.item6.getItem());
-		}
-		if(item7 != null){
-			player.inventory.consumeInventoryItem(this.item7.getItem());
-		}
-		if(item8 != null){
-			player.inventory.consumeInventoryItem(this.item8.getItem());
-		}
-		if(item9 != null){
-			player.inventory.consumeInventoryItem(this.item9.getItem());
-		}
-		if(item10 != null){
-			player.inventory.consumeInventoryItem(this.item10.getItem());
-		}
-		if(item11 != null){
-			player.inventory.consumeInventoryItem(this.item11.getItem());
-		}
-		
-		props.consumeMunny(cost);
 	}
 
 }

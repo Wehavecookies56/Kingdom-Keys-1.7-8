@@ -15,8 +15,11 @@ import wehavecookies56.kk.core.extendedproperties.EntityPropertyDrivePoints;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyMunny;
 import wehavecookies56.kk.item.AddedItems;
 import cpw.mods.fml.common.network.ByteBufUtils;
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
-public class MunnyPacket implements IPacket {
+public class MunnyPacket implements IMessage {
 		
 		ItemStack itemToRemove;
 		int munnyToGive;
@@ -29,7 +32,7 @@ public class MunnyPacket implements IPacket {
 	    }
 	    
 		@Override
-		public void readBytes(ByteBuf bytes) {
+		public void fromBytes(ByteBuf bytes) {
 			this.itemToRemove = ByteBufUtils.readItemStack(bytes);
 			this.munnyToGive = bytes.readInt();
 			
@@ -42,39 +45,39 @@ public class MunnyPacket implements IPacket {
 		}
 		
 		@Override
-		public void writeBytes(ByteBuf bytes) {
+		public void toBytes(ByteBuf bytes) {
 			ByteBufUtils.writeItemStack(bytes, this.itemToRemove);
 			bytes.writeInt(this.munnyToGive);
 
 		}
+		
+		public static class Handler implements IMessageHandler<MunnyPacket, IMessage>{
 
-		@Override
-		public void handleClientSide(NetHandlerPlayClient nhClient) {
-			
-		}
-
-		@Override
-		public void handleServerSide(NetHandlerPlayServer nhServer) {
-			EntityPlayer player = nhServer.playerEntity;
-			if(player.getHeldItem() != null){
-				if (player.getHeldItem().getItem() == AddedItems.DriveOrb)
-				{
-					EntityPropertyDrivePoints props = EntityPropertyDrivePoints.get((EntityPlayer)player);
-					if (!(props.getCurrDrivePoints() >= 1000))
+			@Override
+			public IMessage onMessage(MunnyPacket message, MessageContext ctx) {
+				EntityPlayer player = ctx.getServerHandler().playerEntity;
+				if(player.getHeldItem() != null){
+					if (player.getHeldItem().getItem() == AddedItems.DriveOrb)
 					{
-						player.playSound("random.orb", 1, 1);
-						EntityPropertyDrivePoints.get(player).addDrivePoints(10);
-						player.inventory.consumeInventoryItem(AddedItems.DriveOrb);
-						System.out.println(props.getCurrDrivePoints());
+						EntityPropertyDrivePoints props = EntityPropertyDrivePoints.get((EntityPlayer)player);
+						if (!(props.getCurrDrivePoints() >= 1000))
+						{
+							player.playSound("random.orb", 1, 1);
+							EntityPropertyDrivePoints.get(player).addDrivePoints(10);
+							player.inventory.consumeInventoryItem(AddedItems.DriveOrb);
+							System.out.println(props.getCurrDrivePoints());
+						}
+					}
+					else if(player.getHeldItem().getItem() == message.itemToRemove.getItem()){
+						EntityPropertyMunny props = EntityPropertyMunny.get((EntityPlayer)player);
+						props.addMunny(message.munnyToGive * player.getHeldItem().stackSize);
+						player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
+
 					}
 				}
-				else if(player.getHeldItem().getItem() == itemToRemove.getItem()){
-					EntityPropertyMunny props = EntityPropertyMunny.get((EntityPlayer)player);
-					props.addMunny(munnyToGive * player.getHeldItem().stackSize);
-					player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
-
-				}
+				return null;
 			}
+			
 		}
 
 	}

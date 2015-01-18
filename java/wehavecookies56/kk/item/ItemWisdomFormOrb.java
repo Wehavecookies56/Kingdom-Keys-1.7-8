@@ -20,7 +20,8 @@ public class ItemWisdomFormOrb extends Item {
 
 	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer entity)
 	{
-		EntityPropertyDriveForm.wisdomUnlocked = true;
+		EntityPropertyDriveForm df = EntityPropertyDriveForm.get(entity);
+		df.setWisdomUnlocked(1);
 		return item;
 	}
 	

@@ -2,21 +2,16 @@ package wehavecookies56.kk.core.packet;
 
 
 import io.netty.buffer.ByteBuf;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.NetHandlerPlayServer;
-import net.minecraft.server.MinecraftServer;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
-public class SummonPacket implements IPacket {
+public class SummonPacket implements IMessage {
 	
 	ItemStack itemToSummon;
 	ItemStack itemToRemove;
@@ -29,33 +24,35 @@ public class SummonPacket implements IPacket {
     	
     }
 	
+    @Override
+	public void fromBytes(ByteBuf buf) {
+		this.itemToSummon = ByteBufUtils.readItemStack(buf);
+		this.itemToRemove = ByteBufUtils.readItemStack(buf);
+		
+	}
+
 	@Override
-	public void readBytes(ByteBuf bytes) {
-		this.itemToSummon = ByteBufUtils.readItemStack(bytes);
-		this.itemToRemove = ByteBufUtils.readItemStack(bytes);
+	public void toBytes(ByteBuf buf) {
+		ByteBufUtils.writeItemStack(buf, this.itemToSummon);
+		ByteBufUtils.writeItemStack(buf, this.itemToRemove);
 		
 	}
 	
-	@Override
-	public void writeBytes(ByteBuf bytes) {
-		ByteBufUtils.writeItemStack(bytes, this.itemToSummon);
-		ByteBufUtils.writeItemStack(bytes, this.itemToRemove);
+	public static class Handler implements IMessageHandler<SummonPacket, IMessage>{
 
-	}
-
-	@Override
-	public void handleClientSide(NetHandlerPlayClient nhClient) {
-		
-	}
-
-	@Override
-	public void handleServerSide(NetHandlerPlayServer nhServer) {
-		EntityPlayer player = nhServer.playerEntity;
-		if(player.getHeldItem() != null){
-			if(player.getHeldItem().getItem() == itemToRemove.getItem()){
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, itemToSummon);
+		@Override
+		public IMessage onMessage(SummonPacket message, MessageContext ctx) {
+			EntityPlayer player = ctx.getServerHandler().playerEntity;
+			if(player.getHeldItem() != null){
+				if(player.getHeldItem().getItem() == message.itemToRemove.getItem()){
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, message.itemToSummon);
+				}
 			}
+			return null;
 		}
+	
 	}
+
+	
 
 }

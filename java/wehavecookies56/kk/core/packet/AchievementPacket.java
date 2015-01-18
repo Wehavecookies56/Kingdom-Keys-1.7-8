@@ -20,42 +20,40 @@ import wehavecookies56.kk.core.extendedproperties.EntityPropertyMunny;
 import wehavecookies56.kk.item.AddedItems;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 
-public class AchievementPacket implements IPacket {
-		
-		private Achievement achv;
-		private int achvid;
 
-		public AchievementPacket() { }
-	    
-	    public AchievementPacket(int AchievementID){
-	    	this.achvid = AchievementID;
-	    }
-	    
-		@Override
-		public void readBytes(ByteBuf bytes) {
-			this.achvid = bytes.readInt();
-			
-		}
-		
-		@Override
-		public void writeBytes(ByteBuf bytes) {
-			bytes.writeInt(achvid);
+public class AchievementPacket implements IMessage {
 
-		}
+	private Achievement achv;
+	int achvid;
 
-		@Override
-		public void handleClientSide(NetHandlerPlayClient nhClient) {
-			
-		}
+	public AchievementPacket() { }
 
-		@Override
-		public void handleServerSide(NetHandlerPlayServer nhServer) {
-			EntityPlayer player = nhServer.playerEntity;
-			if(achvid == 1){
-				player.addStat(AddedAchievments.menu, 1);
-			}
-		}
+	public AchievementPacket(int AchievementID){
+		this.achvid = AchievementID;
+	}
+
+	@Override
+	public void fromBytes(ByteBuf buf) {
+		achvid = buf.readInt();
 
 	}
+
+	@Override
+	public void toBytes(ByteBuf buf) {			
+	}
+
+	public static class Handler implements IMessageHandler<AchievementPacket, IMessage> {
+
+		@Override
+		public IMessage onMessage(AchievementPacket message, MessageContext ctx) {
+			if(message.achvid == 1){
+				ctx.getServerHandler().playerEntity.addStat(AddedAchievments.menu, 1);
+			}
+			return null;
+		}
+	}
+}

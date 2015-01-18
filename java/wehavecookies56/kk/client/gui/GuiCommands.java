@@ -191,7 +191,8 @@ public class GuiCommands extends Gui {
 				}
 				
 				EntityPropertyDrivePoints dp = EntityPropertyDrivePoints.get(player);
-				if(EntityPropertyDriveForm.valorUnlocked)
+				EntityPropertyDriveForm df = EntityPropertyDriveForm.get(player);
+				if(df.getValorUnlocked() == 1)
 				{
 					if(dp.getCurrDrivePoints() < AddedDrives.valor.getCost())
 					{
@@ -203,7 +204,7 @@ public class GuiCommands extends Gui {
 					}		
 				}
 				
-				if(EntityPropertyDriveForm.wisdomUnlocked)
+				if(df.getWisdomUnlocked() == 1)
 				{
 					if(dp.getCurrDrivePoints() < AddedDrives.wisdom.getCost())
 					{
@@ -215,7 +216,7 @@ public class GuiCommands extends Gui {
 					}			
 				}
 							
-				if(EntityPropertyDriveForm.limitUnlocked)
+				if(df.getLimitUnlocked() == 1)
 				{
 					if(dp.getCurrDrivePoints() < AddedDrives.limit.getCost())
 					{
@@ -227,7 +228,7 @@ public class GuiCommands extends Gui {
 					}
 				}
 
-				if(EntityPropertyDriveForm.masterUnlocked)
+				if(df.getMasterUnlocked() == 1)
 				{
 					if(dp.getCurrDrivePoints() < AddedDrives.master.getCost())
 					{
@@ -239,7 +240,7 @@ public class GuiCommands extends Gui {
 					}
 				}
 				
-				if(EntityPropertyDriveForm.finalUnlocked)
+				if(df.getFinalUnlocked() == 1)
 				{
 					//If you comment this if statement you can fix the bug.
 					if(dp.getCurrDrivePoints() < AddedDrives.Final.getCost())

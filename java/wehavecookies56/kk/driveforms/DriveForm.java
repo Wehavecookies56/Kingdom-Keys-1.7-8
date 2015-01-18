@@ -6,7 +6,7 @@ import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyDriveForm;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyDrivePoints;
 import wehavecookies56.kk.core.packet.DriveActivatePacket;
-import wehavecookies56.kk.core.packet.IPacket;
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
 
 public class DriveForm {
 	
@@ -55,7 +55,7 @@ public class DriveForm {
 	}
 	
 	public boolean consumePoints(int cost, EntityPlayer player, int state){
-		IPacket packet = new DriveActivatePacket(cost, state);
+		IMessage packet = new DriveActivatePacket(cost, state);
 		KingdomKeys.network.sendToServer(packet);
 		return true;
 		

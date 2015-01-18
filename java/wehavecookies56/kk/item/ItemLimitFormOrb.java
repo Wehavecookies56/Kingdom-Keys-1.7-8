@@ -20,7 +20,8 @@ public class ItemLimitFormOrb extends Item {
 	
 	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer entity)
 	{
-		EntityPropertyDriveForm.limitUnlocked = true;
+		EntityPropertyDriveForm df = EntityPropertyDriveForm.get(entity);
+		df.setLimitUnlocked(1);
 		return item;
 	}
 	

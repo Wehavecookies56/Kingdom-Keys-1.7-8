@@ -20,7 +20,8 @@ public class ItemMasterFormOrb extends Item {
 	
 	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer entity)
 	{
-		EntityPropertyDriveForm.masterUnlocked = true;
+		EntityPropertyDriveForm df = EntityPropertyDriveForm.get(entity);
+		df.setMasterUnlocked(1);
 		return item;
 	}
 

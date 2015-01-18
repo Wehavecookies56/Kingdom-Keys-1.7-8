@@ -40,7 +40,6 @@ import wehavecookies56.kk.core.event.RecipeDrop;
 import wehavecookies56.kk.core.handlers.GiveMunny;
 import wehavecookies56.kk.core.handlers.GuiHandler;
 import wehavecookies56.kk.core.packet.AchievementPacket;
-import wehavecookies56.kk.core.packet.ChannelHandler;
 import wehavecookies56.kk.core.packet.DriveActivatePacket;
 import wehavecookies56.kk.core.packet.KnowledgePacket;
 import wehavecookies56.kk.core.packet.MunnyPacket;
@@ -85,6 +84,8 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
@@ -128,7 +129,7 @@ public class KingdomKeys {
 	public static CreativeTabs KHRECODEDTAB = new KHRECODEDTAB(CreativeTabs.getNextID(), "KHRECODEDTAB");
 	public static CreativeTabs KHDDDTAB = new KHDDDTAB(CreativeTabs.getNextID(), "KHDDDTAB");
 
-	public static ChannelHandler network;
+	public static SimpleNetworkWrapper network;
 
 	public static final Enchantment HarvestHearts = new EnchantHeartHarvest(ints.EnchantmentID, 1);
 
@@ -138,11 +139,11 @@ public class KingdomKeys {
 	//private GuiHandlerSynth guiHandlerSynth = new GuiHandlerSynth();
 
 	//Pre initialisation
-	@Mod.EventHandler
+	/*@Mod.EventHandler
 	public void modConstruct(FMLConstructionEvent event)
 	{
 		network = new ChannelHandler(Reference.MOD_ID, Reference.MOD_CHANNEL);
-	}
+	}*/
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -157,12 +158,19 @@ public class KingdomKeys {
 		AddedMagic.initMagic();
 		AddedDrives.initDrives();
 
-		network.registerPacket(KnowledgePacket.class);
-		network.registerPacket(SummonPacket.class);
-		network.registerPacket(SynthesisPacket.class);
-		network.registerPacket(MunnyPacket.class);
-		network.registerPacket(AchievementPacket.class);
-		network.registerPacket(DriveActivatePacket.class);
+		network = NetworkRegistry.INSTANCE.newSimpleChannel("KingdomKeys");
+	    network.registerMessage(AchievementPacket.Handler.class, AchievementPacket.class, 0, Side.SERVER);
+		network.registerMessage(SummonPacket.Handler.class, SummonPacket.class, 1, Side.SERVER);
+		network.registerMessage(DriveActivatePacket.Handler.class, DriveActivatePacket.class, 2, Side.SERVER);
+		network.registerMessage(KnowledgePacket.Handler.class, KnowledgePacket.class, 3, Side.SERVER);
+		network.registerMessage(MunnyPacket.Handler.class, MunnyPacket.class, 4, Side.SERVER);
+		network.registerMessage(SynthesisPacket.Handler.class, SynthesisPacket.class, 5, Side.SERVER);
+		//network.registerPacket(KnowledgePacket.class);
+		//network.registerPacket(SummonPacket.class);
+		//network.registerPacket(SynthesisPacket.class);
+		//network.registerPacket(MunnyPacket.class);
+		//network.registerPacket(AchievementPacket.class);
+		//network.registerPacket(DriveActivatePacket.class);
 
 
 		int modEntityID = 0;
@@ -246,7 +254,7 @@ public class KingdomKeys {
 	//Initialisation
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
-		network.initialise();
+		//network.initialise();
 		SynthesisRecipes.initSynthesisRecipes();
 		logger.info(Reference.MOD_NAME + ": Registered " + RecipeHandler.getTotalRegistered() + " Synthesis recipes");
 		//RecipeHandler.iterateRecipes();
@@ -314,7 +322,7 @@ public class KingdomKeys {
 	//Post Initialisation
 	@Mod.EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		network.postInitialise();
+		//network.postInitialise();
 	}
 
 	public static void addVillagePiece(Class c, String s){

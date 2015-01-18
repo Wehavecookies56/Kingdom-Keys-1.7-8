@@ -7,21 +7,16 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.NetHandlerPlayServer;
 import wehavecookies56.kk.client.KeyBind;
-import wehavecookies56.kk.core.event.LivingUpdateEevent;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyDriveForm;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyDrivePoints;
 import wehavecookies56.kk.driveforms.AddedDrives;
-import wehavecookies56.kk.driveforms.DriveForm;
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
-public class DriveActivatePacket implements IPacket {
+public class DriveActivatePacket implements IMessage {
 
 	private int amount;
 	private int state;
@@ -34,38 +29,18 @@ public class DriveActivatePacket implements IPacket {
 	}
 
 	@Override
-	public void readBytes(ByteBuf bytes) {
+	public void fromBytes(ByteBuf bytes) {
 		amount = bytes.readInt();
 		state = bytes.readInt();
 
 	}
 
 	@Override
-	public void writeBytes(ByteBuf bytes) {
+	public void toBytes(ByteBuf bytes) {
 		bytes.writeInt(amount);
 		bytes.writeInt(state);
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void handleClientSide(NetHandlerPlayClient nhClient) {
-		EntityPropertyDrivePoints dp = EntityPropertyDrivePoints.get(Minecraft.getMinecraft().thePlayer);
-		EntityPropertyDriveForm df = EntityPropertyDriveForm.get(Minecraft.getMinecraft().thePlayer);
-		if(dp.getCurrDrivePoints() >= amount){
-			df.changeState(state);
-			//consumePoints(amount, Minecraft.getMinecraft().thePlayer);
-		}
-	}
-
-	@Override
-	public void handleServerSide(NetHandlerPlayServer nhServer) {
-		EntityPropertyDrivePoints dp = EntityPropertyDrivePoints.get(nhServer.playerEntity);
-		EntityPropertyDriveForm df = EntityPropertyDriveForm.get(nhServer.playerEntity);
-		if(dp.getCurrDrivePoints() >= amount){
-			df.changeState(state);
-			consumePoints(amount, nhServer.playerEntity);
-		}
-	}
 
 	public boolean consumePoints(int cost, final EntityPlayer player){
 
@@ -109,6 +84,22 @@ public class DriveActivatePacket implements IPacket {
 		}, INITIAL_DELAY_MILLIS, RECURRENCE_MILLIS, TimeUnit.MILLISECONDS);
 		return true;
 
+	}
+	
+	public static class Handler implements IMessageHandler<DriveActivatePacket, IMessage>{
+
+		@Override
+		public IMessage onMessage(DriveActivatePacket message, MessageContext ctx) {
+			EntityPlayer player = ctx.getServerHandler().playerEntity;
+			EntityPropertyDrivePoints dp = EntityPropertyDrivePoints.get(player);
+			EntityPropertyDriveForm df = EntityPropertyDriveForm.get(player);
+			if(dp.getCurrDrivePoints() >= message.amount){
+				df.changeState(message.state);
+				message.consumePoints(message.amount, player);
+			}
+			return null;
+		}
+		
 	}
 
 }

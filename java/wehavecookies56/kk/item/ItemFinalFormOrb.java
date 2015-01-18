@@ -20,7 +20,8 @@ public class ItemFinalFormOrb extends Item {
 
 	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer entity)
 	{
-		EntityPropertyDriveForm.finalUnlocked = true;
+		EntityPropertyDriveForm df = EntityPropertyDriveForm.get(entity);
+		df.setFinalUnlocked(1);
 		return item;
 	}
 	
