@@ -119,7 +119,7 @@ public class BlockKKChest extends BlockContainer
 				player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.YoungXehanortsKeyblade||
 				player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.ZeroOne)
 		{
-			if(world.isRemote){
+			if(!world.isRemote){
                 TileEntity tileEntityKKChest = world.getTileEntity(x, y, z);
 
 				if (tileEntityKKChest == null)
@@ -128,6 +128,11 @@ public class BlockKKChest extends BlockContainer
 				}
 				if(!player.isSneaking()){
 					player.openGui(KingdomKeys.instance, 1, world, x, y, z);
+				}
+			}
+			
+			if(world.isRemote){
+				if(!player.isSneaking()){
 					Minecraft.getMinecraft().thePlayer.playSound("kk:kupo", 0.3F, 1.1F);
 				}
 			}
