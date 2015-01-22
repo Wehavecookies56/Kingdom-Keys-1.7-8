@@ -42,21 +42,18 @@ public class GuiHealthBar extends Gui
 			//this.drawTexturedModalRect(screenWidth - guiWidth, screenHeight - guiHeight, 0, 0, guiWidth, guiHeight);
 			//GL11.glScalef(2F, 2F, 2F);
 			if (player.getHealth() >= 6)
-			{
-				//GL11.glScalef(0.75F, 0.75F, 0.75F);
+			{//vida verde
 
-				GL11.glPushMatrix();
+			/*	GL11.glPushMatrix();
 				GL11.glTranslatef((screenWidth - noborderguiwidth + 30) + currHealth, screenHeight - guiHeight + 2, 0);
 				GL11.glScalef(0.75F, 0.75F, 0.75F);
-				this.drawTexturedModalRect(0, 0, 0, 12, (noborderguiwidth - currHealth) - 2, guiHeight);
-				GL11.glPopMatrix();
-
-
+				this.drawTexturedModalRect(0, 0, 0, 12, (noborderguiwidth - currHealth) - 2, guiHeight);*/
+				this.drawTexturedModalRect((screenWidth - noborderguiwidth + 30) + currHealth, screenHeight - guiHeight+2, 0, 13, (noborderguiwidth - currHealth) - 45, guiHeight);
 			}
 			else
-			{
-				GL11.glScalef(0.5F, 0.5F, 0.5F);
-				this.drawTexturedModalRect((screenWidth - noborderguiwidth - 16) + currHealth, screenHeight - guiHeight+2, 0, 24, (noborderguiwidth - currHealth) - 2, guiHeight);
+			{//vida roja
+				//GL11.glScalef(0.5F, 0.5F, 0.5F);
+				this.drawTexturedModalRect((screenWidth - noborderguiwidth - 13) + currHealth, screenHeight - guiHeight+2, 0, 24, (noborderguiwidth - currHealth) - 2, guiHeight);
 			}
 			GL11.glPopMatrix();
 		}

@@ -63,7 +63,8 @@ public class KeyBind{
 	@SubscribeEvent
 	public void onKeyInput(KeyInputEvent event) {	
 		EntityPlayer player = (EntityPlayer) Minecraft.getMinecraft().thePlayer;
-		if (mc.gameSettings.keyBindUseItem.isPressed() || keys[BACK].isPressed())
+	//	if (mc.gameSettings.keyBindUseItem.isPressed() || keys[BACK].isPressed())
+		if(keys[BACK].isPressed())
 		{
 			if (submenu == 0)
 			{
@@ -85,7 +86,8 @@ public class KeyBind{
 			driveselected = -1;
 		}
 		
-		if(mc.gameSettings.keyBindPickBlock.getIsKeyPressed() || keys[COMMAND].isPressed())
+	//	if(mc.gameSettings.keyBindPickBlock.getIsKeyPressed() || keys[COMMAND].isPressed())
+		if(keys[COMMAND].isPressed())
 		{
 			
 //Main command menu	
