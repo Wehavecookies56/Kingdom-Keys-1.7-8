@@ -48,12 +48,12 @@ public class GuiHealthBar extends Gui
 				GL11.glTranslatef((screenWidth - noborderguiwidth + 30) + currHealth, screenHeight - guiHeight + 2, 0);
 				GL11.glScalef(0.75F, 0.75F, 0.75F);
 				this.drawTexturedModalRect(0, 0, 0, 12, (noborderguiwidth - currHealth) - 2, guiHeight);*/
-				this.drawTexturedModalRect((screenWidth - noborderguiwidth + 30) + currHealth, screenHeight - guiHeight+2, 0, 13, (noborderguiwidth - currHealth) - 45, guiHeight);
+				this.drawTexturedModalRect((screenWidth - noborderguiwidth - 13) + currHealth, screenHeight - guiHeight+2, 0, 13, (noborderguiwidth - currHealth) -1, guiHeight);
 			}
 			else
 			{//vida roja
 				//GL11.glScalef(0.5F, 0.5F, 0.5F);
-				this.drawTexturedModalRect((screenWidth - noborderguiwidth - 13) + currHealth, screenHeight - guiHeight+2, 0, 24, (noborderguiwidth - currHealth) - 2, guiHeight);
+				this.drawTexturedModalRect((screenWidth - noborderguiwidth - 13) + currHealth, screenHeight - guiHeight+2, 0, 24, (noborderguiwidth - currHealth) - 1, guiHeight);
 			}
 			GL11.glPopMatrix();
 		}
