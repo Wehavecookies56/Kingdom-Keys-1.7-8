@@ -55,12 +55,10 @@ public class ItemRenderKingdomKey implements IItemRenderer {
                 
                 Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/entities/Kingdom Key.png"));
                 
-                GL11.glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
-                GL11.glRotatef(45.0F, 0.0F, 0.0F, 1.0F);
-                
-                GL11.glTranslatef(0.0F, -0.8F, 0.0F);
-                
-                GL11.glScalef(1.2F, 1.2F, 1.2F);
+                GL11.glTranslatef(0.6F, 0.4F, -0.05F);
+                GL11.glRotatef(180F, 1, 0, 0);
+                GL11.glRotatef(180F, 0, 1, 0);
+                GL11.glRotatef(45F, 0, 0, 1);
                 
                 model.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
                 
