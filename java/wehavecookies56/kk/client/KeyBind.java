@@ -511,7 +511,7 @@ public class KeyBind{
 			boolean hasMenuAchv = false;
 			if(!hasMenuAchv){
 				hasMenuAchv = true;
-				KingdomKeys.network.sendToServer(new AchievementPacket(1));
+				//KingdomKeys.network.sendToServer(new AchievementPacket(1));
 			}
 			if(Minecraft.getMinecraft().currentScreen == new GuiMenu()){
 				Minecraft.getMinecraft().displayGuiScreen(null);

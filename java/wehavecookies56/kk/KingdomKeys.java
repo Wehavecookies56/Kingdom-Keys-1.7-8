@@ -131,7 +131,6 @@ public class KingdomKeys {
 
 	public static SimpleNetworkWrapper network;
 
-	public static final Enchantment HarvestHearts = new EnchantHeartHarvest(ints.EnchantmentID, 1);
 
 	//Mob
 	//public static int getUniqueEntityID
@@ -147,7 +146,7 @@ public class KingdomKeys {
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		
+
 		AddedItems.initKeyBlades();
 		AddedItems.initHearts();
 		AddedItems.initOthers();
@@ -159,7 +158,7 @@ public class KingdomKeys {
 		AddedDrives.initDrives();
 
 		network = NetworkRegistry.INSTANCE.newSimpleChannel("KingdomKeys");
-	    network.registerMessage(AchievementPacket.Handler.class, AchievementPacket.class, 0, Side.SERVER);
+		network.registerMessage(AchievementPacket.Handler.class, AchievementPacket.class, 0, Side.SERVER);
 		network.registerMessage(SummonPacket.Handler.class, SummonPacket.class, 1, Side.SERVER);
 		network.registerMessage(DriveActivatePacket.Handler.class, DriveActivatePacket.class, 2, Side.SERVER);
 		network.registerMessage(KnowledgePacket.Handler.class, KnowledgePacket.class, 3, Side.SERVER);
@@ -186,7 +185,7 @@ public class KingdomKeys {
 		FMLCommonHandler.instance().bus().register(instance);
 
 		//TODO Make this work
-		ints.EnchantmentID = config.get(config.CATEGORY_GENERAL, "Enchantment ID", ints.ENCHANTMENTID_DEFAULT).getInt(ints.ENCHANTMENTID_DEFAULT);
+		//ints.EnchantmentID = config.get(config.CATEGORY_GENERAL, "Enchantment ID", ints.ENCHANTMENTID_DEFAULT).getInt(ints.ENCHANTMENTID_DEFAULT);
 		ConfigBooleans.enableUpdateCheck = config.get(config.CATEGORY_GENERAL, ConfigBooleans.enableUpdateCheck_name, ConfigBooleans.enableUpdateCheck_default).getBoolean(ConfigBooleans.enableUpdateCheck_default);
 
 		final String GENERATE = config.CATEGORY_GENERAL + config.CATEGORY_SPLITTER + "World Generation";
@@ -251,10 +250,20 @@ public class KingdomKeys {
 		}
 	}
 
+	public static int enchantIDCheck(){
+		for(int i = 0; i < 255; i++){
+			if(Enchantment.enchantmentsList[i] == null){
+				return i;
+			}
+		}
+		return 0;
+	}
+	public static final Enchantment HarvestHearts = new EnchantHeartHarvest(enchantIDCheck(), 1);
 	//Initialisation
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
 		//network.initialise();
+		System.out.println("Vanquish ID: " + ints.EnchantmentID + " Real ID: " + HarvestHearts.effectId);
 		SynthesisRecipes.initSynthesisRecipes();
 		logger.info(Reference.MOD_NAME + ": Registered " + RecipeHandler.getTotalRegistered() + " Synthesis recipes");
 		//RecipeHandler.iterateRecipes();
@@ -287,7 +296,7 @@ public class KingdomKeys {
 		FMLCommonHandler.instance().bus().register(new OnPickUpEvent());
 		FMLCommonHandler.instance().bus().register(new Update());
 		//AddedDrives.driveStats();
-		
+
 		logger.info(Reference.MOD_NAME + ": Registered Events");
 		new GuiHandler();
 		Recipes.initShapedRecipes();
