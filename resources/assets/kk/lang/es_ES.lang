@@ -647,6 +647,9 @@ tooltip.voidedknowledge.desc=Conocimiento desconocido capaz de materializarse en
 key.KingdomKeys.category=Kingdom Keys
 key.summon.desc=Invocar llave espada
 key.menu.desc=Abrir Menú
+key.back.desc=Atrás comando
+key.command.desc=Desplazarse comandos
+key.enter.desc=Aceptar comando
 
 #Menú de Comandos
 gui.command.command=COMANDO
