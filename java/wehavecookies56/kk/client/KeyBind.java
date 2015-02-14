@@ -6,6 +6,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatFileWriter;
 import net.minecraft.util.ChatComponentText;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.input.Keyboard;
 
@@ -14,19 +20,12 @@ import wehavecookies56.kk.client.gui.GuiMenu;
 import wehavecookies56.kk.core.event.LivingUpdateEevent;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyDriveForm;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyDrivePoints;
-import wehavecookies56.kk.core.packet.AchievementPacket;
 import wehavecookies56.kk.core.packet.SummonPacket;
 import wehavecookies56.kk.driveforms.AddedDrives;
 import wehavecookies56.kk.driveforms.DriveAnti;
 import wehavecookies56.kk.item.AddedItems;
 import wehavecookies56.kk.magic.Cure;
 import wehavecookies56.kk.magic.Magics;
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class KeyBind{
