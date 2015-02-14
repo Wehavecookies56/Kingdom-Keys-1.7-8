@@ -1,5 +1,6 @@
 package wehavecookies56.kk.client.gui;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import net.minecraft.client.Minecraft;
@@ -322,7 +323,12 @@ public class GuiSynthesis extends GuiContainer {
 	@Override
 	protected void mouseClicked(int x, int y, int button) {
 		GuiTabs tab = new GuiTabs(button, button, button, button);
-		super.mouseClicked(x, y, button);
+		try {
+			super.mouseClicked(x, y, button);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(Tab1X + guiLeft <= x && x <= Tab1X + guiLeft + DimensionsOfTabW && Tab1Y + guiTop <= y && y <= Tab1Y + guiTop + DimensionsOfTabH){
 			ClickedTab1 = true;
 			ClickedTab2 = false;

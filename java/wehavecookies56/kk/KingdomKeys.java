@@ -252,7 +252,7 @@ public class KingdomKeys {
 
 	public static int enchantIDCheck(){
 		for(int i = 0; i < 255; i++){
-			if(Enchantment.enchantmentsList[i] == null){
+			if(Enchantment.enchantmentsBookList[i] == null){
 				return i;
 			}
 		}

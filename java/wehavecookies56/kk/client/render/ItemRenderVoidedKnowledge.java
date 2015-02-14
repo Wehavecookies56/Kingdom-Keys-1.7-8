@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL11;
 
 public class ItemRenderVoidedKnowledge implements IItemRenderer {
 
-	private static RenderItem renderItem = new RenderItem();
+	private static RenderItem renderItem = new RenderItem(null, null);
 	
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {

@@ -1,5 +1,7 @@
 package wehavecookies56.kk.client.gui;
 
+import java.io.IOException;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -160,7 +162,12 @@ public class GuiReports extends GuiScreen {
 			close();
 			break;
 		}
-		super.keyTyped(c, key);
+		try {
+			super.keyTyped(c, key);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -226,7 +233,12 @@ public class GuiReports extends GuiScreen {
 		case MUNNY:
 			section = MUNNY;
 		}
-		super.actionPerformed(button);
+		try {
+			super.actionPerformed(button);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void close() {
@@ -235,7 +247,12 @@ public class GuiReports extends GuiScreen {
 	
 	public void handleMouseInput()
     {
-        super.handleMouseInput();
+        try {
+			super.handleMouseInput();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         int i = Mouse.getEventDWheel();
         int m = Mouse.getEventButton();
         
