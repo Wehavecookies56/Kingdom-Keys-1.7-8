@@ -1,15 +1,11 @@
 package wehavecookies56.kk.lib;
 
-import com.typesafe.config.Config;
-
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import wehavecookies56.kk.block.AddedBlocks;
 import wehavecookies56.kk.item.AddedItems;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Recipes {
 

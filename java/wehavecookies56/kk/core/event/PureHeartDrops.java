@@ -7,9 +7,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.item.AddedItems;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class PureHeartDrops {
 	

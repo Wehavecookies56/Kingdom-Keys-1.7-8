@@ -3,9 +3,9 @@ package wehavecookies56.kk.core.event;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.boss.EntityWither;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import wehavecookies56.kk.item.AddedItems;
 import wehavecookies56.kk.lib.ConfigBooleans;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class Munny3000Drops {
 	public static double rand; 

@@ -1,15 +1,7 @@
 package wehavecookies56.kk.core.event;
 
-import com.jcraft.jorbis.Block;
-
-import net.minecraft.block.BlockChest;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.inventory.GuiChest;
-import net.minecraft.init.Blocks;
 import net.minecraftforge.client.event.GuiOpenEvent;
-import net.minecraftforge.client.event.GuiScreenEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class OpenGuiEvent {
 

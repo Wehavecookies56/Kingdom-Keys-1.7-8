@@ -2,10 +2,9 @@ package wehavecookies56.kk.core.event;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyDriveForm;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class OnHitEvent
 {

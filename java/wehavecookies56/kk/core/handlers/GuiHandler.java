@@ -3,6 +3,8 @@ package wehavecookies56.kk.core.handlers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.IGuiHandler;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.client.gui.GuiKKChest;
 import wehavecookies56.kk.client.gui.GuiSynthesis;
@@ -10,8 +12,6 @@ import wehavecookies56.kk.container.ContainerKKChest;
 import wehavecookies56.kk.container.ContainerSynthesis;
 import wehavecookies56.kk.entities.tileentities.TileEntityKKChest;
 import wehavecookies56.kk.entities.tileentities.TileEntitySynthesis;
-import cpw.mods.fml.common.network.IGuiHandler;
-import cpw.mods.fml.common.network.NetworkRegistry;
 
 public class GuiHandler implements IGuiHandler {
 		

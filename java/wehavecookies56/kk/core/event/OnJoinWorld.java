@@ -1,12 +1,9 @@
 package wehavecookies56.kk.core.event;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import wehavecookies56.kk.client.KeyBind;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyDriveForm;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class OnJoinWorld
 {

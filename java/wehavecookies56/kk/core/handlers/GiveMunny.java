@@ -6,6 +6,7 @@ import java.util.List;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyMunny;
@@ -55,19 +56,21 @@ public class GiveMunny implements ICommand {
 	}
 
 	@Override
-	public boolean canCommandSenderUseCommand(ICommandSender p_71519_1_) {
+	public boolean isUsernameIndex(String[] p_82358_1_, int p_82358_2_) {
+		return false;
+	}
+
+	@Override
+	public boolean canCommandSenderUse(ICommandSender sender) {
+		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
-	public List addTabCompletionOptions(ICommandSender p_71516_1_,
-			String[] p_71516_2_) {
+	public List addTabCompletionOptions(ICommandSender sender, String[] args,
+			BlockPos pos) {
+		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public boolean isUsernameIndex(String[] p_82358_1_, int p_82358_2_) {
-		return false;
 	}
 
 }

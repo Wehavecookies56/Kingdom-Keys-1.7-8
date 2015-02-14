@@ -1,16 +1,11 @@
 package wehavecookies56.kk.core.event;
 
-import wehavecookies56.kk.client.KeyBind;
-import wehavecookies56.kk.core.extendedproperties.EntityPropertyDriveForm;
-import wehavecookies56.kk.item.AddedItems;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import wehavecookies56.kk.core.extendedproperties.EntityPropertyDriveForm;
 
 public class LivingUpdateEevent {
 	double vJump = 1.2D;
