@@ -1,19 +1,15 @@
 package wehavecookies56.kk.client.gui;
 
-import mods.battlegear2.api.IDefaultRender.RenderType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import org.lwjgl.opengl.GL11;
 
-import wehavecookies56.kk.core.event.OnHitEvent;
 import wehavecookies56.kk.magic.MagicAttack;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.Phase;
-import cpw.mods.fml.common.gameevent.TickEvent.Type;
 
 public class GuiMagicBar extends Gui
 {

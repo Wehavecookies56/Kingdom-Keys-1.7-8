@@ -6,10 +6,9 @@ import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class GuiHealthBar extends Gui
 {

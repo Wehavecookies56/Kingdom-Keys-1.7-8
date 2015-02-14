@@ -1,23 +1,13 @@
 package wehavecookies56.kk.client.gui;
 
+import java.io.IOException;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
-
-import com.ibm.icu.text.SimpleDateFormat;
-import com.ibm.icu.util.Calendar;
 
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyMunny;
 import wehavecookies56.kk.lib.LocalStrings;
@@ -124,7 +114,12 @@ public class GuiMenu extends GuiMenuBase {
 			mc.displayGuiScreen(new GuiDrive());
 			break;
 		}
-		super.actionPerformed(button);
+		try {
+			super.actionPerformed(button);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

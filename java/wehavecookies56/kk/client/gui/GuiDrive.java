@@ -1,7 +1,8 @@
 package wehavecookies56.kk.client.gui;
 
+import java.io.IOException;
+
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
 
 public class GuiDrive extends GuiMenuBase {
 	
@@ -17,7 +18,12 @@ public class GuiDrive extends GuiMenuBase {
 	@Override
 	protected void actionPerformed(GuiButton button) {
 		
-		super.actionPerformed(button);
+		try {
+			super.actionPerformed(button);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }

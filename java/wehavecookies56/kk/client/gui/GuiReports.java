@@ -1,20 +1,16 @@
 package wehavecookies56.kk.client.gui;
 
-import java.util.ArrayList;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
-import wehavecookies56.kk.client.KeyBind;
 import wehavecookies56.kk.item.AddedItems;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 
 public class GuiReports extends GuiScreen {
 

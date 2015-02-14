@@ -1,16 +1,15 @@
 package wehavecookies56.kk.client.gui;
 
+import java.io.IOException;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.Entity;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagInt;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
 import wehavecookies56.kk.client.model.ModelFenrir;
 
@@ -116,7 +115,12 @@ public class GuiHair extends GuiScreen {
 		case VANITAS: if(button.id == NEXT){button.enabled = true;} break;
 		default: break;
 		}
-		super.actionPerformed(button);
+		try {
+			super.actionPerformed(button);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@Override

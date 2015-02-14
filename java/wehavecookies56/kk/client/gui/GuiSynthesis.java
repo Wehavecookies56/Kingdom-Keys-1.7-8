@@ -11,6 +11,9 @@ import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
 
@@ -23,9 +26,6 @@ import wehavecookies56.kk.core.packet.SynthesisPacket;
 import wehavecookies56.kk.entities.tileentities.TileEntitySynthesis;
 import wehavecookies56.kk.item.AddedItems;
 import wehavecookies56.kk.lib.LocalStrings;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class GuiSynthesis extends GuiContainer {
 
