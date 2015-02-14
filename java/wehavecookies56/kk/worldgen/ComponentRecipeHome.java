@@ -6,8 +6,6 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
@@ -16,7 +14,6 @@ import net.minecraft.world.gen.structure.StructureVillagePieces;
 import net.minecraft.world.gen.structure.StructureVillagePieces.Start;
 import net.minecraftforge.common.ChestGenHooks;
 import wehavecookies56.kk.block.AddedBlocks;
-import wehavecookies56.kk.entities.tileentities.TileEntitySynthesis;
 import wehavecookies56.kk.item.AddedItems;
 
 public class ComponentRecipeHome extends StructureVillagePieces.Village {
