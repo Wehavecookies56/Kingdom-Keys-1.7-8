@@ -1,27 +1,13 @@
 package wehavecookies56.kk.client.render;
 
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.glu.GLU;
-import org.lwjgl.util.glu.Sphere;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import wehavecookies56.kk.client.KeyBind;
-import wehavecookies56.kk.core.extendedproperties.EntityPropertyDriveForm;
-import wehavecookies56.kk.core.proxies.ClientProxy;
-import wehavecookies56.kk.driveforms.AddedDrives;
-import wehavecookies56.kk.item.AddedItems;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.ForgeHooksClient;
-import net.minecraftforge.client.IItemRenderer;
-import net.minecraftforge.client.IItemRenderer.ItemRenderType;
+
+import org.lwjgl.opengl.GL11;
+
+import wehavecookies56.kk.core.extendedproperties.EntityPropertyDriveForm;
 import api.player.render.RenderPlayerAPI;
 import api.player.render.RenderPlayerBase;
 

@@ -1,23 +1,13 @@
 package wehavecookies56.kk.client.model;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import wehavecookies56.kk.client.KeyBind;
-import wehavecookies56.kk.core.extendedproperties.EntityPropertyDriveForm;
-import wehavecookies56.kk.driveforms.AddedDrives;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import wehavecookies56.kk.core.extendedproperties.EntityPropertyDriveForm;
 import api.player.model.ModelPlayerAPI;
 import api.player.model.ModelPlayerBase;
-import api.player.render.RenderPlayerAPI;
-import api.player.render.RenderPlayerBase;
 
 public class PlayerModel extends ModelPlayerBase {
 

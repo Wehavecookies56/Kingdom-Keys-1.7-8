@@ -86,7 +86,7 @@ public class EntityPropertyMunny implements IExtendedEntityProperties {
 
 	
 	private static final String getSaveKey(EntityPlayer player) {
-		return player.getCommandSenderName() + ":" + EXT_PROP_NAME;
+		return player.getCommandSenderEntity() + ":" + EXT_PROP_NAME;
 	}
 
 }

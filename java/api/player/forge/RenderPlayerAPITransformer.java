@@ -3,7 +3,6 @@ package api.player.forge;
 import java.util.*;
 
 import net.minecraft.launchwrapper.*;
-
 import api.player.model.*;
 import api.player.render.*;
 
@@ -14,19 +13,38 @@ public class RenderPlayerAPITransformer implements IClassTransformer
 		if(transformedName.equals(RenderPlayerClassVisitor.targetClassName))
 		{
 			Stack<String> models = new Stack<String>();
-			models.push(ModelPlayerClassVisitor.deobfuscatedClassReference + ":armor");
-			models.push(ModelPlayerClassVisitor.deobfuscatedClassReference + ":chestplate");
 			models.push(ModelPlayerClassVisitor.deobfuscatedClassReference + ":main");
 
-			Map<String, Stack<String>> renderConstructorReplacements = new Hashtable<String, Stack<String>>();
-			renderConstructorReplacements.put(ModelPlayerClassVisitor.obfuscatedSuperClassReference, models);
-			renderConstructorReplacements.put(ModelPlayerClassVisitor.deobfuscateSuperClassReference, models);
+			Stack<String> layers = new Stack<String>();
+			layers.push(LayerPlayerArmorClassVisitor.deobfuscatedClassReference);
 
-			return RenderPlayerClassVisitor.transform(bytes, RenderPlayerAPIPlugin.isObfuscated, renderConstructorReplacements);
+			Map<String, Stack<String>> constructorReplacements = new Hashtable<String, Stack<String>>();
+			constructorReplacements.put(ModelPlayerClassVisitor.obfuscatedClassReference, models);
+			constructorReplacements.put(ModelPlayerClassVisitor.deobfuscatedClassReference, models);
+			constructorReplacements.put(LayerPlayerArmorClassVisitor.obfuscatedSuperClassReference, layers);
+			constructorReplacements.put(LayerPlayerArmorClassVisitor.deobfuscateSuperClassReference, layers);
+
+			return RenderPlayerClassVisitor.transform(bytes, RenderPlayerAPIPlugin.isObfuscated, constructorReplacements);
 		}
-		else if(transformedName.equals(ModelPlayerClassVisitor.targetClassName))
+
+		if(name.equals(LayerPlayerArmorClassVisitor.targetClassName))
+		{
+			Stack<String> models = new Stack<String>();
+			models.push(ModelPlayerArmorClassVisitor.deobfuscatedClassReference + ":chestplate");
+			models.push(ModelPlayerArmorClassVisitor.deobfuscatedClassReference + ":armor");
+
+			Map<String, Stack<String>> constructorReplacements = new Hashtable<String, Stack<String>>();
+			constructorReplacements.put(ModelPlayerArmorClassVisitor.deobfuscatedClassReference, models);
+
+			return LayerPlayerArmorClassVisitor.transform(bytes, RenderPlayerAPIPlugin.isObfuscated, constructorReplacements);
+		}
+
+		if(transformedName.equals(ModelPlayerClassVisitor.targetClassName))
 			return ModelPlayerClassVisitor.transform(bytes, RenderPlayerAPIPlugin.isObfuscated);
-		else
-			return bytes;
+
+		if(transformedName.equals(ModelPlayerArmorClassVisitor.targetClassName))
+			return ModelPlayerArmorClassVisitor.transform(bytes, RenderPlayerAPIPlugin.isObfuscated);
+
+		return bytes;
 	}
 }

@@ -4,12 +4,12 @@ import java.util.*;
 
 import org.objectweb.asm.*;
 
-public final class RenderPlayerConstructorVisitor extends MethodVisitor
+public final class LayerPlayerArmorConstructorVisitor extends MethodVisitor
 {
 	private final boolean isObfuscated;
 	private final Map<String, Stack<String>> constructorReplacements;
 
-	public RenderPlayerConstructorVisitor(MethodVisitor paramMethodVisitor, boolean isObfuscated, Map<String, Stack<String>> constructorReplacements)
+	public LayerPlayerArmorConstructorVisitor(MethodVisitor paramMethodVisitor, boolean isObfuscated, Map<String, Stack<String>> constructorReplacements)
 	{
 		super(262144, paramMethodVisitor);
 		this.isObfuscated = isObfuscated;
@@ -47,30 +47,8 @@ public final class RenderPlayerConstructorVisitor extends MethodVisitor
 				desc = desc.substring(0, resultSeparatorIndex) + "Ljava/lang/String;" + desc.substring(resultSeparatorIndex);
 			}
 		}
+		if(isObfuscated && name.equals("<init>") && owner.equals("net/minecraft/client/renderer/entity/layers/LayerBipedArmor"))
+			owner = "csm";
 		super.visitMethodInsn(opcode, owner, name, desc, itf);
-		if(name.equals("<init>") && owner.equals(isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity"))
-		{
-			mv.visitVarInsn(Opcodes.ALOAD, 0);
-			mv.visitVarInsn(Opcodes.ALOAD, 0);
-			mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "create", "(Lapi/player/render/IRenderPlayerAPI;)Lapi/player/render/RenderPlayerAPI;", false);
-			mv.visitFieldInsn(Opcodes.PUTFIELD, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", "renderPlayerAPI", "Lapi/player/render/RenderPlayerAPI;");
-
-			mv.visitVarInsn(Opcodes.ALOAD, 0);
-			mv.visitVarInsn(Opcodes.ALOAD, 1);
-			mv.visitVarInsn(Opcodes.ILOAD, 2);
-			mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "beforeLocalConstructing", "(Lapi/player/render/IRenderPlayerAPI;Lnet/minecraft/client/renderer/entity/RenderManager;Z)V", false);
-		}
-	}
-
-	public void visitInsn(int opcode)
-	{
-		if(opcode == Opcodes.RETURN)
-		{
-			mv.visitVarInsn(Opcodes.ALOAD, 0);
-			mv.visitVarInsn(Opcodes.ALOAD, 1);
-			mv.visitVarInsn(Opcodes.ILOAD, 2);
-			mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "afterLocalConstructing", "(Lapi/player/render/IRenderPlayerAPI;Lnet/minecraft/client/renderer/entity/RenderManager;Z)V", false);
-		}
-		super.visitInsn(opcode);
 	}
 }

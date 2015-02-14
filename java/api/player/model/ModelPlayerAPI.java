@@ -4,6 +4,7 @@ import java.io.*;
 import java.text.*;
 import java.util.*;
 import java.util.logging.*;
+import java.lang.ref.*;
 import java.lang.reflect.*;
 
 public final class ModelPlayerAPI
@@ -48,30 +49,30 @@ public final class ModelPlayerAPI
 		{
 			try
 			{
-				Method mandatory = api.player.model.ModelPlayer.class.getMethod("getModelPlayerBase", String.class);
+				Method mandatory = net.minecraft.client.model.ModelPlayer.class.getMethod("getModelPlayerBase", String.class);
 				if (mandatory.getReturnType() != ModelPlayerBase.class)
-					throw new NoSuchMethodException(ModelPlayerBase.class.getName() + " " + api.player.model.ModelPlayer.class.getName() + ".getModelPlayerBase(" + String.class.getName() + ")");
+					throw new NoSuchMethodException(ModelPlayerBase.class.getName() + " " + net.minecraft.client.model.ModelPlayer.class.getName() + ".getModelPlayerBase(" + String.class.getName() + ")");
 			}
 			catch(NoSuchMethodException exception)
 			{
 				String[] errorMessageParts = new String[]
 				{
 					"========================================",
-					"The API \"Model Player\" version 1.0 of the mod \"Render Player API core 1.0\" can not be created!",
+					"The API \"Model Player\" version " + api.player.forge.RenderPlayerAPIPlugin.Version + " of the mod \"Render Player API Core " + api.player.forge.RenderPlayerAPIPlugin.Version + "\" can not be created!",
 					"----------------------------------------",
 					"Mandatory member method \"{0} getModelPlayerBase({3})\" not found in class \"{1}\".",
 					"There are three scenarios this can happen:",
-					"* Minecraft Forge is missing a Render Player API core which Minecraft version matches its own.",
-					"  Download and install the latest Render Player API core for the Minecraft version you were trying to run.",
-					"* The code of the class \"{2}\" of Render Player API core has been modified beyond recognition by another Minecraft Forge coremod.",
+					"* Minecraft Forge is missing a Render Player API Core which Minecraft version matches its own.",
+					"  Download and install the latest Render Player API Core for the Minecraft version you were trying to run.",
+					"* The code of the class \"{2}\" of Render Player API Core has been modified beyond recognition by another Minecraft Forge coremod.",
 					"  Try temporary deinstallation of other core mods to find the culprit and deinstall it permanently to fix this specific problem.",
-					"* Render Player API core has not been installed correctly.",
-					"  Deinstall Render Player API core and install it again following the installation instructions in the readme file.",
+					"* Render Player API Core has not been installed correctly.",
+					"  Deinstall Render Player API Core and install it again following the installation instructions in the readme file.",
 					"========================================"
 				};
 
 				String baseModelPlayerClassName = ModelPlayerBase.class.getName();
-				String targetClassName = api.player.model.ModelPlayer.class.getName();
+				String targetClassName = net.minecraft.client.model.ModelPlayer.class.getName();
 				String targetClassFileName = targetClassName.replace(".", File.separator);
 				String stringClassName = String.class.getName();
 
@@ -91,7 +92,7 @@ public final class ModelPlayerAPI
 				throw new RuntimeException(errorMessage, exception);
 			}
 
-			log("Model Player 1.0 Created");
+			log("Model Player " + api.player.forge.RenderPlayerAPIPlugin.Version + " Created");
 			isCreated = true;
 		}
 
@@ -151,6 +152,13 @@ public final class ModelPlayerAPI
 			addSorting(id, allBaseAfterGetTextureOffsetSuperiors, baseSorting.getAfterGetTextureOffsetSuperiors());
 			addSorting(id, allBaseAfterGetTextureOffsetInferiors, baseSorting.getAfterGetTextureOffsetInferiors());
 
+			addSorting(id, allBaseBeforePostRenderArmSuperiors, baseSorting.getBeforePostRenderArmSuperiors());
+			addSorting(id, allBaseBeforePostRenderArmInferiors, baseSorting.getBeforePostRenderArmInferiors());
+			addSorting(id, allBaseOverridePostRenderArmSuperiors, baseSorting.getOverridePostRenderArmSuperiors());
+			addSorting(id, allBaseOverridePostRenderArmInferiors, baseSorting.getOverridePostRenderArmInferiors());
+			addSorting(id, allBaseAfterPostRenderArmSuperiors, baseSorting.getAfterPostRenderArmSuperiors());
+			addSorting(id, allBaseAfterPostRenderArmInferiors, baseSorting.getAfterPostRenderArmInferiors());
+
 			addSorting(id, allBaseBeforeRenderSuperiors, baseSorting.getBeforeRenderSuperiors());
 			addSorting(id, allBaseBeforeRenderInferiors, baseSorting.getBeforeRenderInferiors());
 			addSorting(id, allBaseOverrideRenderSuperiors, baseSorting.getOverrideRenderSuperiors());
@@ -158,19 +166,40 @@ public final class ModelPlayerAPI
 			addSorting(id, allBaseAfterRenderSuperiors, baseSorting.getAfterRenderSuperiors());
 			addSorting(id, allBaseAfterRenderInferiors, baseSorting.getAfterRenderInferiors());
 
-			addSorting(id, allBaseBeforeRenderCloakSuperiors, baseSorting.getBeforeRenderCloakSuperiors());
-			addSorting(id, allBaseBeforeRenderCloakInferiors, baseSorting.getBeforeRenderCloakInferiors());
-			addSorting(id, allBaseOverrideRenderCloakSuperiors, baseSorting.getOverrideRenderCloakSuperiors());
-			addSorting(id, allBaseOverrideRenderCloakInferiors, baseSorting.getOverrideRenderCloakInferiors());
-			addSorting(id, allBaseAfterRenderCloakSuperiors, baseSorting.getAfterRenderCloakSuperiors());
-			addSorting(id, allBaseAfterRenderCloakInferiors, baseSorting.getAfterRenderCloakInferiors());
+			addSorting(id, allBaseBeforeRenderCapeSuperiors, baseSorting.getBeforeRenderCapeSuperiors());
+			addSorting(id, allBaseBeforeRenderCapeInferiors, baseSorting.getBeforeRenderCapeInferiors());
+			addSorting(id, allBaseOverrideRenderCapeSuperiors, baseSorting.getOverrideRenderCapeSuperiors());
+			addSorting(id, allBaseOverrideRenderCapeInferiors, baseSorting.getOverrideRenderCapeInferiors());
+			addSorting(id, allBaseAfterRenderCapeSuperiors, baseSorting.getAfterRenderCapeSuperiors());
+			addSorting(id, allBaseAfterRenderCapeInferiors, baseSorting.getAfterRenderCapeInferiors());
 
-			addSorting(id, allBaseBeforeRenderEarsSuperiors, baseSorting.getBeforeRenderEarsSuperiors());
-			addSorting(id, allBaseBeforeRenderEarsInferiors, baseSorting.getBeforeRenderEarsInferiors());
-			addSorting(id, allBaseOverrideRenderEarsSuperiors, baseSorting.getOverrideRenderEarsSuperiors());
-			addSorting(id, allBaseOverrideRenderEarsInferiors, baseSorting.getOverrideRenderEarsInferiors());
-			addSorting(id, allBaseAfterRenderEarsSuperiors, baseSorting.getAfterRenderEarsSuperiors());
-			addSorting(id, allBaseAfterRenderEarsInferiors, baseSorting.getAfterRenderEarsInferiors());
+			addSorting(id, allBaseBeforeRenderDeadmau5HeadSuperiors, baseSorting.getBeforeRenderDeadmau5HeadSuperiors());
+			addSorting(id, allBaseBeforeRenderDeadmau5HeadInferiors, baseSorting.getBeforeRenderDeadmau5HeadInferiors());
+			addSorting(id, allBaseOverrideRenderDeadmau5HeadSuperiors, baseSorting.getOverrideRenderDeadmau5HeadSuperiors());
+			addSorting(id, allBaseOverrideRenderDeadmau5HeadInferiors, baseSorting.getOverrideRenderDeadmau5HeadInferiors());
+			addSorting(id, allBaseAfterRenderDeadmau5HeadSuperiors, baseSorting.getAfterRenderDeadmau5HeadSuperiors());
+			addSorting(id, allBaseAfterRenderDeadmau5HeadInferiors, baseSorting.getAfterRenderDeadmau5HeadInferiors());
+
+			addSorting(id, allBaseBeforeRenderLeftArmSuperiors, baseSorting.getBeforeRenderLeftArmSuperiors());
+			addSorting(id, allBaseBeforeRenderLeftArmInferiors, baseSorting.getBeforeRenderLeftArmInferiors());
+			addSorting(id, allBaseOverrideRenderLeftArmSuperiors, baseSorting.getOverrideRenderLeftArmSuperiors());
+			addSorting(id, allBaseOverrideRenderLeftArmInferiors, baseSorting.getOverrideRenderLeftArmInferiors());
+			addSorting(id, allBaseAfterRenderLeftArmSuperiors, baseSorting.getAfterRenderLeftArmSuperiors());
+			addSorting(id, allBaseAfterRenderLeftArmInferiors, baseSorting.getAfterRenderLeftArmInferiors());
+
+			addSorting(id, allBaseBeforeRenderRightArmSuperiors, baseSorting.getBeforeRenderRightArmSuperiors());
+			addSorting(id, allBaseBeforeRenderRightArmInferiors, baseSorting.getBeforeRenderRightArmInferiors());
+			addSorting(id, allBaseOverrideRenderRightArmSuperiors, baseSorting.getOverrideRenderRightArmSuperiors());
+			addSorting(id, allBaseOverrideRenderRightArmInferiors, baseSorting.getOverrideRenderRightArmInferiors());
+			addSorting(id, allBaseAfterRenderRightArmSuperiors, baseSorting.getAfterRenderRightArmSuperiors());
+			addSorting(id, allBaseAfterRenderRightArmInferiors, baseSorting.getAfterRenderRightArmInferiors());
+
+			addSorting(id, allBaseBeforeSetInvisibleSuperiors, baseSorting.getBeforeSetInvisibleSuperiors());
+			addSorting(id, allBaseBeforeSetInvisibleInferiors, baseSorting.getBeforeSetInvisibleInferiors());
+			addSorting(id, allBaseOverrideSetInvisibleSuperiors, baseSorting.getOverrideSetInvisibleSuperiors());
+			addSorting(id, allBaseOverrideSetInvisibleInferiors, baseSorting.getOverrideSetInvisibleInferiors());
+			addSorting(id, allBaseAfterSetInvisibleSuperiors, baseSorting.getAfterSetInvisibleSuperiors());
+			addSorting(id, allBaseAfterSetInvisibleInferiors, baseSorting.getAfterSetInvisibleInferiors());
 
 			addSorting(id, allBaseBeforeSetLivingAnimationsSuperiors, baseSorting.getBeforeSetLivingAnimationsSuperiors());
 			addSorting(id, allBaseBeforeSetLivingAnimationsInferiors, baseSorting.getBeforeSetLivingAnimationsInferiors());
@@ -178,6 +207,13 @@ public final class ModelPlayerAPI
 			addSorting(id, allBaseOverrideSetLivingAnimationsInferiors, baseSorting.getOverrideSetLivingAnimationsInferiors());
 			addSorting(id, allBaseAfterSetLivingAnimationsSuperiors, baseSorting.getAfterSetLivingAnimationsSuperiors());
 			addSorting(id, allBaseAfterSetLivingAnimationsInferiors, baseSorting.getAfterSetLivingAnimationsInferiors());
+
+			addSorting(id, allBaseBeforeSetModelAttributesSuperiors, baseSorting.getBeforeSetModelAttributesSuperiors());
+			addSorting(id, allBaseBeforeSetModelAttributesInferiors, baseSorting.getBeforeSetModelAttributesInferiors());
+			addSorting(id, allBaseOverrideSetModelAttributesSuperiors, baseSorting.getOverrideSetModelAttributesSuperiors());
+			addSorting(id, allBaseOverrideSetModelAttributesInferiors, baseSorting.getOverrideSetModelAttributesInferiors());
+			addSorting(id, allBaseAfterSetModelAttributesSuperiors, baseSorting.getAfterSetModelAttributesSuperiors());
+			addSorting(id, allBaseAfterSetModelAttributesInferiors, baseSorting.getAfterSetModelAttributesInferiors());
 
 			addSorting(id, allBaseBeforeSetRotationAnglesSuperiors, baseSorting.getBeforeSetRotationAnglesSuperiors());
 			addSorting(id, allBaseBeforeSetRotationAnglesInferiors, baseSorting.getBeforeSetRotationAnglesInferiors());
@@ -195,8 +231,8 @@ public final class ModelPlayerAPI
 
 		}
 
-		addMethod(id, baseClass, beforeLocalConstructingHookTypes, "beforeLocalConstructing", float.class);
-		addMethod(id, baseClass, afterLocalConstructingHookTypes, "afterLocalConstructing", float.class);
+		addMethod(id, baseClass, beforeLocalConstructingHookTypes, "beforeLocalConstructing", float.class, float.class, int.class, int.class, boolean.class);
+		addMethod(id, baseClass, afterLocalConstructingHookTypes, "afterLocalConstructing", float.class, float.class, int.class, int.class, boolean.class);
 
 
 		addMethod(id, baseClass, beforeGetRandomModelBoxHookTypes, "beforeGetRandomModelBox", java.util.Random.class);
@@ -207,21 +243,41 @@ public final class ModelPlayerAPI
 		addMethod(id, baseClass, overrideGetTextureOffsetHookTypes, "getTextureOffset", String.class);
 		addMethod(id, baseClass, afterGetTextureOffsetHookTypes, "afterGetTextureOffset", String.class);
 
+		addMethod(id, baseClass, beforePostRenderArmHookTypes, "beforePostRenderArm", float.class);
+		addMethod(id, baseClass, overridePostRenderArmHookTypes, "postRenderArm", float.class);
+		addMethod(id, baseClass, afterPostRenderArmHookTypes, "afterPostRenderArm", float.class);
+
 		addMethod(id, baseClass, beforeRenderHookTypes, "beforeRender", net.minecraft.entity.Entity.class, float.class, float.class, float.class, float.class, float.class, float.class);
 		addMethod(id, baseClass, overrideRenderHookTypes, "render", net.minecraft.entity.Entity.class, float.class, float.class, float.class, float.class, float.class, float.class);
 		addMethod(id, baseClass, afterRenderHookTypes, "afterRender", net.minecraft.entity.Entity.class, float.class, float.class, float.class, float.class, float.class, float.class);
 
-		addMethod(id, baseClass, beforeRenderCloakHookTypes, "beforeRenderCloak", float.class);
-		addMethod(id, baseClass, overrideRenderCloakHookTypes, "renderCloak", float.class);
-		addMethod(id, baseClass, afterRenderCloakHookTypes, "afterRenderCloak", float.class);
+		addMethod(id, baseClass, beforeRenderCapeHookTypes, "beforeRenderCape", float.class);
+		addMethod(id, baseClass, overrideRenderCapeHookTypes, "renderCape", float.class);
+		addMethod(id, baseClass, afterRenderCapeHookTypes, "afterRenderCape", float.class);
 
-		addMethod(id, baseClass, beforeRenderEarsHookTypes, "beforeRenderEars", float.class);
-		addMethod(id, baseClass, overrideRenderEarsHookTypes, "renderEars", float.class);
-		addMethod(id, baseClass, afterRenderEarsHookTypes, "afterRenderEars", float.class);
+		addMethod(id, baseClass, beforeRenderDeadmau5HeadHookTypes, "beforeRenderDeadmau5Head", float.class);
+		addMethod(id, baseClass, overrideRenderDeadmau5HeadHookTypes, "renderDeadmau5Head", float.class);
+		addMethod(id, baseClass, afterRenderDeadmau5HeadHookTypes, "afterRenderDeadmau5Head", float.class);
+
+		addMethod(id, baseClass, beforeRenderLeftArmHookTypes, "beforeRenderLeftArm");
+		addMethod(id, baseClass, overrideRenderLeftArmHookTypes, "renderLeftArm");
+		addMethod(id, baseClass, afterRenderLeftArmHookTypes, "afterRenderLeftArm");
+
+		addMethod(id, baseClass, beforeRenderRightArmHookTypes, "beforeRenderRightArm");
+		addMethod(id, baseClass, overrideRenderRightArmHookTypes, "renderRightArm");
+		addMethod(id, baseClass, afterRenderRightArmHookTypes, "afterRenderRightArm");
+
+		addMethod(id, baseClass, beforeSetInvisibleHookTypes, "beforeSetInvisible", boolean.class);
+		addMethod(id, baseClass, overrideSetInvisibleHookTypes, "setInvisible", boolean.class);
+		addMethod(id, baseClass, afterSetInvisibleHookTypes, "afterSetInvisible", boolean.class);
 
 		addMethod(id, baseClass, beforeSetLivingAnimationsHookTypes, "beforeSetLivingAnimations", net.minecraft.entity.EntityLivingBase.class, float.class, float.class, float.class);
 		addMethod(id, baseClass, overrideSetLivingAnimationsHookTypes, "setLivingAnimations", net.minecraft.entity.EntityLivingBase.class, float.class, float.class, float.class);
 		addMethod(id, baseClass, afterSetLivingAnimationsHookTypes, "afterSetLivingAnimations", net.minecraft.entity.EntityLivingBase.class, float.class, float.class, float.class);
+
+		addMethod(id, baseClass, beforeSetModelAttributesHookTypes, "beforeSetModelAttributes", net.minecraft.client.model.ModelBase.class);
+		addMethod(id, baseClass, overrideSetModelAttributesHookTypes, "setModelAttributes", net.minecraft.client.model.ModelBase.class);
+		addMethod(id, baseClass, afterSetModelAttributesHookTypes, "afterSetModelAttributes", net.minecraft.client.model.ModelBase.class);
 
 		addMethod(id, baseClass, beforeSetRotationAnglesHookTypes, "beforeSetRotationAngles", float.class, float.class, float.class, float.class, float.class, float.class, net.minecraft.entity.Entity.class);
 		addMethod(id, baseClass, overrideSetRotationAnglesHookTypes, "setRotationAngles", float.class, float.class, float.class, float.class, float.class, float.class, net.minecraft.entity.Entity.class);
@@ -240,7 +296,7 @@ public final class ModelPlayerAPI
 
 		initialize();
 
-		for(IModelPlayerAPI instance : allInstances)
+		for(IModelPlayerAPI instance : getAllInstancesList())
 			instance.getModelPlayerAPI().attachModelPlayerBase(id);
 
 		System.out.println("Model Player: registered " + id);
@@ -258,7 +314,7 @@ public final class ModelPlayerAPI
 		if(constructor == null)
 			return false;
 
-		for(IModelPlayerAPI instance : allInstances)
+		for(IModelPlayerAPI instance : getAllInstancesList())
 			instance.getModelPlayerAPI().detachModelPlayerBase(id);
 
 		beforeLocalConstructingHookTypes.remove(id);
@@ -286,6 +342,17 @@ public final class ModelPlayerAPI
 		overrideGetTextureOffsetHookTypes.remove(id);
 		afterGetTextureOffsetHookTypes.remove(id);
 
+		allBaseBeforePostRenderArmSuperiors.remove(id);
+		allBaseBeforePostRenderArmInferiors.remove(id);
+		allBaseOverridePostRenderArmSuperiors.remove(id);
+		allBaseOverridePostRenderArmInferiors.remove(id);
+		allBaseAfterPostRenderArmSuperiors.remove(id);
+		allBaseAfterPostRenderArmInferiors.remove(id);
+
+		beforePostRenderArmHookTypes.remove(id);
+		overridePostRenderArmHookTypes.remove(id);
+		afterPostRenderArmHookTypes.remove(id);
+
 		allBaseBeforeRenderSuperiors.remove(id);
 		allBaseBeforeRenderInferiors.remove(id);
 		allBaseOverrideRenderSuperiors.remove(id);
@@ -297,27 +364,60 @@ public final class ModelPlayerAPI
 		overrideRenderHookTypes.remove(id);
 		afterRenderHookTypes.remove(id);
 
-		allBaseBeforeRenderCloakSuperiors.remove(id);
-		allBaseBeforeRenderCloakInferiors.remove(id);
-		allBaseOverrideRenderCloakSuperiors.remove(id);
-		allBaseOverrideRenderCloakInferiors.remove(id);
-		allBaseAfterRenderCloakSuperiors.remove(id);
-		allBaseAfterRenderCloakInferiors.remove(id);
+		allBaseBeforeRenderCapeSuperiors.remove(id);
+		allBaseBeforeRenderCapeInferiors.remove(id);
+		allBaseOverrideRenderCapeSuperiors.remove(id);
+		allBaseOverrideRenderCapeInferiors.remove(id);
+		allBaseAfterRenderCapeSuperiors.remove(id);
+		allBaseAfterRenderCapeInferiors.remove(id);
 
-		beforeRenderCloakHookTypes.remove(id);
-		overrideRenderCloakHookTypes.remove(id);
-		afterRenderCloakHookTypes.remove(id);
+		beforeRenderCapeHookTypes.remove(id);
+		overrideRenderCapeHookTypes.remove(id);
+		afterRenderCapeHookTypes.remove(id);
 
-		allBaseBeforeRenderEarsSuperiors.remove(id);
-		allBaseBeforeRenderEarsInferiors.remove(id);
-		allBaseOverrideRenderEarsSuperiors.remove(id);
-		allBaseOverrideRenderEarsInferiors.remove(id);
-		allBaseAfterRenderEarsSuperiors.remove(id);
-		allBaseAfterRenderEarsInferiors.remove(id);
+		allBaseBeforeRenderDeadmau5HeadSuperiors.remove(id);
+		allBaseBeforeRenderDeadmau5HeadInferiors.remove(id);
+		allBaseOverrideRenderDeadmau5HeadSuperiors.remove(id);
+		allBaseOverrideRenderDeadmau5HeadInferiors.remove(id);
+		allBaseAfterRenderDeadmau5HeadSuperiors.remove(id);
+		allBaseAfterRenderDeadmau5HeadInferiors.remove(id);
 
-		beforeRenderEarsHookTypes.remove(id);
-		overrideRenderEarsHookTypes.remove(id);
-		afterRenderEarsHookTypes.remove(id);
+		beforeRenderDeadmau5HeadHookTypes.remove(id);
+		overrideRenderDeadmau5HeadHookTypes.remove(id);
+		afterRenderDeadmau5HeadHookTypes.remove(id);
+
+		allBaseBeforeRenderLeftArmSuperiors.remove(id);
+		allBaseBeforeRenderLeftArmInferiors.remove(id);
+		allBaseOverrideRenderLeftArmSuperiors.remove(id);
+		allBaseOverrideRenderLeftArmInferiors.remove(id);
+		allBaseAfterRenderLeftArmSuperiors.remove(id);
+		allBaseAfterRenderLeftArmInferiors.remove(id);
+
+		beforeRenderLeftArmHookTypes.remove(id);
+		overrideRenderLeftArmHookTypes.remove(id);
+		afterRenderLeftArmHookTypes.remove(id);
+
+		allBaseBeforeRenderRightArmSuperiors.remove(id);
+		allBaseBeforeRenderRightArmInferiors.remove(id);
+		allBaseOverrideRenderRightArmSuperiors.remove(id);
+		allBaseOverrideRenderRightArmInferiors.remove(id);
+		allBaseAfterRenderRightArmSuperiors.remove(id);
+		allBaseAfterRenderRightArmInferiors.remove(id);
+
+		beforeRenderRightArmHookTypes.remove(id);
+		overrideRenderRightArmHookTypes.remove(id);
+		afterRenderRightArmHookTypes.remove(id);
+
+		allBaseBeforeSetInvisibleSuperiors.remove(id);
+		allBaseBeforeSetInvisibleInferiors.remove(id);
+		allBaseOverrideSetInvisibleSuperiors.remove(id);
+		allBaseOverrideSetInvisibleInferiors.remove(id);
+		allBaseAfterSetInvisibleSuperiors.remove(id);
+		allBaseAfterSetInvisibleInferiors.remove(id);
+
+		beforeSetInvisibleHookTypes.remove(id);
+		overrideSetInvisibleHookTypes.remove(id);
+		afterSetInvisibleHookTypes.remove(id);
 
 		allBaseBeforeSetLivingAnimationsSuperiors.remove(id);
 		allBaseBeforeSetLivingAnimationsInferiors.remove(id);
@@ -329,6 +429,17 @@ public final class ModelPlayerAPI
 		beforeSetLivingAnimationsHookTypes.remove(id);
 		overrideSetLivingAnimationsHookTypes.remove(id);
 		afterSetLivingAnimationsHookTypes.remove(id);
+
+		allBaseBeforeSetModelAttributesSuperiors.remove(id);
+		allBaseBeforeSetModelAttributesInferiors.remove(id);
+		allBaseOverrideSetModelAttributesSuperiors.remove(id);
+		allBaseOverrideSetModelAttributesInferiors.remove(id);
+		allBaseAfterSetModelAttributesSuperiors.remove(id);
+		allBaseAfterSetModelAttributesInferiors.remove(id);
+
+		beforeSetModelAttributesHookTypes.remove(id);
+		overrideSetModelAttributesHookTypes.remove(id);
+		afterSetModelAttributesHookTypes.remove(id);
 
 		allBaseBeforeSetRotationAnglesSuperiors.remove(id);
 		allBaseBeforeSetRotationAnglesInferiors.remove(id);
@@ -568,11 +679,11 @@ public final class ModelPlayerAPI
 		return methods;
 	}
 
-	public static ModelPlayerAPI create(IModelPlayerAPI modelPlayer, float paramFloat, String type)
+	public static ModelPlayerAPI create(IModelPlayerAPI modelPlayer, float paramFloat1, float paramFloat2, int paramInt1, int paramInt2, boolean paramBoolean, String type)
 	{
 		if(allBaseConstructors.size() > 0 && !initialized)
 			initialize();
-		return new ModelPlayerAPI(modelPlayer, paramFloat, type);
+		return new ModelPlayerAPI(modelPlayer, paramFloat1, paramFloat2, paramInt1, paramInt2, paramBoolean, type);
 	}
 
 	private static void initialize()
@@ -597,21 +708,41 @@ public final class ModelPlayerAPI
 		sortBases(overrideGetTextureOffsetHookTypes, allBaseOverrideGetTextureOffsetSuperiors, allBaseOverrideGetTextureOffsetInferiors, "overrideGetTextureOffset");
 		sortBases(afterGetTextureOffsetHookTypes, allBaseAfterGetTextureOffsetSuperiors, allBaseAfterGetTextureOffsetInferiors, "afterGetTextureOffset");
 
+		sortBases(beforePostRenderArmHookTypes, allBaseBeforePostRenderArmSuperiors, allBaseBeforePostRenderArmInferiors, "beforePostRenderArm");
+		sortBases(overridePostRenderArmHookTypes, allBaseOverridePostRenderArmSuperiors, allBaseOverridePostRenderArmInferiors, "overridePostRenderArm");
+		sortBases(afterPostRenderArmHookTypes, allBaseAfterPostRenderArmSuperiors, allBaseAfterPostRenderArmInferiors, "afterPostRenderArm");
+
 		sortBases(beforeRenderHookTypes, allBaseBeforeRenderSuperiors, allBaseBeforeRenderInferiors, "beforeRender");
 		sortBases(overrideRenderHookTypes, allBaseOverrideRenderSuperiors, allBaseOverrideRenderInferiors, "overrideRender");
 		sortBases(afterRenderHookTypes, allBaseAfterRenderSuperiors, allBaseAfterRenderInferiors, "afterRender");
 
-		sortBases(beforeRenderCloakHookTypes, allBaseBeforeRenderCloakSuperiors, allBaseBeforeRenderCloakInferiors, "beforeRenderCloak");
-		sortBases(overrideRenderCloakHookTypes, allBaseOverrideRenderCloakSuperiors, allBaseOverrideRenderCloakInferiors, "overrideRenderCloak");
-		sortBases(afterRenderCloakHookTypes, allBaseAfterRenderCloakSuperiors, allBaseAfterRenderCloakInferiors, "afterRenderCloak");
+		sortBases(beforeRenderCapeHookTypes, allBaseBeforeRenderCapeSuperiors, allBaseBeforeRenderCapeInferiors, "beforeRenderCape");
+		sortBases(overrideRenderCapeHookTypes, allBaseOverrideRenderCapeSuperiors, allBaseOverrideRenderCapeInferiors, "overrideRenderCape");
+		sortBases(afterRenderCapeHookTypes, allBaseAfterRenderCapeSuperiors, allBaseAfterRenderCapeInferiors, "afterRenderCape");
 
-		sortBases(beforeRenderEarsHookTypes, allBaseBeforeRenderEarsSuperiors, allBaseBeforeRenderEarsInferiors, "beforeRenderEars");
-		sortBases(overrideRenderEarsHookTypes, allBaseOverrideRenderEarsSuperiors, allBaseOverrideRenderEarsInferiors, "overrideRenderEars");
-		sortBases(afterRenderEarsHookTypes, allBaseAfterRenderEarsSuperiors, allBaseAfterRenderEarsInferiors, "afterRenderEars");
+		sortBases(beforeRenderDeadmau5HeadHookTypes, allBaseBeforeRenderDeadmau5HeadSuperiors, allBaseBeforeRenderDeadmau5HeadInferiors, "beforeRenderDeadmau5Head");
+		sortBases(overrideRenderDeadmau5HeadHookTypes, allBaseOverrideRenderDeadmau5HeadSuperiors, allBaseOverrideRenderDeadmau5HeadInferiors, "overrideRenderDeadmau5Head");
+		sortBases(afterRenderDeadmau5HeadHookTypes, allBaseAfterRenderDeadmau5HeadSuperiors, allBaseAfterRenderDeadmau5HeadInferiors, "afterRenderDeadmau5Head");
+
+		sortBases(beforeRenderLeftArmHookTypes, allBaseBeforeRenderLeftArmSuperiors, allBaseBeforeRenderLeftArmInferiors, "beforeRenderLeftArm");
+		sortBases(overrideRenderLeftArmHookTypes, allBaseOverrideRenderLeftArmSuperiors, allBaseOverrideRenderLeftArmInferiors, "overrideRenderLeftArm");
+		sortBases(afterRenderLeftArmHookTypes, allBaseAfterRenderLeftArmSuperiors, allBaseAfterRenderLeftArmInferiors, "afterRenderLeftArm");
+
+		sortBases(beforeRenderRightArmHookTypes, allBaseBeforeRenderRightArmSuperiors, allBaseBeforeRenderRightArmInferiors, "beforeRenderRightArm");
+		sortBases(overrideRenderRightArmHookTypes, allBaseOverrideRenderRightArmSuperiors, allBaseOverrideRenderRightArmInferiors, "overrideRenderRightArm");
+		sortBases(afterRenderRightArmHookTypes, allBaseAfterRenderRightArmSuperiors, allBaseAfterRenderRightArmInferiors, "afterRenderRightArm");
+
+		sortBases(beforeSetInvisibleHookTypes, allBaseBeforeSetInvisibleSuperiors, allBaseBeforeSetInvisibleInferiors, "beforeSetInvisible");
+		sortBases(overrideSetInvisibleHookTypes, allBaseOverrideSetInvisibleSuperiors, allBaseOverrideSetInvisibleInferiors, "overrideSetInvisible");
+		sortBases(afterSetInvisibleHookTypes, allBaseAfterSetInvisibleSuperiors, allBaseAfterSetInvisibleInferiors, "afterSetInvisible");
 
 		sortBases(beforeSetLivingAnimationsHookTypes, allBaseBeforeSetLivingAnimationsSuperiors, allBaseBeforeSetLivingAnimationsInferiors, "beforeSetLivingAnimations");
 		sortBases(overrideSetLivingAnimationsHookTypes, allBaseOverrideSetLivingAnimationsSuperiors, allBaseOverrideSetLivingAnimationsInferiors, "overrideSetLivingAnimations");
 		sortBases(afterSetLivingAnimationsHookTypes, allBaseAfterSetLivingAnimationsSuperiors, allBaseAfterSetLivingAnimationsInferiors, "afterSetLivingAnimations");
+
+		sortBases(beforeSetModelAttributesHookTypes, allBaseBeforeSetModelAttributesSuperiors, allBaseBeforeSetModelAttributesInferiors, "beforeSetModelAttributes");
+		sortBases(overrideSetModelAttributesHookTypes, allBaseOverrideSetModelAttributesSuperiors, allBaseOverrideSetModelAttributesInferiors, "overrideSetModelAttributes");
+		sortBases(afterSetModelAttributesHookTypes, allBaseAfterSetModelAttributesSuperiors, allBaseAfterSetModelAttributesInferiors, "afterSetModelAttributes");
 
 		sortBases(beforeSetRotationAnglesHookTypes, allBaseBeforeSetRotationAnglesSuperiors, allBaseBeforeSetRotationAnglesInferiors, "beforeSetRotationAngles");
 		sortBases(overrideSetRotationAnglesHookTypes, allBaseOverrideSetRotationAnglesSuperiors, allBaseOverrideSetRotationAnglesInferiors, "overrideSetRotationAngles");
@@ -624,30 +755,45 @@ public final class ModelPlayerAPI
 		initialized = true;
 	}
 
-	private static List<IModelPlayerAPI> allInstances = new ArrayList<IModelPlayerAPI>();
-
-	public static api.player.model.ModelPlayer[] getAllInstances()
+	private static List<IModelPlayerAPI> getAllInstancesList()
 	{
-		return allInstances.toArray(new api.player.model.ModelPlayer[allInstances.size()]);
+		List<IModelPlayerAPI> result = new ArrayList<IModelPlayerAPI>();
+		for(Iterator<WeakReference<IModelPlayerAPI>> iterator = allInstances.iterator(); iterator.hasNext();)
+		{
+			IModelPlayerAPI instance = iterator.next().get();
+			if(instance != null)
+				result.add(instance);
+			else
+				iterator.remove();
+		}
+		return result;
 	}
 
-	public static void beforeLocalConstructing(IModelPlayerAPI modelPlayer, float paramFloat)
+	private static List<WeakReference<IModelPlayerAPI>> allInstances = new ArrayList<WeakReference<IModelPlayerAPI>>();
+
+	public static net.minecraft.client.model.ModelBiped[] getAllInstances()
+	{
+		List<IModelPlayerAPI> allInstances = getAllInstancesList();
+		return allInstances.toArray(new net.minecraft.client.model.ModelBiped[allInstances.size()]);
+	}
+
+	public static void beforeLocalConstructing(IModelPlayerAPI modelPlayer, float paramFloat1, float paramFloat2, int paramInt1, int paramInt2, boolean paramBoolean)
 	{
 		ModelPlayerAPI modelPlayerAPI = modelPlayer.getModelPlayerAPI();
 		if(modelPlayerAPI != null)
 			modelPlayerAPI.load();
 
-		allInstances.add(modelPlayer);
+		allInstances.add(new WeakReference<IModelPlayerAPI>(modelPlayer));
 
 		if(modelPlayerAPI != null)
-			modelPlayerAPI.beforeLocalConstructing(paramFloat);
+			modelPlayerAPI.beforeLocalConstructing(paramFloat1, paramFloat2, paramInt1, paramInt2, paramBoolean);
 	}
 
-	public static void afterLocalConstructing(IModelPlayerAPI modelPlayer, float paramFloat)
+	public static void afterLocalConstructing(IModelPlayerAPI modelPlayer, float paramFloat1, float paramFloat2, int paramInt1, int paramInt2, boolean paramBoolean)
 	{
 		ModelPlayerAPI modelPlayerAPI = modelPlayer.getModelPlayerAPI();
 		if(modelPlayerAPI != null)
-			modelPlayerAPI.afterLocalConstructing(paramFloat);
+			modelPlayerAPI.afterLocalConstructing(paramFloat1, paramFloat2, paramInt1, paramInt2, paramBoolean);
 	}
 
 	public static ModelPlayerBase getModelPlayerBase(IModelPlayerAPI modelPlayer, String baseId)
@@ -673,8 +819,40 @@ public final class ModelPlayerAPI
 	{
 		ModelPlayerAPI modelPlayerAPI = modelPlayer.getModelPlayerAPI();
 		if(modelPlayerAPI != null)
-			return modelPlayerAPI.paramFloat;
+			return modelPlayerAPI.paramFloat1;
 		return 0;
+	}
+
+	public static float getYOffsetParameter(IModelPlayerAPI modelPlayer)
+	{
+		ModelPlayerAPI modelPlayerAPI = modelPlayer.getModelPlayerAPI();
+		if(modelPlayerAPI != null)
+			return modelPlayerAPI.paramFloat2;
+		return 0;
+	}
+
+	public static int getTextureWidthParameter(IModelPlayerAPI modelPlayer)
+	{
+		ModelPlayerAPI modelPlayerAPI = modelPlayer.getModelPlayerAPI();
+		if(modelPlayerAPI != null)
+			return modelPlayerAPI.paramInt1;
+		return 0;
+	}
+
+	public static int getTextureHeightParameter(IModelPlayerAPI modelPlayer)
+	{
+		ModelPlayerAPI modelPlayerAPI = modelPlayer.getModelPlayerAPI();
+		if(modelPlayerAPI != null)
+			return modelPlayerAPI.paramInt2;
+		return 0;
+	}
+
+	public static boolean getSmallArmsParameter(IModelPlayerAPI modelPlayer)
+	{
+		ModelPlayerAPI modelPlayerAPI = modelPlayer.getModelPlayerAPI();
+		if(modelPlayerAPI != null)
+			return modelPlayerAPI.paramBoolean;
+		return false;
 	}
 
 	public static String getModelPlayerType(IModelPlayerAPI modelPlayer)
@@ -731,10 +909,14 @@ public final class ModelPlayerAPI
 		return superiors != null ? superiors : EmptySortMap;
 	}
 
-	private ModelPlayerAPI(IModelPlayerAPI modelPlayer, float paramFloat, String type)
+	private ModelPlayerAPI(IModelPlayerAPI modelPlayer, float paramFloat1, float paramFloat2, int paramInt1, int paramInt2, boolean paramBoolean, String type)
 	{
 		this.modelPlayer = modelPlayer;
-		this.paramFloat = paramFloat;
+		this.paramFloat1 = paramFloat1;
+		this.paramFloat2 = paramFloat2;
+		this.paramInt1 = paramInt1;
+		this.paramInt2 = paramInt2;
+		this.paramBoolean = paramBoolean;
 		this.type = type;
 	}
 
@@ -797,6 +979,14 @@ public final class ModelPlayerAPI
 			overrideGetTextureOffsetHooks != null ||
 			afterGetTextureOffsetHooks != null;
 
+		beforePostRenderArmHooks = create(beforePostRenderArmHookTypes);
+		overridePostRenderArmHooks = create(overridePostRenderArmHookTypes);
+		afterPostRenderArmHooks = create(afterPostRenderArmHookTypes);
+		isPostRenderArmModded =
+			beforePostRenderArmHooks != null ||
+			overridePostRenderArmHooks != null ||
+			afterPostRenderArmHooks != null;
+
 		beforeRenderHooks = create(beforeRenderHookTypes);
 		overrideRenderHooks = create(overrideRenderHookTypes);
 		afterRenderHooks = create(afterRenderHookTypes);
@@ -805,21 +995,45 @@ public final class ModelPlayerAPI
 			overrideRenderHooks != null ||
 			afterRenderHooks != null;
 
-		beforeRenderCloakHooks = create(beforeRenderCloakHookTypes);
-		overrideRenderCloakHooks = create(overrideRenderCloakHookTypes);
-		afterRenderCloakHooks = create(afterRenderCloakHookTypes);
-		isRenderCloakModded =
-			beforeRenderCloakHooks != null ||
-			overrideRenderCloakHooks != null ||
-			afterRenderCloakHooks != null;
+		beforeRenderCapeHooks = create(beforeRenderCapeHookTypes);
+		overrideRenderCapeHooks = create(overrideRenderCapeHookTypes);
+		afterRenderCapeHooks = create(afterRenderCapeHookTypes);
+		isRenderCapeModded =
+			beforeRenderCapeHooks != null ||
+			overrideRenderCapeHooks != null ||
+			afterRenderCapeHooks != null;
 
-		beforeRenderEarsHooks = create(beforeRenderEarsHookTypes);
-		overrideRenderEarsHooks = create(overrideRenderEarsHookTypes);
-		afterRenderEarsHooks = create(afterRenderEarsHookTypes);
-		isRenderEarsModded =
-			beforeRenderEarsHooks != null ||
-			overrideRenderEarsHooks != null ||
-			afterRenderEarsHooks != null;
+		beforeRenderDeadmau5HeadHooks = create(beforeRenderDeadmau5HeadHookTypes);
+		overrideRenderDeadmau5HeadHooks = create(overrideRenderDeadmau5HeadHookTypes);
+		afterRenderDeadmau5HeadHooks = create(afterRenderDeadmau5HeadHookTypes);
+		isRenderDeadmau5HeadModded =
+			beforeRenderDeadmau5HeadHooks != null ||
+			overrideRenderDeadmau5HeadHooks != null ||
+			afterRenderDeadmau5HeadHooks != null;
+
+		beforeRenderLeftArmHooks = create(beforeRenderLeftArmHookTypes);
+		overrideRenderLeftArmHooks = create(overrideRenderLeftArmHookTypes);
+		afterRenderLeftArmHooks = create(afterRenderLeftArmHookTypes);
+		isRenderLeftArmModded =
+			beforeRenderLeftArmHooks != null ||
+			overrideRenderLeftArmHooks != null ||
+			afterRenderLeftArmHooks != null;
+
+		beforeRenderRightArmHooks = create(beforeRenderRightArmHookTypes);
+		overrideRenderRightArmHooks = create(overrideRenderRightArmHookTypes);
+		afterRenderRightArmHooks = create(afterRenderRightArmHookTypes);
+		isRenderRightArmModded =
+			beforeRenderRightArmHooks != null ||
+			overrideRenderRightArmHooks != null ||
+			afterRenderRightArmHooks != null;
+
+		beforeSetInvisibleHooks = create(beforeSetInvisibleHookTypes);
+		overrideSetInvisibleHooks = create(overrideSetInvisibleHookTypes);
+		afterSetInvisibleHooks = create(afterSetInvisibleHookTypes);
+		isSetInvisibleModded =
+			beforeSetInvisibleHooks != null ||
+			overrideSetInvisibleHooks != null ||
+			afterSetInvisibleHooks != null;
 
 		beforeSetLivingAnimationsHooks = create(beforeSetLivingAnimationsHookTypes);
 		overrideSetLivingAnimationsHooks = create(overrideSetLivingAnimationsHookTypes);
@@ -828,6 +1042,14 @@ public final class ModelPlayerAPI
 			beforeSetLivingAnimationsHooks != null ||
 			overrideSetLivingAnimationsHooks != null ||
 			afterSetLivingAnimationsHooks != null;
+
+		beforeSetModelAttributesHooks = create(beforeSetModelAttributesHookTypes);
+		overrideSetModelAttributesHooks = create(overrideSetModelAttributesHookTypes);
+		afterSetModelAttributesHooks = create(afterSetModelAttributesHookTypes);
+		isSetModelAttributesModded =
+			beforeSetModelAttributesHooks != null ||
+			overrideSetModelAttributesHooks != null ||
+			afterSetModelAttributesHooks != null;
 
 		beforeSetRotationAnglesHooks = create(beforeSetRotationAnglesHookTypes);
 		overrideSetRotationAnglesHooks = create(overrideSetRotationAnglesHookTypes);
@@ -876,19 +1098,19 @@ public final class ModelPlayerAPI
 		return result;
 	}
 
-	private void beforeLocalConstructing(float paramFloat)
+	private void beforeLocalConstructing(float paramFloat1, float paramFloat2, int paramInt1, int paramInt2, boolean paramBoolean)
 	{
 		if(beforeLocalConstructingHooks != null)
 			for(int i = beforeLocalConstructingHooks.length - 1; i >= 0 ; i--)
-				beforeLocalConstructingHooks[i].beforeLocalConstructing(paramFloat);
+				beforeLocalConstructingHooks[i].beforeLocalConstructing(paramFloat1, paramFloat2, paramInt1, paramInt2, paramBoolean);
 		beforeLocalConstructingHooks = null;
 	}
 
-	private void afterLocalConstructing(float paramFloat)
+	private void afterLocalConstructing(float paramFloat1, float paramFloat2, int paramInt1, int paramInt2, boolean paramBoolean)
 	{
 		if(afterLocalConstructingHooks != null)
 			for(int i = 0; i < afterLocalConstructingHooks.length; i++)
-				afterLocalConstructingHooks[i].afterLocalConstructing(paramFloat);
+				afterLocalConstructingHooks[i].afterLocalConstructing(paramFloat1, paramFloat2, paramInt1, paramInt2, paramBoolean);
 		afterLocalConstructingHooks = null;
 	}
 
@@ -946,7 +1168,7 @@ public final class ModelPlayerAPI
 			return null;
 
 		Method method = methods.get(key);
-		if(methods == null)
+		if(method == null)
 			return null;
 
 		return execute(getModelPlayerBase(id), method, parameters);
@@ -1020,6 +1242,9 @@ public final class ModelPlayerAPI
 
 	protected ModelPlayerBase GetOverwrittenGetRandomModelBox(ModelPlayerBase overWriter)
 	{
+		if (overrideGetRandomModelBoxHooks == null)
+			return overWriter;
+
 		for(int i = 0; i < overrideGetRandomModelBoxHooks.length; i++)
 			if(overrideGetRandomModelBoxHooks[i] == overWriter)
 				if(i == 0)
@@ -1079,6 +1304,9 @@ public final class ModelPlayerAPI
 
 	protected ModelPlayerBase GetOverwrittenGetTextureOffset(ModelPlayerBase overWriter)
 	{
+		if (overrideGetTextureOffsetHooks == null)
+			return overWriter;
+
 		for(int i = 0; i < overrideGetTextureOffsetHooks.length; i++)
 			if(overrideGetTextureOffsetHooks[i] == overWriter)
 				if(i == 0)
@@ -1105,6 +1333,64 @@ public final class ModelPlayerAPI
 	private static final Map<String, String[]> allBaseOverrideGetTextureOffsetInferiors = new Hashtable<String, String[]>(0);
 	private static final Map<String, String[]> allBaseAfterGetTextureOffsetSuperiors = new Hashtable<String, String[]>(0);
 	private static final Map<String, String[]> allBaseAfterGetTextureOffsetInferiors = new Hashtable<String, String[]>(0);
+
+	public static void postRenderArm(IModelPlayerAPI target, float paramFloat)
+	{
+		ModelPlayerAPI modelPlayerAPI = target.getModelPlayerAPI();
+		if(modelPlayerAPI != null && modelPlayerAPI.isPostRenderArmModded)
+			modelPlayerAPI.postRenderArm(paramFloat);
+		else
+			target.localPostRenderArm(paramFloat);
+	}
+
+	private void postRenderArm(float paramFloat)
+	{
+		if(beforePostRenderArmHooks != null)
+			for(int i = beforePostRenderArmHooks.length - 1; i >= 0 ; i--)
+				beforePostRenderArmHooks[i].beforePostRenderArm(paramFloat);
+
+		if(overridePostRenderArmHooks != null)
+			overridePostRenderArmHooks[overridePostRenderArmHooks.length - 1].postRenderArm(paramFloat);
+		else
+			modelPlayer.localPostRenderArm(paramFloat);
+
+		if(afterPostRenderArmHooks != null)
+			for(int i = 0; i < afterPostRenderArmHooks.length; i++)
+				afterPostRenderArmHooks[i].afterPostRenderArm(paramFloat);
+
+	}
+
+	protected ModelPlayerBase GetOverwrittenPostRenderArm(ModelPlayerBase overWriter)
+	{
+		if (overridePostRenderArmHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overridePostRenderArmHooks.length; i++)
+			if(overridePostRenderArmHooks[i] == overWriter)
+				if(i == 0)
+					return null;
+				else
+					return overridePostRenderArmHooks[i - 1];
+
+		return overWriter;
+	}
+
+	private final static List<String> beforePostRenderArmHookTypes = new LinkedList<String>();
+	private final static List<String> overridePostRenderArmHookTypes = new LinkedList<String>();
+	private final static List<String> afterPostRenderArmHookTypes = new LinkedList<String>();
+
+	private ModelPlayerBase[] beforePostRenderArmHooks;
+	private ModelPlayerBase[] overridePostRenderArmHooks;
+	private ModelPlayerBase[] afterPostRenderArmHooks;
+
+	public boolean isPostRenderArmModded;
+
+	private static final Map<String, String[]> allBaseBeforePostRenderArmSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforePostRenderArmInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverridePostRenderArmSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverridePostRenderArmInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterPostRenderArmSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterPostRenderArmInferiors = new Hashtable<String, String[]>(0);
 
 	public static void render(IModelPlayerAPI target, net.minecraft.entity.Entity paramEntity, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6)
 	{
@@ -1134,6 +1420,9 @@ public final class ModelPlayerAPI
 
 	protected ModelPlayerBase GetOverwrittenRender(ModelPlayerBase overWriter)
 	{
+		if (overrideRenderHooks == null)
+			return overWriter;
+
 		for(int i = 0; i < overrideRenderHooks.length; i++)
 			if(overrideRenderHooks[i] == overWriter)
 				if(i == 0)
@@ -1161,115 +1450,295 @@ public final class ModelPlayerAPI
 	private static final Map<String, String[]> allBaseAfterRenderSuperiors = new Hashtable<String, String[]>(0);
 	private static final Map<String, String[]> allBaseAfterRenderInferiors = new Hashtable<String, String[]>(0);
 
-	public static void renderCloak(IModelPlayerAPI target, float paramFloat)
+	public static void renderCape(IModelPlayerAPI target, float paramFloat)
 	{
 		ModelPlayerAPI modelPlayerAPI = target.getModelPlayerAPI();
-		if(modelPlayerAPI != null && modelPlayerAPI.isRenderCloakModded)
-			modelPlayerAPI.renderCloak(paramFloat);
+		if(modelPlayerAPI != null && modelPlayerAPI.isRenderCapeModded)
+			modelPlayerAPI.renderCape(paramFloat);
 		else
-			target.localRenderCloak(paramFloat);
+			target.localRenderCape(paramFloat);
 	}
 
-	private void renderCloak(float paramFloat)
+	private void renderCape(float paramFloat)
 	{
-		if(beforeRenderCloakHooks != null)
-			for(int i = beforeRenderCloakHooks.length - 1; i >= 0 ; i--)
-				beforeRenderCloakHooks[i].beforeRenderCloak(paramFloat);
+		if(beforeRenderCapeHooks != null)
+			for(int i = beforeRenderCapeHooks.length - 1; i >= 0 ; i--)
+				beforeRenderCapeHooks[i].beforeRenderCape(paramFloat);
 
-		if(overrideRenderCloakHooks != null)
-			overrideRenderCloakHooks[overrideRenderCloakHooks.length - 1].renderCloak(paramFloat);
+		if(overrideRenderCapeHooks != null)
+			overrideRenderCapeHooks[overrideRenderCapeHooks.length - 1].renderCape(paramFloat);
 		else
-			modelPlayer.localRenderCloak(paramFloat);
+			modelPlayer.localRenderCape(paramFloat);
 
-		if(afterRenderCloakHooks != null)
-			for(int i = 0; i < afterRenderCloakHooks.length; i++)
-				afterRenderCloakHooks[i].afterRenderCloak(paramFloat);
+		if(afterRenderCapeHooks != null)
+			for(int i = 0; i < afterRenderCapeHooks.length; i++)
+				afterRenderCapeHooks[i].afterRenderCape(paramFloat);
 
 	}
 
-	protected ModelPlayerBase GetOverwrittenRenderCloak(ModelPlayerBase overWriter)
+	protected ModelPlayerBase GetOverwrittenRenderCape(ModelPlayerBase overWriter)
 	{
-		for(int i = 0; i < overrideRenderCloakHooks.length; i++)
-			if(overrideRenderCloakHooks[i] == overWriter)
+		if (overrideRenderCapeHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideRenderCapeHooks.length; i++)
+			if(overrideRenderCapeHooks[i] == overWriter)
 				if(i == 0)
 					return null;
 				else
-					return overrideRenderCloakHooks[i - 1];
+					return overrideRenderCapeHooks[i - 1];
 
 		return overWriter;
 	}
 
-	private final static List<String> beforeRenderCloakHookTypes = new LinkedList<String>();
-	private final static List<String> overrideRenderCloakHookTypes = new LinkedList<String>();
-	private final static List<String> afterRenderCloakHookTypes = new LinkedList<String>();
+	private final static List<String> beforeRenderCapeHookTypes = new LinkedList<String>();
+	private final static List<String> overrideRenderCapeHookTypes = new LinkedList<String>();
+	private final static List<String> afterRenderCapeHookTypes = new LinkedList<String>();
 
-	private ModelPlayerBase[] beforeRenderCloakHooks;
-	private ModelPlayerBase[] overrideRenderCloakHooks;
-	private ModelPlayerBase[] afterRenderCloakHooks;
+	private ModelPlayerBase[] beforeRenderCapeHooks;
+	private ModelPlayerBase[] overrideRenderCapeHooks;
+	private ModelPlayerBase[] afterRenderCapeHooks;
 
-	public boolean isRenderCloakModded;
+	public boolean isRenderCapeModded;
 
-	private static final Map<String, String[]> allBaseBeforeRenderCloakSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseBeforeRenderCloakInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideRenderCloakSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideRenderCloakInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterRenderCloakSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterRenderCloakInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeRenderCapeSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeRenderCapeInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideRenderCapeSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideRenderCapeInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterRenderCapeSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterRenderCapeInferiors = new Hashtable<String, String[]>(0);
 
-	public static void renderEars(IModelPlayerAPI target, float paramFloat)
+	public static void renderDeadmau5Head(IModelPlayerAPI target, float paramFloat)
 	{
 		ModelPlayerAPI modelPlayerAPI = target.getModelPlayerAPI();
-		if(modelPlayerAPI != null && modelPlayerAPI.isRenderEarsModded)
-			modelPlayerAPI.renderEars(paramFloat);
+		if(modelPlayerAPI != null && modelPlayerAPI.isRenderDeadmau5HeadModded)
+			modelPlayerAPI.renderDeadmau5Head(paramFloat);
 		else
-			target.localRenderEars(paramFloat);
+			target.localRenderDeadmau5Head(paramFloat);
 	}
 
-	private void renderEars(float paramFloat)
+	private void renderDeadmau5Head(float paramFloat)
 	{
-		if(beforeRenderEarsHooks != null)
-			for(int i = beforeRenderEarsHooks.length - 1; i >= 0 ; i--)
-				beforeRenderEarsHooks[i].beforeRenderEars(paramFloat);
+		if(beforeRenderDeadmau5HeadHooks != null)
+			for(int i = beforeRenderDeadmau5HeadHooks.length - 1; i >= 0 ; i--)
+				beforeRenderDeadmau5HeadHooks[i].beforeRenderDeadmau5Head(paramFloat);
 
-		if(overrideRenderEarsHooks != null)
-			overrideRenderEarsHooks[overrideRenderEarsHooks.length - 1].renderEars(paramFloat);
+		if(overrideRenderDeadmau5HeadHooks != null)
+			overrideRenderDeadmau5HeadHooks[overrideRenderDeadmau5HeadHooks.length - 1].renderDeadmau5Head(paramFloat);
 		else
-			modelPlayer.localRenderEars(paramFloat);
+			modelPlayer.localRenderDeadmau5Head(paramFloat);
 
-		if(afterRenderEarsHooks != null)
-			for(int i = 0; i < afterRenderEarsHooks.length; i++)
-				afterRenderEarsHooks[i].afterRenderEars(paramFloat);
+		if(afterRenderDeadmau5HeadHooks != null)
+			for(int i = 0; i < afterRenderDeadmau5HeadHooks.length; i++)
+				afterRenderDeadmau5HeadHooks[i].afterRenderDeadmau5Head(paramFloat);
 
 	}
 
-	protected ModelPlayerBase GetOverwrittenRenderEars(ModelPlayerBase overWriter)
+	protected ModelPlayerBase GetOverwrittenRenderDeadmau5Head(ModelPlayerBase overWriter)
 	{
-		for(int i = 0; i < overrideRenderEarsHooks.length; i++)
-			if(overrideRenderEarsHooks[i] == overWriter)
+		if (overrideRenderDeadmau5HeadHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideRenderDeadmau5HeadHooks.length; i++)
+			if(overrideRenderDeadmau5HeadHooks[i] == overWriter)
 				if(i == 0)
 					return null;
 				else
-					return overrideRenderEarsHooks[i - 1];
+					return overrideRenderDeadmau5HeadHooks[i - 1];
 
 		return overWriter;
 	}
 
-	private final static List<String> beforeRenderEarsHookTypes = new LinkedList<String>();
-	private final static List<String> overrideRenderEarsHookTypes = new LinkedList<String>();
-	private final static List<String> afterRenderEarsHookTypes = new LinkedList<String>();
+	private final static List<String> beforeRenderDeadmau5HeadHookTypes = new LinkedList<String>();
+	private final static List<String> overrideRenderDeadmau5HeadHookTypes = new LinkedList<String>();
+	private final static List<String> afterRenderDeadmau5HeadHookTypes = new LinkedList<String>();
 
-	private ModelPlayerBase[] beforeRenderEarsHooks;
-	private ModelPlayerBase[] overrideRenderEarsHooks;
-	private ModelPlayerBase[] afterRenderEarsHooks;
+	private ModelPlayerBase[] beforeRenderDeadmau5HeadHooks;
+	private ModelPlayerBase[] overrideRenderDeadmau5HeadHooks;
+	private ModelPlayerBase[] afterRenderDeadmau5HeadHooks;
 
-	public boolean isRenderEarsModded;
+	public boolean isRenderDeadmau5HeadModded;
 
-	private static final Map<String, String[]> allBaseBeforeRenderEarsSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseBeforeRenderEarsInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideRenderEarsSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideRenderEarsInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterRenderEarsSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterRenderEarsInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeRenderDeadmau5HeadSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeRenderDeadmau5HeadInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideRenderDeadmau5HeadSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideRenderDeadmau5HeadInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterRenderDeadmau5HeadSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterRenderDeadmau5HeadInferiors = new Hashtable<String, String[]>(0);
+
+	public static void renderLeftArm(IModelPlayerAPI target)
+	{
+		ModelPlayerAPI modelPlayerAPI = target.getModelPlayerAPI();
+		if(modelPlayerAPI != null && modelPlayerAPI.isRenderLeftArmModded)
+			modelPlayerAPI.renderLeftArm();
+		else
+			target.localRenderLeftArm();
+	}
+
+	private void renderLeftArm()
+	{
+		if(beforeRenderLeftArmHooks != null)
+			for(int i = beforeRenderLeftArmHooks.length - 1; i >= 0 ; i--)
+				beforeRenderLeftArmHooks[i].beforeRenderLeftArm();
+
+		if(overrideRenderLeftArmHooks != null)
+			overrideRenderLeftArmHooks[overrideRenderLeftArmHooks.length - 1].renderLeftArm();
+		else
+			modelPlayer.localRenderLeftArm();
+
+		if(afterRenderLeftArmHooks != null)
+			for(int i = 0; i < afterRenderLeftArmHooks.length; i++)
+				afterRenderLeftArmHooks[i].afterRenderLeftArm();
+
+	}
+
+	protected ModelPlayerBase GetOverwrittenRenderLeftArm(ModelPlayerBase overWriter)
+	{
+		if (overrideRenderLeftArmHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideRenderLeftArmHooks.length; i++)
+			if(overrideRenderLeftArmHooks[i] == overWriter)
+				if(i == 0)
+					return null;
+				else
+					return overrideRenderLeftArmHooks[i - 1];
+
+		return overWriter;
+	}
+
+	private final static List<String> beforeRenderLeftArmHookTypes = new LinkedList<String>();
+	private final static List<String> overrideRenderLeftArmHookTypes = new LinkedList<String>();
+	private final static List<String> afterRenderLeftArmHookTypes = new LinkedList<String>();
+
+	private ModelPlayerBase[] beforeRenderLeftArmHooks;
+	private ModelPlayerBase[] overrideRenderLeftArmHooks;
+	private ModelPlayerBase[] afterRenderLeftArmHooks;
+
+	public boolean isRenderLeftArmModded;
+
+	private static final Map<String, String[]> allBaseBeforeRenderLeftArmSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeRenderLeftArmInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideRenderLeftArmSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideRenderLeftArmInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterRenderLeftArmSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterRenderLeftArmInferiors = new Hashtable<String, String[]>(0);
+
+	public static void renderRightArm(IModelPlayerAPI target)
+	{
+		ModelPlayerAPI modelPlayerAPI = target.getModelPlayerAPI();
+		if(modelPlayerAPI != null && modelPlayerAPI.isRenderRightArmModded)
+			modelPlayerAPI.renderRightArm();
+		else
+			target.localRenderRightArm();
+	}
+
+	private void renderRightArm()
+	{
+		if(beforeRenderRightArmHooks != null)
+			for(int i = beforeRenderRightArmHooks.length - 1; i >= 0 ; i--)
+				beforeRenderRightArmHooks[i].beforeRenderRightArm();
+
+		if(overrideRenderRightArmHooks != null)
+			overrideRenderRightArmHooks[overrideRenderRightArmHooks.length - 1].renderRightArm();
+		else
+			modelPlayer.localRenderRightArm();
+
+		if(afterRenderRightArmHooks != null)
+			for(int i = 0; i < afterRenderRightArmHooks.length; i++)
+				afterRenderRightArmHooks[i].afterRenderRightArm();
+
+	}
+
+	protected ModelPlayerBase GetOverwrittenRenderRightArm(ModelPlayerBase overWriter)
+	{
+		if (overrideRenderRightArmHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideRenderRightArmHooks.length; i++)
+			if(overrideRenderRightArmHooks[i] == overWriter)
+				if(i == 0)
+					return null;
+				else
+					return overrideRenderRightArmHooks[i - 1];
+
+		return overWriter;
+	}
+
+	private final static List<String> beforeRenderRightArmHookTypes = new LinkedList<String>();
+	private final static List<String> overrideRenderRightArmHookTypes = new LinkedList<String>();
+	private final static List<String> afterRenderRightArmHookTypes = new LinkedList<String>();
+
+	private ModelPlayerBase[] beforeRenderRightArmHooks;
+	private ModelPlayerBase[] overrideRenderRightArmHooks;
+	private ModelPlayerBase[] afterRenderRightArmHooks;
+
+	public boolean isRenderRightArmModded;
+
+	private static final Map<String, String[]> allBaseBeforeRenderRightArmSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeRenderRightArmInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideRenderRightArmSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideRenderRightArmInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterRenderRightArmSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterRenderRightArmInferiors = new Hashtable<String, String[]>(0);
+
+	public static void setInvisible(IModelPlayerAPI target, boolean paramBoolean)
+	{
+		ModelPlayerAPI modelPlayerAPI = target.getModelPlayerAPI();
+		if(modelPlayerAPI != null && modelPlayerAPI.isSetInvisibleModded)
+			modelPlayerAPI.setInvisible(paramBoolean);
+		else
+			target.localSetInvisible(paramBoolean);
+	}
+
+	private void setInvisible(boolean paramBoolean)
+	{
+		if(beforeSetInvisibleHooks != null)
+			for(int i = beforeSetInvisibleHooks.length - 1; i >= 0 ; i--)
+				beforeSetInvisibleHooks[i].beforeSetInvisible(paramBoolean);
+
+		if(overrideSetInvisibleHooks != null)
+			overrideSetInvisibleHooks[overrideSetInvisibleHooks.length - 1].setInvisible(paramBoolean);
+		else
+			modelPlayer.localSetInvisible(paramBoolean);
+
+		if(afterSetInvisibleHooks != null)
+			for(int i = 0; i < afterSetInvisibleHooks.length; i++)
+				afterSetInvisibleHooks[i].afterSetInvisible(paramBoolean);
+
+	}
+
+	protected ModelPlayerBase GetOverwrittenSetInvisible(ModelPlayerBase overWriter)
+	{
+		if (overrideSetInvisibleHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideSetInvisibleHooks.length; i++)
+			if(overrideSetInvisibleHooks[i] == overWriter)
+				if(i == 0)
+					return null;
+				else
+					return overrideSetInvisibleHooks[i - 1];
+
+		return overWriter;
+	}
+
+	private final static List<String> beforeSetInvisibleHookTypes = new LinkedList<String>();
+	private final static List<String> overrideSetInvisibleHookTypes = new LinkedList<String>();
+	private final static List<String> afterSetInvisibleHookTypes = new LinkedList<String>();
+
+	private ModelPlayerBase[] beforeSetInvisibleHooks;
+	private ModelPlayerBase[] overrideSetInvisibleHooks;
+	private ModelPlayerBase[] afterSetInvisibleHooks;
+
+	public boolean isSetInvisibleModded;
+
+	private static final Map<String, String[]> allBaseBeforeSetInvisibleSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeSetInvisibleInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideSetInvisibleSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideSetInvisibleInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterSetInvisibleSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterSetInvisibleInferiors = new Hashtable<String, String[]>(0);
 
 	public static void setLivingAnimations(IModelPlayerAPI target, net.minecraft.entity.EntityLivingBase paramEntityLivingBase, float paramFloat1, float paramFloat2, float paramFloat3)
 	{
@@ -1299,6 +1768,9 @@ public final class ModelPlayerAPI
 
 	protected ModelPlayerBase GetOverwrittenSetLivingAnimations(ModelPlayerBase overWriter)
 	{
+		if (overrideSetLivingAnimationsHooks == null)
+			return overWriter;
+
 		for(int i = 0; i < overrideSetLivingAnimationsHooks.length; i++)
 			if(overrideSetLivingAnimationsHooks[i] == overWriter)
 				if(i == 0)
@@ -1325,6 +1797,64 @@ public final class ModelPlayerAPI
 	private static final Map<String, String[]> allBaseOverrideSetLivingAnimationsInferiors = new Hashtable<String, String[]>(0);
 	private static final Map<String, String[]> allBaseAfterSetLivingAnimationsSuperiors = new Hashtable<String, String[]>(0);
 	private static final Map<String, String[]> allBaseAfterSetLivingAnimationsInferiors = new Hashtable<String, String[]>(0);
+
+	public static void setModelAttributes(IModelPlayerAPI target, net.minecraft.client.model.ModelBase paramModelBase)
+	{
+		ModelPlayerAPI modelPlayerAPI = target.getModelPlayerAPI();
+		if(modelPlayerAPI != null && modelPlayerAPI.isSetModelAttributesModded)
+			modelPlayerAPI.setModelAttributes(paramModelBase);
+		else
+			target.localSetModelAttributes(paramModelBase);
+	}
+
+	private void setModelAttributes(net.minecraft.client.model.ModelBase paramModelBase)
+	{
+		if(beforeSetModelAttributesHooks != null)
+			for(int i = beforeSetModelAttributesHooks.length - 1; i >= 0 ; i--)
+				beforeSetModelAttributesHooks[i].beforeSetModelAttributes(paramModelBase);
+
+		if(overrideSetModelAttributesHooks != null)
+			overrideSetModelAttributesHooks[overrideSetModelAttributesHooks.length - 1].setModelAttributes(paramModelBase);
+		else
+			modelPlayer.localSetModelAttributes(paramModelBase);
+
+		if(afterSetModelAttributesHooks != null)
+			for(int i = 0; i < afterSetModelAttributesHooks.length; i++)
+				afterSetModelAttributesHooks[i].afterSetModelAttributes(paramModelBase);
+
+	}
+
+	protected ModelPlayerBase GetOverwrittenSetModelAttributes(ModelPlayerBase overWriter)
+	{
+		if (overrideSetModelAttributesHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideSetModelAttributesHooks.length; i++)
+			if(overrideSetModelAttributesHooks[i] == overWriter)
+				if(i == 0)
+					return null;
+				else
+					return overrideSetModelAttributesHooks[i - 1];
+
+		return overWriter;
+	}
+
+	private final static List<String> beforeSetModelAttributesHookTypes = new LinkedList<String>();
+	private final static List<String> overrideSetModelAttributesHookTypes = new LinkedList<String>();
+	private final static List<String> afterSetModelAttributesHookTypes = new LinkedList<String>();
+
+	private ModelPlayerBase[] beforeSetModelAttributesHooks;
+	private ModelPlayerBase[] overrideSetModelAttributesHooks;
+	private ModelPlayerBase[] afterSetModelAttributesHooks;
+
+	public boolean isSetModelAttributesModded;
+
+	private static final Map<String, String[]> allBaseBeforeSetModelAttributesSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeSetModelAttributesInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideSetModelAttributesSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideSetModelAttributesInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterSetModelAttributesSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterSetModelAttributesInferiors = new Hashtable<String, String[]>(0);
 
 	public static void setRotationAngles(IModelPlayerAPI target, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6, net.minecraft.entity.Entity paramEntity)
 	{
@@ -1354,6 +1884,9 @@ public final class ModelPlayerAPI
 
 	protected ModelPlayerBase GetOverwrittenSetRotationAngles(ModelPlayerBase overWriter)
 	{
+		if (overrideSetRotationAnglesHooks == null)
+			return overWriter;
+
 		for(int i = 0; i < overrideSetRotationAnglesHooks.length; i++)
 			if(overrideSetRotationAnglesHooks[i] == overWriter)
 				if(i == 0)
@@ -1409,6 +1942,9 @@ public final class ModelPlayerAPI
 
 	protected ModelPlayerBase GetOverwrittenSetTextureOffset(ModelPlayerBase overWriter)
 	{
+		if (overrideSetTextureOffsetHooks == null)
+			return overWriter;
+
 		for(int i = 0; i < overrideSetTextureOffsetHooks.length; i++)
 			if(overrideSetTextureOffsetHooks[i] == overWriter)
 				if(i == 0)
@@ -1438,7 +1974,11 @@ public final class ModelPlayerAPI
 
 	
 	protected final IModelPlayerAPI modelPlayer;
-	private final float paramFloat;
+	private final float paramFloat1;
+	private final float paramFloat2;
+	private final int paramInt1;
+	private final int paramInt2;
+	private final boolean paramBoolean;
 	private final String type;
 
 	private final static Set<String> keys = new HashSet<String>();

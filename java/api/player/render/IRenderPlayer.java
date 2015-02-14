@@ -8,29 +8,55 @@ public interface IRenderPlayer
 
 	Object dynamic(String key, Object[] parameters);
 
-	boolean realDoRenderLabel(net.minecraft.entity.EntityLivingBase paramEntityLivingBase);
+	boolean realAddLayer(net.minecraft.client.renderer.entity.layers.LayerRenderer paramLayerRenderer);
 
-	boolean superDoRenderLabel(net.minecraft.entity.EntityLivingBase paramEntityLivingBase);
+	boolean superAddLayer(net.minecraft.client.renderer.entity.layers.LayerRenderer paramLayerRenderer);
 
-	boolean localDoRenderLabel(net.minecraft.entity.EntityLivingBase paramEntityLivingBase);
+	boolean localAddLayer(net.minecraft.client.renderer.entity.layers.LayerRenderer paramLayerRenderer);
 
-	void realDoRenderShadowAndFire(net.minecraft.entity.Entity paramEntity, double paramDouble1, double paramDouble2, double paramDouble3, float paramFloat1, float paramFloat2);
+	boolean realBindEntityTexture(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer);
 
-	void superDoRenderShadowAndFire(net.minecraft.entity.Entity paramEntity, double paramDouble1, double paramDouble2, double paramDouble3, float paramFloat1, float paramFloat2);
+	boolean superBindEntityTexture(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer);
 
-	void localDoRenderShadowAndFire(net.minecraft.entity.Entity paramEntity, double paramDouble1, double paramDouble2, double paramDouble3, float paramFloat1, float paramFloat2);
+	boolean localBindEntityTexture(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer);
 
-	int realGetColorMultiplier(net.minecraft.entity.EntityLivingBase paramEntityLivingBase, float paramFloat1, float paramFloat2);
+	void realBindTexture(net.minecraft.util.ResourceLocation paramResourceLocation);
 
-	int superGetColorMultiplier(net.minecraft.entity.EntityLivingBase paramEntityLivingBase, float paramFloat1, float paramFloat2);
+	void superBindTexture(net.minecraft.util.ResourceLocation paramResourceLocation);
 
-	int localGetColorMultiplier(net.minecraft.entity.EntityLivingBase paramEntityLivingBase, float paramFloat1, float paramFloat2);
+	void localBindTexture(net.minecraft.util.ResourceLocation paramResourceLocation);
 
-	float realGetDeathMaxRotation(net.minecraft.entity.EntityLivingBase paramEntityLivingBase);
+	boolean realCanRenderName(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer);
 
-	float superGetDeathMaxRotation(net.minecraft.entity.EntityLivingBase paramEntityLivingBase);
+	boolean superCanRenderName(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer);
 
-	float localGetDeathMaxRotation(net.minecraft.entity.EntityLivingBase paramEntityLivingBase);
+	boolean localCanRenderName(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer);
+
+	void realDoRender(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3, float paramFloat1, float paramFloat2);
+
+	void localDoRender(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3, float paramFloat1, float paramFloat2);
+
+	void realDoRenderShadowAndFire(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3, float paramFloat1, float paramFloat2);
+
+	void superDoRenderShadowAndFire(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3, float paramFloat1, float paramFloat2);
+
+	void localDoRenderShadowAndFire(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3, float paramFloat1, float paramFloat2);
+
+	int realGetColorMultiplier(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat1, float paramFloat2);
+
+	int superGetColorMultiplier(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat1, float paramFloat2);
+
+	int localGetColorMultiplier(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat1, float paramFloat2);
+
+	float realGetDeathMaxRotation(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer);
+
+	float superGetDeathMaxRotation(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer);
+
+	float localGetDeathMaxRotation(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer);
+
+	net.minecraft.util.ResourceLocation realGetEntityTexture(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer);
+
+	net.minecraft.util.ResourceLocation localGetEntityTexture(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer);
 
 	net.minecraft.client.gui.FontRenderer realGetFontRendererFromRenderManager();
 
@@ -38,151 +64,169 @@ public interface IRenderPlayer
 
 	net.minecraft.client.gui.FontRenderer localGetFontRendererFromRenderManager();
 
-	net.minecraft.util.ResourceLocation realGetResourceLocationFromPlayer(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer);
+	net.minecraft.client.model.ModelBase realGetMainModel();
 
-	net.minecraft.util.ResourceLocation localGetResourceLocationFromPlayer(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer);
+	net.minecraft.client.model.ModelBase superGetMainModel();
 
-	float realHandleRotationFloat(net.minecraft.entity.EntityLivingBase paramEntityLivingBase, float paramFloat);
+	net.minecraft.client.model.ModelBase localGetMainModel();
 
-	float superHandleRotationFloat(net.minecraft.entity.EntityLivingBase paramEntityLivingBase, float paramFloat);
+	net.minecraft.client.model.ModelPlayer realGetPlayerModel();
 
-	float localHandleRotationFloat(net.minecraft.entity.EntityLivingBase paramEntityLivingBase, float paramFloat);
+	net.minecraft.client.model.ModelPlayer localGetPlayerModel();
 
-	int realInheritRenderPass(net.minecraft.entity.EntityLivingBase paramEntityLivingBase, int paramInt, float paramFloat);
+	net.minecraft.client.renderer.entity.RenderManager realGetRenderManager();
 
-	int superInheritRenderPass(net.minecraft.entity.EntityLivingBase paramEntityLivingBase, int paramInt, float paramFloat);
+	net.minecraft.client.renderer.entity.RenderManager superGetRenderManager();
 
-	int localInheritRenderPass(net.minecraft.entity.EntityLivingBase paramEntityLivingBase, int paramInt, float paramFloat);
+	net.minecraft.client.renderer.entity.RenderManager localGetRenderManager();
 
-	void realLoadTexture(net.minecraft.util.ResourceLocation paramResourceLocation);
+	float realGetSwingProgress(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat);
 
-	void superLoadTexture(net.minecraft.util.ResourceLocation paramResourceLocation);
+	float superGetSwingProgress(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat);
 
-	void localLoadTexture(net.minecraft.util.ResourceLocation paramResourceLocation);
+	float localGetSwingProgress(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat);
 
-	void realLoadTextureOfEntity(net.minecraft.entity.Entity paramEntity);
+	float realHandleRotationFloat(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat);
 
-	void superLoadTextureOfEntity(net.minecraft.entity.Entity paramEntity);
+	float superHandleRotationFloat(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat);
 
-	void localLoadTextureOfEntity(net.minecraft.entity.Entity paramEntity);
+	float localHandleRotationFloat(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat);
 
-	void realPassSpecialRender(net.minecraft.entity.EntityLivingBase paramEntityLivingBase, double paramDouble1, double paramDouble2, double paramDouble3);
+	float realInterpolateRotation(float paramFloat1, float paramFloat2, float paramFloat3);
 
-	void superPassSpecialRender(net.minecraft.entity.EntityLivingBase paramEntityLivingBase, double paramDouble1, double paramDouble2, double paramDouble3);
+	float superInterpolateRotation(float paramFloat1, float paramFloat2, float paramFloat3);
 
-	void localPassSpecialRender(net.minecraft.entity.EntityLivingBase paramEntityLivingBase, double paramDouble1, double paramDouble2, double paramDouble3);
+	float localInterpolateRotation(float paramFloat1, float paramFloat2, float paramFloat3);
 
-	boolean realPerformStaticEntityRebuild();
+	void realPassSpecialRender(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3);
 
-	boolean superPerformStaticEntityRebuild();
+	void superPassSpecialRender(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3);
 
-	boolean localPerformStaticEntityRebuild();
+	void localPassSpecialRender(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3);
 
-	void realRenderArrowsStuckInEntity(net.minecraft.entity.EntityLivingBase paramEntityLivingBase, float paramFloat);
+	void realPreRenderCallback(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat);
 
-	void superRenderArrowsStuckInEntity(net.minecraft.entity.EntityLivingBase paramEntityLivingBase, float paramFloat);
+	void localPreRenderCallback(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat);
 
-	void localRenderArrowsStuckInEntity(net.minecraft.entity.EntityLivingBase paramEntityLivingBase, float paramFloat);
+	boolean realRemoveLayer(net.minecraft.client.renderer.entity.layers.LayerRenderer paramLayerRenderer);
 
-	void realRenderFirstPersonArm(net.minecraft.entity.player.EntityPlayer paramEntityPlayer);
+	boolean superRemoveLayer(net.minecraft.client.renderer.entity.layers.LayerRenderer paramLayerRenderer);
 
-	void localRenderFirstPersonArm(net.minecraft.entity.player.EntityPlayer paramEntityPlayer);
+	boolean localRemoveLayer(net.minecraft.client.renderer.entity.layers.LayerRenderer paramLayerRenderer);
 
-	void realRenderLivingLabel(net.minecraft.entity.Entity paramEntity, String paramString, double paramDouble1, double paramDouble2, double paramDouble3, int paramInt);
+	void realRenderLayers(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6, float paramFloat7);
 
-	void superRenderLivingLabel(net.minecraft.entity.Entity paramEntity, String paramString, double paramDouble1, double paramDouble2, double paramDouble3, int paramInt);
+	void superRenderLayers(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6, float paramFloat7);
 
-	void localRenderLivingLabel(net.minecraft.entity.Entity paramEntity, String paramString, double paramDouble1, double paramDouble2, double paramDouble3, int paramInt);
+	void localRenderLayers(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6, float paramFloat7);
 
-	void realRenderModel(net.minecraft.entity.EntityLivingBase paramEntityLivingBase, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6);
+	void realRenderLeftArm(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer);
 
-	void superRenderModel(net.minecraft.entity.EntityLivingBase paramEntityLivingBase, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6);
+	void localRenderLeftArm(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer);
 
-	void localRenderModel(net.minecraft.entity.EntityLivingBase paramEntityLivingBase, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6);
+	void realRenderLivingAt(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3);
 
-	void realRenderPlayer(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3, float paramFloat1, float paramFloat2);
+	void localRenderLivingAt(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3);
 
-	void localRenderPlayer(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3, float paramFloat1, float paramFloat2);
+	void realRenderLivingLabel(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, String paramString, double paramDouble1, double paramDouble2, double paramDouble3, int paramInt);
 
-	void realRenderPlayerNameAndScoreLabel(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3, String paramString, float paramFloat, double paramDouble4);
+	void superRenderLivingLabel(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, String paramString, double paramDouble1, double paramDouble2, double paramDouble3, int paramInt);
 
-	void localRenderPlayerNameAndScoreLabel(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3, String paramString, float paramFloat, double paramDouble4);
+	void localRenderLivingLabel(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, String paramString, double paramDouble1, double paramDouble2, double paramDouble3, int paramInt);
 
-	void realRenderPlayerScale(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat);
+	void realRenderModel(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6);
 
-	void localRenderPlayerScale(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat);
+	void superRenderModel(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6);
 
-	void realRenderPlayerSleep(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3);
+	void localRenderModel(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6);
 
-	void localRenderPlayerSleep(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3);
+	void realRenderName(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3);
 
-	void realRenderSpecials(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat);
+	void superRenderName(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3);
 
-	void localRenderSpecials(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat);
+	void localRenderName(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3);
 
-	float realRenderSwingProgress(net.minecraft.entity.EntityLivingBase paramEntityLivingBase, float paramFloat);
+	void realRenderOffsetLivingLabel(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3, String paramString, float paramFloat, double paramDouble4);
 
-	float superRenderSwingProgress(net.minecraft.entity.EntityLivingBase paramEntityLivingBase, float paramFloat);
+	void localRenderOffsetLivingLabel(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3, String paramString, float paramFloat, double paramDouble4);
 
-	float localRenderSwingProgress(net.minecraft.entity.EntityLivingBase paramEntityLivingBase, float paramFloat);
+	void realRenderRightArm(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer);
 
-	void realRotatePlayer(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat1, float paramFloat2, float paramFloat3);
+	void localRenderRightArm(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer);
 
-	void localRotatePlayer(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat1, float paramFloat2, float paramFloat3);
+	void realRotateCorpse(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat1, float paramFloat2, float paramFloat3);
 
-	int realSetArmorModel(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, int paramInt, float paramFloat);
+	void localRotateCorpse(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat1, float paramFloat2, float paramFloat3);
 
-	int localSetArmorModel(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, int paramInt, float paramFloat);
+	boolean realSetBrightness(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat, boolean paramBoolean);
 
-	void realSetPassArmorModel(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, int paramInt, float paramFloat);
+	boolean superSetBrightness(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat, boolean paramBoolean);
 
-	void localSetPassArmorModel(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, int paramInt, float paramFloat);
+	boolean localSetBrightness(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat, boolean paramBoolean);
 
-	void realSetRenderManager(net.minecraft.client.renderer.entity.RenderManager paramRenderManager);
+	boolean realSetDoRenderBrightness(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat);
 
-	void superSetRenderManager(net.minecraft.client.renderer.entity.RenderManager paramRenderManager);
+	boolean superSetDoRenderBrightness(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat);
 
-	void localSetRenderManager(net.minecraft.client.renderer.entity.RenderManager paramRenderManager);
+	boolean localSetDoRenderBrightness(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat);
 
-	void realSetRenderPassModel(net.minecraft.client.model.ModelBase paramModelBase);
+	void realSetModelVisibilities(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer);
 
-	void superSetRenderPassModel(net.minecraft.client.model.ModelBase paramModelBase);
+	void localSetModelVisibilities(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer);
 
-	void localSetRenderPassModel(net.minecraft.client.model.ModelBase paramModelBase);
+	void realSetRenderOutlines(boolean paramBoolean);
 
-	void realUpdateIcons(net.minecraft.client.renderer.texture.IIconRegister paramIIconRegister);
+	void superSetRenderOutlines(boolean paramBoolean);
 
-	void superUpdateIcons(net.minecraft.client.renderer.texture.IIconRegister paramIIconRegister);
+	void localSetRenderOutlines(boolean paramBoolean);
 
-	void localUpdateIcons(net.minecraft.client.renderer.texture.IIconRegister paramIIconRegister);
+	boolean realSetScoreTeamColor(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer);
+
+	boolean superSetScoreTeamColor(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer);
+
+	boolean localSetScoreTeamColor(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer);
+
+	boolean realShouldRender(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, net.minecraft.client.renderer.culling.ICamera paramICamera, double paramDouble1, double paramDouble2, double paramDouble3);
+
+	boolean superShouldRender(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, net.minecraft.client.renderer.culling.ICamera paramICamera, double paramDouble1, double paramDouble2, double paramDouble3);
+
+	boolean localShouldRender(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, net.minecraft.client.renderer.culling.ICamera paramICamera, double paramDouble1, double paramDouble2, double paramDouble3);
+
+	void realTransformHeldFull3DItemLayer();
+
+	void superTransformHeldFull3DItemLayer();
+
+	void localTransformHeldFull3DItemLayer();
+
+	void realUnsetBrightness();
+
+	void superUnsetBrightness();
+
+	void localUnsetBrightness();
+
+	void realUnsetScoreTeamColor();
+
+	void superUnsetScoreTeamColor();
+
+	void localUnsetScoreTeamColor();
+
+	java.nio.FloatBuffer getBrightnessBufferField();
+
+	void setBrightnessBufferField(java.nio.FloatBuffer brightnessBuffer);
+
+	java.util.List<?> getLayerRenderersField();
+
+	void setLayerRenderersField(java.util.List<?> layerRenderers);
 
 	net.minecraft.client.model.ModelBase getMainModelField();
 
 	void setMainModelField(net.minecraft.client.model.ModelBase mainModel);
 
-	net.minecraft.client.model.ModelBiped getModelArmorField();
-
-	void setModelArmorField(net.minecraft.client.model.ModelBiped modelArmor);
-
-	net.minecraft.client.model.ModelBiped getModelArmorChestplateField();
-
-	void setModelArmorChestplateField(net.minecraft.client.model.ModelBiped modelArmorChestplate);
-
-	net.minecraft.client.model.ModelBiped getModelBipedMainField();
-
-	void setModelBipedMainField(net.minecraft.client.model.ModelBiped modelBipedMain);
-
-	net.minecraft.client.renderer.RenderBlocks getRenderBlocksField();
-
-	void setRenderBlocksField(net.minecraft.client.renderer.RenderBlocks renderBlocks);
-
 	net.minecraft.client.renderer.entity.RenderManager getRenderManagerField();
 
-	void setRenderManagerField(net.minecraft.client.renderer.entity.RenderManager renderManager);
+	boolean getRenderOutlinesField();
 
-	net.minecraft.client.model.ModelBase getRenderPassModelField();
-
-	void setRenderPassModelField(net.minecraft.client.model.ModelBase renderPassModel);
+	void setRenderOutlinesField(boolean renderOutlines);
 
 	float getShadowOpaqueField();
 
@@ -192,6 +236,8 @@ public interface IRenderPlayer
 
 	void setShadowSizeField(float shadowSize);
 
-	net.minecraft.util.ResourceLocation getSteveTexturesField();
+	boolean getSmallArmsField();
+
+	void setSmallArmsField(boolean smallArms);
 
 }

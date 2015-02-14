@@ -3,16 +3,12 @@ package wehavecookies56.kk.core.handlers;
 import java.util.ArrayList;
 import java.util.List;
 
-import wehavecookies56.kk.core.extendedproperties.EntityPropertyMunny;
-
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
+import wehavecookies56.kk.core.extendedproperties.EntityPropertyMunny;
 
 public class GiveMunny implements ICommand {
 
@@ -31,7 +27,7 @@ public class GiveMunny implements ICommand {
 	}
 
 	@Override
-	public String getCommandName() {
+	public String getName() {
 		return "giveMuunny";
 	}
 
@@ -41,12 +37,12 @@ public class GiveMunny implements ICommand {
 	}
 
 	@Override
-	public List getCommandAliases() {
+	public List getAliases() {
 		return this.aliases;
 	}
 	
 	@Override
-	public void processCommand(ICommandSender commandSender, String[] str) {
+	public void execute(ICommandSender commandSender, String[] str) {
 		EntityPropertyMunny props = EntityPropertyMunny.get((EntityPlayer)commandSender);
 		if(str.length == 0 || Integer.parseInt(str[0]) > props.maxMunny){
 			commandSender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "Invalid Arguments Enter a value below (" + props.maxMunny + ")"));

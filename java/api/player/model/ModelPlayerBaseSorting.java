@@ -30,6 +30,13 @@ public final class ModelPlayerBaseSorting
 	private String[] afterGetTextureOffsetSuperiors = null;
 	private String[] afterGetTextureOffsetInferiors = null;
 
+	private String[] beforePostRenderArmSuperiors = null;
+	private String[] beforePostRenderArmInferiors = null;
+	private String[] overridePostRenderArmSuperiors = null;
+	private String[] overridePostRenderArmInferiors = null;
+	private String[] afterPostRenderArmSuperiors = null;
+	private String[] afterPostRenderArmInferiors = null;
+
 	private String[] beforeRenderSuperiors = null;
 	private String[] beforeRenderInferiors = null;
 	private String[] overrideRenderSuperiors = null;
@@ -37,19 +44,40 @@ public final class ModelPlayerBaseSorting
 	private String[] afterRenderSuperiors = null;
 	private String[] afterRenderInferiors = null;
 
-	private String[] beforeRenderCloakSuperiors = null;
-	private String[] beforeRenderCloakInferiors = null;
-	private String[] overrideRenderCloakSuperiors = null;
-	private String[] overrideRenderCloakInferiors = null;
-	private String[] afterRenderCloakSuperiors = null;
-	private String[] afterRenderCloakInferiors = null;
+	private String[] beforeRenderCapeSuperiors = null;
+	private String[] beforeRenderCapeInferiors = null;
+	private String[] overrideRenderCapeSuperiors = null;
+	private String[] overrideRenderCapeInferiors = null;
+	private String[] afterRenderCapeSuperiors = null;
+	private String[] afterRenderCapeInferiors = null;
 
-	private String[] beforeRenderEarsSuperiors = null;
-	private String[] beforeRenderEarsInferiors = null;
-	private String[] overrideRenderEarsSuperiors = null;
-	private String[] overrideRenderEarsInferiors = null;
-	private String[] afterRenderEarsSuperiors = null;
-	private String[] afterRenderEarsInferiors = null;
+	private String[] beforeRenderDeadmau5HeadSuperiors = null;
+	private String[] beforeRenderDeadmau5HeadInferiors = null;
+	private String[] overrideRenderDeadmau5HeadSuperiors = null;
+	private String[] overrideRenderDeadmau5HeadInferiors = null;
+	private String[] afterRenderDeadmau5HeadSuperiors = null;
+	private String[] afterRenderDeadmau5HeadInferiors = null;
+
+	private String[] beforeRenderLeftArmSuperiors = null;
+	private String[] beforeRenderLeftArmInferiors = null;
+	private String[] overrideRenderLeftArmSuperiors = null;
+	private String[] overrideRenderLeftArmInferiors = null;
+	private String[] afterRenderLeftArmSuperiors = null;
+	private String[] afterRenderLeftArmInferiors = null;
+
+	private String[] beforeRenderRightArmSuperiors = null;
+	private String[] beforeRenderRightArmInferiors = null;
+	private String[] overrideRenderRightArmSuperiors = null;
+	private String[] overrideRenderRightArmInferiors = null;
+	private String[] afterRenderRightArmSuperiors = null;
+	private String[] afterRenderRightArmInferiors = null;
+
+	private String[] beforeSetInvisibleSuperiors = null;
+	private String[] beforeSetInvisibleInferiors = null;
+	private String[] overrideSetInvisibleSuperiors = null;
+	private String[] overrideSetInvisibleInferiors = null;
+	private String[] afterSetInvisibleSuperiors = null;
+	private String[] afterSetInvisibleInferiors = null;
 
 	private String[] beforeSetLivingAnimationsSuperiors = null;
 	private String[] beforeSetLivingAnimationsInferiors = null;
@@ -57,6 +85,13 @@ public final class ModelPlayerBaseSorting
 	private String[] overrideSetLivingAnimationsInferiors = null;
 	private String[] afterSetLivingAnimationsSuperiors = null;
 	private String[] afterSetLivingAnimationsInferiors = null;
+
+	private String[] beforeSetModelAttributesSuperiors = null;
+	private String[] beforeSetModelAttributesInferiors = null;
+	private String[] overrideSetModelAttributesSuperiors = null;
+	private String[] overrideSetModelAttributesInferiors = null;
+	private String[] afterSetModelAttributesSuperiors = null;
+	private String[] afterSetModelAttributesInferiors = null;
 
 	private String[] beforeSetRotationAnglesSuperiors = null;
 	private String[] beforeSetRotationAnglesInferiors = null;
@@ -312,6 +347,66 @@ public final class ModelPlayerBaseSorting
 		afterGetTextureOffsetInferiors = value;
 	}
 
+	public String[] getBeforePostRenderArmSuperiors()
+	{
+		return beforePostRenderArmSuperiors;
+	}
+
+	public String[] getBeforePostRenderArmInferiors()
+	{
+		return beforePostRenderArmInferiors;
+	}
+
+	public String[] getOverridePostRenderArmSuperiors()
+	{
+		return overridePostRenderArmSuperiors;
+	}
+
+	public String[] getOverridePostRenderArmInferiors()
+	{
+		return overridePostRenderArmInferiors;
+	}
+
+	public String[] getAfterPostRenderArmSuperiors()
+	{
+		return afterPostRenderArmSuperiors;
+	}
+
+	public String[] getAfterPostRenderArmInferiors()
+	{
+		return afterPostRenderArmInferiors;
+	}
+
+	public void setBeforePostRenderArmSuperiors(String[] value)
+	{
+		beforePostRenderArmSuperiors = value;
+	}
+
+	public void setBeforePostRenderArmInferiors(String[] value)
+	{
+		beforePostRenderArmInferiors = value;
+	}
+
+	public void setOverridePostRenderArmSuperiors(String[] value)
+	{
+		overridePostRenderArmSuperiors = value;
+	}
+
+	public void setOverridePostRenderArmInferiors(String[] value)
+	{
+		overridePostRenderArmInferiors = value;
+	}
+
+	public void setAfterPostRenderArmSuperiors(String[] value)
+	{
+		afterPostRenderArmSuperiors = value;
+	}
+
+	public void setAfterPostRenderArmInferiors(String[] value)
+	{
+		afterPostRenderArmInferiors = value;
+	}
+
 	public String[] getBeforeRenderSuperiors()
 	{
 		return beforeRenderSuperiors;
@@ -372,124 +467,304 @@ public final class ModelPlayerBaseSorting
 		afterRenderInferiors = value;
 	}
 
-	public String[] getBeforeRenderCloakSuperiors()
+	public String[] getBeforeRenderCapeSuperiors()
 	{
-		return beforeRenderCloakSuperiors;
+		return beforeRenderCapeSuperiors;
 	}
 
-	public String[] getBeforeRenderCloakInferiors()
+	public String[] getBeforeRenderCapeInferiors()
 	{
-		return beforeRenderCloakInferiors;
+		return beforeRenderCapeInferiors;
 	}
 
-	public String[] getOverrideRenderCloakSuperiors()
+	public String[] getOverrideRenderCapeSuperiors()
 	{
-		return overrideRenderCloakSuperiors;
+		return overrideRenderCapeSuperiors;
 	}
 
-	public String[] getOverrideRenderCloakInferiors()
+	public String[] getOverrideRenderCapeInferiors()
 	{
-		return overrideRenderCloakInferiors;
+		return overrideRenderCapeInferiors;
 	}
 
-	public String[] getAfterRenderCloakSuperiors()
+	public String[] getAfterRenderCapeSuperiors()
 	{
-		return afterRenderCloakSuperiors;
+		return afterRenderCapeSuperiors;
 	}
 
-	public String[] getAfterRenderCloakInferiors()
+	public String[] getAfterRenderCapeInferiors()
 	{
-		return afterRenderCloakInferiors;
+		return afterRenderCapeInferiors;
 	}
 
-	public void setBeforeRenderCloakSuperiors(String[] value)
+	public void setBeforeRenderCapeSuperiors(String[] value)
 	{
-		beforeRenderCloakSuperiors = value;
+		beforeRenderCapeSuperiors = value;
 	}
 
-	public void setBeforeRenderCloakInferiors(String[] value)
+	public void setBeforeRenderCapeInferiors(String[] value)
 	{
-		beforeRenderCloakInferiors = value;
+		beforeRenderCapeInferiors = value;
 	}
 
-	public void setOverrideRenderCloakSuperiors(String[] value)
+	public void setOverrideRenderCapeSuperiors(String[] value)
 	{
-		overrideRenderCloakSuperiors = value;
+		overrideRenderCapeSuperiors = value;
 	}
 
-	public void setOverrideRenderCloakInferiors(String[] value)
+	public void setOverrideRenderCapeInferiors(String[] value)
 	{
-		overrideRenderCloakInferiors = value;
+		overrideRenderCapeInferiors = value;
 	}
 
-	public void setAfterRenderCloakSuperiors(String[] value)
+	public void setAfterRenderCapeSuperiors(String[] value)
 	{
-		afterRenderCloakSuperiors = value;
+		afterRenderCapeSuperiors = value;
 	}
 
-	public void setAfterRenderCloakInferiors(String[] value)
+	public void setAfterRenderCapeInferiors(String[] value)
 	{
-		afterRenderCloakInferiors = value;
+		afterRenderCapeInferiors = value;
 	}
 
-	public String[] getBeforeRenderEarsSuperiors()
+	public String[] getBeforeRenderDeadmau5HeadSuperiors()
 	{
-		return beforeRenderEarsSuperiors;
+		return beforeRenderDeadmau5HeadSuperiors;
 	}
 
-	public String[] getBeforeRenderEarsInferiors()
+	public String[] getBeforeRenderDeadmau5HeadInferiors()
 	{
-		return beforeRenderEarsInferiors;
+		return beforeRenderDeadmau5HeadInferiors;
 	}
 
-	public String[] getOverrideRenderEarsSuperiors()
+	public String[] getOverrideRenderDeadmau5HeadSuperiors()
 	{
-		return overrideRenderEarsSuperiors;
+		return overrideRenderDeadmau5HeadSuperiors;
 	}
 
-	public String[] getOverrideRenderEarsInferiors()
+	public String[] getOverrideRenderDeadmau5HeadInferiors()
 	{
-		return overrideRenderEarsInferiors;
+		return overrideRenderDeadmau5HeadInferiors;
 	}
 
-	public String[] getAfterRenderEarsSuperiors()
+	public String[] getAfterRenderDeadmau5HeadSuperiors()
 	{
-		return afterRenderEarsSuperiors;
+		return afterRenderDeadmau5HeadSuperiors;
 	}
 
-	public String[] getAfterRenderEarsInferiors()
+	public String[] getAfterRenderDeadmau5HeadInferiors()
 	{
-		return afterRenderEarsInferiors;
+		return afterRenderDeadmau5HeadInferiors;
 	}
 
-	public void setBeforeRenderEarsSuperiors(String[] value)
+	public void setBeforeRenderDeadmau5HeadSuperiors(String[] value)
 	{
-		beforeRenderEarsSuperiors = value;
+		beforeRenderDeadmau5HeadSuperiors = value;
 	}
 
-	public void setBeforeRenderEarsInferiors(String[] value)
+	public void setBeforeRenderDeadmau5HeadInferiors(String[] value)
 	{
-		beforeRenderEarsInferiors = value;
+		beforeRenderDeadmau5HeadInferiors = value;
 	}
 
-	public void setOverrideRenderEarsSuperiors(String[] value)
+	public void setOverrideRenderDeadmau5HeadSuperiors(String[] value)
 	{
-		overrideRenderEarsSuperiors = value;
+		overrideRenderDeadmau5HeadSuperiors = value;
 	}
 
-	public void setOverrideRenderEarsInferiors(String[] value)
+	public void setOverrideRenderDeadmau5HeadInferiors(String[] value)
 	{
-		overrideRenderEarsInferiors = value;
+		overrideRenderDeadmau5HeadInferiors = value;
 	}
 
-	public void setAfterRenderEarsSuperiors(String[] value)
+	public void setAfterRenderDeadmau5HeadSuperiors(String[] value)
 	{
-		afterRenderEarsSuperiors = value;
+		afterRenderDeadmau5HeadSuperiors = value;
 	}
 
-	public void setAfterRenderEarsInferiors(String[] value)
+	public void setAfterRenderDeadmau5HeadInferiors(String[] value)
 	{
-		afterRenderEarsInferiors = value;
+		afterRenderDeadmau5HeadInferiors = value;
+	}
+
+	public String[] getBeforeRenderLeftArmSuperiors()
+	{
+		return beforeRenderLeftArmSuperiors;
+	}
+
+	public String[] getBeforeRenderLeftArmInferiors()
+	{
+		return beforeRenderLeftArmInferiors;
+	}
+
+	public String[] getOverrideRenderLeftArmSuperiors()
+	{
+		return overrideRenderLeftArmSuperiors;
+	}
+
+	public String[] getOverrideRenderLeftArmInferiors()
+	{
+		return overrideRenderLeftArmInferiors;
+	}
+
+	public String[] getAfterRenderLeftArmSuperiors()
+	{
+		return afterRenderLeftArmSuperiors;
+	}
+
+	public String[] getAfterRenderLeftArmInferiors()
+	{
+		return afterRenderLeftArmInferiors;
+	}
+
+	public void setBeforeRenderLeftArmSuperiors(String[] value)
+	{
+		beforeRenderLeftArmSuperiors = value;
+	}
+
+	public void setBeforeRenderLeftArmInferiors(String[] value)
+	{
+		beforeRenderLeftArmInferiors = value;
+	}
+
+	public void setOverrideRenderLeftArmSuperiors(String[] value)
+	{
+		overrideRenderLeftArmSuperiors = value;
+	}
+
+	public void setOverrideRenderLeftArmInferiors(String[] value)
+	{
+		overrideRenderLeftArmInferiors = value;
+	}
+
+	public void setAfterRenderLeftArmSuperiors(String[] value)
+	{
+		afterRenderLeftArmSuperiors = value;
+	}
+
+	public void setAfterRenderLeftArmInferiors(String[] value)
+	{
+		afterRenderLeftArmInferiors = value;
+	}
+
+	public String[] getBeforeRenderRightArmSuperiors()
+	{
+		return beforeRenderRightArmSuperiors;
+	}
+
+	public String[] getBeforeRenderRightArmInferiors()
+	{
+		return beforeRenderRightArmInferiors;
+	}
+
+	public String[] getOverrideRenderRightArmSuperiors()
+	{
+		return overrideRenderRightArmSuperiors;
+	}
+
+	public String[] getOverrideRenderRightArmInferiors()
+	{
+		return overrideRenderRightArmInferiors;
+	}
+
+	public String[] getAfterRenderRightArmSuperiors()
+	{
+		return afterRenderRightArmSuperiors;
+	}
+
+	public String[] getAfterRenderRightArmInferiors()
+	{
+		return afterRenderRightArmInferiors;
+	}
+
+	public void setBeforeRenderRightArmSuperiors(String[] value)
+	{
+		beforeRenderRightArmSuperiors = value;
+	}
+
+	public void setBeforeRenderRightArmInferiors(String[] value)
+	{
+		beforeRenderRightArmInferiors = value;
+	}
+
+	public void setOverrideRenderRightArmSuperiors(String[] value)
+	{
+		overrideRenderRightArmSuperiors = value;
+	}
+
+	public void setOverrideRenderRightArmInferiors(String[] value)
+	{
+		overrideRenderRightArmInferiors = value;
+	}
+
+	public void setAfterRenderRightArmSuperiors(String[] value)
+	{
+		afterRenderRightArmSuperiors = value;
+	}
+
+	public void setAfterRenderRightArmInferiors(String[] value)
+	{
+		afterRenderRightArmInferiors = value;
+	}
+
+	public String[] getBeforeSetInvisibleSuperiors()
+	{
+		return beforeSetInvisibleSuperiors;
+	}
+
+	public String[] getBeforeSetInvisibleInferiors()
+	{
+		return beforeSetInvisibleInferiors;
+	}
+
+	public String[] getOverrideSetInvisibleSuperiors()
+	{
+		return overrideSetInvisibleSuperiors;
+	}
+
+	public String[] getOverrideSetInvisibleInferiors()
+	{
+		return overrideSetInvisibleInferiors;
+	}
+
+	public String[] getAfterSetInvisibleSuperiors()
+	{
+		return afterSetInvisibleSuperiors;
+	}
+
+	public String[] getAfterSetInvisibleInferiors()
+	{
+		return afterSetInvisibleInferiors;
+	}
+
+	public void setBeforeSetInvisibleSuperiors(String[] value)
+	{
+		beforeSetInvisibleSuperiors = value;
+	}
+
+	public void setBeforeSetInvisibleInferiors(String[] value)
+	{
+		beforeSetInvisibleInferiors = value;
+	}
+
+	public void setOverrideSetInvisibleSuperiors(String[] value)
+	{
+		overrideSetInvisibleSuperiors = value;
+	}
+
+	public void setOverrideSetInvisibleInferiors(String[] value)
+	{
+		overrideSetInvisibleInferiors = value;
+	}
+
+	public void setAfterSetInvisibleSuperiors(String[] value)
+	{
+		afterSetInvisibleSuperiors = value;
+	}
+
+	public void setAfterSetInvisibleInferiors(String[] value)
+	{
+		afterSetInvisibleInferiors = value;
 	}
 
 	public String[] getBeforeSetLivingAnimationsSuperiors()
@@ -550,6 +825,66 @@ public final class ModelPlayerBaseSorting
 	public void setAfterSetLivingAnimationsInferiors(String[] value)
 	{
 		afterSetLivingAnimationsInferiors = value;
+	}
+
+	public String[] getBeforeSetModelAttributesSuperiors()
+	{
+		return beforeSetModelAttributesSuperiors;
+	}
+
+	public String[] getBeforeSetModelAttributesInferiors()
+	{
+		return beforeSetModelAttributesInferiors;
+	}
+
+	public String[] getOverrideSetModelAttributesSuperiors()
+	{
+		return overrideSetModelAttributesSuperiors;
+	}
+
+	public String[] getOverrideSetModelAttributesInferiors()
+	{
+		return overrideSetModelAttributesInferiors;
+	}
+
+	public String[] getAfterSetModelAttributesSuperiors()
+	{
+		return afterSetModelAttributesSuperiors;
+	}
+
+	public String[] getAfterSetModelAttributesInferiors()
+	{
+		return afterSetModelAttributesInferiors;
+	}
+
+	public void setBeforeSetModelAttributesSuperiors(String[] value)
+	{
+		beforeSetModelAttributesSuperiors = value;
+	}
+
+	public void setBeforeSetModelAttributesInferiors(String[] value)
+	{
+		beforeSetModelAttributesInferiors = value;
+	}
+
+	public void setOverrideSetModelAttributesSuperiors(String[] value)
+	{
+		overrideSetModelAttributesSuperiors = value;
+	}
+
+	public void setOverrideSetModelAttributesInferiors(String[] value)
+	{
+		overrideSetModelAttributesInferiors = value;
+	}
+
+	public void setAfterSetModelAttributesSuperiors(String[] value)
+	{
+		afterSetModelAttributesSuperiors = value;
+	}
+
+	public void setAfterSetModelAttributesInferiors(String[] value)
+	{
+		afterSetModelAttributesInferiors = value;
 	}
 
 	public String[] getBeforeSetRotationAnglesSuperiors()

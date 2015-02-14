@@ -1,7 +1,5 @@
 package wehavecookies56.kk.item;
 
-import org.apache.commons.codec.language.Nysiis;
-
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
@@ -9,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.client.EnumHelperClient;
 import net.minecraftforge.common.ChestGenHooks;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.item.keyblades.*;
 import wehavecookies56.kk.item.keychains.*;
@@ -85,10 +84,7 @@ import wehavecookies56.kk.item.synthesis.ItemTwilightCrystal;
 import wehavecookies56.kk.item.synthesis.ItemTwilightGem;
 import wehavecookies56.kk.item.synthesis.ItemTwilightShard;
 import wehavecookies56.kk.item.synthesis.ItemTwilightStone;
-import wehavecookies56.kk.lib.ConfigBooleans;
-import wehavecookies56.kk.lib.Reference;
 import wehavecookies56.kk.lib.Strings;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class AddedItems {
 
@@ -475,32 +471,32 @@ public class AddedItems {
 
 	public static void intiArmour(){
 		//Organization
-		OrganizationArmourMaterial = EnumHelperClient.addArmorMaterial("ORGANIZATION", 68, new int[] { 4, 8, 6, 3 }, 30);
+		OrganizationArmourMaterial = EnumHelperClient.addArmorMaterial("ORGANIZATION", null, 68, new int[] { 4, 8, 6, 3 }, 30);
 		OrganizationHood = new OrganizationArmor(OrganizationArmourMaterial , KingdomKeys.proxy.addArmor(OrganizationArmourMaterial.name()), 0, "ORGANIZATION_1", Strings.OHood); GameRegistry.registerItem(OrganizationHood, Strings.OHood);
 		OrganizationCoat = new OrganizationArmor(OrganizationArmourMaterial, KingdomKeys.proxy.addArmor(OrganizationArmourMaterial.name()), 1, "ORGANIZATION_1", Strings.OCoat); GameRegistry.registerItem(OrganizationCoat, Strings.OCoat);
 		OrganizationLegs = new OrganizationArmor(OrganizationArmourMaterial, KingdomKeys.proxy.addArmor(OrganizationArmourMaterial.name()), 2, "ORGANIZATION_2", Strings.OLegs); GameRegistry.registerItem(OrganizationLegs, Strings.OLegs);
 		OrganizationBoots = new OrganizationArmor(OrganizationArmourMaterial, KingdomKeys.proxy.addArmor(OrganizationArmourMaterial.name()), 3, "ORGANIZATION_1", Strings.OBoots); GameRegistry.registerItem(OrganizationBoots, Strings.OBoots);
 		//Keyblade
 		//Aqua
-		KeybladeAArmourMaterial = EnumHelperClient.addArmorMaterial("KEYBLADEA", 74, new int[] { 5, 8, 6, 4 }, 30);
+		KeybladeAArmourMaterial = EnumHelperClient.addArmorMaterial("KEYBLADEA", null, 74, new int[] { 5, 8, 6, 4 }, 30);
 		KeybladeAHelm = new KeybladeAArmor(KeybladeAArmourMaterial , KingdomKeys.proxy.addArmor(KeybladeAArmourMaterial.name()), 0, "KEYBLADEA_1", Strings.KAHelm); GameRegistry.registerItem(KeybladeAHelm, Strings.KAHelm);
 		KeybladeAChest = new KeybladeAArmor(KeybladeAArmourMaterial, KingdomKeys.proxy.addArmor(KeybladeAArmourMaterial.name()), 1, "KEYBLADEA_1", Strings.KAChest); GameRegistry.registerItem(KeybladeAChest, Strings.KAChest);
 		KeybladeALegs = new KeybladeAArmor(KeybladeAArmourMaterial, KingdomKeys.proxy.addArmor(KeybladeAArmourMaterial.name()), 2, "KEYBLADEA_2", Strings.KALegs); GameRegistry.registerItem(KeybladeALegs, Strings.KALegs);
 		KeybladeABoots = new KeybladeAArmor(KeybladeAArmourMaterial, KingdomKeys.proxy.addArmor(KeybladeAArmourMaterial.name()), 3, "KEYBLADEA_1", Strings.KABoots); GameRegistry.registerItem(KeybladeABoots, Strings.KABoots);
 		//Terra
-		KeybladeTArmourMaterial = EnumHelperClient.addArmorMaterial("KEYBLADET", 80, new int[] { 6, 8, 7, 4 }, 30);
+		KeybladeTArmourMaterial = EnumHelperClient.addArmorMaterial("KEYBLADET", null, 80, new int[] { 6, 8, 7, 4 }, 30);
 		KeybladeTHelm = new KeybladeTArmor(KeybladeTArmourMaterial , KingdomKeys.proxy.addArmor(KeybladeTArmourMaterial.name()), 0, "KEYBLADET_1", Strings.KTHelm); GameRegistry.registerItem(KeybladeTHelm, Strings.KTHelm);
 		KeybladeTChest = new KeybladeTArmor(KeybladeTArmourMaterial, KingdomKeys.proxy.addArmor(KeybladeTArmourMaterial.name()), 1, "KEYBLADET_1", Strings.KTChest); GameRegistry.registerItem(KeybladeTChest, Strings.KTChest);
 		KeybladeTLegs = new KeybladeTArmor(KeybladeTArmourMaterial, KingdomKeys.proxy.addArmor(KeybladeTArmourMaterial.name()), 2, "KEYBLADET_2", Strings.KTLegs); GameRegistry.registerItem(KeybladeTLegs, Strings.KTLegs);
 		KeybladeTBoots = new KeybladeTArmor(KeybladeTArmourMaterial, KingdomKeys.proxy.addArmor(KeybladeTArmourMaterial.name()), 3, "KEYBLADET_1", Strings.KTBoots); GameRegistry.registerItem(KeybladeTBoots, Strings.KTBoots);
 		//Ventus
-		KeybladeVArmourMaterial = EnumHelperClient.addArmorMaterial("KEYBLADEV", 70, new int[] { 4, 8, 5, 4 }, 30);
+		KeybladeVArmourMaterial = EnumHelperClient.addArmorMaterial("KEYBLADEV", null, 70, new int[] { 4, 8, 5, 4 }, 30);
 		KeybladeVHelm = new KeybladeVArmor(KeybladeAArmourMaterial , KingdomKeys.proxy.addArmor(KeybladeVArmourMaterial.name()), 0, "KEYBLADEV_1", Strings.KVHelm); GameRegistry.registerItem(KeybladeVHelm, Strings.KVHelm);
 		KeybladeVChest = new KeybladeVArmor(KeybladeAArmourMaterial, KingdomKeys.proxy.addArmor(KeybladeVArmourMaterial.name()), 1, "KEYBLADEV_1", Strings.KVChest); GameRegistry.registerItem(KeybladeVChest, Strings.KVChest);
 		KeybladeVLegs = new KeybladeVArmor(KeybladeAArmourMaterial, KingdomKeys.proxy.addArmor(KeybladeVArmourMaterial.name()), 2, "KEYBLADEV_2", Strings.KVLegs); GameRegistry.registerItem(KeybladeVLegs, Strings.KVLegs);
 		KeybladeVBoots = new KeybladeVArmor(KeybladeAArmourMaterial, KingdomKeys.proxy.addArmor(KeybladeVArmourMaterial.name()), 3, "KEYBLADEV_1", Strings.KVBoots); GameRegistry.registerItem(KeybladeVBoots, Strings.KVBoots);
 		//Eraqus
-		KeybladeEArmourMaterial = EnumHelperClient.addArmorMaterial("KEYBLADEE", 82, new int[] { 5, 7, 7, 5 }, 30);
+		KeybladeEArmourMaterial = EnumHelperClient.addArmorMaterial("KEYBLADEE", null, 82, new int[] { 5, 7, 7, 5 }, 30);
 		KeybladeEHelm = new KeybladeEArmor(KeybladeEArmourMaterial , KingdomKeys.proxy.addArmor(KeybladeEArmourMaterial.name()), 0, "KEYBLADEE_1", Strings.KEHelm); GameRegistry.registerItem(KeybladeEHelm, Strings.KEHelm);
 		KeybladeEChest = new KeybladeEArmor(KeybladeEArmourMaterial, KingdomKeys.proxy.addArmor(KeybladeEArmourMaterial.name()), 1, "KEYBLADEE_1", Strings.KEChest); GameRegistry.registerItem(KeybladeEChest, Strings.KEChest);
 		KeybladeELegs = new KeybladeEArmor(KeybladeEArmourMaterial, KingdomKeys.proxy.addArmor(KeybladeEArmourMaterial.name()), 2, "KEYBLADEE_2", Strings.KELegs); GameRegistry.registerItem(KeybladeELegs, Strings.KELegs);

@@ -4,6 +4,7 @@ import java.io.*;
 import java.text.*;
 import java.util.*;
 import java.util.logging.*;
+import java.lang.ref.*;
 import java.lang.reflect.*;
 
 public final class RenderPlayerAPI
@@ -57,16 +58,16 @@ public final class RenderPlayerAPI
 				String[] errorMessageParts = new String[]
 				{
 					"========================================",
-					"The API \"Render Player\" version 1.0 of the mod \"Render Player API core 1.0\" can not be created!",
+					"The API \"Render Player\" version " + api.player.forge.RenderPlayerAPIPlugin.Version + " of the mod \"Render Player API Core " + api.player.forge.RenderPlayerAPIPlugin.Version + "\" can not be created!",
 					"----------------------------------------",
 					"Mandatory member method \"{0} getRenderPlayerBase({3})\" not found in class \"{1}\".",
 					"There are three scenarios this can happen:",
-					"* Minecraft Forge is missing a Render Player API core which Minecraft version matches its own.",
-					"  Download and install the latest Render Player API core for the Minecraft version you were trying to run.",
-					"* The code of the class \"{2}\" of Render Player API core has been modified beyond recognition by another Minecraft Forge coremod.",
+					"* Minecraft Forge is missing a Render Player API Core which Minecraft version matches its own.",
+					"  Download and install the latest Render Player API Core for the Minecraft version you were trying to run.",
+					"* The code of the class \"{2}\" of Render Player API Core has been modified beyond recognition by another Minecraft Forge coremod.",
 					"  Try temporary deinstallation of other core mods to find the culprit and deinstall it permanently to fix this specific problem.",
-					"* Render Player API core has not been installed correctly.",
-					"  Deinstall Render Player API core and install it again following the installation instructions in the readme file.",
+					"* Render Player API Core has not been installed correctly.",
+					"  Deinstall Render Player API Core and install it again following the installation instructions in the readme file.",
 					"========================================"
 				};
 
@@ -91,7 +92,7 @@ public final class RenderPlayerAPI
 				throw new RuntimeException(errorMessage, exception);
 			}
 
-			log("Render Player 1.0 Created");
+			log("Render Player " + api.player.forge.RenderPlayerAPIPlugin.Version + " Created");
 			isCreated = true;
 		}
 
@@ -137,12 +138,40 @@ public final class RenderPlayerAPI
 			addDynamicSorting(id, allBaseAfterDynamicSuperiors, baseSorting.getDynamicAfterSuperiors());
 			addDynamicSorting(id, allBaseAfterDynamicInferiors, baseSorting.getDynamicAfterInferiors());
 
-			addSorting(id, allBaseBeforeDoRenderLabelSuperiors, baseSorting.getBeforeDoRenderLabelSuperiors());
-			addSorting(id, allBaseBeforeDoRenderLabelInferiors, baseSorting.getBeforeDoRenderLabelInferiors());
-			addSorting(id, allBaseOverrideDoRenderLabelSuperiors, baseSorting.getOverrideDoRenderLabelSuperiors());
-			addSorting(id, allBaseOverrideDoRenderLabelInferiors, baseSorting.getOverrideDoRenderLabelInferiors());
-			addSorting(id, allBaseAfterDoRenderLabelSuperiors, baseSorting.getAfterDoRenderLabelSuperiors());
-			addSorting(id, allBaseAfterDoRenderLabelInferiors, baseSorting.getAfterDoRenderLabelInferiors());
+			addSorting(id, allBaseBeforeAddLayerSuperiors, baseSorting.getBeforeAddLayerSuperiors());
+			addSorting(id, allBaseBeforeAddLayerInferiors, baseSorting.getBeforeAddLayerInferiors());
+			addSorting(id, allBaseOverrideAddLayerSuperiors, baseSorting.getOverrideAddLayerSuperiors());
+			addSorting(id, allBaseOverrideAddLayerInferiors, baseSorting.getOverrideAddLayerInferiors());
+			addSorting(id, allBaseAfterAddLayerSuperiors, baseSorting.getAfterAddLayerSuperiors());
+			addSorting(id, allBaseAfterAddLayerInferiors, baseSorting.getAfterAddLayerInferiors());
+
+			addSorting(id, allBaseBeforeBindEntityTextureSuperiors, baseSorting.getBeforeBindEntityTextureSuperiors());
+			addSorting(id, allBaseBeforeBindEntityTextureInferiors, baseSorting.getBeforeBindEntityTextureInferiors());
+			addSorting(id, allBaseOverrideBindEntityTextureSuperiors, baseSorting.getOverrideBindEntityTextureSuperiors());
+			addSorting(id, allBaseOverrideBindEntityTextureInferiors, baseSorting.getOverrideBindEntityTextureInferiors());
+			addSorting(id, allBaseAfterBindEntityTextureSuperiors, baseSorting.getAfterBindEntityTextureSuperiors());
+			addSorting(id, allBaseAfterBindEntityTextureInferiors, baseSorting.getAfterBindEntityTextureInferiors());
+
+			addSorting(id, allBaseBeforeBindTextureSuperiors, baseSorting.getBeforeBindTextureSuperiors());
+			addSorting(id, allBaseBeforeBindTextureInferiors, baseSorting.getBeforeBindTextureInferiors());
+			addSorting(id, allBaseOverrideBindTextureSuperiors, baseSorting.getOverrideBindTextureSuperiors());
+			addSorting(id, allBaseOverrideBindTextureInferiors, baseSorting.getOverrideBindTextureInferiors());
+			addSorting(id, allBaseAfterBindTextureSuperiors, baseSorting.getAfterBindTextureSuperiors());
+			addSorting(id, allBaseAfterBindTextureInferiors, baseSorting.getAfterBindTextureInferiors());
+
+			addSorting(id, allBaseBeforeCanRenderNameSuperiors, baseSorting.getBeforeCanRenderNameSuperiors());
+			addSorting(id, allBaseBeforeCanRenderNameInferiors, baseSorting.getBeforeCanRenderNameInferiors());
+			addSorting(id, allBaseOverrideCanRenderNameSuperiors, baseSorting.getOverrideCanRenderNameSuperiors());
+			addSorting(id, allBaseOverrideCanRenderNameInferiors, baseSorting.getOverrideCanRenderNameInferiors());
+			addSorting(id, allBaseAfterCanRenderNameSuperiors, baseSorting.getAfterCanRenderNameSuperiors());
+			addSorting(id, allBaseAfterCanRenderNameInferiors, baseSorting.getAfterCanRenderNameInferiors());
+
+			addSorting(id, allBaseBeforeDoRenderSuperiors, baseSorting.getBeforeDoRenderSuperiors());
+			addSorting(id, allBaseBeforeDoRenderInferiors, baseSorting.getBeforeDoRenderInferiors());
+			addSorting(id, allBaseOverrideDoRenderSuperiors, baseSorting.getOverrideDoRenderSuperiors());
+			addSorting(id, allBaseOverrideDoRenderInferiors, baseSorting.getOverrideDoRenderInferiors());
+			addSorting(id, allBaseAfterDoRenderSuperiors, baseSorting.getAfterDoRenderSuperiors());
+			addSorting(id, allBaseAfterDoRenderInferiors, baseSorting.getAfterDoRenderInferiors());
 
 			addSorting(id, allBaseBeforeDoRenderShadowAndFireSuperiors, baseSorting.getBeforeDoRenderShadowAndFireSuperiors());
 			addSorting(id, allBaseBeforeDoRenderShadowAndFireInferiors, baseSorting.getBeforeDoRenderShadowAndFireInferiors());
@@ -165,6 +194,13 @@ public final class RenderPlayerAPI
 			addSorting(id, allBaseAfterGetDeathMaxRotationSuperiors, baseSorting.getAfterGetDeathMaxRotationSuperiors());
 			addSorting(id, allBaseAfterGetDeathMaxRotationInferiors, baseSorting.getAfterGetDeathMaxRotationInferiors());
 
+			addSorting(id, allBaseBeforeGetEntityTextureSuperiors, baseSorting.getBeforeGetEntityTextureSuperiors());
+			addSorting(id, allBaseBeforeGetEntityTextureInferiors, baseSorting.getBeforeGetEntityTextureInferiors());
+			addSorting(id, allBaseOverrideGetEntityTextureSuperiors, baseSorting.getOverrideGetEntityTextureSuperiors());
+			addSorting(id, allBaseOverrideGetEntityTextureInferiors, baseSorting.getOverrideGetEntityTextureInferiors());
+			addSorting(id, allBaseAfterGetEntityTextureSuperiors, baseSorting.getAfterGetEntityTextureSuperiors());
+			addSorting(id, allBaseAfterGetEntityTextureInferiors, baseSorting.getAfterGetEntityTextureInferiors());
+
 			addSorting(id, allBaseBeforeGetFontRendererFromRenderManagerSuperiors, baseSorting.getBeforeGetFontRendererFromRenderManagerSuperiors());
 			addSorting(id, allBaseBeforeGetFontRendererFromRenderManagerInferiors, baseSorting.getBeforeGetFontRendererFromRenderManagerInferiors());
 			addSorting(id, allBaseOverrideGetFontRendererFromRenderManagerSuperiors, baseSorting.getOverrideGetFontRendererFromRenderManagerSuperiors());
@@ -172,12 +208,33 @@ public final class RenderPlayerAPI
 			addSorting(id, allBaseAfterGetFontRendererFromRenderManagerSuperiors, baseSorting.getAfterGetFontRendererFromRenderManagerSuperiors());
 			addSorting(id, allBaseAfterGetFontRendererFromRenderManagerInferiors, baseSorting.getAfterGetFontRendererFromRenderManagerInferiors());
 
-			addSorting(id, allBaseBeforeGetResourceLocationFromPlayerSuperiors, baseSorting.getBeforeGetResourceLocationFromPlayerSuperiors());
-			addSorting(id, allBaseBeforeGetResourceLocationFromPlayerInferiors, baseSorting.getBeforeGetResourceLocationFromPlayerInferiors());
-			addSorting(id, allBaseOverrideGetResourceLocationFromPlayerSuperiors, baseSorting.getOverrideGetResourceLocationFromPlayerSuperiors());
-			addSorting(id, allBaseOverrideGetResourceLocationFromPlayerInferiors, baseSorting.getOverrideGetResourceLocationFromPlayerInferiors());
-			addSorting(id, allBaseAfterGetResourceLocationFromPlayerSuperiors, baseSorting.getAfterGetResourceLocationFromPlayerSuperiors());
-			addSorting(id, allBaseAfterGetResourceLocationFromPlayerInferiors, baseSorting.getAfterGetResourceLocationFromPlayerInferiors());
+			addSorting(id, allBaseBeforeGetMainModelSuperiors, baseSorting.getBeforeGetMainModelSuperiors());
+			addSorting(id, allBaseBeforeGetMainModelInferiors, baseSorting.getBeforeGetMainModelInferiors());
+			addSorting(id, allBaseOverrideGetMainModelSuperiors, baseSorting.getOverrideGetMainModelSuperiors());
+			addSorting(id, allBaseOverrideGetMainModelInferiors, baseSorting.getOverrideGetMainModelInferiors());
+			addSorting(id, allBaseAfterGetMainModelSuperiors, baseSorting.getAfterGetMainModelSuperiors());
+			addSorting(id, allBaseAfterGetMainModelInferiors, baseSorting.getAfterGetMainModelInferiors());
+
+			addSorting(id, allBaseBeforeGetPlayerModelSuperiors, baseSorting.getBeforeGetPlayerModelSuperiors());
+			addSorting(id, allBaseBeforeGetPlayerModelInferiors, baseSorting.getBeforeGetPlayerModelInferiors());
+			addSorting(id, allBaseOverrideGetPlayerModelSuperiors, baseSorting.getOverrideGetPlayerModelSuperiors());
+			addSorting(id, allBaseOverrideGetPlayerModelInferiors, baseSorting.getOverrideGetPlayerModelInferiors());
+			addSorting(id, allBaseAfterGetPlayerModelSuperiors, baseSorting.getAfterGetPlayerModelSuperiors());
+			addSorting(id, allBaseAfterGetPlayerModelInferiors, baseSorting.getAfterGetPlayerModelInferiors());
+
+			addSorting(id, allBaseBeforeGetRenderManagerSuperiors, baseSorting.getBeforeGetRenderManagerSuperiors());
+			addSorting(id, allBaseBeforeGetRenderManagerInferiors, baseSorting.getBeforeGetRenderManagerInferiors());
+			addSorting(id, allBaseOverrideGetRenderManagerSuperiors, baseSorting.getOverrideGetRenderManagerSuperiors());
+			addSorting(id, allBaseOverrideGetRenderManagerInferiors, baseSorting.getOverrideGetRenderManagerInferiors());
+			addSorting(id, allBaseAfterGetRenderManagerSuperiors, baseSorting.getAfterGetRenderManagerSuperiors());
+			addSorting(id, allBaseAfterGetRenderManagerInferiors, baseSorting.getAfterGetRenderManagerInferiors());
+
+			addSorting(id, allBaseBeforeGetSwingProgressSuperiors, baseSorting.getBeforeGetSwingProgressSuperiors());
+			addSorting(id, allBaseBeforeGetSwingProgressInferiors, baseSorting.getBeforeGetSwingProgressInferiors());
+			addSorting(id, allBaseOverrideGetSwingProgressSuperiors, baseSorting.getOverrideGetSwingProgressSuperiors());
+			addSorting(id, allBaseOverrideGetSwingProgressInferiors, baseSorting.getOverrideGetSwingProgressInferiors());
+			addSorting(id, allBaseAfterGetSwingProgressSuperiors, baseSorting.getAfterGetSwingProgressSuperiors());
+			addSorting(id, allBaseAfterGetSwingProgressInferiors, baseSorting.getAfterGetSwingProgressInferiors());
 
 			addSorting(id, allBaseBeforeHandleRotationFloatSuperiors, baseSorting.getBeforeHandleRotationFloatSuperiors());
 			addSorting(id, allBaseBeforeHandleRotationFloatInferiors, baseSorting.getBeforeHandleRotationFloatInferiors());
@@ -186,26 +243,12 @@ public final class RenderPlayerAPI
 			addSorting(id, allBaseAfterHandleRotationFloatSuperiors, baseSorting.getAfterHandleRotationFloatSuperiors());
 			addSorting(id, allBaseAfterHandleRotationFloatInferiors, baseSorting.getAfterHandleRotationFloatInferiors());
 
-			addSorting(id, allBaseBeforeInheritRenderPassSuperiors, baseSorting.getBeforeInheritRenderPassSuperiors());
-			addSorting(id, allBaseBeforeInheritRenderPassInferiors, baseSorting.getBeforeInheritRenderPassInferiors());
-			addSorting(id, allBaseOverrideInheritRenderPassSuperiors, baseSorting.getOverrideInheritRenderPassSuperiors());
-			addSorting(id, allBaseOverrideInheritRenderPassInferiors, baseSorting.getOverrideInheritRenderPassInferiors());
-			addSorting(id, allBaseAfterInheritRenderPassSuperiors, baseSorting.getAfterInheritRenderPassSuperiors());
-			addSorting(id, allBaseAfterInheritRenderPassInferiors, baseSorting.getAfterInheritRenderPassInferiors());
-
-			addSorting(id, allBaseBeforeLoadTextureSuperiors, baseSorting.getBeforeLoadTextureSuperiors());
-			addSorting(id, allBaseBeforeLoadTextureInferiors, baseSorting.getBeforeLoadTextureInferiors());
-			addSorting(id, allBaseOverrideLoadTextureSuperiors, baseSorting.getOverrideLoadTextureSuperiors());
-			addSorting(id, allBaseOverrideLoadTextureInferiors, baseSorting.getOverrideLoadTextureInferiors());
-			addSorting(id, allBaseAfterLoadTextureSuperiors, baseSorting.getAfterLoadTextureSuperiors());
-			addSorting(id, allBaseAfterLoadTextureInferiors, baseSorting.getAfterLoadTextureInferiors());
-
-			addSorting(id, allBaseBeforeLoadTextureOfEntitySuperiors, baseSorting.getBeforeLoadTextureOfEntitySuperiors());
-			addSorting(id, allBaseBeforeLoadTextureOfEntityInferiors, baseSorting.getBeforeLoadTextureOfEntityInferiors());
-			addSorting(id, allBaseOverrideLoadTextureOfEntitySuperiors, baseSorting.getOverrideLoadTextureOfEntitySuperiors());
-			addSorting(id, allBaseOverrideLoadTextureOfEntityInferiors, baseSorting.getOverrideLoadTextureOfEntityInferiors());
-			addSorting(id, allBaseAfterLoadTextureOfEntitySuperiors, baseSorting.getAfterLoadTextureOfEntitySuperiors());
-			addSorting(id, allBaseAfterLoadTextureOfEntityInferiors, baseSorting.getAfterLoadTextureOfEntityInferiors());
+			addSorting(id, allBaseBeforeInterpolateRotationSuperiors, baseSorting.getBeforeInterpolateRotationSuperiors());
+			addSorting(id, allBaseBeforeInterpolateRotationInferiors, baseSorting.getBeforeInterpolateRotationInferiors());
+			addSorting(id, allBaseOverrideInterpolateRotationSuperiors, baseSorting.getOverrideInterpolateRotationSuperiors());
+			addSorting(id, allBaseOverrideInterpolateRotationInferiors, baseSorting.getOverrideInterpolateRotationInferiors());
+			addSorting(id, allBaseAfterInterpolateRotationSuperiors, baseSorting.getAfterInterpolateRotationSuperiors());
+			addSorting(id, allBaseAfterInterpolateRotationInferiors, baseSorting.getAfterInterpolateRotationInferiors());
 
 			addSorting(id, allBaseBeforePassSpecialRenderSuperiors, baseSorting.getBeforePassSpecialRenderSuperiors());
 			addSorting(id, allBaseBeforePassSpecialRenderInferiors, baseSorting.getBeforePassSpecialRenderInferiors());
@@ -214,26 +257,40 @@ public final class RenderPlayerAPI
 			addSorting(id, allBaseAfterPassSpecialRenderSuperiors, baseSorting.getAfterPassSpecialRenderSuperiors());
 			addSorting(id, allBaseAfterPassSpecialRenderInferiors, baseSorting.getAfterPassSpecialRenderInferiors());
 
-			addSorting(id, allBaseBeforePerformStaticEntityRebuildSuperiors, baseSorting.getBeforePerformStaticEntityRebuildSuperiors());
-			addSorting(id, allBaseBeforePerformStaticEntityRebuildInferiors, baseSorting.getBeforePerformStaticEntityRebuildInferiors());
-			addSorting(id, allBaseOverridePerformStaticEntityRebuildSuperiors, baseSorting.getOverridePerformStaticEntityRebuildSuperiors());
-			addSorting(id, allBaseOverridePerformStaticEntityRebuildInferiors, baseSorting.getOverridePerformStaticEntityRebuildInferiors());
-			addSorting(id, allBaseAfterPerformStaticEntityRebuildSuperiors, baseSorting.getAfterPerformStaticEntityRebuildSuperiors());
-			addSorting(id, allBaseAfterPerformStaticEntityRebuildInferiors, baseSorting.getAfterPerformStaticEntityRebuildInferiors());
+			addSorting(id, allBaseBeforePreRenderCallbackSuperiors, baseSorting.getBeforePreRenderCallbackSuperiors());
+			addSorting(id, allBaseBeforePreRenderCallbackInferiors, baseSorting.getBeforePreRenderCallbackInferiors());
+			addSorting(id, allBaseOverridePreRenderCallbackSuperiors, baseSorting.getOverridePreRenderCallbackSuperiors());
+			addSorting(id, allBaseOverridePreRenderCallbackInferiors, baseSorting.getOverridePreRenderCallbackInferiors());
+			addSorting(id, allBaseAfterPreRenderCallbackSuperiors, baseSorting.getAfterPreRenderCallbackSuperiors());
+			addSorting(id, allBaseAfterPreRenderCallbackInferiors, baseSorting.getAfterPreRenderCallbackInferiors());
 
-			addSorting(id, allBaseBeforeRenderArrowsStuckInEntitySuperiors, baseSorting.getBeforeRenderArrowsStuckInEntitySuperiors());
-			addSorting(id, allBaseBeforeRenderArrowsStuckInEntityInferiors, baseSorting.getBeforeRenderArrowsStuckInEntityInferiors());
-			addSorting(id, allBaseOverrideRenderArrowsStuckInEntitySuperiors, baseSorting.getOverrideRenderArrowsStuckInEntitySuperiors());
-			addSorting(id, allBaseOverrideRenderArrowsStuckInEntityInferiors, baseSorting.getOverrideRenderArrowsStuckInEntityInferiors());
-			addSorting(id, allBaseAfterRenderArrowsStuckInEntitySuperiors, baseSorting.getAfterRenderArrowsStuckInEntitySuperiors());
-			addSorting(id, allBaseAfterRenderArrowsStuckInEntityInferiors, baseSorting.getAfterRenderArrowsStuckInEntityInferiors());
+			addSorting(id, allBaseBeforeRemoveLayerSuperiors, baseSorting.getBeforeRemoveLayerSuperiors());
+			addSorting(id, allBaseBeforeRemoveLayerInferiors, baseSorting.getBeforeRemoveLayerInferiors());
+			addSorting(id, allBaseOverrideRemoveLayerSuperiors, baseSorting.getOverrideRemoveLayerSuperiors());
+			addSorting(id, allBaseOverrideRemoveLayerInferiors, baseSorting.getOverrideRemoveLayerInferiors());
+			addSorting(id, allBaseAfterRemoveLayerSuperiors, baseSorting.getAfterRemoveLayerSuperiors());
+			addSorting(id, allBaseAfterRemoveLayerInferiors, baseSorting.getAfterRemoveLayerInferiors());
 
-			addSorting(id, allBaseBeforeRenderFirstPersonArmSuperiors, baseSorting.getBeforeRenderFirstPersonArmSuperiors());
-			addSorting(id, allBaseBeforeRenderFirstPersonArmInferiors, baseSorting.getBeforeRenderFirstPersonArmInferiors());
-			addSorting(id, allBaseOverrideRenderFirstPersonArmSuperiors, baseSorting.getOverrideRenderFirstPersonArmSuperiors());
-			addSorting(id, allBaseOverrideRenderFirstPersonArmInferiors, baseSorting.getOverrideRenderFirstPersonArmInferiors());
-			addSorting(id, allBaseAfterRenderFirstPersonArmSuperiors, baseSorting.getAfterRenderFirstPersonArmSuperiors());
-			addSorting(id, allBaseAfterRenderFirstPersonArmInferiors, baseSorting.getAfterRenderFirstPersonArmInferiors());
+			addSorting(id, allBaseBeforeRenderLayersSuperiors, baseSorting.getBeforeRenderLayersSuperiors());
+			addSorting(id, allBaseBeforeRenderLayersInferiors, baseSorting.getBeforeRenderLayersInferiors());
+			addSorting(id, allBaseOverrideRenderLayersSuperiors, baseSorting.getOverrideRenderLayersSuperiors());
+			addSorting(id, allBaseOverrideRenderLayersInferiors, baseSorting.getOverrideRenderLayersInferiors());
+			addSorting(id, allBaseAfterRenderLayersSuperiors, baseSorting.getAfterRenderLayersSuperiors());
+			addSorting(id, allBaseAfterRenderLayersInferiors, baseSorting.getAfterRenderLayersInferiors());
+
+			addSorting(id, allBaseBeforeRenderLeftArmSuperiors, baseSorting.getBeforeRenderLeftArmSuperiors());
+			addSorting(id, allBaseBeforeRenderLeftArmInferiors, baseSorting.getBeforeRenderLeftArmInferiors());
+			addSorting(id, allBaseOverrideRenderLeftArmSuperiors, baseSorting.getOverrideRenderLeftArmSuperiors());
+			addSorting(id, allBaseOverrideRenderLeftArmInferiors, baseSorting.getOverrideRenderLeftArmInferiors());
+			addSorting(id, allBaseAfterRenderLeftArmSuperiors, baseSorting.getAfterRenderLeftArmSuperiors());
+			addSorting(id, allBaseAfterRenderLeftArmInferiors, baseSorting.getAfterRenderLeftArmInferiors());
+
+			addSorting(id, allBaseBeforeRenderLivingAtSuperiors, baseSorting.getBeforeRenderLivingAtSuperiors());
+			addSorting(id, allBaseBeforeRenderLivingAtInferiors, baseSorting.getBeforeRenderLivingAtInferiors());
+			addSorting(id, allBaseOverrideRenderLivingAtSuperiors, baseSorting.getOverrideRenderLivingAtSuperiors());
+			addSorting(id, allBaseOverrideRenderLivingAtInferiors, baseSorting.getOverrideRenderLivingAtInferiors());
+			addSorting(id, allBaseAfterRenderLivingAtSuperiors, baseSorting.getAfterRenderLivingAtSuperiors());
+			addSorting(id, allBaseAfterRenderLivingAtInferiors, baseSorting.getAfterRenderLivingAtInferiors());
 
 			addSorting(id, allBaseBeforeRenderLivingLabelSuperiors, baseSorting.getBeforeRenderLivingLabelSuperiors());
 			addSorting(id, allBaseBeforeRenderLivingLabelInferiors, baseSorting.getBeforeRenderLivingLabelInferiors());
@@ -249,207 +306,250 @@ public final class RenderPlayerAPI
 			addSorting(id, allBaseAfterRenderModelSuperiors, baseSorting.getAfterRenderModelSuperiors());
 			addSorting(id, allBaseAfterRenderModelInferiors, baseSorting.getAfterRenderModelInferiors());
 
-			addSorting(id, allBaseBeforeRenderPlayerSuperiors, baseSorting.getBeforeRenderPlayerSuperiors());
-			addSorting(id, allBaseBeforeRenderPlayerInferiors, baseSorting.getBeforeRenderPlayerInferiors());
-			addSorting(id, allBaseOverrideRenderPlayerSuperiors, baseSorting.getOverrideRenderPlayerSuperiors());
-			addSorting(id, allBaseOverrideRenderPlayerInferiors, baseSorting.getOverrideRenderPlayerInferiors());
-			addSorting(id, allBaseAfterRenderPlayerSuperiors, baseSorting.getAfterRenderPlayerSuperiors());
-			addSorting(id, allBaseAfterRenderPlayerInferiors, baseSorting.getAfterRenderPlayerInferiors());
+			addSorting(id, allBaseBeforeRenderNameSuperiors, baseSorting.getBeforeRenderNameSuperiors());
+			addSorting(id, allBaseBeforeRenderNameInferiors, baseSorting.getBeforeRenderNameInferiors());
+			addSorting(id, allBaseOverrideRenderNameSuperiors, baseSorting.getOverrideRenderNameSuperiors());
+			addSorting(id, allBaseOverrideRenderNameInferiors, baseSorting.getOverrideRenderNameInferiors());
+			addSorting(id, allBaseAfterRenderNameSuperiors, baseSorting.getAfterRenderNameSuperiors());
+			addSorting(id, allBaseAfterRenderNameInferiors, baseSorting.getAfterRenderNameInferiors());
 
-			addSorting(id, allBaseBeforeRenderPlayerNameAndScoreLabelSuperiors, baseSorting.getBeforeRenderPlayerNameAndScoreLabelSuperiors());
-			addSorting(id, allBaseBeforeRenderPlayerNameAndScoreLabelInferiors, baseSorting.getBeforeRenderPlayerNameAndScoreLabelInferiors());
-			addSorting(id, allBaseOverrideRenderPlayerNameAndScoreLabelSuperiors, baseSorting.getOverrideRenderPlayerNameAndScoreLabelSuperiors());
-			addSorting(id, allBaseOverrideRenderPlayerNameAndScoreLabelInferiors, baseSorting.getOverrideRenderPlayerNameAndScoreLabelInferiors());
-			addSorting(id, allBaseAfterRenderPlayerNameAndScoreLabelSuperiors, baseSorting.getAfterRenderPlayerNameAndScoreLabelSuperiors());
-			addSorting(id, allBaseAfterRenderPlayerNameAndScoreLabelInferiors, baseSorting.getAfterRenderPlayerNameAndScoreLabelInferiors());
+			addSorting(id, allBaseBeforeRenderOffsetLivingLabelSuperiors, baseSorting.getBeforeRenderOffsetLivingLabelSuperiors());
+			addSorting(id, allBaseBeforeRenderOffsetLivingLabelInferiors, baseSorting.getBeforeRenderOffsetLivingLabelInferiors());
+			addSorting(id, allBaseOverrideRenderOffsetLivingLabelSuperiors, baseSorting.getOverrideRenderOffsetLivingLabelSuperiors());
+			addSorting(id, allBaseOverrideRenderOffsetLivingLabelInferiors, baseSorting.getOverrideRenderOffsetLivingLabelInferiors());
+			addSorting(id, allBaseAfterRenderOffsetLivingLabelSuperiors, baseSorting.getAfterRenderOffsetLivingLabelSuperiors());
+			addSorting(id, allBaseAfterRenderOffsetLivingLabelInferiors, baseSorting.getAfterRenderOffsetLivingLabelInferiors());
 
-			addSorting(id, allBaseBeforeRenderPlayerScaleSuperiors, baseSorting.getBeforeRenderPlayerScaleSuperiors());
-			addSorting(id, allBaseBeforeRenderPlayerScaleInferiors, baseSorting.getBeforeRenderPlayerScaleInferiors());
-			addSorting(id, allBaseOverrideRenderPlayerScaleSuperiors, baseSorting.getOverrideRenderPlayerScaleSuperiors());
-			addSorting(id, allBaseOverrideRenderPlayerScaleInferiors, baseSorting.getOverrideRenderPlayerScaleInferiors());
-			addSorting(id, allBaseAfterRenderPlayerScaleSuperiors, baseSorting.getAfterRenderPlayerScaleSuperiors());
-			addSorting(id, allBaseAfterRenderPlayerScaleInferiors, baseSorting.getAfterRenderPlayerScaleInferiors());
+			addSorting(id, allBaseBeforeRenderRightArmSuperiors, baseSorting.getBeforeRenderRightArmSuperiors());
+			addSorting(id, allBaseBeforeRenderRightArmInferiors, baseSorting.getBeforeRenderRightArmInferiors());
+			addSorting(id, allBaseOverrideRenderRightArmSuperiors, baseSorting.getOverrideRenderRightArmSuperiors());
+			addSorting(id, allBaseOverrideRenderRightArmInferiors, baseSorting.getOverrideRenderRightArmInferiors());
+			addSorting(id, allBaseAfterRenderRightArmSuperiors, baseSorting.getAfterRenderRightArmSuperiors());
+			addSorting(id, allBaseAfterRenderRightArmInferiors, baseSorting.getAfterRenderRightArmInferiors());
 
-			addSorting(id, allBaseBeforeRenderPlayerSleepSuperiors, baseSorting.getBeforeRenderPlayerSleepSuperiors());
-			addSorting(id, allBaseBeforeRenderPlayerSleepInferiors, baseSorting.getBeforeRenderPlayerSleepInferiors());
-			addSorting(id, allBaseOverrideRenderPlayerSleepSuperiors, baseSorting.getOverrideRenderPlayerSleepSuperiors());
-			addSorting(id, allBaseOverrideRenderPlayerSleepInferiors, baseSorting.getOverrideRenderPlayerSleepInferiors());
-			addSorting(id, allBaseAfterRenderPlayerSleepSuperiors, baseSorting.getAfterRenderPlayerSleepSuperiors());
-			addSorting(id, allBaseAfterRenderPlayerSleepInferiors, baseSorting.getAfterRenderPlayerSleepInferiors());
+			addSorting(id, allBaseBeforeRotateCorpseSuperiors, baseSorting.getBeforeRotateCorpseSuperiors());
+			addSorting(id, allBaseBeforeRotateCorpseInferiors, baseSorting.getBeforeRotateCorpseInferiors());
+			addSorting(id, allBaseOverrideRotateCorpseSuperiors, baseSorting.getOverrideRotateCorpseSuperiors());
+			addSorting(id, allBaseOverrideRotateCorpseInferiors, baseSorting.getOverrideRotateCorpseInferiors());
+			addSorting(id, allBaseAfterRotateCorpseSuperiors, baseSorting.getAfterRotateCorpseSuperiors());
+			addSorting(id, allBaseAfterRotateCorpseInferiors, baseSorting.getAfterRotateCorpseInferiors());
 
-			addSorting(id, allBaseBeforeRenderSpecialsSuperiors, baseSorting.getBeforeRenderSpecialsSuperiors());
-			addSorting(id, allBaseBeforeRenderSpecialsInferiors, baseSorting.getBeforeRenderSpecialsInferiors());
-			addSorting(id, allBaseOverrideRenderSpecialsSuperiors, baseSorting.getOverrideRenderSpecialsSuperiors());
-			addSorting(id, allBaseOverrideRenderSpecialsInferiors, baseSorting.getOverrideRenderSpecialsInferiors());
-			addSorting(id, allBaseAfterRenderSpecialsSuperiors, baseSorting.getAfterRenderSpecialsSuperiors());
-			addSorting(id, allBaseAfterRenderSpecialsInferiors, baseSorting.getAfterRenderSpecialsInferiors());
+			addSorting(id, allBaseBeforeSetBrightnessSuperiors, baseSorting.getBeforeSetBrightnessSuperiors());
+			addSorting(id, allBaseBeforeSetBrightnessInferiors, baseSorting.getBeforeSetBrightnessInferiors());
+			addSorting(id, allBaseOverrideSetBrightnessSuperiors, baseSorting.getOverrideSetBrightnessSuperiors());
+			addSorting(id, allBaseOverrideSetBrightnessInferiors, baseSorting.getOverrideSetBrightnessInferiors());
+			addSorting(id, allBaseAfterSetBrightnessSuperiors, baseSorting.getAfterSetBrightnessSuperiors());
+			addSorting(id, allBaseAfterSetBrightnessInferiors, baseSorting.getAfterSetBrightnessInferiors());
 
-			addSorting(id, allBaseBeforeRenderSwingProgressSuperiors, baseSorting.getBeforeRenderSwingProgressSuperiors());
-			addSorting(id, allBaseBeforeRenderSwingProgressInferiors, baseSorting.getBeforeRenderSwingProgressInferiors());
-			addSorting(id, allBaseOverrideRenderSwingProgressSuperiors, baseSorting.getOverrideRenderSwingProgressSuperiors());
-			addSorting(id, allBaseOverrideRenderSwingProgressInferiors, baseSorting.getOverrideRenderSwingProgressInferiors());
-			addSorting(id, allBaseAfterRenderSwingProgressSuperiors, baseSorting.getAfterRenderSwingProgressSuperiors());
-			addSorting(id, allBaseAfterRenderSwingProgressInferiors, baseSorting.getAfterRenderSwingProgressInferiors());
+			addSorting(id, allBaseBeforeSetDoRenderBrightnessSuperiors, baseSorting.getBeforeSetDoRenderBrightnessSuperiors());
+			addSorting(id, allBaseBeforeSetDoRenderBrightnessInferiors, baseSorting.getBeforeSetDoRenderBrightnessInferiors());
+			addSorting(id, allBaseOverrideSetDoRenderBrightnessSuperiors, baseSorting.getOverrideSetDoRenderBrightnessSuperiors());
+			addSorting(id, allBaseOverrideSetDoRenderBrightnessInferiors, baseSorting.getOverrideSetDoRenderBrightnessInferiors());
+			addSorting(id, allBaseAfterSetDoRenderBrightnessSuperiors, baseSorting.getAfterSetDoRenderBrightnessSuperiors());
+			addSorting(id, allBaseAfterSetDoRenderBrightnessInferiors, baseSorting.getAfterSetDoRenderBrightnessInferiors());
 
-			addSorting(id, allBaseBeforeRotatePlayerSuperiors, baseSorting.getBeforeRotatePlayerSuperiors());
-			addSorting(id, allBaseBeforeRotatePlayerInferiors, baseSorting.getBeforeRotatePlayerInferiors());
-			addSorting(id, allBaseOverrideRotatePlayerSuperiors, baseSorting.getOverrideRotatePlayerSuperiors());
-			addSorting(id, allBaseOverrideRotatePlayerInferiors, baseSorting.getOverrideRotatePlayerInferiors());
-			addSorting(id, allBaseAfterRotatePlayerSuperiors, baseSorting.getAfterRotatePlayerSuperiors());
-			addSorting(id, allBaseAfterRotatePlayerInferiors, baseSorting.getAfterRotatePlayerInferiors());
+			addSorting(id, allBaseBeforeSetModelVisibilitiesSuperiors, baseSorting.getBeforeSetModelVisibilitiesSuperiors());
+			addSorting(id, allBaseBeforeSetModelVisibilitiesInferiors, baseSorting.getBeforeSetModelVisibilitiesInferiors());
+			addSorting(id, allBaseOverrideSetModelVisibilitiesSuperiors, baseSorting.getOverrideSetModelVisibilitiesSuperiors());
+			addSorting(id, allBaseOverrideSetModelVisibilitiesInferiors, baseSorting.getOverrideSetModelVisibilitiesInferiors());
+			addSorting(id, allBaseAfterSetModelVisibilitiesSuperiors, baseSorting.getAfterSetModelVisibilitiesSuperiors());
+			addSorting(id, allBaseAfterSetModelVisibilitiesInferiors, baseSorting.getAfterSetModelVisibilitiesInferiors());
 
-			addSorting(id, allBaseBeforeSetArmorModelSuperiors, baseSorting.getBeforeSetArmorModelSuperiors());
-			addSorting(id, allBaseBeforeSetArmorModelInferiors, baseSorting.getBeforeSetArmorModelInferiors());
-			addSorting(id, allBaseOverrideSetArmorModelSuperiors, baseSorting.getOverrideSetArmorModelSuperiors());
-			addSorting(id, allBaseOverrideSetArmorModelInferiors, baseSorting.getOverrideSetArmorModelInferiors());
-			addSorting(id, allBaseAfterSetArmorModelSuperiors, baseSorting.getAfterSetArmorModelSuperiors());
-			addSorting(id, allBaseAfterSetArmorModelInferiors, baseSorting.getAfterSetArmorModelInferiors());
+			addSorting(id, allBaseBeforeSetRenderOutlinesSuperiors, baseSorting.getBeforeSetRenderOutlinesSuperiors());
+			addSorting(id, allBaseBeforeSetRenderOutlinesInferiors, baseSorting.getBeforeSetRenderOutlinesInferiors());
+			addSorting(id, allBaseOverrideSetRenderOutlinesSuperiors, baseSorting.getOverrideSetRenderOutlinesSuperiors());
+			addSorting(id, allBaseOverrideSetRenderOutlinesInferiors, baseSorting.getOverrideSetRenderOutlinesInferiors());
+			addSorting(id, allBaseAfterSetRenderOutlinesSuperiors, baseSorting.getAfterSetRenderOutlinesSuperiors());
+			addSorting(id, allBaseAfterSetRenderOutlinesInferiors, baseSorting.getAfterSetRenderOutlinesInferiors());
 
-			addSorting(id, allBaseBeforeSetPassArmorModelSuperiors, baseSorting.getBeforeSetPassArmorModelSuperiors());
-			addSorting(id, allBaseBeforeSetPassArmorModelInferiors, baseSorting.getBeforeSetPassArmorModelInferiors());
-			addSorting(id, allBaseOverrideSetPassArmorModelSuperiors, baseSorting.getOverrideSetPassArmorModelSuperiors());
-			addSorting(id, allBaseOverrideSetPassArmorModelInferiors, baseSorting.getOverrideSetPassArmorModelInferiors());
-			addSorting(id, allBaseAfterSetPassArmorModelSuperiors, baseSorting.getAfterSetPassArmorModelSuperiors());
-			addSorting(id, allBaseAfterSetPassArmorModelInferiors, baseSorting.getAfterSetPassArmorModelInferiors());
+			addSorting(id, allBaseBeforeSetScoreTeamColorSuperiors, baseSorting.getBeforeSetScoreTeamColorSuperiors());
+			addSorting(id, allBaseBeforeSetScoreTeamColorInferiors, baseSorting.getBeforeSetScoreTeamColorInferiors());
+			addSorting(id, allBaseOverrideSetScoreTeamColorSuperiors, baseSorting.getOverrideSetScoreTeamColorSuperiors());
+			addSorting(id, allBaseOverrideSetScoreTeamColorInferiors, baseSorting.getOverrideSetScoreTeamColorInferiors());
+			addSorting(id, allBaseAfterSetScoreTeamColorSuperiors, baseSorting.getAfterSetScoreTeamColorSuperiors());
+			addSorting(id, allBaseAfterSetScoreTeamColorInferiors, baseSorting.getAfterSetScoreTeamColorInferiors());
 
-			addSorting(id, allBaseBeforeSetRenderManagerSuperiors, baseSorting.getBeforeSetRenderManagerSuperiors());
-			addSorting(id, allBaseBeforeSetRenderManagerInferiors, baseSorting.getBeforeSetRenderManagerInferiors());
-			addSorting(id, allBaseOverrideSetRenderManagerSuperiors, baseSorting.getOverrideSetRenderManagerSuperiors());
-			addSorting(id, allBaseOverrideSetRenderManagerInferiors, baseSorting.getOverrideSetRenderManagerInferiors());
-			addSorting(id, allBaseAfterSetRenderManagerSuperiors, baseSorting.getAfterSetRenderManagerSuperiors());
-			addSorting(id, allBaseAfterSetRenderManagerInferiors, baseSorting.getAfterSetRenderManagerInferiors());
+			addSorting(id, allBaseBeforeShouldRenderSuperiors, baseSorting.getBeforeShouldRenderSuperiors());
+			addSorting(id, allBaseBeforeShouldRenderInferiors, baseSorting.getBeforeShouldRenderInferiors());
+			addSorting(id, allBaseOverrideShouldRenderSuperiors, baseSorting.getOverrideShouldRenderSuperiors());
+			addSorting(id, allBaseOverrideShouldRenderInferiors, baseSorting.getOverrideShouldRenderInferiors());
+			addSorting(id, allBaseAfterShouldRenderSuperiors, baseSorting.getAfterShouldRenderSuperiors());
+			addSorting(id, allBaseAfterShouldRenderInferiors, baseSorting.getAfterShouldRenderInferiors());
 
-			addSorting(id, allBaseBeforeSetRenderPassModelSuperiors, baseSorting.getBeforeSetRenderPassModelSuperiors());
-			addSorting(id, allBaseBeforeSetRenderPassModelInferiors, baseSorting.getBeforeSetRenderPassModelInferiors());
-			addSorting(id, allBaseOverrideSetRenderPassModelSuperiors, baseSorting.getOverrideSetRenderPassModelSuperiors());
-			addSorting(id, allBaseOverrideSetRenderPassModelInferiors, baseSorting.getOverrideSetRenderPassModelInferiors());
-			addSorting(id, allBaseAfterSetRenderPassModelSuperiors, baseSorting.getAfterSetRenderPassModelSuperiors());
-			addSorting(id, allBaseAfterSetRenderPassModelInferiors, baseSorting.getAfterSetRenderPassModelInferiors());
+			addSorting(id, allBaseBeforeTransformHeldFull3DItemLayerSuperiors, baseSorting.getBeforeTransformHeldFull3DItemLayerSuperiors());
+			addSorting(id, allBaseBeforeTransformHeldFull3DItemLayerInferiors, baseSorting.getBeforeTransformHeldFull3DItemLayerInferiors());
+			addSorting(id, allBaseOverrideTransformHeldFull3DItemLayerSuperiors, baseSorting.getOverrideTransformHeldFull3DItemLayerSuperiors());
+			addSorting(id, allBaseOverrideTransformHeldFull3DItemLayerInferiors, baseSorting.getOverrideTransformHeldFull3DItemLayerInferiors());
+			addSorting(id, allBaseAfterTransformHeldFull3DItemLayerSuperiors, baseSorting.getAfterTransformHeldFull3DItemLayerSuperiors());
+			addSorting(id, allBaseAfterTransformHeldFull3DItemLayerInferiors, baseSorting.getAfterTransformHeldFull3DItemLayerInferiors());
 
-			addSorting(id, allBaseBeforeUpdateIconsSuperiors, baseSorting.getBeforeUpdateIconsSuperiors());
-			addSorting(id, allBaseBeforeUpdateIconsInferiors, baseSorting.getBeforeUpdateIconsInferiors());
-			addSorting(id, allBaseOverrideUpdateIconsSuperiors, baseSorting.getOverrideUpdateIconsSuperiors());
-			addSorting(id, allBaseOverrideUpdateIconsInferiors, baseSorting.getOverrideUpdateIconsInferiors());
-			addSorting(id, allBaseAfterUpdateIconsSuperiors, baseSorting.getAfterUpdateIconsSuperiors());
-			addSorting(id, allBaseAfterUpdateIconsInferiors, baseSorting.getAfterUpdateIconsInferiors());
+			addSorting(id, allBaseBeforeUnsetBrightnessSuperiors, baseSorting.getBeforeUnsetBrightnessSuperiors());
+			addSorting(id, allBaseBeforeUnsetBrightnessInferiors, baseSorting.getBeforeUnsetBrightnessInferiors());
+			addSorting(id, allBaseOverrideUnsetBrightnessSuperiors, baseSorting.getOverrideUnsetBrightnessSuperiors());
+			addSorting(id, allBaseOverrideUnsetBrightnessInferiors, baseSorting.getOverrideUnsetBrightnessInferiors());
+			addSorting(id, allBaseAfterUnsetBrightnessSuperiors, baseSorting.getAfterUnsetBrightnessSuperiors());
+			addSorting(id, allBaseAfterUnsetBrightnessInferiors, baseSorting.getAfterUnsetBrightnessInferiors());
+
+			addSorting(id, allBaseBeforeUnsetScoreTeamColorSuperiors, baseSorting.getBeforeUnsetScoreTeamColorSuperiors());
+			addSorting(id, allBaseBeforeUnsetScoreTeamColorInferiors, baseSorting.getBeforeUnsetScoreTeamColorInferiors());
+			addSorting(id, allBaseOverrideUnsetScoreTeamColorSuperiors, baseSorting.getOverrideUnsetScoreTeamColorSuperiors());
+			addSorting(id, allBaseOverrideUnsetScoreTeamColorInferiors, baseSorting.getOverrideUnsetScoreTeamColorInferiors());
+			addSorting(id, allBaseAfterUnsetScoreTeamColorSuperiors, baseSorting.getAfterUnsetScoreTeamColorSuperiors());
+			addSorting(id, allBaseAfterUnsetScoreTeamColorInferiors, baseSorting.getAfterUnsetScoreTeamColorInferiors());
 
 		}
 
-		addMethod(id, baseClass, beforeLocalConstructingHookTypes, "beforeLocalConstructing");
-		addMethod(id, baseClass, afterLocalConstructingHookTypes, "afterLocalConstructing");
+		addMethod(id, baseClass, beforeLocalConstructingHookTypes, "beforeLocalConstructing", net.minecraft.client.renderer.entity.RenderManager.class, boolean.class);
+		addMethod(id, baseClass, afterLocalConstructingHookTypes, "afterLocalConstructing", net.minecraft.client.renderer.entity.RenderManager.class, boolean.class);
 
 
-		addMethod(id, baseClass, beforeDoRenderLabelHookTypes, "beforeDoRenderLabel", net.minecraft.entity.EntityLivingBase.class);
-		addMethod(id, baseClass, overrideDoRenderLabelHookTypes, "doRenderLabel", net.minecraft.entity.EntityLivingBase.class);
-		addMethod(id, baseClass, afterDoRenderLabelHookTypes, "afterDoRenderLabel", net.minecraft.entity.EntityLivingBase.class);
+		addMethod(id, baseClass, beforeAddLayerHookTypes, "beforeAddLayer", net.minecraft.client.renderer.entity.layers.LayerRenderer.class);
+		addMethod(id, baseClass, overrideAddLayerHookTypes, "addLayer", net.minecraft.client.renderer.entity.layers.LayerRenderer.class);
+		addMethod(id, baseClass, afterAddLayerHookTypes, "afterAddLayer", net.minecraft.client.renderer.entity.layers.LayerRenderer.class);
 
-		addMethod(id, baseClass, beforeDoRenderShadowAndFireHookTypes, "beforeDoRenderShadowAndFire", net.minecraft.entity.Entity.class, double.class, double.class, double.class, float.class, float.class);
-		addMethod(id, baseClass, overrideDoRenderShadowAndFireHookTypes, "doRenderShadowAndFire", net.minecraft.entity.Entity.class, double.class, double.class, double.class, float.class, float.class);
-		addMethod(id, baseClass, afterDoRenderShadowAndFireHookTypes, "afterDoRenderShadowAndFire", net.minecraft.entity.Entity.class, double.class, double.class, double.class, float.class, float.class);
+		addMethod(id, baseClass, beforeBindEntityTextureHookTypes, "beforeBindEntityTexture", net.minecraft.client.entity.AbstractClientPlayer.class);
+		addMethod(id, baseClass, overrideBindEntityTextureHookTypes, "bindEntityTexture", net.minecraft.client.entity.AbstractClientPlayer.class);
+		addMethod(id, baseClass, afterBindEntityTextureHookTypes, "afterBindEntityTexture", net.minecraft.client.entity.AbstractClientPlayer.class);
 
-		addMethod(id, baseClass, beforeGetColorMultiplierHookTypes, "beforeGetColorMultiplier", net.minecraft.entity.EntityLivingBase.class, float.class, float.class);
-		addMethod(id, baseClass, overrideGetColorMultiplierHookTypes, "getColorMultiplier", net.minecraft.entity.EntityLivingBase.class, float.class, float.class);
-		addMethod(id, baseClass, afterGetColorMultiplierHookTypes, "afterGetColorMultiplier", net.minecraft.entity.EntityLivingBase.class, float.class, float.class);
+		addMethod(id, baseClass, beforeBindTextureHookTypes, "beforeBindTexture", net.minecraft.util.ResourceLocation.class);
+		addMethod(id, baseClass, overrideBindTextureHookTypes, "bindTexture", net.minecraft.util.ResourceLocation.class);
+		addMethod(id, baseClass, afterBindTextureHookTypes, "afterBindTexture", net.minecraft.util.ResourceLocation.class);
 
-		addMethod(id, baseClass, beforeGetDeathMaxRotationHookTypes, "beforeGetDeathMaxRotation", net.minecraft.entity.EntityLivingBase.class);
-		addMethod(id, baseClass, overrideGetDeathMaxRotationHookTypes, "getDeathMaxRotation", net.minecraft.entity.EntityLivingBase.class);
-		addMethod(id, baseClass, afterGetDeathMaxRotationHookTypes, "afterGetDeathMaxRotation", net.minecraft.entity.EntityLivingBase.class);
+		addMethod(id, baseClass, beforeCanRenderNameHookTypes, "beforeCanRenderName", net.minecraft.client.entity.AbstractClientPlayer.class);
+		addMethod(id, baseClass, overrideCanRenderNameHookTypes, "canRenderName", net.minecraft.client.entity.AbstractClientPlayer.class);
+		addMethod(id, baseClass, afterCanRenderNameHookTypes, "afterCanRenderName", net.minecraft.client.entity.AbstractClientPlayer.class);
+
+		addMethod(id, baseClass, beforeDoRenderHookTypes, "beforeDoRender", net.minecraft.client.entity.AbstractClientPlayer.class, double.class, double.class, double.class, float.class, float.class);
+		addMethod(id, baseClass, overrideDoRenderHookTypes, "doRender", net.minecraft.client.entity.AbstractClientPlayer.class, double.class, double.class, double.class, float.class, float.class);
+		addMethod(id, baseClass, afterDoRenderHookTypes, "afterDoRender", net.minecraft.client.entity.AbstractClientPlayer.class, double.class, double.class, double.class, float.class, float.class);
+
+		addMethod(id, baseClass, beforeDoRenderShadowAndFireHookTypes, "beforeDoRenderShadowAndFire", net.minecraft.client.entity.AbstractClientPlayer.class, double.class, double.class, double.class, float.class, float.class);
+		addMethod(id, baseClass, overrideDoRenderShadowAndFireHookTypes, "doRenderShadowAndFire", net.minecraft.client.entity.AbstractClientPlayer.class, double.class, double.class, double.class, float.class, float.class);
+		addMethod(id, baseClass, afterDoRenderShadowAndFireHookTypes, "afterDoRenderShadowAndFire", net.minecraft.client.entity.AbstractClientPlayer.class, double.class, double.class, double.class, float.class, float.class);
+
+		addMethod(id, baseClass, beforeGetColorMultiplierHookTypes, "beforeGetColorMultiplier", net.minecraft.client.entity.AbstractClientPlayer.class, float.class, float.class);
+		addMethod(id, baseClass, overrideGetColorMultiplierHookTypes, "getColorMultiplier", net.minecraft.client.entity.AbstractClientPlayer.class, float.class, float.class);
+		addMethod(id, baseClass, afterGetColorMultiplierHookTypes, "afterGetColorMultiplier", net.minecraft.client.entity.AbstractClientPlayer.class, float.class, float.class);
+
+		addMethod(id, baseClass, beforeGetDeathMaxRotationHookTypes, "beforeGetDeathMaxRotation", net.minecraft.client.entity.AbstractClientPlayer.class);
+		addMethod(id, baseClass, overrideGetDeathMaxRotationHookTypes, "getDeathMaxRotation", net.minecraft.client.entity.AbstractClientPlayer.class);
+		addMethod(id, baseClass, afterGetDeathMaxRotationHookTypes, "afterGetDeathMaxRotation", net.minecraft.client.entity.AbstractClientPlayer.class);
+
+		addMethod(id, baseClass, beforeGetEntityTextureHookTypes, "beforeGetEntityTexture", net.minecraft.client.entity.AbstractClientPlayer.class);
+		addMethod(id, baseClass, overrideGetEntityTextureHookTypes, "getEntityTexture", net.minecraft.client.entity.AbstractClientPlayer.class);
+		addMethod(id, baseClass, afterGetEntityTextureHookTypes, "afterGetEntityTexture", net.minecraft.client.entity.AbstractClientPlayer.class);
 
 		addMethod(id, baseClass, beforeGetFontRendererFromRenderManagerHookTypes, "beforeGetFontRendererFromRenderManager");
 		addMethod(id, baseClass, overrideGetFontRendererFromRenderManagerHookTypes, "getFontRendererFromRenderManager");
 		addMethod(id, baseClass, afterGetFontRendererFromRenderManagerHookTypes, "afterGetFontRendererFromRenderManager");
 
-		addMethod(id, baseClass, beforeGetResourceLocationFromPlayerHookTypes, "beforeGetResourceLocationFromPlayer", net.minecraft.client.entity.AbstractClientPlayer.class);
-		addMethod(id, baseClass, overrideGetResourceLocationFromPlayerHookTypes, "getResourceLocationFromPlayer", net.minecraft.client.entity.AbstractClientPlayer.class);
-		addMethod(id, baseClass, afterGetResourceLocationFromPlayerHookTypes, "afterGetResourceLocationFromPlayer", net.minecraft.client.entity.AbstractClientPlayer.class);
+		addMethod(id, baseClass, beforeGetMainModelHookTypes, "beforeGetMainModel");
+		addMethod(id, baseClass, overrideGetMainModelHookTypes, "getMainModel");
+		addMethod(id, baseClass, afterGetMainModelHookTypes, "afterGetMainModel");
 
-		addMethod(id, baseClass, beforeHandleRotationFloatHookTypes, "beforeHandleRotationFloat", net.minecraft.entity.EntityLivingBase.class, float.class);
-		addMethod(id, baseClass, overrideHandleRotationFloatHookTypes, "handleRotationFloat", net.minecraft.entity.EntityLivingBase.class, float.class);
-		addMethod(id, baseClass, afterHandleRotationFloatHookTypes, "afterHandleRotationFloat", net.minecraft.entity.EntityLivingBase.class, float.class);
+		addMethod(id, baseClass, beforeGetPlayerModelHookTypes, "beforeGetPlayerModel");
+		addMethod(id, baseClass, overrideGetPlayerModelHookTypes, "getPlayerModel");
+		addMethod(id, baseClass, afterGetPlayerModelHookTypes, "afterGetPlayerModel");
 
-		addMethod(id, baseClass, beforeInheritRenderPassHookTypes, "beforeInheritRenderPass", net.minecraft.entity.EntityLivingBase.class, int.class, float.class);
-		addMethod(id, baseClass, overrideInheritRenderPassHookTypes, "inheritRenderPass", net.minecraft.entity.EntityLivingBase.class, int.class, float.class);
-		addMethod(id, baseClass, afterInheritRenderPassHookTypes, "afterInheritRenderPass", net.minecraft.entity.EntityLivingBase.class, int.class, float.class);
+		addMethod(id, baseClass, beforeGetRenderManagerHookTypes, "beforeGetRenderManager");
+		addMethod(id, baseClass, overrideGetRenderManagerHookTypes, "getRenderManager");
+		addMethod(id, baseClass, afterGetRenderManagerHookTypes, "afterGetRenderManager");
 
-		addMethod(id, baseClass, beforeLoadTextureHookTypes, "beforeLoadTexture", net.minecraft.util.ResourceLocation.class);
-		addMethod(id, baseClass, overrideLoadTextureHookTypes, "loadTexture", net.minecraft.util.ResourceLocation.class);
-		addMethod(id, baseClass, afterLoadTextureHookTypes, "afterLoadTexture", net.minecraft.util.ResourceLocation.class);
+		addMethod(id, baseClass, beforeGetSwingProgressHookTypes, "beforeGetSwingProgress", net.minecraft.client.entity.AbstractClientPlayer.class, float.class);
+		addMethod(id, baseClass, overrideGetSwingProgressHookTypes, "getSwingProgress", net.minecraft.client.entity.AbstractClientPlayer.class, float.class);
+		addMethod(id, baseClass, afterGetSwingProgressHookTypes, "afterGetSwingProgress", net.minecraft.client.entity.AbstractClientPlayer.class, float.class);
 
-		addMethod(id, baseClass, beforeLoadTextureOfEntityHookTypes, "beforeLoadTextureOfEntity", net.minecraft.entity.Entity.class);
-		addMethod(id, baseClass, overrideLoadTextureOfEntityHookTypes, "loadTextureOfEntity", net.minecraft.entity.Entity.class);
-		addMethod(id, baseClass, afterLoadTextureOfEntityHookTypes, "afterLoadTextureOfEntity", net.minecraft.entity.Entity.class);
+		addMethod(id, baseClass, beforeHandleRotationFloatHookTypes, "beforeHandleRotationFloat", net.minecraft.client.entity.AbstractClientPlayer.class, float.class);
+		addMethod(id, baseClass, overrideHandleRotationFloatHookTypes, "handleRotationFloat", net.minecraft.client.entity.AbstractClientPlayer.class, float.class);
+		addMethod(id, baseClass, afterHandleRotationFloatHookTypes, "afterHandleRotationFloat", net.minecraft.client.entity.AbstractClientPlayer.class, float.class);
 
-		addMethod(id, baseClass, beforePassSpecialRenderHookTypes, "beforePassSpecialRender", net.minecraft.entity.EntityLivingBase.class, double.class, double.class, double.class);
-		addMethod(id, baseClass, overridePassSpecialRenderHookTypes, "passSpecialRender", net.minecraft.entity.EntityLivingBase.class, double.class, double.class, double.class);
-		addMethod(id, baseClass, afterPassSpecialRenderHookTypes, "afterPassSpecialRender", net.minecraft.entity.EntityLivingBase.class, double.class, double.class, double.class);
+		addMethod(id, baseClass, beforeInterpolateRotationHookTypes, "beforeInterpolateRotation", float.class, float.class, float.class);
+		addMethod(id, baseClass, overrideInterpolateRotationHookTypes, "interpolateRotation", float.class, float.class, float.class);
+		addMethod(id, baseClass, afterInterpolateRotationHookTypes, "afterInterpolateRotation", float.class, float.class, float.class);
 
-		addMethod(id, baseClass, beforePerformStaticEntityRebuildHookTypes, "beforePerformStaticEntityRebuild");
-		addMethod(id, baseClass, overridePerformStaticEntityRebuildHookTypes, "performStaticEntityRebuild");
-		addMethod(id, baseClass, afterPerformStaticEntityRebuildHookTypes, "afterPerformStaticEntityRebuild");
+		addMethod(id, baseClass, beforePassSpecialRenderHookTypes, "beforePassSpecialRender", net.minecraft.client.entity.AbstractClientPlayer.class, double.class, double.class, double.class);
+		addMethod(id, baseClass, overridePassSpecialRenderHookTypes, "passSpecialRender", net.minecraft.client.entity.AbstractClientPlayer.class, double.class, double.class, double.class);
+		addMethod(id, baseClass, afterPassSpecialRenderHookTypes, "afterPassSpecialRender", net.minecraft.client.entity.AbstractClientPlayer.class, double.class, double.class, double.class);
 
-		addMethod(id, baseClass, beforeRenderArrowsStuckInEntityHookTypes, "beforeRenderArrowsStuckInEntity", net.minecraft.entity.EntityLivingBase.class, float.class);
-		addMethod(id, baseClass, overrideRenderArrowsStuckInEntityHookTypes, "renderArrowsStuckInEntity", net.minecraft.entity.EntityLivingBase.class, float.class);
-		addMethod(id, baseClass, afterRenderArrowsStuckInEntityHookTypes, "afterRenderArrowsStuckInEntity", net.minecraft.entity.EntityLivingBase.class, float.class);
+		addMethod(id, baseClass, beforePreRenderCallbackHookTypes, "beforePreRenderCallback", net.minecraft.client.entity.AbstractClientPlayer.class, float.class);
+		addMethod(id, baseClass, overridePreRenderCallbackHookTypes, "preRenderCallback", net.minecraft.client.entity.AbstractClientPlayer.class, float.class);
+		addMethod(id, baseClass, afterPreRenderCallbackHookTypes, "afterPreRenderCallback", net.minecraft.client.entity.AbstractClientPlayer.class, float.class);
 
-		addMethod(id, baseClass, beforeRenderFirstPersonArmHookTypes, "beforeRenderFirstPersonArm", net.minecraft.entity.player.EntityPlayer.class);
-		addMethod(id, baseClass, overrideRenderFirstPersonArmHookTypes, "renderFirstPersonArm", net.minecraft.entity.player.EntityPlayer.class);
-		addMethod(id, baseClass, afterRenderFirstPersonArmHookTypes, "afterRenderFirstPersonArm", net.minecraft.entity.player.EntityPlayer.class);
+		addMethod(id, baseClass, beforeRemoveLayerHookTypes, "beforeRemoveLayer", net.minecraft.client.renderer.entity.layers.LayerRenderer.class);
+		addMethod(id, baseClass, overrideRemoveLayerHookTypes, "removeLayer", net.minecraft.client.renderer.entity.layers.LayerRenderer.class);
+		addMethod(id, baseClass, afterRemoveLayerHookTypes, "afterRemoveLayer", net.minecraft.client.renderer.entity.layers.LayerRenderer.class);
 
-		addMethod(id, baseClass, beforeRenderLivingLabelHookTypes, "beforeRenderLivingLabel", net.minecraft.entity.Entity.class, String.class, double.class, double.class, double.class, int.class);
-		addMethod(id, baseClass, overrideRenderLivingLabelHookTypes, "renderLivingLabel", net.minecraft.entity.Entity.class, String.class, double.class, double.class, double.class, int.class);
-		addMethod(id, baseClass, afterRenderLivingLabelHookTypes, "afterRenderLivingLabel", net.minecraft.entity.Entity.class, String.class, double.class, double.class, double.class, int.class);
+		addMethod(id, baseClass, beforeRenderLayersHookTypes, "beforeRenderLayers", net.minecraft.client.entity.AbstractClientPlayer.class, float.class, float.class, float.class, float.class, float.class, float.class, float.class);
+		addMethod(id, baseClass, overrideRenderLayersHookTypes, "renderLayers", net.minecraft.client.entity.AbstractClientPlayer.class, float.class, float.class, float.class, float.class, float.class, float.class, float.class);
+		addMethod(id, baseClass, afterRenderLayersHookTypes, "afterRenderLayers", net.minecraft.client.entity.AbstractClientPlayer.class, float.class, float.class, float.class, float.class, float.class, float.class, float.class);
 
-		addMethod(id, baseClass, beforeRenderModelHookTypes, "beforeRenderModel", net.minecraft.entity.EntityLivingBase.class, float.class, float.class, float.class, float.class, float.class, float.class);
-		addMethod(id, baseClass, overrideRenderModelHookTypes, "renderModel", net.minecraft.entity.EntityLivingBase.class, float.class, float.class, float.class, float.class, float.class, float.class);
-		addMethod(id, baseClass, afterRenderModelHookTypes, "afterRenderModel", net.minecraft.entity.EntityLivingBase.class, float.class, float.class, float.class, float.class, float.class, float.class);
+		addMethod(id, baseClass, beforeRenderLeftArmHookTypes, "beforeRenderLeftArm", net.minecraft.client.entity.AbstractClientPlayer.class);
+		addMethod(id, baseClass, overrideRenderLeftArmHookTypes, "renderLeftArm", net.minecraft.client.entity.AbstractClientPlayer.class);
+		addMethod(id, baseClass, afterRenderLeftArmHookTypes, "afterRenderLeftArm", net.minecraft.client.entity.AbstractClientPlayer.class);
 
-		addMethod(id, baseClass, beforeRenderPlayerHookTypes, "beforeRenderPlayer", net.minecraft.client.entity.AbstractClientPlayer.class, double.class, double.class, double.class, float.class, float.class);
-		addMethod(id, baseClass, overrideRenderPlayerHookTypes, "renderPlayer", net.minecraft.client.entity.AbstractClientPlayer.class, double.class, double.class, double.class, float.class, float.class);
-		addMethod(id, baseClass, afterRenderPlayerHookTypes, "afterRenderPlayer", net.minecraft.client.entity.AbstractClientPlayer.class, double.class, double.class, double.class, float.class, float.class);
+		addMethod(id, baseClass, beforeRenderLivingAtHookTypes, "beforeRenderLivingAt", net.minecraft.client.entity.AbstractClientPlayer.class, double.class, double.class, double.class);
+		addMethod(id, baseClass, overrideRenderLivingAtHookTypes, "renderLivingAt", net.minecraft.client.entity.AbstractClientPlayer.class, double.class, double.class, double.class);
+		addMethod(id, baseClass, afterRenderLivingAtHookTypes, "afterRenderLivingAt", net.minecraft.client.entity.AbstractClientPlayer.class, double.class, double.class, double.class);
 
-		addMethod(id, baseClass, beforeRenderPlayerNameAndScoreLabelHookTypes, "beforeRenderPlayerNameAndScoreLabel", net.minecraft.client.entity.AbstractClientPlayer.class, double.class, double.class, double.class, String.class, float.class, double.class);
-		addMethod(id, baseClass, overrideRenderPlayerNameAndScoreLabelHookTypes, "renderPlayerNameAndScoreLabel", net.minecraft.client.entity.AbstractClientPlayer.class, double.class, double.class, double.class, String.class, float.class, double.class);
-		addMethod(id, baseClass, afterRenderPlayerNameAndScoreLabelHookTypes, "afterRenderPlayerNameAndScoreLabel", net.minecraft.client.entity.AbstractClientPlayer.class, double.class, double.class, double.class, String.class, float.class, double.class);
+		addMethod(id, baseClass, beforeRenderLivingLabelHookTypes, "beforeRenderLivingLabel", net.minecraft.client.entity.AbstractClientPlayer.class, String.class, double.class, double.class, double.class, int.class);
+		addMethod(id, baseClass, overrideRenderLivingLabelHookTypes, "renderLivingLabel", net.minecraft.client.entity.AbstractClientPlayer.class, String.class, double.class, double.class, double.class, int.class);
+		addMethod(id, baseClass, afterRenderLivingLabelHookTypes, "afterRenderLivingLabel", net.minecraft.client.entity.AbstractClientPlayer.class, String.class, double.class, double.class, double.class, int.class);
 
-		addMethod(id, baseClass, beforeRenderPlayerScaleHookTypes, "beforeRenderPlayerScale", net.minecraft.client.entity.AbstractClientPlayer.class, float.class);
-		addMethod(id, baseClass, overrideRenderPlayerScaleHookTypes, "renderPlayerScale", net.minecraft.client.entity.AbstractClientPlayer.class, float.class);
-		addMethod(id, baseClass, afterRenderPlayerScaleHookTypes, "afterRenderPlayerScale", net.minecraft.client.entity.AbstractClientPlayer.class, float.class);
+		addMethod(id, baseClass, beforeRenderModelHookTypes, "beforeRenderModel", net.minecraft.client.entity.AbstractClientPlayer.class, float.class, float.class, float.class, float.class, float.class, float.class);
+		addMethod(id, baseClass, overrideRenderModelHookTypes, "renderModel", net.minecraft.client.entity.AbstractClientPlayer.class, float.class, float.class, float.class, float.class, float.class, float.class);
+		addMethod(id, baseClass, afterRenderModelHookTypes, "afterRenderModel", net.minecraft.client.entity.AbstractClientPlayer.class, float.class, float.class, float.class, float.class, float.class, float.class);
 
-		addMethod(id, baseClass, beforeRenderPlayerSleepHookTypes, "beforeRenderPlayerSleep", net.minecraft.client.entity.AbstractClientPlayer.class, double.class, double.class, double.class);
-		addMethod(id, baseClass, overrideRenderPlayerSleepHookTypes, "renderPlayerSleep", net.minecraft.client.entity.AbstractClientPlayer.class, double.class, double.class, double.class);
-		addMethod(id, baseClass, afterRenderPlayerSleepHookTypes, "afterRenderPlayerSleep", net.minecraft.client.entity.AbstractClientPlayer.class, double.class, double.class, double.class);
+		addMethod(id, baseClass, beforeRenderNameHookTypes, "beforeRenderName", net.minecraft.client.entity.AbstractClientPlayer.class, double.class, double.class, double.class);
+		addMethod(id, baseClass, overrideRenderNameHookTypes, "renderName", net.minecraft.client.entity.AbstractClientPlayer.class, double.class, double.class, double.class);
+		addMethod(id, baseClass, afterRenderNameHookTypes, "afterRenderName", net.minecraft.client.entity.AbstractClientPlayer.class, double.class, double.class, double.class);
 
-		addMethod(id, baseClass, beforeRenderSpecialsHookTypes, "beforeRenderSpecials", net.minecraft.client.entity.AbstractClientPlayer.class, float.class);
-		addMethod(id, baseClass, overrideRenderSpecialsHookTypes, "renderSpecials", net.minecraft.client.entity.AbstractClientPlayer.class, float.class);
-		addMethod(id, baseClass, afterRenderSpecialsHookTypes, "afterRenderSpecials", net.minecraft.client.entity.AbstractClientPlayer.class, float.class);
+		addMethod(id, baseClass, beforeRenderOffsetLivingLabelHookTypes, "beforeRenderOffsetLivingLabel", net.minecraft.client.entity.AbstractClientPlayer.class, double.class, double.class, double.class, String.class, float.class, double.class);
+		addMethod(id, baseClass, overrideRenderOffsetLivingLabelHookTypes, "renderOffsetLivingLabel", net.minecraft.client.entity.AbstractClientPlayer.class, double.class, double.class, double.class, String.class, float.class, double.class);
+		addMethod(id, baseClass, afterRenderOffsetLivingLabelHookTypes, "afterRenderOffsetLivingLabel", net.minecraft.client.entity.AbstractClientPlayer.class, double.class, double.class, double.class, String.class, float.class, double.class);
 
-		addMethod(id, baseClass, beforeRenderSwingProgressHookTypes, "beforeRenderSwingProgress", net.minecraft.entity.EntityLivingBase.class, float.class);
-		addMethod(id, baseClass, overrideRenderSwingProgressHookTypes, "renderSwingProgress", net.minecraft.entity.EntityLivingBase.class, float.class);
-		addMethod(id, baseClass, afterRenderSwingProgressHookTypes, "afterRenderSwingProgress", net.minecraft.entity.EntityLivingBase.class, float.class);
+		addMethod(id, baseClass, beforeRenderRightArmHookTypes, "beforeRenderRightArm", net.minecraft.client.entity.AbstractClientPlayer.class);
+		addMethod(id, baseClass, overrideRenderRightArmHookTypes, "renderRightArm", net.minecraft.client.entity.AbstractClientPlayer.class);
+		addMethod(id, baseClass, afterRenderRightArmHookTypes, "afterRenderRightArm", net.minecraft.client.entity.AbstractClientPlayer.class);
 
-		addMethod(id, baseClass, beforeRotatePlayerHookTypes, "beforeRotatePlayer", net.minecraft.client.entity.AbstractClientPlayer.class, float.class, float.class, float.class);
-		addMethod(id, baseClass, overrideRotatePlayerHookTypes, "rotatePlayer", net.minecraft.client.entity.AbstractClientPlayer.class, float.class, float.class, float.class);
-		addMethod(id, baseClass, afterRotatePlayerHookTypes, "afterRotatePlayer", net.minecraft.client.entity.AbstractClientPlayer.class, float.class, float.class, float.class);
+		addMethod(id, baseClass, beforeRotateCorpseHookTypes, "beforeRotateCorpse", net.minecraft.client.entity.AbstractClientPlayer.class, float.class, float.class, float.class);
+		addMethod(id, baseClass, overrideRotateCorpseHookTypes, "rotateCorpse", net.minecraft.client.entity.AbstractClientPlayer.class, float.class, float.class, float.class);
+		addMethod(id, baseClass, afterRotateCorpseHookTypes, "afterRotateCorpse", net.minecraft.client.entity.AbstractClientPlayer.class, float.class, float.class, float.class);
 
-		addMethod(id, baseClass, beforeSetArmorModelHookTypes, "beforeSetArmorModel", net.minecraft.client.entity.AbstractClientPlayer.class, int.class, float.class);
-		addMethod(id, baseClass, overrideSetArmorModelHookTypes, "setArmorModel", net.minecraft.client.entity.AbstractClientPlayer.class, int.class, float.class);
-		addMethod(id, baseClass, afterSetArmorModelHookTypes, "afterSetArmorModel", net.minecraft.client.entity.AbstractClientPlayer.class, int.class, float.class);
+		addMethod(id, baseClass, beforeSetBrightnessHookTypes, "beforeSetBrightness", net.minecraft.client.entity.AbstractClientPlayer.class, float.class, boolean.class);
+		addMethod(id, baseClass, overrideSetBrightnessHookTypes, "setBrightness", net.minecraft.client.entity.AbstractClientPlayer.class, float.class, boolean.class);
+		addMethod(id, baseClass, afterSetBrightnessHookTypes, "afterSetBrightness", net.minecraft.client.entity.AbstractClientPlayer.class, float.class, boolean.class);
 
-		addMethod(id, baseClass, beforeSetPassArmorModelHookTypes, "beforeSetPassArmorModel", net.minecraft.client.entity.AbstractClientPlayer.class, int.class, float.class);
-		addMethod(id, baseClass, overrideSetPassArmorModelHookTypes, "setPassArmorModel", net.minecraft.client.entity.AbstractClientPlayer.class, int.class, float.class);
-		addMethod(id, baseClass, afterSetPassArmorModelHookTypes, "afterSetPassArmorModel", net.minecraft.client.entity.AbstractClientPlayer.class, int.class, float.class);
+		addMethod(id, baseClass, beforeSetDoRenderBrightnessHookTypes, "beforeSetDoRenderBrightness", net.minecraft.client.entity.AbstractClientPlayer.class, float.class);
+		addMethod(id, baseClass, overrideSetDoRenderBrightnessHookTypes, "setDoRenderBrightness", net.minecraft.client.entity.AbstractClientPlayer.class, float.class);
+		addMethod(id, baseClass, afterSetDoRenderBrightnessHookTypes, "afterSetDoRenderBrightness", net.minecraft.client.entity.AbstractClientPlayer.class, float.class);
 
-		addMethod(id, baseClass, beforeSetRenderManagerHookTypes, "beforeSetRenderManager", net.minecraft.client.renderer.entity.RenderManager.class);
-		addMethod(id, baseClass, overrideSetRenderManagerHookTypes, "setRenderManager", net.minecraft.client.renderer.entity.RenderManager.class);
-		addMethod(id, baseClass, afterSetRenderManagerHookTypes, "afterSetRenderManager", net.minecraft.client.renderer.entity.RenderManager.class);
+		addMethod(id, baseClass, beforeSetModelVisibilitiesHookTypes, "beforeSetModelVisibilities", net.minecraft.client.entity.AbstractClientPlayer.class);
+		addMethod(id, baseClass, overrideSetModelVisibilitiesHookTypes, "setModelVisibilities", net.minecraft.client.entity.AbstractClientPlayer.class);
+		addMethod(id, baseClass, afterSetModelVisibilitiesHookTypes, "afterSetModelVisibilities", net.minecraft.client.entity.AbstractClientPlayer.class);
 
-		addMethod(id, baseClass, beforeSetRenderPassModelHookTypes, "beforeSetRenderPassModel", net.minecraft.client.model.ModelBase.class);
-		addMethod(id, baseClass, overrideSetRenderPassModelHookTypes, "setRenderPassModel", net.minecraft.client.model.ModelBase.class);
-		addMethod(id, baseClass, afterSetRenderPassModelHookTypes, "afterSetRenderPassModel", net.minecraft.client.model.ModelBase.class);
+		addMethod(id, baseClass, beforeSetRenderOutlinesHookTypes, "beforeSetRenderOutlines", boolean.class);
+		addMethod(id, baseClass, overrideSetRenderOutlinesHookTypes, "setRenderOutlines", boolean.class);
+		addMethod(id, baseClass, afterSetRenderOutlinesHookTypes, "afterSetRenderOutlines", boolean.class);
 
-		addMethod(id, baseClass, beforeUpdateIconsHookTypes, "beforeUpdateIcons", net.minecraft.client.renderer.texture.IIconRegister.class);
-		addMethod(id, baseClass, overrideUpdateIconsHookTypes, "updateIcons", net.minecraft.client.renderer.texture.IIconRegister.class);
-		addMethod(id, baseClass, afterUpdateIconsHookTypes, "afterUpdateIcons", net.minecraft.client.renderer.texture.IIconRegister.class);
+		addMethod(id, baseClass, beforeSetScoreTeamColorHookTypes, "beforeSetScoreTeamColor", net.minecraft.client.entity.AbstractClientPlayer.class);
+		addMethod(id, baseClass, overrideSetScoreTeamColorHookTypes, "setScoreTeamColor", net.minecraft.client.entity.AbstractClientPlayer.class);
+		addMethod(id, baseClass, afterSetScoreTeamColorHookTypes, "afterSetScoreTeamColor", net.minecraft.client.entity.AbstractClientPlayer.class);
+
+		addMethod(id, baseClass, beforeShouldRenderHookTypes, "beforeShouldRender", net.minecraft.client.entity.AbstractClientPlayer.class, net.minecraft.client.renderer.culling.ICamera.class, double.class, double.class, double.class);
+		addMethod(id, baseClass, overrideShouldRenderHookTypes, "shouldRender", net.minecraft.client.entity.AbstractClientPlayer.class, net.minecraft.client.renderer.culling.ICamera.class, double.class, double.class, double.class);
+		addMethod(id, baseClass, afterShouldRenderHookTypes, "afterShouldRender", net.minecraft.client.entity.AbstractClientPlayer.class, net.minecraft.client.renderer.culling.ICamera.class, double.class, double.class, double.class);
+
+		addMethod(id, baseClass, beforeTransformHeldFull3DItemLayerHookTypes, "beforeTransformHeldFull3DItemLayer");
+		addMethod(id, baseClass, overrideTransformHeldFull3DItemLayerHookTypes, "transformHeldFull3DItemLayer");
+		addMethod(id, baseClass, afterTransformHeldFull3DItemLayerHookTypes, "afterTransformHeldFull3DItemLayer");
+
+		addMethod(id, baseClass, beforeUnsetBrightnessHookTypes, "beforeUnsetBrightness");
+		addMethod(id, baseClass, overrideUnsetBrightnessHookTypes, "unsetBrightness");
+		addMethod(id, baseClass, afterUnsetBrightnessHookTypes, "afterUnsetBrightness");
+
+		addMethod(id, baseClass, beforeUnsetScoreTeamColorHookTypes, "beforeUnsetScoreTeamColor");
+		addMethod(id, baseClass, overrideUnsetScoreTeamColorHookTypes, "unsetScoreTeamColor");
+		addMethod(id, baseClass, afterUnsetScoreTeamColorHookTypes, "afterUnsetScoreTeamColor");
 
 
 		addDynamicMethods(id, baseClass);
@@ -460,7 +560,7 @@ public final class RenderPlayerAPI
 
 		initialize();
 
-		for(IRenderPlayerAPI instance : allInstances)
+		for(IRenderPlayerAPI instance : getAllInstancesList())
 			instance.getRenderPlayerAPI().attachRenderPlayerBase(id);
 
 		System.out.println("Render Player: registered " + id);
@@ -478,22 +578,66 @@ public final class RenderPlayerAPI
 		if(constructor == null)
 			return false;
 
-		for(IRenderPlayerAPI instance : allInstances)
+		for(IRenderPlayerAPI instance : getAllInstancesList())
 			instance.getRenderPlayerAPI().detachRenderPlayerBase(id);
 
 		beforeLocalConstructingHookTypes.remove(id);
 		afterLocalConstructingHookTypes.remove(id);
 
-		allBaseBeforeDoRenderLabelSuperiors.remove(id);
-		allBaseBeforeDoRenderLabelInferiors.remove(id);
-		allBaseOverrideDoRenderLabelSuperiors.remove(id);
-		allBaseOverrideDoRenderLabelInferiors.remove(id);
-		allBaseAfterDoRenderLabelSuperiors.remove(id);
-		allBaseAfterDoRenderLabelInferiors.remove(id);
+		allBaseBeforeAddLayerSuperiors.remove(id);
+		allBaseBeforeAddLayerInferiors.remove(id);
+		allBaseOverrideAddLayerSuperiors.remove(id);
+		allBaseOverrideAddLayerInferiors.remove(id);
+		allBaseAfterAddLayerSuperiors.remove(id);
+		allBaseAfterAddLayerInferiors.remove(id);
 
-		beforeDoRenderLabelHookTypes.remove(id);
-		overrideDoRenderLabelHookTypes.remove(id);
-		afterDoRenderLabelHookTypes.remove(id);
+		beforeAddLayerHookTypes.remove(id);
+		overrideAddLayerHookTypes.remove(id);
+		afterAddLayerHookTypes.remove(id);
+
+		allBaseBeforeBindEntityTextureSuperiors.remove(id);
+		allBaseBeforeBindEntityTextureInferiors.remove(id);
+		allBaseOverrideBindEntityTextureSuperiors.remove(id);
+		allBaseOverrideBindEntityTextureInferiors.remove(id);
+		allBaseAfterBindEntityTextureSuperiors.remove(id);
+		allBaseAfterBindEntityTextureInferiors.remove(id);
+
+		beforeBindEntityTextureHookTypes.remove(id);
+		overrideBindEntityTextureHookTypes.remove(id);
+		afterBindEntityTextureHookTypes.remove(id);
+
+		allBaseBeforeBindTextureSuperiors.remove(id);
+		allBaseBeforeBindTextureInferiors.remove(id);
+		allBaseOverrideBindTextureSuperiors.remove(id);
+		allBaseOverrideBindTextureInferiors.remove(id);
+		allBaseAfterBindTextureSuperiors.remove(id);
+		allBaseAfterBindTextureInferiors.remove(id);
+
+		beforeBindTextureHookTypes.remove(id);
+		overrideBindTextureHookTypes.remove(id);
+		afterBindTextureHookTypes.remove(id);
+
+		allBaseBeforeCanRenderNameSuperiors.remove(id);
+		allBaseBeforeCanRenderNameInferiors.remove(id);
+		allBaseOverrideCanRenderNameSuperiors.remove(id);
+		allBaseOverrideCanRenderNameInferiors.remove(id);
+		allBaseAfterCanRenderNameSuperiors.remove(id);
+		allBaseAfterCanRenderNameInferiors.remove(id);
+
+		beforeCanRenderNameHookTypes.remove(id);
+		overrideCanRenderNameHookTypes.remove(id);
+		afterCanRenderNameHookTypes.remove(id);
+
+		allBaseBeforeDoRenderSuperiors.remove(id);
+		allBaseBeforeDoRenderInferiors.remove(id);
+		allBaseOverrideDoRenderSuperiors.remove(id);
+		allBaseOverrideDoRenderInferiors.remove(id);
+		allBaseAfterDoRenderSuperiors.remove(id);
+		allBaseAfterDoRenderInferiors.remove(id);
+
+		beforeDoRenderHookTypes.remove(id);
+		overrideDoRenderHookTypes.remove(id);
+		afterDoRenderHookTypes.remove(id);
 
 		allBaseBeforeDoRenderShadowAndFireSuperiors.remove(id);
 		allBaseBeforeDoRenderShadowAndFireInferiors.remove(id);
@@ -528,6 +672,17 @@ public final class RenderPlayerAPI
 		overrideGetDeathMaxRotationHookTypes.remove(id);
 		afterGetDeathMaxRotationHookTypes.remove(id);
 
+		allBaseBeforeGetEntityTextureSuperiors.remove(id);
+		allBaseBeforeGetEntityTextureInferiors.remove(id);
+		allBaseOverrideGetEntityTextureSuperiors.remove(id);
+		allBaseOverrideGetEntityTextureInferiors.remove(id);
+		allBaseAfterGetEntityTextureSuperiors.remove(id);
+		allBaseAfterGetEntityTextureInferiors.remove(id);
+
+		beforeGetEntityTextureHookTypes.remove(id);
+		overrideGetEntityTextureHookTypes.remove(id);
+		afterGetEntityTextureHookTypes.remove(id);
+
 		allBaseBeforeGetFontRendererFromRenderManagerSuperiors.remove(id);
 		allBaseBeforeGetFontRendererFromRenderManagerInferiors.remove(id);
 		allBaseOverrideGetFontRendererFromRenderManagerSuperiors.remove(id);
@@ -539,16 +694,49 @@ public final class RenderPlayerAPI
 		overrideGetFontRendererFromRenderManagerHookTypes.remove(id);
 		afterGetFontRendererFromRenderManagerHookTypes.remove(id);
 
-		allBaseBeforeGetResourceLocationFromPlayerSuperiors.remove(id);
-		allBaseBeforeGetResourceLocationFromPlayerInferiors.remove(id);
-		allBaseOverrideGetResourceLocationFromPlayerSuperiors.remove(id);
-		allBaseOverrideGetResourceLocationFromPlayerInferiors.remove(id);
-		allBaseAfterGetResourceLocationFromPlayerSuperiors.remove(id);
-		allBaseAfterGetResourceLocationFromPlayerInferiors.remove(id);
+		allBaseBeforeGetMainModelSuperiors.remove(id);
+		allBaseBeforeGetMainModelInferiors.remove(id);
+		allBaseOverrideGetMainModelSuperiors.remove(id);
+		allBaseOverrideGetMainModelInferiors.remove(id);
+		allBaseAfterGetMainModelSuperiors.remove(id);
+		allBaseAfterGetMainModelInferiors.remove(id);
 
-		beforeGetResourceLocationFromPlayerHookTypes.remove(id);
-		overrideGetResourceLocationFromPlayerHookTypes.remove(id);
-		afterGetResourceLocationFromPlayerHookTypes.remove(id);
+		beforeGetMainModelHookTypes.remove(id);
+		overrideGetMainModelHookTypes.remove(id);
+		afterGetMainModelHookTypes.remove(id);
+
+		allBaseBeforeGetPlayerModelSuperiors.remove(id);
+		allBaseBeforeGetPlayerModelInferiors.remove(id);
+		allBaseOverrideGetPlayerModelSuperiors.remove(id);
+		allBaseOverrideGetPlayerModelInferiors.remove(id);
+		allBaseAfterGetPlayerModelSuperiors.remove(id);
+		allBaseAfterGetPlayerModelInferiors.remove(id);
+
+		beforeGetPlayerModelHookTypes.remove(id);
+		overrideGetPlayerModelHookTypes.remove(id);
+		afterGetPlayerModelHookTypes.remove(id);
+
+		allBaseBeforeGetRenderManagerSuperiors.remove(id);
+		allBaseBeforeGetRenderManagerInferiors.remove(id);
+		allBaseOverrideGetRenderManagerSuperiors.remove(id);
+		allBaseOverrideGetRenderManagerInferiors.remove(id);
+		allBaseAfterGetRenderManagerSuperiors.remove(id);
+		allBaseAfterGetRenderManagerInferiors.remove(id);
+
+		beforeGetRenderManagerHookTypes.remove(id);
+		overrideGetRenderManagerHookTypes.remove(id);
+		afterGetRenderManagerHookTypes.remove(id);
+
+		allBaseBeforeGetSwingProgressSuperiors.remove(id);
+		allBaseBeforeGetSwingProgressInferiors.remove(id);
+		allBaseOverrideGetSwingProgressSuperiors.remove(id);
+		allBaseOverrideGetSwingProgressInferiors.remove(id);
+		allBaseAfterGetSwingProgressSuperiors.remove(id);
+		allBaseAfterGetSwingProgressInferiors.remove(id);
+
+		beforeGetSwingProgressHookTypes.remove(id);
+		overrideGetSwingProgressHookTypes.remove(id);
+		afterGetSwingProgressHookTypes.remove(id);
 
 		allBaseBeforeHandleRotationFloatSuperiors.remove(id);
 		allBaseBeforeHandleRotationFloatInferiors.remove(id);
@@ -561,38 +749,16 @@ public final class RenderPlayerAPI
 		overrideHandleRotationFloatHookTypes.remove(id);
 		afterHandleRotationFloatHookTypes.remove(id);
 
-		allBaseBeforeInheritRenderPassSuperiors.remove(id);
-		allBaseBeforeInheritRenderPassInferiors.remove(id);
-		allBaseOverrideInheritRenderPassSuperiors.remove(id);
-		allBaseOverrideInheritRenderPassInferiors.remove(id);
-		allBaseAfterInheritRenderPassSuperiors.remove(id);
-		allBaseAfterInheritRenderPassInferiors.remove(id);
+		allBaseBeforeInterpolateRotationSuperiors.remove(id);
+		allBaseBeforeInterpolateRotationInferiors.remove(id);
+		allBaseOverrideInterpolateRotationSuperiors.remove(id);
+		allBaseOverrideInterpolateRotationInferiors.remove(id);
+		allBaseAfterInterpolateRotationSuperiors.remove(id);
+		allBaseAfterInterpolateRotationInferiors.remove(id);
 
-		beforeInheritRenderPassHookTypes.remove(id);
-		overrideInheritRenderPassHookTypes.remove(id);
-		afterInheritRenderPassHookTypes.remove(id);
-
-		allBaseBeforeLoadTextureSuperiors.remove(id);
-		allBaseBeforeLoadTextureInferiors.remove(id);
-		allBaseOverrideLoadTextureSuperiors.remove(id);
-		allBaseOverrideLoadTextureInferiors.remove(id);
-		allBaseAfterLoadTextureSuperiors.remove(id);
-		allBaseAfterLoadTextureInferiors.remove(id);
-
-		beforeLoadTextureHookTypes.remove(id);
-		overrideLoadTextureHookTypes.remove(id);
-		afterLoadTextureHookTypes.remove(id);
-
-		allBaseBeforeLoadTextureOfEntitySuperiors.remove(id);
-		allBaseBeforeLoadTextureOfEntityInferiors.remove(id);
-		allBaseOverrideLoadTextureOfEntitySuperiors.remove(id);
-		allBaseOverrideLoadTextureOfEntityInferiors.remove(id);
-		allBaseAfterLoadTextureOfEntitySuperiors.remove(id);
-		allBaseAfterLoadTextureOfEntityInferiors.remove(id);
-
-		beforeLoadTextureOfEntityHookTypes.remove(id);
-		overrideLoadTextureOfEntityHookTypes.remove(id);
-		afterLoadTextureOfEntityHookTypes.remove(id);
+		beforeInterpolateRotationHookTypes.remove(id);
+		overrideInterpolateRotationHookTypes.remove(id);
+		afterInterpolateRotationHookTypes.remove(id);
 
 		allBaseBeforePassSpecialRenderSuperiors.remove(id);
 		allBaseBeforePassSpecialRenderInferiors.remove(id);
@@ -605,38 +771,60 @@ public final class RenderPlayerAPI
 		overridePassSpecialRenderHookTypes.remove(id);
 		afterPassSpecialRenderHookTypes.remove(id);
 
-		allBaseBeforePerformStaticEntityRebuildSuperiors.remove(id);
-		allBaseBeforePerformStaticEntityRebuildInferiors.remove(id);
-		allBaseOverridePerformStaticEntityRebuildSuperiors.remove(id);
-		allBaseOverridePerformStaticEntityRebuildInferiors.remove(id);
-		allBaseAfterPerformStaticEntityRebuildSuperiors.remove(id);
-		allBaseAfterPerformStaticEntityRebuildInferiors.remove(id);
+		allBaseBeforePreRenderCallbackSuperiors.remove(id);
+		allBaseBeforePreRenderCallbackInferiors.remove(id);
+		allBaseOverridePreRenderCallbackSuperiors.remove(id);
+		allBaseOverridePreRenderCallbackInferiors.remove(id);
+		allBaseAfterPreRenderCallbackSuperiors.remove(id);
+		allBaseAfterPreRenderCallbackInferiors.remove(id);
 
-		beforePerformStaticEntityRebuildHookTypes.remove(id);
-		overridePerformStaticEntityRebuildHookTypes.remove(id);
-		afterPerformStaticEntityRebuildHookTypes.remove(id);
+		beforePreRenderCallbackHookTypes.remove(id);
+		overridePreRenderCallbackHookTypes.remove(id);
+		afterPreRenderCallbackHookTypes.remove(id);
 
-		allBaseBeforeRenderArrowsStuckInEntitySuperiors.remove(id);
-		allBaseBeforeRenderArrowsStuckInEntityInferiors.remove(id);
-		allBaseOverrideRenderArrowsStuckInEntitySuperiors.remove(id);
-		allBaseOverrideRenderArrowsStuckInEntityInferiors.remove(id);
-		allBaseAfterRenderArrowsStuckInEntitySuperiors.remove(id);
-		allBaseAfterRenderArrowsStuckInEntityInferiors.remove(id);
+		allBaseBeforeRemoveLayerSuperiors.remove(id);
+		allBaseBeforeRemoveLayerInferiors.remove(id);
+		allBaseOverrideRemoveLayerSuperiors.remove(id);
+		allBaseOverrideRemoveLayerInferiors.remove(id);
+		allBaseAfterRemoveLayerSuperiors.remove(id);
+		allBaseAfterRemoveLayerInferiors.remove(id);
 
-		beforeRenderArrowsStuckInEntityHookTypes.remove(id);
-		overrideRenderArrowsStuckInEntityHookTypes.remove(id);
-		afterRenderArrowsStuckInEntityHookTypes.remove(id);
+		beforeRemoveLayerHookTypes.remove(id);
+		overrideRemoveLayerHookTypes.remove(id);
+		afterRemoveLayerHookTypes.remove(id);
 
-		allBaseBeforeRenderFirstPersonArmSuperiors.remove(id);
-		allBaseBeforeRenderFirstPersonArmInferiors.remove(id);
-		allBaseOverrideRenderFirstPersonArmSuperiors.remove(id);
-		allBaseOverrideRenderFirstPersonArmInferiors.remove(id);
-		allBaseAfterRenderFirstPersonArmSuperiors.remove(id);
-		allBaseAfterRenderFirstPersonArmInferiors.remove(id);
+		allBaseBeforeRenderLayersSuperiors.remove(id);
+		allBaseBeforeRenderLayersInferiors.remove(id);
+		allBaseOverrideRenderLayersSuperiors.remove(id);
+		allBaseOverrideRenderLayersInferiors.remove(id);
+		allBaseAfterRenderLayersSuperiors.remove(id);
+		allBaseAfterRenderLayersInferiors.remove(id);
 
-		beforeRenderFirstPersonArmHookTypes.remove(id);
-		overrideRenderFirstPersonArmHookTypes.remove(id);
-		afterRenderFirstPersonArmHookTypes.remove(id);
+		beforeRenderLayersHookTypes.remove(id);
+		overrideRenderLayersHookTypes.remove(id);
+		afterRenderLayersHookTypes.remove(id);
+
+		allBaseBeforeRenderLeftArmSuperiors.remove(id);
+		allBaseBeforeRenderLeftArmInferiors.remove(id);
+		allBaseOverrideRenderLeftArmSuperiors.remove(id);
+		allBaseOverrideRenderLeftArmInferiors.remove(id);
+		allBaseAfterRenderLeftArmSuperiors.remove(id);
+		allBaseAfterRenderLeftArmInferiors.remove(id);
+
+		beforeRenderLeftArmHookTypes.remove(id);
+		overrideRenderLeftArmHookTypes.remove(id);
+		afterRenderLeftArmHookTypes.remove(id);
+
+		allBaseBeforeRenderLivingAtSuperiors.remove(id);
+		allBaseBeforeRenderLivingAtInferiors.remove(id);
+		allBaseOverrideRenderLivingAtSuperiors.remove(id);
+		allBaseOverrideRenderLivingAtInferiors.remove(id);
+		allBaseAfterRenderLivingAtSuperiors.remove(id);
+		allBaseAfterRenderLivingAtInferiors.remove(id);
+
+		beforeRenderLivingAtHookTypes.remove(id);
+		overrideRenderLivingAtHookTypes.remove(id);
+		afterRenderLivingAtHookTypes.remove(id);
 
 		allBaseBeforeRenderLivingLabelSuperiors.remove(id);
 		allBaseBeforeRenderLivingLabelInferiors.remove(id);
@@ -660,137 +848,148 @@ public final class RenderPlayerAPI
 		overrideRenderModelHookTypes.remove(id);
 		afterRenderModelHookTypes.remove(id);
 
-		allBaseBeforeRenderPlayerSuperiors.remove(id);
-		allBaseBeforeRenderPlayerInferiors.remove(id);
-		allBaseOverrideRenderPlayerSuperiors.remove(id);
-		allBaseOverrideRenderPlayerInferiors.remove(id);
-		allBaseAfterRenderPlayerSuperiors.remove(id);
-		allBaseAfterRenderPlayerInferiors.remove(id);
+		allBaseBeforeRenderNameSuperiors.remove(id);
+		allBaseBeforeRenderNameInferiors.remove(id);
+		allBaseOverrideRenderNameSuperiors.remove(id);
+		allBaseOverrideRenderNameInferiors.remove(id);
+		allBaseAfterRenderNameSuperiors.remove(id);
+		allBaseAfterRenderNameInferiors.remove(id);
 
-		beforeRenderPlayerHookTypes.remove(id);
-		overrideRenderPlayerHookTypes.remove(id);
-		afterRenderPlayerHookTypes.remove(id);
+		beforeRenderNameHookTypes.remove(id);
+		overrideRenderNameHookTypes.remove(id);
+		afterRenderNameHookTypes.remove(id);
 
-		allBaseBeforeRenderPlayerNameAndScoreLabelSuperiors.remove(id);
-		allBaseBeforeRenderPlayerNameAndScoreLabelInferiors.remove(id);
-		allBaseOverrideRenderPlayerNameAndScoreLabelSuperiors.remove(id);
-		allBaseOverrideRenderPlayerNameAndScoreLabelInferiors.remove(id);
-		allBaseAfterRenderPlayerNameAndScoreLabelSuperiors.remove(id);
-		allBaseAfterRenderPlayerNameAndScoreLabelInferiors.remove(id);
+		allBaseBeforeRenderOffsetLivingLabelSuperiors.remove(id);
+		allBaseBeforeRenderOffsetLivingLabelInferiors.remove(id);
+		allBaseOverrideRenderOffsetLivingLabelSuperiors.remove(id);
+		allBaseOverrideRenderOffsetLivingLabelInferiors.remove(id);
+		allBaseAfterRenderOffsetLivingLabelSuperiors.remove(id);
+		allBaseAfterRenderOffsetLivingLabelInferiors.remove(id);
 
-		beforeRenderPlayerNameAndScoreLabelHookTypes.remove(id);
-		overrideRenderPlayerNameAndScoreLabelHookTypes.remove(id);
-		afterRenderPlayerNameAndScoreLabelHookTypes.remove(id);
+		beforeRenderOffsetLivingLabelHookTypes.remove(id);
+		overrideRenderOffsetLivingLabelHookTypes.remove(id);
+		afterRenderOffsetLivingLabelHookTypes.remove(id);
 
-		allBaseBeforeRenderPlayerScaleSuperiors.remove(id);
-		allBaseBeforeRenderPlayerScaleInferiors.remove(id);
-		allBaseOverrideRenderPlayerScaleSuperiors.remove(id);
-		allBaseOverrideRenderPlayerScaleInferiors.remove(id);
-		allBaseAfterRenderPlayerScaleSuperiors.remove(id);
-		allBaseAfterRenderPlayerScaleInferiors.remove(id);
+		allBaseBeforeRenderRightArmSuperiors.remove(id);
+		allBaseBeforeRenderRightArmInferiors.remove(id);
+		allBaseOverrideRenderRightArmSuperiors.remove(id);
+		allBaseOverrideRenderRightArmInferiors.remove(id);
+		allBaseAfterRenderRightArmSuperiors.remove(id);
+		allBaseAfterRenderRightArmInferiors.remove(id);
 
-		beforeRenderPlayerScaleHookTypes.remove(id);
-		overrideRenderPlayerScaleHookTypes.remove(id);
-		afterRenderPlayerScaleHookTypes.remove(id);
+		beforeRenderRightArmHookTypes.remove(id);
+		overrideRenderRightArmHookTypes.remove(id);
+		afterRenderRightArmHookTypes.remove(id);
 
-		allBaseBeforeRenderPlayerSleepSuperiors.remove(id);
-		allBaseBeforeRenderPlayerSleepInferiors.remove(id);
-		allBaseOverrideRenderPlayerSleepSuperiors.remove(id);
-		allBaseOverrideRenderPlayerSleepInferiors.remove(id);
-		allBaseAfterRenderPlayerSleepSuperiors.remove(id);
-		allBaseAfterRenderPlayerSleepInferiors.remove(id);
+		allBaseBeforeRotateCorpseSuperiors.remove(id);
+		allBaseBeforeRotateCorpseInferiors.remove(id);
+		allBaseOverrideRotateCorpseSuperiors.remove(id);
+		allBaseOverrideRotateCorpseInferiors.remove(id);
+		allBaseAfterRotateCorpseSuperiors.remove(id);
+		allBaseAfterRotateCorpseInferiors.remove(id);
 
-		beforeRenderPlayerSleepHookTypes.remove(id);
-		overrideRenderPlayerSleepHookTypes.remove(id);
-		afterRenderPlayerSleepHookTypes.remove(id);
+		beforeRotateCorpseHookTypes.remove(id);
+		overrideRotateCorpseHookTypes.remove(id);
+		afterRotateCorpseHookTypes.remove(id);
 
-		allBaseBeforeRenderSpecialsSuperiors.remove(id);
-		allBaseBeforeRenderSpecialsInferiors.remove(id);
-		allBaseOverrideRenderSpecialsSuperiors.remove(id);
-		allBaseOverrideRenderSpecialsInferiors.remove(id);
-		allBaseAfterRenderSpecialsSuperiors.remove(id);
-		allBaseAfterRenderSpecialsInferiors.remove(id);
+		allBaseBeforeSetBrightnessSuperiors.remove(id);
+		allBaseBeforeSetBrightnessInferiors.remove(id);
+		allBaseOverrideSetBrightnessSuperiors.remove(id);
+		allBaseOverrideSetBrightnessInferiors.remove(id);
+		allBaseAfterSetBrightnessSuperiors.remove(id);
+		allBaseAfterSetBrightnessInferiors.remove(id);
 
-		beforeRenderSpecialsHookTypes.remove(id);
-		overrideRenderSpecialsHookTypes.remove(id);
-		afterRenderSpecialsHookTypes.remove(id);
+		beforeSetBrightnessHookTypes.remove(id);
+		overrideSetBrightnessHookTypes.remove(id);
+		afterSetBrightnessHookTypes.remove(id);
 
-		allBaseBeforeRenderSwingProgressSuperiors.remove(id);
-		allBaseBeforeRenderSwingProgressInferiors.remove(id);
-		allBaseOverrideRenderSwingProgressSuperiors.remove(id);
-		allBaseOverrideRenderSwingProgressInferiors.remove(id);
-		allBaseAfterRenderSwingProgressSuperiors.remove(id);
-		allBaseAfterRenderSwingProgressInferiors.remove(id);
+		allBaseBeforeSetDoRenderBrightnessSuperiors.remove(id);
+		allBaseBeforeSetDoRenderBrightnessInferiors.remove(id);
+		allBaseOverrideSetDoRenderBrightnessSuperiors.remove(id);
+		allBaseOverrideSetDoRenderBrightnessInferiors.remove(id);
+		allBaseAfterSetDoRenderBrightnessSuperiors.remove(id);
+		allBaseAfterSetDoRenderBrightnessInferiors.remove(id);
 
-		beforeRenderSwingProgressHookTypes.remove(id);
-		overrideRenderSwingProgressHookTypes.remove(id);
-		afterRenderSwingProgressHookTypes.remove(id);
+		beforeSetDoRenderBrightnessHookTypes.remove(id);
+		overrideSetDoRenderBrightnessHookTypes.remove(id);
+		afterSetDoRenderBrightnessHookTypes.remove(id);
 
-		allBaseBeforeRotatePlayerSuperiors.remove(id);
-		allBaseBeforeRotatePlayerInferiors.remove(id);
-		allBaseOverrideRotatePlayerSuperiors.remove(id);
-		allBaseOverrideRotatePlayerInferiors.remove(id);
-		allBaseAfterRotatePlayerSuperiors.remove(id);
-		allBaseAfterRotatePlayerInferiors.remove(id);
+		allBaseBeforeSetModelVisibilitiesSuperiors.remove(id);
+		allBaseBeforeSetModelVisibilitiesInferiors.remove(id);
+		allBaseOverrideSetModelVisibilitiesSuperiors.remove(id);
+		allBaseOverrideSetModelVisibilitiesInferiors.remove(id);
+		allBaseAfterSetModelVisibilitiesSuperiors.remove(id);
+		allBaseAfterSetModelVisibilitiesInferiors.remove(id);
 
-		beforeRotatePlayerHookTypes.remove(id);
-		overrideRotatePlayerHookTypes.remove(id);
-		afterRotatePlayerHookTypes.remove(id);
+		beforeSetModelVisibilitiesHookTypes.remove(id);
+		overrideSetModelVisibilitiesHookTypes.remove(id);
+		afterSetModelVisibilitiesHookTypes.remove(id);
 
-		allBaseBeforeSetArmorModelSuperiors.remove(id);
-		allBaseBeforeSetArmorModelInferiors.remove(id);
-		allBaseOverrideSetArmorModelSuperiors.remove(id);
-		allBaseOverrideSetArmorModelInferiors.remove(id);
-		allBaseAfterSetArmorModelSuperiors.remove(id);
-		allBaseAfterSetArmorModelInferiors.remove(id);
+		allBaseBeforeSetRenderOutlinesSuperiors.remove(id);
+		allBaseBeforeSetRenderOutlinesInferiors.remove(id);
+		allBaseOverrideSetRenderOutlinesSuperiors.remove(id);
+		allBaseOverrideSetRenderOutlinesInferiors.remove(id);
+		allBaseAfterSetRenderOutlinesSuperiors.remove(id);
+		allBaseAfterSetRenderOutlinesInferiors.remove(id);
 
-		beforeSetArmorModelHookTypes.remove(id);
-		overrideSetArmorModelHookTypes.remove(id);
-		afterSetArmorModelHookTypes.remove(id);
+		beforeSetRenderOutlinesHookTypes.remove(id);
+		overrideSetRenderOutlinesHookTypes.remove(id);
+		afterSetRenderOutlinesHookTypes.remove(id);
 
-		allBaseBeforeSetPassArmorModelSuperiors.remove(id);
-		allBaseBeforeSetPassArmorModelInferiors.remove(id);
-		allBaseOverrideSetPassArmorModelSuperiors.remove(id);
-		allBaseOverrideSetPassArmorModelInferiors.remove(id);
-		allBaseAfterSetPassArmorModelSuperiors.remove(id);
-		allBaseAfterSetPassArmorModelInferiors.remove(id);
+		allBaseBeforeSetScoreTeamColorSuperiors.remove(id);
+		allBaseBeforeSetScoreTeamColorInferiors.remove(id);
+		allBaseOverrideSetScoreTeamColorSuperiors.remove(id);
+		allBaseOverrideSetScoreTeamColorInferiors.remove(id);
+		allBaseAfterSetScoreTeamColorSuperiors.remove(id);
+		allBaseAfterSetScoreTeamColorInferiors.remove(id);
 
-		beforeSetPassArmorModelHookTypes.remove(id);
-		overrideSetPassArmorModelHookTypes.remove(id);
-		afterSetPassArmorModelHookTypes.remove(id);
+		beforeSetScoreTeamColorHookTypes.remove(id);
+		overrideSetScoreTeamColorHookTypes.remove(id);
+		afterSetScoreTeamColorHookTypes.remove(id);
 
-		allBaseBeforeSetRenderManagerSuperiors.remove(id);
-		allBaseBeforeSetRenderManagerInferiors.remove(id);
-		allBaseOverrideSetRenderManagerSuperiors.remove(id);
-		allBaseOverrideSetRenderManagerInferiors.remove(id);
-		allBaseAfterSetRenderManagerSuperiors.remove(id);
-		allBaseAfterSetRenderManagerInferiors.remove(id);
+		allBaseBeforeShouldRenderSuperiors.remove(id);
+		allBaseBeforeShouldRenderInferiors.remove(id);
+		allBaseOverrideShouldRenderSuperiors.remove(id);
+		allBaseOverrideShouldRenderInferiors.remove(id);
+		allBaseAfterShouldRenderSuperiors.remove(id);
+		allBaseAfterShouldRenderInferiors.remove(id);
 
-		beforeSetRenderManagerHookTypes.remove(id);
-		overrideSetRenderManagerHookTypes.remove(id);
-		afterSetRenderManagerHookTypes.remove(id);
+		beforeShouldRenderHookTypes.remove(id);
+		overrideShouldRenderHookTypes.remove(id);
+		afterShouldRenderHookTypes.remove(id);
 
-		allBaseBeforeSetRenderPassModelSuperiors.remove(id);
-		allBaseBeforeSetRenderPassModelInferiors.remove(id);
-		allBaseOverrideSetRenderPassModelSuperiors.remove(id);
-		allBaseOverrideSetRenderPassModelInferiors.remove(id);
-		allBaseAfterSetRenderPassModelSuperiors.remove(id);
-		allBaseAfterSetRenderPassModelInferiors.remove(id);
+		allBaseBeforeTransformHeldFull3DItemLayerSuperiors.remove(id);
+		allBaseBeforeTransformHeldFull3DItemLayerInferiors.remove(id);
+		allBaseOverrideTransformHeldFull3DItemLayerSuperiors.remove(id);
+		allBaseOverrideTransformHeldFull3DItemLayerInferiors.remove(id);
+		allBaseAfterTransformHeldFull3DItemLayerSuperiors.remove(id);
+		allBaseAfterTransformHeldFull3DItemLayerInferiors.remove(id);
 
-		beforeSetRenderPassModelHookTypes.remove(id);
-		overrideSetRenderPassModelHookTypes.remove(id);
-		afterSetRenderPassModelHookTypes.remove(id);
+		beforeTransformHeldFull3DItemLayerHookTypes.remove(id);
+		overrideTransformHeldFull3DItemLayerHookTypes.remove(id);
+		afterTransformHeldFull3DItemLayerHookTypes.remove(id);
 
-		allBaseBeforeUpdateIconsSuperiors.remove(id);
-		allBaseBeforeUpdateIconsInferiors.remove(id);
-		allBaseOverrideUpdateIconsSuperiors.remove(id);
-		allBaseOverrideUpdateIconsInferiors.remove(id);
-		allBaseAfterUpdateIconsSuperiors.remove(id);
-		allBaseAfterUpdateIconsInferiors.remove(id);
+		allBaseBeforeUnsetBrightnessSuperiors.remove(id);
+		allBaseBeforeUnsetBrightnessInferiors.remove(id);
+		allBaseOverrideUnsetBrightnessSuperiors.remove(id);
+		allBaseOverrideUnsetBrightnessInferiors.remove(id);
+		allBaseAfterUnsetBrightnessSuperiors.remove(id);
+		allBaseAfterUnsetBrightnessInferiors.remove(id);
 
-		beforeUpdateIconsHookTypes.remove(id);
-		overrideUpdateIconsHookTypes.remove(id);
-		afterUpdateIconsHookTypes.remove(id);
+		beforeUnsetBrightnessHookTypes.remove(id);
+		overrideUnsetBrightnessHookTypes.remove(id);
+		afterUnsetBrightnessHookTypes.remove(id);
+
+		allBaseBeforeUnsetScoreTeamColorSuperiors.remove(id);
+		allBaseBeforeUnsetScoreTeamColorInferiors.remove(id);
+		allBaseOverrideUnsetScoreTeamColorSuperiors.remove(id);
+		allBaseOverrideUnsetScoreTeamColorInferiors.remove(id);
+		allBaseAfterUnsetScoreTeamColorSuperiors.remove(id);
+		allBaseAfterUnsetScoreTeamColorInferiors.remove(id);
+
+		beforeUnsetScoreTeamColorHookTypes.remove(id);
+		overrideUnsetScoreTeamColorHookTypes.remove(id);
+		afterUnsetScoreTeamColorHookTypes.remove(id);
 
 
 		Iterator<String> iterator = keysToVirtualIds.keySet().iterator();
@@ -1029,9 +1228,25 @@ public final class RenderPlayerAPI
 			sortDynamicBases(afterDynamicHookTypes, allBaseAfterDynamicSuperiors, allBaseAfterDynamicInferiors, key);
 		}
 
-		sortBases(beforeDoRenderLabelHookTypes, allBaseBeforeDoRenderLabelSuperiors, allBaseBeforeDoRenderLabelInferiors, "beforeDoRenderLabel");
-		sortBases(overrideDoRenderLabelHookTypes, allBaseOverrideDoRenderLabelSuperiors, allBaseOverrideDoRenderLabelInferiors, "overrideDoRenderLabel");
-		sortBases(afterDoRenderLabelHookTypes, allBaseAfterDoRenderLabelSuperiors, allBaseAfterDoRenderLabelInferiors, "afterDoRenderLabel");
+		sortBases(beforeAddLayerHookTypes, allBaseBeforeAddLayerSuperiors, allBaseBeforeAddLayerInferiors, "beforeAddLayer");
+		sortBases(overrideAddLayerHookTypes, allBaseOverrideAddLayerSuperiors, allBaseOverrideAddLayerInferiors, "overrideAddLayer");
+		sortBases(afterAddLayerHookTypes, allBaseAfterAddLayerSuperiors, allBaseAfterAddLayerInferiors, "afterAddLayer");
+
+		sortBases(beforeBindEntityTextureHookTypes, allBaseBeforeBindEntityTextureSuperiors, allBaseBeforeBindEntityTextureInferiors, "beforeBindEntityTexture");
+		sortBases(overrideBindEntityTextureHookTypes, allBaseOverrideBindEntityTextureSuperiors, allBaseOverrideBindEntityTextureInferiors, "overrideBindEntityTexture");
+		sortBases(afterBindEntityTextureHookTypes, allBaseAfterBindEntityTextureSuperiors, allBaseAfterBindEntityTextureInferiors, "afterBindEntityTexture");
+
+		sortBases(beforeBindTextureHookTypes, allBaseBeforeBindTextureSuperiors, allBaseBeforeBindTextureInferiors, "beforeBindTexture");
+		sortBases(overrideBindTextureHookTypes, allBaseOverrideBindTextureSuperiors, allBaseOverrideBindTextureInferiors, "overrideBindTexture");
+		sortBases(afterBindTextureHookTypes, allBaseAfterBindTextureSuperiors, allBaseAfterBindTextureInferiors, "afterBindTexture");
+
+		sortBases(beforeCanRenderNameHookTypes, allBaseBeforeCanRenderNameSuperiors, allBaseBeforeCanRenderNameInferiors, "beforeCanRenderName");
+		sortBases(overrideCanRenderNameHookTypes, allBaseOverrideCanRenderNameSuperiors, allBaseOverrideCanRenderNameInferiors, "overrideCanRenderName");
+		sortBases(afterCanRenderNameHookTypes, allBaseAfterCanRenderNameSuperiors, allBaseAfterCanRenderNameInferiors, "afterCanRenderName");
+
+		sortBases(beforeDoRenderHookTypes, allBaseBeforeDoRenderSuperiors, allBaseBeforeDoRenderInferiors, "beforeDoRender");
+		sortBases(overrideDoRenderHookTypes, allBaseOverrideDoRenderSuperiors, allBaseOverrideDoRenderInferiors, "overrideDoRender");
+		sortBases(afterDoRenderHookTypes, allBaseAfterDoRenderSuperiors, allBaseAfterDoRenderInferiors, "afterDoRender");
 
 		sortBases(beforeDoRenderShadowAndFireHookTypes, allBaseBeforeDoRenderShadowAndFireSuperiors, allBaseBeforeDoRenderShadowAndFireInferiors, "beforeDoRenderShadowAndFire");
 		sortBases(overrideDoRenderShadowAndFireHookTypes, allBaseOverrideDoRenderShadowAndFireSuperiors, allBaseOverrideDoRenderShadowAndFireInferiors, "overrideDoRenderShadowAndFire");
@@ -1045,45 +1260,61 @@ public final class RenderPlayerAPI
 		sortBases(overrideGetDeathMaxRotationHookTypes, allBaseOverrideGetDeathMaxRotationSuperiors, allBaseOverrideGetDeathMaxRotationInferiors, "overrideGetDeathMaxRotation");
 		sortBases(afterGetDeathMaxRotationHookTypes, allBaseAfterGetDeathMaxRotationSuperiors, allBaseAfterGetDeathMaxRotationInferiors, "afterGetDeathMaxRotation");
 
+		sortBases(beforeGetEntityTextureHookTypes, allBaseBeforeGetEntityTextureSuperiors, allBaseBeforeGetEntityTextureInferiors, "beforeGetEntityTexture");
+		sortBases(overrideGetEntityTextureHookTypes, allBaseOverrideGetEntityTextureSuperiors, allBaseOverrideGetEntityTextureInferiors, "overrideGetEntityTexture");
+		sortBases(afterGetEntityTextureHookTypes, allBaseAfterGetEntityTextureSuperiors, allBaseAfterGetEntityTextureInferiors, "afterGetEntityTexture");
+
 		sortBases(beforeGetFontRendererFromRenderManagerHookTypes, allBaseBeforeGetFontRendererFromRenderManagerSuperiors, allBaseBeforeGetFontRendererFromRenderManagerInferiors, "beforeGetFontRendererFromRenderManager");
 		sortBases(overrideGetFontRendererFromRenderManagerHookTypes, allBaseOverrideGetFontRendererFromRenderManagerSuperiors, allBaseOverrideGetFontRendererFromRenderManagerInferiors, "overrideGetFontRendererFromRenderManager");
 		sortBases(afterGetFontRendererFromRenderManagerHookTypes, allBaseAfterGetFontRendererFromRenderManagerSuperiors, allBaseAfterGetFontRendererFromRenderManagerInferiors, "afterGetFontRendererFromRenderManager");
 
-		sortBases(beforeGetResourceLocationFromPlayerHookTypes, allBaseBeforeGetResourceLocationFromPlayerSuperiors, allBaseBeforeGetResourceLocationFromPlayerInferiors, "beforeGetResourceLocationFromPlayer");
-		sortBases(overrideGetResourceLocationFromPlayerHookTypes, allBaseOverrideGetResourceLocationFromPlayerSuperiors, allBaseOverrideGetResourceLocationFromPlayerInferiors, "overrideGetResourceLocationFromPlayer");
-		sortBases(afterGetResourceLocationFromPlayerHookTypes, allBaseAfterGetResourceLocationFromPlayerSuperiors, allBaseAfterGetResourceLocationFromPlayerInferiors, "afterGetResourceLocationFromPlayer");
+		sortBases(beforeGetMainModelHookTypes, allBaseBeforeGetMainModelSuperiors, allBaseBeforeGetMainModelInferiors, "beforeGetMainModel");
+		sortBases(overrideGetMainModelHookTypes, allBaseOverrideGetMainModelSuperiors, allBaseOverrideGetMainModelInferiors, "overrideGetMainModel");
+		sortBases(afterGetMainModelHookTypes, allBaseAfterGetMainModelSuperiors, allBaseAfterGetMainModelInferiors, "afterGetMainModel");
+
+		sortBases(beforeGetPlayerModelHookTypes, allBaseBeforeGetPlayerModelSuperiors, allBaseBeforeGetPlayerModelInferiors, "beforeGetPlayerModel");
+		sortBases(overrideGetPlayerModelHookTypes, allBaseOverrideGetPlayerModelSuperiors, allBaseOverrideGetPlayerModelInferiors, "overrideGetPlayerModel");
+		sortBases(afterGetPlayerModelHookTypes, allBaseAfterGetPlayerModelSuperiors, allBaseAfterGetPlayerModelInferiors, "afterGetPlayerModel");
+
+		sortBases(beforeGetRenderManagerHookTypes, allBaseBeforeGetRenderManagerSuperiors, allBaseBeforeGetRenderManagerInferiors, "beforeGetRenderManager");
+		sortBases(overrideGetRenderManagerHookTypes, allBaseOverrideGetRenderManagerSuperiors, allBaseOverrideGetRenderManagerInferiors, "overrideGetRenderManager");
+		sortBases(afterGetRenderManagerHookTypes, allBaseAfterGetRenderManagerSuperiors, allBaseAfterGetRenderManagerInferiors, "afterGetRenderManager");
+
+		sortBases(beforeGetSwingProgressHookTypes, allBaseBeforeGetSwingProgressSuperiors, allBaseBeforeGetSwingProgressInferiors, "beforeGetSwingProgress");
+		sortBases(overrideGetSwingProgressHookTypes, allBaseOverrideGetSwingProgressSuperiors, allBaseOverrideGetSwingProgressInferiors, "overrideGetSwingProgress");
+		sortBases(afterGetSwingProgressHookTypes, allBaseAfterGetSwingProgressSuperiors, allBaseAfterGetSwingProgressInferiors, "afterGetSwingProgress");
 
 		sortBases(beforeHandleRotationFloatHookTypes, allBaseBeforeHandleRotationFloatSuperiors, allBaseBeforeHandleRotationFloatInferiors, "beforeHandleRotationFloat");
 		sortBases(overrideHandleRotationFloatHookTypes, allBaseOverrideHandleRotationFloatSuperiors, allBaseOverrideHandleRotationFloatInferiors, "overrideHandleRotationFloat");
 		sortBases(afterHandleRotationFloatHookTypes, allBaseAfterHandleRotationFloatSuperiors, allBaseAfterHandleRotationFloatInferiors, "afterHandleRotationFloat");
 
-		sortBases(beforeInheritRenderPassHookTypes, allBaseBeforeInheritRenderPassSuperiors, allBaseBeforeInheritRenderPassInferiors, "beforeInheritRenderPass");
-		sortBases(overrideInheritRenderPassHookTypes, allBaseOverrideInheritRenderPassSuperiors, allBaseOverrideInheritRenderPassInferiors, "overrideInheritRenderPass");
-		sortBases(afterInheritRenderPassHookTypes, allBaseAfterInheritRenderPassSuperiors, allBaseAfterInheritRenderPassInferiors, "afterInheritRenderPass");
-
-		sortBases(beforeLoadTextureHookTypes, allBaseBeforeLoadTextureSuperiors, allBaseBeforeLoadTextureInferiors, "beforeLoadTexture");
-		sortBases(overrideLoadTextureHookTypes, allBaseOverrideLoadTextureSuperiors, allBaseOverrideLoadTextureInferiors, "overrideLoadTexture");
-		sortBases(afterLoadTextureHookTypes, allBaseAfterLoadTextureSuperiors, allBaseAfterLoadTextureInferiors, "afterLoadTexture");
-
-		sortBases(beforeLoadTextureOfEntityHookTypes, allBaseBeforeLoadTextureOfEntitySuperiors, allBaseBeforeLoadTextureOfEntityInferiors, "beforeLoadTextureOfEntity");
-		sortBases(overrideLoadTextureOfEntityHookTypes, allBaseOverrideLoadTextureOfEntitySuperiors, allBaseOverrideLoadTextureOfEntityInferiors, "overrideLoadTextureOfEntity");
-		sortBases(afterLoadTextureOfEntityHookTypes, allBaseAfterLoadTextureOfEntitySuperiors, allBaseAfterLoadTextureOfEntityInferiors, "afterLoadTextureOfEntity");
+		sortBases(beforeInterpolateRotationHookTypes, allBaseBeforeInterpolateRotationSuperiors, allBaseBeforeInterpolateRotationInferiors, "beforeInterpolateRotation");
+		sortBases(overrideInterpolateRotationHookTypes, allBaseOverrideInterpolateRotationSuperiors, allBaseOverrideInterpolateRotationInferiors, "overrideInterpolateRotation");
+		sortBases(afterInterpolateRotationHookTypes, allBaseAfterInterpolateRotationSuperiors, allBaseAfterInterpolateRotationInferiors, "afterInterpolateRotation");
 
 		sortBases(beforePassSpecialRenderHookTypes, allBaseBeforePassSpecialRenderSuperiors, allBaseBeforePassSpecialRenderInferiors, "beforePassSpecialRender");
 		sortBases(overridePassSpecialRenderHookTypes, allBaseOverridePassSpecialRenderSuperiors, allBaseOverridePassSpecialRenderInferiors, "overridePassSpecialRender");
 		sortBases(afterPassSpecialRenderHookTypes, allBaseAfterPassSpecialRenderSuperiors, allBaseAfterPassSpecialRenderInferiors, "afterPassSpecialRender");
 
-		sortBases(beforePerformStaticEntityRebuildHookTypes, allBaseBeforePerformStaticEntityRebuildSuperiors, allBaseBeforePerformStaticEntityRebuildInferiors, "beforePerformStaticEntityRebuild");
-		sortBases(overridePerformStaticEntityRebuildHookTypes, allBaseOverridePerformStaticEntityRebuildSuperiors, allBaseOverridePerformStaticEntityRebuildInferiors, "overridePerformStaticEntityRebuild");
-		sortBases(afterPerformStaticEntityRebuildHookTypes, allBaseAfterPerformStaticEntityRebuildSuperiors, allBaseAfterPerformStaticEntityRebuildInferiors, "afterPerformStaticEntityRebuild");
+		sortBases(beforePreRenderCallbackHookTypes, allBaseBeforePreRenderCallbackSuperiors, allBaseBeforePreRenderCallbackInferiors, "beforePreRenderCallback");
+		sortBases(overridePreRenderCallbackHookTypes, allBaseOverridePreRenderCallbackSuperiors, allBaseOverridePreRenderCallbackInferiors, "overridePreRenderCallback");
+		sortBases(afterPreRenderCallbackHookTypes, allBaseAfterPreRenderCallbackSuperiors, allBaseAfterPreRenderCallbackInferiors, "afterPreRenderCallback");
 
-		sortBases(beforeRenderArrowsStuckInEntityHookTypes, allBaseBeforeRenderArrowsStuckInEntitySuperiors, allBaseBeforeRenderArrowsStuckInEntityInferiors, "beforeRenderArrowsStuckInEntity");
-		sortBases(overrideRenderArrowsStuckInEntityHookTypes, allBaseOverrideRenderArrowsStuckInEntitySuperiors, allBaseOverrideRenderArrowsStuckInEntityInferiors, "overrideRenderArrowsStuckInEntity");
-		sortBases(afterRenderArrowsStuckInEntityHookTypes, allBaseAfterRenderArrowsStuckInEntitySuperiors, allBaseAfterRenderArrowsStuckInEntityInferiors, "afterRenderArrowsStuckInEntity");
+		sortBases(beforeRemoveLayerHookTypes, allBaseBeforeRemoveLayerSuperiors, allBaseBeforeRemoveLayerInferiors, "beforeRemoveLayer");
+		sortBases(overrideRemoveLayerHookTypes, allBaseOverrideRemoveLayerSuperiors, allBaseOverrideRemoveLayerInferiors, "overrideRemoveLayer");
+		sortBases(afterRemoveLayerHookTypes, allBaseAfterRemoveLayerSuperiors, allBaseAfterRemoveLayerInferiors, "afterRemoveLayer");
 
-		sortBases(beforeRenderFirstPersonArmHookTypes, allBaseBeforeRenderFirstPersonArmSuperiors, allBaseBeforeRenderFirstPersonArmInferiors, "beforeRenderFirstPersonArm");
-		sortBases(overrideRenderFirstPersonArmHookTypes, allBaseOverrideRenderFirstPersonArmSuperiors, allBaseOverrideRenderFirstPersonArmInferiors, "overrideRenderFirstPersonArm");
-		sortBases(afterRenderFirstPersonArmHookTypes, allBaseAfterRenderFirstPersonArmSuperiors, allBaseAfterRenderFirstPersonArmInferiors, "afterRenderFirstPersonArm");
+		sortBases(beforeRenderLayersHookTypes, allBaseBeforeRenderLayersSuperiors, allBaseBeforeRenderLayersInferiors, "beforeRenderLayers");
+		sortBases(overrideRenderLayersHookTypes, allBaseOverrideRenderLayersSuperiors, allBaseOverrideRenderLayersInferiors, "overrideRenderLayers");
+		sortBases(afterRenderLayersHookTypes, allBaseAfterRenderLayersSuperiors, allBaseAfterRenderLayersInferiors, "afterRenderLayers");
+
+		sortBases(beforeRenderLeftArmHookTypes, allBaseBeforeRenderLeftArmSuperiors, allBaseBeforeRenderLeftArmInferiors, "beforeRenderLeftArm");
+		sortBases(overrideRenderLeftArmHookTypes, allBaseOverrideRenderLeftArmSuperiors, allBaseOverrideRenderLeftArmInferiors, "overrideRenderLeftArm");
+		sortBases(afterRenderLeftArmHookTypes, allBaseAfterRenderLeftArmSuperiors, allBaseAfterRenderLeftArmInferiors, "afterRenderLeftArm");
+
+		sortBases(beforeRenderLivingAtHookTypes, allBaseBeforeRenderLivingAtSuperiors, allBaseBeforeRenderLivingAtInferiors, "beforeRenderLivingAt");
+		sortBases(overrideRenderLivingAtHookTypes, allBaseOverrideRenderLivingAtSuperiors, allBaseOverrideRenderLivingAtInferiors, "overrideRenderLivingAt");
+		sortBases(afterRenderLivingAtHookTypes, allBaseAfterRenderLivingAtSuperiors, allBaseAfterRenderLivingAtInferiors, "afterRenderLivingAt");
 
 		sortBases(beforeRenderLivingLabelHookTypes, allBaseBeforeRenderLivingLabelSuperiors, allBaseBeforeRenderLivingLabelInferiors, "beforeRenderLivingLabel");
 		sortBases(overrideRenderLivingLabelHookTypes, allBaseOverrideRenderLivingLabelSuperiors, allBaseOverrideRenderLivingLabelInferiors, "overrideRenderLivingLabel");
@@ -1093,81 +1324,100 @@ public final class RenderPlayerAPI
 		sortBases(overrideRenderModelHookTypes, allBaseOverrideRenderModelSuperiors, allBaseOverrideRenderModelInferiors, "overrideRenderModel");
 		sortBases(afterRenderModelHookTypes, allBaseAfterRenderModelSuperiors, allBaseAfterRenderModelInferiors, "afterRenderModel");
 
-		sortBases(beforeRenderPlayerHookTypes, allBaseBeforeRenderPlayerSuperiors, allBaseBeforeRenderPlayerInferiors, "beforeRenderPlayer");
-		sortBases(overrideRenderPlayerHookTypes, allBaseOverrideRenderPlayerSuperiors, allBaseOverrideRenderPlayerInferiors, "overrideRenderPlayer");
-		sortBases(afterRenderPlayerHookTypes, allBaseAfterRenderPlayerSuperiors, allBaseAfterRenderPlayerInferiors, "afterRenderPlayer");
+		sortBases(beforeRenderNameHookTypes, allBaseBeforeRenderNameSuperiors, allBaseBeforeRenderNameInferiors, "beforeRenderName");
+		sortBases(overrideRenderNameHookTypes, allBaseOverrideRenderNameSuperiors, allBaseOverrideRenderNameInferiors, "overrideRenderName");
+		sortBases(afterRenderNameHookTypes, allBaseAfterRenderNameSuperiors, allBaseAfterRenderNameInferiors, "afterRenderName");
 
-		sortBases(beforeRenderPlayerNameAndScoreLabelHookTypes, allBaseBeforeRenderPlayerNameAndScoreLabelSuperiors, allBaseBeforeRenderPlayerNameAndScoreLabelInferiors, "beforeRenderPlayerNameAndScoreLabel");
-		sortBases(overrideRenderPlayerNameAndScoreLabelHookTypes, allBaseOverrideRenderPlayerNameAndScoreLabelSuperiors, allBaseOverrideRenderPlayerNameAndScoreLabelInferiors, "overrideRenderPlayerNameAndScoreLabel");
-		sortBases(afterRenderPlayerNameAndScoreLabelHookTypes, allBaseAfterRenderPlayerNameAndScoreLabelSuperiors, allBaseAfterRenderPlayerNameAndScoreLabelInferiors, "afterRenderPlayerNameAndScoreLabel");
+		sortBases(beforeRenderOffsetLivingLabelHookTypes, allBaseBeforeRenderOffsetLivingLabelSuperiors, allBaseBeforeRenderOffsetLivingLabelInferiors, "beforeRenderOffsetLivingLabel");
+		sortBases(overrideRenderOffsetLivingLabelHookTypes, allBaseOverrideRenderOffsetLivingLabelSuperiors, allBaseOverrideRenderOffsetLivingLabelInferiors, "overrideRenderOffsetLivingLabel");
+		sortBases(afterRenderOffsetLivingLabelHookTypes, allBaseAfterRenderOffsetLivingLabelSuperiors, allBaseAfterRenderOffsetLivingLabelInferiors, "afterRenderOffsetLivingLabel");
 
-		sortBases(beforeRenderPlayerScaleHookTypes, allBaseBeforeRenderPlayerScaleSuperiors, allBaseBeforeRenderPlayerScaleInferiors, "beforeRenderPlayerScale");
-		sortBases(overrideRenderPlayerScaleHookTypes, allBaseOverrideRenderPlayerScaleSuperiors, allBaseOverrideRenderPlayerScaleInferiors, "overrideRenderPlayerScale");
-		sortBases(afterRenderPlayerScaleHookTypes, allBaseAfterRenderPlayerScaleSuperiors, allBaseAfterRenderPlayerScaleInferiors, "afterRenderPlayerScale");
+		sortBases(beforeRenderRightArmHookTypes, allBaseBeforeRenderRightArmSuperiors, allBaseBeforeRenderRightArmInferiors, "beforeRenderRightArm");
+		sortBases(overrideRenderRightArmHookTypes, allBaseOverrideRenderRightArmSuperiors, allBaseOverrideRenderRightArmInferiors, "overrideRenderRightArm");
+		sortBases(afterRenderRightArmHookTypes, allBaseAfterRenderRightArmSuperiors, allBaseAfterRenderRightArmInferiors, "afterRenderRightArm");
 
-		sortBases(beforeRenderPlayerSleepHookTypes, allBaseBeforeRenderPlayerSleepSuperiors, allBaseBeforeRenderPlayerSleepInferiors, "beforeRenderPlayerSleep");
-		sortBases(overrideRenderPlayerSleepHookTypes, allBaseOverrideRenderPlayerSleepSuperiors, allBaseOverrideRenderPlayerSleepInferiors, "overrideRenderPlayerSleep");
-		sortBases(afterRenderPlayerSleepHookTypes, allBaseAfterRenderPlayerSleepSuperiors, allBaseAfterRenderPlayerSleepInferiors, "afterRenderPlayerSleep");
+		sortBases(beforeRotateCorpseHookTypes, allBaseBeforeRotateCorpseSuperiors, allBaseBeforeRotateCorpseInferiors, "beforeRotateCorpse");
+		sortBases(overrideRotateCorpseHookTypes, allBaseOverrideRotateCorpseSuperiors, allBaseOverrideRotateCorpseInferiors, "overrideRotateCorpse");
+		sortBases(afterRotateCorpseHookTypes, allBaseAfterRotateCorpseSuperiors, allBaseAfterRotateCorpseInferiors, "afterRotateCorpse");
 
-		sortBases(beforeRenderSpecialsHookTypes, allBaseBeforeRenderSpecialsSuperiors, allBaseBeforeRenderSpecialsInferiors, "beforeRenderSpecials");
-		sortBases(overrideRenderSpecialsHookTypes, allBaseOverrideRenderSpecialsSuperiors, allBaseOverrideRenderSpecialsInferiors, "overrideRenderSpecials");
-		sortBases(afterRenderSpecialsHookTypes, allBaseAfterRenderSpecialsSuperiors, allBaseAfterRenderSpecialsInferiors, "afterRenderSpecials");
+		sortBases(beforeSetBrightnessHookTypes, allBaseBeforeSetBrightnessSuperiors, allBaseBeforeSetBrightnessInferiors, "beforeSetBrightness");
+		sortBases(overrideSetBrightnessHookTypes, allBaseOverrideSetBrightnessSuperiors, allBaseOverrideSetBrightnessInferiors, "overrideSetBrightness");
+		sortBases(afterSetBrightnessHookTypes, allBaseAfterSetBrightnessSuperiors, allBaseAfterSetBrightnessInferiors, "afterSetBrightness");
 
-		sortBases(beforeRenderSwingProgressHookTypes, allBaseBeforeRenderSwingProgressSuperiors, allBaseBeforeRenderSwingProgressInferiors, "beforeRenderSwingProgress");
-		sortBases(overrideRenderSwingProgressHookTypes, allBaseOverrideRenderSwingProgressSuperiors, allBaseOverrideRenderSwingProgressInferiors, "overrideRenderSwingProgress");
-		sortBases(afterRenderSwingProgressHookTypes, allBaseAfterRenderSwingProgressSuperiors, allBaseAfterRenderSwingProgressInferiors, "afterRenderSwingProgress");
+		sortBases(beforeSetDoRenderBrightnessHookTypes, allBaseBeforeSetDoRenderBrightnessSuperiors, allBaseBeforeSetDoRenderBrightnessInferiors, "beforeSetDoRenderBrightness");
+		sortBases(overrideSetDoRenderBrightnessHookTypes, allBaseOverrideSetDoRenderBrightnessSuperiors, allBaseOverrideSetDoRenderBrightnessInferiors, "overrideSetDoRenderBrightness");
+		sortBases(afterSetDoRenderBrightnessHookTypes, allBaseAfterSetDoRenderBrightnessSuperiors, allBaseAfterSetDoRenderBrightnessInferiors, "afterSetDoRenderBrightness");
 
-		sortBases(beforeRotatePlayerHookTypes, allBaseBeforeRotatePlayerSuperiors, allBaseBeforeRotatePlayerInferiors, "beforeRotatePlayer");
-		sortBases(overrideRotatePlayerHookTypes, allBaseOverrideRotatePlayerSuperiors, allBaseOverrideRotatePlayerInferiors, "overrideRotatePlayer");
-		sortBases(afterRotatePlayerHookTypes, allBaseAfterRotatePlayerSuperiors, allBaseAfterRotatePlayerInferiors, "afterRotatePlayer");
+		sortBases(beforeSetModelVisibilitiesHookTypes, allBaseBeforeSetModelVisibilitiesSuperiors, allBaseBeforeSetModelVisibilitiesInferiors, "beforeSetModelVisibilities");
+		sortBases(overrideSetModelVisibilitiesHookTypes, allBaseOverrideSetModelVisibilitiesSuperiors, allBaseOverrideSetModelVisibilitiesInferiors, "overrideSetModelVisibilities");
+		sortBases(afterSetModelVisibilitiesHookTypes, allBaseAfterSetModelVisibilitiesSuperiors, allBaseAfterSetModelVisibilitiesInferiors, "afterSetModelVisibilities");
 
-		sortBases(beforeSetArmorModelHookTypes, allBaseBeforeSetArmorModelSuperiors, allBaseBeforeSetArmorModelInferiors, "beforeSetArmorModel");
-		sortBases(overrideSetArmorModelHookTypes, allBaseOverrideSetArmorModelSuperiors, allBaseOverrideSetArmorModelInferiors, "overrideSetArmorModel");
-		sortBases(afterSetArmorModelHookTypes, allBaseAfterSetArmorModelSuperiors, allBaseAfterSetArmorModelInferiors, "afterSetArmorModel");
+		sortBases(beforeSetRenderOutlinesHookTypes, allBaseBeforeSetRenderOutlinesSuperiors, allBaseBeforeSetRenderOutlinesInferiors, "beforeSetRenderOutlines");
+		sortBases(overrideSetRenderOutlinesHookTypes, allBaseOverrideSetRenderOutlinesSuperiors, allBaseOverrideSetRenderOutlinesInferiors, "overrideSetRenderOutlines");
+		sortBases(afterSetRenderOutlinesHookTypes, allBaseAfterSetRenderOutlinesSuperiors, allBaseAfterSetRenderOutlinesInferiors, "afterSetRenderOutlines");
 
-		sortBases(beforeSetPassArmorModelHookTypes, allBaseBeforeSetPassArmorModelSuperiors, allBaseBeforeSetPassArmorModelInferiors, "beforeSetPassArmorModel");
-		sortBases(overrideSetPassArmorModelHookTypes, allBaseOverrideSetPassArmorModelSuperiors, allBaseOverrideSetPassArmorModelInferiors, "overrideSetPassArmorModel");
-		sortBases(afterSetPassArmorModelHookTypes, allBaseAfterSetPassArmorModelSuperiors, allBaseAfterSetPassArmorModelInferiors, "afterSetPassArmorModel");
+		sortBases(beforeSetScoreTeamColorHookTypes, allBaseBeforeSetScoreTeamColorSuperiors, allBaseBeforeSetScoreTeamColorInferiors, "beforeSetScoreTeamColor");
+		sortBases(overrideSetScoreTeamColorHookTypes, allBaseOverrideSetScoreTeamColorSuperiors, allBaseOverrideSetScoreTeamColorInferiors, "overrideSetScoreTeamColor");
+		sortBases(afterSetScoreTeamColorHookTypes, allBaseAfterSetScoreTeamColorSuperiors, allBaseAfterSetScoreTeamColorInferiors, "afterSetScoreTeamColor");
 
-		sortBases(beforeSetRenderManagerHookTypes, allBaseBeforeSetRenderManagerSuperiors, allBaseBeforeSetRenderManagerInferiors, "beforeSetRenderManager");
-		sortBases(overrideSetRenderManagerHookTypes, allBaseOverrideSetRenderManagerSuperiors, allBaseOverrideSetRenderManagerInferiors, "overrideSetRenderManager");
-		sortBases(afterSetRenderManagerHookTypes, allBaseAfterSetRenderManagerSuperiors, allBaseAfterSetRenderManagerInferiors, "afterSetRenderManager");
+		sortBases(beforeShouldRenderHookTypes, allBaseBeforeShouldRenderSuperiors, allBaseBeforeShouldRenderInferiors, "beforeShouldRender");
+		sortBases(overrideShouldRenderHookTypes, allBaseOverrideShouldRenderSuperiors, allBaseOverrideShouldRenderInferiors, "overrideShouldRender");
+		sortBases(afterShouldRenderHookTypes, allBaseAfterShouldRenderSuperiors, allBaseAfterShouldRenderInferiors, "afterShouldRender");
 
-		sortBases(beforeSetRenderPassModelHookTypes, allBaseBeforeSetRenderPassModelSuperiors, allBaseBeforeSetRenderPassModelInferiors, "beforeSetRenderPassModel");
-		sortBases(overrideSetRenderPassModelHookTypes, allBaseOverrideSetRenderPassModelSuperiors, allBaseOverrideSetRenderPassModelInferiors, "overrideSetRenderPassModel");
-		sortBases(afterSetRenderPassModelHookTypes, allBaseAfterSetRenderPassModelSuperiors, allBaseAfterSetRenderPassModelInferiors, "afterSetRenderPassModel");
+		sortBases(beforeTransformHeldFull3DItemLayerHookTypes, allBaseBeforeTransformHeldFull3DItemLayerSuperiors, allBaseBeforeTransformHeldFull3DItemLayerInferiors, "beforeTransformHeldFull3DItemLayer");
+		sortBases(overrideTransformHeldFull3DItemLayerHookTypes, allBaseOverrideTransformHeldFull3DItemLayerSuperiors, allBaseOverrideTransformHeldFull3DItemLayerInferiors, "overrideTransformHeldFull3DItemLayer");
+		sortBases(afterTransformHeldFull3DItemLayerHookTypes, allBaseAfterTransformHeldFull3DItemLayerSuperiors, allBaseAfterTransformHeldFull3DItemLayerInferiors, "afterTransformHeldFull3DItemLayer");
 
-		sortBases(beforeUpdateIconsHookTypes, allBaseBeforeUpdateIconsSuperiors, allBaseBeforeUpdateIconsInferiors, "beforeUpdateIcons");
-		sortBases(overrideUpdateIconsHookTypes, allBaseOverrideUpdateIconsSuperiors, allBaseOverrideUpdateIconsInferiors, "overrideUpdateIcons");
-		sortBases(afterUpdateIconsHookTypes, allBaseAfterUpdateIconsSuperiors, allBaseAfterUpdateIconsInferiors, "afterUpdateIcons");
+		sortBases(beforeUnsetBrightnessHookTypes, allBaseBeforeUnsetBrightnessSuperiors, allBaseBeforeUnsetBrightnessInferiors, "beforeUnsetBrightness");
+		sortBases(overrideUnsetBrightnessHookTypes, allBaseOverrideUnsetBrightnessSuperiors, allBaseOverrideUnsetBrightnessInferiors, "overrideUnsetBrightness");
+		sortBases(afterUnsetBrightnessHookTypes, allBaseAfterUnsetBrightnessSuperiors, allBaseAfterUnsetBrightnessInferiors, "afterUnsetBrightness");
+
+		sortBases(beforeUnsetScoreTeamColorHookTypes, allBaseBeforeUnsetScoreTeamColorSuperiors, allBaseBeforeUnsetScoreTeamColorInferiors, "beforeUnsetScoreTeamColor");
+		sortBases(overrideUnsetScoreTeamColorHookTypes, allBaseOverrideUnsetScoreTeamColorSuperiors, allBaseOverrideUnsetScoreTeamColorInferiors, "overrideUnsetScoreTeamColor");
+		sortBases(afterUnsetScoreTeamColorHookTypes, allBaseAfterUnsetScoreTeamColorSuperiors, allBaseAfterUnsetScoreTeamColorInferiors, "afterUnsetScoreTeamColor");
 
 		initialized = true;
 	}
 
-	private static List<IRenderPlayerAPI> allInstances = new ArrayList<IRenderPlayerAPI>();
+	private static List<IRenderPlayerAPI> getAllInstancesList()
+	{
+		List<IRenderPlayerAPI> result = new ArrayList<IRenderPlayerAPI>();
+		for(Iterator<WeakReference<IRenderPlayerAPI>> iterator = allInstances.iterator(); iterator.hasNext();)
+		{
+			IRenderPlayerAPI instance = iterator.next().get();
+			if(instance != null)
+				result.add(instance);
+			else
+				iterator.remove();
+		}
+		return result;
+	}
+
+	private static List<WeakReference<IRenderPlayerAPI>> allInstances = new ArrayList<WeakReference<IRenderPlayerAPI>>();
 
 	public static net.minecraft.client.renderer.entity.RenderPlayer[] getAllInstances()
 	{
+		List<IRenderPlayerAPI> allInstances = getAllInstancesList();
 		return allInstances.toArray(new net.minecraft.client.renderer.entity.RenderPlayer[allInstances.size()]);
 	}
 
-	public static void beforeLocalConstructing(IRenderPlayerAPI renderPlayer)
+	public static void beforeLocalConstructing(IRenderPlayerAPI renderPlayer, net.minecraft.client.renderer.entity.RenderManager paramRenderManager, boolean paramBoolean)
 	{
 		RenderPlayerAPI renderPlayerAPI = renderPlayer.getRenderPlayerAPI();
 		if(renderPlayerAPI != null)
 			renderPlayerAPI.load();
 
-		allInstances.add(renderPlayer);
+		allInstances.add(new WeakReference<IRenderPlayerAPI>(renderPlayer));
 
 		if(renderPlayerAPI != null)
-			renderPlayerAPI.beforeLocalConstructing();
+			renderPlayerAPI.beforeLocalConstructing(paramRenderManager, paramBoolean);
 	}
 
-	public static void afterLocalConstructing(IRenderPlayerAPI renderPlayer)
+	public static void afterLocalConstructing(IRenderPlayerAPI renderPlayer, net.minecraft.client.renderer.entity.RenderManager paramRenderManager, boolean paramBoolean)
 	{
 		RenderPlayerAPI renderPlayerAPI = renderPlayer.getRenderPlayerAPI();
 		if(renderPlayerAPI != null)
-			renderPlayerAPI.afterLocalConstructing();
+			renderPlayerAPI.afterLocalConstructing(paramRenderManager, paramBoolean);
 	}
 
 	public static RenderPlayerBase getRenderPlayerBase(IRenderPlayerAPI renderPlayer, String baseId)
@@ -1283,13 +1533,45 @@ public final class RenderPlayerAPI
 
 	private void updateRenderPlayerBases()
 	{
-		beforeDoRenderLabelHooks = create(beforeDoRenderLabelHookTypes);
-		overrideDoRenderLabelHooks = create(overrideDoRenderLabelHookTypes);
-		afterDoRenderLabelHooks = create(afterDoRenderLabelHookTypes);
-		isDoRenderLabelModded =
-			beforeDoRenderLabelHooks != null ||
-			overrideDoRenderLabelHooks != null ||
-			afterDoRenderLabelHooks != null;
+		beforeAddLayerHooks = create(beforeAddLayerHookTypes);
+		overrideAddLayerHooks = create(overrideAddLayerHookTypes);
+		afterAddLayerHooks = create(afterAddLayerHookTypes);
+		isAddLayerModded =
+			beforeAddLayerHooks != null ||
+			overrideAddLayerHooks != null ||
+			afterAddLayerHooks != null;
+
+		beforeBindEntityTextureHooks = create(beforeBindEntityTextureHookTypes);
+		overrideBindEntityTextureHooks = create(overrideBindEntityTextureHookTypes);
+		afterBindEntityTextureHooks = create(afterBindEntityTextureHookTypes);
+		isBindEntityTextureModded =
+			beforeBindEntityTextureHooks != null ||
+			overrideBindEntityTextureHooks != null ||
+			afterBindEntityTextureHooks != null;
+
+		beforeBindTextureHooks = create(beforeBindTextureHookTypes);
+		overrideBindTextureHooks = create(overrideBindTextureHookTypes);
+		afterBindTextureHooks = create(afterBindTextureHookTypes);
+		isBindTextureModded =
+			beforeBindTextureHooks != null ||
+			overrideBindTextureHooks != null ||
+			afterBindTextureHooks != null;
+
+		beforeCanRenderNameHooks = create(beforeCanRenderNameHookTypes);
+		overrideCanRenderNameHooks = create(overrideCanRenderNameHookTypes);
+		afterCanRenderNameHooks = create(afterCanRenderNameHookTypes);
+		isCanRenderNameModded =
+			beforeCanRenderNameHooks != null ||
+			overrideCanRenderNameHooks != null ||
+			afterCanRenderNameHooks != null;
+
+		beforeDoRenderHooks = create(beforeDoRenderHookTypes);
+		overrideDoRenderHooks = create(overrideDoRenderHookTypes);
+		afterDoRenderHooks = create(afterDoRenderHookTypes);
+		isDoRenderModded =
+			beforeDoRenderHooks != null ||
+			overrideDoRenderHooks != null ||
+			afterDoRenderHooks != null;
 
 		beforeDoRenderShadowAndFireHooks = create(beforeDoRenderShadowAndFireHookTypes);
 		overrideDoRenderShadowAndFireHooks = create(overrideDoRenderShadowAndFireHookTypes);
@@ -1315,6 +1597,14 @@ public final class RenderPlayerAPI
 			overrideGetDeathMaxRotationHooks != null ||
 			afterGetDeathMaxRotationHooks != null;
 
+		beforeGetEntityTextureHooks = create(beforeGetEntityTextureHookTypes);
+		overrideGetEntityTextureHooks = create(overrideGetEntityTextureHookTypes);
+		afterGetEntityTextureHooks = create(afterGetEntityTextureHookTypes);
+		isGetEntityTextureModded =
+			beforeGetEntityTextureHooks != null ||
+			overrideGetEntityTextureHooks != null ||
+			afterGetEntityTextureHooks != null;
+
 		beforeGetFontRendererFromRenderManagerHooks = create(beforeGetFontRendererFromRenderManagerHookTypes);
 		overrideGetFontRendererFromRenderManagerHooks = create(overrideGetFontRendererFromRenderManagerHookTypes);
 		afterGetFontRendererFromRenderManagerHooks = create(afterGetFontRendererFromRenderManagerHookTypes);
@@ -1323,13 +1613,37 @@ public final class RenderPlayerAPI
 			overrideGetFontRendererFromRenderManagerHooks != null ||
 			afterGetFontRendererFromRenderManagerHooks != null;
 
-		beforeGetResourceLocationFromPlayerHooks = create(beforeGetResourceLocationFromPlayerHookTypes);
-		overrideGetResourceLocationFromPlayerHooks = create(overrideGetResourceLocationFromPlayerHookTypes);
-		afterGetResourceLocationFromPlayerHooks = create(afterGetResourceLocationFromPlayerHookTypes);
-		isGetResourceLocationFromPlayerModded =
-			beforeGetResourceLocationFromPlayerHooks != null ||
-			overrideGetResourceLocationFromPlayerHooks != null ||
-			afterGetResourceLocationFromPlayerHooks != null;
+		beforeGetMainModelHooks = create(beforeGetMainModelHookTypes);
+		overrideGetMainModelHooks = create(overrideGetMainModelHookTypes);
+		afterGetMainModelHooks = create(afterGetMainModelHookTypes);
+		isGetMainModelModded =
+			beforeGetMainModelHooks != null ||
+			overrideGetMainModelHooks != null ||
+			afterGetMainModelHooks != null;
+
+		beforeGetPlayerModelHooks = create(beforeGetPlayerModelHookTypes);
+		overrideGetPlayerModelHooks = create(overrideGetPlayerModelHookTypes);
+		afterGetPlayerModelHooks = create(afterGetPlayerModelHookTypes);
+		isGetPlayerModelModded =
+			beforeGetPlayerModelHooks != null ||
+			overrideGetPlayerModelHooks != null ||
+			afterGetPlayerModelHooks != null;
+
+		beforeGetRenderManagerHooks = create(beforeGetRenderManagerHookTypes);
+		overrideGetRenderManagerHooks = create(overrideGetRenderManagerHookTypes);
+		afterGetRenderManagerHooks = create(afterGetRenderManagerHookTypes);
+		isGetRenderManagerModded =
+			beforeGetRenderManagerHooks != null ||
+			overrideGetRenderManagerHooks != null ||
+			afterGetRenderManagerHooks != null;
+
+		beforeGetSwingProgressHooks = create(beforeGetSwingProgressHookTypes);
+		overrideGetSwingProgressHooks = create(overrideGetSwingProgressHookTypes);
+		afterGetSwingProgressHooks = create(afterGetSwingProgressHookTypes);
+		isGetSwingProgressModded =
+			beforeGetSwingProgressHooks != null ||
+			overrideGetSwingProgressHooks != null ||
+			afterGetSwingProgressHooks != null;
 
 		beforeHandleRotationFloatHooks = create(beforeHandleRotationFloatHookTypes);
 		overrideHandleRotationFloatHooks = create(overrideHandleRotationFloatHookTypes);
@@ -1339,29 +1653,13 @@ public final class RenderPlayerAPI
 			overrideHandleRotationFloatHooks != null ||
 			afterHandleRotationFloatHooks != null;
 
-		beforeInheritRenderPassHooks = create(beforeInheritRenderPassHookTypes);
-		overrideInheritRenderPassHooks = create(overrideInheritRenderPassHookTypes);
-		afterInheritRenderPassHooks = create(afterInheritRenderPassHookTypes);
-		isInheritRenderPassModded =
-			beforeInheritRenderPassHooks != null ||
-			overrideInheritRenderPassHooks != null ||
-			afterInheritRenderPassHooks != null;
-
-		beforeLoadTextureHooks = create(beforeLoadTextureHookTypes);
-		overrideLoadTextureHooks = create(overrideLoadTextureHookTypes);
-		afterLoadTextureHooks = create(afterLoadTextureHookTypes);
-		isLoadTextureModded =
-			beforeLoadTextureHooks != null ||
-			overrideLoadTextureHooks != null ||
-			afterLoadTextureHooks != null;
-
-		beforeLoadTextureOfEntityHooks = create(beforeLoadTextureOfEntityHookTypes);
-		overrideLoadTextureOfEntityHooks = create(overrideLoadTextureOfEntityHookTypes);
-		afterLoadTextureOfEntityHooks = create(afterLoadTextureOfEntityHookTypes);
-		isLoadTextureOfEntityModded =
-			beforeLoadTextureOfEntityHooks != null ||
-			overrideLoadTextureOfEntityHooks != null ||
-			afterLoadTextureOfEntityHooks != null;
+		beforeInterpolateRotationHooks = create(beforeInterpolateRotationHookTypes);
+		overrideInterpolateRotationHooks = create(overrideInterpolateRotationHookTypes);
+		afterInterpolateRotationHooks = create(afterInterpolateRotationHookTypes);
+		isInterpolateRotationModded =
+			beforeInterpolateRotationHooks != null ||
+			overrideInterpolateRotationHooks != null ||
+			afterInterpolateRotationHooks != null;
 
 		beforePassSpecialRenderHooks = create(beforePassSpecialRenderHookTypes);
 		overridePassSpecialRenderHooks = create(overridePassSpecialRenderHookTypes);
@@ -1371,29 +1669,45 @@ public final class RenderPlayerAPI
 			overridePassSpecialRenderHooks != null ||
 			afterPassSpecialRenderHooks != null;
 
-		beforePerformStaticEntityRebuildHooks = create(beforePerformStaticEntityRebuildHookTypes);
-		overridePerformStaticEntityRebuildHooks = create(overridePerformStaticEntityRebuildHookTypes);
-		afterPerformStaticEntityRebuildHooks = create(afterPerformStaticEntityRebuildHookTypes);
-		isPerformStaticEntityRebuildModded =
-			beforePerformStaticEntityRebuildHooks != null ||
-			overridePerformStaticEntityRebuildHooks != null ||
-			afterPerformStaticEntityRebuildHooks != null;
+		beforePreRenderCallbackHooks = create(beforePreRenderCallbackHookTypes);
+		overridePreRenderCallbackHooks = create(overridePreRenderCallbackHookTypes);
+		afterPreRenderCallbackHooks = create(afterPreRenderCallbackHookTypes);
+		isPreRenderCallbackModded =
+			beforePreRenderCallbackHooks != null ||
+			overridePreRenderCallbackHooks != null ||
+			afterPreRenderCallbackHooks != null;
 
-		beforeRenderArrowsStuckInEntityHooks = create(beforeRenderArrowsStuckInEntityHookTypes);
-		overrideRenderArrowsStuckInEntityHooks = create(overrideRenderArrowsStuckInEntityHookTypes);
-		afterRenderArrowsStuckInEntityHooks = create(afterRenderArrowsStuckInEntityHookTypes);
-		isRenderArrowsStuckInEntityModded =
-			beforeRenderArrowsStuckInEntityHooks != null ||
-			overrideRenderArrowsStuckInEntityHooks != null ||
-			afterRenderArrowsStuckInEntityHooks != null;
+		beforeRemoveLayerHooks = create(beforeRemoveLayerHookTypes);
+		overrideRemoveLayerHooks = create(overrideRemoveLayerHookTypes);
+		afterRemoveLayerHooks = create(afterRemoveLayerHookTypes);
+		isRemoveLayerModded =
+			beforeRemoveLayerHooks != null ||
+			overrideRemoveLayerHooks != null ||
+			afterRemoveLayerHooks != null;
 
-		beforeRenderFirstPersonArmHooks = create(beforeRenderFirstPersonArmHookTypes);
-		overrideRenderFirstPersonArmHooks = create(overrideRenderFirstPersonArmHookTypes);
-		afterRenderFirstPersonArmHooks = create(afterRenderFirstPersonArmHookTypes);
-		isRenderFirstPersonArmModded =
-			beforeRenderFirstPersonArmHooks != null ||
-			overrideRenderFirstPersonArmHooks != null ||
-			afterRenderFirstPersonArmHooks != null;
+		beforeRenderLayersHooks = create(beforeRenderLayersHookTypes);
+		overrideRenderLayersHooks = create(overrideRenderLayersHookTypes);
+		afterRenderLayersHooks = create(afterRenderLayersHookTypes);
+		isRenderLayersModded =
+			beforeRenderLayersHooks != null ||
+			overrideRenderLayersHooks != null ||
+			afterRenderLayersHooks != null;
+
+		beforeRenderLeftArmHooks = create(beforeRenderLeftArmHookTypes);
+		overrideRenderLeftArmHooks = create(overrideRenderLeftArmHookTypes);
+		afterRenderLeftArmHooks = create(afterRenderLeftArmHookTypes);
+		isRenderLeftArmModded =
+			beforeRenderLeftArmHooks != null ||
+			overrideRenderLeftArmHooks != null ||
+			afterRenderLeftArmHooks != null;
+
+		beforeRenderLivingAtHooks = create(beforeRenderLivingAtHookTypes);
+		overrideRenderLivingAtHooks = create(overrideRenderLivingAtHookTypes);
+		afterRenderLivingAtHooks = create(afterRenderLivingAtHookTypes);
+		isRenderLivingAtModded =
+			beforeRenderLivingAtHooks != null ||
+			overrideRenderLivingAtHooks != null ||
+			afterRenderLivingAtHooks != null;
 
 		beforeRenderLivingLabelHooks = create(beforeRenderLivingLabelHookTypes);
 		overrideRenderLivingLabelHooks = create(overrideRenderLivingLabelHookTypes);
@@ -1411,101 +1725,109 @@ public final class RenderPlayerAPI
 			overrideRenderModelHooks != null ||
 			afterRenderModelHooks != null;
 
-		beforeRenderPlayerHooks = create(beforeRenderPlayerHookTypes);
-		overrideRenderPlayerHooks = create(overrideRenderPlayerHookTypes);
-		afterRenderPlayerHooks = create(afterRenderPlayerHookTypes);
-		isRenderPlayerModded =
-			beforeRenderPlayerHooks != null ||
-			overrideRenderPlayerHooks != null ||
-			afterRenderPlayerHooks != null;
+		beforeRenderNameHooks = create(beforeRenderNameHookTypes);
+		overrideRenderNameHooks = create(overrideRenderNameHookTypes);
+		afterRenderNameHooks = create(afterRenderNameHookTypes);
+		isRenderNameModded =
+			beforeRenderNameHooks != null ||
+			overrideRenderNameHooks != null ||
+			afterRenderNameHooks != null;
 
-		beforeRenderPlayerNameAndScoreLabelHooks = create(beforeRenderPlayerNameAndScoreLabelHookTypes);
-		overrideRenderPlayerNameAndScoreLabelHooks = create(overrideRenderPlayerNameAndScoreLabelHookTypes);
-		afterRenderPlayerNameAndScoreLabelHooks = create(afterRenderPlayerNameAndScoreLabelHookTypes);
-		isRenderPlayerNameAndScoreLabelModded =
-			beforeRenderPlayerNameAndScoreLabelHooks != null ||
-			overrideRenderPlayerNameAndScoreLabelHooks != null ||
-			afterRenderPlayerNameAndScoreLabelHooks != null;
+		beforeRenderOffsetLivingLabelHooks = create(beforeRenderOffsetLivingLabelHookTypes);
+		overrideRenderOffsetLivingLabelHooks = create(overrideRenderOffsetLivingLabelHookTypes);
+		afterRenderOffsetLivingLabelHooks = create(afterRenderOffsetLivingLabelHookTypes);
+		isRenderOffsetLivingLabelModded =
+			beforeRenderOffsetLivingLabelHooks != null ||
+			overrideRenderOffsetLivingLabelHooks != null ||
+			afterRenderOffsetLivingLabelHooks != null;
 
-		beforeRenderPlayerScaleHooks = create(beforeRenderPlayerScaleHookTypes);
-		overrideRenderPlayerScaleHooks = create(overrideRenderPlayerScaleHookTypes);
-		afterRenderPlayerScaleHooks = create(afterRenderPlayerScaleHookTypes);
-		isRenderPlayerScaleModded =
-			beforeRenderPlayerScaleHooks != null ||
-			overrideRenderPlayerScaleHooks != null ||
-			afterRenderPlayerScaleHooks != null;
+		beforeRenderRightArmHooks = create(beforeRenderRightArmHookTypes);
+		overrideRenderRightArmHooks = create(overrideRenderRightArmHookTypes);
+		afterRenderRightArmHooks = create(afterRenderRightArmHookTypes);
+		isRenderRightArmModded =
+			beforeRenderRightArmHooks != null ||
+			overrideRenderRightArmHooks != null ||
+			afterRenderRightArmHooks != null;
 
-		beforeRenderPlayerSleepHooks = create(beforeRenderPlayerSleepHookTypes);
-		overrideRenderPlayerSleepHooks = create(overrideRenderPlayerSleepHookTypes);
-		afterRenderPlayerSleepHooks = create(afterRenderPlayerSleepHookTypes);
-		isRenderPlayerSleepModded =
-			beforeRenderPlayerSleepHooks != null ||
-			overrideRenderPlayerSleepHooks != null ||
-			afterRenderPlayerSleepHooks != null;
+		beforeRotateCorpseHooks = create(beforeRotateCorpseHookTypes);
+		overrideRotateCorpseHooks = create(overrideRotateCorpseHookTypes);
+		afterRotateCorpseHooks = create(afterRotateCorpseHookTypes);
+		isRotateCorpseModded =
+			beforeRotateCorpseHooks != null ||
+			overrideRotateCorpseHooks != null ||
+			afterRotateCorpseHooks != null;
 
-		beforeRenderSpecialsHooks = create(beforeRenderSpecialsHookTypes);
-		overrideRenderSpecialsHooks = create(overrideRenderSpecialsHookTypes);
-		afterRenderSpecialsHooks = create(afterRenderSpecialsHookTypes);
-		isRenderSpecialsModded =
-			beforeRenderSpecialsHooks != null ||
-			overrideRenderSpecialsHooks != null ||
-			afterRenderSpecialsHooks != null;
+		beforeSetBrightnessHooks = create(beforeSetBrightnessHookTypes);
+		overrideSetBrightnessHooks = create(overrideSetBrightnessHookTypes);
+		afterSetBrightnessHooks = create(afterSetBrightnessHookTypes);
+		isSetBrightnessModded =
+			beforeSetBrightnessHooks != null ||
+			overrideSetBrightnessHooks != null ||
+			afterSetBrightnessHooks != null;
 
-		beforeRenderSwingProgressHooks = create(beforeRenderSwingProgressHookTypes);
-		overrideRenderSwingProgressHooks = create(overrideRenderSwingProgressHookTypes);
-		afterRenderSwingProgressHooks = create(afterRenderSwingProgressHookTypes);
-		isRenderSwingProgressModded =
-			beforeRenderSwingProgressHooks != null ||
-			overrideRenderSwingProgressHooks != null ||
-			afterRenderSwingProgressHooks != null;
+		beforeSetDoRenderBrightnessHooks = create(beforeSetDoRenderBrightnessHookTypes);
+		overrideSetDoRenderBrightnessHooks = create(overrideSetDoRenderBrightnessHookTypes);
+		afterSetDoRenderBrightnessHooks = create(afterSetDoRenderBrightnessHookTypes);
+		isSetDoRenderBrightnessModded =
+			beforeSetDoRenderBrightnessHooks != null ||
+			overrideSetDoRenderBrightnessHooks != null ||
+			afterSetDoRenderBrightnessHooks != null;
 
-		beforeRotatePlayerHooks = create(beforeRotatePlayerHookTypes);
-		overrideRotatePlayerHooks = create(overrideRotatePlayerHookTypes);
-		afterRotatePlayerHooks = create(afterRotatePlayerHookTypes);
-		isRotatePlayerModded =
-			beforeRotatePlayerHooks != null ||
-			overrideRotatePlayerHooks != null ||
-			afterRotatePlayerHooks != null;
+		beforeSetModelVisibilitiesHooks = create(beforeSetModelVisibilitiesHookTypes);
+		overrideSetModelVisibilitiesHooks = create(overrideSetModelVisibilitiesHookTypes);
+		afterSetModelVisibilitiesHooks = create(afterSetModelVisibilitiesHookTypes);
+		isSetModelVisibilitiesModded =
+			beforeSetModelVisibilitiesHooks != null ||
+			overrideSetModelVisibilitiesHooks != null ||
+			afterSetModelVisibilitiesHooks != null;
 
-		beforeSetArmorModelHooks = create(beforeSetArmorModelHookTypes);
-		overrideSetArmorModelHooks = create(overrideSetArmorModelHookTypes);
-		afterSetArmorModelHooks = create(afterSetArmorModelHookTypes);
-		isSetArmorModelModded =
-			beforeSetArmorModelHooks != null ||
-			overrideSetArmorModelHooks != null ||
-			afterSetArmorModelHooks != null;
+		beforeSetRenderOutlinesHooks = create(beforeSetRenderOutlinesHookTypes);
+		overrideSetRenderOutlinesHooks = create(overrideSetRenderOutlinesHookTypes);
+		afterSetRenderOutlinesHooks = create(afterSetRenderOutlinesHookTypes);
+		isSetRenderOutlinesModded =
+			beforeSetRenderOutlinesHooks != null ||
+			overrideSetRenderOutlinesHooks != null ||
+			afterSetRenderOutlinesHooks != null;
 
-		beforeSetPassArmorModelHooks = create(beforeSetPassArmorModelHookTypes);
-		overrideSetPassArmorModelHooks = create(overrideSetPassArmorModelHookTypes);
-		afterSetPassArmorModelHooks = create(afterSetPassArmorModelHookTypes);
-		isSetPassArmorModelModded =
-			beforeSetPassArmorModelHooks != null ||
-			overrideSetPassArmorModelHooks != null ||
-			afterSetPassArmorModelHooks != null;
+		beforeSetScoreTeamColorHooks = create(beforeSetScoreTeamColorHookTypes);
+		overrideSetScoreTeamColorHooks = create(overrideSetScoreTeamColorHookTypes);
+		afterSetScoreTeamColorHooks = create(afterSetScoreTeamColorHookTypes);
+		isSetScoreTeamColorModded =
+			beforeSetScoreTeamColorHooks != null ||
+			overrideSetScoreTeamColorHooks != null ||
+			afterSetScoreTeamColorHooks != null;
 
-		beforeSetRenderManagerHooks = create(beforeSetRenderManagerHookTypes);
-		overrideSetRenderManagerHooks = create(overrideSetRenderManagerHookTypes);
-		afterSetRenderManagerHooks = create(afterSetRenderManagerHookTypes);
-		isSetRenderManagerModded =
-			beforeSetRenderManagerHooks != null ||
-			overrideSetRenderManagerHooks != null ||
-			afterSetRenderManagerHooks != null;
+		beforeShouldRenderHooks = create(beforeShouldRenderHookTypes);
+		overrideShouldRenderHooks = create(overrideShouldRenderHookTypes);
+		afterShouldRenderHooks = create(afterShouldRenderHookTypes);
+		isShouldRenderModded =
+			beforeShouldRenderHooks != null ||
+			overrideShouldRenderHooks != null ||
+			afterShouldRenderHooks != null;
 
-		beforeSetRenderPassModelHooks = create(beforeSetRenderPassModelHookTypes);
-		overrideSetRenderPassModelHooks = create(overrideSetRenderPassModelHookTypes);
-		afterSetRenderPassModelHooks = create(afterSetRenderPassModelHookTypes);
-		isSetRenderPassModelModded =
-			beforeSetRenderPassModelHooks != null ||
-			overrideSetRenderPassModelHooks != null ||
-			afterSetRenderPassModelHooks != null;
+		beforeTransformHeldFull3DItemLayerHooks = create(beforeTransformHeldFull3DItemLayerHookTypes);
+		overrideTransformHeldFull3DItemLayerHooks = create(overrideTransformHeldFull3DItemLayerHookTypes);
+		afterTransformHeldFull3DItemLayerHooks = create(afterTransformHeldFull3DItemLayerHookTypes);
+		isTransformHeldFull3DItemLayerModded =
+			beforeTransformHeldFull3DItemLayerHooks != null ||
+			overrideTransformHeldFull3DItemLayerHooks != null ||
+			afterTransformHeldFull3DItemLayerHooks != null;
 
-		beforeUpdateIconsHooks = create(beforeUpdateIconsHookTypes);
-		overrideUpdateIconsHooks = create(overrideUpdateIconsHookTypes);
-		afterUpdateIconsHooks = create(afterUpdateIconsHookTypes);
-		isUpdateIconsModded =
-			beforeUpdateIconsHooks != null ||
-			overrideUpdateIconsHooks != null ||
-			afterUpdateIconsHooks != null;
+		beforeUnsetBrightnessHooks = create(beforeUnsetBrightnessHookTypes);
+		overrideUnsetBrightnessHooks = create(overrideUnsetBrightnessHookTypes);
+		afterUnsetBrightnessHooks = create(afterUnsetBrightnessHookTypes);
+		isUnsetBrightnessModded =
+			beforeUnsetBrightnessHooks != null ||
+			overrideUnsetBrightnessHooks != null ||
+			afterUnsetBrightnessHooks != null;
+
+		beforeUnsetScoreTeamColorHooks = create(beforeUnsetScoreTeamColorHookTypes);
+		overrideUnsetScoreTeamColorHooks = create(overrideUnsetScoreTeamColorHookTypes);
+		afterUnsetScoreTeamColorHooks = create(afterUnsetScoreTeamColorHookTypes);
+		isUnsetScoreTeamColorModded =
+			beforeUnsetScoreTeamColorHooks != null ||
+			overrideUnsetScoreTeamColorHooks != null ||
+			afterUnsetScoreTeamColorHooks != null;
 
 	}
 
@@ -1538,19 +1860,19 @@ public final class RenderPlayerAPI
 		return result;
 	}
 
-	private void beforeLocalConstructing()
+	private void beforeLocalConstructing(net.minecraft.client.renderer.entity.RenderManager paramRenderManager, boolean paramBoolean)
 	{
 		if(beforeLocalConstructingHooks != null)
 			for(int i = beforeLocalConstructingHooks.length - 1; i >= 0 ; i--)
-				beforeLocalConstructingHooks[i].beforeLocalConstructing();
+				beforeLocalConstructingHooks[i].beforeLocalConstructing(paramRenderManager, paramBoolean);
 		beforeLocalConstructingHooks = null;
 	}
 
-	private void afterLocalConstructing()
+	private void afterLocalConstructing(net.minecraft.client.renderer.entity.RenderManager paramRenderManager, boolean paramBoolean)
 	{
 		if(afterLocalConstructingHooks != null)
 			for(int i = 0; i < afterLocalConstructingHooks.length; i++)
-				afterLocalConstructingHooks[i].afterLocalConstructing();
+				afterLocalConstructingHooks[i].afterLocalConstructing(paramRenderManager, paramBoolean);
 		afterLocalConstructingHooks = null;
 	}
 
@@ -1608,7 +1930,7 @@ public final class RenderPlayerAPI
 			return null;
 
 		Method method = methods.get(key);
-		if(methods == null)
+		if(method == null)
 			return null;
 
 		return execute(getRenderPlayerBase(id), method, parameters);
@@ -1650,93 +1972,339 @@ public final class RenderPlayerAPI
 		}
 	}
 
-	public static boolean doRenderLabel(IRenderPlayerAPI target, net.minecraft.entity.EntityLivingBase paramEntityLivingBase)
+	public static boolean addLayer(IRenderPlayerAPI target, net.minecraft.client.renderer.entity.layers.LayerRenderer paramLayerRenderer)
 	{
 		boolean _result;
 		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
-		if(renderPlayerAPI != null && renderPlayerAPI.isDoRenderLabelModded)
-			_result = renderPlayerAPI.doRenderLabel(paramEntityLivingBase);
+		if(renderPlayerAPI != null && renderPlayerAPI.isAddLayerModded)
+			_result = renderPlayerAPI.addLayer(paramLayerRenderer);
 		else
-			_result = target.localDoRenderLabel(paramEntityLivingBase);
+			_result = target.localAddLayer(paramLayerRenderer);
 		return _result;
 	}
 
-	private boolean doRenderLabel(net.minecraft.entity.EntityLivingBase paramEntityLivingBase)
+	private boolean addLayer(net.minecraft.client.renderer.entity.layers.LayerRenderer paramLayerRenderer)
 	{
-		if(beforeDoRenderLabelHooks != null)
-			for(int i = beforeDoRenderLabelHooks.length - 1; i >= 0 ; i--)
-				beforeDoRenderLabelHooks[i].beforeDoRenderLabel(paramEntityLivingBase);
+		if(beforeAddLayerHooks != null)
+			for(int i = beforeAddLayerHooks.length - 1; i >= 0 ; i--)
+				beforeAddLayerHooks[i].beforeAddLayer(paramLayerRenderer);
 
 		boolean _result;
-		if(overrideDoRenderLabelHooks != null)
-			_result = overrideDoRenderLabelHooks[overrideDoRenderLabelHooks.length - 1].doRenderLabel(paramEntityLivingBase);
+		if(overrideAddLayerHooks != null)
+			_result = overrideAddLayerHooks[overrideAddLayerHooks.length - 1].addLayer(paramLayerRenderer);
 		else
-			_result = renderPlayer.localDoRenderLabel(paramEntityLivingBase);
+			_result = renderPlayer.localAddLayer(paramLayerRenderer);
 
-		if(afterDoRenderLabelHooks != null)
-			for(int i = 0; i < afterDoRenderLabelHooks.length; i++)
-				afterDoRenderLabelHooks[i].afterDoRenderLabel(paramEntityLivingBase);
+		if(afterAddLayerHooks != null)
+			for(int i = 0; i < afterAddLayerHooks.length; i++)
+				afterAddLayerHooks[i].afterAddLayer(paramLayerRenderer);
 
 		return _result;
 	}
 
-	protected RenderPlayerBase GetOverwrittenDoRenderLabel(RenderPlayerBase overWriter)
+	protected RenderPlayerBase GetOverwrittenAddLayer(RenderPlayerBase overWriter)
 	{
-		for(int i = 0; i < overrideDoRenderLabelHooks.length; i++)
-			if(overrideDoRenderLabelHooks[i] == overWriter)
+		if (overrideAddLayerHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideAddLayerHooks.length; i++)
+			if(overrideAddLayerHooks[i] == overWriter)
 				if(i == 0)
 					return null;
 				else
-					return overrideDoRenderLabelHooks[i - 1];
+					return overrideAddLayerHooks[i - 1];
 
 		return overWriter;
 	}
 
-	private final static List<String> beforeDoRenderLabelHookTypes = new LinkedList<String>();
-	private final static List<String> overrideDoRenderLabelHookTypes = new LinkedList<String>();
-	private final static List<String> afterDoRenderLabelHookTypes = new LinkedList<String>();
+	private final static List<String> beforeAddLayerHookTypes = new LinkedList<String>();
+	private final static List<String> overrideAddLayerHookTypes = new LinkedList<String>();
+	private final static List<String> afterAddLayerHookTypes = new LinkedList<String>();
 
-	private RenderPlayerBase[] beforeDoRenderLabelHooks;
-	private RenderPlayerBase[] overrideDoRenderLabelHooks;
-	private RenderPlayerBase[] afterDoRenderLabelHooks;
+	private RenderPlayerBase[] beforeAddLayerHooks;
+	private RenderPlayerBase[] overrideAddLayerHooks;
+	private RenderPlayerBase[] afterAddLayerHooks;
 
-	public boolean isDoRenderLabelModded;
+	public boolean isAddLayerModded;
 
-	private static final Map<String, String[]> allBaseBeforeDoRenderLabelSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseBeforeDoRenderLabelInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideDoRenderLabelSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideDoRenderLabelInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterDoRenderLabelSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterDoRenderLabelInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeAddLayerSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeAddLayerInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideAddLayerSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideAddLayerInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterAddLayerSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterAddLayerInferiors = new Hashtable<String, String[]>(0);
 
-	public static void doRenderShadowAndFire(IRenderPlayerAPI target, net.minecraft.entity.Entity paramEntity, double paramDouble1, double paramDouble2, double paramDouble3, float paramFloat1, float paramFloat2)
+	public static boolean bindEntityTexture(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer)
+	{
+		boolean _result;
+		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
+		if(renderPlayerAPI != null && renderPlayerAPI.isBindEntityTextureModded)
+			_result = renderPlayerAPI.bindEntityTexture(paramAbstractClientPlayer);
+		else
+			_result = target.localBindEntityTexture(paramAbstractClientPlayer);
+		return _result;
+	}
+
+	private boolean bindEntityTexture(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer)
+	{
+		if(beforeBindEntityTextureHooks != null)
+			for(int i = beforeBindEntityTextureHooks.length - 1; i >= 0 ; i--)
+				beforeBindEntityTextureHooks[i].beforeBindEntityTexture(paramAbstractClientPlayer);
+
+		boolean _result;
+		if(overrideBindEntityTextureHooks != null)
+			_result = overrideBindEntityTextureHooks[overrideBindEntityTextureHooks.length - 1].bindEntityTexture(paramAbstractClientPlayer);
+		else
+			_result = renderPlayer.localBindEntityTexture(paramAbstractClientPlayer);
+
+		if(afterBindEntityTextureHooks != null)
+			for(int i = 0; i < afterBindEntityTextureHooks.length; i++)
+				afterBindEntityTextureHooks[i].afterBindEntityTexture(paramAbstractClientPlayer);
+
+		return _result;
+	}
+
+	protected RenderPlayerBase GetOverwrittenBindEntityTexture(RenderPlayerBase overWriter)
+	{
+		if (overrideBindEntityTextureHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideBindEntityTextureHooks.length; i++)
+			if(overrideBindEntityTextureHooks[i] == overWriter)
+				if(i == 0)
+					return null;
+				else
+					return overrideBindEntityTextureHooks[i - 1];
+
+		return overWriter;
+	}
+
+	private final static List<String> beforeBindEntityTextureHookTypes = new LinkedList<String>();
+	private final static List<String> overrideBindEntityTextureHookTypes = new LinkedList<String>();
+	private final static List<String> afterBindEntityTextureHookTypes = new LinkedList<String>();
+
+	private RenderPlayerBase[] beforeBindEntityTextureHooks;
+	private RenderPlayerBase[] overrideBindEntityTextureHooks;
+	private RenderPlayerBase[] afterBindEntityTextureHooks;
+
+	public boolean isBindEntityTextureModded;
+
+	private static final Map<String, String[]> allBaseBeforeBindEntityTextureSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeBindEntityTextureInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideBindEntityTextureSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideBindEntityTextureInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterBindEntityTextureSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterBindEntityTextureInferiors = new Hashtable<String, String[]>(0);
+
+	public static void bindTexture(IRenderPlayerAPI target, net.minecraft.util.ResourceLocation paramResourceLocation)
+	{
+		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
+		if(renderPlayerAPI != null && renderPlayerAPI.isBindTextureModded)
+			renderPlayerAPI.bindTexture(paramResourceLocation);
+		else
+			target.localBindTexture(paramResourceLocation);
+	}
+
+	private void bindTexture(net.minecraft.util.ResourceLocation paramResourceLocation)
+	{
+		if(beforeBindTextureHooks != null)
+			for(int i = beforeBindTextureHooks.length - 1; i >= 0 ; i--)
+				beforeBindTextureHooks[i].beforeBindTexture(paramResourceLocation);
+
+		if(overrideBindTextureHooks != null)
+			overrideBindTextureHooks[overrideBindTextureHooks.length - 1].bindTexture(paramResourceLocation);
+		else
+			renderPlayer.localBindTexture(paramResourceLocation);
+
+		if(afterBindTextureHooks != null)
+			for(int i = 0; i < afterBindTextureHooks.length; i++)
+				afterBindTextureHooks[i].afterBindTexture(paramResourceLocation);
+
+	}
+
+	protected RenderPlayerBase GetOverwrittenBindTexture(RenderPlayerBase overWriter)
+	{
+		if (overrideBindTextureHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideBindTextureHooks.length; i++)
+			if(overrideBindTextureHooks[i] == overWriter)
+				if(i == 0)
+					return null;
+				else
+					return overrideBindTextureHooks[i - 1];
+
+		return overWriter;
+	}
+
+	private final static List<String> beforeBindTextureHookTypes = new LinkedList<String>();
+	private final static List<String> overrideBindTextureHookTypes = new LinkedList<String>();
+	private final static List<String> afterBindTextureHookTypes = new LinkedList<String>();
+
+	private RenderPlayerBase[] beforeBindTextureHooks;
+	private RenderPlayerBase[] overrideBindTextureHooks;
+	private RenderPlayerBase[] afterBindTextureHooks;
+
+	public boolean isBindTextureModded;
+
+	private static final Map<String, String[]> allBaseBeforeBindTextureSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeBindTextureInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideBindTextureSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideBindTextureInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterBindTextureSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterBindTextureInferiors = new Hashtable<String, String[]>(0);
+
+	public static boolean canRenderName(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer)
+	{
+		boolean _result;
+		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
+		if(renderPlayerAPI != null && renderPlayerAPI.isCanRenderNameModded)
+			_result = renderPlayerAPI.canRenderName(paramAbstractClientPlayer);
+		else
+			_result = target.localCanRenderName(paramAbstractClientPlayer);
+		return _result;
+	}
+
+	private boolean canRenderName(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer)
+	{
+		if(beforeCanRenderNameHooks != null)
+			for(int i = beforeCanRenderNameHooks.length - 1; i >= 0 ; i--)
+				beforeCanRenderNameHooks[i].beforeCanRenderName(paramAbstractClientPlayer);
+
+		boolean _result;
+		if(overrideCanRenderNameHooks != null)
+			_result = overrideCanRenderNameHooks[overrideCanRenderNameHooks.length - 1].canRenderName(paramAbstractClientPlayer);
+		else
+			_result = renderPlayer.localCanRenderName(paramAbstractClientPlayer);
+
+		if(afterCanRenderNameHooks != null)
+			for(int i = 0; i < afterCanRenderNameHooks.length; i++)
+				afterCanRenderNameHooks[i].afterCanRenderName(paramAbstractClientPlayer);
+
+		return _result;
+	}
+
+	protected RenderPlayerBase GetOverwrittenCanRenderName(RenderPlayerBase overWriter)
+	{
+		if (overrideCanRenderNameHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideCanRenderNameHooks.length; i++)
+			if(overrideCanRenderNameHooks[i] == overWriter)
+				if(i == 0)
+					return null;
+				else
+					return overrideCanRenderNameHooks[i - 1];
+
+		return overWriter;
+	}
+
+	private final static List<String> beforeCanRenderNameHookTypes = new LinkedList<String>();
+	private final static List<String> overrideCanRenderNameHookTypes = new LinkedList<String>();
+	private final static List<String> afterCanRenderNameHookTypes = new LinkedList<String>();
+
+	private RenderPlayerBase[] beforeCanRenderNameHooks;
+	private RenderPlayerBase[] overrideCanRenderNameHooks;
+	private RenderPlayerBase[] afterCanRenderNameHooks;
+
+	public boolean isCanRenderNameModded;
+
+	private static final Map<String, String[]> allBaseBeforeCanRenderNameSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeCanRenderNameInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideCanRenderNameSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideCanRenderNameInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterCanRenderNameSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterCanRenderNameInferiors = new Hashtable<String, String[]>(0);
+
+	public static void doRender(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3, float paramFloat1, float paramFloat2)
+	{
+		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
+		if(renderPlayerAPI != null && renderPlayerAPI.isDoRenderModded)
+			renderPlayerAPI.doRender(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3, paramFloat1, paramFloat2);
+		else
+			target.localDoRender(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3, paramFloat1, paramFloat2);
+	}
+
+	private void doRender(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3, float paramFloat1, float paramFloat2)
+	{
+		if(beforeDoRenderHooks != null)
+			for(int i = beforeDoRenderHooks.length - 1; i >= 0 ; i--)
+				beforeDoRenderHooks[i].beforeDoRender(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3, paramFloat1, paramFloat2);
+
+		if(overrideDoRenderHooks != null)
+			overrideDoRenderHooks[overrideDoRenderHooks.length - 1].doRender(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3, paramFloat1, paramFloat2);
+		else
+			renderPlayer.localDoRender(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3, paramFloat1, paramFloat2);
+
+		if(afterDoRenderHooks != null)
+			for(int i = 0; i < afterDoRenderHooks.length; i++)
+				afterDoRenderHooks[i].afterDoRender(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3, paramFloat1, paramFloat2);
+
+	}
+
+	protected RenderPlayerBase GetOverwrittenDoRender(RenderPlayerBase overWriter)
+	{
+		if (overrideDoRenderHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideDoRenderHooks.length; i++)
+			if(overrideDoRenderHooks[i] == overWriter)
+				if(i == 0)
+					return null;
+				else
+					return overrideDoRenderHooks[i - 1];
+
+		return overWriter;
+	}
+
+	private final static List<String> beforeDoRenderHookTypes = new LinkedList<String>();
+	private final static List<String> overrideDoRenderHookTypes = new LinkedList<String>();
+	private final static List<String> afterDoRenderHookTypes = new LinkedList<String>();
+
+	private RenderPlayerBase[] beforeDoRenderHooks;
+	private RenderPlayerBase[] overrideDoRenderHooks;
+	private RenderPlayerBase[] afterDoRenderHooks;
+
+	public boolean isDoRenderModded;
+
+	private static final Map<String, String[]> allBaseBeforeDoRenderSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeDoRenderInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideDoRenderSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideDoRenderInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterDoRenderSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterDoRenderInferiors = new Hashtable<String, String[]>(0);
+
+	public static void doRenderShadowAndFire(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3, float paramFloat1, float paramFloat2)
 	{
 		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
 		if(renderPlayerAPI != null && renderPlayerAPI.isDoRenderShadowAndFireModded)
-			renderPlayerAPI.doRenderShadowAndFire(paramEntity, paramDouble1, paramDouble2, paramDouble3, paramFloat1, paramFloat2);
+			renderPlayerAPI.doRenderShadowAndFire(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3, paramFloat1, paramFloat2);
 		else
-			target.localDoRenderShadowAndFire(paramEntity, paramDouble1, paramDouble2, paramDouble3, paramFloat1, paramFloat2);
+			target.localDoRenderShadowAndFire(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3, paramFloat1, paramFloat2);
 	}
 
-	private void doRenderShadowAndFire(net.minecraft.entity.Entity paramEntity, double paramDouble1, double paramDouble2, double paramDouble3, float paramFloat1, float paramFloat2)
+	private void doRenderShadowAndFire(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3, float paramFloat1, float paramFloat2)
 	{
 		if(beforeDoRenderShadowAndFireHooks != null)
 			for(int i = beforeDoRenderShadowAndFireHooks.length - 1; i >= 0 ; i--)
-				beforeDoRenderShadowAndFireHooks[i].beforeDoRenderShadowAndFire(paramEntity, paramDouble1, paramDouble2, paramDouble3, paramFloat1, paramFloat2);
+				beforeDoRenderShadowAndFireHooks[i].beforeDoRenderShadowAndFire(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3, paramFloat1, paramFloat2);
 
 		if(overrideDoRenderShadowAndFireHooks != null)
-			overrideDoRenderShadowAndFireHooks[overrideDoRenderShadowAndFireHooks.length - 1].doRenderShadowAndFire(paramEntity, paramDouble1, paramDouble2, paramDouble3, paramFloat1, paramFloat2);
+			overrideDoRenderShadowAndFireHooks[overrideDoRenderShadowAndFireHooks.length - 1].doRenderShadowAndFire(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3, paramFloat1, paramFloat2);
 		else
-			renderPlayer.localDoRenderShadowAndFire(paramEntity, paramDouble1, paramDouble2, paramDouble3, paramFloat1, paramFloat2);
+			renderPlayer.localDoRenderShadowAndFire(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3, paramFloat1, paramFloat2);
 
 		if(afterDoRenderShadowAndFireHooks != null)
 			for(int i = 0; i < afterDoRenderShadowAndFireHooks.length; i++)
-				afterDoRenderShadowAndFireHooks[i].afterDoRenderShadowAndFire(paramEntity, paramDouble1, paramDouble2, paramDouble3, paramFloat1, paramFloat2);
+				afterDoRenderShadowAndFireHooks[i].afterDoRenderShadowAndFire(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3, paramFloat1, paramFloat2);
 
 	}
 
 	protected RenderPlayerBase GetOverwrittenDoRenderShadowAndFire(RenderPlayerBase overWriter)
 	{
+		if (overrideDoRenderShadowAndFireHooks == null)
+			return overWriter;
+
 		for(int i = 0; i < overrideDoRenderShadowAndFireHooks.length; i++)
 			if(overrideDoRenderShadowAndFireHooks[i] == overWriter)
 				if(i == 0)
@@ -1764,38 +2332,41 @@ public final class RenderPlayerAPI
 	private static final Map<String, String[]> allBaseAfterDoRenderShadowAndFireSuperiors = new Hashtable<String, String[]>(0);
 	private static final Map<String, String[]> allBaseAfterDoRenderShadowAndFireInferiors = new Hashtable<String, String[]>(0);
 
-	public static int getColorMultiplier(IRenderPlayerAPI target, net.minecraft.entity.EntityLivingBase paramEntityLivingBase, float paramFloat1, float paramFloat2)
+	public static int getColorMultiplier(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat1, float paramFloat2)
 	{
 		int _result;
 		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
 		if(renderPlayerAPI != null && renderPlayerAPI.isGetColorMultiplierModded)
-			_result = renderPlayerAPI.getColorMultiplier(paramEntityLivingBase, paramFloat1, paramFloat2);
+			_result = renderPlayerAPI.getColorMultiplier(paramAbstractClientPlayer, paramFloat1, paramFloat2);
 		else
-			_result = target.localGetColorMultiplier(paramEntityLivingBase, paramFloat1, paramFloat2);
+			_result = target.localGetColorMultiplier(paramAbstractClientPlayer, paramFloat1, paramFloat2);
 		return _result;
 	}
 
-	private int getColorMultiplier(net.minecraft.entity.EntityLivingBase paramEntityLivingBase, float paramFloat1, float paramFloat2)
+	private int getColorMultiplier(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat1, float paramFloat2)
 	{
 		if(beforeGetColorMultiplierHooks != null)
 			for(int i = beforeGetColorMultiplierHooks.length - 1; i >= 0 ; i--)
-				beforeGetColorMultiplierHooks[i].beforeGetColorMultiplier(paramEntityLivingBase, paramFloat1, paramFloat2);
+				beforeGetColorMultiplierHooks[i].beforeGetColorMultiplier(paramAbstractClientPlayer, paramFloat1, paramFloat2);
 
 		int _result;
 		if(overrideGetColorMultiplierHooks != null)
-			_result = overrideGetColorMultiplierHooks[overrideGetColorMultiplierHooks.length - 1].getColorMultiplier(paramEntityLivingBase, paramFloat1, paramFloat2);
+			_result = overrideGetColorMultiplierHooks[overrideGetColorMultiplierHooks.length - 1].getColorMultiplier(paramAbstractClientPlayer, paramFloat1, paramFloat2);
 		else
-			_result = renderPlayer.localGetColorMultiplier(paramEntityLivingBase, paramFloat1, paramFloat2);
+			_result = renderPlayer.localGetColorMultiplier(paramAbstractClientPlayer, paramFloat1, paramFloat2);
 
 		if(afterGetColorMultiplierHooks != null)
 			for(int i = 0; i < afterGetColorMultiplierHooks.length; i++)
-				afterGetColorMultiplierHooks[i].afterGetColorMultiplier(paramEntityLivingBase, paramFloat1, paramFloat2);
+				afterGetColorMultiplierHooks[i].afterGetColorMultiplier(paramAbstractClientPlayer, paramFloat1, paramFloat2);
 
 		return _result;
 	}
 
 	protected RenderPlayerBase GetOverwrittenGetColorMultiplier(RenderPlayerBase overWriter)
 	{
+		if (overrideGetColorMultiplierHooks == null)
+			return overWriter;
+
 		for(int i = 0; i < overrideGetColorMultiplierHooks.length; i++)
 			if(overrideGetColorMultiplierHooks[i] == overWriter)
 				if(i == 0)
@@ -1823,38 +2394,41 @@ public final class RenderPlayerAPI
 	private static final Map<String, String[]> allBaseAfterGetColorMultiplierSuperiors = new Hashtable<String, String[]>(0);
 	private static final Map<String, String[]> allBaseAfterGetColorMultiplierInferiors = new Hashtable<String, String[]>(0);
 
-	public static float getDeathMaxRotation(IRenderPlayerAPI target, net.minecraft.entity.EntityLivingBase paramEntityLivingBase)
+	public static float getDeathMaxRotation(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer)
 	{
 		float _result;
 		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
 		if(renderPlayerAPI != null && renderPlayerAPI.isGetDeathMaxRotationModded)
-			_result = renderPlayerAPI.getDeathMaxRotation(paramEntityLivingBase);
+			_result = renderPlayerAPI.getDeathMaxRotation(paramAbstractClientPlayer);
 		else
-			_result = target.localGetDeathMaxRotation(paramEntityLivingBase);
+			_result = target.localGetDeathMaxRotation(paramAbstractClientPlayer);
 		return _result;
 	}
 
-	private float getDeathMaxRotation(net.minecraft.entity.EntityLivingBase paramEntityLivingBase)
+	private float getDeathMaxRotation(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer)
 	{
 		if(beforeGetDeathMaxRotationHooks != null)
 			for(int i = beforeGetDeathMaxRotationHooks.length - 1; i >= 0 ; i--)
-				beforeGetDeathMaxRotationHooks[i].beforeGetDeathMaxRotation(paramEntityLivingBase);
+				beforeGetDeathMaxRotationHooks[i].beforeGetDeathMaxRotation(paramAbstractClientPlayer);
 
 		float _result;
 		if(overrideGetDeathMaxRotationHooks != null)
-			_result = overrideGetDeathMaxRotationHooks[overrideGetDeathMaxRotationHooks.length - 1].getDeathMaxRotation(paramEntityLivingBase);
+			_result = overrideGetDeathMaxRotationHooks[overrideGetDeathMaxRotationHooks.length - 1].getDeathMaxRotation(paramAbstractClientPlayer);
 		else
-			_result = renderPlayer.localGetDeathMaxRotation(paramEntityLivingBase);
+			_result = renderPlayer.localGetDeathMaxRotation(paramAbstractClientPlayer);
 
 		if(afterGetDeathMaxRotationHooks != null)
 			for(int i = 0; i < afterGetDeathMaxRotationHooks.length; i++)
-				afterGetDeathMaxRotationHooks[i].afterGetDeathMaxRotation(paramEntityLivingBase);
+				afterGetDeathMaxRotationHooks[i].afterGetDeathMaxRotation(paramAbstractClientPlayer);
 
 		return _result;
 	}
 
 	protected RenderPlayerBase GetOverwrittenGetDeathMaxRotation(RenderPlayerBase overWriter)
 	{
+		if (overrideGetDeathMaxRotationHooks == null)
+			return overWriter;
+
 		for(int i = 0; i < overrideGetDeathMaxRotationHooks.length; i++)
 			if(overrideGetDeathMaxRotationHooks[i] == overWriter)
 				if(i == 0)
@@ -1881,6 +2455,68 @@ public final class RenderPlayerAPI
 	private static final Map<String, String[]> allBaseOverrideGetDeathMaxRotationInferiors = new Hashtable<String, String[]>(0);
 	private static final Map<String, String[]> allBaseAfterGetDeathMaxRotationSuperiors = new Hashtable<String, String[]>(0);
 	private static final Map<String, String[]> allBaseAfterGetDeathMaxRotationInferiors = new Hashtable<String, String[]>(0);
+
+	public static net.minecraft.util.ResourceLocation getEntityTexture(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer)
+	{
+		net.minecraft.util.ResourceLocation _result;
+		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
+		if(renderPlayerAPI != null && renderPlayerAPI.isGetEntityTextureModded)
+			_result = renderPlayerAPI.getEntityTexture(paramAbstractClientPlayer);
+		else
+			_result = target.localGetEntityTexture(paramAbstractClientPlayer);
+		return _result;
+	}
+
+	private net.minecraft.util.ResourceLocation getEntityTexture(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer)
+	{
+		if(beforeGetEntityTextureHooks != null)
+			for(int i = beforeGetEntityTextureHooks.length - 1; i >= 0 ; i--)
+				beforeGetEntityTextureHooks[i].beforeGetEntityTexture(paramAbstractClientPlayer);
+
+		net.minecraft.util.ResourceLocation _result;
+		if(overrideGetEntityTextureHooks != null)
+			_result = overrideGetEntityTextureHooks[overrideGetEntityTextureHooks.length - 1].getEntityTexture(paramAbstractClientPlayer);
+		else
+			_result = renderPlayer.localGetEntityTexture(paramAbstractClientPlayer);
+
+		if(afterGetEntityTextureHooks != null)
+			for(int i = 0; i < afterGetEntityTextureHooks.length; i++)
+				afterGetEntityTextureHooks[i].afterGetEntityTexture(paramAbstractClientPlayer);
+
+		return _result;
+	}
+
+	protected RenderPlayerBase GetOverwrittenGetEntityTexture(RenderPlayerBase overWriter)
+	{
+		if (overrideGetEntityTextureHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideGetEntityTextureHooks.length; i++)
+			if(overrideGetEntityTextureHooks[i] == overWriter)
+				if(i == 0)
+					return null;
+				else
+					return overrideGetEntityTextureHooks[i - 1];
+
+		return overWriter;
+	}
+
+	private final static List<String> beforeGetEntityTextureHookTypes = new LinkedList<String>();
+	private final static List<String> overrideGetEntityTextureHookTypes = new LinkedList<String>();
+	private final static List<String> afterGetEntityTextureHookTypes = new LinkedList<String>();
+
+	private RenderPlayerBase[] beforeGetEntityTextureHooks;
+	private RenderPlayerBase[] overrideGetEntityTextureHooks;
+	private RenderPlayerBase[] afterGetEntityTextureHooks;
+
+	public boolean isGetEntityTextureModded;
+
+	private static final Map<String, String[]> allBaseBeforeGetEntityTextureSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeGetEntityTextureInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideGetEntityTextureSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideGetEntityTextureInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterGetEntityTextureSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterGetEntityTextureInferiors = new Hashtable<String, String[]>(0);
 
 	public static net.minecraft.client.gui.FontRenderer getFontRendererFromRenderManager(IRenderPlayerAPI target)
 	{
@@ -1914,6 +2550,9 @@ public final class RenderPlayerAPI
 
 	protected RenderPlayerBase GetOverwrittenGetFontRendererFromRenderManager(RenderPlayerBase overWriter)
 	{
+		if (overrideGetFontRendererFromRenderManagerHooks == null)
+			return overWriter;
+
 		for(int i = 0; i < overrideGetFontRendererFromRenderManagerHooks.length; i++)
 			if(overrideGetFontRendererFromRenderManagerHooks[i] == overWriter)
 				if(i == 0)
@@ -1941,97 +2580,289 @@ public final class RenderPlayerAPI
 	private static final Map<String, String[]> allBaseAfterGetFontRendererFromRenderManagerSuperiors = new Hashtable<String, String[]>(0);
 	private static final Map<String, String[]> allBaseAfterGetFontRendererFromRenderManagerInferiors = new Hashtable<String, String[]>(0);
 
-	public static net.minecraft.util.ResourceLocation getResourceLocationFromPlayer(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer)
+	public static net.minecraft.client.model.ModelBase getMainModel(IRenderPlayerAPI target)
 	{
-		net.minecraft.util.ResourceLocation _result;
+		net.minecraft.client.model.ModelBase _result;
 		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
-		if(renderPlayerAPI != null && renderPlayerAPI.isGetResourceLocationFromPlayerModded)
-			_result = renderPlayerAPI.getResourceLocationFromPlayer(paramAbstractClientPlayer);
+		if(renderPlayerAPI != null && renderPlayerAPI.isGetMainModelModded)
+			_result = renderPlayerAPI.getMainModel();
 		else
-			_result = target.localGetResourceLocationFromPlayer(paramAbstractClientPlayer);
+			_result = target.localGetMainModel();
 		return _result;
 	}
 
-	private net.minecraft.util.ResourceLocation getResourceLocationFromPlayer(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer)
+	private net.minecraft.client.model.ModelBase getMainModel()
 	{
-		if(beforeGetResourceLocationFromPlayerHooks != null)
-			for(int i = beforeGetResourceLocationFromPlayerHooks.length - 1; i >= 0 ; i--)
-				beforeGetResourceLocationFromPlayerHooks[i].beforeGetResourceLocationFromPlayer(paramAbstractClientPlayer);
+		if(beforeGetMainModelHooks != null)
+			for(int i = beforeGetMainModelHooks.length - 1; i >= 0 ; i--)
+				beforeGetMainModelHooks[i].beforeGetMainModel();
 
-		net.minecraft.util.ResourceLocation _result;
-		if(overrideGetResourceLocationFromPlayerHooks != null)
-			_result = overrideGetResourceLocationFromPlayerHooks[overrideGetResourceLocationFromPlayerHooks.length - 1].getResourceLocationFromPlayer(paramAbstractClientPlayer);
+		net.minecraft.client.model.ModelBase _result;
+		if(overrideGetMainModelHooks != null)
+			_result = overrideGetMainModelHooks[overrideGetMainModelHooks.length - 1].getMainModel();
 		else
-			_result = renderPlayer.localGetResourceLocationFromPlayer(paramAbstractClientPlayer);
+			_result = renderPlayer.localGetMainModel();
 
-		if(afterGetResourceLocationFromPlayerHooks != null)
-			for(int i = 0; i < afterGetResourceLocationFromPlayerHooks.length; i++)
-				afterGetResourceLocationFromPlayerHooks[i].afterGetResourceLocationFromPlayer(paramAbstractClientPlayer);
+		if(afterGetMainModelHooks != null)
+			for(int i = 0; i < afterGetMainModelHooks.length; i++)
+				afterGetMainModelHooks[i].afterGetMainModel();
 
 		return _result;
 	}
 
-	protected RenderPlayerBase GetOverwrittenGetResourceLocationFromPlayer(RenderPlayerBase overWriter)
+	protected RenderPlayerBase GetOverwrittenGetMainModel(RenderPlayerBase overWriter)
 	{
-		for(int i = 0; i < overrideGetResourceLocationFromPlayerHooks.length; i++)
-			if(overrideGetResourceLocationFromPlayerHooks[i] == overWriter)
+		if (overrideGetMainModelHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideGetMainModelHooks.length; i++)
+			if(overrideGetMainModelHooks[i] == overWriter)
 				if(i == 0)
 					return null;
 				else
-					return overrideGetResourceLocationFromPlayerHooks[i - 1];
+					return overrideGetMainModelHooks[i - 1];
 
 		return overWriter;
 	}
 
-	private final static List<String> beforeGetResourceLocationFromPlayerHookTypes = new LinkedList<String>();
-	private final static List<String> overrideGetResourceLocationFromPlayerHookTypes = new LinkedList<String>();
-	private final static List<String> afterGetResourceLocationFromPlayerHookTypes = new LinkedList<String>();
+	private final static List<String> beforeGetMainModelHookTypes = new LinkedList<String>();
+	private final static List<String> overrideGetMainModelHookTypes = new LinkedList<String>();
+	private final static List<String> afterGetMainModelHookTypes = new LinkedList<String>();
 
-	private RenderPlayerBase[] beforeGetResourceLocationFromPlayerHooks;
-	private RenderPlayerBase[] overrideGetResourceLocationFromPlayerHooks;
-	private RenderPlayerBase[] afterGetResourceLocationFromPlayerHooks;
+	private RenderPlayerBase[] beforeGetMainModelHooks;
+	private RenderPlayerBase[] overrideGetMainModelHooks;
+	private RenderPlayerBase[] afterGetMainModelHooks;
 
-	public boolean isGetResourceLocationFromPlayerModded;
+	public boolean isGetMainModelModded;
 
-	private static final Map<String, String[]> allBaseBeforeGetResourceLocationFromPlayerSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseBeforeGetResourceLocationFromPlayerInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideGetResourceLocationFromPlayerSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideGetResourceLocationFromPlayerInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterGetResourceLocationFromPlayerSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterGetResourceLocationFromPlayerInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeGetMainModelSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeGetMainModelInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideGetMainModelSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideGetMainModelInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterGetMainModelSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterGetMainModelInferiors = new Hashtable<String, String[]>(0);
 
-	public static float handleRotationFloat(IRenderPlayerAPI target, net.minecraft.entity.EntityLivingBase paramEntityLivingBase, float paramFloat)
+	public static net.minecraft.client.model.ModelPlayer getPlayerModel(IRenderPlayerAPI target)
+	{
+		net.minecraft.client.model.ModelPlayer _result;
+		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
+		if(renderPlayerAPI != null && renderPlayerAPI.isGetPlayerModelModded)
+			_result = renderPlayerAPI.getPlayerModel();
+		else
+			_result = target.localGetPlayerModel();
+		return _result;
+	}
+
+	private net.minecraft.client.model.ModelPlayer getPlayerModel()
+	{
+		if(beforeGetPlayerModelHooks != null)
+			for(int i = beforeGetPlayerModelHooks.length - 1; i >= 0 ; i--)
+				beforeGetPlayerModelHooks[i].beforeGetPlayerModel();
+
+		net.minecraft.client.model.ModelPlayer _result;
+		if(overrideGetPlayerModelHooks != null)
+			_result = overrideGetPlayerModelHooks[overrideGetPlayerModelHooks.length - 1].getPlayerModel();
+		else
+			_result = renderPlayer.localGetPlayerModel();
+
+		if(afterGetPlayerModelHooks != null)
+			for(int i = 0; i < afterGetPlayerModelHooks.length; i++)
+				afterGetPlayerModelHooks[i].afterGetPlayerModel();
+
+		return _result;
+	}
+
+	protected RenderPlayerBase GetOverwrittenGetPlayerModel(RenderPlayerBase overWriter)
+	{
+		if (overrideGetPlayerModelHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideGetPlayerModelHooks.length; i++)
+			if(overrideGetPlayerModelHooks[i] == overWriter)
+				if(i == 0)
+					return null;
+				else
+					return overrideGetPlayerModelHooks[i - 1];
+
+		return overWriter;
+	}
+
+	private final static List<String> beforeGetPlayerModelHookTypes = new LinkedList<String>();
+	private final static List<String> overrideGetPlayerModelHookTypes = new LinkedList<String>();
+	private final static List<String> afterGetPlayerModelHookTypes = new LinkedList<String>();
+
+	private RenderPlayerBase[] beforeGetPlayerModelHooks;
+	private RenderPlayerBase[] overrideGetPlayerModelHooks;
+	private RenderPlayerBase[] afterGetPlayerModelHooks;
+
+	public boolean isGetPlayerModelModded;
+
+	private static final Map<String, String[]> allBaseBeforeGetPlayerModelSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeGetPlayerModelInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideGetPlayerModelSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideGetPlayerModelInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterGetPlayerModelSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterGetPlayerModelInferiors = new Hashtable<String, String[]>(0);
+
+	public static net.minecraft.client.renderer.entity.RenderManager getRenderManager(IRenderPlayerAPI target)
+	{
+		net.minecraft.client.renderer.entity.RenderManager _result;
+		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
+		if(renderPlayerAPI != null && renderPlayerAPI.isGetRenderManagerModded)
+			_result = renderPlayerAPI.getRenderManager();
+		else
+			_result = target.localGetRenderManager();
+		return _result;
+	}
+
+	private net.minecraft.client.renderer.entity.RenderManager getRenderManager()
+	{
+		if(beforeGetRenderManagerHooks != null)
+			for(int i = beforeGetRenderManagerHooks.length - 1; i >= 0 ; i--)
+				beforeGetRenderManagerHooks[i].beforeGetRenderManager();
+
+		net.minecraft.client.renderer.entity.RenderManager _result;
+		if(overrideGetRenderManagerHooks != null)
+			_result = overrideGetRenderManagerHooks[overrideGetRenderManagerHooks.length - 1].getRenderManager();
+		else
+			_result = renderPlayer.localGetRenderManager();
+
+		if(afterGetRenderManagerHooks != null)
+			for(int i = 0; i < afterGetRenderManagerHooks.length; i++)
+				afterGetRenderManagerHooks[i].afterGetRenderManager();
+
+		return _result;
+	}
+
+	protected RenderPlayerBase GetOverwrittenGetRenderManager(RenderPlayerBase overWriter)
+	{
+		if (overrideGetRenderManagerHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideGetRenderManagerHooks.length; i++)
+			if(overrideGetRenderManagerHooks[i] == overWriter)
+				if(i == 0)
+					return null;
+				else
+					return overrideGetRenderManagerHooks[i - 1];
+
+		return overWriter;
+	}
+
+	private final static List<String> beforeGetRenderManagerHookTypes = new LinkedList<String>();
+	private final static List<String> overrideGetRenderManagerHookTypes = new LinkedList<String>();
+	private final static List<String> afterGetRenderManagerHookTypes = new LinkedList<String>();
+
+	private RenderPlayerBase[] beforeGetRenderManagerHooks;
+	private RenderPlayerBase[] overrideGetRenderManagerHooks;
+	private RenderPlayerBase[] afterGetRenderManagerHooks;
+
+	public boolean isGetRenderManagerModded;
+
+	private static final Map<String, String[]> allBaseBeforeGetRenderManagerSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeGetRenderManagerInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideGetRenderManagerSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideGetRenderManagerInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterGetRenderManagerSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterGetRenderManagerInferiors = new Hashtable<String, String[]>(0);
+
+	public static float getSwingProgress(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat)
+	{
+		float _result;
+		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
+		if(renderPlayerAPI != null && renderPlayerAPI.isGetSwingProgressModded)
+			_result = renderPlayerAPI.getSwingProgress(paramAbstractClientPlayer, paramFloat);
+		else
+			_result = target.localGetSwingProgress(paramAbstractClientPlayer, paramFloat);
+		return _result;
+	}
+
+	private float getSwingProgress(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat)
+	{
+		if(beforeGetSwingProgressHooks != null)
+			for(int i = beforeGetSwingProgressHooks.length - 1; i >= 0 ; i--)
+				beforeGetSwingProgressHooks[i].beforeGetSwingProgress(paramAbstractClientPlayer, paramFloat);
+
+		float _result;
+		if(overrideGetSwingProgressHooks != null)
+			_result = overrideGetSwingProgressHooks[overrideGetSwingProgressHooks.length - 1].getSwingProgress(paramAbstractClientPlayer, paramFloat);
+		else
+			_result = renderPlayer.localGetSwingProgress(paramAbstractClientPlayer, paramFloat);
+
+		if(afterGetSwingProgressHooks != null)
+			for(int i = 0; i < afterGetSwingProgressHooks.length; i++)
+				afterGetSwingProgressHooks[i].afterGetSwingProgress(paramAbstractClientPlayer, paramFloat);
+
+		return _result;
+	}
+
+	protected RenderPlayerBase GetOverwrittenGetSwingProgress(RenderPlayerBase overWriter)
+	{
+		if (overrideGetSwingProgressHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideGetSwingProgressHooks.length; i++)
+			if(overrideGetSwingProgressHooks[i] == overWriter)
+				if(i == 0)
+					return null;
+				else
+					return overrideGetSwingProgressHooks[i - 1];
+
+		return overWriter;
+	}
+
+	private final static List<String> beforeGetSwingProgressHookTypes = new LinkedList<String>();
+	private final static List<String> overrideGetSwingProgressHookTypes = new LinkedList<String>();
+	private final static List<String> afterGetSwingProgressHookTypes = new LinkedList<String>();
+
+	private RenderPlayerBase[] beforeGetSwingProgressHooks;
+	private RenderPlayerBase[] overrideGetSwingProgressHooks;
+	private RenderPlayerBase[] afterGetSwingProgressHooks;
+
+	public boolean isGetSwingProgressModded;
+
+	private static final Map<String, String[]> allBaseBeforeGetSwingProgressSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeGetSwingProgressInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideGetSwingProgressSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideGetSwingProgressInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterGetSwingProgressSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterGetSwingProgressInferiors = new Hashtable<String, String[]>(0);
+
+	public static float handleRotationFloat(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat)
 	{
 		float _result;
 		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
 		if(renderPlayerAPI != null && renderPlayerAPI.isHandleRotationFloatModded)
-			_result = renderPlayerAPI.handleRotationFloat(paramEntityLivingBase, paramFloat);
+			_result = renderPlayerAPI.handleRotationFloat(paramAbstractClientPlayer, paramFloat);
 		else
-			_result = target.localHandleRotationFloat(paramEntityLivingBase, paramFloat);
+			_result = target.localHandleRotationFloat(paramAbstractClientPlayer, paramFloat);
 		return _result;
 	}
 
-	private float handleRotationFloat(net.minecraft.entity.EntityLivingBase paramEntityLivingBase, float paramFloat)
+	private float handleRotationFloat(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat)
 	{
 		if(beforeHandleRotationFloatHooks != null)
 			for(int i = beforeHandleRotationFloatHooks.length - 1; i >= 0 ; i--)
-				beforeHandleRotationFloatHooks[i].beforeHandleRotationFloat(paramEntityLivingBase, paramFloat);
+				beforeHandleRotationFloatHooks[i].beforeHandleRotationFloat(paramAbstractClientPlayer, paramFloat);
 
 		float _result;
 		if(overrideHandleRotationFloatHooks != null)
-			_result = overrideHandleRotationFloatHooks[overrideHandleRotationFloatHooks.length - 1].handleRotationFloat(paramEntityLivingBase, paramFloat);
+			_result = overrideHandleRotationFloatHooks[overrideHandleRotationFloatHooks.length - 1].handleRotationFloat(paramAbstractClientPlayer, paramFloat);
 		else
-			_result = renderPlayer.localHandleRotationFloat(paramEntityLivingBase, paramFloat);
+			_result = renderPlayer.localHandleRotationFloat(paramAbstractClientPlayer, paramFloat);
 
 		if(afterHandleRotationFloatHooks != null)
 			for(int i = 0; i < afterHandleRotationFloatHooks.length; i++)
-				afterHandleRotationFloatHooks[i].afterHandleRotationFloat(paramEntityLivingBase, paramFloat);
+				afterHandleRotationFloatHooks[i].afterHandleRotationFloat(paramAbstractClientPlayer, paramFloat);
 
 		return _result;
 	}
 
 	protected RenderPlayerBase GetOverwrittenHandleRotationFloat(RenderPlayerBase overWriter)
 	{
+		if (overrideHandleRotationFloatHooks == null)
+			return overWriter;
+
 		for(int i = 0; i < overrideHandleRotationFloatHooks.length; i++)
 			if(overrideHandleRotationFloatHooks[i] == overWriter)
 				if(i == 0)
@@ -2059,203 +2890,99 @@ public final class RenderPlayerAPI
 	private static final Map<String, String[]> allBaseAfterHandleRotationFloatSuperiors = new Hashtable<String, String[]>(0);
 	private static final Map<String, String[]> allBaseAfterHandleRotationFloatInferiors = new Hashtable<String, String[]>(0);
 
-	public static int inheritRenderPass(IRenderPlayerAPI target, net.minecraft.entity.EntityLivingBase paramEntityLivingBase, int paramInt, float paramFloat)
+	public static float interpolateRotation(IRenderPlayerAPI target, float paramFloat1, float paramFloat2, float paramFloat3)
 	{
-		int _result;
+		float _result;
 		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
-		if(renderPlayerAPI != null && renderPlayerAPI.isInheritRenderPassModded)
-			_result = renderPlayerAPI.inheritRenderPass(paramEntityLivingBase, paramInt, paramFloat);
+		if(renderPlayerAPI != null && renderPlayerAPI.isInterpolateRotationModded)
+			_result = renderPlayerAPI.interpolateRotation(paramFloat1, paramFloat2, paramFloat3);
 		else
-			_result = target.localInheritRenderPass(paramEntityLivingBase, paramInt, paramFloat);
+			_result = target.localInterpolateRotation(paramFloat1, paramFloat2, paramFloat3);
 		return _result;
 	}
 
-	private int inheritRenderPass(net.minecraft.entity.EntityLivingBase paramEntityLivingBase, int paramInt, float paramFloat)
+	private float interpolateRotation(float paramFloat1, float paramFloat2, float paramFloat3)
 	{
-		if(beforeInheritRenderPassHooks != null)
-			for(int i = beforeInheritRenderPassHooks.length - 1; i >= 0 ; i--)
-				beforeInheritRenderPassHooks[i].beforeInheritRenderPass(paramEntityLivingBase, paramInt, paramFloat);
+		if(beforeInterpolateRotationHooks != null)
+			for(int i = beforeInterpolateRotationHooks.length - 1; i >= 0 ; i--)
+				beforeInterpolateRotationHooks[i].beforeInterpolateRotation(paramFloat1, paramFloat2, paramFloat3);
 
-		int _result;
-		if(overrideInheritRenderPassHooks != null)
-			_result = overrideInheritRenderPassHooks[overrideInheritRenderPassHooks.length - 1].inheritRenderPass(paramEntityLivingBase, paramInt, paramFloat);
+		float _result;
+		if(overrideInterpolateRotationHooks != null)
+			_result = overrideInterpolateRotationHooks[overrideInterpolateRotationHooks.length - 1].interpolateRotation(paramFloat1, paramFloat2, paramFloat3);
 		else
-			_result = renderPlayer.localInheritRenderPass(paramEntityLivingBase, paramInt, paramFloat);
+			_result = renderPlayer.localInterpolateRotation(paramFloat1, paramFloat2, paramFloat3);
 
-		if(afterInheritRenderPassHooks != null)
-			for(int i = 0; i < afterInheritRenderPassHooks.length; i++)
-				afterInheritRenderPassHooks[i].afterInheritRenderPass(paramEntityLivingBase, paramInt, paramFloat);
+		if(afterInterpolateRotationHooks != null)
+			for(int i = 0; i < afterInterpolateRotationHooks.length; i++)
+				afterInterpolateRotationHooks[i].afterInterpolateRotation(paramFloat1, paramFloat2, paramFloat3);
 
 		return _result;
 	}
 
-	protected RenderPlayerBase GetOverwrittenInheritRenderPass(RenderPlayerBase overWriter)
+	protected RenderPlayerBase GetOverwrittenInterpolateRotation(RenderPlayerBase overWriter)
 	{
-		for(int i = 0; i < overrideInheritRenderPassHooks.length; i++)
-			if(overrideInheritRenderPassHooks[i] == overWriter)
+		if (overrideInterpolateRotationHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideInterpolateRotationHooks.length; i++)
+			if(overrideInterpolateRotationHooks[i] == overWriter)
 				if(i == 0)
 					return null;
 				else
-					return overrideInheritRenderPassHooks[i - 1];
+					return overrideInterpolateRotationHooks[i - 1];
 
 		return overWriter;
 	}
 
-	private final static List<String> beforeInheritRenderPassHookTypes = new LinkedList<String>();
-	private final static List<String> overrideInheritRenderPassHookTypes = new LinkedList<String>();
-	private final static List<String> afterInheritRenderPassHookTypes = new LinkedList<String>();
+	private final static List<String> beforeInterpolateRotationHookTypes = new LinkedList<String>();
+	private final static List<String> overrideInterpolateRotationHookTypes = new LinkedList<String>();
+	private final static List<String> afterInterpolateRotationHookTypes = new LinkedList<String>();
 
-	private RenderPlayerBase[] beforeInheritRenderPassHooks;
-	private RenderPlayerBase[] overrideInheritRenderPassHooks;
-	private RenderPlayerBase[] afterInheritRenderPassHooks;
+	private RenderPlayerBase[] beforeInterpolateRotationHooks;
+	private RenderPlayerBase[] overrideInterpolateRotationHooks;
+	private RenderPlayerBase[] afterInterpolateRotationHooks;
 
-	public boolean isInheritRenderPassModded;
+	public boolean isInterpolateRotationModded;
 
-	private static final Map<String, String[]> allBaseBeforeInheritRenderPassSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseBeforeInheritRenderPassInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideInheritRenderPassSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideInheritRenderPassInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterInheritRenderPassSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterInheritRenderPassInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeInterpolateRotationSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeInterpolateRotationInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideInterpolateRotationSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideInterpolateRotationInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterInterpolateRotationSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterInterpolateRotationInferiors = new Hashtable<String, String[]>(0);
 
-	public static void loadTexture(IRenderPlayerAPI target, net.minecraft.util.ResourceLocation paramResourceLocation)
-	{
-		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
-		if(renderPlayerAPI != null && renderPlayerAPI.isLoadTextureModded)
-			renderPlayerAPI.loadTexture(paramResourceLocation);
-		else
-			target.localLoadTexture(paramResourceLocation);
-	}
-
-	private void loadTexture(net.minecraft.util.ResourceLocation paramResourceLocation)
-	{
-		if(beforeLoadTextureHooks != null)
-			for(int i = beforeLoadTextureHooks.length - 1; i >= 0 ; i--)
-				beforeLoadTextureHooks[i].beforeLoadTexture(paramResourceLocation);
-
-		if(overrideLoadTextureHooks != null)
-			overrideLoadTextureHooks[overrideLoadTextureHooks.length - 1].loadTexture(paramResourceLocation);
-		else
-			renderPlayer.localLoadTexture(paramResourceLocation);
-
-		if(afterLoadTextureHooks != null)
-			for(int i = 0; i < afterLoadTextureHooks.length; i++)
-				afterLoadTextureHooks[i].afterLoadTexture(paramResourceLocation);
-
-	}
-
-	protected RenderPlayerBase GetOverwrittenLoadTexture(RenderPlayerBase overWriter)
-	{
-		for(int i = 0; i < overrideLoadTextureHooks.length; i++)
-			if(overrideLoadTextureHooks[i] == overWriter)
-				if(i == 0)
-					return null;
-				else
-					return overrideLoadTextureHooks[i - 1];
-
-		return overWriter;
-	}
-
-	private final static List<String> beforeLoadTextureHookTypes = new LinkedList<String>();
-	private final static List<String> overrideLoadTextureHookTypes = new LinkedList<String>();
-	private final static List<String> afterLoadTextureHookTypes = new LinkedList<String>();
-
-	private RenderPlayerBase[] beforeLoadTextureHooks;
-	private RenderPlayerBase[] overrideLoadTextureHooks;
-	private RenderPlayerBase[] afterLoadTextureHooks;
-
-	public boolean isLoadTextureModded;
-
-	private static final Map<String, String[]> allBaseBeforeLoadTextureSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseBeforeLoadTextureInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideLoadTextureSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideLoadTextureInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterLoadTextureSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterLoadTextureInferiors = new Hashtable<String, String[]>(0);
-
-	public static void loadTextureOfEntity(IRenderPlayerAPI target, net.minecraft.entity.Entity paramEntity)
-	{
-		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
-		if(renderPlayerAPI != null && renderPlayerAPI.isLoadTextureOfEntityModded)
-			renderPlayerAPI.loadTextureOfEntity(paramEntity);
-		else
-			target.localLoadTextureOfEntity(paramEntity);
-	}
-
-	private void loadTextureOfEntity(net.minecraft.entity.Entity paramEntity)
-	{
-		if(beforeLoadTextureOfEntityHooks != null)
-			for(int i = beforeLoadTextureOfEntityHooks.length - 1; i >= 0 ; i--)
-				beforeLoadTextureOfEntityHooks[i].beforeLoadTextureOfEntity(paramEntity);
-
-		if(overrideLoadTextureOfEntityHooks != null)
-			overrideLoadTextureOfEntityHooks[overrideLoadTextureOfEntityHooks.length - 1].loadTextureOfEntity(paramEntity);
-		else
-			renderPlayer.localLoadTextureOfEntity(paramEntity);
-
-		if(afterLoadTextureOfEntityHooks != null)
-			for(int i = 0; i < afterLoadTextureOfEntityHooks.length; i++)
-				afterLoadTextureOfEntityHooks[i].afterLoadTextureOfEntity(paramEntity);
-
-	}
-
-	protected RenderPlayerBase GetOverwrittenLoadTextureOfEntity(RenderPlayerBase overWriter)
-	{
-		for(int i = 0; i < overrideLoadTextureOfEntityHooks.length; i++)
-			if(overrideLoadTextureOfEntityHooks[i] == overWriter)
-				if(i == 0)
-					return null;
-				else
-					return overrideLoadTextureOfEntityHooks[i - 1];
-
-		return overWriter;
-	}
-
-	private final static List<String> beforeLoadTextureOfEntityHookTypes = new LinkedList<String>();
-	private final static List<String> overrideLoadTextureOfEntityHookTypes = new LinkedList<String>();
-	private final static List<String> afterLoadTextureOfEntityHookTypes = new LinkedList<String>();
-
-	private RenderPlayerBase[] beforeLoadTextureOfEntityHooks;
-	private RenderPlayerBase[] overrideLoadTextureOfEntityHooks;
-	private RenderPlayerBase[] afterLoadTextureOfEntityHooks;
-
-	public boolean isLoadTextureOfEntityModded;
-
-	private static final Map<String, String[]> allBaseBeforeLoadTextureOfEntitySuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseBeforeLoadTextureOfEntityInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideLoadTextureOfEntitySuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideLoadTextureOfEntityInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterLoadTextureOfEntitySuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterLoadTextureOfEntityInferiors = new Hashtable<String, String[]>(0);
-
-	public static void passSpecialRender(IRenderPlayerAPI target, net.minecraft.entity.EntityLivingBase paramEntityLivingBase, double paramDouble1, double paramDouble2, double paramDouble3)
+	public static void passSpecialRender(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3)
 	{
 		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
 		if(renderPlayerAPI != null && renderPlayerAPI.isPassSpecialRenderModded)
-			renderPlayerAPI.passSpecialRender(paramEntityLivingBase, paramDouble1, paramDouble2, paramDouble3);
+			renderPlayerAPI.passSpecialRender(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3);
 		else
-			target.localPassSpecialRender(paramEntityLivingBase, paramDouble1, paramDouble2, paramDouble3);
+			target.localPassSpecialRender(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3);
 	}
 
-	private void passSpecialRender(net.minecraft.entity.EntityLivingBase paramEntityLivingBase, double paramDouble1, double paramDouble2, double paramDouble3)
+	private void passSpecialRender(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3)
 	{
 		if(beforePassSpecialRenderHooks != null)
 			for(int i = beforePassSpecialRenderHooks.length - 1; i >= 0 ; i--)
-				beforePassSpecialRenderHooks[i].beforePassSpecialRender(paramEntityLivingBase, paramDouble1, paramDouble2, paramDouble3);
+				beforePassSpecialRenderHooks[i].beforePassSpecialRender(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3);
 
 		if(overridePassSpecialRenderHooks != null)
-			overridePassSpecialRenderHooks[overridePassSpecialRenderHooks.length - 1].passSpecialRender(paramEntityLivingBase, paramDouble1, paramDouble2, paramDouble3);
+			overridePassSpecialRenderHooks[overridePassSpecialRenderHooks.length - 1].passSpecialRender(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3);
 		else
-			renderPlayer.localPassSpecialRender(paramEntityLivingBase, paramDouble1, paramDouble2, paramDouble3);
+			renderPlayer.localPassSpecialRender(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3);
 
 		if(afterPassSpecialRenderHooks != null)
 			for(int i = 0; i < afterPassSpecialRenderHooks.length; i++)
-				afterPassSpecialRenderHooks[i].afterPassSpecialRender(paramEntityLivingBase, paramDouble1, paramDouble2, paramDouble3);
+				afterPassSpecialRenderHooks[i].afterPassSpecialRender(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3);
 
 	}
 
 	protected RenderPlayerBase GetOverwrittenPassSpecialRender(RenderPlayerBase overWriter)
 	{
+		if (overridePassSpecialRenderHooks == null)
+			return overWriter;
+
 		for(int i = 0; i < overridePassSpecialRenderHooks.length; i++)
 			if(overridePassSpecialRenderHooks[i] == overWriter)
 				if(i == 0)
@@ -2283,203 +3010,331 @@ public final class RenderPlayerAPI
 	private static final Map<String, String[]> allBaseAfterPassSpecialRenderSuperiors = new Hashtable<String, String[]>(0);
 	private static final Map<String, String[]> allBaseAfterPassSpecialRenderInferiors = new Hashtable<String, String[]>(0);
 
-	public static boolean performStaticEntityRebuild(IRenderPlayerAPI target)
+	public static void preRenderCallback(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat)
+	{
+		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
+		if(renderPlayerAPI != null && renderPlayerAPI.isPreRenderCallbackModded)
+			renderPlayerAPI.preRenderCallback(paramAbstractClientPlayer, paramFloat);
+		else
+			target.localPreRenderCallback(paramAbstractClientPlayer, paramFloat);
+	}
+
+	private void preRenderCallback(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat)
+	{
+		if(beforePreRenderCallbackHooks != null)
+			for(int i = beforePreRenderCallbackHooks.length - 1; i >= 0 ; i--)
+				beforePreRenderCallbackHooks[i].beforePreRenderCallback(paramAbstractClientPlayer, paramFloat);
+
+		if(overridePreRenderCallbackHooks != null)
+			overridePreRenderCallbackHooks[overridePreRenderCallbackHooks.length - 1].preRenderCallback(paramAbstractClientPlayer, paramFloat);
+		else
+			renderPlayer.localPreRenderCallback(paramAbstractClientPlayer, paramFloat);
+
+		if(afterPreRenderCallbackHooks != null)
+			for(int i = 0; i < afterPreRenderCallbackHooks.length; i++)
+				afterPreRenderCallbackHooks[i].afterPreRenderCallback(paramAbstractClientPlayer, paramFloat);
+
+	}
+
+	protected RenderPlayerBase GetOverwrittenPreRenderCallback(RenderPlayerBase overWriter)
+	{
+		if (overridePreRenderCallbackHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overridePreRenderCallbackHooks.length; i++)
+			if(overridePreRenderCallbackHooks[i] == overWriter)
+				if(i == 0)
+					return null;
+				else
+					return overridePreRenderCallbackHooks[i - 1];
+
+		return overWriter;
+	}
+
+	private final static List<String> beforePreRenderCallbackHookTypes = new LinkedList<String>();
+	private final static List<String> overridePreRenderCallbackHookTypes = new LinkedList<String>();
+	private final static List<String> afterPreRenderCallbackHookTypes = new LinkedList<String>();
+
+	private RenderPlayerBase[] beforePreRenderCallbackHooks;
+	private RenderPlayerBase[] overridePreRenderCallbackHooks;
+	private RenderPlayerBase[] afterPreRenderCallbackHooks;
+
+	public boolean isPreRenderCallbackModded;
+
+	private static final Map<String, String[]> allBaseBeforePreRenderCallbackSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforePreRenderCallbackInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverridePreRenderCallbackSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverridePreRenderCallbackInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterPreRenderCallbackSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterPreRenderCallbackInferiors = new Hashtable<String, String[]>(0);
+
+	public static boolean removeLayer(IRenderPlayerAPI target, net.minecraft.client.renderer.entity.layers.LayerRenderer paramLayerRenderer)
 	{
 		boolean _result;
 		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
-		if(renderPlayerAPI != null && renderPlayerAPI.isPerformStaticEntityRebuildModded)
-			_result = renderPlayerAPI.performStaticEntityRebuild();
+		if(renderPlayerAPI != null && renderPlayerAPI.isRemoveLayerModded)
+			_result = renderPlayerAPI.removeLayer(paramLayerRenderer);
 		else
-			_result = target.localPerformStaticEntityRebuild();
+			_result = target.localRemoveLayer(paramLayerRenderer);
 		return _result;
 	}
 
-	private boolean performStaticEntityRebuild()
+	private boolean removeLayer(net.minecraft.client.renderer.entity.layers.LayerRenderer paramLayerRenderer)
 	{
-		if(beforePerformStaticEntityRebuildHooks != null)
-			for(int i = beforePerformStaticEntityRebuildHooks.length - 1; i >= 0 ; i--)
-				beforePerformStaticEntityRebuildHooks[i].beforePerformStaticEntityRebuild();
+		if(beforeRemoveLayerHooks != null)
+			for(int i = beforeRemoveLayerHooks.length - 1; i >= 0 ; i--)
+				beforeRemoveLayerHooks[i].beforeRemoveLayer(paramLayerRenderer);
 
 		boolean _result;
-		if(overridePerformStaticEntityRebuildHooks != null)
-			_result = overridePerformStaticEntityRebuildHooks[overridePerformStaticEntityRebuildHooks.length - 1].performStaticEntityRebuild();
+		if(overrideRemoveLayerHooks != null)
+			_result = overrideRemoveLayerHooks[overrideRemoveLayerHooks.length - 1].removeLayer(paramLayerRenderer);
 		else
-			_result = renderPlayer.localPerformStaticEntityRebuild();
+			_result = renderPlayer.localRemoveLayer(paramLayerRenderer);
 
-		if(afterPerformStaticEntityRebuildHooks != null)
-			for(int i = 0; i < afterPerformStaticEntityRebuildHooks.length; i++)
-				afterPerformStaticEntityRebuildHooks[i].afterPerformStaticEntityRebuild();
+		if(afterRemoveLayerHooks != null)
+			for(int i = 0; i < afterRemoveLayerHooks.length; i++)
+				afterRemoveLayerHooks[i].afterRemoveLayer(paramLayerRenderer);
 
 		return _result;
 	}
 
-	protected RenderPlayerBase GetOverwrittenPerformStaticEntityRebuild(RenderPlayerBase overWriter)
+	protected RenderPlayerBase GetOverwrittenRemoveLayer(RenderPlayerBase overWriter)
 	{
-		for(int i = 0; i < overridePerformStaticEntityRebuildHooks.length; i++)
-			if(overridePerformStaticEntityRebuildHooks[i] == overWriter)
+		if (overrideRemoveLayerHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideRemoveLayerHooks.length; i++)
+			if(overrideRemoveLayerHooks[i] == overWriter)
 				if(i == 0)
 					return null;
 				else
-					return overridePerformStaticEntityRebuildHooks[i - 1];
+					return overrideRemoveLayerHooks[i - 1];
 
 		return overWriter;
 	}
 
-	private final static List<String> beforePerformStaticEntityRebuildHookTypes = new LinkedList<String>();
-	private final static List<String> overridePerformStaticEntityRebuildHookTypes = new LinkedList<String>();
-	private final static List<String> afterPerformStaticEntityRebuildHookTypes = new LinkedList<String>();
+	private final static List<String> beforeRemoveLayerHookTypes = new LinkedList<String>();
+	private final static List<String> overrideRemoveLayerHookTypes = new LinkedList<String>();
+	private final static List<String> afterRemoveLayerHookTypes = new LinkedList<String>();
 
-	private RenderPlayerBase[] beforePerformStaticEntityRebuildHooks;
-	private RenderPlayerBase[] overridePerformStaticEntityRebuildHooks;
-	private RenderPlayerBase[] afterPerformStaticEntityRebuildHooks;
+	private RenderPlayerBase[] beforeRemoveLayerHooks;
+	private RenderPlayerBase[] overrideRemoveLayerHooks;
+	private RenderPlayerBase[] afterRemoveLayerHooks;
 
-	public boolean isPerformStaticEntityRebuildModded;
+	public boolean isRemoveLayerModded;
 
-	private static final Map<String, String[]> allBaseBeforePerformStaticEntityRebuildSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseBeforePerformStaticEntityRebuildInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverridePerformStaticEntityRebuildSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverridePerformStaticEntityRebuildInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterPerformStaticEntityRebuildSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterPerformStaticEntityRebuildInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeRemoveLayerSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeRemoveLayerInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideRemoveLayerSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideRemoveLayerInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterRemoveLayerSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterRemoveLayerInferiors = new Hashtable<String, String[]>(0);
 
-	public static void renderArrowsStuckInEntity(IRenderPlayerAPI target, net.minecraft.entity.EntityLivingBase paramEntityLivingBase, float paramFloat)
+	public static void renderLayers(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6, float paramFloat7)
 	{
 		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
-		if(renderPlayerAPI != null && renderPlayerAPI.isRenderArrowsStuckInEntityModded)
-			renderPlayerAPI.renderArrowsStuckInEntity(paramEntityLivingBase, paramFloat);
+		if(renderPlayerAPI != null && renderPlayerAPI.isRenderLayersModded)
+			renderPlayerAPI.renderLayers(paramAbstractClientPlayer, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6, paramFloat7);
 		else
-			target.localRenderArrowsStuckInEntity(paramEntityLivingBase, paramFloat);
+			target.localRenderLayers(paramAbstractClientPlayer, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6, paramFloat7);
 	}
 
-	private void renderArrowsStuckInEntity(net.minecraft.entity.EntityLivingBase paramEntityLivingBase, float paramFloat)
+	private void renderLayers(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6, float paramFloat7)
 	{
-		if(beforeRenderArrowsStuckInEntityHooks != null)
-			for(int i = beforeRenderArrowsStuckInEntityHooks.length - 1; i >= 0 ; i--)
-				beforeRenderArrowsStuckInEntityHooks[i].beforeRenderArrowsStuckInEntity(paramEntityLivingBase, paramFloat);
+		if(beforeRenderLayersHooks != null)
+			for(int i = beforeRenderLayersHooks.length - 1; i >= 0 ; i--)
+				beforeRenderLayersHooks[i].beforeRenderLayers(paramAbstractClientPlayer, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6, paramFloat7);
 
-		if(overrideRenderArrowsStuckInEntityHooks != null)
-			overrideRenderArrowsStuckInEntityHooks[overrideRenderArrowsStuckInEntityHooks.length - 1].renderArrowsStuckInEntity(paramEntityLivingBase, paramFloat);
+		if(overrideRenderLayersHooks != null)
+			overrideRenderLayersHooks[overrideRenderLayersHooks.length - 1].renderLayers(paramAbstractClientPlayer, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6, paramFloat7);
 		else
-			renderPlayer.localRenderArrowsStuckInEntity(paramEntityLivingBase, paramFloat);
+			renderPlayer.localRenderLayers(paramAbstractClientPlayer, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6, paramFloat7);
 
-		if(afterRenderArrowsStuckInEntityHooks != null)
-			for(int i = 0; i < afterRenderArrowsStuckInEntityHooks.length; i++)
-				afterRenderArrowsStuckInEntityHooks[i].afterRenderArrowsStuckInEntity(paramEntityLivingBase, paramFloat);
+		if(afterRenderLayersHooks != null)
+			for(int i = 0; i < afterRenderLayersHooks.length; i++)
+				afterRenderLayersHooks[i].afterRenderLayers(paramAbstractClientPlayer, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6, paramFloat7);
 
 	}
 
-	protected RenderPlayerBase GetOverwrittenRenderArrowsStuckInEntity(RenderPlayerBase overWriter)
+	protected RenderPlayerBase GetOverwrittenRenderLayers(RenderPlayerBase overWriter)
 	{
-		for(int i = 0; i < overrideRenderArrowsStuckInEntityHooks.length; i++)
-			if(overrideRenderArrowsStuckInEntityHooks[i] == overWriter)
+		if (overrideRenderLayersHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideRenderLayersHooks.length; i++)
+			if(overrideRenderLayersHooks[i] == overWriter)
 				if(i == 0)
 					return null;
 				else
-					return overrideRenderArrowsStuckInEntityHooks[i - 1];
+					return overrideRenderLayersHooks[i - 1];
 
 		return overWriter;
 	}
 
-	private final static List<String> beforeRenderArrowsStuckInEntityHookTypes = new LinkedList<String>();
-	private final static List<String> overrideRenderArrowsStuckInEntityHookTypes = new LinkedList<String>();
-	private final static List<String> afterRenderArrowsStuckInEntityHookTypes = new LinkedList<String>();
+	private final static List<String> beforeRenderLayersHookTypes = new LinkedList<String>();
+	private final static List<String> overrideRenderLayersHookTypes = new LinkedList<String>();
+	private final static List<String> afterRenderLayersHookTypes = new LinkedList<String>();
 
-	private RenderPlayerBase[] beforeRenderArrowsStuckInEntityHooks;
-	private RenderPlayerBase[] overrideRenderArrowsStuckInEntityHooks;
-	private RenderPlayerBase[] afterRenderArrowsStuckInEntityHooks;
+	private RenderPlayerBase[] beforeRenderLayersHooks;
+	private RenderPlayerBase[] overrideRenderLayersHooks;
+	private RenderPlayerBase[] afterRenderLayersHooks;
 
-	public boolean isRenderArrowsStuckInEntityModded;
+	public boolean isRenderLayersModded;
 
-	private static final Map<String, String[]> allBaseBeforeRenderArrowsStuckInEntitySuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseBeforeRenderArrowsStuckInEntityInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideRenderArrowsStuckInEntitySuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideRenderArrowsStuckInEntityInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterRenderArrowsStuckInEntitySuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterRenderArrowsStuckInEntityInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeRenderLayersSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeRenderLayersInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideRenderLayersSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideRenderLayersInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterRenderLayersSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterRenderLayersInferiors = new Hashtable<String, String[]>(0);
 
-	public static void renderFirstPersonArm(IRenderPlayerAPI target, net.minecraft.entity.player.EntityPlayer paramEntityPlayer)
+	public static void renderLeftArm(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer)
 	{
 		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
-		if(renderPlayerAPI != null && renderPlayerAPI.isRenderFirstPersonArmModded)
-			renderPlayerAPI.renderFirstPersonArm(paramEntityPlayer);
+		if(renderPlayerAPI != null && renderPlayerAPI.isRenderLeftArmModded)
+			renderPlayerAPI.renderLeftArm(paramAbstractClientPlayer);
 		else
-			target.localRenderFirstPersonArm(paramEntityPlayer);
+			target.localRenderLeftArm(paramAbstractClientPlayer);
 	}
 
-	private void renderFirstPersonArm(net.minecraft.entity.player.EntityPlayer paramEntityPlayer)
+	private void renderLeftArm(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer)
 	{
-		if(beforeRenderFirstPersonArmHooks != null)
-			for(int i = beforeRenderFirstPersonArmHooks.length - 1; i >= 0 ; i--)
-				beforeRenderFirstPersonArmHooks[i].beforeRenderFirstPersonArm(paramEntityPlayer);
+		if(beforeRenderLeftArmHooks != null)
+			for(int i = beforeRenderLeftArmHooks.length - 1; i >= 0 ; i--)
+				beforeRenderLeftArmHooks[i].beforeRenderLeftArm(paramAbstractClientPlayer);
 
-		if(overrideRenderFirstPersonArmHooks != null)
-			overrideRenderFirstPersonArmHooks[overrideRenderFirstPersonArmHooks.length - 1].renderFirstPersonArm(paramEntityPlayer);
+		if(overrideRenderLeftArmHooks != null)
+			overrideRenderLeftArmHooks[overrideRenderLeftArmHooks.length - 1].renderLeftArm(paramAbstractClientPlayer);
 		else
-			renderPlayer.localRenderFirstPersonArm(paramEntityPlayer);
+			renderPlayer.localRenderLeftArm(paramAbstractClientPlayer);
 
-		if(afterRenderFirstPersonArmHooks != null)
-			for(int i = 0; i < afterRenderFirstPersonArmHooks.length; i++)
-				afterRenderFirstPersonArmHooks[i].afterRenderFirstPersonArm(paramEntityPlayer);
+		if(afterRenderLeftArmHooks != null)
+			for(int i = 0; i < afterRenderLeftArmHooks.length; i++)
+				afterRenderLeftArmHooks[i].afterRenderLeftArm(paramAbstractClientPlayer);
 
 	}
 
-	protected RenderPlayerBase GetOverwrittenRenderFirstPersonArm(RenderPlayerBase overWriter)
+	protected RenderPlayerBase GetOverwrittenRenderLeftArm(RenderPlayerBase overWriter)
 	{
-		for(int i = 0; i < overrideRenderFirstPersonArmHooks.length; i++)
-			if(overrideRenderFirstPersonArmHooks[i] == overWriter)
+		if (overrideRenderLeftArmHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideRenderLeftArmHooks.length; i++)
+			if(overrideRenderLeftArmHooks[i] == overWriter)
 				if(i == 0)
 					return null;
 				else
-					return overrideRenderFirstPersonArmHooks[i - 1];
+					return overrideRenderLeftArmHooks[i - 1];
 
 		return overWriter;
 	}
 
-	private final static List<String> beforeRenderFirstPersonArmHookTypes = new LinkedList<String>();
-	private final static List<String> overrideRenderFirstPersonArmHookTypes = new LinkedList<String>();
-	private final static List<String> afterRenderFirstPersonArmHookTypes = new LinkedList<String>();
+	private final static List<String> beforeRenderLeftArmHookTypes = new LinkedList<String>();
+	private final static List<String> overrideRenderLeftArmHookTypes = new LinkedList<String>();
+	private final static List<String> afterRenderLeftArmHookTypes = new LinkedList<String>();
 
-	private RenderPlayerBase[] beforeRenderFirstPersonArmHooks;
-	private RenderPlayerBase[] overrideRenderFirstPersonArmHooks;
-	private RenderPlayerBase[] afterRenderFirstPersonArmHooks;
+	private RenderPlayerBase[] beforeRenderLeftArmHooks;
+	private RenderPlayerBase[] overrideRenderLeftArmHooks;
+	private RenderPlayerBase[] afterRenderLeftArmHooks;
 
-	public boolean isRenderFirstPersonArmModded;
+	public boolean isRenderLeftArmModded;
 
-	private static final Map<String, String[]> allBaseBeforeRenderFirstPersonArmSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseBeforeRenderFirstPersonArmInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideRenderFirstPersonArmSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideRenderFirstPersonArmInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterRenderFirstPersonArmSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterRenderFirstPersonArmInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeRenderLeftArmSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeRenderLeftArmInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideRenderLeftArmSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideRenderLeftArmInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterRenderLeftArmSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterRenderLeftArmInferiors = new Hashtable<String, String[]>(0);
 
-	public static void renderLivingLabel(IRenderPlayerAPI target, net.minecraft.entity.Entity paramEntity, String paramString, double paramDouble1, double paramDouble2, double paramDouble3, int paramInt)
+	public static void renderLivingAt(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3)
+	{
+		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
+		if(renderPlayerAPI != null && renderPlayerAPI.isRenderLivingAtModded)
+			renderPlayerAPI.renderLivingAt(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3);
+		else
+			target.localRenderLivingAt(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3);
+	}
+
+	private void renderLivingAt(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3)
+	{
+		if(beforeRenderLivingAtHooks != null)
+			for(int i = beforeRenderLivingAtHooks.length - 1; i >= 0 ; i--)
+				beforeRenderLivingAtHooks[i].beforeRenderLivingAt(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3);
+
+		if(overrideRenderLivingAtHooks != null)
+			overrideRenderLivingAtHooks[overrideRenderLivingAtHooks.length - 1].renderLivingAt(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3);
+		else
+			renderPlayer.localRenderLivingAt(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3);
+
+		if(afterRenderLivingAtHooks != null)
+			for(int i = 0; i < afterRenderLivingAtHooks.length; i++)
+				afterRenderLivingAtHooks[i].afterRenderLivingAt(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3);
+
+	}
+
+	protected RenderPlayerBase GetOverwrittenRenderLivingAt(RenderPlayerBase overWriter)
+	{
+		if (overrideRenderLivingAtHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideRenderLivingAtHooks.length; i++)
+			if(overrideRenderLivingAtHooks[i] == overWriter)
+				if(i == 0)
+					return null;
+				else
+					return overrideRenderLivingAtHooks[i - 1];
+
+		return overWriter;
+	}
+
+	private final static List<String> beforeRenderLivingAtHookTypes = new LinkedList<String>();
+	private final static List<String> overrideRenderLivingAtHookTypes = new LinkedList<String>();
+	private final static List<String> afterRenderLivingAtHookTypes = new LinkedList<String>();
+
+	private RenderPlayerBase[] beforeRenderLivingAtHooks;
+	private RenderPlayerBase[] overrideRenderLivingAtHooks;
+	private RenderPlayerBase[] afterRenderLivingAtHooks;
+
+	public boolean isRenderLivingAtModded;
+
+	private static final Map<String, String[]> allBaseBeforeRenderLivingAtSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeRenderLivingAtInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideRenderLivingAtSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideRenderLivingAtInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterRenderLivingAtSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterRenderLivingAtInferiors = new Hashtable<String, String[]>(0);
+
+	public static void renderLivingLabel(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, String paramString, double paramDouble1, double paramDouble2, double paramDouble3, int paramInt)
 	{
 		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
 		if(renderPlayerAPI != null && renderPlayerAPI.isRenderLivingLabelModded)
-			renderPlayerAPI.renderLivingLabel(paramEntity, paramString, paramDouble1, paramDouble2, paramDouble3, paramInt);
+			renderPlayerAPI.renderLivingLabel(paramAbstractClientPlayer, paramString, paramDouble1, paramDouble2, paramDouble3, paramInt);
 		else
-			target.localRenderLivingLabel(paramEntity, paramString, paramDouble1, paramDouble2, paramDouble3, paramInt);
+			target.localRenderLivingLabel(paramAbstractClientPlayer, paramString, paramDouble1, paramDouble2, paramDouble3, paramInt);
 	}
 
-	private void renderLivingLabel(net.minecraft.entity.Entity paramEntity, String paramString, double paramDouble1, double paramDouble2, double paramDouble3, int paramInt)
+	private void renderLivingLabel(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, String paramString, double paramDouble1, double paramDouble2, double paramDouble3, int paramInt)
 	{
 		if(beforeRenderLivingLabelHooks != null)
 			for(int i = beforeRenderLivingLabelHooks.length - 1; i >= 0 ; i--)
-				beforeRenderLivingLabelHooks[i].beforeRenderLivingLabel(paramEntity, paramString, paramDouble1, paramDouble2, paramDouble3, paramInt);
+				beforeRenderLivingLabelHooks[i].beforeRenderLivingLabel(paramAbstractClientPlayer, paramString, paramDouble1, paramDouble2, paramDouble3, paramInt);
 
 		if(overrideRenderLivingLabelHooks != null)
-			overrideRenderLivingLabelHooks[overrideRenderLivingLabelHooks.length - 1].renderLivingLabel(paramEntity, paramString, paramDouble1, paramDouble2, paramDouble3, paramInt);
+			overrideRenderLivingLabelHooks[overrideRenderLivingLabelHooks.length - 1].renderLivingLabel(paramAbstractClientPlayer, paramString, paramDouble1, paramDouble2, paramDouble3, paramInt);
 		else
-			renderPlayer.localRenderLivingLabel(paramEntity, paramString, paramDouble1, paramDouble2, paramDouble3, paramInt);
+			renderPlayer.localRenderLivingLabel(paramAbstractClientPlayer, paramString, paramDouble1, paramDouble2, paramDouble3, paramInt);
 
 		if(afterRenderLivingLabelHooks != null)
 			for(int i = 0; i < afterRenderLivingLabelHooks.length; i++)
-				afterRenderLivingLabelHooks[i].afterRenderLivingLabel(paramEntity, paramString, paramDouble1, paramDouble2, paramDouble3, paramInt);
+				afterRenderLivingLabelHooks[i].afterRenderLivingLabel(paramAbstractClientPlayer, paramString, paramDouble1, paramDouble2, paramDouble3, paramInt);
 
 	}
 
 	protected RenderPlayerBase GetOverwrittenRenderLivingLabel(RenderPlayerBase overWriter)
 	{
+		if (overrideRenderLivingLabelHooks == null)
+			return overWriter;
+
 		for(int i = 0; i < overrideRenderLivingLabelHooks.length; i++)
 			if(overrideRenderLivingLabelHooks[i] == overWriter)
 				if(i == 0)
@@ -2507,34 +3362,37 @@ public final class RenderPlayerAPI
 	private static final Map<String, String[]> allBaseAfterRenderLivingLabelSuperiors = new Hashtable<String, String[]>(0);
 	private static final Map<String, String[]> allBaseAfterRenderLivingLabelInferiors = new Hashtable<String, String[]>(0);
 
-	public static void renderModel(IRenderPlayerAPI target, net.minecraft.entity.EntityLivingBase paramEntityLivingBase, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6)
+	public static void renderModel(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6)
 	{
 		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
 		if(renderPlayerAPI != null && renderPlayerAPI.isRenderModelModded)
-			renderPlayerAPI.renderModel(paramEntityLivingBase, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
+			renderPlayerAPI.renderModel(paramAbstractClientPlayer, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
 		else
-			target.localRenderModel(paramEntityLivingBase, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
+			target.localRenderModel(paramAbstractClientPlayer, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
 	}
 
-	private void renderModel(net.minecraft.entity.EntityLivingBase paramEntityLivingBase, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6)
+	private void renderModel(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6)
 	{
 		if(beforeRenderModelHooks != null)
 			for(int i = beforeRenderModelHooks.length - 1; i >= 0 ; i--)
-				beforeRenderModelHooks[i].beforeRenderModel(paramEntityLivingBase, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
+				beforeRenderModelHooks[i].beforeRenderModel(paramAbstractClientPlayer, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
 
 		if(overrideRenderModelHooks != null)
-			overrideRenderModelHooks[overrideRenderModelHooks.length - 1].renderModel(paramEntityLivingBase, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
+			overrideRenderModelHooks[overrideRenderModelHooks.length - 1].renderModel(paramAbstractClientPlayer, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
 		else
-			renderPlayer.localRenderModel(paramEntityLivingBase, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
+			renderPlayer.localRenderModel(paramAbstractClientPlayer, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
 
 		if(afterRenderModelHooks != null)
 			for(int i = 0; i < afterRenderModelHooks.length; i++)
-				afterRenderModelHooks[i].afterRenderModel(paramEntityLivingBase, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
+				afterRenderModelHooks[i].afterRenderModel(paramAbstractClientPlayer, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
 
 	}
 
 	protected RenderPlayerBase GetOverwrittenRenderModel(RenderPlayerBase overWriter)
 	{
+		if (overrideRenderModelHooks == null)
+			return overWriter;
+
 		for(int i = 0; i < overrideRenderModelHooks.length; i++)
 			if(overrideRenderModelHooks[i] == overWriter)
 				if(i == 0)
@@ -2562,673 +3420,775 @@ public final class RenderPlayerAPI
 	private static final Map<String, String[]> allBaseAfterRenderModelSuperiors = new Hashtable<String, String[]>(0);
 	private static final Map<String, String[]> allBaseAfterRenderModelInferiors = new Hashtable<String, String[]>(0);
 
-	public static void renderPlayer(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3, float paramFloat1, float paramFloat2)
+	public static void renderName(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3)
 	{
 		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
-		if(renderPlayerAPI != null && renderPlayerAPI.isRenderPlayerModded)
-			renderPlayerAPI.renderPlayer(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3, paramFloat1, paramFloat2);
+		if(renderPlayerAPI != null && renderPlayerAPI.isRenderNameModded)
+			renderPlayerAPI.renderName(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3);
 		else
-			target.localRenderPlayer(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3, paramFloat1, paramFloat2);
+			target.localRenderName(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3);
 	}
 
-	private void renderPlayer(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3, float paramFloat1, float paramFloat2)
+	private void renderName(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3)
 	{
-		if(beforeRenderPlayerHooks != null)
-			for(int i = beforeRenderPlayerHooks.length - 1; i >= 0 ; i--)
-				beforeRenderPlayerHooks[i].beforeRenderPlayer(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3, paramFloat1, paramFloat2);
+		if(beforeRenderNameHooks != null)
+			for(int i = beforeRenderNameHooks.length - 1; i >= 0 ; i--)
+				beforeRenderNameHooks[i].beforeRenderName(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3);
 
-		if(overrideRenderPlayerHooks != null)
-			overrideRenderPlayerHooks[overrideRenderPlayerHooks.length - 1].renderPlayer(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3, paramFloat1, paramFloat2);
+		if(overrideRenderNameHooks != null)
+			overrideRenderNameHooks[overrideRenderNameHooks.length - 1].renderName(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3);
 		else
-			renderPlayer.localRenderPlayer(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3, paramFloat1, paramFloat2);
+			renderPlayer.localRenderName(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3);
 
-		if(afterRenderPlayerHooks != null)
-			for(int i = 0; i < afterRenderPlayerHooks.length; i++)
-				afterRenderPlayerHooks[i].afterRenderPlayer(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3, paramFloat1, paramFloat2);
+		if(afterRenderNameHooks != null)
+			for(int i = 0; i < afterRenderNameHooks.length; i++)
+				afterRenderNameHooks[i].afterRenderName(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3);
 
 	}
 
-	protected RenderPlayerBase GetOverwrittenRenderPlayer(RenderPlayerBase overWriter)
+	protected RenderPlayerBase GetOverwrittenRenderName(RenderPlayerBase overWriter)
 	{
-		for(int i = 0; i < overrideRenderPlayerHooks.length; i++)
-			if(overrideRenderPlayerHooks[i] == overWriter)
+		if (overrideRenderNameHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideRenderNameHooks.length; i++)
+			if(overrideRenderNameHooks[i] == overWriter)
 				if(i == 0)
 					return null;
 				else
-					return overrideRenderPlayerHooks[i - 1];
+					return overrideRenderNameHooks[i - 1];
 
 		return overWriter;
 	}
 
-	private final static List<String> beforeRenderPlayerHookTypes = new LinkedList<String>();
-	private final static List<String> overrideRenderPlayerHookTypes = new LinkedList<String>();
-	private final static List<String> afterRenderPlayerHookTypes = new LinkedList<String>();
+	private final static List<String> beforeRenderNameHookTypes = new LinkedList<String>();
+	private final static List<String> overrideRenderNameHookTypes = new LinkedList<String>();
+	private final static List<String> afterRenderNameHookTypes = new LinkedList<String>();
 
-	private RenderPlayerBase[] beforeRenderPlayerHooks;
-	private RenderPlayerBase[] overrideRenderPlayerHooks;
-	private RenderPlayerBase[] afterRenderPlayerHooks;
+	private RenderPlayerBase[] beforeRenderNameHooks;
+	private RenderPlayerBase[] overrideRenderNameHooks;
+	private RenderPlayerBase[] afterRenderNameHooks;
 
-	public boolean isRenderPlayerModded;
+	public boolean isRenderNameModded;
 
-	private static final Map<String, String[]> allBaseBeforeRenderPlayerSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseBeforeRenderPlayerInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideRenderPlayerSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideRenderPlayerInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterRenderPlayerSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterRenderPlayerInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeRenderNameSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeRenderNameInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideRenderNameSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideRenderNameInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterRenderNameSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterRenderNameInferiors = new Hashtable<String, String[]>(0);
 
-	public static void renderPlayerNameAndScoreLabel(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3, String paramString, float paramFloat, double paramDouble4)
+	public static void renderOffsetLivingLabel(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3, String paramString, float paramFloat, double paramDouble4)
 	{
 		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
-		if(renderPlayerAPI != null && renderPlayerAPI.isRenderPlayerNameAndScoreLabelModded)
-			renderPlayerAPI.renderPlayerNameAndScoreLabel(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3, paramString, paramFloat, paramDouble4);
+		if(renderPlayerAPI != null && renderPlayerAPI.isRenderOffsetLivingLabelModded)
+			renderPlayerAPI.renderOffsetLivingLabel(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3, paramString, paramFloat, paramDouble4);
 		else
-			target.localRenderPlayerNameAndScoreLabel(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3, paramString, paramFloat, paramDouble4);
+			target.localRenderOffsetLivingLabel(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3, paramString, paramFloat, paramDouble4);
 	}
 
-	private void renderPlayerNameAndScoreLabel(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3, String paramString, float paramFloat, double paramDouble4)
+	private void renderOffsetLivingLabel(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3, String paramString, float paramFloat, double paramDouble4)
 	{
-		if(beforeRenderPlayerNameAndScoreLabelHooks != null)
-			for(int i = beforeRenderPlayerNameAndScoreLabelHooks.length - 1; i >= 0 ; i--)
-				beforeRenderPlayerNameAndScoreLabelHooks[i].beforeRenderPlayerNameAndScoreLabel(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3, paramString, paramFloat, paramDouble4);
+		if(beforeRenderOffsetLivingLabelHooks != null)
+			for(int i = beforeRenderOffsetLivingLabelHooks.length - 1; i >= 0 ; i--)
+				beforeRenderOffsetLivingLabelHooks[i].beforeRenderOffsetLivingLabel(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3, paramString, paramFloat, paramDouble4);
 
-		if(overrideRenderPlayerNameAndScoreLabelHooks != null)
-			overrideRenderPlayerNameAndScoreLabelHooks[overrideRenderPlayerNameAndScoreLabelHooks.length - 1].renderPlayerNameAndScoreLabel(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3, paramString, paramFloat, paramDouble4);
+		if(overrideRenderOffsetLivingLabelHooks != null)
+			overrideRenderOffsetLivingLabelHooks[overrideRenderOffsetLivingLabelHooks.length - 1].renderOffsetLivingLabel(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3, paramString, paramFloat, paramDouble4);
 		else
-			renderPlayer.localRenderPlayerNameAndScoreLabel(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3, paramString, paramFloat, paramDouble4);
+			renderPlayer.localRenderOffsetLivingLabel(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3, paramString, paramFloat, paramDouble4);
 
-		if(afterRenderPlayerNameAndScoreLabelHooks != null)
-			for(int i = 0; i < afterRenderPlayerNameAndScoreLabelHooks.length; i++)
-				afterRenderPlayerNameAndScoreLabelHooks[i].afterRenderPlayerNameAndScoreLabel(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3, paramString, paramFloat, paramDouble4);
+		if(afterRenderOffsetLivingLabelHooks != null)
+			for(int i = 0; i < afterRenderOffsetLivingLabelHooks.length; i++)
+				afterRenderOffsetLivingLabelHooks[i].afterRenderOffsetLivingLabel(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3, paramString, paramFloat, paramDouble4);
 
 	}
 
-	protected RenderPlayerBase GetOverwrittenRenderPlayerNameAndScoreLabel(RenderPlayerBase overWriter)
+	protected RenderPlayerBase GetOverwrittenRenderOffsetLivingLabel(RenderPlayerBase overWriter)
 	{
-		for(int i = 0; i < overrideRenderPlayerNameAndScoreLabelHooks.length; i++)
-			if(overrideRenderPlayerNameAndScoreLabelHooks[i] == overWriter)
+		if (overrideRenderOffsetLivingLabelHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideRenderOffsetLivingLabelHooks.length; i++)
+			if(overrideRenderOffsetLivingLabelHooks[i] == overWriter)
 				if(i == 0)
 					return null;
 				else
-					return overrideRenderPlayerNameAndScoreLabelHooks[i - 1];
+					return overrideRenderOffsetLivingLabelHooks[i - 1];
 
 		return overWriter;
 	}
 
-	private final static List<String> beforeRenderPlayerNameAndScoreLabelHookTypes = new LinkedList<String>();
-	private final static List<String> overrideRenderPlayerNameAndScoreLabelHookTypes = new LinkedList<String>();
-	private final static List<String> afterRenderPlayerNameAndScoreLabelHookTypes = new LinkedList<String>();
+	private final static List<String> beforeRenderOffsetLivingLabelHookTypes = new LinkedList<String>();
+	private final static List<String> overrideRenderOffsetLivingLabelHookTypes = new LinkedList<String>();
+	private final static List<String> afterRenderOffsetLivingLabelHookTypes = new LinkedList<String>();
 
-	private RenderPlayerBase[] beforeRenderPlayerNameAndScoreLabelHooks;
-	private RenderPlayerBase[] overrideRenderPlayerNameAndScoreLabelHooks;
-	private RenderPlayerBase[] afterRenderPlayerNameAndScoreLabelHooks;
+	private RenderPlayerBase[] beforeRenderOffsetLivingLabelHooks;
+	private RenderPlayerBase[] overrideRenderOffsetLivingLabelHooks;
+	private RenderPlayerBase[] afterRenderOffsetLivingLabelHooks;
 
-	public boolean isRenderPlayerNameAndScoreLabelModded;
+	public boolean isRenderOffsetLivingLabelModded;
 
-	private static final Map<String, String[]> allBaseBeforeRenderPlayerNameAndScoreLabelSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseBeforeRenderPlayerNameAndScoreLabelInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideRenderPlayerNameAndScoreLabelSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideRenderPlayerNameAndScoreLabelInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterRenderPlayerNameAndScoreLabelSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterRenderPlayerNameAndScoreLabelInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeRenderOffsetLivingLabelSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeRenderOffsetLivingLabelInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideRenderOffsetLivingLabelSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideRenderOffsetLivingLabelInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterRenderOffsetLivingLabelSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterRenderOffsetLivingLabelInferiors = new Hashtable<String, String[]>(0);
 
-	public static void renderPlayerScale(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat)
+	public static void renderRightArm(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer)
 	{
 		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
-		if(renderPlayerAPI != null && renderPlayerAPI.isRenderPlayerScaleModded)
-			renderPlayerAPI.renderPlayerScale(paramAbstractClientPlayer, paramFloat);
+		if(renderPlayerAPI != null && renderPlayerAPI.isRenderRightArmModded)
+			renderPlayerAPI.renderRightArm(paramAbstractClientPlayer);
 		else
-			target.localRenderPlayerScale(paramAbstractClientPlayer, paramFloat);
+			target.localRenderRightArm(paramAbstractClientPlayer);
 	}
 
-	private void renderPlayerScale(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat)
+	private void renderRightArm(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer)
 	{
-		if(beforeRenderPlayerScaleHooks != null)
-			for(int i = beforeRenderPlayerScaleHooks.length - 1; i >= 0 ; i--)
-				beforeRenderPlayerScaleHooks[i].beforeRenderPlayerScale(paramAbstractClientPlayer, paramFloat);
+		if(beforeRenderRightArmHooks != null)
+			for(int i = beforeRenderRightArmHooks.length - 1; i >= 0 ; i--)
+				beforeRenderRightArmHooks[i].beforeRenderRightArm(paramAbstractClientPlayer);
 
-		if(overrideRenderPlayerScaleHooks != null)
-			overrideRenderPlayerScaleHooks[overrideRenderPlayerScaleHooks.length - 1].renderPlayerScale(paramAbstractClientPlayer, paramFloat);
+		if(overrideRenderRightArmHooks != null)
+			overrideRenderRightArmHooks[overrideRenderRightArmHooks.length - 1].renderRightArm(paramAbstractClientPlayer);
 		else
-			renderPlayer.localRenderPlayerScale(paramAbstractClientPlayer, paramFloat);
+			renderPlayer.localRenderRightArm(paramAbstractClientPlayer);
 
-		if(afterRenderPlayerScaleHooks != null)
-			for(int i = 0; i < afterRenderPlayerScaleHooks.length; i++)
-				afterRenderPlayerScaleHooks[i].afterRenderPlayerScale(paramAbstractClientPlayer, paramFloat);
+		if(afterRenderRightArmHooks != null)
+			for(int i = 0; i < afterRenderRightArmHooks.length; i++)
+				afterRenderRightArmHooks[i].afterRenderRightArm(paramAbstractClientPlayer);
 
 	}
 
-	protected RenderPlayerBase GetOverwrittenRenderPlayerScale(RenderPlayerBase overWriter)
+	protected RenderPlayerBase GetOverwrittenRenderRightArm(RenderPlayerBase overWriter)
 	{
-		for(int i = 0; i < overrideRenderPlayerScaleHooks.length; i++)
-			if(overrideRenderPlayerScaleHooks[i] == overWriter)
+		if (overrideRenderRightArmHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideRenderRightArmHooks.length; i++)
+			if(overrideRenderRightArmHooks[i] == overWriter)
 				if(i == 0)
 					return null;
 				else
-					return overrideRenderPlayerScaleHooks[i - 1];
+					return overrideRenderRightArmHooks[i - 1];
 
 		return overWriter;
 	}
 
-	private final static List<String> beforeRenderPlayerScaleHookTypes = new LinkedList<String>();
-	private final static List<String> overrideRenderPlayerScaleHookTypes = new LinkedList<String>();
-	private final static List<String> afterRenderPlayerScaleHookTypes = new LinkedList<String>();
+	private final static List<String> beforeRenderRightArmHookTypes = new LinkedList<String>();
+	private final static List<String> overrideRenderRightArmHookTypes = new LinkedList<String>();
+	private final static List<String> afterRenderRightArmHookTypes = new LinkedList<String>();
 
-	private RenderPlayerBase[] beforeRenderPlayerScaleHooks;
-	private RenderPlayerBase[] overrideRenderPlayerScaleHooks;
-	private RenderPlayerBase[] afterRenderPlayerScaleHooks;
+	private RenderPlayerBase[] beforeRenderRightArmHooks;
+	private RenderPlayerBase[] overrideRenderRightArmHooks;
+	private RenderPlayerBase[] afterRenderRightArmHooks;
 
-	public boolean isRenderPlayerScaleModded;
+	public boolean isRenderRightArmModded;
 
-	private static final Map<String, String[]> allBaseBeforeRenderPlayerScaleSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseBeforeRenderPlayerScaleInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideRenderPlayerScaleSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideRenderPlayerScaleInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterRenderPlayerScaleSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterRenderPlayerScaleInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeRenderRightArmSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeRenderRightArmInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideRenderRightArmSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideRenderRightArmInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterRenderRightArmSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterRenderRightArmInferiors = new Hashtable<String, String[]>(0);
 
-	public static void renderPlayerSleep(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3)
+	public static void rotateCorpse(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat1, float paramFloat2, float paramFloat3)
 	{
 		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
-		if(renderPlayerAPI != null && renderPlayerAPI.isRenderPlayerSleepModded)
-			renderPlayerAPI.renderPlayerSleep(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3);
+		if(renderPlayerAPI != null && renderPlayerAPI.isRotateCorpseModded)
+			renderPlayerAPI.rotateCorpse(paramAbstractClientPlayer, paramFloat1, paramFloat2, paramFloat3);
 		else
-			target.localRenderPlayerSleep(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3);
+			target.localRotateCorpse(paramAbstractClientPlayer, paramFloat1, paramFloat2, paramFloat3);
 	}
 
-	private void renderPlayerSleep(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, double paramDouble1, double paramDouble2, double paramDouble3)
+	private void rotateCorpse(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat1, float paramFloat2, float paramFloat3)
 	{
-		if(beforeRenderPlayerSleepHooks != null)
-			for(int i = beforeRenderPlayerSleepHooks.length - 1; i >= 0 ; i--)
-				beforeRenderPlayerSleepHooks[i].beforeRenderPlayerSleep(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3);
+		if(beforeRotateCorpseHooks != null)
+			for(int i = beforeRotateCorpseHooks.length - 1; i >= 0 ; i--)
+				beforeRotateCorpseHooks[i].beforeRotateCorpse(paramAbstractClientPlayer, paramFloat1, paramFloat2, paramFloat3);
 
-		if(overrideRenderPlayerSleepHooks != null)
-			overrideRenderPlayerSleepHooks[overrideRenderPlayerSleepHooks.length - 1].renderPlayerSleep(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3);
+		if(overrideRotateCorpseHooks != null)
+			overrideRotateCorpseHooks[overrideRotateCorpseHooks.length - 1].rotateCorpse(paramAbstractClientPlayer, paramFloat1, paramFloat2, paramFloat3);
 		else
-			renderPlayer.localRenderPlayerSleep(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3);
+			renderPlayer.localRotateCorpse(paramAbstractClientPlayer, paramFloat1, paramFloat2, paramFloat3);
 
-		if(afterRenderPlayerSleepHooks != null)
-			for(int i = 0; i < afterRenderPlayerSleepHooks.length; i++)
-				afterRenderPlayerSleepHooks[i].afterRenderPlayerSleep(paramAbstractClientPlayer, paramDouble1, paramDouble2, paramDouble3);
+		if(afterRotateCorpseHooks != null)
+			for(int i = 0; i < afterRotateCorpseHooks.length; i++)
+				afterRotateCorpseHooks[i].afterRotateCorpse(paramAbstractClientPlayer, paramFloat1, paramFloat2, paramFloat3);
 
 	}
 
-	protected RenderPlayerBase GetOverwrittenRenderPlayerSleep(RenderPlayerBase overWriter)
+	protected RenderPlayerBase GetOverwrittenRotateCorpse(RenderPlayerBase overWriter)
 	{
-		for(int i = 0; i < overrideRenderPlayerSleepHooks.length; i++)
-			if(overrideRenderPlayerSleepHooks[i] == overWriter)
+		if (overrideRotateCorpseHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideRotateCorpseHooks.length; i++)
+			if(overrideRotateCorpseHooks[i] == overWriter)
 				if(i == 0)
 					return null;
 				else
-					return overrideRenderPlayerSleepHooks[i - 1];
+					return overrideRotateCorpseHooks[i - 1];
 
 		return overWriter;
 	}
 
-	private final static List<String> beforeRenderPlayerSleepHookTypes = new LinkedList<String>();
-	private final static List<String> overrideRenderPlayerSleepHookTypes = new LinkedList<String>();
-	private final static List<String> afterRenderPlayerSleepHookTypes = new LinkedList<String>();
+	private final static List<String> beforeRotateCorpseHookTypes = new LinkedList<String>();
+	private final static List<String> overrideRotateCorpseHookTypes = new LinkedList<String>();
+	private final static List<String> afterRotateCorpseHookTypes = new LinkedList<String>();
 
-	private RenderPlayerBase[] beforeRenderPlayerSleepHooks;
-	private RenderPlayerBase[] overrideRenderPlayerSleepHooks;
-	private RenderPlayerBase[] afterRenderPlayerSleepHooks;
+	private RenderPlayerBase[] beforeRotateCorpseHooks;
+	private RenderPlayerBase[] overrideRotateCorpseHooks;
+	private RenderPlayerBase[] afterRotateCorpseHooks;
 
-	public boolean isRenderPlayerSleepModded;
+	public boolean isRotateCorpseModded;
 
-	private static final Map<String, String[]> allBaseBeforeRenderPlayerSleepSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseBeforeRenderPlayerSleepInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideRenderPlayerSleepSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideRenderPlayerSleepInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterRenderPlayerSleepSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterRenderPlayerSleepInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeRotateCorpseSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeRotateCorpseInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideRotateCorpseSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideRotateCorpseInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterRotateCorpseSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterRotateCorpseInferiors = new Hashtable<String, String[]>(0);
 
-	public static void renderSpecials(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat)
+	public static boolean setBrightness(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat, boolean paramBoolean)
 	{
+		boolean _result;
 		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
-		if(renderPlayerAPI != null && renderPlayerAPI.isRenderSpecialsModded)
-			renderPlayerAPI.renderSpecials(paramAbstractClientPlayer, paramFloat);
+		if(renderPlayerAPI != null && renderPlayerAPI.isSetBrightnessModded)
+			_result = renderPlayerAPI.setBrightness(paramAbstractClientPlayer, paramFloat, paramBoolean);
 		else
-			target.localRenderSpecials(paramAbstractClientPlayer, paramFloat);
-	}
-
-	private void renderSpecials(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat)
-	{
-		if(beforeRenderSpecialsHooks != null)
-			for(int i = beforeRenderSpecialsHooks.length - 1; i >= 0 ; i--)
-				beforeRenderSpecialsHooks[i].beforeRenderSpecials(paramAbstractClientPlayer, paramFloat);
-
-		if(overrideRenderSpecialsHooks != null)
-			overrideRenderSpecialsHooks[overrideRenderSpecialsHooks.length - 1].renderSpecials(paramAbstractClientPlayer, paramFloat);
-		else
-			renderPlayer.localRenderSpecials(paramAbstractClientPlayer, paramFloat);
-
-		if(afterRenderSpecialsHooks != null)
-			for(int i = 0; i < afterRenderSpecialsHooks.length; i++)
-				afterRenderSpecialsHooks[i].afterRenderSpecials(paramAbstractClientPlayer, paramFloat);
-
-	}
-
-	protected RenderPlayerBase GetOverwrittenRenderSpecials(RenderPlayerBase overWriter)
-	{
-		for(int i = 0; i < overrideRenderSpecialsHooks.length; i++)
-			if(overrideRenderSpecialsHooks[i] == overWriter)
-				if(i == 0)
-					return null;
-				else
-					return overrideRenderSpecialsHooks[i - 1];
-
-		return overWriter;
-	}
-
-	private final static List<String> beforeRenderSpecialsHookTypes = new LinkedList<String>();
-	private final static List<String> overrideRenderSpecialsHookTypes = new LinkedList<String>();
-	private final static List<String> afterRenderSpecialsHookTypes = new LinkedList<String>();
-
-	private RenderPlayerBase[] beforeRenderSpecialsHooks;
-	private RenderPlayerBase[] overrideRenderSpecialsHooks;
-	private RenderPlayerBase[] afterRenderSpecialsHooks;
-
-	public boolean isRenderSpecialsModded;
-
-	private static final Map<String, String[]> allBaseBeforeRenderSpecialsSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseBeforeRenderSpecialsInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideRenderSpecialsSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideRenderSpecialsInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterRenderSpecialsSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterRenderSpecialsInferiors = new Hashtable<String, String[]>(0);
-
-	public static float renderSwingProgress(IRenderPlayerAPI target, net.minecraft.entity.EntityLivingBase paramEntityLivingBase, float paramFloat)
-	{
-		float _result;
-		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
-		if(renderPlayerAPI != null && renderPlayerAPI.isRenderSwingProgressModded)
-			_result = renderPlayerAPI.renderSwingProgress(paramEntityLivingBase, paramFloat);
-		else
-			_result = target.localRenderSwingProgress(paramEntityLivingBase, paramFloat);
+			_result = target.localSetBrightness(paramAbstractClientPlayer, paramFloat, paramBoolean);
 		return _result;
 	}
 
-	private float renderSwingProgress(net.minecraft.entity.EntityLivingBase paramEntityLivingBase, float paramFloat)
+	private boolean setBrightness(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat, boolean paramBoolean)
 	{
-		if(beforeRenderSwingProgressHooks != null)
-			for(int i = beforeRenderSwingProgressHooks.length - 1; i >= 0 ; i--)
-				beforeRenderSwingProgressHooks[i].beforeRenderSwingProgress(paramEntityLivingBase, paramFloat);
+		if(beforeSetBrightnessHooks != null)
+			for(int i = beforeSetBrightnessHooks.length - 1; i >= 0 ; i--)
+				beforeSetBrightnessHooks[i].beforeSetBrightness(paramAbstractClientPlayer, paramFloat, paramBoolean);
 
-		float _result;
-		if(overrideRenderSwingProgressHooks != null)
-			_result = overrideRenderSwingProgressHooks[overrideRenderSwingProgressHooks.length - 1].renderSwingProgress(paramEntityLivingBase, paramFloat);
+		boolean _result;
+		if(overrideSetBrightnessHooks != null)
+			_result = overrideSetBrightnessHooks[overrideSetBrightnessHooks.length - 1].setBrightness(paramAbstractClientPlayer, paramFloat, paramBoolean);
 		else
-			_result = renderPlayer.localRenderSwingProgress(paramEntityLivingBase, paramFloat);
+			_result = renderPlayer.localSetBrightness(paramAbstractClientPlayer, paramFloat, paramBoolean);
 
-		if(afterRenderSwingProgressHooks != null)
-			for(int i = 0; i < afterRenderSwingProgressHooks.length; i++)
-				afterRenderSwingProgressHooks[i].afterRenderSwingProgress(paramEntityLivingBase, paramFloat);
+		if(afterSetBrightnessHooks != null)
+			for(int i = 0; i < afterSetBrightnessHooks.length; i++)
+				afterSetBrightnessHooks[i].afterSetBrightness(paramAbstractClientPlayer, paramFloat, paramBoolean);
 
 		return _result;
 	}
 
-	protected RenderPlayerBase GetOverwrittenRenderSwingProgress(RenderPlayerBase overWriter)
+	protected RenderPlayerBase GetOverwrittenSetBrightness(RenderPlayerBase overWriter)
 	{
-		for(int i = 0; i < overrideRenderSwingProgressHooks.length; i++)
-			if(overrideRenderSwingProgressHooks[i] == overWriter)
+		if (overrideSetBrightnessHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideSetBrightnessHooks.length; i++)
+			if(overrideSetBrightnessHooks[i] == overWriter)
 				if(i == 0)
 					return null;
 				else
-					return overrideRenderSwingProgressHooks[i - 1];
+					return overrideSetBrightnessHooks[i - 1];
 
 		return overWriter;
 	}
 
-	private final static List<String> beforeRenderSwingProgressHookTypes = new LinkedList<String>();
-	private final static List<String> overrideRenderSwingProgressHookTypes = new LinkedList<String>();
-	private final static List<String> afterRenderSwingProgressHookTypes = new LinkedList<String>();
+	private final static List<String> beforeSetBrightnessHookTypes = new LinkedList<String>();
+	private final static List<String> overrideSetBrightnessHookTypes = new LinkedList<String>();
+	private final static List<String> afterSetBrightnessHookTypes = new LinkedList<String>();
 
-	private RenderPlayerBase[] beforeRenderSwingProgressHooks;
-	private RenderPlayerBase[] overrideRenderSwingProgressHooks;
-	private RenderPlayerBase[] afterRenderSwingProgressHooks;
+	private RenderPlayerBase[] beforeSetBrightnessHooks;
+	private RenderPlayerBase[] overrideSetBrightnessHooks;
+	private RenderPlayerBase[] afterSetBrightnessHooks;
 
-	public boolean isRenderSwingProgressModded;
+	public boolean isSetBrightnessModded;
 
-	private static final Map<String, String[]> allBaseBeforeRenderSwingProgressSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseBeforeRenderSwingProgressInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideRenderSwingProgressSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideRenderSwingProgressInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterRenderSwingProgressSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterRenderSwingProgressInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeSetBrightnessSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeSetBrightnessInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideSetBrightnessSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideSetBrightnessInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterSetBrightnessSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterSetBrightnessInferiors = new Hashtable<String, String[]>(0);
 
-	public static void rotatePlayer(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat1, float paramFloat2, float paramFloat3)
+	public static boolean setDoRenderBrightness(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat)
 	{
+		boolean _result;
 		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
-		if(renderPlayerAPI != null && renderPlayerAPI.isRotatePlayerModded)
-			renderPlayerAPI.rotatePlayer(paramAbstractClientPlayer, paramFloat1, paramFloat2, paramFloat3);
+		if(renderPlayerAPI != null && renderPlayerAPI.isSetDoRenderBrightnessModded)
+			_result = renderPlayerAPI.setDoRenderBrightness(paramAbstractClientPlayer, paramFloat);
 		else
-			target.localRotatePlayer(paramAbstractClientPlayer, paramFloat1, paramFloat2, paramFloat3);
-	}
-
-	private void rotatePlayer(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat1, float paramFloat2, float paramFloat3)
-	{
-		if(beforeRotatePlayerHooks != null)
-			for(int i = beforeRotatePlayerHooks.length - 1; i >= 0 ; i--)
-				beforeRotatePlayerHooks[i].beforeRotatePlayer(paramAbstractClientPlayer, paramFloat1, paramFloat2, paramFloat3);
-
-		if(overrideRotatePlayerHooks != null)
-			overrideRotatePlayerHooks[overrideRotatePlayerHooks.length - 1].rotatePlayer(paramAbstractClientPlayer, paramFloat1, paramFloat2, paramFloat3);
-		else
-			renderPlayer.localRotatePlayer(paramAbstractClientPlayer, paramFloat1, paramFloat2, paramFloat3);
-
-		if(afterRotatePlayerHooks != null)
-			for(int i = 0; i < afterRotatePlayerHooks.length; i++)
-				afterRotatePlayerHooks[i].afterRotatePlayer(paramAbstractClientPlayer, paramFloat1, paramFloat2, paramFloat3);
-
-	}
-
-	protected RenderPlayerBase GetOverwrittenRotatePlayer(RenderPlayerBase overWriter)
-	{
-		for(int i = 0; i < overrideRotatePlayerHooks.length; i++)
-			if(overrideRotatePlayerHooks[i] == overWriter)
-				if(i == 0)
-					return null;
-				else
-					return overrideRotatePlayerHooks[i - 1];
-
-		return overWriter;
-	}
-
-	private final static List<String> beforeRotatePlayerHookTypes = new LinkedList<String>();
-	private final static List<String> overrideRotatePlayerHookTypes = new LinkedList<String>();
-	private final static List<String> afterRotatePlayerHookTypes = new LinkedList<String>();
-
-	private RenderPlayerBase[] beforeRotatePlayerHooks;
-	private RenderPlayerBase[] overrideRotatePlayerHooks;
-	private RenderPlayerBase[] afterRotatePlayerHooks;
-
-	public boolean isRotatePlayerModded;
-
-	private static final Map<String, String[]> allBaseBeforeRotatePlayerSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseBeforeRotatePlayerInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideRotatePlayerSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideRotatePlayerInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterRotatePlayerSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterRotatePlayerInferiors = new Hashtable<String, String[]>(0);
-
-	public static int setArmorModel(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, int paramInt, float paramFloat)
-	{
-		int _result;
-		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
-		if(renderPlayerAPI != null && renderPlayerAPI.isSetArmorModelModded)
-			_result = renderPlayerAPI.setArmorModel(paramAbstractClientPlayer, paramInt, paramFloat);
-		else
-			_result = target.localSetArmorModel(paramAbstractClientPlayer, paramInt, paramFloat);
+			_result = target.localSetDoRenderBrightness(paramAbstractClientPlayer, paramFloat);
 		return _result;
 	}
 
-	private int setArmorModel(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, int paramInt, float paramFloat)
+	private boolean setDoRenderBrightness(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, float paramFloat)
 	{
-		if(beforeSetArmorModelHooks != null)
-			for(int i = beforeSetArmorModelHooks.length - 1; i >= 0 ; i--)
-				beforeSetArmorModelHooks[i].beforeSetArmorModel(paramAbstractClientPlayer, paramInt, paramFloat);
+		if(beforeSetDoRenderBrightnessHooks != null)
+			for(int i = beforeSetDoRenderBrightnessHooks.length - 1; i >= 0 ; i--)
+				beforeSetDoRenderBrightnessHooks[i].beforeSetDoRenderBrightness(paramAbstractClientPlayer, paramFloat);
 
-		int _result;
-		if(overrideSetArmorModelHooks != null)
-			_result = overrideSetArmorModelHooks[overrideSetArmorModelHooks.length - 1].setArmorModel(paramAbstractClientPlayer, paramInt, paramFloat);
+		boolean _result;
+		if(overrideSetDoRenderBrightnessHooks != null)
+			_result = overrideSetDoRenderBrightnessHooks[overrideSetDoRenderBrightnessHooks.length - 1].setDoRenderBrightness(paramAbstractClientPlayer, paramFloat);
 		else
-			_result = renderPlayer.localSetArmorModel(paramAbstractClientPlayer, paramInt, paramFloat);
+			_result = renderPlayer.localSetDoRenderBrightness(paramAbstractClientPlayer, paramFloat);
 
-		if(afterSetArmorModelHooks != null)
-			for(int i = 0; i < afterSetArmorModelHooks.length; i++)
-				afterSetArmorModelHooks[i].afterSetArmorModel(paramAbstractClientPlayer, paramInt, paramFloat);
+		if(afterSetDoRenderBrightnessHooks != null)
+			for(int i = 0; i < afterSetDoRenderBrightnessHooks.length; i++)
+				afterSetDoRenderBrightnessHooks[i].afterSetDoRenderBrightness(paramAbstractClientPlayer, paramFloat);
 
 		return _result;
 	}
 
-	protected RenderPlayerBase GetOverwrittenSetArmorModel(RenderPlayerBase overWriter)
+	protected RenderPlayerBase GetOverwrittenSetDoRenderBrightness(RenderPlayerBase overWriter)
 	{
-		for(int i = 0; i < overrideSetArmorModelHooks.length; i++)
-			if(overrideSetArmorModelHooks[i] == overWriter)
+		if (overrideSetDoRenderBrightnessHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideSetDoRenderBrightnessHooks.length; i++)
+			if(overrideSetDoRenderBrightnessHooks[i] == overWriter)
 				if(i == 0)
 					return null;
 				else
-					return overrideSetArmorModelHooks[i - 1];
+					return overrideSetDoRenderBrightnessHooks[i - 1];
 
 		return overWriter;
 	}
 
-	private final static List<String> beforeSetArmorModelHookTypes = new LinkedList<String>();
-	private final static List<String> overrideSetArmorModelHookTypes = new LinkedList<String>();
-	private final static List<String> afterSetArmorModelHookTypes = new LinkedList<String>();
+	private final static List<String> beforeSetDoRenderBrightnessHookTypes = new LinkedList<String>();
+	private final static List<String> overrideSetDoRenderBrightnessHookTypes = new LinkedList<String>();
+	private final static List<String> afterSetDoRenderBrightnessHookTypes = new LinkedList<String>();
 
-	private RenderPlayerBase[] beforeSetArmorModelHooks;
-	private RenderPlayerBase[] overrideSetArmorModelHooks;
-	private RenderPlayerBase[] afterSetArmorModelHooks;
+	private RenderPlayerBase[] beforeSetDoRenderBrightnessHooks;
+	private RenderPlayerBase[] overrideSetDoRenderBrightnessHooks;
+	private RenderPlayerBase[] afterSetDoRenderBrightnessHooks;
 
-	public boolean isSetArmorModelModded;
+	public boolean isSetDoRenderBrightnessModded;
 
-	private static final Map<String, String[]> allBaseBeforeSetArmorModelSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseBeforeSetArmorModelInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideSetArmorModelSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideSetArmorModelInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterSetArmorModelSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterSetArmorModelInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeSetDoRenderBrightnessSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeSetDoRenderBrightnessInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideSetDoRenderBrightnessSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideSetDoRenderBrightnessInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterSetDoRenderBrightnessSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterSetDoRenderBrightnessInferiors = new Hashtable<String, String[]>(0);
 
-	public static void setPassArmorModel(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, int paramInt, float paramFloat)
+	public static void setModelVisibilities(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer)
 	{
 		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
-		if(renderPlayerAPI != null && renderPlayerAPI.isSetPassArmorModelModded)
-			renderPlayerAPI.setPassArmorModel(paramAbstractClientPlayer, paramInt, paramFloat);
+		if(renderPlayerAPI != null && renderPlayerAPI.isSetModelVisibilitiesModded)
+			renderPlayerAPI.setModelVisibilities(paramAbstractClientPlayer);
 		else
-			target.localSetPassArmorModel(paramAbstractClientPlayer, paramInt, paramFloat);
+			target.localSetModelVisibilities(paramAbstractClientPlayer);
 	}
 
-	private void setPassArmorModel(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, int paramInt, float paramFloat)
+	private void setModelVisibilities(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer)
 	{
-		if(beforeSetPassArmorModelHooks != null)
-			for(int i = beforeSetPassArmorModelHooks.length - 1; i >= 0 ; i--)
-				beforeSetPassArmorModelHooks[i].beforeSetPassArmorModel(paramAbstractClientPlayer, paramInt, paramFloat);
+		if(beforeSetModelVisibilitiesHooks != null)
+			for(int i = beforeSetModelVisibilitiesHooks.length - 1; i >= 0 ; i--)
+				beforeSetModelVisibilitiesHooks[i].beforeSetModelVisibilities(paramAbstractClientPlayer);
 
-		if(overrideSetPassArmorModelHooks != null)
-			overrideSetPassArmorModelHooks[overrideSetPassArmorModelHooks.length - 1].setPassArmorModel(paramAbstractClientPlayer, paramInt, paramFloat);
+		if(overrideSetModelVisibilitiesHooks != null)
+			overrideSetModelVisibilitiesHooks[overrideSetModelVisibilitiesHooks.length - 1].setModelVisibilities(paramAbstractClientPlayer);
 		else
-			renderPlayer.localSetPassArmorModel(paramAbstractClientPlayer, paramInt, paramFloat);
+			renderPlayer.localSetModelVisibilities(paramAbstractClientPlayer);
 
-		if(afterSetPassArmorModelHooks != null)
-			for(int i = 0; i < afterSetPassArmorModelHooks.length; i++)
-				afterSetPassArmorModelHooks[i].afterSetPassArmorModel(paramAbstractClientPlayer, paramInt, paramFloat);
+		if(afterSetModelVisibilitiesHooks != null)
+			for(int i = 0; i < afterSetModelVisibilitiesHooks.length; i++)
+				afterSetModelVisibilitiesHooks[i].afterSetModelVisibilities(paramAbstractClientPlayer);
 
 	}
 
-	protected RenderPlayerBase GetOverwrittenSetPassArmorModel(RenderPlayerBase overWriter)
+	protected RenderPlayerBase GetOverwrittenSetModelVisibilities(RenderPlayerBase overWriter)
 	{
-		for(int i = 0; i < overrideSetPassArmorModelHooks.length; i++)
-			if(overrideSetPassArmorModelHooks[i] == overWriter)
+		if (overrideSetModelVisibilitiesHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideSetModelVisibilitiesHooks.length; i++)
+			if(overrideSetModelVisibilitiesHooks[i] == overWriter)
 				if(i == 0)
 					return null;
 				else
-					return overrideSetPassArmorModelHooks[i - 1];
+					return overrideSetModelVisibilitiesHooks[i - 1];
 
 		return overWriter;
 	}
 
-	private final static List<String> beforeSetPassArmorModelHookTypes = new LinkedList<String>();
-	private final static List<String> overrideSetPassArmorModelHookTypes = new LinkedList<String>();
-	private final static List<String> afterSetPassArmorModelHookTypes = new LinkedList<String>();
+	private final static List<String> beforeSetModelVisibilitiesHookTypes = new LinkedList<String>();
+	private final static List<String> overrideSetModelVisibilitiesHookTypes = new LinkedList<String>();
+	private final static List<String> afterSetModelVisibilitiesHookTypes = new LinkedList<String>();
 
-	private RenderPlayerBase[] beforeSetPassArmorModelHooks;
-	private RenderPlayerBase[] overrideSetPassArmorModelHooks;
-	private RenderPlayerBase[] afterSetPassArmorModelHooks;
+	private RenderPlayerBase[] beforeSetModelVisibilitiesHooks;
+	private RenderPlayerBase[] overrideSetModelVisibilitiesHooks;
+	private RenderPlayerBase[] afterSetModelVisibilitiesHooks;
 
-	public boolean isSetPassArmorModelModded;
+	public boolean isSetModelVisibilitiesModded;
 
-	private static final Map<String, String[]> allBaseBeforeSetPassArmorModelSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseBeforeSetPassArmorModelInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideSetPassArmorModelSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideSetPassArmorModelInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterSetPassArmorModelSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterSetPassArmorModelInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeSetModelVisibilitiesSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeSetModelVisibilitiesInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideSetModelVisibilitiesSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideSetModelVisibilitiesInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterSetModelVisibilitiesSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterSetModelVisibilitiesInferiors = new Hashtable<String, String[]>(0);
 
-	public static void setRenderManager(IRenderPlayerAPI target, net.minecraft.client.renderer.entity.RenderManager paramRenderManager)
+	public static void setRenderOutlines(IRenderPlayerAPI target, boolean paramBoolean)
 	{
 		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
-		if(renderPlayerAPI != null && renderPlayerAPI.isSetRenderManagerModded)
-			renderPlayerAPI.setRenderManager(paramRenderManager);
+		if(renderPlayerAPI != null && renderPlayerAPI.isSetRenderOutlinesModded)
+			renderPlayerAPI.setRenderOutlines(paramBoolean);
 		else
-			target.localSetRenderManager(paramRenderManager);
+			target.localSetRenderOutlines(paramBoolean);
 	}
 
-	private void setRenderManager(net.minecraft.client.renderer.entity.RenderManager paramRenderManager)
+	private void setRenderOutlines(boolean paramBoolean)
 	{
-		if(beforeSetRenderManagerHooks != null)
-			for(int i = beforeSetRenderManagerHooks.length - 1; i >= 0 ; i--)
-				beforeSetRenderManagerHooks[i].beforeSetRenderManager(paramRenderManager);
+		if(beforeSetRenderOutlinesHooks != null)
+			for(int i = beforeSetRenderOutlinesHooks.length - 1; i >= 0 ; i--)
+				beforeSetRenderOutlinesHooks[i].beforeSetRenderOutlines(paramBoolean);
 
-		if(overrideSetRenderManagerHooks != null)
-			overrideSetRenderManagerHooks[overrideSetRenderManagerHooks.length - 1].setRenderManager(paramRenderManager);
+		if(overrideSetRenderOutlinesHooks != null)
+			overrideSetRenderOutlinesHooks[overrideSetRenderOutlinesHooks.length - 1].setRenderOutlines(paramBoolean);
 		else
-			renderPlayer.localSetRenderManager(paramRenderManager);
+			renderPlayer.localSetRenderOutlines(paramBoolean);
 
-		if(afterSetRenderManagerHooks != null)
-			for(int i = 0; i < afterSetRenderManagerHooks.length; i++)
-				afterSetRenderManagerHooks[i].afterSetRenderManager(paramRenderManager);
+		if(afterSetRenderOutlinesHooks != null)
+			for(int i = 0; i < afterSetRenderOutlinesHooks.length; i++)
+				afterSetRenderOutlinesHooks[i].afterSetRenderOutlines(paramBoolean);
 
 	}
 
-	protected RenderPlayerBase GetOverwrittenSetRenderManager(RenderPlayerBase overWriter)
+	protected RenderPlayerBase GetOverwrittenSetRenderOutlines(RenderPlayerBase overWriter)
 	{
-		for(int i = 0; i < overrideSetRenderManagerHooks.length; i++)
-			if(overrideSetRenderManagerHooks[i] == overWriter)
+		if (overrideSetRenderOutlinesHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideSetRenderOutlinesHooks.length; i++)
+			if(overrideSetRenderOutlinesHooks[i] == overWriter)
 				if(i == 0)
 					return null;
 				else
-					return overrideSetRenderManagerHooks[i - 1];
+					return overrideSetRenderOutlinesHooks[i - 1];
 
 		return overWriter;
 	}
 
-	private final static List<String> beforeSetRenderManagerHookTypes = new LinkedList<String>();
-	private final static List<String> overrideSetRenderManagerHookTypes = new LinkedList<String>();
-	private final static List<String> afterSetRenderManagerHookTypes = new LinkedList<String>();
+	private final static List<String> beforeSetRenderOutlinesHookTypes = new LinkedList<String>();
+	private final static List<String> overrideSetRenderOutlinesHookTypes = new LinkedList<String>();
+	private final static List<String> afterSetRenderOutlinesHookTypes = new LinkedList<String>();
 
-	private RenderPlayerBase[] beforeSetRenderManagerHooks;
-	private RenderPlayerBase[] overrideSetRenderManagerHooks;
-	private RenderPlayerBase[] afterSetRenderManagerHooks;
+	private RenderPlayerBase[] beforeSetRenderOutlinesHooks;
+	private RenderPlayerBase[] overrideSetRenderOutlinesHooks;
+	private RenderPlayerBase[] afterSetRenderOutlinesHooks;
 
-	public boolean isSetRenderManagerModded;
+	public boolean isSetRenderOutlinesModded;
 
-	private static final Map<String, String[]> allBaseBeforeSetRenderManagerSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseBeforeSetRenderManagerInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideSetRenderManagerSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideSetRenderManagerInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterSetRenderManagerSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterSetRenderManagerInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeSetRenderOutlinesSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeSetRenderOutlinesInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideSetRenderOutlinesSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideSetRenderOutlinesInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterSetRenderOutlinesSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterSetRenderOutlinesInferiors = new Hashtable<String, String[]>(0);
 
-	public static void setRenderPassModel(IRenderPlayerAPI target, net.minecraft.client.model.ModelBase paramModelBase)
+	public static boolean setScoreTeamColor(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer)
+	{
+		boolean _result;
+		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
+		if(renderPlayerAPI != null && renderPlayerAPI.isSetScoreTeamColorModded)
+			_result = renderPlayerAPI.setScoreTeamColor(paramAbstractClientPlayer);
+		else
+			_result = target.localSetScoreTeamColor(paramAbstractClientPlayer);
+		return _result;
+	}
+
+	private boolean setScoreTeamColor(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer)
+	{
+		if(beforeSetScoreTeamColorHooks != null)
+			for(int i = beforeSetScoreTeamColorHooks.length - 1; i >= 0 ; i--)
+				beforeSetScoreTeamColorHooks[i].beforeSetScoreTeamColor(paramAbstractClientPlayer);
+
+		boolean _result;
+		if(overrideSetScoreTeamColorHooks != null)
+			_result = overrideSetScoreTeamColorHooks[overrideSetScoreTeamColorHooks.length - 1].setScoreTeamColor(paramAbstractClientPlayer);
+		else
+			_result = renderPlayer.localSetScoreTeamColor(paramAbstractClientPlayer);
+
+		if(afterSetScoreTeamColorHooks != null)
+			for(int i = 0; i < afterSetScoreTeamColorHooks.length; i++)
+				afterSetScoreTeamColorHooks[i].afterSetScoreTeamColor(paramAbstractClientPlayer);
+
+		return _result;
+	}
+
+	protected RenderPlayerBase GetOverwrittenSetScoreTeamColor(RenderPlayerBase overWriter)
+	{
+		if (overrideSetScoreTeamColorHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideSetScoreTeamColorHooks.length; i++)
+			if(overrideSetScoreTeamColorHooks[i] == overWriter)
+				if(i == 0)
+					return null;
+				else
+					return overrideSetScoreTeamColorHooks[i - 1];
+
+		return overWriter;
+	}
+
+	private final static List<String> beforeSetScoreTeamColorHookTypes = new LinkedList<String>();
+	private final static List<String> overrideSetScoreTeamColorHookTypes = new LinkedList<String>();
+	private final static List<String> afterSetScoreTeamColorHookTypes = new LinkedList<String>();
+
+	private RenderPlayerBase[] beforeSetScoreTeamColorHooks;
+	private RenderPlayerBase[] overrideSetScoreTeamColorHooks;
+	private RenderPlayerBase[] afterSetScoreTeamColorHooks;
+
+	public boolean isSetScoreTeamColorModded;
+
+	private static final Map<String, String[]> allBaseBeforeSetScoreTeamColorSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeSetScoreTeamColorInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideSetScoreTeamColorSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideSetScoreTeamColorInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterSetScoreTeamColorSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterSetScoreTeamColorInferiors = new Hashtable<String, String[]>(0);
+
+	public static boolean shouldRender(IRenderPlayerAPI target, net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, net.minecraft.client.renderer.culling.ICamera paramICamera, double paramDouble1, double paramDouble2, double paramDouble3)
+	{
+		boolean _result;
+		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
+		if(renderPlayerAPI != null && renderPlayerAPI.isShouldRenderModded)
+			_result = renderPlayerAPI.shouldRender(paramAbstractClientPlayer, paramICamera, paramDouble1, paramDouble2, paramDouble3);
+		else
+			_result = target.localShouldRender(paramAbstractClientPlayer, paramICamera, paramDouble1, paramDouble2, paramDouble3);
+		return _result;
+	}
+
+	private boolean shouldRender(net.minecraft.client.entity.AbstractClientPlayer paramAbstractClientPlayer, net.minecraft.client.renderer.culling.ICamera paramICamera, double paramDouble1, double paramDouble2, double paramDouble3)
+	{
+		if(beforeShouldRenderHooks != null)
+			for(int i = beforeShouldRenderHooks.length - 1; i >= 0 ; i--)
+				beforeShouldRenderHooks[i].beforeShouldRender(paramAbstractClientPlayer, paramICamera, paramDouble1, paramDouble2, paramDouble3);
+
+		boolean _result;
+		if(overrideShouldRenderHooks != null)
+			_result = overrideShouldRenderHooks[overrideShouldRenderHooks.length - 1].shouldRender(paramAbstractClientPlayer, paramICamera, paramDouble1, paramDouble2, paramDouble3);
+		else
+			_result = renderPlayer.localShouldRender(paramAbstractClientPlayer, paramICamera, paramDouble1, paramDouble2, paramDouble3);
+
+		if(afterShouldRenderHooks != null)
+			for(int i = 0; i < afterShouldRenderHooks.length; i++)
+				afterShouldRenderHooks[i].afterShouldRender(paramAbstractClientPlayer, paramICamera, paramDouble1, paramDouble2, paramDouble3);
+
+		return _result;
+	}
+
+	protected RenderPlayerBase GetOverwrittenShouldRender(RenderPlayerBase overWriter)
+	{
+		if (overrideShouldRenderHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideShouldRenderHooks.length; i++)
+			if(overrideShouldRenderHooks[i] == overWriter)
+				if(i == 0)
+					return null;
+				else
+					return overrideShouldRenderHooks[i - 1];
+
+		return overWriter;
+	}
+
+	private final static List<String> beforeShouldRenderHookTypes = new LinkedList<String>();
+	private final static List<String> overrideShouldRenderHookTypes = new LinkedList<String>();
+	private final static List<String> afterShouldRenderHookTypes = new LinkedList<String>();
+
+	private RenderPlayerBase[] beforeShouldRenderHooks;
+	private RenderPlayerBase[] overrideShouldRenderHooks;
+	private RenderPlayerBase[] afterShouldRenderHooks;
+
+	public boolean isShouldRenderModded;
+
+	private static final Map<String, String[]> allBaseBeforeShouldRenderSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeShouldRenderInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideShouldRenderSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideShouldRenderInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterShouldRenderSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterShouldRenderInferiors = new Hashtable<String, String[]>(0);
+
+	public static void transformHeldFull3DItemLayer(IRenderPlayerAPI target)
 	{
 		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
-		if(renderPlayerAPI != null && renderPlayerAPI.isSetRenderPassModelModded)
-			renderPlayerAPI.setRenderPassModel(paramModelBase);
+		if(renderPlayerAPI != null && renderPlayerAPI.isTransformHeldFull3DItemLayerModded)
+			renderPlayerAPI.transformHeldFull3DItemLayer();
 		else
-			target.localSetRenderPassModel(paramModelBase);
+			target.localTransformHeldFull3DItemLayer();
 	}
 
-	private void setRenderPassModel(net.minecraft.client.model.ModelBase paramModelBase)
+	private void transformHeldFull3DItemLayer()
 	{
-		if(beforeSetRenderPassModelHooks != null)
-			for(int i = beforeSetRenderPassModelHooks.length - 1; i >= 0 ; i--)
-				beforeSetRenderPassModelHooks[i].beforeSetRenderPassModel(paramModelBase);
+		if(beforeTransformHeldFull3DItemLayerHooks != null)
+			for(int i = beforeTransformHeldFull3DItemLayerHooks.length - 1; i >= 0 ; i--)
+				beforeTransformHeldFull3DItemLayerHooks[i].beforeTransformHeldFull3DItemLayer();
 
-		if(overrideSetRenderPassModelHooks != null)
-			overrideSetRenderPassModelHooks[overrideSetRenderPassModelHooks.length - 1].setRenderPassModel(paramModelBase);
+		if(overrideTransformHeldFull3DItemLayerHooks != null)
+			overrideTransformHeldFull3DItemLayerHooks[overrideTransformHeldFull3DItemLayerHooks.length - 1].transformHeldFull3DItemLayer();
 		else
-			renderPlayer.localSetRenderPassModel(paramModelBase);
+			renderPlayer.localTransformHeldFull3DItemLayer();
 
-		if(afterSetRenderPassModelHooks != null)
-			for(int i = 0; i < afterSetRenderPassModelHooks.length; i++)
-				afterSetRenderPassModelHooks[i].afterSetRenderPassModel(paramModelBase);
+		if(afterTransformHeldFull3DItemLayerHooks != null)
+			for(int i = 0; i < afterTransformHeldFull3DItemLayerHooks.length; i++)
+				afterTransformHeldFull3DItemLayerHooks[i].afterTransformHeldFull3DItemLayer();
 
 	}
 
-	protected RenderPlayerBase GetOverwrittenSetRenderPassModel(RenderPlayerBase overWriter)
+	protected RenderPlayerBase GetOverwrittenTransformHeldFull3DItemLayer(RenderPlayerBase overWriter)
 	{
-		for(int i = 0; i < overrideSetRenderPassModelHooks.length; i++)
-			if(overrideSetRenderPassModelHooks[i] == overWriter)
+		if (overrideTransformHeldFull3DItemLayerHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideTransformHeldFull3DItemLayerHooks.length; i++)
+			if(overrideTransformHeldFull3DItemLayerHooks[i] == overWriter)
 				if(i == 0)
 					return null;
 				else
-					return overrideSetRenderPassModelHooks[i - 1];
+					return overrideTransformHeldFull3DItemLayerHooks[i - 1];
 
 		return overWriter;
 	}
 
-	private final static List<String> beforeSetRenderPassModelHookTypes = new LinkedList<String>();
-	private final static List<String> overrideSetRenderPassModelHookTypes = new LinkedList<String>();
-	private final static List<String> afterSetRenderPassModelHookTypes = new LinkedList<String>();
+	private final static List<String> beforeTransformHeldFull3DItemLayerHookTypes = new LinkedList<String>();
+	private final static List<String> overrideTransformHeldFull3DItemLayerHookTypes = new LinkedList<String>();
+	private final static List<String> afterTransformHeldFull3DItemLayerHookTypes = new LinkedList<String>();
 
-	private RenderPlayerBase[] beforeSetRenderPassModelHooks;
-	private RenderPlayerBase[] overrideSetRenderPassModelHooks;
-	private RenderPlayerBase[] afterSetRenderPassModelHooks;
+	private RenderPlayerBase[] beforeTransformHeldFull3DItemLayerHooks;
+	private RenderPlayerBase[] overrideTransformHeldFull3DItemLayerHooks;
+	private RenderPlayerBase[] afterTransformHeldFull3DItemLayerHooks;
 
-	public boolean isSetRenderPassModelModded;
+	public boolean isTransformHeldFull3DItemLayerModded;
 
-	private static final Map<String, String[]> allBaseBeforeSetRenderPassModelSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseBeforeSetRenderPassModelInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideSetRenderPassModelSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideSetRenderPassModelInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterSetRenderPassModelSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterSetRenderPassModelInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeTransformHeldFull3DItemLayerSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeTransformHeldFull3DItemLayerInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideTransformHeldFull3DItemLayerSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideTransformHeldFull3DItemLayerInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterTransformHeldFull3DItemLayerSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterTransformHeldFull3DItemLayerInferiors = new Hashtable<String, String[]>(0);
 
-	public static void updateIcons(IRenderPlayerAPI target, net.minecraft.client.renderer.texture.IIconRegister paramIIconRegister)
+	public static void unsetBrightness(IRenderPlayerAPI target)
 	{
 		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
-		if(renderPlayerAPI != null && renderPlayerAPI.isUpdateIconsModded)
-			renderPlayerAPI.updateIcons(paramIIconRegister);
+		if(renderPlayerAPI != null && renderPlayerAPI.isUnsetBrightnessModded)
+			renderPlayerAPI.unsetBrightness();
 		else
-			target.localUpdateIcons(paramIIconRegister);
+			target.localUnsetBrightness();
 	}
 
-	private void updateIcons(net.minecraft.client.renderer.texture.IIconRegister paramIIconRegister)
+	private void unsetBrightness()
 	{
-		if(beforeUpdateIconsHooks != null)
-			for(int i = beforeUpdateIconsHooks.length - 1; i >= 0 ; i--)
-				beforeUpdateIconsHooks[i].beforeUpdateIcons(paramIIconRegister);
+		if(beforeUnsetBrightnessHooks != null)
+			for(int i = beforeUnsetBrightnessHooks.length - 1; i >= 0 ; i--)
+				beforeUnsetBrightnessHooks[i].beforeUnsetBrightness();
 
-		if(overrideUpdateIconsHooks != null)
-			overrideUpdateIconsHooks[overrideUpdateIconsHooks.length - 1].updateIcons(paramIIconRegister);
+		if(overrideUnsetBrightnessHooks != null)
+			overrideUnsetBrightnessHooks[overrideUnsetBrightnessHooks.length - 1].unsetBrightness();
 		else
-			renderPlayer.localUpdateIcons(paramIIconRegister);
+			renderPlayer.localUnsetBrightness();
 
-		if(afterUpdateIconsHooks != null)
-			for(int i = 0; i < afterUpdateIconsHooks.length; i++)
-				afterUpdateIconsHooks[i].afterUpdateIcons(paramIIconRegister);
+		if(afterUnsetBrightnessHooks != null)
+			for(int i = 0; i < afterUnsetBrightnessHooks.length; i++)
+				afterUnsetBrightnessHooks[i].afterUnsetBrightness();
 
 	}
 
-	protected RenderPlayerBase GetOverwrittenUpdateIcons(RenderPlayerBase overWriter)
+	protected RenderPlayerBase GetOverwrittenUnsetBrightness(RenderPlayerBase overWriter)
 	{
-		for(int i = 0; i < overrideUpdateIconsHooks.length; i++)
-			if(overrideUpdateIconsHooks[i] == overWriter)
+		if (overrideUnsetBrightnessHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideUnsetBrightnessHooks.length; i++)
+			if(overrideUnsetBrightnessHooks[i] == overWriter)
 				if(i == 0)
 					return null;
 				else
-					return overrideUpdateIconsHooks[i - 1];
+					return overrideUnsetBrightnessHooks[i - 1];
 
 		return overWriter;
 	}
 
-	private final static List<String> beforeUpdateIconsHookTypes = new LinkedList<String>();
-	private final static List<String> overrideUpdateIconsHookTypes = new LinkedList<String>();
-	private final static List<String> afterUpdateIconsHookTypes = new LinkedList<String>();
+	private final static List<String> beforeUnsetBrightnessHookTypes = new LinkedList<String>();
+	private final static List<String> overrideUnsetBrightnessHookTypes = new LinkedList<String>();
+	private final static List<String> afterUnsetBrightnessHookTypes = new LinkedList<String>();
 
-	private RenderPlayerBase[] beforeUpdateIconsHooks;
-	private RenderPlayerBase[] overrideUpdateIconsHooks;
-	private RenderPlayerBase[] afterUpdateIconsHooks;
+	private RenderPlayerBase[] beforeUnsetBrightnessHooks;
+	private RenderPlayerBase[] overrideUnsetBrightnessHooks;
+	private RenderPlayerBase[] afterUnsetBrightnessHooks;
 
-	public boolean isUpdateIconsModded;
+	public boolean isUnsetBrightnessModded;
 
-	private static final Map<String, String[]> allBaseBeforeUpdateIconsSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseBeforeUpdateIconsInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideUpdateIconsSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseOverrideUpdateIconsInferiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterUpdateIconsSuperiors = new Hashtable<String, String[]>(0);
-	private static final Map<String, String[]> allBaseAfterUpdateIconsInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeUnsetBrightnessSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeUnsetBrightnessInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideUnsetBrightnessSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideUnsetBrightnessInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterUnsetBrightnessSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterUnsetBrightnessInferiors = new Hashtable<String, String[]>(0);
+
+	public static void unsetScoreTeamColor(IRenderPlayerAPI target)
+	{
+		RenderPlayerAPI renderPlayerAPI = target.getRenderPlayerAPI();
+		if(renderPlayerAPI != null && renderPlayerAPI.isUnsetScoreTeamColorModded)
+			renderPlayerAPI.unsetScoreTeamColor();
+		else
+			target.localUnsetScoreTeamColor();
+	}
+
+	private void unsetScoreTeamColor()
+	{
+		if(beforeUnsetScoreTeamColorHooks != null)
+			for(int i = beforeUnsetScoreTeamColorHooks.length - 1; i >= 0 ; i--)
+				beforeUnsetScoreTeamColorHooks[i].beforeUnsetScoreTeamColor();
+
+		if(overrideUnsetScoreTeamColorHooks != null)
+			overrideUnsetScoreTeamColorHooks[overrideUnsetScoreTeamColorHooks.length - 1].unsetScoreTeamColor();
+		else
+			renderPlayer.localUnsetScoreTeamColor();
+
+		if(afterUnsetScoreTeamColorHooks != null)
+			for(int i = 0; i < afterUnsetScoreTeamColorHooks.length; i++)
+				afterUnsetScoreTeamColorHooks[i].afterUnsetScoreTeamColor();
+
+	}
+
+	protected RenderPlayerBase GetOverwrittenUnsetScoreTeamColor(RenderPlayerBase overWriter)
+	{
+		if (overrideUnsetScoreTeamColorHooks == null)
+			return overWriter;
+
+		for(int i = 0; i < overrideUnsetScoreTeamColorHooks.length; i++)
+			if(overrideUnsetScoreTeamColorHooks[i] == overWriter)
+				if(i == 0)
+					return null;
+				else
+					return overrideUnsetScoreTeamColorHooks[i - 1];
+
+		return overWriter;
+	}
+
+	private final static List<String> beforeUnsetScoreTeamColorHookTypes = new LinkedList<String>();
+	private final static List<String> overrideUnsetScoreTeamColorHookTypes = new LinkedList<String>();
+	private final static List<String> afterUnsetScoreTeamColorHookTypes = new LinkedList<String>();
+
+	private RenderPlayerBase[] beforeUnsetScoreTeamColorHooks;
+	private RenderPlayerBase[] overrideUnsetScoreTeamColorHooks;
+	private RenderPlayerBase[] afterUnsetScoreTeamColorHooks;
+
+	public boolean isUnsetScoreTeamColorModded;
+
+	private static final Map<String, String[]> allBaseBeforeUnsetScoreTeamColorSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseBeforeUnsetScoreTeamColorInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideUnsetScoreTeamColorSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseOverrideUnsetScoreTeamColorInferiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterUnsetScoreTeamColorSuperiors = new Hashtable<String, String[]>(0);
+	private static final Map<String, String[]> allBaseAfterUnsetScoreTeamColorInferiors = new Hashtable<String, String[]>(0);
 
 	
 	protected final IRenderPlayerAPI renderPlayer;

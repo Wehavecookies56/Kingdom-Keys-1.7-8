@@ -6,7 +6,9 @@ public abstract class ModelPlayerBase
 	{
 		this.internalModelPlayerAPI = modelPlayerAPI;
 		this.modelPlayerAPI = modelPlayerAPI.modelPlayer;
-		this.modelPlayer = modelPlayerAPI.modelPlayer.getModelPlayer();
+		this.modelBiped = modelPlayerAPI.modelPlayer.getModelPlayer();
+		this.modelPlayer = this.modelBiped instanceof net.minecraft.client.model.ModelPlayer ? (net.minecraft.client.model.ModelPlayer)this.modelBiped : null;
+		this.modelPlayerArmor = this.modelBiped instanceof api.player.model.ModelPlayerArmor ? (api.player.model.ModelPlayerArmor)this.modelBiped : null;
 	}
 
 	public void beforeBaseAttach(boolean onTheFly)
@@ -17,11 +19,11 @@ public abstract class ModelPlayerBase
 	{
 	}
 
-	public void beforeLocalConstructing(float paramFloat)
+	public void beforeLocalConstructing(float paramFloat1, float paramFloat2, int paramInt1, int paramInt2, boolean paramBoolean)
 	{
 	}
 
-	public void afterLocalConstructing(float paramFloat)
+	public void afterLocalConstructing(float paramFloat1, float paramFloat2, int paramInt1, int paramInt2, boolean paramBoolean)
 	{
 	}
 
@@ -89,6 +91,25 @@ public abstract class ModelPlayerBase
 	{
 	}
 
+	public void beforePostRenderArm(float paramFloat)
+	{
+	}
+
+	public void postRenderArm(float paramFloat)
+	{
+		ModelPlayerBase overwritten = internalModelPlayerAPI.GetOverwrittenPostRenderArm(this);
+
+		if(overwritten == null)
+			modelPlayerAPI.localPostRenderArm(paramFloat);
+		else if(overwritten != this)
+			overwritten.postRenderArm(paramFloat);
+
+	}
+
+	public void afterPostRenderArm(float paramFloat)
+	{
+	}
+
 	public void beforeRender(net.minecraft.entity.Entity paramEntity, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6)
 	{
 	}
@@ -108,41 +129,98 @@ public abstract class ModelPlayerBase
 	{
 	}
 
-	public void beforeRenderCloak(float paramFloat)
+	public void beforeRenderCape(float paramFloat)
 	{
 	}
 
-	public void renderCloak(float paramFloat)
+	public void renderCape(float paramFloat)
 	{
-		ModelPlayerBase overwritten = internalModelPlayerAPI.GetOverwrittenRenderCloak(this);
+		ModelPlayerBase overwritten = internalModelPlayerAPI.GetOverwrittenRenderCape(this);
 
 		if(overwritten == null)
-			modelPlayerAPI.localRenderCloak(paramFloat);
+			modelPlayerAPI.localRenderCape(paramFloat);
 		else if(overwritten != this)
-			overwritten.renderCloak(paramFloat);
+			overwritten.renderCape(paramFloat);
 
 	}
 
-	public void afterRenderCloak(float paramFloat)
+	public void afterRenderCape(float paramFloat)
 	{
 	}
 
-	public void beforeRenderEars(float paramFloat)
+	public void beforeRenderDeadmau5Head(float paramFloat)
 	{
 	}
 
-	public void renderEars(float paramFloat)
+	public void renderDeadmau5Head(float paramFloat)
 	{
-		ModelPlayerBase overwritten = internalModelPlayerAPI.GetOverwrittenRenderEars(this);
+		ModelPlayerBase overwritten = internalModelPlayerAPI.GetOverwrittenRenderDeadmau5Head(this);
 
 		if(overwritten == null)
-			modelPlayerAPI.localRenderEars(paramFloat);
+			modelPlayerAPI.localRenderDeadmau5Head(paramFloat);
 		else if(overwritten != this)
-			overwritten.renderEars(paramFloat);
+			overwritten.renderDeadmau5Head(paramFloat);
 
 	}
 
-	public void afterRenderEars(float paramFloat)
+	public void afterRenderDeadmau5Head(float paramFloat)
+	{
+	}
+
+	public void beforeRenderLeftArm()
+	{
+	}
+
+	public void renderLeftArm()
+	{
+		ModelPlayerBase overwritten = internalModelPlayerAPI.GetOverwrittenRenderLeftArm(this);
+
+		if(overwritten == null)
+			modelPlayerAPI.localRenderLeftArm();
+		else if(overwritten != this)
+			overwritten.renderLeftArm();
+
+	}
+
+	public void afterRenderLeftArm()
+	{
+	}
+
+	public void beforeRenderRightArm()
+	{
+	}
+
+	public void renderRightArm()
+	{
+		ModelPlayerBase overwritten = internalModelPlayerAPI.GetOverwrittenRenderRightArm(this);
+
+		if(overwritten == null)
+			modelPlayerAPI.localRenderRightArm();
+		else if(overwritten != this)
+			overwritten.renderRightArm();
+
+	}
+
+	public void afterRenderRightArm()
+	{
+	}
+
+	public void beforeSetInvisible(boolean paramBoolean)
+	{
+	}
+
+	public void setInvisible(boolean paramBoolean)
+	{
+		ModelPlayerBase overwritten = internalModelPlayerAPI.GetOverwrittenSetInvisible(this);
+
+		if(overwritten == null)
+			modelPlayerAPI.localSetInvisible(paramBoolean);
+		else if(overwritten != this)
+			overwritten.setInvisible(paramBoolean);
+
+	}
+
+	public void afterSetInvisible(boolean paramBoolean)
 	{
 	}
 
@@ -162,6 +240,25 @@ public abstract class ModelPlayerBase
 	}
 
 	public void afterSetLivingAnimations(net.minecraft.entity.EntityLivingBase paramEntityLivingBase, float paramFloat1, float paramFloat2, float paramFloat3)
+	{
+	}
+
+	public void beforeSetModelAttributes(net.minecraft.client.model.ModelBase paramModelBase)
+	{
+	}
+
+	public void setModelAttributes(net.minecraft.client.model.ModelBase paramModelBase)
+	{
+		ModelPlayerBase overwritten = internalModelPlayerAPI.GetOverwrittenSetModelAttributes(this);
+
+		if(overwritten == null)
+			modelPlayerAPI.localSetModelAttributes(paramModelBase);
+		else if(overwritten != this)
+			overwritten.setModelAttributes(paramModelBase);
+
+	}
+
+	public void afterSetModelAttributes(net.minecraft.client.model.ModelBase paramModelBase)
 	{
 	}
 
@@ -203,7 +300,9 @@ public abstract class ModelPlayerBase
 	{
 	}
 
-	protected final api.player.model.ModelPlayer modelPlayer;
+	protected final net.minecraft.client.model.ModelBiped modelBiped;
+	protected final net.minecraft.client.model.ModelPlayer modelPlayer;
+	protected final api.player.model.ModelPlayerArmor modelPlayerArmor;
 	protected final IModelPlayer modelPlayerAPI;
 	private final ModelPlayerAPI internalModelPlayerAPI;
 }

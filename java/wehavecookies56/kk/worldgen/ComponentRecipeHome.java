@@ -171,8 +171,8 @@ public class ComponentRecipeHome extends StructureVillagePieces.Village {
 		this.boundingBox = par4StructureBoundingBox;
 	}
 
-	public static ComponentRecipeHome buildComponent(Start villagePiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5) {
-		StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p1, p2, p3, 0, 0, 0, 7, 6, 7, p4);
+	public static ComponentRecipeHome buildComponent(Start villagePiece, List pieces, Random random, int p1, int p2, int p3, Enum facing, int p5) {
+		StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p1, p2, p3, 0, 0, 0, 7, 6, 7, facing);
         return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new ComponentRecipeHome(villagePiece, p5, random, structureboundingbox, p4) : null;
 	
 	}

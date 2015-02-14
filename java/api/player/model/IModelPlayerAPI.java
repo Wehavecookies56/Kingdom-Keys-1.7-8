@@ -4,5 +4,5 @@ public interface IModelPlayerAPI extends IModelPlayer
 {
 	ModelPlayerAPI getModelPlayerAPI();
 
-	api.player.model.ModelPlayer getModelPlayer();
+	net.minecraft.client.model.ModelBiped getModelPlayer();
 }

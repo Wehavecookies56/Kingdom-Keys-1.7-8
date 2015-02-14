@@ -2,11 +2,11 @@ package wehavecookies56.kk.driveforms;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyDriveForm;
 import wehavecookies56.kk.core.extendedproperties.EntityPropertyDrivePoints;
 import wehavecookies56.kk.core.packet.DriveActivatePacket;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
 
 public class DriveForm {
 	

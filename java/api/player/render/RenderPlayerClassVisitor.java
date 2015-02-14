@@ -9,34 +9,43 @@ public final class RenderPlayerClassVisitor extends ClassVisitor
 {
 	public static final String targetClassName = "net.minecraft.client.renderer.entity.RenderPlayer";
 
-	private boolean hadLocalDoRenderLabel;
+	private boolean hadLocalAddLayer;
+	private boolean hadLocalBindEntityTexture;
+	private boolean hadLocalBindTexture;
+	private boolean hadLocalCanRenderName;
+	private boolean hadLocalDoRender;
 	private boolean hadLocalDoRenderShadowAndFire;
 	private boolean hadLocalGetColorMultiplier;
 	private boolean hadLocalGetDeathMaxRotation;
+	private boolean hadLocalGetEntityTexture;
 	private boolean hadLocalGetFontRendererFromRenderManager;
-	private boolean hadLocalGetResourceLocationFromPlayer;
+	private boolean hadLocalGetMainModel;
+	private boolean hadLocalGetPlayerModel;
+	private boolean hadLocalGetRenderManager;
+	private boolean hadLocalGetSwingProgress;
 	private boolean hadLocalHandleRotationFloat;
-	private boolean hadLocalInheritRenderPass;
-	private boolean hadLocalLoadTexture;
-	private boolean hadLocalLoadTextureOfEntity;
+	private boolean hadLocalInterpolateRotation;
 	private boolean hadLocalPassSpecialRender;
-	private boolean hadLocalPerformStaticEntityRebuild;
-	private boolean hadLocalRenderArrowsStuckInEntity;
-	private boolean hadLocalRenderFirstPersonArm;
+	private boolean hadLocalPreRenderCallback;
+	private boolean hadLocalRemoveLayer;
+	private boolean hadLocalRenderLayers;
+	private boolean hadLocalRenderLeftArm;
+	private boolean hadLocalRenderLivingAt;
 	private boolean hadLocalRenderLivingLabel;
 	private boolean hadLocalRenderModel;
-	private boolean hadLocalRenderPlayer;
-	private boolean hadLocalRenderPlayerNameAndScoreLabel;
-	private boolean hadLocalRenderPlayerScale;
-	private boolean hadLocalRenderPlayerSleep;
-	private boolean hadLocalRenderSpecials;
-	private boolean hadLocalRenderSwingProgress;
-	private boolean hadLocalRotatePlayer;
-	private boolean hadLocalSetArmorModel;
-	private boolean hadLocalSetPassArmorModel;
-	private boolean hadLocalSetRenderManager;
-	private boolean hadLocalSetRenderPassModel;
-	private boolean hadLocalUpdateIcons;
+	private boolean hadLocalRenderName;
+	private boolean hadLocalRenderOffsetLivingLabel;
+	private boolean hadLocalRenderRightArm;
+	private boolean hadLocalRotateCorpse;
+	private boolean hadLocalSetBrightness;
+	private boolean hadLocalSetDoRenderBrightness;
+	private boolean hadLocalSetModelVisibilities;
+	private boolean hadLocalSetRenderOutlines;
+	private boolean hadLocalSetScoreTeamColor;
+	private boolean hadLocalShouldRender;
+	private boolean hadLocalTransformHeldFull3DItemLayer;
+	private boolean hadLocalUnsetBrightness;
+	private boolean hadLocalUnsetScoreTeamColor;
 
 	public static byte[] transform(byte[] bytes, boolean isObfuscated, Map<String, Stack<String>> constructorReplacements)
 	{
@@ -69,6 +78,7 @@ public final class RenderPlayerClassVisitor extends ClassVisitor
 		this.constructorReplacements = constructorReplacements;
 	}
 
+	@Override
 	public void visit(int version, int access, String name, String signature, String superName, String[] interfaces)
 	{
 		String[] newInterfaces = new String[interfaces.length + 1];
@@ -78,263 +88,426 @@ public final class RenderPlayerClassVisitor extends ClassVisitor
 		super.visit(version, access, name, signature, superName, newInterfaces);
 	}
 
+	@Override
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions)
 	{
-		if(name.equals("<init>"))
+		if(name.equals("<init>") && desc.equals(isObfuscated ? "(Lcpt;Z)V" : "(Lnet/minecraft/client/renderer/entity/RenderManager;Z)V"))
 			return new RenderPlayerConstructorVisitor(super.visitMethod(access, name, desc, signature, exceptions), isObfuscated, constructorReplacements);
 
-		if(name.equals(isObfuscated ? "b" : "func_110813_b") && desc.equals(isObfuscated ? "(Lsv;)Z" : "(Lnet/minecraft/entity/EntityLivingBase;)Z"))
+		if(name.equals(isObfuscated ? "a" : "addLayer") && desc.equals(isObfuscated ? "(Lcsq;)Z" : "(Lnet/minecraft/client/renderer/entity/layers/LayerRenderer;)Z"))
 		{
-			hadLocalDoRenderLabel = true;
-			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localDoRenderLabel", desc, signature, exceptions);
+			hadLocalAddLayer = true;
+			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localAddLayer", desc, signature, exceptions);
 		}
 
-		if(name.equals(isObfuscated ? "b" : "doRenderShadowAndFire") && desc.equals(isObfuscated ? "(Lsa;DDDFF)V" : "(Lnet/minecraft/entity/Entity;DDDFF)V"))
+		if(name.equals(isObfuscated ? "c" : "bindEntityTexture") && desc.equals(isObfuscated ? "(Lwv;)Z" : "(Lnet/minecraft/entity/Entity;)Z"))
+		{
+			hadLocalBindEntityTexture = true;
+			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localBindEntityTexture", desc, signature, exceptions);
+		}
+
+		if(name.equals(isObfuscated ? "a" : "bindTexture") && desc.equals(isObfuscated ? "(Loa;)V" : "(Lnet/minecraft/util/ResourceLocation;)V"))
+		{
+			hadLocalBindTexture = true;
+			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localBindTexture", desc, signature, exceptions);
+		}
+
+		if(name.equals(isObfuscated ? "a" : "canRenderName") && desc.equals(isObfuscated ? "(Lxm;)Z" : "(Lnet/minecraft/entity/EntityLivingBase;)Z"))
+		{
+			hadLocalCanRenderName = true;
+			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localCanRenderName", desc, signature, exceptions);
+		}
+
+		if(name.equals(isObfuscated ? "a" : "func_180596_a") && desc.equals(isObfuscated ? "(Lcil;DDDFF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDFF)V"))
+		{
+			hadLocalDoRender = true;
+			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localDoRender", desc, signature, exceptions);
+		}
+
+		if(name.equals(isObfuscated ? "b" : "doRenderShadowAndFire") && desc.equals(isObfuscated ? "(Lwv;DDDFF)V" : "(Lnet/minecraft/entity/Entity;DDDFF)V"))
 		{
 			hadLocalDoRenderShadowAndFire = true;
 			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localDoRenderShadowAndFire", desc, signature, exceptions);
 		}
 
-		if(name.equals(isObfuscated ? "a" : "getColorMultiplier") && desc.equals(isObfuscated ? "(Lsv;FF)I" : "(Lnet/minecraft/entity/EntityLivingBase;FF)I"))
+		if(name.equals(isObfuscated ? "a" : "getColorMultiplier") && desc.equals(isObfuscated ? "(Lxm;FF)I" : "(Lnet/minecraft/entity/EntityLivingBase;FF)I"))
 		{
 			hadLocalGetColorMultiplier = true;
 			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localGetColorMultiplier", desc, signature, exceptions);
 		}
 
-		if(name.equals(isObfuscated ? "a" : "getDeathMaxRotation") && desc.equals(isObfuscated ? "(Lsv;)F" : "(Lnet/minecraft/entity/EntityLivingBase;)F"))
+		if(name.equals(isObfuscated ? "b" : "getDeathMaxRotation") && desc.equals(isObfuscated ? "(Lxm;)F" : "(Lnet/minecraft/entity/EntityLivingBase;)F"))
 		{
 			hadLocalGetDeathMaxRotation = true;
 			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localGetDeathMaxRotation", desc, signature, exceptions);
 		}
 
-		if(name.equals(isObfuscated ? "c" : "getFontRendererFromRenderManager") && desc.equals(isObfuscated ? "()Lbbu;" : "()Lnet/minecraft/client/gui/FontRenderer;"))
+		if(name.equals(isObfuscated ? "a" : "func_180594_a") && desc.equals(isObfuscated ? "(Lcil;)Loa;" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;)Lnet/minecraft/util/ResourceLocation;"))
+		{
+			hadLocalGetEntityTexture = true;
+			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localGetEntityTexture", desc, signature, exceptions);
+		}
+
+		if(name.equals(isObfuscated ? "c" : "getFontRendererFromRenderManager") && desc.equals(isObfuscated ? "()Lbty;" : "()Lnet/minecraft/client/gui/FontRenderer;"))
 		{
 			hadLocalGetFontRendererFromRenderManager = true;
 			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localGetFontRendererFromRenderManager", desc, signature, exceptions);
 		}
 
-		if(name.equals(isObfuscated ? "a" : "getEntityTexture") && desc.equals(isObfuscated ? "(Lblg;)Lbqx;" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;)Lnet/minecraft/util/ResourceLocation;"))
+		if(name.equals(isObfuscated ? "b" : "getMainModel") && desc.equals(isObfuscated ? "()Lccq;" : "()Lnet/minecraft/client/model/ModelBase;"))
 		{
-			hadLocalGetResourceLocationFromPlayer = true;
-			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localGetResourceLocationFromPlayer", desc, signature, exceptions);
+			hadLocalGetMainModel = true;
+			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localGetMainModel", desc, signature, exceptions);
 		}
 
-		if(name.equals(isObfuscated ? "b" : "handleRotationFloat") && desc.equals(isObfuscated ? "(Lsv;F)F" : "(Lnet/minecraft/entity/EntityLivingBase;F)F"))
+		if(name.equals(isObfuscated ? "g" : "getPlayerModel") && desc.equals(isObfuscated ? "()Lcct;" : "()Lnet/minecraft/client/model/ModelPlayer;"))
+		{
+			hadLocalGetPlayerModel = true;
+			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localGetPlayerModel", desc, signature, exceptions);
+		}
+
+		if(name.equals(isObfuscated ? "d" : "func_177068_d") && desc.equals(isObfuscated ? "()Lcpt;" : "()Lnet/minecraft/client/renderer/entity/RenderManager;"))
+		{
+			hadLocalGetRenderManager = true;
+			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localGetRenderManager", desc, signature, exceptions);
+		}
+
+		if(name.equals(isObfuscated ? "d" : "getSwingProgress") && desc.equals(isObfuscated ? "(Lxm;F)F" : "(Lnet/minecraft/entity/EntityLivingBase;F)F"))
+		{
+			hadLocalGetSwingProgress = true;
+			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localGetSwingProgress", desc, signature, exceptions);
+		}
+
+		if(name.equals(isObfuscated ? "b" : "handleRotationFloat") && desc.equals(isObfuscated ? "(Lxm;F)F" : "(Lnet/minecraft/entity/EntityLivingBase;F)F"))
 		{
 			hadLocalHandleRotationFloat = true;
 			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localHandleRotationFloat", desc, signature, exceptions);
 		}
 
-		if(name.equals(isObfuscated ? "b" : "inheritRenderPass") && desc.equals(isObfuscated ? "(Lsv;IF)I" : "(Lnet/minecraft/entity/EntityLivingBase;IF)I"))
+		if(name.equals(isObfuscated ? "a" : "interpolateRotation") && desc.equals("(FFF)F"))
 		{
-			hadLocalInheritRenderPass = true;
-			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localInheritRenderPass", desc, signature, exceptions);
+			hadLocalInterpolateRotation = true;
+			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localInterpolateRotation", desc, signature, exceptions);
 		}
 
-		if(name.equals(isObfuscated ? "a" : "bindTexture") && desc.equals(isObfuscated ? "(Lbqx;)V" : "(Lnet/minecraft/util/ResourceLocation;)V"))
-		{
-			hadLocalLoadTexture = true;
-			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localLoadTexture", desc, signature, exceptions);
-		}
-
-		if(name.equals(isObfuscated ? "b" : "bindEntityTexture") && desc.equals(isObfuscated ? "(Lsa;)V" : "(Lnet/minecraft/entity/Entity;)V"))
-		{
-			hadLocalLoadTextureOfEntity = true;
-			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localLoadTextureOfEntity", desc, signature, exceptions);
-		}
-
-		if(name.equals(isObfuscated ? "b" : "passSpecialRender") && desc.equals(isObfuscated ? "(Lsv;DDD)V" : "(Lnet/minecraft/entity/EntityLivingBase;DDD)V"))
+		if(name.equals(isObfuscated ? "b" : "passSpecialRender") && desc.equals(isObfuscated ? "(Lxm;DDD)V" : "(Lnet/minecraft/entity/EntityLivingBase;DDD)V"))
 		{
 			hadLocalPassSpecialRender = true;
 			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localPassSpecialRender", desc, signature, exceptions);
 		}
 
-		if(name.equals(isObfuscated ? "a" : "isStaticEntity") && desc.equals("()Z"))
+		if(name.equals(isObfuscated ? "a" : "preRenderCallback") && desc.equals(isObfuscated ? "(Lcil;F)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;F)V"))
 		{
-			hadLocalPerformStaticEntityRebuild = true;
-			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localPerformStaticEntityRebuild", desc, signature, exceptions);
+			hadLocalPreRenderCallback = true;
+			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localPreRenderCallback", desc, signature, exceptions);
 		}
 
-		if(name.equals(isObfuscated ? "e" : "renderArrowsStuckInEntity") && desc.equals(isObfuscated ? "(Lsv;F)V" : "(Lnet/minecraft/entity/EntityLivingBase;F)V"))
+		if(name.equals(isObfuscated ? "b" : "removeLayer") && desc.equals(isObfuscated ? "(Lcsq;)Z" : "(Lnet/minecraft/client/renderer/entity/layers/LayerRenderer;)Z"))
 		{
-			hadLocalRenderArrowsStuckInEntity = true;
-			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderArrowsStuckInEntity", desc, signature, exceptions);
+			hadLocalRemoveLayer = true;
+			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRemoveLayer", desc, signature, exceptions);
 		}
 
-		if(name.equals(isObfuscated ? "a" : "renderFirstPersonArm") && desc.equals(isObfuscated ? "(Lyz;)V" : "(Lnet/minecraft/entity/player/EntityPlayer;)V"))
+		if(name.equals(isObfuscated ? "a" : "func_177093_a") && desc.equals(isObfuscated ? "(Lxm;FFFFFFF)V" : "(Lnet/minecraft/entity/EntityLivingBase;FFFFFFF)V"))
 		{
-			hadLocalRenderFirstPersonArm = true;
-			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderFirstPersonArm", desc, signature, exceptions);
+			hadLocalRenderLayers = true;
+			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderLayers", desc, signature, exceptions);
 		}
 
-		if(name.equals(isObfuscated ? "a" : "func_147906_a") && desc.equals(isObfuscated ? "(Lsa;Ljava/lang/String;DDDI)V" : "(Lnet/minecraft/entity/Entity;Ljava/lang/String;DDDI)V"))
+		if(name.equals(isObfuscated ? "c" : "func_177139_c") && desc.equals(isObfuscated ? "(Lcil;)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;)V"))
+		{
+			hadLocalRenderLeftArm = true;
+			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderLeftArm", desc, signature, exceptions);
+		}
+
+		if(name.equals(isObfuscated ? "a" : "renderLivingAt") && desc.equals(isObfuscated ? "(Lcil;DDD)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDD)V"))
+		{
+			hadLocalRenderLivingAt = true;
+			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderLivingAt", desc, signature, exceptions);
+		}
+
+		if(name.equals(isObfuscated ? "a" : "renderLivingLabel") && desc.equals(isObfuscated ? "(Lwv;Ljava/lang/String;DDDI)V" : "(Lnet/minecraft/entity/Entity;Ljava/lang/String;DDDI)V"))
 		{
 			hadLocalRenderLivingLabel = true;
 			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderLivingLabel", desc, signature, exceptions);
 		}
 
-		if(name.equals(isObfuscated ? "a" : "renderModel") && desc.equals(isObfuscated ? "(Lsv;FFFFFF)V" : "(Lnet/minecraft/entity/EntityLivingBase;FFFFFF)V"))
+		if(name.equals(isObfuscated ? "a" : "renderModel") && desc.equals(isObfuscated ? "(Lxm;FFFFFF)V" : "(Lnet/minecraft/entity/EntityLivingBase;FFFFFF)V"))
 		{
 			hadLocalRenderModel = true;
 			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderModel", desc, signature, exceptions);
 		}
 
-		if(name.equals(isObfuscated ? "a" : "doRender") && desc.equals(isObfuscated ? "(Lblg;DDDFF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDFF)V"))
+		if(name.equals(isObfuscated ? "a" : "renderName") && desc.equals(isObfuscated ? "(Lwv;DDD)V" : "(Lnet/minecraft/entity/Entity;DDD)V"))
 		{
-			hadLocalRenderPlayer = true;
-			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderPlayer", desc, signature, exceptions);
+			hadLocalRenderName = true;
+			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderName", desc, signature, exceptions);
 		}
 
-		if(name.equals(isObfuscated ? "a" : "func_96449_a") && desc.equals(isObfuscated ? "(Lblg;DDDLjava/lang/String;FD)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDLjava/lang/String;FD)V"))
+		if(name.equals(isObfuscated ? "a" : "renderOffsetLivingLabel") && desc.equals(isObfuscated ? "(Lcil;DDDLjava/lang/String;FD)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDLjava/lang/String;FD)V"))
 		{
-			hadLocalRenderPlayerNameAndScoreLabel = true;
-			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderPlayerNameAndScoreLabel", desc, signature, exceptions);
+			hadLocalRenderOffsetLivingLabel = true;
+			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderOffsetLivingLabel", desc, signature, exceptions);
 		}
 
-		if(name.equals(isObfuscated ? "b" : "preRenderCallback") && desc.equals(isObfuscated ? "(Lblg;F)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;F)V"))
+		if(name.equals(isObfuscated ? "b" : "func_177138_b") && desc.equals(isObfuscated ? "(Lcil;)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;)V"))
 		{
-			hadLocalRenderPlayerScale = true;
-			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderPlayerScale", desc, signature, exceptions);
+			hadLocalRenderRightArm = true;
+			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderRightArm", desc, signature, exceptions);
 		}
 
-		if(name.equals(isObfuscated ? "a" : "renderLivingAt") && desc.equals(isObfuscated ? "(Lblg;DDD)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDD)V"))
+		if(name.equals(isObfuscated ? "a" : "func_180595_a") && desc.equals(isObfuscated ? "(Lcil;FFF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;FFF)V"))
 		{
-			hadLocalRenderPlayerSleep = true;
-			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderPlayerSleep", desc, signature, exceptions);
+			hadLocalRotateCorpse = true;
+			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRotateCorpse", desc, signature, exceptions);
 		}
 
-		if(name.equals(isObfuscated ? "a" : "renderEquippedItems") && desc.equals(isObfuscated ? "(Lblg;F)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;F)V"))
+		if(name.equals(isObfuscated ? "a" : "func_177092_a") && desc.equals(isObfuscated ? "(Lxm;FZ)Z" : "(Lnet/minecraft/entity/EntityLivingBase;FZ)Z"))
 		{
-			hadLocalRenderSpecials = true;
-			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderSpecials", desc, signature, exceptions);
+			hadLocalSetBrightness = true;
+			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localSetBrightness", desc, signature, exceptions);
 		}
 
-		if(name.equals(isObfuscated ? "d" : "renderSwingProgress") && desc.equals(isObfuscated ? "(Lsv;F)F" : "(Lnet/minecraft/entity/EntityLivingBase;F)F"))
+		if(name.equals(isObfuscated ? "c" : "func_177090_c") && desc.equals(isObfuscated ? "(Lxm;F)Z" : "(Lnet/minecraft/entity/EntityLivingBase;F)Z"))
 		{
-			hadLocalRenderSwingProgress = true;
-			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderSwingProgress", desc, signature, exceptions);
+			hadLocalSetDoRenderBrightness = true;
+			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localSetDoRenderBrightness", desc, signature, exceptions);
 		}
 
-		if(name.equals(isObfuscated ? "a" : "rotateCorpse") && desc.equals(isObfuscated ? "(Lblg;FFF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;FFF)V"))
+		if(name.equals(isObfuscated ? "d" : "func_177137_d") && desc.equals(isObfuscated ? "(Lcil;)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;)V"))
 		{
-			hadLocalRotatePlayer = true;
-			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRotatePlayer", desc, signature, exceptions);
+			hadLocalSetModelVisibilities = true;
+			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localSetModelVisibilities", desc, signature, exceptions);
 		}
 
-		if(name.equals(isObfuscated ? "a" : "shouldRenderPass") && desc.equals(isObfuscated ? "(Lblg;IF)I" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;IF)I"))
+		if(name.equals(isObfuscated ? "a" : "setRenderOutlines") && desc.equals("(Z)V"))
 		{
-			hadLocalSetArmorModel = true;
-			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localSetArmorModel", desc, signature, exceptions);
+			hadLocalSetRenderOutlines = true;
+			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localSetRenderOutlines", desc, signature, exceptions);
 		}
 
-		if(name.equals(isObfuscated ? "b" : "func_82408_c") && desc.equals(isObfuscated ? "(Lblg;IF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;IF)V"))
+		if(name.equals(isObfuscated ? "c" : "func_177088_c") && desc.equals(isObfuscated ? "(Lxm;)Z" : "(Lnet/minecraft/entity/EntityLivingBase;)Z"))
 		{
-			hadLocalSetPassArmorModel = true;
-			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localSetPassArmorModel", desc, signature, exceptions);
+			hadLocalSetScoreTeamColor = true;
+			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localSetScoreTeamColor", desc, signature, exceptions);
 		}
 
-		if(name.equals(isObfuscated ? "a" : "setRenderManager") && desc.equals(isObfuscated ? "(Lbnn;)V" : "(Lnet/minecraft/client/renderer/entity/RenderManager;)V"))
+		if(name.equals(isObfuscated ? "a" : "shouldRender") && desc.equals(isObfuscated ? "(Lwv;Lcox;DDD)Z" : "(Lnet/minecraft/entity/Entity;Lnet/minecraft/client/renderer/culling/ICamera;DDD)Z"))
 		{
-			hadLocalSetRenderManager = true;
-			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localSetRenderManager", desc, signature, exceptions);
+			hadLocalShouldRender = true;
+			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localShouldRender", desc, signature, exceptions);
 		}
 
-		if(name.equals(isObfuscated ? "a" : "setRenderPassModel") && desc.equals(isObfuscated ? "(Lbhr;)V" : "(Lnet/minecraft/client/model/ModelBase;)V"))
+		if(name.equals(isObfuscated ? "B_" : "func_82422_c") && desc.equals("()V"))
 		{
-			hadLocalSetRenderPassModel = true;
-			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localSetRenderPassModel", desc, signature, exceptions);
+			hadLocalTransformHeldFull3DItemLayer = true;
+			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localTransformHeldFull3DItemLayer", desc, signature, exceptions);
 		}
 
-		if(name.equals(isObfuscated ? "a" : "updateIcons") && desc.equals(isObfuscated ? "(Lrg;)V" : "(Lnet/minecraft/client/renderer/texture/IIconRegister;)V"))
+		if(name.equals(isObfuscated ? "f" : "func_177091_f") && desc.equals("()V"))
 		{
-			hadLocalUpdateIcons = true;
-			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localUpdateIcons", desc, signature, exceptions);
+			hadLocalUnsetBrightness = true;
+			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localUnsetBrightness", desc, signature, exceptions);
+		}
+
+		if(name.equals(isObfuscated ? "e" : "func_180565_e") && desc.equals("()V"))
+		{
+			hadLocalUnsetScoreTeamColor = true;
+			return super.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localUnsetScoreTeamColor", desc, signature, exceptions);
 		}
 
 		return super.visitMethod(access, name, desc, signature, exceptions);
 	}
 
+	@Override
 	public void visitEnd()
 	{
 		MethodVisitor mv;
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "b" : "func_110813_b", "" + (isObfuscated ? "(Lsv;)Z" : "(Lnet/minecraft/entity/EntityLivingBase;)Z") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "addLayer", "" + (isObfuscated ? "(Lcsq;)Z" : "(Lnet/minecraft/client/renderer/entity/layers/LayerRenderer;)Z") + "", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "doRenderLabel", "(Lapi/player/render/IRenderPlayerAPI;" + (isObfuscated ? "Lsv;" : "Lnet/minecraft/entity/EntityLivingBase;") + ")Z");
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "addLayer", "(Lapi/player/render/IRenderPlayerAPI;Lnet/minecraft/client/renderer/entity/layers/LayerRenderer;)Z", false);
 		mv.visitInsn(Opcodes.IRETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realDoRenderLabel", "" + (isObfuscated ? "(Lsv;)Z" : "(Lnet/minecraft/entity/EntityLivingBase;)Z") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realAddLayer", "(Lnet/minecraft/client/renderer/entity/layers/LayerRenderer;)Z", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "b" : "func_110813_b", "" + (isObfuscated ? "(Lsv;)Z" : "(Lnet/minecraft/entity/EntityLivingBase;)Z") + "");
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "addLayer", "" + (isObfuscated ? "(Lcsq;)Z" : "(Lnet/minecraft/client/renderer/entity/layers/LayerRenderer;)Z") + "", false);
 		mv.visitInsn(Opcodes.IRETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superDoRenderLabel", "" + (isObfuscated ? "(Lsv;)Z" : "(Lnet/minecraft/entity/EntityLivingBase;)Z") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superAddLayer", "(Lnet/minecraft/client/renderer/entity/layers/LayerRenderer;)Z", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "b" : "func_110813_b", "" + (isObfuscated ? "(Lsv;)Z" : "(Lnet/minecraft/entity/EntityLivingBase;)Z") + "");
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "addLayer", "" + (isObfuscated ? "(Lcsq;)Z" : "(Lnet/minecraft/client/renderer/entity/layers/LayerRenderer;)Z") + "", false);
 		mv.visitInsn(Opcodes.IRETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		if(!hadLocalDoRenderLabel)
+		if(!hadLocalAddLayer)
 		{
-			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localDoRenderLabel", "" + (isObfuscated ? "(Lsv;)Z" : "(Lnet/minecraft/entity/EntityLivingBase;)Z") + "", null, null);
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localAddLayer", "(Lnet/minecraft/client/renderer/entity/layers/LayerRenderer;)Z", null, null);
 			mv.visitVarInsn(Opcodes.ALOAD, 0);
 			mv.visitVarInsn(Opcodes.ALOAD, 1);
-			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "b" : "func_110813_b", "" + (isObfuscated ? "(Lsv;)Z" : "(Lnet/minecraft/entity/EntityLivingBase;)Z") + "");
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "addLayer", "" + (isObfuscated ? "(Lcsq;)Z" : "(Lnet/minecraft/client/renderer/entity/layers/LayerRenderer;)Z") + "", false);
 			mv.visitInsn(Opcodes.IRETURN);
 			mv.visitMaxs(0, 0);
 			mv.visitEnd();
 		}
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "b" : "doRenderShadowAndFire", "" + (isObfuscated ? "(Lsa;DDDFF)V" : "(Lnet/minecraft/entity/Entity;DDDFF)V") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "c" : "bindEntityTexture", "" + (isObfuscated ? "(Lwv;)Z" : "(Lnet/minecraft/entity/Entity;)Z") + "", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.DLOAD, 2);
-		mv.visitVarInsn(Opcodes.DLOAD, 4);
-		mv.visitVarInsn(Opcodes.DLOAD, 6);
-		mv.visitVarInsn(Opcodes.FLOAD, 8);
-		mv.visitVarInsn(Opcodes.FLOAD, 9);
-		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "doRenderShadowAndFire", "(Lapi/player/render/IRenderPlayerAPI;" + (isObfuscated ? "Lsa;DDDFF" : "Lnet/minecraft/entity/Entity;DDDFF") + ")V");
-		mv.visitInsn(Opcodes.RETURN);
+		mv.visitTypeInsn(Opcodes.CHECKCAST, "net/minecraft/client/entity/AbstractClientPlayer");
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "bindEntityTexture", "(Lapi/player/render/IRenderPlayerAPI;Lnet/minecraft/client/entity/AbstractClientPlayer;)Z", false);
+		mv.visitInsn(Opcodes.IRETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realDoRenderShadowAndFire", "" + (isObfuscated ? "(Lsa;DDDFF)V" : "(Lnet/minecraft/entity/Entity;DDDFF)V") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realBindEntityTexture", "(Lnet/minecraft/client/entity/AbstractClientPlayer;)Z", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.DLOAD, 2);
-		mv.visitVarInsn(Opcodes.DLOAD, 4);
-		mv.visitVarInsn(Opcodes.DLOAD, 6);
-		mv.visitVarInsn(Opcodes.FLOAD, 8);
-		mv.visitVarInsn(Opcodes.FLOAD, 9);
-		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "b" : "doRenderShadowAndFire", "" + (isObfuscated ? "(Lsa;DDDFF)V" : "(Lnet/minecraft/entity/Entity;DDDFF)V") + "");
-		mv.visitInsn(Opcodes.RETURN);
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "c" : "bindEntityTexture", "" + (isObfuscated ? "(Lwv;)Z" : "(Lnet/minecraft/entity/Entity;)Z") + "", false);
+		mv.visitInsn(Opcodes.IRETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superDoRenderShadowAndFire", "" + (isObfuscated ? "(Lsa;DDDFF)V" : "(Lnet/minecraft/entity/Entity;DDDFF)V") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superBindEntityTexture", "(Lnet/minecraft/client/entity/AbstractClientPlayer;)Z", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.DLOAD, 2);
-		mv.visitVarInsn(Opcodes.DLOAD, 4);
-		mv.visitVarInsn(Opcodes.DLOAD, 6);
-		mv.visitVarInsn(Opcodes.FLOAD, 8);
-		mv.visitVarInsn(Opcodes.FLOAD, 9);
-		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "b" : "doRenderShadowAndFire", "" + (isObfuscated ? "(Lsa;DDDFF)V" : "(Lnet/minecraft/entity/Entity;DDDFF)V") + "");
-		mv.visitInsn(Opcodes.RETURN);
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "c" : "bindEntityTexture", "" + (isObfuscated ? "(Lwv;)Z" : "(Lnet/minecraft/entity/Entity;)Z") + "", false);
+		mv.visitInsn(Opcodes.IRETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		if(!hadLocalDoRenderShadowAndFire)
+		if(!hadLocalBindEntityTexture)
 		{
-			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localDoRenderShadowAndFire", "" + (isObfuscated ? "(Lsa;DDDFF)V" : "(Lnet/minecraft/entity/Entity;DDDFF)V") + "", null, null);
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localBindEntityTexture", "(Lnet/minecraft/client/entity/AbstractClientPlayer;)Z", null, null);
+			mv.visitVarInsn(Opcodes.ALOAD, 0);
+			mv.visitVarInsn(Opcodes.ALOAD, 1);
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "c" : "bindEntityTexture", "" + (isObfuscated ? "(Lwv;)Z" : "(Lnet/minecraft/entity/Entity;)Z") + "", false);
+			mv.visitInsn(Opcodes.IRETURN);
+			mv.visitMaxs(0, 0);
+			mv.visitEnd();
+		}
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "bindTexture", "" + (isObfuscated ? "(Loa;)V" : "(Lnet/minecraft/util/ResourceLocation;)V") + "", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "bindTexture", "(Lapi/player/render/IRenderPlayerAPI;Lnet/minecraft/util/ResourceLocation;)V", false);
+		mv.visitInsn(Opcodes.RETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realBindTexture", "(Lnet/minecraft/util/ResourceLocation;)V", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "bindTexture", "" + (isObfuscated ? "(Loa;)V" : "(Lnet/minecraft/util/ResourceLocation;)V") + "", false);
+		mv.visitInsn(Opcodes.RETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superBindTexture", "(Lnet/minecraft/util/ResourceLocation;)V", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "bindTexture", "" + (isObfuscated ? "(Loa;)V" : "(Lnet/minecraft/util/ResourceLocation;)V") + "", false);
+		mv.visitInsn(Opcodes.RETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		if(!hadLocalBindTexture)
+		{
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localBindTexture", "(Lnet/minecraft/util/ResourceLocation;)V", null, null);
+			mv.visitVarInsn(Opcodes.ALOAD, 0);
+			mv.visitVarInsn(Opcodes.ALOAD, 1);
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "bindTexture", "" + (isObfuscated ? "(Loa;)V" : "(Lnet/minecraft/util/ResourceLocation;)V") + "", false);
+			mv.visitInsn(Opcodes.RETURN);
+			mv.visitMaxs(0, 0);
+			mv.visitEnd();
+		}
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "canRenderName", "" + (isObfuscated ? "(Lxm;)Z" : "(Lnet/minecraft/entity/EntityLivingBase;)Z") + "", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitTypeInsn(Opcodes.CHECKCAST, "net/minecraft/client/entity/AbstractClientPlayer");
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "canRenderName", "(Lapi/player/render/IRenderPlayerAPI;Lnet/minecraft/client/entity/AbstractClientPlayer;)Z", false);
+		mv.visitInsn(Opcodes.IRETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realCanRenderName", "(Lnet/minecraft/client/entity/AbstractClientPlayer;)Z", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "canRenderName", "" + (isObfuscated ? "(Lxm;)Z" : "(Lnet/minecraft/entity/EntityLivingBase;)Z") + "", false);
+		mv.visitInsn(Opcodes.IRETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superCanRenderName", "(Lnet/minecraft/client/entity/AbstractClientPlayer;)Z", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "canRenderName", "" + (isObfuscated ? "(Lxm;)Z" : "(Lnet/minecraft/entity/EntityLivingBase;)Z") + "", false);
+		mv.visitInsn(Opcodes.IRETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		if(!hadLocalCanRenderName)
+		{
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localCanRenderName", "(Lnet/minecraft/client/entity/AbstractClientPlayer;)Z", null, null);
+			mv.visitVarInsn(Opcodes.ALOAD, 0);
+			mv.visitVarInsn(Opcodes.ALOAD, 1);
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "canRenderName", "" + (isObfuscated ? "(Lxm;)Z" : "(Lnet/minecraft/entity/EntityLivingBase;)Z") + "", false);
+			mv.visitInsn(Opcodes.IRETURN);
+			mv.visitMaxs(0, 0);
+			mv.visitEnd();
+		}
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "func_180596_a", "" + (isObfuscated ? "(Lcil;DDDFF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDFF)V") + "", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitVarInsn(Opcodes.DLOAD, 2);
+		mv.visitVarInsn(Opcodes.DLOAD, 4);
+		mv.visitVarInsn(Opcodes.DLOAD, 6);
+		mv.visitVarInsn(Opcodes.FLOAD, 8);
+		mv.visitVarInsn(Opcodes.FLOAD, 9);
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "doRender", "(Lapi/player/render/IRenderPlayerAPI;Lnet/minecraft/client/entity/AbstractClientPlayer;DDDFF)V", false);
+		mv.visitInsn(Opcodes.RETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realDoRender", "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDFF)V", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitVarInsn(Opcodes.DLOAD, 2);
+		mv.visitVarInsn(Opcodes.DLOAD, 4);
+		mv.visitVarInsn(Opcodes.DLOAD, 6);
+		mv.visitVarInsn(Opcodes.FLOAD, 8);
+		mv.visitVarInsn(Opcodes.FLOAD, 9);
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "func_180596_a", "" + (isObfuscated ? "(Lcil;DDDFF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDFF)V") + "", false);
+		mv.visitInsn(Opcodes.RETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superDoRender", "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDFF)V", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitVarInsn(Opcodes.DLOAD, 2);
+		mv.visitVarInsn(Opcodes.DLOAD, 4);
+		mv.visitVarInsn(Opcodes.DLOAD, 6);
+		mv.visitVarInsn(Opcodes.FLOAD, 8);
+		mv.visitVarInsn(Opcodes.FLOAD, 9);
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "func_180596_a", "" + (isObfuscated ? "(Lcil;DDDFF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDFF)V") + "", false);
+		mv.visitInsn(Opcodes.RETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		if(!hadLocalDoRender)
+		{
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localDoRender", "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDFF)V", null, null);
 			mv.visitVarInsn(Opcodes.ALOAD, 0);
 			mv.visitVarInsn(Opcodes.ALOAD, 1);
 			mv.visitVarInsn(Opcodes.DLOAD, 2);
@@ -342,516 +515,569 @@ public final class RenderPlayerClassVisitor extends ClassVisitor
 			mv.visitVarInsn(Opcodes.DLOAD, 6);
 			mv.visitVarInsn(Opcodes.FLOAD, 8);
 			mv.visitVarInsn(Opcodes.FLOAD, 9);
-			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "b" : "doRenderShadowAndFire", "" + (isObfuscated ? "(Lsa;DDDFF)V" : "(Lnet/minecraft/entity/Entity;DDDFF)V") + "");
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "func_180596_a", "" + (isObfuscated ? "(Lcil;DDDFF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDFF)V") + "", false);
 			mv.visitInsn(Opcodes.RETURN);
 			mv.visitMaxs(0, 0);
 			mv.visitEnd();
 		}
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "getColorMultiplier", "" + (isObfuscated ? "(Lsv;FF)I" : "(Lnet/minecraft/entity/EntityLivingBase;FF)I") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "b" : "doRenderShadowAndFire", "" + (isObfuscated ? "(Lwv;DDDFF)V" : "(Lnet/minecraft/entity/Entity;DDDFF)V") + "", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitTypeInsn(Opcodes.CHECKCAST, "net/minecraft/client/entity/AbstractClientPlayer");
+		mv.visitVarInsn(Opcodes.DLOAD, 2);
+		mv.visitVarInsn(Opcodes.DLOAD, 4);
+		mv.visitVarInsn(Opcodes.DLOAD, 6);
+		mv.visitVarInsn(Opcodes.FLOAD, 8);
+		mv.visitVarInsn(Opcodes.FLOAD, 9);
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "doRenderShadowAndFire", "(Lapi/player/render/IRenderPlayerAPI;Lnet/minecraft/client/entity/AbstractClientPlayer;DDDFF)V", false);
+		mv.visitInsn(Opcodes.RETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realDoRenderShadowAndFire", "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDFF)V", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitVarInsn(Opcodes.DLOAD, 2);
+		mv.visitVarInsn(Opcodes.DLOAD, 4);
+		mv.visitVarInsn(Opcodes.DLOAD, 6);
+		mv.visitVarInsn(Opcodes.FLOAD, 8);
+		mv.visitVarInsn(Opcodes.FLOAD, 9);
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "b" : "doRenderShadowAndFire", "" + (isObfuscated ? "(Lwv;DDDFF)V" : "(Lnet/minecraft/entity/Entity;DDDFF)V") + "", false);
+		mv.visitInsn(Opcodes.RETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superDoRenderShadowAndFire", "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDFF)V", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitVarInsn(Opcodes.DLOAD, 2);
+		mv.visitVarInsn(Opcodes.DLOAD, 4);
+		mv.visitVarInsn(Opcodes.DLOAD, 6);
+		mv.visitVarInsn(Opcodes.FLOAD, 8);
+		mv.visitVarInsn(Opcodes.FLOAD, 9);
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "b" : "doRenderShadowAndFire", "" + (isObfuscated ? "(Lwv;DDDFF)V" : "(Lnet/minecraft/entity/Entity;DDDFF)V") + "", false);
+		mv.visitInsn(Opcodes.RETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		if(!hadLocalDoRenderShadowAndFire)
+		{
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localDoRenderShadowAndFire", "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDFF)V", null, null);
+			mv.visitVarInsn(Opcodes.ALOAD, 0);
+			mv.visitVarInsn(Opcodes.ALOAD, 1);
+			mv.visitVarInsn(Opcodes.DLOAD, 2);
+			mv.visitVarInsn(Opcodes.DLOAD, 4);
+			mv.visitVarInsn(Opcodes.DLOAD, 6);
+			mv.visitVarInsn(Opcodes.FLOAD, 8);
+			mv.visitVarInsn(Opcodes.FLOAD, 9);
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "b" : "doRenderShadowAndFire", "" + (isObfuscated ? "(Lwv;DDDFF)V" : "(Lnet/minecraft/entity/Entity;DDDFF)V") + "", false);
+			mv.visitInsn(Opcodes.RETURN);
+			mv.visitMaxs(0, 0);
+			mv.visitEnd();
+		}
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "getColorMultiplier", "" + (isObfuscated ? "(Lxm;FF)I" : "(Lnet/minecraft/entity/EntityLivingBase;FF)I") + "", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitTypeInsn(Opcodes.CHECKCAST, "net/minecraft/client/entity/AbstractClientPlayer");
 		mv.visitVarInsn(Opcodes.FLOAD, 2);
 		mv.visitVarInsn(Opcodes.FLOAD, 3);
-		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "getColorMultiplier", "(Lapi/player/render/IRenderPlayerAPI;" + (isObfuscated ? "Lsv;FF" : "Lnet/minecraft/entity/EntityLivingBase;FF") + ")I");
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "getColorMultiplier", "(Lapi/player/render/IRenderPlayerAPI;Lnet/minecraft/client/entity/AbstractClientPlayer;FF)I", false);
 		mv.visitInsn(Opcodes.IRETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realGetColorMultiplier", "" + (isObfuscated ? "(Lsv;FF)I" : "(Lnet/minecraft/entity/EntityLivingBase;FF)I") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realGetColorMultiplier", "(Lnet/minecraft/client/entity/AbstractClientPlayer;FF)I", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
 		mv.visitVarInsn(Opcodes.FLOAD, 2);
 		mv.visitVarInsn(Opcodes.FLOAD, 3);
-		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "getColorMultiplier", "" + (isObfuscated ? "(Lsv;FF)I" : "(Lnet/minecraft/entity/EntityLivingBase;FF)I") + "");
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "getColorMultiplier", "" + (isObfuscated ? "(Lxm;FF)I" : "(Lnet/minecraft/entity/EntityLivingBase;FF)I") + "", false);
 		mv.visitInsn(Opcodes.IRETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superGetColorMultiplier", "" + (isObfuscated ? "(Lsv;FF)I" : "(Lnet/minecraft/entity/EntityLivingBase;FF)I") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superGetColorMultiplier", "(Lnet/minecraft/client/entity/AbstractClientPlayer;FF)I", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
 		mv.visitVarInsn(Opcodes.FLOAD, 2);
 		mv.visitVarInsn(Opcodes.FLOAD, 3);
-		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "getColorMultiplier", "" + (isObfuscated ? "(Lsv;FF)I" : "(Lnet/minecraft/entity/EntityLivingBase;FF)I") + "");
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "getColorMultiplier", "" + (isObfuscated ? "(Lxm;FF)I" : "(Lnet/minecraft/entity/EntityLivingBase;FF)I") + "", false);
 		mv.visitInsn(Opcodes.IRETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
 		if(!hadLocalGetColorMultiplier)
 		{
-			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localGetColorMultiplier", "" + (isObfuscated ? "(Lsv;FF)I" : "(Lnet/minecraft/entity/EntityLivingBase;FF)I") + "", null, null);
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localGetColorMultiplier", "(Lnet/minecraft/client/entity/AbstractClientPlayer;FF)I", null, null);
 			mv.visitVarInsn(Opcodes.ALOAD, 0);
 			mv.visitVarInsn(Opcodes.ALOAD, 1);
 			mv.visitVarInsn(Opcodes.FLOAD, 2);
 			mv.visitVarInsn(Opcodes.FLOAD, 3);
-			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "getColorMultiplier", "" + (isObfuscated ? "(Lsv;FF)I" : "(Lnet/minecraft/entity/EntityLivingBase;FF)I") + "");
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "getColorMultiplier", "" + (isObfuscated ? "(Lxm;FF)I" : "(Lnet/minecraft/entity/EntityLivingBase;FF)I") + "", false);
 			mv.visitInsn(Opcodes.IRETURN);
 			mv.visitMaxs(0, 0);
 			mv.visitEnd();
 		}
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "getDeathMaxRotation", "" + (isObfuscated ? "(Lsv;)F" : "(Lnet/minecraft/entity/EntityLivingBase;)F") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "b" : "getDeathMaxRotation", "" + (isObfuscated ? "(Lxm;)F" : "(Lnet/minecraft/entity/EntityLivingBase;)F") + "", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "getDeathMaxRotation", "(Lapi/player/render/IRenderPlayerAPI;" + (isObfuscated ? "Lsv;" : "Lnet/minecraft/entity/EntityLivingBase;") + ")F");
+		mv.visitTypeInsn(Opcodes.CHECKCAST, "net/minecraft/client/entity/AbstractClientPlayer");
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "getDeathMaxRotation", "(Lapi/player/render/IRenderPlayerAPI;Lnet/minecraft/client/entity/AbstractClientPlayer;)F", false);
 		mv.visitInsn(Opcodes.FRETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realGetDeathMaxRotation", "" + (isObfuscated ? "(Lsv;)F" : "(Lnet/minecraft/entity/EntityLivingBase;)F") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realGetDeathMaxRotation", "(Lnet/minecraft/client/entity/AbstractClientPlayer;)F", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "getDeathMaxRotation", "" + (isObfuscated ? "(Lsv;)F" : "(Lnet/minecraft/entity/EntityLivingBase;)F") + "");
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "b" : "getDeathMaxRotation", "" + (isObfuscated ? "(Lxm;)F" : "(Lnet/minecraft/entity/EntityLivingBase;)F") + "", false);
 		mv.visitInsn(Opcodes.FRETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superGetDeathMaxRotation", "" + (isObfuscated ? "(Lsv;)F" : "(Lnet/minecraft/entity/EntityLivingBase;)F") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superGetDeathMaxRotation", "(Lnet/minecraft/client/entity/AbstractClientPlayer;)F", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "getDeathMaxRotation", "" + (isObfuscated ? "(Lsv;)F" : "(Lnet/minecraft/entity/EntityLivingBase;)F") + "");
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "b" : "getDeathMaxRotation", "" + (isObfuscated ? "(Lxm;)F" : "(Lnet/minecraft/entity/EntityLivingBase;)F") + "", false);
 		mv.visitInsn(Opcodes.FRETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
 		if(!hadLocalGetDeathMaxRotation)
 		{
-			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localGetDeathMaxRotation", "" + (isObfuscated ? "(Lsv;)F" : "(Lnet/minecraft/entity/EntityLivingBase;)F") + "", null, null);
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localGetDeathMaxRotation", "(Lnet/minecraft/client/entity/AbstractClientPlayer;)F", null, null);
 			mv.visitVarInsn(Opcodes.ALOAD, 0);
 			mv.visitVarInsn(Opcodes.ALOAD, 1);
-			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "getDeathMaxRotation", "" + (isObfuscated ? "(Lsv;)F" : "(Lnet/minecraft/entity/EntityLivingBase;)F") + "");
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "b" : "getDeathMaxRotation", "" + (isObfuscated ? "(Lxm;)F" : "(Lnet/minecraft/entity/EntityLivingBase;)F") + "", false);
 			mv.visitInsn(Opcodes.FRETURN);
 			mv.visitMaxs(0, 0);
 			mv.visitEnd();
 		}
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "c" : "getFontRendererFromRenderManager", "" + (isObfuscated ? "()Lbbu;" : "()Lnet/minecraft/client/gui/FontRenderer;") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "func_180594_a", "" + (isObfuscated ? "(Lcil;)Loa;" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;)Lnet/minecraft/util/ResourceLocation;") + "", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "getFontRendererFromRenderManager", "(Lapi/player/render/IRenderPlayerAPI;)" + (isObfuscated ? "Lbbu;" : "Lnet/minecraft/client/gui/FontRenderer;") + "");
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "getEntityTexture", "(Lapi/player/render/IRenderPlayerAPI;Lnet/minecraft/client/entity/AbstractClientPlayer;)" + (isObfuscated ? "Loa;" : "Lnet/minecraft/util/ResourceLocation;") + "", false);
 		mv.visitInsn(Opcodes.ARETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realGetFontRendererFromRenderManager", "" + (isObfuscated ? "()Lbbu;" : "()Lnet/minecraft/client/gui/FontRenderer;") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realGetEntityTexture", "(Lnet/minecraft/client/entity/AbstractClientPlayer;)" + (isObfuscated ? "Loa;" : "Lnet/minecraft/util/ResourceLocation;") + "", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "c" : "getFontRendererFromRenderManager", "" + (isObfuscated ? "()Lbbu;" : "()Lnet/minecraft/client/gui/FontRenderer;") + "");
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "func_180594_a", "" + (isObfuscated ? "(Lcil;)Loa;" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;)Lnet/minecraft/util/ResourceLocation;") + "", false);
 		mv.visitInsn(Opcodes.ARETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superGetFontRendererFromRenderManager", "" + (isObfuscated ? "()Lbbu;" : "()Lnet/minecraft/client/gui/FontRenderer;") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superGetEntityTexture", "(Lnet/minecraft/client/entity/AbstractClientPlayer;)" + (isObfuscated ? "Loa;" : "Lnet/minecraft/util/ResourceLocation;") + "", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "c" : "getFontRendererFromRenderManager", "" + (isObfuscated ? "()Lbbu;" : "()Lnet/minecraft/client/gui/FontRenderer;") + "");
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "func_180594_a", "" + (isObfuscated ? "(Lcil;)Loa;" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;)Lnet/minecraft/util/ResourceLocation;") + "", false);
+		mv.visitInsn(Opcodes.ARETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		if(!hadLocalGetEntityTexture)
+		{
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localGetEntityTexture", "(Lnet/minecraft/client/entity/AbstractClientPlayer;)" + (isObfuscated ? "Loa;" : "Lnet/minecraft/util/ResourceLocation;") + "", null, null);
+			mv.visitVarInsn(Opcodes.ALOAD, 0);
+			mv.visitVarInsn(Opcodes.ALOAD, 1);
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "func_180594_a", "" + (isObfuscated ? "(Lcil;)Loa;" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;)Lnet/minecraft/util/ResourceLocation;") + "", false);
+			mv.visitInsn(Opcodes.ARETURN);
+			mv.visitMaxs(0, 0);
+			mv.visitEnd();
+		}
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "c" : "getFontRendererFromRenderManager", "" + (isObfuscated ? "()Lbty;" : "()Lnet/minecraft/client/gui/FontRenderer;") + "", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "getFontRendererFromRenderManager", "(Lapi/player/render/IRenderPlayerAPI;)" + (isObfuscated ? "Lbty;" : "Lnet/minecraft/client/gui/FontRenderer;") + "", false);
+		mv.visitInsn(Opcodes.ARETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realGetFontRendererFromRenderManager", "()" + (isObfuscated ? "Lbty;" : "Lnet/minecraft/client/gui/FontRenderer;") + "", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "c" : "getFontRendererFromRenderManager", "" + (isObfuscated ? "()Lbty;" : "()Lnet/minecraft/client/gui/FontRenderer;") + "", false);
+		mv.visitInsn(Opcodes.ARETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superGetFontRendererFromRenderManager", "()" + (isObfuscated ? "Lbty;" : "Lnet/minecraft/client/gui/FontRenderer;") + "", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "c" : "getFontRendererFromRenderManager", "" + (isObfuscated ? "()Lbty;" : "()Lnet/minecraft/client/gui/FontRenderer;") + "", false);
 		mv.visitInsn(Opcodes.ARETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
 		if(!hadLocalGetFontRendererFromRenderManager)
 		{
-			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localGetFontRendererFromRenderManager", "" + (isObfuscated ? "()Lbbu;" : "()Lnet/minecraft/client/gui/FontRenderer;") + "", null, null);
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localGetFontRendererFromRenderManager", "()" + (isObfuscated ? "Lbty;" : "Lnet/minecraft/client/gui/FontRenderer;") + "", null, null);
 			mv.visitVarInsn(Opcodes.ALOAD, 0);
-			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "c" : "getFontRendererFromRenderManager", "" + (isObfuscated ? "()Lbbu;" : "()Lnet/minecraft/client/gui/FontRenderer;") + "");
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "c" : "getFontRendererFromRenderManager", "" + (isObfuscated ? "()Lbty;" : "()Lnet/minecraft/client/gui/FontRenderer;") + "", false);
 			mv.visitInsn(Opcodes.ARETURN);
 			mv.visitMaxs(0, 0);
 			mv.visitEnd();
 		}
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "getEntityTexture", "" + (isObfuscated ? "(Lblg;)Lbqx;" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;)Lnet/minecraft/util/ResourceLocation;") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "b" : "getMainModel", "" + (isObfuscated ? "()Lccq;" : "()Lnet/minecraft/client/model/ModelBase;") + "", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "getResourceLocationFromPlayer", "(Lapi/player/render/IRenderPlayerAPI;" + (isObfuscated ? "Lblg;" : "Lnet/minecraft/client/entity/AbstractClientPlayer;") + ")" + (isObfuscated ? "Lbqx;" : "Lnet/minecraft/util/ResourceLocation;") + "");
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "getMainModel", "(Lapi/player/render/IRenderPlayerAPI;)" + (isObfuscated ? "Lccq;" : "Lnet/minecraft/client/model/ModelBase;") + "", false);
 		mv.visitInsn(Opcodes.ARETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realGetResourceLocationFromPlayer", "" + (isObfuscated ? "(Lblg;)Lbqx;" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;)Lnet/minecraft/util/ResourceLocation;") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realGetMainModel", "()" + (isObfuscated ? "Lccq;" : "Lnet/minecraft/client/model/ModelBase;") + "", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "getEntityTexture", "" + (isObfuscated ? "(Lblg;)Lbqx;" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;)Lnet/minecraft/util/ResourceLocation;") + "");
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "b" : "getMainModel", "" + (isObfuscated ? "()Lccq;" : "()Lnet/minecraft/client/model/ModelBase;") + "", false);
 		mv.visitInsn(Opcodes.ARETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superGetResourceLocationFromPlayer", "" + (isObfuscated ? "(Lblg;)Lbqx;" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;)Lnet/minecraft/util/ResourceLocation;") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superGetMainModel", "()" + (isObfuscated ? "Lccq;" : "Lnet/minecraft/client/model/ModelBase;") + "", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "getEntityTexture", "" + (isObfuscated ? "(Lblg;)Lbqx;" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;)Lnet/minecraft/util/ResourceLocation;") + "");
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "b" : "getMainModel", "" + (isObfuscated ? "()Lccq;" : "()Lnet/minecraft/client/model/ModelBase;") + "", false);
 		mv.visitInsn(Opcodes.ARETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		if(!hadLocalGetResourceLocationFromPlayer)
+		if(!hadLocalGetMainModel)
 		{
-			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localGetResourceLocationFromPlayer", "" + (isObfuscated ? "(Lblg;)Lbqx;" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;)Lnet/minecraft/util/ResourceLocation;") + "", null, null);
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localGetMainModel", "()" + (isObfuscated ? "Lccq;" : "Lnet/minecraft/client/model/ModelBase;") + "", null, null);
+			mv.visitVarInsn(Opcodes.ALOAD, 0);
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "b" : "getMainModel", "" + (isObfuscated ? "()Lccq;" : "()Lnet/minecraft/client/model/ModelBase;") + "", false);
+			mv.visitInsn(Opcodes.ARETURN);
+			mv.visitMaxs(0, 0);
+			mv.visitEnd();
+		}
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "g" : "getPlayerModel", "" + (isObfuscated ? "()Lcct;" : "()Lnet/minecraft/client/model/ModelPlayer;") + "", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "getPlayerModel", "(Lapi/player/render/IRenderPlayerAPI;)" + (isObfuscated ? "Lcct;" : "Lnet/minecraft/client/model/ModelPlayer;") + "", false);
+		mv.visitInsn(Opcodes.ARETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realGetPlayerModel", "()" + (isObfuscated ? "Lcct;" : "Lnet/minecraft/client/model/ModelPlayer;") + "", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "g" : "getPlayerModel", "" + (isObfuscated ? "()Lcct;" : "()Lnet/minecraft/client/model/ModelPlayer;") + "", false);
+		mv.visitInsn(Opcodes.ARETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superGetPlayerModel", "()" + (isObfuscated ? "Lcct;" : "Lnet/minecraft/client/model/ModelPlayer;") + "", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "g" : "getPlayerModel", "" + (isObfuscated ? "()Lcct;" : "()Lnet/minecraft/client/model/ModelPlayer;") + "", false);
+		mv.visitInsn(Opcodes.ARETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		if(!hadLocalGetPlayerModel)
+		{
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localGetPlayerModel", "()" + (isObfuscated ? "Lcct;" : "Lnet/minecraft/client/model/ModelPlayer;") + "", null, null);
+			mv.visitVarInsn(Opcodes.ALOAD, 0);
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "g" : "getPlayerModel", "" + (isObfuscated ? "()Lcct;" : "()Lnet/minecraft/client/model/ModelPlayer;") + "", false);
+			mv.visitInsn(Opcodes.ARETURN);
+			mv.visitMaxs(0, 0);
+			mv.visitEnd();
+		}
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "d" : "func_177068_d", "" + (isObfuscated ? "()Lcpt;" : "()Lnet/minecraft/client/renderer/entity/RenderManager;") + "", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "getRenderManager", "(Lapi/player/render/IRenderPlayerAPI;)" + (isObfuscated ? "Lcpt;" : "Lnet/minecraft/client/renderer/entity/RenderManager;") + "", false);
+		mv.visitInsn(Opcodes.ARETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realGetRenderManager", "()" + (isObfuscated ? "Lcpt;" : "Lnet/minecraft/client/renderer/entity/RenderManager;") + "", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "d" : "func_177068_d", "" + (isObfuscated ? "()Lcpt;" : "()Lnet/minecraft/client/renderer/entity/RenderManager;") + "", false);
+		mv.visitInsn(Opcodes.ARETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superGetRenderManager", "()" + (isObfuscated ? "Lcpt;" : "Lnet/minecraft/client/renderer/entity/RenderManager;") + "", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "d" : "func_177068_d", "" + (isObfuscated ? "()Lcpt;" : "()Lnet/minecraft/client/renderer/entity/RenderManager;") + "", false);
+		mv.visitInsn(Opcodes.ARETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		if(!hadLocalGetRenderManager)
+		{
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localGetRenderManager", "()" + (isObfuscated ? "Lcpt;" : "Lnet/minecraft/client/renderer/entity/RenderManager;") + "", null, null);
+			mv.visitVarInsn(Opcodes.ALOAD, 0);
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "d" : "func_177068_d", "" + (isObfuscated ? "()Lcpt;" : "()Lnet/minecraft/client/renderer/entity/RenderManager;") + "", false);
+			mv.visitInsn(Opcodes.ARETURN);
+			mv.visitMaxs(0, 0);
+			mv.visitEnd();
+		}
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "d" : "getSwingProgress", "" + (isObfuscated ? "(Lxm;F)F" : "(Lnet/minecraft/entity/EntityLivingBase;F)F") + "", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitTypeInsn(Opcodes.CHECKCAST, "net/minecraft/client/entity/AbstractClientPlayer");
+		mv.visitVarInsn(Opcodes.FLOAD, 2);
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "getSwingProgress", "(Lapi/player/render/IRenderPlayerAPI;Lnet/minecraft/client/entity/AbstractClientPlayer;F)F", false);
+		mv.visitInsn(Opcodes.FRETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realGetSwingProgress", "(Lnet/minecraft/client/entity/AbstractClientPlayer;F)F", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitVarInsn(Opcodes.FLOAD, 2);
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "d" : "getSwingProgress", "" + (isObfuscated ? "(Lxm;F)F" : "(Lnet/minecraft/entity/EntityLivingBase;F)F") + "", false);
+		mv.visitInsn(Opcodes.FRETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superGetSwingProgress", "(Lnet/minecraft/client/entity/AbstractClientPlayer;F)F", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitVarInsn(Opcodes.FLOAD, 2);
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "d" : "getSwingProgress", "" + (isObfuscated ? "(Lxm;F)F" : "(Lnet/minecraft/entity/EntityLivingBase;F)F") + "", false);
+		mv.visitInsn(Opcodes.FRETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		if(!hadLocalGetSwingProgress)
+		{
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localGetSwingProgress", "(Lnet/minecraft/client/entity/AbstractClientPlayer;F)F", null, null);
 			mv.visitVarInsn(Opcodes.ALOAD, 0);
 			mv.visitVarInsn(Opcodes.ALOAD, 1);
-			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "getEntityTexture", "" + (isObfuscated ? "(Lblg;)Lbqx;" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;)Lnet/minecraft/util/ResourceLocation;") + "");
-			mv.visitInsn(Opcodes.ARETURN);
+			mv.visitVarInsn(Opcodes.FLOAD, 2);
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "d" : "getSwingProgress", "" + (isObfuscated ? "(Lxm;F)F" : "(Lnet/minecraft/entity/EntityLivingBase;F)F") + "", false);
+			mv.visitInsn(Opcodes.FRETURN);
 			mv.visitMaxs(0, 0);
 			mv.visitEnd();
 		}
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "b" : "handleRotationFloat", "" + (isObfuscated ? "(Lsv;F)F" : "(Lnet/minecraft/entity/EntityLivingBase;F)F") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "b" : "handleRotationFloat", "" + (isObfuscated ? "(Lxm;F)F" : "(Lnet/minecraft/entity/EntityLivingBase;F)F") + "", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitTypeInsn(Opcodes.CHECKCAST, "net/minecraft/client/entity/AbstractClientPlayer");
 		mv.visitVarInsn(Opcodes.FLOAD, 2);
-		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "handleRotationFloat", "(Lapi/player/render/IRenderPlayerAPI;" + (isObfuscated ? "Lsv;F" : "Lnet/minecraft/entity/EntityLivingBase;F") + ")F");
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "handleRotationFloat", "(Lapi/player/render/IRenderPlayerAPI;Lnet/minecraft/client/entity/AbstractClientPlayer;F)F", false);
 		mv.visitInsn(Opcodes.FRETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realHandleRotationFloat", "" + (isObfuscated ? "(Lsv;F)F" : "(Lnet/minecraft/entity/EntityLivingBase;F)F") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realHandleRotationFloat", "(Lnet/minecraft/client/entity/AbstractClientPlayer;F)F", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
 		mv.visitVarInsn(Opcodes.FLOAD, 2);
-		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "b" : "handleRotationFloat", "" + (isObfuscated ? "(Lsv;F)F" : "(Lnet/minecraft/entity/EntityLivingBase;F)F") + "");
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "b" : "handleRotationFloat", "" + (isObfuscated ? "(Lxm;F)F" : "(Lnet/minecraft/entity/EntityLivingBase;F)F") + "", false);
 		mv.visitInsn(Opcodes.FRETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superHandleRotationFloat", "" + (isObfuscated ? "(Lsv;F)F" : "(Lnet/minecraft/entity/EntityLivingBase;F)F") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superHandleRotationFloat", "(Lnet/minecraft/client/entity/AbstractClientPlayer;F)F", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
 		mv.visitVarInsn(Opcodes.FLOAD, 2);
-		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "b" : "handleRotationFloat", "" + (isObfuscated ? "(Lsv;F)F" : "(Lnet/minecraft/entity/EntityLivingBase;F)F") + "");
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "b" : "handleRotationFloat", "" + (isObfuscated ? "(Lxm;F)F" : "(Lnet/minecraft/entity/EntityLivingBase;F)F") + "", false);
 		mv.visitInsn(Opcodes.FRETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
 		if(!hadLocalHandleRotationFloat)
 		{
-			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localHandleRotationFloat", "" + (isObfuscated ? "(Lsv;F)F" : "(Lnet/minecraft/entity/EntityLivingBase;F)F") + "", null, null);
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localHandleRotationFloat", "(Lnet/minecraft/client/entity/AbstractClientPlayer;F)F", null, null);
 			mv.visitVarInsn(Opcodes.ALOAD, 0);
 			mv.visitVarInsn(Opcodes.ALOAD, 1);
 			mv.visitVarInsn(Opcodes.FLOAD, 2);
-			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "b" : "handleRotationFloat", "" + (isObfuscated ? "(Lsv;F)F" : "(Lnet/minecraft/entity/EntityLivingBase;F)F") + "");
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "b" : "handleRotationFloat", "" + (isObfuscated ? "(Lxm;F)F" : "(Lnet/minecraft/entity/EntityLivingBase;F)F") + "", false);
 			mv.visitInsn(Opcodes.FRETURN);
 			mv.visitMaxs(0, 0);
 			mv.visitEnd();
 		}
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "b" : "inheritRenderPass", "" + (isObfuscated ? "(Lsv;IF)I" : "(Lnet/minecraft/entity/EntityLivingBase;IF)I") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "interpolateRotation", "(FFF)F", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.ILOAD, 2);
+		mv.visitVarInsn(Opcodes.FLOAD, 1);
+		mv.visitVarInsn(Opcodes.FLOAD, 2);
 		mv.visitVarInsn(Opcodes.FLOAD, 3);
-		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "inheritRenderPass", "(Lapi/player/render/IRenderPlayerAPI;" + (isObfuscated ? "Lsv;IF" : "Lnet/minecraft/entity/EntityLivingBase;IF") + ")I");
-		mv.visitInsn(Opcodes.IRETURN);
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "interpolateRotation", "(Lapi/player/render/IRenderPlayerAPI;FFF)F", false);
+		mv.visitInsn(Opcodes.FRETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realInheritRenderPass", "" + (isObfuscated ? "(Lsv;IF)I" : "(Lnet/minecraft/entity/EntityLivingBase;IF)I") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realInterpolateRotation", "(FFF)F", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.ILOAD, 2);
+		mv.visitVarInsn(Opcodes.FLOAD, 1);
+		mv.visitVarInsn(Opcodes.FLOAD, 2);
 		mv.visitVarInsn(Opcodes.FLOAD, 3);
-		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "b" : "inheritRenderPass", "" + (isObfuscated ? "(Lsv;IF)I" : "(Lnet/minecraft/entity/EntityLivingBase;IF)I") + "");
-		mv.visitInsn(Opcodes.IRETURN);
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "interpolateRotation", "(FFF)F", false);
+		mv.visitInsn(Opcodes.FRETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superInheritRenderPass", "" + (isObfuscated ? "(Lsv;IF)I" : "(Lnet/minecraft/entity/EntityLivingBase;IF)I") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superInterpolateRotation", "(FFF)F", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.ILOAD, 2);
+		mv.visitVarInsn(Opcodes.FLOAD, 1);
+		mv.visitVarInsn(Opcodes.FLOAD, 2);
 		mv.visitVarInsn(Opcodes.FLOAD, 3);
-		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "b" : "inheritRenderPass", "" + (isObfuscated ? "(Lsv;IF)I" : "(Lnet/minecraft/entity/EntityLivingBase;IF)I") + "");
-		mv.visitInsn(Opcodes.IRETURN);
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "interpolateRotation", "(FFF)F", false);
+		mv.visitInsn(Opcodes.FRETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		if(!hadLocalInheritRenderPass)
+		if(!hadLocalInterpolateRotation)
 		{
-			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localInheritRenderPass", "" + (isObfuscated ? "(Lsv;IF)I" : "(Lnet/minecraft/entity/EntityLivingBase;IF)I") + "", null, null);
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localInterpolateRotation", "(FFF)F", null, null);
 			mv.visitVarInsn(Opcodes.ALOAD, 0);
-			mv.visitVarInsn(Opcodes.ALOAD, 1);
-			mv.visitVarInsn(Opcodes.ILOAD, 2);
+			mv.visitVarInsn(Opcodes.FLOAD, 1);
+			mv.visitVarInsn(Opcodes.FLOAD, 2);
 			mv.visitVarInsn(Opcodes.FLOAD, 3);
-			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "b" : "inheritRenderPass", "" + (isObfuscated ? "(Lsv;IF)I" : "(Lnet/minecraft/entity/EntityLivingBase;IF)I") + "");
-			mv.visitInsn(Opcodes.IRETURN);
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "interpolateRotation", "(FFF)F", false);
+			mv.visitInsn(Opcodes.FRETURN);
 			mv.visitMaxs(0, 0);
 			mv.visitEnd();
 		}
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "bindTexture", "" + (isObfuscated ? "(Lbqx;)V" : "(Lnet/minecraft/util/ResourceLocation;)V") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "b" : "passSpecialRender", "" + (isObfuscated ? "(Lxm;DDD)V" : "(Lnet/minecraft/entity/EntityLivingBase;DDD)V") + "", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "loadTexture", "(Lapi/player/render/IRenderPlayerAPI;" + (isObfuscated ? "Lbqx;" : "Lnet/minecraft/util/ResourceLocation;") + ")V");
+		mv.visitTypeInsn(Opcodes.CHECKCAST, "net/minecraft/client/entity/AbstractClientPlayer");
+		mv.visitVarInsn(Opcodes.DLOAD, 2);
+		mv.visitVarInsn(Opcodes.DLOAD, 4);
+		mv.visitVarInsn(Opcodes.DLOAD, 6);
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "passSpecialRender", "(Lapi/player/render/IRenderPlayerAPI;Lnet/minecraft/client/entity/AbstractClientPlayer;DDD)V", false);
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realLoadTexture", "" + (isObfuscated ? "(Lbqx;)V" : "(Lnet/minecraft/util/ResourceLocation;)V") + "", null, null);
-		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "bindTexture", "" + (isObfuscated ? "(Lbqx;)V" : "(Lnet/minecraft/util/ResourceLocation;)V") + "");
-		mv.visitInsn(Opcodes.RETURN);
-		mv.visitMaxs(0, 0);
-		mv.visitEnd();
-
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superLoadTexture", "" + (isObfuscated ? "(Lbqx;)V" : "(Lnet/minecraft/util/ResourceLocation;)V") + "", null, null);
-		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "bindTexture", "" + (isObfuscated ? "(Lbqx;)V" : "(Lnet/minecraft/util/ResourceLocation;)V") + "");
-		mv.visitInsn(Opcodes.RETURN);
-		mv.visitMaxs(0, 0);
-		mv.visitEnd();
-
-		if(!hadLocalLoadTexture)
-		{
-			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localLoadTexture", "" + (isObfuscated ? "(Lbqx;)V" : "(Lnet/minecraft/util/ResourceLocation;)V") + "", null, null);
-			mv.visitVarInsn(Opcodes.ALOAD, 0);
-			mv.visitVarInsn(Opcodes.ALOAD, 1);
-			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "bindTexture", "" + (isObfuscated ? "(Lbqx;)V" : "(Lnet/minecraft/util/ResourceLocation;)V") + "");
-			mv.visitInsn(Opcodes.RETURN);
-			mv.visitMaxs(0, 0);
-			mv.visitEnd();
-		}
-
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "b" : "bindEntityTexture", "" + (isObfuscated ? "(Lsa;)V" : "(Lnet/minecraft/entity/Entity;)V") + "", null, null);
-		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "loadTextureOfEntity", "(Lapi/player/render/IRenderPlayerAPI;" + (isObfuscated ? "Lsa;" : "Lnet/minecraft/entity/Entity;") + ")V");
-		mv.visitInsn(Opcodes.RETURN);
-		mv.visitMaxs(0, 0);
-		mv.visitEnd();
-
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realLoadTextureOfEntity", "" + (isObfuscated ? "(Lsa;)V" : "(Lnet/minecraft/entity/Entity;)V") + "", null, null);
-		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "b" : "bindEntityTexture", "" + (isObfuscated ? "(Lsa;)V" : "(Lnet/minecraft/entity/Entity;)V") + "");
-		mv.visitInsn(Opcodes.RETURN);
-		mv.visitMaxs(0, 0);
-		mv.visitEnd();
-
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superLoadTextureOfEntity", "" + (isObfuscated ? "(Lsa;)V" : "(Lnet/minecraft/entity/Entity;)V") + "", null, null);
-		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "b" : "bindEntityTexture", "" + (isObfuscated ? "(Lsa;)V" : "(Lnet/minecraft/entity/Entity;)V") + "");
-		mv.visitInsn(Opcodes.RETURN);
-		mv.visitMaxs(0, 0);
-		mv.visitEnd();
-
-		if(!hadLocalLoadTextureOfEntity)
-		{
-			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localLoadTextureOfEntity", "" + (isObfuscated ? "(Lsa;)V" : "(Lnet/minecraft/entity/Entity;)V") + "", null, null);
-			mv.visitVarInsn(Opcodes.ALOAD, 0);
-			mv.visitVarInsn(Opcodes.ALOAD, 1);
-			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "b" : "bindEntityTexture", "" + (isObfuscated ? "(Lsa;)V" : "(Lnet/minecraft/entity/Entity;)V") + "");
-			mv.visitInsn(Opcodes.RETURN);
-			mv.visitMaxs(0, 0);
-			mv.visitEnd();
-		}
-
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "b" : "passSpecialRender", "" + (isObfuscated ? "(Lsv;DDD)V" : "(Lnet/minecraft/entity/EntityLivingBase;DDD)V") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realPassSpecialRender", "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDD)V", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
 		mv.visitVarInsn(Opcodes.DLOAD, 2);
 		mv.visitVarInsn(Opcodes.DLOAD, 4);
 		mv.visitVarInsn(Opcodes.DLOAD, 6);
-		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "passSpecialRender", "(Lapi/player/render/IRenderPlayerAPI;" + (isObfuscated ? "Lsv;DDD" : "Lnet/minecraft/entity/EntityLivingBase;DDD") + ")V");
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "b" : "passSpecialRender", "" + (isObfuscated ? "(Lxm;DDD)V" : "(Lnet/minecraft/entity/EntityLivingBase;DDD)V") + "", false);
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realPassSpecialRender", "" + (isObfuscated ? "(Lsv;DDD)V" : "(Lnet/minecraft/entity/EntityLivingBase;DDD)V") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superPassSpecialRender", "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDD)V", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
 		mv.visitVarInsn(Opcodes.DLOAD, 2);
 		mv.visitVarInsn(Opcodes.DLOAD, 4);
 		mv.visitVarInsn(Opcodes.DLOAD, 6);
-		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "b" : "passSpecialRender", "" + (isObfuscated ? "(Lsv;DDD)V" : "(Lnet/minecraft/entity/EntityLivingBase;DDD)V") + "");
-		mv.visitInsn(Opcodes.RETURN);
-		mv.visitMaxs(0, 0);
-		mv.visitEnd();
-
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superPassSpecialRender", "" + (isObfuscated ? "(Lsv;DDD)V" : "(Lnet/minecraft/entity/EntityLivingBase;DDD)V") + "", null, null);
-		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.DLOAD, 2);
-		mv.visitVarInsn(Opcodes.DLOAD, 4);
-		mv.visitVarInsn(Opcodes.DLOAD, 6);
-		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "b" : "passSpecialRender", "" + (isObfuscated ? "(Lsv;DDD)V" : "(Lnet/minecraft/entity/EntityLivingBase;DDD)V") + "");
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "b" : "passSpecialRender", "" + (isObfuscated ? "(Lxm;DDD)V" : "(Lnet/minecraft/entity/EntityLivingBase;DDD)V") + "", false);
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
 		if(!hadLocalPassSpecialRender)
 		{
-			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localPassSpecialRender", "" + (isObfuscated ? "(Lsv;DDD)V" : "(Lnet/minecraft/entity/EntityLivingBase;DDD)V") + "", null, null);
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localPassSpecialRender", "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDD)V", null, null);
 			mv.visitVarInsn(Opcodes.ALOAD, 0);
 			mv.visitVarInsn(Opcodes.ALOAD, 1);
 			mv.visitVarInsn(Opcodes.DLOAD, 2);
 			mv.visitVarInsn(Opcodes.DLOAD, 4);
 			mv.visitVarInsn(Opcodes.DLOAD, 6);
-			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "b" : "passSpecialRender", "" + (isObfuscated ? "(Lsv;DDD)V" : "(Lnet/minecraft/entity/EntityLivingBase;DDD)V") + "");
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "b" : "passSpecialRender", "" + (isObfuscated ? "(Lxm;DDD)V" : "(Lnet/minecraft/entity/EntityLivingBase;DDD)V") + "", false);
 			mv.visitInsn(Opcodes.RETURN);
 			mv.visitMaxs(0, 0);
 			mv.visitEnd();
 		}
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "isStaticEntity", "()Z", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "preRenderCallback", "" + (isObfuscated ? "(Lcil;F)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;F)V") + "", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "performStaticEntityRebuild", "(Lapi/player/render/IRenderPlayerAPI;)Z");
-		mv.visitInsn(Opcodes.IRETURN);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitVarInsn(Opcodes.FLOAD, 2);
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "preRenderCallback", "(Lapi/player/render/IRenderPlayerAPI;Lnet/minecraft/client/entity/AbstractClientPlayer;F)V", false);
+		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realPerformStaticEntityRebuild", "()Z", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realPreRenderCallback", "(Lnet/minecraft/client/entity/AbstractClientPlayer;F)V", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "isStaticEntity", "()Z");
-		mv.visitInsn(Opcodes.IRETURN);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitVarInsn(Opcodes.FLOAD, 2);
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "preRenderCallback", "" + (isObfuscated ? "(Lcil;F)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;F)V") + "", false);
+		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superPerformStaticEntityRebuild", "()Z", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superPreRenderCallback", "(Lnet/minecraft/client/entity/AbstractClientPlayer;F)V", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "isStaticEntity", "()Z");
-		mv.visitInsn(Opcodes.IRETURN);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitVarInsn(Opcodes.FLOAD, 2);
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "preRenderCallback", "" + (isObfuscated ? "(Lcil;F)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;F)V") + "", false);
+		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		if(!hadLocalPerformStaticEntityRebuild)
+		if(!hadLocalPreRenderCallback)
 		{
-			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localPerformStaticEntityRebuild", "()Z", null, null);
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localPreRenderCallback", "(Lnet/minecraft/client/entity/AbstractClientPlayer;F)V", null, null);
 			mv.visitVarInsn(Opcodes.ALOAD, 0);
-			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "isStaticEntity", "()Z");
+			mv.visitVarInsn(Opcodes.ALOAD, 1);
+			mv.visitVarInsn(Opcodes.FLOAD, 2);
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "preRenderCallback", "" + (isObfuscated ? "(Lcil;F)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;F)V") + "", false);
+			mv.visitInsn(Opcodes.RETURN);
+			mv.visitMaxs(0, 0);
+			mv.visitEnd();
+		}
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "b" : "removeLayer", "" + (isObfuscated ? "(Lcsq;)Z" : "(Lnet/minecraft/client/renderer/entity/layers/LayerRenderer;)Z") + "", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "removeLayer", "(Lapi/player/render/IRenderPlayerAPI;Lnet/minecraft/client/renderer/entity/layers/LayerRenderer;)Z", false);
+		mv.visitInsn(Opcodes.IRETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realRemoveLayer", "(Lnet/minecraft/client/renderer/entity/layers/LayerRenderer;)Z", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "b" : "removeLayer", "" + (isObfuscated ? "(Lcsq;)Z" : "(Lnet/minecraft/client/renderer/entity/layers/LayerRenderer;)Z") + "", false);
+		mv.visitInsn(Opcodes.IRETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superRemoveLayer", "(Lnet/minecraft/client/renderer/entity/layers/LayerRenderer;)Z", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "b" : "removeLayer", "" + (isObfuscated ? "(Lcsq;)Z" : "(Lnet/minecraft/client/renderer/entity/layers/LayerRenderer;)Z") + "", false);
+		mv.visitInsn(Opcodes.IRETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		if(!hadLocalRemoveLayer)
+		{
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRemoveLayer", "(Lnet/minecraft/client/renderer/entity/layers/LayerRenderer;)Z", null, null);
+			mv.visitVarInsn(Opcodes.ALOAD, 0);
+			mv.visitVarInsn(Opcodes.ALOAD, 1);
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "b" : "removeLayer", "" + (isObfuscated ? "(Lcsq;)Z" : "(Lnet/minecraft/client/renderer/entity/layers/LayerRenderer;)Z") + "", false);
 			mv.visitInsn(Opcodes.IRETURN);
 			mv.visitMaxs(0, 0);
 			mv.visitEnd();
 		}
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "e" : "renderArrowsStuckInEntity", "" + (isObfuscated ? "(Lsv;F)V" : "(Lnet/minecraft/entity/EntityLivingBase;F)V") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "func_177093_a", "" + (isObfuscated ? "(Lxm;FFFFFFF)V" : "(Lnet/minecraft/entity/EntityLivingBase;FFFFFFF)V") + "", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitTypeInsn(Opcodes.CHECKCAST, "net/minecraft/client/entity/AbstractClientPlayer");
 		mv.visitVarInsn(Opcodes.FLOAD, 2);
-		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "renderArrowsStuckInEntity", "(Lapi/player/render/IRenderPlayerAPI;" + (isObfuscated ? "Lsv;F" : "Lnet/minecraft/entity/EntityLivingBase;F") + ")V");
+		mv.visitVarInsn(Opcodes.FLOAD, 3);
+		mv.visitVarInsn(Opcodes.FLOAD, 4);
+		mv.visitVarInsn(Opcodes.FLOAD, 5);
+		mv.visitVarInsn(Opcodes.FLOAD, 6);
+		mv.visitVarInsn(Opcodes.FLOAD, 7);
+		mv.visitVarInsn(Opcodes.FLOAD, 8);
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "renderLayers", "(Lapi/player/render/IRenderPlayerAPI;Lnet/minecraft/client/entity/AbstractClientPlayer;FFFFFFF)V", false);
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realRenderArrowsStuckInEntity", "" + (isObfuscated ? "(Lsv;F)V" : "(Lnet/minecraft/entity/EntityLivingBase;F)V") + "", null, null);
-		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.FLOAD, 2);
-		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "e" : "renderArrowsStuckInEntity", "" + (isObfuscated ? "(Lsv;F)V" : "(Lnet/minecraft/entity/EntityLivingBase;F)V") + "");
-		mv.visitInsn(Opcodes.RETURN);
-		mv.visitMaxs(0, 0);
-		mv.visitEnd();
-
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superRenderArrowsStuckInEntity", "" + (isObfuscated ? "(Lsv;F)V" : "(Lnet/minecraft/entity/EntityLivingBase;F)V") + "", null, null);
-		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.FLOAD, 2);
-		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "e" : "renderArrowsStuckInEntity", "" + (isObfuscated ? "(Lsv;F)V" : "(Lnet/minecraft/entity/EntityLivingBase;F)V") + "");
-		mv.visitInsn(Opcodes.RETURN);
-		mv.visitMaxs(0, 0);
-		mv.visitEnd();
-
-		if(!hadLocalRenderArrowsStuckInEntity)
-		{
-			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderArrowsStuckInEntity", "" + (isObfuscated ? "(Lsv;F)V" : "(Lnet/minecraft/entity/EntityLivingBase;F)V") + "", null, null);
-			mv.visitVarInsn(Opcodes.ALOAD, 0);
-			mv.visitVarInsn(Opcodes.ALOAD, 1);
-			mv.visitVarInsn(Opcodes.FLOAD, 2);
-			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "e" : "renderArrowsStuckInEntity", "" + (isObfuscated ? "(Lsv;F)V" : "(Lnet/minecraft/entity/EntityLivingBase;F)V") + "");
-			mv.visitInsn(Opcodes.RETURN);
-			mv.visitMaxs(0, 0);
-			mv.visitEnd();
-		}
-
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "renderFirstPersonArm", "" + (isObfuscated ? "(Lyz;)V" : "(Lnet/minecraft/entity/player/EntityPlayer;)V") + "", null, null);
-		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "renderFirstPersonArm", "(Lapi/player/render/IRenderPlayerAPI;" + (isObfuscated ? "Lyz;" : "Lnet/minecraft/entity/player/EntityPlayer;") + ")V");
-		mv.visitInsn(Opcodes.RETURN);
-		mv.visitMaxs(0, 0);
-		mv.visitEnd();
-
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realRenderFirstPersonArm", "" + (isObfuscated ? "(Lyz;)V" : "(Lnet/minecraft/entity/player/EntityPlayer;)V") + "", null, null);
-		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "renderFirstPersonArm", "" + (isObfuscated ? "(Lyz;)V" : "(Lnet/minecraft/entity/player/EntityPlayer;)V") + "");
-		mv.visitInsn(Opcodes.RETURN);
-		mv.visitMaxs(0, 0);
-		mv.visitEnd();
-
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superRenderFirstPersonArm", "" + (isObfuscated ? "(Lyz;)V" : "(Lnet/minecraft/entity/player/EntityPlayer;)V") + "", null, null);
-		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "renderFirstPersonArm", "" + (isObfuscated ? "(Lyz;)V" : "(Lnet/minecraft/entity/player/EntityPlayer;)V") + "");
-		mv.visitInsn(Opcodes.RETURN);
-		mv.visitMaxs(0, 0);
-		mv.visitEnd();
-
-		if(!hadLocalRenderFirstPersonArm)
-		{
-			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderFirstPersonArm", "" + (isObfuscated ? "(Lyz;)V" : "(Lnet/minecraft/entity/player/EntityPlayer;)V") + "", null, null);
-			mv.visitVarInsn(Opcodes.ALOAD, 0);
-			mv.visitVarInsn(Opcodes.ALOAD, 1);
-			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "renderFirstPersonArm", "" + (isObfuscated ? "(Lyz;)V" : "(Lnet/minecraft/entity/player/EntityPlayer;)V") + "");
-			mv.visitInsn(Opcodes.RETURN);
-			mv.visitMaxs(0, 0);
-			mv.visitEnd();
-		}
-
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "func_147906_a", "" + (isObfuscated ? "(Lsa;Ljava/lang/String;DDDI)V" : "(Lnet/minecraft/entity/Entity;Ljava/lang/String;DDDI)V") + "", null, null);
-		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.ALOAD, 2);
-		mv.visitVarInsn(Opcodes.DLOAD, 3);
-		mv.visitVarInsn(Opcodes.DLOAD, 5);
-		mv.visitVarInsn(Opcodes.DLOAD, 7);
-		mv.visitVarInsn(Opcodes.ILOAD, 9);
-		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "renderLivingLabel", "(Lapi/player/render/IRenderPlayerAPI;" + (isObfuscated ? "Lsa;Ljava/lang/String;DDDI" : "Lnet/minecraft/entity/Entity;Ljava/lang/String;DDDI") + ")V");
-		mv.visitInsn(Opcodes.RETURN);
-		mv.visitMaxs(0, 0);
-		mv.visitEnd();
-
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realRenderLivingLabel", "" + (isObfuscated ? "(Lsa;Ljava/lang/String;DDDI)V" : "(Lnet/minecraft/entity/Entity;Ljava/lang/String;DDDI)V") + "", null, null);
-		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.ALOAD, 2);
-		mv.visitVarInsn(Opcodes.DLOAD, 3);
-		mv.visitVarInsn(Opcodes.DLOAD, 5);
-		mv.visitVarInsn(Opcodes.DLOAD, 7);
-		mv.visitVarInsn(Opcodes.ILOAD, 9);
-		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "func_147906_a", "" + (isObfuscated ? "(Lsa;Ljava/lang/String;DDDI)V" : "(Lnet/minecraft/entity/Entity;Ljava/lang/String;DDDI)V") + "");
-		mv.visitInsn(Opcodes.RETURN);
-		mv.visitMaxs(0, 0);
-		mv.visitEnd();
-
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superRenderLivingLabel", "" + (isObfuscated ? "(Lsa;Ljava/lang/String;DDDI)V" : "(Lnet/minecraft/entity/Entity;Ljava/lang/String;DDDI)V") + "", null, null);
-		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.ALOAD, 2);
-		mv.visitVarInsn(Opcodes.DLOAD, 3);
-		mv.visitVarInsn(Opcodes.DLOAD, 5);
-		mv.visitVarInsn(Opcodes.DLOAD, 7);
-		mv.visitVarInsn(Opcodes.ILOAD, 9);
-		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "func_147906_a", "" + (isObfuscated ? "(Lsa;Ljava/lang/String;DDDI)V" : "(Lnet/minecraft/entity/Entity;Ljava/lang/String;DDDI)V") + "");
-		mv.visitInsn(Opcodes.RETURN);
-		mv.visitMaxs(0, 0);
-		mv.visitEnd();
-
-		if(!hadLocalRenderLivingLabel)
-		{
-			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderLivingLabel", "" + (isObfuscated ? "(Lsa;Ljava/lang/String;DDDI)V" : "(Lnet/minecraft/entity/Entity;Ljava/lang/String;DDDI)V") + "", null, null);
-			mv.visitVarInsn(Opcodes.ALOAD, 0);
-			mv.visitVarInsn(Opcodes.ALOAD, 1);
-			mv.visitVarInsn(Opcodes.ALOAD, 2);
-			mv.visitVarInsn(Opcodes.DLOAD, 3);
-			mv.visitVarInsn(Opcodes.DLOAD, 5);
-			mv.visitVarInsn(Opcodes.DLOAD, 7);
-			mv.visitVarInsn(Opcodes.ILOAD, 9);
-			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "func_147906_a", "" + (isObfuscated ? "(Lsa;Ljava/lang/String;DDDI)V" : "(Lnet/minecraft/entity/Entity;Ljava/lang/String;DDDI)V") + "");
-			mv.visitInsn(Opcodes.RETURN);
-			mv.visitMaxs(0, 0);
-			mv.visitEnd();
-		}
-
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "renderModel", "" + (isObfuscated ? "(Lsv;FFFFFF)V" : "(Lnet/minecraft/entity/EntityLivingBase;FFFFFF)V") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realRenderLayers", "(Lnet/minecraft/client/entity/AbstractClientPlayer;FFFFFFF)V", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
 		mv.visitVarInsn(Opcodes.FLOAD, 2);
@@ -860,12 +1086,13 @@ public final class RenderPlayerClassVisitor extends ClassVisitor
 		mv.visitVarInsn(Opcodes.FLOAD, 5);
 		mv.visitVarInsn(Opcodes.FLOAD, 6);
 		mv.visitVarInsn(Opcodes.FLOAD, 7);
-		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "renderModel", "(Lapi/player/render/IRenderPlayerAPI;" + (isObfuscated ? "Lsv;FFFFFF" : "Lnet/minecraft/entity/EntityLivingBase;FFFFFF") + ")V");
+		mv.visitVarInsn(Opcodes.FLOAD, 8);
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "func_177093_a", "" + (isObfuscated ? "(Lxm;FFFFFFF)V" : "(Lnet/minecraft/entity/EntityLivingBase;FFFFFFF)V") + "", false);
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realRenderModel", "" + (isObfuscated ? "(Lsv;FFFFFF)V" : "(Lnet/minecraft/entity/EntityLivingBase;FFFFFF)V") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superRenderLayers", "(Lnet/minecraft/client/entity/AbstractClientPlayer;FFFFFFF)V", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
 		mv.visitVarInsn(Opcodes.FLOAD, 2);
@@ -874,28 +1101,15 @@ public final class RenderPlayerClassVisitor extends ClassVisitor
 		mv.visitVarInsn(Opcodes.FLOAD, 5);
 		mv.visitVarInsn(Opcodes.FLOAD, 6);
 		mv.visitVarInsn(Opcodes.FLOAD, 7);
-		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "renderModel", "" + (isObfuscated ? "(Lsv;FFFFFF)V" : "(Lnet/minecraft/entity/EntityLivingBase;FFFFFF)V") + "");
+		mv.visitVarInsn(Opcodes.FLOAD, 8);
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "func_177093_a", "" + (isObfuscated ? "(Lxm;FFFFFFF)V" : "(Lnet/minecraft/entity/EntityLivingBase;FFFFFFF)V") + "", false);
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superRenderModel", "" + (isObfuscated ? "(Lsv;FFFFFF)V" : "(Lnet/minecraft/entity/EntityLivingBase;FFFFFF)V") + "", null, null);
-		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.FLOAD, 2);
-		mv.visitVarInsn(Opcodes.FLOAD, 3);
-		mv.visitVarInsn(Opcodes.FLOAD, 4);
-		mv.visitVarInsn(Opcodes.FLOAD, 5);
-		mv.visitVarInsn(Opcodes.FLOAD, 6);
-		mv.visitVarInsn(Opcodes.FLOAD, 7);
-		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "renderModel", "" + (isObfuscated ? "(Lsv;FFFFFF)V" : "(Lnet/minecraft/entity/EntityLivingBase;FFFFFF)V") + "");
-		mv.visitInsn(Opcodes.RETURN);
-		mv.visitMaxs(0, 0);
-		mv.visitEnd();
-
-		if(!hadLocalRenderModel)
+		if(!hadLocalRenderLayers)
 		{
-			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderModel", "" + (isObfuscated ? "(Lsv;FFFFFF)V" : "(Lnet/minecraft/entity/EntityLivingBase;FFFFFF)V") + "", null, null);
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderLayers", "(Lnet/minecraft/client/entity/AbstractClientPlayer;FFFFFFF)V", null, null);
 			mv.visitVarInsn(Opcodes.ALOAD, 0);
 			mv.visitVarInsn(Opcodes.ALOAD, 1);
 			mv.visitVarInsn(Opcodes.FLOAD, 2);
@@ -904,112 +1118,304 @@ public final class RenderPlayerClassVisitor extends ClassVisitor
 			mv.visitVarInsn(Opcodes.FLOAD, 5);
 			mv.visitVarInsn(Opcodes.FLOAD, 6);
 			mv.visitVarInsn(Opcodes.FLOAD, 7);
-			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "renderModel", "" + (isObfuscated ? "(Lsv;FFFFFF)V" : "(Lnet/minecraft/entity/EntityLivingBase;FFFFFF)V") + "");
+			mv.visitVarInsn(Opcodes.FLOAD, 8);
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "func_177093_a", "" + (isObfuscated ? "(Lxm;FFFFFFF)V" : "(Lnet/minecraft/entity/EntityLivingBase;FFFFFFF)V") + "", false);
 			mv.visitInsn(Opcodes.RETURN);
 			mv.visitMaxs(0, 0);
 			mv.visitEnd();
 		}
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "doRender", "" + (isObfuscated ? "(Lblg;DDDFF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDFF)V") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "c" : "func_177139_c", "" + (isObfuscated ? "(Lcil;)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;)V") + "", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.DLOAD, 2);
-		mv.visitVarInsn(Opcodes.DLOAD, 4);
-		mv.visitVarInsn(Opcodes.DLOAD, 6);
-		mv.visitVarInsn(Opcodes.FLOAD, 8);
-		mv.visitVarInsn(Opcodes.FLOAD, 9);
-		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "renderPlayer", "(Lapi/player/render/IRenderPlayerAPI;" + (isObfuscated ? "Lblg;DDDFF" : "Lnet/minecraft/client/entity/AbstractClientPlayer;DDDFF") + ")V");
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "renderLeftArm", "(Lapi/player/render/IRenderPlayerAPI;Lnet/minecraft/client/entity/AbstractClientPlayer;)V", false);
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realRenderPlayer", "" + (isObfuscated ? "(Lblg;DDDFF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDFF)V") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realRenderLeftArm", "(Lnet/minecraft/client/entity/AbstractClientPlayer;)V", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.DLOAD, 2);
-		mv.visitVarInsn(Opcodes.DLOAD, 4);
-		mv.visitVarInsn(Opcodes.DLOAD, 6);
-		mv.visitVarInsn(Opcodes.FLOAD, 8);
-		mv.visitVarInsn(Opcodes.FLOAD, 9);
-		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "doRender", "" + (isObfuscated ? "(Lblg;DDDFF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDFF)V") + "");
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "c" : "func_177139_c", "" + (isObfuscated ? "(Lcil;)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;)V") + "", false);
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superRenderPlayer", "" + (isObfuscated ? "(Lblg;DDDFF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDFF)V") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superRenderLeftArm", "(Lnet/minecraft/client/entity/AbstractClientPlayer;)V", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.DLOAD, 2);
-		mv.visitVarInsn(Opcodes.DLOAD, 4);
-		mv.visitVarInsn(Opcodes.DLOAD, 6);
-		mv.visitVarInsn(Opcodes.FLOAD, 8);
-		mv.visitVarInsn(Opcodes.FLOAD, 9);
-		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "doRender", "" + (isObfuscated ? "(Lblg;DDDFF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDFF)V") + "");
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "c" : "func_177139_c", "" + (isObfuscated ? "(Lcil;)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;)V") + "", false);
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		if(!hadLocalRenderPlayer)
+		if(!hadLocalRenderLeftArm)
 		{
-			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderPlayer", "" + (isObfuscated ? "(Lblg;DDDFF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDFF)V") + "", null, null);
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderLeftArm", "(Lnet/minecraft/client/entity/AbstractClientPlayer;)V", null, null);
+			mv.visitVarInsn(Opcodes.ALOAD, 0);
+			mv.visitVarInsn(Opcodes.ALOAD, 1);
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "c" : "func_177139_c", "" + (isObfuscated ? "(Lcil;)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;)V") + "", false);
+			mv.visitInsn(Opcodes.RETURN);
+			mv.visitMaxs(0, 0);
+			mv.visitEnd();
+		}
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "renderLivingAt", "" + (isObfuscated ? "(Lcil;DDD)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDD)V") + "", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitVarInsn(Opcodes.DLOAD, 2);
+		mv.visitVarInsn(Opcodes.DLOAD, 4);
+		mv.visitVarInsn(Opcodes.DLOAD, 6);
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "renderLivingAt", "(Lapi/player/render/IRenderPlayerAPI;Lnet/minecraft/client/entity/AbstractClientPlayer;DDD)V", false);
+		mv.visitInsn(Opcodes.RETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realRenderLivingAt", "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDD)V", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitVarInsn(Opcodes.DLOAD, 2);
+		mv.visitVarInsn(Opcodes.DLOAD, 4);
+		mv.visitVarInsn(Opcodes.DLOAD, 6);
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "renderLivingAt", "" + (isObfuscated ? "(Lcil;DDD)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDD)V") + "", false);
+		mv.visitInsn(Opcodes.RETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superRenderLivingAt", "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDD)V", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitVarInsn(Opcodes.DLOAD, 2);
+		mv.visitVarInsn(Opcodes.DLOAD, 4);
+		mv.visitVarInsn(Opcodes.DLOAD, 6);
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "renderLivingAt", "" + (isObfuscated ? "(Lcil;DDD)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDD)V") + "", false);
+		mv.visitInsn(Opcodes.RETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		if(!hadLocalRenderLivingAt)
+		{
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderLivingAt", "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDD)V", null, null);
 			mv.visitVarInsn(Opcodes.ALOAD, 0);
 			mv.visitVarInsn(Opcodes.ALOAD, 1);
 			mv.visitVarInsn(Opcodes.DLOAD, 2);
 			mv.visitVarInsn(Opcodes.DLOAD, 4);
 			mv.visitVarInsn(Opcodes.DLOAD, 6);
-			mv.visitVarInsn(Opcodes.FLOAD, 8);
-			mv.visitVarInsn(Opcodes.FLOAD, 9);
-			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "doRender", "" + (isObfuscated ? "(Lblg;DDDFF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDFF)V") + "");
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "renderLivingAt", "" + (isObfuscated ? "(Lcil;DDD)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDD)V") + "", false);
 			mv.visitInsn(Opcodes.RETURN);
 			mv.visitMaxs(0, 0);
 			mv.visitEnd();
 		}
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "func_96449_a", "" + (isObfuscated ? "(Lblg;DDDLjava/lang/String;FD)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDLjava/lang/String;FD)V") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "renderLivingLabel", "" + (isObfuscated ? "(Lwv;Ljava/lang/String;DDDI)V" : "(Lnet/minecraft/entity/Entity;Ljava/lang/String;DDDI)V") + "", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.DLOAD, 2);
-		mv.visitVarInsn(Opcodes.DLOAD, 4);
-		mv.visitVarInsn(Opcodes.DLOAD, 6);
-		mv.visitVarInsn(Opcodes.ALOAD, 8);
-		mv.visitVarInsn(Opcodes.FLOAD, 9);
-		mv.visitVarInsn(Opcodes.DLOAD, 10);
-		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "renderPlayerNameAndScoreLabel", "(Lapi/player/render/IRenderPlayerAPI;" + (isObfuscated ? "Lblg;DDDLjava/lang/String;FD" : "Lnet/minecraft/client/entity/AbstractClientPlayer;DDDLjava/lang/String;FD") + ")V");
+		mv.visitTypeInsn(Opcodes.CHECKCAST, "net/minecraft/client/entity/AbstractClientPlayer");
+		mv.visitVarInsn(Opcodes.ALOAD, 2);
+		mv.visitVarInsn(Opcodes.DLOAD, 3);
+		mv.visitVarInsn(Opcodes.DLOAD, 5);
+		mv.visitVarInsn(Opcodes.DLOAD, 7);
+		mv.visitVarInsn(Opcodes.ILOAD, 9);
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "renderLivingLabel", "(Lapi/player/render/IRenderPlayerAPI;Lnet/minecraft/client/entity/AbstractClientPlayer;Ljava/lang/String;DDDI)V", false);
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realRenderPlayerNameAndScoreLabel", "" + (isObfuscated ? "(Lblg;DDDLjava/lang/String;FD)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDLjava/lang/String;FD)V") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realRenderLivingLabel", "(Lnet/minecraft/client/entity/AbstractClientPlayer;Ljava/lang/String;DDDI)V", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.DLOAD, 2);
-		mv.visitVarInsn(Opcodes.DLOAD, 4);
-		mv.visitVarInsn(Opcodes.DLOAD, 6);
-		mv.visitVarInsn(Opcodes.ALOAD, 8);
-		mv.visitVarInsn(Opcodes.FLOAD, 9);
-		mv.visitVarInsn(Opcodes.DLOAD, 10);
-		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "func_96449_a", "" + (isObfuscated ? "(Lblg;DDDLjava/lang/String;FD)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDLjava/lang/String;FD)V") + "");
+		mv.visitVarInsn(Opcodes.ALOAD, 2);
+		mv.visitVarInsn(Opcodes.DLOAD, 3);
+		mv.visitVarInsn(Opcodes.DLOAD, 5);
+		mv.visitVarInsn(Opcodes.DLOAD, 7);
+		mv.visitVarInsn(Opcodes.ILOAD, 9);
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "renderLivingLabel", "" + (isObfuscated ? "(Lwv;Ljava/lang/String;DDDI)V" : "(Lnet/minecraft/entity/Entity;Ljava/lang/String;DDDI)V") + "", false);
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superRenderPlayerNameAndScoreLabel", "" + (isObfuscated ? "(Lblg;DDDLjava/lang/String;FD)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDLjava/lang/String;FD)V") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superRenderLivingLabel", "(Lnet/minecraft/client/entity/AbstractClientPlayer;Ljava/lang/String;DDDI)V", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.DLOAD, 2);
-		mv.visitVarInsn(Opcodes.DLOAD, 4);
-		mv.visitVarInsn(Opcodes.DLOAD, 6);
-		mv.visitVarInsn(Opcodes.ALOAD, 8);
-		mv.visitVarInsn(Opcodes.FLOAD, 9);
-		mv.visitVarInsn(Opcodes.DLOAD, 10);
-		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "func_96449_a", "" + (isObfuscated ? "(Lblg;DDDLjava/lang/String;FD)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDLjava/lang/String;FD)V") + "");
+		mv.visitVarInsn(Opcodes.ALOAD, 2);
+		mv.visitVarInsn(Opcodes.DLOAD, 3);
+		mv.visitVarInsn(Opcodes.DLOAD, 5);
+		mv.visitVarInsn(Opcodes.DLOAD, 7);
+		mv.visitVarInsn(Opcodes.ILOAD, 9);
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "renderLivingLabel", "" + (isObfuscated ? "(Lwv;Ljava/lang/String;DDDI)V" : "(Lnet/minecraft/entity/Entity;Ljava/lang/String;DDDI)V") + "", false);
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		if(!hadLocalRenderPlayerNameAndScoreLabel)
+		if(!hadLocalRenderLivingLabel)
 		{
-			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderPlayerNameAndScoreLabel", "" + (isObfuscated ? "(Lblg;DDDLjava/lang/String;FD)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDLjava/lang/String;FD)V") + "", null, null);
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderLivingLabel", "(Lnet/minecraft/client/entity/AbstractClientPlayer;Ljava/lang/String;DDDI)V", null, null);
+			mv.visitVarInsn(Opcodes.ALOAD, 0);
+			mv.visitVarInsn(Opcodes.ALOAD, 1);
+			mv.visitVarInsn(Opcodes.ALOAD, 2);
+			mv.visitVarInsn(Opcodes.DLOAD, 3);
+			mv.visitVarInsn(Opcodes.DLOAD, 5);
+			mv.visitVarInsn(Opcodes.DLOAD, 7);
+			mv.visitVarInsn(Opcodes.ILOAD, 9);
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "renderLivingLabel", "" + (isObfuscated ? "(Lwv;Ljava/lang/String;DDDI)V" : "(Lnet/minecraft/entity/Entity;Ljava/lang/String;DDDI)V") + "", false);
+			mv.visitInsn(Opcodes.RETURN);
+			mv.visitMaxs(0, 0);
+			mv.visitEnd();
+		}
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "renderModel", "" + (isObfuscated ? "(Lxm;FFFFFF)V" : "(Lnet/minecraft/entity/EntityLivingBase;FFFFFF)V") + "", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitTypeInsn(Opcodes.CHECKCAST, "net/minecraft/client/entity/AbstractClientPlayer");
+		mv.visitVarInsn(Opcodes.FLOAD, 2);
+		mv.visitVarInsn(Opcodes.FLOAD, 3);
+		mv.visitVarInsn(Opcodes.FLOAD, 4);
+		mv.visitVarInsn(Opcodes.FLOAD, 5);
+		mv.visitVarInsn(Opcodes.FLOAD, 6);
+		mv.visitVarInsn(Opcodes.FLOAD, 7);
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "renderModel", "(Lapi/player/render/IRenderPlayerAPI;Lnet/minecraft/client/entity/AbstractClientPlayer;FFFFFF)V", false);
+		mv.visitInsn(Opcodes.RETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realRenderModel", "(Lnet/minecraft/client/entity/AbstractClientPlayer;FFFFFF)V", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitVarInsn(Opcodes.FLOAD, 2);
+		mv.visitVarInsn(Opcodes.FLOAD, 3);
+		mv.visitVarInsn(Opcodes.FLOAD, 4);
+		mv.visitVarInsn(Opcodes.FLOAD, 5);
+		mv.visitVarInsn(Opcodes.FLOAD, 6);
+		mv.visitVarInsn(Opcodes.FLOAD, 7);
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "renderModel", "" + (isObfuscated ? "(Lxm;FFFFFF)V" : "(Lnet/minecraft/entity/EntityLivingBase;FFFFFF)V") + "", false);
+		mv.visitInsn(Opcodes.RETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superRenderModel", "(Lnet/minecraft/client/entity/AbstractClientPlayer;FFFFFF)V", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitVarInsn(Opcodes.FLOAD, 2);
+		mv.visitVarInsn(Opcodes.FLOAD, 3);
+		mv.visitVarInsn(Opcodes.FLOAD, 4);
+		mv.visitVarInsn(Opcodes.FLOAD, 5);
+		mv.visitVarInsn(Opcodes.FLOAD, 6);
+		mv.visitVarInsn(Opcodes.FLOAD, 7);
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "renderModel", "" + (isObfuscated ? "(Lxm;FFFFFF)V" : "(Lnet/minecraft/entity/EntityLivingBase;FFFFFF)V") + "", false);
+		mv.visitInsn(Opcodes.RETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		if(!hadLocalRenderModel)
+		{
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderModel", "(Lnet/minecraft/client/entity/AbstractClientPlayer;FFFFFF)V", null, null);
+			mv.visitVarInsn(Opcodes.ALOAD, 0);
+			mv.visitVarInsn(Opcodes.ALOAD, 1);
+			mv.visitVarInsn(Opcodes.FLOAD, 2);
+			mv.visitVarInsn(Opcodes.FLOAD, 3);
+			mv.visitVarInsn(Opcodes.FLOAD, 4);
+			mv.visitVarInsn(Opcodes.FLOAD, 5);
+			mv.visitVarInsn(Opcodes.FLOAD, 6);
+			mv.visitVarInsn(Opcodes.FLOAD, 7);
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "renderModel", "" + (isObfuscated ? "(Lxm;FFFFFF)V" : "(Lnet/minecraft/entity/EntityLivingBase;FFFFFF)V") + "", false);
+			mv.visitInsn(Opcodes.RETURN);
+			mv.visitMaxs(0, 0);
+			mv.visitEnd();
+		}
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "renderName", "" + (isObfuscated ? "(Lwv;DDD)V" : "(Lnet/minecraft/entity/Entity;DDD)V") + "", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitTypeInsn(Opcodes.CHECKCAST, "net/minecraft/client/entity/AbstractClientPlayer");
+		mv.visitVarInsn(Opcodes.DLOAD, 2);
+		mv.visitVarInsn(Opcodes.DLOAD, 4);
+		mv.visitVarInsn(Opcodes.DLOAD, 6);
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "renderName", "(Lapi/player/render/IRenderPlayerAPI;Lnet/minecraft/client/entity/AbstractClientPlayer;DDD)V", false);
+		mv.visitInsn(Opcodes.RETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realRenderName", "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDD)V", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitVarInsn(Opcodes.DLOAD, 2);
+		mv.visitVarInsn(Opcodes.DLOAD, 4);
+		mv.visitVarInsn(Opcodes.DLOAD, 6);
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "renderName", "" + (isObfuscated ? "(Lwv;DDD)V" : "(Lnet/minecraft/entity/Entity;DDD)V") + "", false);
+		mv.visitInsn(Opcodes.RETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superRenderName", "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDD)V", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitVarInsn(Opcodes.DLOAD, 2);
+		mv.visitVarInsn(Opcodes.DLOAD, 4);
+		mv.visitVarInsn(Opcodes.DLOAD, 6);
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "renderName", "" + (isObfuscated ? "(Lwv;DDD)V" : "(Lnet/minecraft/entity/Entity;DDD)V") + "", false);
+		mv.visitInsn(Opcodes.RETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		if(!hadLocalRenderName)
+		{
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderName", "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDD)V", null, null);
+			mv.visitVarInsn(Opcodes.ALOAD, 0);
+			mv.visitVarInsn(Opcodes.ALOAD, 1);
+			mv.visitVarInsn(Opcodes.DLOAD, 2);
+			mv.visitVarInsn(Opcodes.DLOAD, 4);
+			mv.visitVarInsn(Opcodes.DLOAD, 6);
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "renderName", "" + (isObfuscated ? "(Lwv;DDD)V" : "(Lnet/minecraft/entity/Entity;DDD)V") + "", false);
+			mv.visitInsn(Opcodes.RETURN);
+			mv.visitMaxs(0, 0);
+			mv.visitEnd();
+		}
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "renderOffsetLivingLabel", "" + (isObfuscated ? "(Lcil;DDDLjava/lang/String;FD)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDLjava/lang/String;FD)V") + "", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitVarInsn(Opcodes.DLOAD, 2);
+		mv.visitVarInsn(Opcodes.DLOAD, 4);
+		mv.visitVarInsn(Opcodes.DLOAD, 6);
+		mv.visitVarInsn(Opcodes.ALOAD, 8);
+		mv.visitVarInsn(Opcodes.FLOAD, 9);
+		mv.visitVarInsn(Opcodes.DLOAD, 10);
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "renderOffsetLivingLabel", "(Lapi/player/render/IRenderPlayerAPI;Lnet/minecraft/client/entity/AbstractClientPlayer;DDDLjava/lang/String;FD)V", false);
+		mv.visitInsn(Opcodes.RETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realRenderOffsetLivingLabel", "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDLjava/lang/String;FD)V", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitVarInsn(Opcodes.DLOAD, 2);
+		mv.visitVarInsn(Opcodes.DLOAD, 4);
+		mv.visitVarInsn(Opcodes.DLOAD, 6);
+		mv.visitVarInsn(Opcodes.ALOAD, 8);
+		mv.visitVarInsn(Opcodes.FLOAD, 9);
+		mv.visitVarInsn(Opcodes.DLOAD, 10);
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "renderOffsetLivingLabel", "" + (isObfuscated ? "(Lcil;DDDLjava/lang/String;FD)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDLjava/lang/String;FD)V") + "", false);
+		mv.visitInsn(Opcodes.RETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superRenderOffsetLivingLabel", "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDLjava/lang/String;FD)V", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitVarInsn(Opcodes.DLOAD, 2);
+		mv.visitVarInsn(Opcodes.DLOAD, 4);
+		mv.visitVarInsn(Opcodes.DLOAD, 6);
+		mv.visitVarInsn(Opcodes.ALOAD, 8);
+		mv.visitVarInsn(Opcodes.FLOAD, 9);
+		mv.visitVarInsn(Opcodes.DLOAD, 10);
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "renderOffsetLivingLabel", "" + (isObfuscated ? "(Lcil;DDDLjava/lang/String;FD)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDLjava/lang/String;FD)V") + "", false);
+		mv.visitInsn(Opcodes.RETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		if(!hadLocalRenderOffsetLivingLabel)
+		{
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderOffsetLivingLabel", "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDLjava/lang/String;FD)V", null, null);
 			mv.visitVarInsn(Opcodes.ALOAD, 0);
 			mv.visitVarInsn(Opcodes.ALOAD, 1);
 			mv.visitVarInsn(Opcodes.DLOAD, 2);
@@ -1018,522 +1424,499 @@ public final class RenderPlayerClassVisitor extends ClassVisitor
 			mv.visitVarInsn(Opcodes.ALOAD, 8);
 			mv.visitVarInsn(Opcodes.FLOAD, 9);
 			mv.visitVarInsn(Opcodes.DLOAD, 10);
-			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "func_96449_a", "" + (isObfuscated ? "(Lblg;DDDLjava/lang/String;FD)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDLjava/lang/String;FD)V") + "");
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "renderOffsetLivingLabel", "" + (isObfuscated ? "(Lcil;DDDLjava/lang/String;FD)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDLjava/lang/String;FD)V") + "", false);
 			mv.visitInsn(Opcodes.RETURN);
 			mv.visitMaxs(0, 0);
 			mv.visitEnd();
 		}
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "b" : "preRenderCallback", "" + (isObfuscated ? "(Lblg;F)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;F)V") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "b" : "func_177138_b", "" + (isObfuscated ? "(Lcil;)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;)V") + "", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.FLOAD, 2);
-		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "renderPlayerScale", "(Lapi/player/render/IRenderPlayerAPI;" + (isObfuscated ? "Lblg;F" : "Lnet/minecraft/client/entity/AbstractClientPlayer;F") + ")V");
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "renderRightArm", "(Lapi/player/render/IRenderPlayerAPI;Lnet/minecraft/client/entity/AbstractClientPlayer;)V", false);
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realRenderPlayerScale", "" + (isObfuscated ? "(Lblg;F)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;F)V") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realRenderRightArm", "(Lnet/minecraft/client/entity/AbstractClientPlayer;)V", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.FLOAD, 2);
-		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "b" : "preRenderCallback", "" + (isObfuscated ? "(Lblg;F)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;F)V") + "");
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "b" : "func_177138_b", "" + (isObfuscated ? "(Lcil;)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;)V") + "", false);
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superRenderPlayerScale", "" + (isObfuscated ? "(Lblg;F)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;F)V") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superRenderRightArm", "(Lnet/minecraft/client/entity/AbstractClientPlayer;)V", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.FLOAD, 2);
-		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "b" : "preRenderCallback", "" + (isObfuscated ? "(Lblg;F)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;F)V") + "");
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "b" : "func_177138_b", "" + (isObfuscated ? "(Lcil;)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;)V") + "", false);
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		if(!hadLocalRenderPlayerScale)
+		if(!hadLocalRenderRightArm)
 		{
-			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderPlayerScale", "" + (isObfuscated ? "(Lblg;F)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;F)V") + "", null, null);
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderRightArm", "(Lnet/minecraft/client/entity/AbstractClientPlayer;)V", null, null);
 			mv.visitVarInsn(Opcodes.ALOAD, 0);
 			mv.visitVarInsn(Opcodes.ALOAD, 1);
-			mv.visitVarInsn(Opcodes.FLOAD, 2);
-			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "b" : "preRenderCallback", "" + (isObfuscated ? "(Lblg;F)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;F)V") + "");
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "b" : "func_177138_b", "" + (isObfuscated ? "(Lcil;)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;)V") + "", false);
 			mv.visitInsn(Opcodes.RETURN);
 			mv.visitMaxs(0, 0);
 			mv.visitEnd();
 		}
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "renderLivingAt", "" + (isObfuscated ? "(Lblg;DDD)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDD)V") + "", null, null);
-		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.DLOAD, 2);
-		mv.visitVarInsn(Opcodes.DLOAD, 4);
-		mv.visitVarInsn(Opcodes.DLOAD, 6);
-		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "renderPlayerSleep", "(Lapi/player/render/IRenderPlayerAPI;" + (isObfuscated ? "Lblg;DDD" : "Lnet/minecraft/client/entity/AbstractClientPlayer;DDD") + ")V");
-		mv.visitInsn(Opcodes.RETURN);
-		mv.visitMaxs(0, 0);
-		mv.visitEnd();
-
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realRenderPlayerSleep", "" + (isObfuscated ? "(Lblg;DDD)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDD)V") + "", null, null);
-		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.DLOAD, 2);
-		mv.visitVarInsn(Opcodes.DLOAD, 4);
-		mv.visitVarInsn(Opcodes.DLOAD, 6);
-		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "renderLivingAt", "" + (isObfuscated ? "(Lblg;DDD)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDD)V") + "");
-		mv.visitInsn(Opcodes.RETURN);
-		mv.visitMaxs(0, 0);
-		mv.visitEnd();
-
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superRenderPlayerSleep", "" + (isObfuscated ? "(Lblg;DDD)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDD)V") + "", null, null);
-		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.DLOAD, 2);
-		mv.visitVarInsn(Opcodes.DLOAD, 4);
-		mv.visitVarInsn(Opcodes.DLOAD, 6);
-		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "renderLivingAt", "" + (isObfuscated ? "(Lblg;DDD)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDD)V") + "");
-		mv.visitInsn(Opcodes.RETURN);
-		mv.visitMaxs(0, 0);
-		mv.visitEnd();
-
-		if(!hadLocalRenderPlayerSleep)
-		{
-			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderPlayerSleep", "" + (isObfuscated ? "(Lblg;DDD)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDD)V") + "", null, null);
-			mv.visitVarInsn(Opcodes.ALOAD, 0);
-			mv.visitVarInsn(Opcodes.ALOAD, 1);
-			mv.visitVarInsn(Opcodes.DLOAD, 2);
-			mv.visitVarInsn(Opcodes.DLOAD, 4);
-			mv.visitVarInsn(Opcodes.DLOAD, 6);
-			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "renderLivingAt", "" + (isObfuscated ? "(Lblg;DDD)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDD)V") + "");
-			mv.visitInsn(Opcodes.RETURN);
-			mv.visitMaxs(0, 0);
-			mv.visitEnd();
-		}
-
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "renderEquippedItems", "" + (isObfuscated ? "(Lblg;F)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;F)V") + "", null, null);
-		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.FLOAD, 2);
-		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "renderSpecials", "(Lapi/player/render/IRenderPlayerAPI;" + (isObfuscated ? "Lblg;F" : "Lnet/minecraft/client/entity/AbstractClientPlayer;F") + ")V");
-		mv.visitInsn(Opcodes.RETURN);
-		mv.visitMaxs(0, 0);
-		mv.visitEnd();
-
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realRenderSpecials", "" + (isObfuscated ? "(Lblg;F)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;F)V") + "", null, null);
-		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.FLOAD, 2);
-		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "renderEquippedItems", "" + (isObfuscated ? "(Lblg;F)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;F)V") + "");
-		mv.visitInsn(Opcodes.RETURN);
-		mv.visitMaxs(0, 0);
-		mv.visitEnd();
-
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superRenderSpecials", "" + (isObfuscated ? "(Lblg;F)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;F)V") + "", null, null);
-		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.FLOAD, 2);
-		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "renderEquippedItems", "" + (isObfuscated ? "(Lblg;F)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;F)V") + "");
-		mv.visitInsn(Opcodes.RETURN);
-		mv.visitMaxs(0, 0);
-		mv.visitEnd();
-
-		if(!hadLocalRenderSpecials)
-		{
-			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderSpecials", "" + (isObfuscated ? "(Lblg;F)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;F)V") + "", null, null);
-			mv.visitVarInsn(Opcodes.ALOAD, 0);
-			mv.visitVarInsn(Opcodes.ALOAD, 1);
-			mv.visitVarInsn(Opcodes.FLOAD, 2);
-			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "renderEquippedItems", "" + (isObfuscated ? "(Lblg;F)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;F)V") + "");
-			mv.visitInsn(Opcodes.RETURN);
-			mv.visitMaxs(0, 0);
-			mv.visitEnd();
-		}
-
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "d" : "renderSwingProgress", "" + (isObfuscated ? "(Lsv;F)F" : "(Lnet/minecraft/entity/EntityLivingBase;F)F") + "", null, null);
-		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.FLOAD, 2);
-		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "renderSwingProgress", "(Lapi/player/render/IRenderPlayerAPI;" + (isObfuscated ? "Lsv;F" : "Lnet/minecraft/entity/EntityLivingBase;F") + ")F");
-		mv.visitInsn(Opcodes.FRETURN);
-		mv.visitMaxs(0, 0);
-		mv.visitEnd();
-
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realRenderSwingProgress", "" + (isObfuscated ? "(Lsv;F)F" : "(Lnet/minecraft/entity/EntityLivingBase;F)F") + "", null, null);
-		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.FLOAD, 2);
-		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "d" : "renderSwingProgress", "" + (isObfuscated ? "(Lsv;F)F" : "(Lnet/minecraft/entity/EntityLivingBase;F)F") + "");
-		mv.visitInsn(Opcodes.FRETURN);
-		mv.visitMaxs(0, 0);
-		mv.visitEnd();
-
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superRenderSwingProgress", "" + (isObfuscated ? "(Lsv;F)F" : "(Lnet/minecraft/entity/EntityLivingBase;F)F") + "", null, null);
-		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.FLOAD, 2);
-		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "d" : "renderSwingProgress", "" + (isObfuscated ? "(Lsv;F)F" : "(Lnet/minecraft/entity/EntityLivingBase;F)F") + "");
-		mv.visitInsn(Opcodes.FRETURN);
-		mv.visitMaxs(0, 0);
-		mv.visitEnd();
-
-		if(!hadLocalRenderSwingProgress)
-		{
-			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRenderSwingProgress", "" + (isObfuscated ? "(Lsv;F)F" : "(Lnet/minecraft/entity/EntityLivingBase;F)F") + "", null, null);
-			mv.visitVarInsn(Opcodes.ALOAD, 0);
-			mv.visitVarInsn(Opcodes.ALOAD, 1);
-			mv.visitVarInsn(Opcodes.FLOAD, 2);
-			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "d" : "renderSwingProgress", "" + (isObfuscated ? "(Lsv;F)F" : "(Lnet/minecraft/entity/EntityLivingBase;F)F") + "");
-			mv.visitInsn(Opcodes.FRETURN);
-			mv.visitMaxs(0, 0);
-			mv.visitEnd();
-		}
-
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "rotateCorpse", "" + (isObfuscated ? "(Lblg;FFF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;FFF)V") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "func_180595_a", "" + (isObfuscated ? "(Lcil;FFF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;FFF)V") + "", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
 		mv.visitVarInsn(Opcodes.FLOAD, 2);
 		mv.visitVarInsn(Opcodes.FLOAD, 3);
 		mv.visitVarInsn(Opcodes.FLOAD, 4);
-		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "rotatePlayer", "(Lapi/player/render/IRenderPlayerAPI;" + (isObfuscated ? "Lblg;FFF" : "Lnet/minecraft/client/entity/AbstractClientPlayer;FFF") + ")V");
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "rotateCorpse", "(Lapi/player/render/IRenderPlayerAPI;Lnet/minecraft/client/entity/AbstractClientPlayer;FFF)V", false);
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realRotatePlayer", "" + (isObfuscated ? "(Lblg;FFF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;FFF)V") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realRotateCorpse", "(Lnet/minecraft/client/entity/AbstractClientPlayer;FFF)V", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
 		mv.visitVarInsn(Opcodes.FLOAD, 2);
 		mv.visitVarInsn(Opcodes.FLOAD, 3);
 		mv.visitVarInsn(Opcodes.FLOAD, 4);
-		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "rotateCorpse", "" + (isObfuscated ? "(Lblg;FFF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;FFF)V") + "");
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "func_180595_a", "" + (isObfuscated ? "(Lcil;FFF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;FFF)V") + "", false);
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superRotatePlayer", "" + (isObfuscated ? "(Lblg;FFF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;FFF)V") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superRotateCorpse", "(Lnet/minecraft/client/entity/AbstractClientPlayer;FFF)V", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
 		mv.visitVarInsn(Opcodes.FLOAD, 2);
 		mv.visitVarInsn(Opcodes.FLOAD, 3);
 		mv.visitVarInsn(Opcodes.FLOAD, 4);
-		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "rotateCorpse", "" + (isObfuscated ? "(Lblg;FFF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;FFF)V") + "");
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "func_180595_a", "" + (isObfuscated ? "(Lcil;FFF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;FFF)V") + "", false);
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		if(!hadLocalRotatePlayer)
+		if(!hadLocalRotateCorpse)
 		{
-			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRotatePlayer", "" + (isObfuscated ? "(Lblg;FFF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;FFF)V") + "", null, null);
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localRotateCorpse", "(Lnet/minecraft/client/entity/AbstractClientPlayer;FFF)V", null, null);
 			mv.visitVarInsn(Opcodes.ALOAD, 0);
 			mv.visitVarInsn(Opcodes.ALOAD, 1);
 			mv.visitVarInsn(Opcodes.FLOAD, 2);
 			mv.visitVarInsn(Opcodes.FLOAD, 3);
 			mv.visitVarInsn(Opcodes.FLOAD, 4);
-			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "rotateCorpse", "" + (isObfuscated ? "(Lblg;FFF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;FFF)V") + "");
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "func_180595_a", "" + (isObfuscated ? "(Lcil;FFF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;FFF)V") + "", false);
 			mv.visitInsn(Opcodes.RETURN);
 			mv.visitMaxs(0, 0);
 			mv.visitEnd();
 		}
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "shouldRenderPass", "" + (isObfuscated ? "(Lblg;IF)I" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;IF)I") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "func_177092_a", "" + (isObfuscated ? "(Lxm;FZ)Z" : "(Lnet/minecraft/entity/EntityLivingBase;FZ)Z") + "", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.ILOAD, 2);
-		mv.visitVarInsn(Opcodes.FLOAD, 3);
-		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "setArmorModel", "(Lapi/player/render/IRenderPlayerAPI;" + (isObfuscated ? "Lblg;IF" : "Lnet/minecraft/client/entity/AbstractClientPlayer;IF") + ")I");
+		mv.visitTypeInsn(Opcodes.CHECKCAST, "net/minecraft/client/entity/AbstractClientPlayer");
+		mv.visitVarInsn(Opcodes.FLOAD, 2);
+		mv.visitVarInsn(Opcodes.ILOAD, 3);
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "setBrightness", "(Lapi/player/render/IRenderPlayerAPI;Lnet/minecraft/client/entity/AbstractClientPlayer;FZ)Z", false);
 		mv.visitInsn(Opcodes.IRETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realSetArmorModel", "" + (isObfuscated ? "(Lblg;IF)I" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;IF)I") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realSetBrightness", "(Lnet/minecraft/client/entity/AbstractClientPlayer;FZ)Z", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.ILOAD, 2);
-		mv.visitVarInsn(Opcodes.FLOAD, 3);
-		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "shouldRenderPass", "" + (isObfuscated ? "(Lblg;IF)I" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;IF)I") + "");
+		mv.visitVarInsn(Opcodes.FLOAD, 2);
+		mv.visitVarInsn(Opcodes.ILOAD, 3);
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "func_177092_a", "" + (isObfuscated ? "(Lxm;FZ)Z" : "(Lnet/minecraft/entity/EntityLivingBase;FZ)Z") + "", false);
 		mv.visitInsn(Opcodes.IRETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superSetArmorModel", "" + (isObfuscated ? "(Lblg;IF)I" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;IF)I") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superSetBrightness", "(Lnet/minecraft/client/entity/AbstractClientPlayer;FZ)Z", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.ILOAD, 2);
-		mv.visitVarInsn(Opcodes.FLOAD, 3);
-		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "shouldRenderPass", "" + (isObfuscated ? "(Lblg;IF)I" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;IF)I") + "");
+		mv.visitVarInsn(Opcodes.FLOAD, 2);
+		mv.visitVarInsn(Opcodes.ILOAD, 3);
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "func_177092_a", "" + (isObfuscated ? "(Lxm;FZ)Z" : "(Lnet/minecraft/entity/EntityLivingBase;FZ)Z") + "", false);
 		mv.visitInsn(Opcodes.IRETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		if(!hadLocalSetArmorModel)
+		if(!hadLocalSetBrightness)
 		{
-			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localSetArmorModel", "" + (isObfuscated ? "(Lblg;IF)I" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;IF)I") + "", null, null);
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localSetBrightness", "(Lnet/minecraft/client/entity/AbstractClientPlayer;FZ)Z", null, null);
 			mv.visitVarInsn(Opcodes.ALOAD, 0);
 			mv.visitVarInsn(Opcodes.ALOAD, 1);
-			mv.visitVarInsn(Opcodes.ILOAD, 2);
-			mv.visitVarInsn(Opcodes.FLOAD, 3);
-			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "shouldRenderPass", "" + (isObfuscated ? "(Lblg;IF)I" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;IF)I") + "");
+			mv.visitVarInsn(Opcodes.FLOAD, 2);
+			mv.visitVarInsn(Opcodes.ILOAD, 3);
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "func_177092_a", "" + (isObfuscated ? "(Lxm;FZ)Z" : "(Lnet/minecraft/entity/EntityLivingBase;FZ)Z") + "", false);
 			mv.visitInsn(Opcodes.IRETURN);
 			mv.visitMaxs(0, 0);
 			mv.visitEnd();
 		}
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "b" : "func_82408_c", "" + (isObfuscated ? "(Lblg;IF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;IF)V") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "c" : "func_177090_c", "" + (isObfuscated ? "(Lxm;F)Z" : "(Lnet/minecraft/entity/EntityLivingBase;F)Z") + "", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.ILOAD, 2);
-		mv.visitVarInsn(Opcodes.FLOAD, 3);
-		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "setPassArmorModel", "(Lapi/player/render/IRenderPlayerAPI;" + (isObfuscated ? "Lblg;IF" : "Lnet/minecraft/client/entity/AbstractClientPlayer;IF") + ")V");
-		mv.visitInsn(Opcodes.RETURN);
+		mv.visitTypeInsn(Opcodes.CHECKCAST, "net/minecraft/client/entity/AbstractClientPlayer");
+		mv.visitVarInsn(Opcodes.FLOAD, 2);
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "setDoRenderBrightness", "(Lapi/player/render/IRenderPlayerAPI;Lnet/minecraft/client/entity/AbstractClientPlayer;F)Z", false);
+		mv.visitInsn(Opcodes.IRETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realSetPassArmorModel", "" + (isObfuscated ? "(Lblg;IF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;IF)V") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realSetDoRenderBrightness", "(Lnet/minecraft/client/entity/AbstractClientPlayer;F)Z", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.ILOAD, 2);
-		mv.visitVarInsn(Opcodes.FLOAD, 3);
-		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "b" : "func_82408_c", "" + (isObfuscated ? "(Lblg;IF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;IF)V") + "");
-		mv.visitInsn(Opcodes.RETURN);
+		mv.visitVarInsn(Opcodes.FLOAD, 2);
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "c" : "func_177090_c", "" + (isObfuscated ? "(Lxm;F)Z" : "(Lnet/minecraft/entity/EntityLivingBase;F)Z") + "", false);
+		mv.visitInsn(Opcodes.IRETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superSetPassArmorModel", "" + (isObfuscated ? "(Lblg;IF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;IF)V") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superSetDoRenderBrightness", "(Lnet/minecraft/client/entity/AbstractClientPlayer;F)Z", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitVarInsn(Opcodes.ILOAD, 2);
-		mv.visitVarInsn(Opcodes.FLOAD, 3);
-		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "b" : "func_82408_c", "" + (isObfuscated ? "(Lblg;IF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;IF)V") + "");
-		mv.visitInsn(Opcodes.RETURN);
+		mv.visitVarInsn(Opcodes.FLOAD, 2);
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "c" : "func_177090_c", "" + (isObfuscated ? "(Lxm;F)Z" : "(Lnet/minecraft/entity/EntityLivingBase;F)Z") + "", false);
+		mv.visitInsn(Opcodes.IRETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		if(!hadLocalSetPassArmorModel)
+		if(!hadLocalSetDoRenderBrightness)
 		{
-			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localSetPassArmorModel", "" + (isObfuscated ? "(Lblg;IF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;IF)V") + "", null, null);
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localSetDoRenderBrightness", "(Lnet/minecraft/client/entity/AbstractClientPlayer;F)Z", null, null);
 			mv.visitVarInsn(Opcodes.ALOAD, 0);
 			mv.visitVarInsn(Opcodes.ALOAD, 1);
-			mv.visitVarInsn(Opcodes.ILOAD, 2);
-			mv.visitVarInsn(Opcodes.FLOAD, 3);
-			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "b" : "func_82408_c", "" + (isObfuscated ? "(Lblg;IF)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;IF)V") + "");
+			mv.visitVarInsn(Opcodes.FLOAD, 2);
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "c" : "func_177090_c", "" + (isObfuscated ? "(Lxm;F)Z" : "(Lnet/minecraft/entity/EntityLivingBase;F)Z") + "", false);
+			mv.visitInsn(Opcodes.IRETURN);
+			mv.visitMaxs(0, 0);
+			mv.visitEnd();
+		}
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "d" : "func_177137_d", "" + (isObfuscated ? "(Lcil;)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;)V") + "", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "setModelVisibilities", "(Lapi/player/render/IRenderPlayerAPI;Lnet/minecraft/client/entity/AbstractClientPlayer;)V", false);
+		mv.visitInsn(Opcodes.RETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realSetModelVisibilities", "(Lnet/minecraft/client/entity/AbstractClientPlayer;)V", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "d" : "func_177137_d", "" + (isObfuscated ? "(Lcil;)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;)V") + "", false);
+		mv.visitInsn(Opcodes.RETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superSetModelVisibilities", "(Lnet/minecraft/client/entity/AbstractClientPlayer;)V", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "d" : "func_177137_d", "" + (isObfuscated ? "(Lcil;)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;)V") + "", false);
+		mv.visitInsn(Opcodes.RETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		if(!hadLocalSetModelVisibilities)
+		{
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localSetModelVisibilities", "(Lnet/minecraft/client/entity/AbstractClientPlayer;)V", null, null);
+			mv.visitVarInsn(Opcodes.ALOAD, 0);
+			mv.visitVarInsn(Opcodes.ALOAD, 1);
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "d" : "func_177137_d", "" + (isObfuscated ? "(Lcil;)V" : "(Lnet/minecraft/client/entity/AbstractClientPlayer;)V") + "", false);
 			mv.visitInsn(Opcodes.RETURN);
 			mv.visitMaxs(0, 0);
 			mv.visitEnd();
 		}
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "setRenderManager", "" + (isObfuscated ? "(Lbnn;)V" : "(Lnet/minecraft/client/renderer/entity/RenderManager;)V") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "setRenderOutlines", "(Z)V", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "setRenderManager", "(Lapi/player/render/IRenderPlayerAPI;" + (isObfuscated ? "Lbnn;" : "Lnet/minecraft/client/renderer/entity/RenderManager;") + ")V");
+		mv.visitVarInsn(Opcodes.ILOAD, 1);
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "setRenderOutlines", "(Lapi/player/render/IRenderPlayerAPI;Z)V", false);
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realSetRenderManager", "" + (isObfuscated ? "(Lbnn;)V" : "(Lnet/minecraft/client/renderer/entity/RenderManager;)V") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realSetRenderOutlines", "(Z)V", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "setRenderManager", "" + (isObfuscated ? "(Lbnn;)V" : "(Lnet/minecraft/client/renderer/entity/RenderManager;)V") + "");
+		mv.visitVarInsn(Opcodes.ILOAD, 1);
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "setRenderOutlines", "(Z)V", false);
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superSetRenderManager", "" + (isObfuscated ? "(Lbnn;)V" : "(Lnet/minecraft/client/renderer/entity/RenderManager;)V") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superSetRenderOutlines", "(Z)V", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "setRenderManager", "" + (isObfuscated ? "(Lbnn;)V" : "(Lnet/minecraft/client/renderer/entity/RenderManager;)V") + "");
+		mv.visitVarInsn(Opcodes.ILOAD, 1);
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "setRenderOutlines", "(Z)V", false);
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		if(!hadLocalSetRenderManager)
+		if(!hadLocalSetRenderOutlines)
 		{
-			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localSetRenderManager", "" + (isObfuscated ? "(Lbnn;)V" : "(Lnet/minecraft/client/renderer/entity/RenderManager;)V") + "", null, null);
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localSetRenderOutlines", "(Z)V", null, null);
 			mv.visitVarInsn(Opcodes.ALOAD, 0);
-			mv.visitVarInsn(Opcodes.ALOAD, 1);
-			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "setRenderManager", "" + (isObfuscated ? "(Lbnn;)V" : "(Lnet/minecraft/client/renderer/entity/RenderManager;)V") + "");
+			mv.visitVarInsn(Opcodes.ILOAD, 1);
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "setRenderOutlines", "(Z)V", false);
 			mv.visitInsn(Opcodes.RETURN);
 			mv.visitMaxs(0, 0);
 			mv.visitEnd();
 		}
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "setRenderPassModel", "" + (isObfuscated ? "(Lbhr;)V" : "(Lnet/minecraft/client/model/ModelBase;)V") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "c" : "func_177088_c", "" + (isObfuscated ? "(Lxm;)Z" : "(Lnet/minecraft/entity/EntityLivingBase;)Z") + "", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "setRenderPassModel", "(Lapi/player/render/IRenderPlayerAPI;" + (isObfuscated ? "Lbhr;" : "Lnet/minecraft/client/model/ModelBase;") + ")V");
-		mv.visitInsn(Opcodes.RETURN);
+		mv.visitTypeInsn(Opcodes.CHECKCAST, "net/minecraft/client/entity/AbstractClientPlayer");
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "setScoreTeamColor", "(Lapi/player/render/IRenderPlayerAPI;Lnet/minecraft/client/entity/AbstractClientPlayer;)Z", false);
+		mv.visitInsn(Opcodes.IRETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realSetRenderPassModel", "" + (isObfuscated ? "(Lbhr;)V" : "(Lnet/minecraft/client/model/ModelBase;)V") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realSetScoreTeamColor", "(Lnet/minecraft/client/entity/AbstractClientPlayer;)Z", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "setRenderPassModel", "" + (isObfuscated ? "(Lbhr;)V" : "(Lnet/minecraft/client/model/ModelBase;)V") + "");
-		mv.visitInsn(Opcodes.RETURN);
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "c" : "func_177088_c", "" + (isObfuscated ? "(Lxm;)Z" : "(Lnet/minecraft/entity/EntityLivingBase;)Z") + "", false);
+		mv.visitInsn(Opcodes.IRETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superSetRenderPassModel", "" + (isObfuscated ? "(Lbhr;)V" : "(Lnet/minecraft/client/model/ModelBase;)V") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superSetScoreTeamColor", "(Lnet/minecraft/client/entity/AbstractClientPlayer;)Z", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "setRenderPassModel", "" + (isObfuscated ? "(Lbhr;)V" : "(Lnet/minecraft/client/model/ModelBase;)V") + "");
-		mv.visitInsn(Opcodes.RETURN);
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "c" : "func_177088_c", "" + (isObfuscated ? "(Lxm;)Z" : "(Lnet/minecraft/entity/EntityLivingBase;)Z") + "", false);
+		mv.visitInsn(Opcodes.IRETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		if(!hadLocalSetRenderPassModel)
+		if(!hadLocalSetScoreTeamColor)
 		{
-			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localSetRenderPassModel", "" + (isObfuscated ? "(Lbhr;)V" : "(Lnet/minecraft/client/model/ModelBase;)V") + "", null, null);
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localSetScoreTeamColor", "(Lnet/minecraft/client/entity/AbstractClientPlayer;)Z", null, null);
 			mv.visitVarInsn(Opcodes.ALOAD, 0);
 			mv.visitVarInsn(Opcodes.ALOAD, 1);
-			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "setRenderPassModel", "" + (isObfuscated ? "(Lbhr;)V" : "(Lnet/minecraft/client/model/ModelBase;)V") + "");
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "c" : "func_177088_c", "" + (isObfuscated ? "(Lxm;)Z" : "(Lnet/minecraft/entity/EntityLivingBase;)Z") + "", false);
+			mv.visitInsn(Opcodes.IRETURN);
+			mv.visitMaxs(0, 0);
+			mv.visitEnd();
+		}
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "shouldRender", "" + (isObfuscated ? "(Lwv;Lcox;DDD)Z" : "(Lnet/minecraft/entity/Entity;Lnet/minecraft/client/renderer/culling/ICamera;DDD)Z") + "", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitTypeInsn(Opcodes.CHECKCAST, "net/minecraft/client/entity/AbstractClientPlayer");
+		mv.visitVarInsn(Opcodes.ALOAD, 2);
+		mv.visitVarInsn(Opcodes.DLOAD, 3);
+		mv.visitVarInsn(Opcodes.DLOAD, 5);
+		mv.visitVarInsn(Opcodes.DLOAD, 7);
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "shouldRender", "(Lapi/player/render/IRenderPlayerAPI;Lnet/minecraft/client/entity/AbstractClientPlayer;Lnet/minecraft/client/renderer/culling/ICamera;DDD)Z", false);
+		mv.visitInsn(Opcodes.IRETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realShouldRender", "(Lnet/minecraft/client/entity/AbstractClientPlayer;Lnet/minecraft/client/renderer/culling/ICamera;DDD)Z", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitVarInsn(Opcodes.ALOAD, 2);
+		mv.visitVarInsn(Opcodes.DLOAD, 3);
+		mv.visitVarInsn(Opcodes.DLOAD, 5);
+		mv.visitVarInsn(Opcodes.DLOAD, 7);
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "shouldRender", "" + (isObfuscated ? "(Lwv;Lcox;DDD)Z" : "(Lnet/minecraft/entity/Entity;Lnet/minecraft/client/renderer/culling/ICamera;DDD)Z") + "", false);
+		mv.visitInsn(Opcodes.IRETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superShouldRender", "(Lnet/minecraft/client/entity/AbstractClientPlayer;Lnet/minecraft/client/renderer/culling/ICamera;DDD)Z", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ALOAD, 1);
+		mv.visitVarInsn(Opcodes.ALOAD, 2);
+		mv.visitVarInsn(Opcodes.DLOAD, 3);
+		mv.visitVarInsn(Opcodes.DLOAD, 5);
+		mv.visitVarInsn(Opcodes.DLOAD, 7);
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "shouldRender", "" + (isObfuscated ? "(Lwv;Lcox;DDD)Z" : "(Lnet/minecraft/entity/Entity;Lnet/minecraft/client/renderer/culling/ICamera;DDD)Z") + "", false);
+		mv.visitInsn(Opcodes.IRETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		if(!hadLocalShouldRender)
+		{
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localShouldRender", "(Lnet/minecraft/client/entity/AbstractClientPlayer;Lnet/minecraft/client/renderer/culling/ICamera;DDD)Z", null, null);
+			mv.visitVarInsn(Opcodes.ALOAD, 0);
+			mv.visitVarInsn(Opcodes.ALOAD, 1);
+			mv.visitVarInsn(Opcodes.ALOAD, 2);
+			mv.visitVarInsn(Opcodes.DLOAD, 3);
+			mv.visitVarInsn(Opcodes.DLOAD, 5);
+			mv.visitVarInsn(Opcodes.DLOAD, 7);
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "shouldRender", "" + (isObfuscated ? "(Lwv;Lcox;DDD)Z" : "(Lnet/minecraft/entity/Entity;Lnet/minecraft/client/renderer/culling/ICamera;DDD)Z") + "", false);
+			mv.visitInsn(Opcodes.IRETURN);
+			mv.visitMaxs(0, 0);
+			mv.visitEnd();
+		}
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "B_" : "func_82422_c", "()V", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "transformHeldFull3DItemLayer", "(Lapi/player/render/IRenderPlayerAPI;)V", false);
+		mv.visitInsn(Opcodes.RETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realTransformHeldFull3DItemLayer", "()V", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "B_" : "func_82422_c", "()V", false);
+		mv.visitInsn(Opcodes.RETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superTransformHeldFull3DItemLayer", "()V", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "B_" : "func_82422_c", "()V", false);
+		mv.visitInsn(Opcodes.RETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		if(!hadLocalTransformHeldFull3DItemLayer)
+		{
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localTransformHeldFull3DItemLayer", "()V", null, null);
+			mv.visitVarInsn(Opcodes.ALOAD, 0);
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "B_" : "func_82422_c", "()V", false);
 			mv.visitInsn(Opcodes.RETURN);
 			mv.visitMaxs(0, 0);
 			mv.visitEnd();
 		}
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "a" : "updateIcons", "" + (isObfuscated ? "(Lrg;)V" : "(Lnet/minecraft/client/renderer/texture/IIconRegister;)V") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "f" : "func_177091_f", "()V", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "updateIcons", "(Lapi/player/render/IRenderPlayerAPI;" + (isObfuscated ? "Lrg;" : "Lnet/minecraft/client/renderer/texture/IIconRegister;") + ")V");
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "unsetBrightness", "(Lapi/player/render/IRenderPlayerAPI;)V", false);
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realUpdateIcons", "" + (isObfuscated ? "(Lrg;)V" : "(Lnet/minecraft/client/renderer/texture/IIconRegister;)V") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realUnsetBrightness", "()V", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "updateIcons", "" + (isObfuscated ? "(Lrg;)V" : "(Lnet/minecraft/client/renderer/texture/IIconRegister;)V") + "");
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "f" : "func_177091_f", "()V", false);
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superUpdateIcons", "" + (isObfuscated ? "(Lrg;)V" : "(Lnet/minecraft/client/renderer/texture/IIconRegister;)V") + "", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superUnsetBrightness", "()V", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "updateIcons", "" + (isObfuscated ? "(Lrg;)V" : "(Lnet/minecraft/client/renderer/texture/IIconRegister;)V") + "");
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "f" : "func_177091_f", "()V", false);
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		if(!hadLocalUpdateIcons)
+		if(!hadLocalUnsetBrightness)
 		{
-			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localUpdateIcons", "" + (isObfuscated ? "(Lrg;)V" : "(Lnet/minecraft/client/renderer/texture/IIconRegister;)V") + "", null, null);
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localUnsetBrightness", "()V", null, null);
 			mv.visitVarInsn(Opcodes.ALOAD, 0);
-			mv.visitVarInsn(Opcodes.ALOAD, 1);
-			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "boh" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "a" : "updateIcons", "" + (isObfuscated ? "(Lrg;)V" : "(Lnet/minecraft/client/renderer/texture/IIconRegister;)V") + "");
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "f" : "func_177091_f", "()V", false);
 			mv.visitInsn(Opcodes.RETURN);
 			mv.visitMaxs(0, 0);
 			mv.visitEnd();
 		}
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "getMainModelField", isObfuscated ? "()Lbhr;" : "()Lnet/minecraft/client/model/ModelBase;", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC, isObfuscated ? "e" : "func_180565_e", "()V", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitFieldInsn(Opcodes.GETFIELD, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "i" : "mainModel", isObfuscated ? "Lbhr;" : "Lnet/minecraft/client/model/ModelBase;");
-		mv.visitInsn(Opcodes.ARETURN);
-		mv.visitMaxs(0, 0);
-		mv.visitEnd();
-
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "setMainModelField", isObfuscated ? "(Lbhr;)V" : "(Lnet/minecraft/client/model/ModelBase;)V", null, null);
-		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitFieldInsn(Opcodes.PUTFIELD, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "i" : "mainModel", isObfuscated ? "Lbhr;" : "Lnet/minecraft/client/model/ModelBase;");
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "unsetScoreTeamColor", "(Lapi/player/render/IRenderPlayerAPI;)V", false);
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "getModelArmorField", isObfuscated ? "()Lbhm;" : "()Lnet/minecraft/client/model/ModelBiped;", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "realUnsetScoreTeamColor", "()V", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitFieldInsn(Opcodes.GETFIELD, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "h" : "modelArmor", isObfuscated ? "Lbhm;" : "Lnet/minecraft/client/model/ModelBiped;");
-		mv.visitInsn(Opcodes.ARETURN);
-		mv.visitMaxs(0, 0);
-		mv.visitEnd();
-
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "setModelArmorField", isObfuscated ? "(Lbhm;)V" : "(Lnet/minecraft/client/model/ModelBiped;)V", null, null);
-		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitFieldInsn(Opcodes.PUTFIELD, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "h" : "modelArmor", isObfuscated ? "Lbhm;" : "Lnet/minecraft/client/model/ModelBiped;");
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "e" : "func_180565_e", "()V", false);
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "getModelArmorChestplateField", isObfuscated ? "()Lbhm;" : "()Lnet/minecraft/client/model/ModelBiped;", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "superUnsetScoreTeamColor", "()V", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitFieldInsn(Opcodes.GETFIELD, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "g" : "modelArmorChestplate", isObfuscated ? "Lbhm;" : "Lnet/minecraft/client/model/ModelBiped;");
-		mv.visitInsn(Opcodes.ARETURN);
-		mv.visitMaxs(0, 0);
-		mv.visitEnd();
-
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "setModelArmorChestplateField", isObfuscated ? "(Lbhm;)V" : "(Lnet/minecraft/client/model/ModelBiped;)V", null, null);
-		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitFieldInsn(Opcodes.PUTFIELD, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "g" : "modelArmorChestplate", isObfuscated ? "Lbhm;" : "Lnet/minecraft/client/model/ModelBiped;");
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "e" : "func_180565_e", "()V", false);
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "getModelBipedMainField", isObfuscated ? "()Lbhm;" : "()Lnet/minecraft/client/model/ModelBiped;", null, null);
+		if(!hadLocalUnsetScoreTeamColor)
+		{
+			mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "localUnsetScoreTeamColor", "()V", null, null);
+			mv.visitVarInsn(Opcodes.ALOAD, 0);
+			mv.visitMethodInsn(Opcodes.INVOKESPECIAL, isObfuscated ? "cqv" : "net/minecraft/client/renderer/entity/RendererLivingEntity", isObfuscated ? "e" : "func_180565_e", "()V", false);
+			mv.visitInsn(Opcodes.RETURN);
+			mv.visitMaxs(0, 0);
+			mv.visitEnd();
+		}
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "getBrightnessBufferField", "()Ljava/nio/FloatBuffer;", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitFieldInsn(Opcodes.GETFIELD, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "f" : "modelBipedMain", isObfuscated ? "Lbhm;" : "Lnet/minecraft/client/model/ModelBiped;");
+		mv.visitFieldInsn(Opcodes.GETFIELD, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "g" : "field_177095_g", "Ljava/nio/FloatBuffer;");
 		mv.visitInsn(Opcodes.ARETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "setModelBipedMainField", isObfuscated ? "(Lbhm;)V" : "(Lnet/minecraft/client/model/ModelBiped;)V", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "setBrightnessBufferField", "(Ljava/nio/FloatBuffer;)V", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitFieldInsn(Opcodes.PUTFIELD, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "f" : "modelBipedMain", isObfuscated ? "Lbhm;" : "Lnet/minecraft/client/model/ModelBiped;");
+		mv.visitFieldInsn(Opcodes.PUTFIELD, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "g" : "field_177095_g", "Ljava/nio/FloatBuffer;");
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "getRenderBlocksField", isObfuscated ? "()Lblm;" : "()Lnet/minecraft/client/renderer/RenderBlocks;", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "getLayerRenderersField", "()Ljava/util/List;", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitFieldInsn(Opcodes.GETFIELD, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "c" : "field_147909_c", isObfuscated ? "Lblm;" : "Lnet/minecraft/client/renderer/RenderBlocks;");
+		mv.visitFieldInsn(Opcodes.GETFIELD, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "h" : "layerRenderers", "Ljava/util/List;");
 		mv.visitInsn(Opcodes.ARETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "setRenderBlocksField", isObfuscated ? "(Lblm;)V" : "(Lnet/minecraft/client/renderer/RenderBlocks;)V", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "setLayerRenderersField", "(Ljava/util/List;)V", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitFieldInsn(Opcodes.PUTFIELD, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "c" : "field_147909_c", isObfuscated ? "Lblm;" : "Lnet/minecraft/client/renderer/RenderBlocks;");
+		mv.visitFieldInsn(Opcodes.PUTFIELD, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "h" : "layerRenderers", "Ljava/util/List;");
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "getRenderManagerField", isObfuscated ? "()Lbnn;" : "()Lnet/minecraft/client/renderer/entity/RenderManager;", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "getMainModelField", isObfuscated ? "()Lccq;" : "()Lnet/minecraft/client/model/ModelBase;", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitFieldInsn(Opcodes.GETFIELD, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "b" : "renderManager", isObfuscated ? "Lbnn;" : "Lnet/minecraft/client/renderer/entity/RenderManager;");
+		mv.visitFieldInsn(Opcodes.GETFIELD, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "f" : "mainModel", isObfuscated ? "Lccq;" : "Lnet/minecraft/client/model/ModelBase;");
 		mv.visitInsn(Opcodes.ARETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "setRenderManagerField", isObfuscated ? "(Lbnn;)V" : "(Lnet/minecraft/client/renderer/entity/RenderManager;)V", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "setMainModelField", isObfuscated ? "(Lccq;)V" : "(Lnet/minecraft/client/model/ModelBase;)V", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitFieldInsn(Opcodes.PUTFIELD, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "b" : "renderManager", isObfuscated ? "Lbnn;" : "Lnet/minecraft/client/renderer/entity/RenderManager;");
+		mv.visitFieldInsn(Opcodes.PUTFIELD, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "f" : "mainModel", isObfuscated ? "Lccq;" : "Lnet/minecraft/client/model/ModelBase;");
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "getRenderPassModelField", isObfuscated ? "()Lbhr;" : "()Lnet/minecraft/client/model/ModelBase;", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "getRenderManagerField", isObfuscated ? "()Lcpt;" : "()Lnet/minecraft/client/renderer/entity/RenderManager;", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitFieldInsn(Opcodes.GETFIELD, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "j" : "renderPassModel", isObfuscated ? "Lbhr;" : "Lnet/minecraft/client/model/ModelBase;");
+		mv.visitFieldInsn(Opcodes.GETFIELD, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "b" : "renderManager", isObfuscated ? "Lcpt;" : "Lnet/minecraft/client/renderer/entity/RenderManager;");
 		mv.visitInsn(Opcodes.ARETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "setRenderPassModelField", isObfuscated ? "(Lbhr;)V" : "(Lnet/minecraft/client/model/ModelBase;)V", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "getRenderOutlinesField", "()Z", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitFieldInsn(Opcodes.PUTFIELD, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "j" : "renderPassModel", isObfuscated ? "Lbhr;" : "Lnet/minecraft/client/model/ModelBase;");
+		mv.visitFieldInsn(Opcodes.GETFIELD, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "i" : "renderOutlines", "Z");
+		mv.visitInsn(Opcodes.IRETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "setRenderOutlinesField", "(Z)V", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ILOAD, 1);
+		mv.visitFieldInsn(Opcodes.PUTFIELD, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "i" : "renderOutlines", "Z");
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
 		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "getShadowOpaqueField", "()F", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitFieldInsn(Opcodes.GETFIELD, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "e" : "shadowOpaque", "F");
+		mv.visitFieldInsn(Opcodes.GETFIELD, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "d" : "shadowOpaque", "F");
 		mv.visitInsn(Opcodes.FRETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
@@ -1541,14 +1924,14 @@ public final class RenderPlayerClassVisitor extends ClassVisitor
 		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "setShadowOpaqueField", "(F)V", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.FLOAD, 1);
-		mv.visitFieldInsn(Opcodes.PUTFIELD, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "e" : "shadowOpaque", "F");
+		mv.visitFieldInsn(Opcodes.PUTFIELD, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "d" : "shadowOpaque", "F");
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
 		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "getShadowSizeField", "()F", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitFieldInsn(Opcodes.GETFIELD, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "d" : "shadowSize", "F");
+		mv.visitFieldInsn(Opcodes.GETFIELD, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "c" : "shadowSize", "F");
 		mv.visitInsn(Opcodes.FRETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
@@ -1556,29 +1939,37 @@ public final class RenderPlayerClassVisitor extends ClassVisitor
 		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "setShadowSizeField", "(F)V", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.FLOAD, 1);
-		mv.visitFieldInsn(Opcodes.PUTFIELD, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "d" : "shadowSize", "F");
+		mv.visitFieldInsn(Opcodes.PUTFIELD, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "c" : "shadowSize", "F");
 		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "getSteveTexturesField", isObfuscated ? "()Lbqx;" : "()Lnet/minecraft/util/ResourceLocation;", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "getSmallArmsField", "()Z", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitFieldInsn(Opcodes.GETFIELD, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "steveTextures", isObfuscated ? "Lbqx;" : "Lnet/minecraft/util/ResourceLocation;");
-		mv.visitInsn(Opcodes.ARETURN);
+		mv.visitFieldInsn(Opcodes.GETFIELD, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "smallArms", "Z");
+		mv.visitInsn(Opcodes.IRETURN);
+		mv.visitMaxs(0, 0);
+		mv.visitEnd();
+
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "setSmallArmsField", "(Z)V", null, null);
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitVarInsn(Opcodes.ILOAD, 1);
+		mv.visitFieldInsn(Opcodes.PUTFIELD, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", isObfuscated ? "a" : "smallArms", "Z");
+		mv.visitInsn(Opcodes.RETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
 		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "getRenderPlayerBase", "(Ljava/lang/String;)Lapi/player/render/RenderPlayerBase;", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
-		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "getRenderPlayerBase", "(Lapi/player/render/IRenderPlayerAPI;Ljava/lang/String;)Lapi/player/render/RenderPlayerBase;");
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "getRenderPlayerBase", "(Lapi/player/render/IRenderPlayerAPI;Ljava/lang/String;)Lapi/player/render/RenderPlayerBase;", false);
 		mv.visitInsn(Opcodes.ARETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
 		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "getRenderPlayerBaseIds", "()Ljava/util/Set;", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "getRenderPlayerBaseIds", "(Lapi/player/render/IRenderPlayerAPI;)Ljava/util/Set;");
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "getRenderPlayerBaseIds", "(Lapi/player/render/IRenderPlayerAPI;)Ljava/util/Set;", false);
 		mv.visitInsn(Opcodes.ARETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
@@ -1587,26 +1978,26 @@ public final class RenderPlayerClassVisitor extends ClassVisitor
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitVarInsn(Opcodes.ALOAD, 1);
 		mv.visitVarInsn(Opcodes.ALOAD, 2);
-		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "dynamic", "(Lapi/player/render/IRenderPlayerAPI;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/Object;");
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "dynamic", "(Lapi/player/render/IRenderPlayerAPI;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/Object;", false);
 		mv.visitInsn(Opcodes.ARETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
 		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "getRenderPlayerAPI", "()Lapi/player/render/RenderPlayerAPI;", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
-		mv.visitFieldInsn(Opcodes.GETFIELD, isObfuscated ? "bop" : "net/minecraft/client/renderer/entity/RenderPlayer", "renderPlayerAPI", "Lapi/player/render/RenderPlayerAPI;");
+		mv.visitFieldInsn(Opcodes.GETFIELD, isObfuscated ? "ctc" : "net/minecraft/client/renderer/entity/RenderPlayer", "renderPlayerAPI", "Lapi/player/render/RenderPlayerAPI;");
 		mv.visitInsn(Opcodes.ARETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "getRenderPlayer", isObfuscated ? "()Lbop;" : "()Lnet/minecraft/client/renderer/entity/RenderPlayer;", null, null);
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL, "getRenderPlayer", isObfuscated ? "()Lctc;" : "()Lnet/minecraft/client/renderer/entity/RenderPlayer;", null, null);
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitInsn(Opcodes.ARETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();
 
-		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_STATIC, "getAllInstances", isObfuscated ? "()[Lbop;" : "()[Lnet/minecraft/client/renderer/entity/RenderPlayer;", null, null);
-		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "getAllInstances", isObfuscated ? "()[Lbop;" : "()[Lnet/minecraft/client/renderer/entity/RenderPlayer;");
+		mv = cv.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_STATIC, "getAllInstances", isObfuscated ? "()[Lctc;" : "()[Lnet/minecraft/client/renderer/entity/RenderPlayer;", null, null);
+		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "api/player/render/RenderPlayerAPI", "getAllInstances", isObfuscated ? "()[Lctc;" : "()[Lnet/minecraft/client/renderer/entity/RenderPlayer;", false);
 		mv.visitInsn(Opcodes.ARETURN);
 		mv.visitMaxs(0, 0);
 		mv.visitEnd();

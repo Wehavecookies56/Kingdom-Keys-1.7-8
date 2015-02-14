@@ -1,15 +1,11 @@
 package wehavecookies56.kk.core.proxies;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
-
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.glu.GLU;
-import org.lwjgl.util.glu.Sphere;
-
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import wehavecookies56.kk.block.AddedBlocks;
 import wehavecookies56.kk.client.KeyBind;
 import wehavecookies56.kk.client.gui.GuiCommands;
@@ -59,13 +55,6 @@ import wehavecookies56.kk.entities.tileentities.TileEntityKKChest;
 import wehavecookies56.kk.item.AddedItems;
 import api.player.model.ModelPlayerAPI;
 import api.player.render.RenderPlayerAPI;
-
-import com.jadarstudios.developercapes.DevCapes;
-
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.registry.VillagerRegistry;
 
 
 public class ClientProxy extends CommonProxy {
@@ -125,9 +114,10 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityBlastBlox.class, new BlockRenderBlastBlox());
 		RenderingRegistry.registerEntityRenderingHandler(EntityEternalFlamesProjectile.class, new EntityRenderEternalFlamesProjectile(AddedItems.EternalFlames));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySharpshooterBullet.class, new EntityRenderSharpShooterBullet());
+		/*
 		ResourceLocation villagerTexture = new ResourceLocation("kk", "textures/entities/mobs/knowledgeVillager.png");
 		VillagerRegistry.instance().registerVillagerSkin(20, villagerTexture);
-		VillagerRegistry.getVillagerSkin(10, villagerTexture);
+		VillagerRegistry.getVillagerSkin(10, villagerTexture);*/
 
 		/*Sphere sphere = new Sphere();
 
@@ -151,14 +141,16 @@ public class ClientProxy extends CommonProxy {
 		*/
 	}
 
+	//TODO FIX ARMOUR
 	@Override
 	public int addArmor(String armor) {
-		return RenderingRegistry.addNewArmourRendererPrefix(armor);
+		return 0;
+		//return RenderingRegistry.addNewArmourRendererPrefix(armor);
 	}
 
 	@Override
 	public void initCapes() {
-		DevCapes.getInstance().registerConfig("https://www.dropbox.com/s/hb0wg5ky5wblz9g/Capes.json?raw=1");
+		//DevCapes.getInstance().registerConfig("https://www.dropbox.com/s/hb0wg5ky5wblz9g/Capes.json?raw=1");
 	}
 
 

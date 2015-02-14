@@ -1,8 +1,10 @@
 package api.player.forge;
 
 import java.util.*;
+
 import com.google.common.eventbus.*;
-import cpw.mods.fml.common.*;
+
+import net.minecraftforge.fml.common.*;
 
 public class RenderPlayerAPIContainer extends DummyModContainer
 {
@@ -22,7 +24,7 @@ public class RenderPlayerAPIContainer extends DummyModContainer
 
 		meta.modId = "RenderPlayerAPI";
 		meta.name = "Render Player API";
-		meta.version = "1.0";
+		meta.version = RenderPlayerAPIPlugin.Version;
 		meta.description = "Render Player API for Minecraft Forge";
 		meta.url = "http://www.minecraftforum.net/topic/1261354-";
 		meta.authorList = Arrays.asList(new String[] { "Divisor" });
