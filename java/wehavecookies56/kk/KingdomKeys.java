@@ -312,11 +312,14 @@ public class KingdomKeys {
 		{
 			MinecraftForge.EVENT_BUS.register(new Update());
 			final Side side = FMLCommonHandler.instance().getEffectiveSide();
+			//TODO Fix this
+			/*
 			addVillagePiece(ComponentRecipeHome.class, "SynthesistsHome");
 			VillagerRegistry.instance().registerVillagerId(20);
 			VillagerRegistry.instance().registerVillageTradeHandler(20, new VillagerTradeHandlerRecipes());
 			VillagerRegistry.instance().registerVillageCreationHandler(new VillagerCreationHandler());
 			VillagerRegistry.getRegisteredVillagers();
+			*/
 		}
 	}
 
@@ -333,7 +336,7 @@ public class KingdomKeys {
 	public void postInit(FMLPostInitializationEvent event) {
 		//network.postInitialise();
 	}
-
+	/*
 	public static void addVillagePiece(Class c, String s){
 		try
 		{
@@ -344,4 +347,5 @@ public class KingdomKeys {
 
 		}
 	}
+	*/
 }

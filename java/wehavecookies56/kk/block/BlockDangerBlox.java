@@ -2,10 +2,12 @@ package wehavecookies56.kk.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -24,19 +26,20 @@ public class BlockDangerBlox extends Block {
     }
     
     @Override
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+    public AxisAlignedBB getCollisionBoundingBox(World par1World, BlockPos pos, IBlockState state)
     {
         float f = 0.0625F;
-        return AxisAlignedBB.getBoundingBox((double)((float)par2 + f), (double)par3, (double)((float)par4 + f), (double)((float)(par2 + 1) - f), (double)((float)(par3 + 1) - f), (double)((float)(par4 + 1) - f));
+        return AxisAlignedBB.fromBounds((double)((float)pos.getX() + f), (double)pos.getY(), (double)((float)pos.getZ() + f), (double)((float)(pos.getX() + 1) - f), (double)((float)(pos.getY() + 1) - f), (double)((float)(pos.getZ() + 1) - f));
     }
     
     @Override
-    public void onBlockClicked(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer) {
+    public void onBlockClicked(World par1World, BlockPos pos, EntityPlayer par5EntityPlayer) {
         par5EntityPlayer.attackEntityFrom(DamageSource.magic, 3);
     }
+
     
     @Override
-    public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity)
+    public void onEntityCollidedWithBlock(World par1World, BlockPos pos, Entity par5Entity)
     {
     	if(par5Entity instanceof EntityPlayer)
 		{
@@ -54,12 +57,6 @@ public class BlockDangerBlox extends Block {
     	{
     		par5Entity.attackEntityFrom(DamageSource.magic, 3);
     	}
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void registerBlockIcons(IIconRegister par1IconRegister) {
-        blockIcon = par1IconRegister.registerIcon(Reference.MOD_ID + ":" + (this.getUnlocalizedName().substring(5)));
     }
     
     @Override

@@ -4,6 +4,7 @@ import wehavecookies56.kk.client.render.EntityRenderEternalFlamesProjectile;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
@@ -29,7 +30,7 @@ public class EntityEternalFlamesProjectile extends EntityThrowable{
 	@Override
 	public void onUpdate() {
 		int rotation = 0;
-		this.worldObj.spawnParticle("flame", this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
+		this.worldObj.spawnParticle(EnumParticleTypes.FLAME, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
 		this.rotationYaw = (rotation + 1) % 360;
 		if(ticksExisted > 60){
 			setDead();
@@ -45,7 +46,7 @@ public class EntityEternalFlamesProjectile extends EntityThrowable{
 			
 		}
 
-		this.worldObj.spawnParticle("flame", this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
+		this.worldObj.spawnParticle(EnumParticleTypes.FLAME, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
 
 		if (!worldObj.isRemote) {
 			setDead();

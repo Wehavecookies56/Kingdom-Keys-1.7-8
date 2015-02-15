@@ -3,9 +3,10 @@ package wehavecookies56.kk.entities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityBlastBlox extends Entity
 {
@@ -19,7 +20,6 @@ public class EntityBlastBlox extends Entity
         this.preventEntitySpawning = true;
         this.fuse = 40;
         this.setSize(0.98F, 0.98F);
-        this.yOffset = this.height / 2.0F;
     }
 
     public EntityBlastBlox(World par1World, double par2, double par4, double par6, EntityLivingBase par8EntityLivingBase)
@@ -88,7 +88,7 @@ public class EntityBlastBlox extends Entity
         }
         else
         {
-            this.worldObj.spawnParticle("flame", this.posX, this.posY + 0.5D, this.posZ, 0.0D, 0.0D, 0.0D);
+            this.worldObj.spawnParticle(EnumParticleTypes.FLAME, this.posX, this.posY + 0.5D, this.posZ, 0.0D, 0.0D, 0.0D);
         }
     }
 

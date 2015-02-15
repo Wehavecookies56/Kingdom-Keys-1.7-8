@@ -1,6 +1,7 @@
 package wehavecookies56.kk.client.render;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
@@ -39,7 +40,7 @@ public class PlayerRender extends RenderPlayerBase {
 	}*/
 
 	@Override
-	public void renderModel(EntityLivingBase paramEntityLivingBase, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6) {
+	public void renderModel(AbstractClientPlayer player, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6) {
 		EntityPropertyDriveForm df = EntityPropertyDriveForm.get(mc.thePlayer);	
 		GL11.glColor4f(1F, 1F, 1F, 1F);
 		if(df.getCurrentState() == 0){	
@@ -56,11 +57,11 @@ public class PlayerRender extends RenderPlayerBase {
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Anti_A.png"));
 			GL11.glColor4f(0.2F, 0.2F, 0.2F, 1F);
 		}else{
-			super.renderModel(paramEntityLivingBase, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
+			super.renderModel(player, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
 		}
-		ModelBiped armour = renderPlayer.modelArmor;
-		armour.onGround = 0.0F;
-		armour.setRotationAngles(paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6, paramEntityLivingBase);
+		ModelBiped armour = renderPlayer.getPlayerModel();
+		//armour.onGround = 0.0F;
+		armour.setRotationAngles(paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6, player);
 		
 		if(df.getCurrentState() == 0 || df.getCurrentState() == 1 || df.getCurrentState() == 2 || df.getCurrentState() == 3 || df.getCurrentState() == 4)
 		{
@@ -111,7 +112,7 @@ public class PlayerRender extends RenderPlayerBase {
 		}else if(df.getCurrentState() == 5){
 			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("kk", "textures/forms/Anti_B.png"));
 		}else{
-			super.renderModel(paramEntityLivingBase, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
+			super.renderModel(player, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
 		}
 		if(df.getCurrentState() == 0 || df.getCurrentState() == 1 || df.getCurrentState() == 2 || df.getCurrentState() == 3 || df.getCurrentState() == 4)
 		{
@@ -129,7 +130,7 @@ public class PlayerRender extends RenderPlayerBase {
 			armour.bipedRightLeg.showModel = false;
 			armour.bipedRightLeg.render(0.0625F);
 		}
-		super.renderModel(paramEntityLivingBase, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
+		super.renderModel(player, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
 
 	}
 

@@ -40,7 +40,6 @@ import wehavecookies56.kk.client.render.ItemRenderSpellBinder;
 import wehavecookies56.kk.client.render.ItemRenderStarLight;
 import wehavecookies56.kk.client.render.ItemRenderTotalEclipse;
 import wehavecookies56.kk.client.render.ItemRenderUltimaWeapon;
-import wehavecookies56.kk.client.render.ItemRenderVoidedKnowledge;
 import wehavecookies56.kk.client.render.ItemRenderWaywardWind;
 import wehavecookies56.kk.client.render.ItemRenderWoodenKeyblade;
 import wehavecookies56.kk.client.render.ItemRenderXBlade;
@@ -86,7 +85,6 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(AddedItems.Interdiction, new ItemRenderInterdiction());
 		MinecraftForgeClient.registerItemRenderer(AddedItems.EternalFlames, new ItemRenderEternalFlames());
 		MinecraftForgeClient.registerItemRenderer(AddedItems.SkySplitter, new ItemRenderSkysplitter());
-		MinecraftForgeClient.registerItemRenderer(AddedItems.VoidedKnowledge, new ItemRenderVoidedKnowledge());
 		MinecraftForgeClient.registerItemRenderer(AddedItems.MasterKeeper, new ItemRenderMasterKeeper());
 		MinecraftForgeClient.registerItemRenderer(AddedItems.MetalChocobo, new ItemRenderMetalChocobo());
 		MinecraftForgeClient.registerItemRenderer(AddedItems.WoodenKeyblade, new ItemRenderWoodenKeyblade());
