@@ -17,7 +17,7 @@ public class WorldGenBlox implements IWorldGenerator
 
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
-		switch(world.provider.dimensionId){
+		switch(world.provider.getDimensionId()){
 		case 0:  generateOverworld   (world, random, chunkX * 16, chunkZ * 16);
 		case 1:  generateEnd		 (world, random, chunkX * 16, chunkZ * 16);
 		case -1: generateNether      (world, random, chunkX * 16, chunkZ * 16);
@@ -119,7 +119,8 @@ public class WorldGenBlox implements IWorldGenerator
 	 */
 
 	public void spawnOres(Block block, Block blockReplaced, World world, Random random, int chunkX, int chunkZ, int XMax, int ZMax, int vainSize, int spawnChance, int YMin, int YMax){
-		for(int i = 0; i < spawnChance; i ++){
+		for(int i = 0; i < spawnChance; i ++)
+		{
 			int posX = chunkX + random.nextInt(XMax);
 			int posZ = chunkZ + random.nextInt(ZMax);
 			int posY = YMin + random.nextInt(YMax-YMin);

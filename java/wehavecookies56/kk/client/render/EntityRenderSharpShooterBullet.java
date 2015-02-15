@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL12;
 public class EntityRenderSharpShooterBullet extends Render {
 
 
-	protected EntityRenderSharpShooterBullet(RenderManager renderManager) {
+	public EntityRenderSharpShooterBullet(RenderManager renderManager) {
 		super(renderManager);
 		// TODO Auto-generated constructor stub
 	}

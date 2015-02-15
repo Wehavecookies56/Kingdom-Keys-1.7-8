@@ -1,13 +1,11 @@
 package wehavecookies56.kk.block;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.entities.tileentities.TileEntityKKChest;
 import wehavecookies56.kk.entities.tileentities.TileEntitySynthesis;
 import wehavecookies56.kk.lib.Strings;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class AddedBlocks {
 
