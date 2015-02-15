@@ -18,12 +18,6 @@ public class BlockDarkOreN extends Block {
         this.setResistance(5.0F);
         this.setHarvestLevel("pickaxe", 3);
     }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void registerBlockIcons(IIconRegister par1IconRegister) {
-            blockIcon = par1IconRegister.registerIcon(Reference.MOD_ID + ":" + (this.getUnlocalizedName().substring(5)));
-        }
     
     @Override
     protected boolean canSilkHarvest()

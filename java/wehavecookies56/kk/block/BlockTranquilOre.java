@@ -1,21 +1,16 @@
 package wehavecookies56.kk.block;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
 import wehavecookies56.kk.item.AddedItems;
-import wehavecookies56.kk.lib.Reference;
 import wehavecookies56.kk.lib.Strings;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockTranquilOre extends Block {
 
@@ -30,9 +25,9 @@ public class BlockTranquilOre extends Block {
 
     private Random rand = new Random();
     @Override
-    public int getExpDrop(IBlockAccess p_149690_1_, int p_149690_5_, int p_149690_7_)
+    public int getExpDrop(IBlockAccess world, BlockPos pos, int fortune)
     {
-        if (this.getItemDropped(p_149690_5_, rand, p_149690_7_) != Item.getItemFromBlock(this))
+        if (this.getItemDropped(world.getBlockState(pos), rand, fortune) != Item.getItemFromBlock(this))
         {
             int j1;
                 j1 = MathHelper.getRandomIntegerInRange(rand, 2, 4);
@@ -40,13 +35,7 @@ public class BlockTranquilOre extends Block {
         }
         return 0;
     }
-    
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void registerBlockIcons(IIconRegister par1IconRegister) {
-            blockIcon = par1IconRegister.registerIcon(Reference.MOD_ID + ":" + (this.getUnlocalizedName().substring(5)));
-        }
-    
+
     @Override
     protected boolean canSilkHarvest()
     {
@@ -54,7 +43,7 @@ public class BlockTranquilOre extends Block {
     }
     
     @Override
-    public Item getItemDropped(int i, Random r, int j) {
+    public Item getItemDropped(IBlockState state, Random r, int fortune) {
     Item d = null;
 	int randomDrop;
     randomDrop = r.nextInt(99);

@@ -17,13 +17,7 @@ public class BlockNormalBlox extends Block {
         this.setHardness(2.5F);
         this.setResistance(2.0F);
     }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void registerBlockIcons(IIconRegister par1IconRegister) {
-            blockIcon = par1IconRegister.registerIcon(Reference.MOD_ID + ":" + (this.getUnlocalizedName().substring(5)));
-    }
-
+    
     @Override
     protected boolean canSilkHarvest()
     {

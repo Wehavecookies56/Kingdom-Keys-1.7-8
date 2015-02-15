@@ -26,9 +26,9 @@ public class BlockBlazingOreN extends Block {
 
     private Random rand = new Random();
     @Override
-    public int getExpDrop(IBlockAccess p_149690_1_, int p_149690_5_, int p_149690_7_)
+    public int getExpDrop(IBlockAccess world, BlockPos pos, int fortune)
     {
-        if (this.getItemDropped(p_149690_5_, rand, p_149690_7_) != Item.getItemFromBlock(this))
+        if (this.getItemDropped(world.getBlockState(pos), rand, fortune) != Item.getItemFromBlock(this))
         {
             int j1;
                 j1 = MathHelper.getRandomIntegerInRange(rand, 2, 4);
@@ -36,6 +36,7 @@ public class BlockBlazingOreN extends Block {
         }
         return 0;
     }
+
     
     @SideOnly(Side.CLIENT)
     @Override
