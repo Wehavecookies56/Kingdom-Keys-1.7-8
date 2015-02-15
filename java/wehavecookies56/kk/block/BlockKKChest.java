@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -12,6 +13,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -43,9 +46,10 @@ public class BlockKKChest extends BlockContainer
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess p_149719_1_, int p_149719_2_, int p_149719_3_, int p_149719_4_) {
-
-		int l = p_149719_1_.getBlockMetadata(p_149719_2_, p_149719_3_, p_149719_4_) & 3;
+	public void setBlockBoundsBasedOnState(IBlockAccess access,	BlockPos pos) {
+		// TODO Auto-generated method stub
+		super.setBlockBoundsBasedOnState(access, pos);
+		int l = access.getBlockState(pos) & 3;
 		if(l != 0 && l != 2){
 			this.setBlockBounds(0.2F, 0.0F, 0.1F, 0.9F, 0.75F, 0.9F);
 		}
@@ -53,18 +57,18 @@ public class BlockKKChest extends BlockContainer
 			this.setBlockBounds(0.1F, 0.0F, 0.25F, 0.9F, 0.75F, 0.9F);
 		}
 	}
-
 	@Override
-	public void onBlockPlacedBy(World par1World, int x, int y, int z, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
-	{
-		TileEntity te = par1World.getTileEntity(x, y, z);
+	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+	// TODO Auto-generated method stub
+	super.onBlockPlacedBy(world, pos, state, placer, stack);
+		TileEntity te = world.getTileEntity(new BlockPos(pos));
 
 		if(te != null && te instanceof TileEntityKKChest){
-			int dir = MathHelper.floor_double((double)((par5EntityLivingBase.rotationYaw * 4F) / 360F) + 0.5D) & 3;
+			int dir = MathHelper.floor_double((double)((placer.rotationYaw * 4F) / 360F) + 0.5D) & 3;
 			TileEntityKKChest teKK = (TileEntityKKChest) te;
 			teKK.setFacingDirection(dir);
-			par1World.setBlockMetadataWithNotify(x, y, z, dir, 0);
-			par1World.markBlockForUpdate(x, y, z);
+			world.setBlockMetadataWithNotify(pos, dir, 0);
+			world.markBlockForUpdate(pos);
 		}
 
 
@@ -86,9 +90,10 @@ public class BlockKKChest extends BlockContainer
 	{
 		return false;
 	}
-
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float a, float b, float c)
+@Override
+public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side,	float a, float b, float c) {
+	// TODO Auto-generated method stub
+	return super.onBlockActivated(world, pos, state, player, side, a, b, c);
 	{
 		if(		player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.AbaddonPlasma|| player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.AbyssalTide|| player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.AllForOne|| player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.Anguis|| player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.Aubade||
 				player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.BondOfFlames|| player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.BrightCrest||
@@ -116,14 +121,14 @@ public class BlockKKChest extends BlockContainer
 				player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.ZeroOne)
 		{
 			if(!world.isRemote){
-                TileEntity tileEntityKKChest = world.getTileEntity(x, y, z);
+                TileEntity tileEntityKKChest = world.getTileEntity(new BlockPos(pos));
 
 				if (tileEntityKKChest == null)
 				{
                     return false;
 				}
 				if(!player.isSneaking()){
-					player.openGui(KingdomKeys.instance, 1, world, x, y, z);
+					player.openGui(KingdomKeys.instance, 1, world, pos);
 				}
 			}
 			
@@ -136,11 +141,6 @@ public class BlockKKChest extends BlockContainer
 		return true;
 	}
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void registerBlockIcons(IIconRegister par1IconRegister) {
-		blockIcon = par1IconRegister.registerIcon(Reference.MOD_ID + ":" + (this.getUnlocalizedName().substring(5)));
-	}
 
 	@Override
 	protected boolean canSilkHarvest()
@@ -149,9 +149,11 @@ public class BlockKKChest extends BlockContainer
 	}
 
 	@Override
-	public void breakBlock(World world, int x, int y, int z, Block p_149749_5_, int p_149749_6_)
-	{
-		TileEntityKKChest tileentitykkchest = (TileEntityKKChest)world.getTileEntity(x, y, z);
+	public void breakBlock(World world, BlockPos pos, IBlockState state) {
+		// TODO Auto-generated method stub
+		super.breakBlock(world, pos, state);
+	
+		TileEntityKKChest tileentitykkchest = (TileEntityKKChest)world.getTileEntity(new BlockPos(pos));
 
 		if (tileentitykkchest != null)
 		{
@@ -191,7 +193,7 @@ public class BlockKKChest extends BlockContainer
 				}
 			}
 
-			world.func_147453_f(x, y, z, p_149749_5_);
+			world.func_147453_f(pos, p_149749_5_);
 		}
 	}
 
