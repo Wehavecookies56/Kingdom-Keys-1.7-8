@@ -4,21 +4,19 @@ import java.util.List;
 
 import mods.battlegear2.api.PlayerEventChild.OffhandAttackEvent;
 import mods.battlegear2.api.weapons.IBattlegearWeapon;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.entities.EntityEternalFlamesProjectile;
 import wehavecookies56.kk.lib.ConfigBooleans;
 import wehavecookies56.kk.lib.Reference;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemEternalFlames extends ItemSword implements IBattlegearWeapon{
 	protected final ToolMaterial material;
@@ -26,11 +24,6 @@ public class ItemEternalFlames extends ItemSword implements IBattlegearWeapon{
 		super(abaddonPlasmaMaterial);
 		this.setCreativeTab(KingdomKeys.KHDAYSTAB);
 		this.material = abaddonPlasmaMaterial;
-	}
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void registerIcons(IIconRegister par1IconRegister) {
-		itemIcon = par1IconRegister.registerIcon(Reference.MOD_ID + ":orgxiii/" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".")+1));
 	}
 	
 	@Override
@@ -48,7 +41,7 @@ public class ItemEternalFlames extends ItemSword implements IBattlegearWeapon{
     @Override
     @SideOnly(Side.CLIENT)
     public EnumRarity getRarity(ItemStack par1ItemStack){
-        return EnumRarity.uncommon;
+        return EnumRarity.UNCOMMON;
     }
 
     @Override

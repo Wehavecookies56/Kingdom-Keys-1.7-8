@@ -1,28 +1,18 @@
 package wehavecookies56.kk.item.org13;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.List;
 
 import mods.battlegear2.api.weapons.IBattlegearWeapon;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import wehavecookies56.kk.KingdomKeys;
-import wehavecookies56.kk.entities.EntityEternalFlamesProjectile;
-import wehavecookies56.kk.entities.EntitySharpshooterBullet;
 import wehavecookies56.kk.lib.ConfigBooleans;
 import wehavecookies56.kk.lib.Reference;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemSharpShooter extends ItemSword implements IBattlegearWeapon{
 	protected final ToolMaterial material;
@@ -33,12 +23,6 @@ public class ItemSharpShooter extends ItemSword implements IBattlegearWeapon{
 	}
 	private int timer = 0;
 	
-    @SideOnly(Side.CLIENT)
-    @Override
-	public void registerIcons(IIconRegister par1IconRegister) {
-		itemIcon = par1IconRegister.registerIcon(Reference.MOD_ID + ":orgxiii/" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".")+1));
-	}
-
     @Override
     public boolean hasEffect(ItemStack par1ItemStack){
     	if(ConfigBooleans.enableShine == true){
@@ -54,7 +38,7 @@ public class ItemSharpShooter extends ItemSword implements IBattlegearWeapon{
     @Override
     @SideOnly(Side.CLIENT)
     public EnumRarity getRarity(ItemStack par1ItemStack){
-        return EnumRarity.uncommon;
+        return EnumRarity.UNCOMMON;
     }
     
 	/*public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
