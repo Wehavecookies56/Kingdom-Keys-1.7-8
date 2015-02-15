@@ -2,15 +2,13 @@ package wehavecookies56.kk.item;
 
 import java.util.List;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import wehavecookies56.kk.KingdomKeys;
-import wehavecookies56.kk.lib.Reference;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class KeybladeEArmor extends ItemArmor{
 	private String armorFile;
@@ -37,10 +35,4 @@ public class KeybladeEArmor extends ItemArmor{
 		dataList.add("Eraqus");
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister iconReg) {
-		// sets the icon of this armor whenever it is in any inventory
-		this.itemIcon = iconReg.registerIcon(Reference.MOD_ID + ":misc/" + this.name);
-	}
 }

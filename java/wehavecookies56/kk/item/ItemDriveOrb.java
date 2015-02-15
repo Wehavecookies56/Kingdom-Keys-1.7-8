@@ -1,15 +1,13 @@
 package wehavecookies56.kk.item;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.core.packet.MunnyPacket;
-import wehavecookies56.kk.lib.Reference;
 import wehavecookies56.kk.lib.Strings;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
 
 public class ItemDriveOrb extends Item{
 
@@ -17,12 +15,6 @@ public class ItemDriveOrb extends Item{
 		super();       
 		this.setUnlocalizedName(Strings.DriveOrb);
 		this.setCreativeTab(KingdomKeys.KKTAB);
-	}
-
-	@Override
-	public void registerIcons(IIconRegister par1IconRegister)
-	{
-		itemIcon = par1IconRegister.registerIcon(Reference.MOD_ID + ":misc/" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".")+1));
 	}
 
 	@Override
