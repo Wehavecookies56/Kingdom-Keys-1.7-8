@@ -35,7 +35,7 @@ public class ItemDarkerThanDark extends ItemSword implements IBattlegearWeapon{
     @Override
     @SideOnly(Side.CLIENT)
     public EnumRarity getRarity(ItemStack par1ItemStack){
-        return EnumRarity.epic;
+        return EnumRarity.EPIC;
     }
     
     @SideOnly(Side.CLIENT)
