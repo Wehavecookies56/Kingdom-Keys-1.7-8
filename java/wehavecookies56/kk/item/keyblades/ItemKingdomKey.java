@@ -3,22 +3,18 @@ package wehavecookies56.kk.item.keyblades;
 import java.util.List;
 
 import mods.battlegear2.api.weapons.IBattlegearWeapon;
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.lib.ConfigBooleans;
-import wehavecookies56.kk.lib.Reference;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemKingdomKey extends ItemSword implements IBattlegearWeapon{
 	public static boolean keyPressed = false;
@@ -27,9 +23,7 @@ public class ItemKingdomKey extends ItemSword implements IBattlegearWeapon{
 		super(kingdomkey36);
 		this.setCreativeTab(KingdomKeys.KHTAB);
 	}
-	public void registerIcons(IIconRegister par1IconRegister) {
-		itemIcon = par1IconRegister.registerIcon(Reference.MOD_ID + ":" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".")+1));
-	}
+	
 	@Override
 	public boolean hasEffect(ItemStack par1ItemStack){
 		if(ConfigBooleans.enableShine == true){
@@ -40,7 +34,7 @@ public class ItemKingdomKey extends ItemSword implements IBattlegearWeapon{
 	@Override
 	@SideOnly(Side.CLIENT)
 	public EnumRarity getRarity(ItemStack par1ItemStack){
-		return EnumRarity.epic;
+		return EnumRarity.EPIC;
 	}
 
 	@SideOnly(Side.CLIENT)
