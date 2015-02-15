@@ -2,27 +2,18 @@ package wehavecookies56.kk.item.keychains;
 
 import java.util.List;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
-import wehavecookies56.kk.item.AddedItems;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import wehavecookies56.kk.item.ItemKingdomKeys;
-import wehavecookies56.kk.item.keyblades.ItemAbyssalTide;
-import wehavecookies56.kk.lib.Reference;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemAbyssalTideChain extends ItemKingdomKeys{
 	
     public ItemAbyssalTideChain() {
         super();       
     }
-    @Override
-    public void registerIcons(IIconRegister par1IconRegister) {
-        itemIcon = par1IconRegister.registerIcon(Reference.MOD_ID + ":" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".")+1));
-        }
+
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack itemStack, EntityPlayer player, List dataList, boolean bool){
