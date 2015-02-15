@@ -70,7 +70,7 @@ public class TileEntitySynthesis extends TileEntity implements IInventory {
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-		return entityplayer.getDistanceSq(xCoord + 0.5, yCoord + 0.5, zCoord + 0.5) <= 64;
+		return entityplayer.getDistanceSq(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) <= 64;
 	}
 
 	@Override
@@ -346,11 +346,12 @@ public class TileEntitySynthesis extends TileEntity implements IInventory {
 	public Packet getDescriptionPacket() {
         NBTTagCompound nbtTag = new NBTTagCompound();
         this.writeToNBT(nbtTag);
-        return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 7, nbtTag);
+        return new S35PacketUpdateTileEntity(pos, 7, nbtTag);
 }
 
+	@Override
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
-        readFromNBT(packet.func_148857_g());
+        readFromNBT(packet.getNbtCompound());
 }
 	
 	

@@ -1,21 +1,13 @@
 package wehavecookies56.kk.entities.mob;
 
-import java.util.List;
 import java.util.Random;
-
-import wehavecookies56.kk.item.AddedItems;
 
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
-import net.minecraft.world.gen.structure.MapGenVillage;
-import net.minecraft.world.gen.structure.StructureVillagePieces;
-import net.minecraft.world.gen.structure.StructureVillagePieces.PieceWeight;
-import net.minecraft.world.gen.structure.StructureVillagePieces.Start;
-import cpw.mods.fml.common.registry.VillagerRegistry.IVillageCreationHandler;
-import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
+import wehavecookies56.kk.item.AddedItems;
 
 public class VillagerTradeHandlerRecipes implements IVillageTradeHandler {
 	

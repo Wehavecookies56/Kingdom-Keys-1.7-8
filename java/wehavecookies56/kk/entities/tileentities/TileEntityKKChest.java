@@ -65,8 +65,8 @@ public class TileEntityKKChest extends TileEntity implements IInventory
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player) {
-		return worldObj.getTileEntity(xCoord, yCoord, zCoord) == this &&
-				player.getDistanceSq(xCoord + 0.5, yCoord + 0.5, zCoord + 0.5) < 64;
+		return worldObj.getTileEntity(pos) == this &&
+				player.getDistanceSq(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) < 64;
 	}
 
 	public ItemStack decrStackSize(int slot, int amount) {
