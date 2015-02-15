@@ -2,24 +2,22 @@ package wehavecookies56.kk.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import wehavecookies56.kk.lib.Reference;
 import wehavecookies56.kk.lib.Strings;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockDangerBlox extends Block {
 
     public BlockDangerBlox() {
         super(Material.rock);
-        this.setBlockName(Strings.DBlox);
+        this.setUnlocalizedName(Strings.DBlox);
         this.setStepSound(soundTypeMetal);
         this.setHardness(2.0F);
         this.setResistance(2.0F);

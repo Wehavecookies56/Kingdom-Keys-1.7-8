@@ -17,7 +17,7 @@ public class BlockRemembranceOreN extends Block {
 
     public BlockRemembranceOreN() {
         super(Material.rock);
-        this.setBlockName(Strings.RemembranceOreN);
+        this.setUnlocalizedName(Strings.RemembranceOreN);
         this.setStepSound(soundTypeStone);
         this.setHardness(3.0F);
         this.setResistance(5.0F);

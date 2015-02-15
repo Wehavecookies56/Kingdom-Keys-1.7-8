@@ -16,7 +16,7 @@ public class BlockTranquilOre extends Block {
 
     public BlockTranquilOre() {
         super(Material.rock);
-        this.setBlockName(Strings.TranquilOre);
+        this.setUnlocalizedName(Strings.TranquilOre);
         this.setStepSound(soundTypeStone);
         this.setHardness(3.0F);
         this.setResistance(2.0F);

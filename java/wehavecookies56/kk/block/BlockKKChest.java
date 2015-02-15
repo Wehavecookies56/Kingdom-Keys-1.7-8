@@ -6,26 +6,22 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityDispenser;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.entities.tileentities.TileEntityKKChest;
 import wehavecookies56.kk.item.AddedItems;
-import wehavecookies56.kk.lib.Arrays;
 import wehavecookies56.kk.lib.Reference;
 import wehavecookies56.kk.lib.Strings;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockKKChest extends BlockContainer 
 {
@@ -33,7 +29,7 @@ public class BlockKKChest extends BlockContainer
 
 	public BlockKKChest() {
 		super(Material.rock);
-		this.setBlockName(Strings.KKChest);
+		this.setUnlocalizedName(Strings.KKChest);
 		this.setStepSound(soundTypeStone);
 		this.setHardness(25.0F);
 		this.setResistance(5.0F);

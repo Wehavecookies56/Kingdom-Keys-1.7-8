@@ -4,21 +4,19 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import wehavecookies56.kk.item.AddedItems;
-import wehavecookies56.kk.lib.Reference;
 import wehavecookies56.kk.lib.Strings;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockDenseOre extends Block {
 
     public BlockDenseOre() {
         super(Material.rock);
-        this.setBlockName(Strings.DenseOre);
+        this.setUnlocalizedName(Strings.DenseOre);
         this.setStepSound(soundTypeStone);
         this.setHardness(3.0F);
         this.setResistance(5.0F);
@@ -37,13 +35,6 @@ public class BlockDenseOre extends Block {
         }
         return 0;
     }
-
-    
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void registerBlockIcons(IIconRegister par1IconRegister) {
-            blockIcon = par1IconRegister.registerIcon(Reference.MOD_ID + ":" + (this.getUnlocalizedName().substring(5)));
-        }
     
     @Override
     protected boolean canSilkHarvest()
@@ -52,7 +43,7 @@ public class BlockDenseOre extends Block {
     }
     
     @Override
-    public Item getItemDropped(int i, Random r, int j) {
+    public Item getItemDropped(IBlockState state, Random r, int fortune) {
     Item d = null;
 	int randomDrop;
     randomDrop = r.nextInt(99);

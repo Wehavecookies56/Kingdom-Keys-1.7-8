@@ -26,7 +26,7 @@ public class BlockSynthesis extends BlockContainer{
 	{
 		super(Material.iron);
 		this.setCreativeTab(KingdomKeys.KKTAB);
-		this.setBlockName(Strings.Synthesiser);
+		this.setUnlocalizedName(Strings.Synthesiser);
 		this.setResistance(0.5F);
 		this.setHardness(1.5F);
 	}

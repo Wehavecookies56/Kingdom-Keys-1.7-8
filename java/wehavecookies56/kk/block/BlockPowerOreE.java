@@ -5,21 +5,18 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import wehavecookies56.kk.item.AddedItems;
-import wehavecookies56.kk.lib.Reference;
 import wehavecookies56.kk.lib.Strings;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockPowerOreE extends Block {
 
     public BlockPowerOreE() {
         super(Material.rock);
-        this.setBlockName(Strings.PowerOreE);
+        this.setUnlocalizedName(Strings.PowerOreE);
         this.setStepSound(soundTypeStone);
         this.setHardness(3.0F);
         this.setResistance(5.0F);

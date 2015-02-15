@@ -4,20 +4,17 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
-import wehavecookies56.kk.lib.Reference;
 import wehavecookies56.kk.lib.Strings;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockTwilightOreN extends Block {
 
     public BlockTwilightOreN() {
         super(Material.rock);
-        this.setBlockName(Strings.TwilightOreN);
+        this.setUnlocalizedName(Strings.TwilightOreN);
         this.setStepSound(soundTypeStone);
         this.setHardness(3.0F);
         this.setResistance(5.0F);

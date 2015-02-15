@@ -22,7 +22,7 @@ public class BlockBounceBlox extends Block {
 
     public BlockBounceBlox() {
         super(Material.rock);
-        this.setBlockName(Strings.BBlox);
+        this.setUnlocalizedName(Strings.BBlox);
         this.setStepSound(soundTypeMetal);
         this.setHardness(2.0F);
         this.setResistance(2.0F);
