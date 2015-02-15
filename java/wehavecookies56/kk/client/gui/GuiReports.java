@@ -144,7 +144,7 @@ public class GuiReports extends GuiScreen {
 			GL11.glPopMatrix();
 			buttonList.clear();
 			buttonList.add(Back = new GuiButton(BACK, guiX + 140, guiY + 150, 78, 18, "Back"));
-			itemRender.renderItemIntoGUI(fontRendererObj, mc.renderEngine, new ItemStack(AddedItems.Munny1), guiX + 36, guiY + 20);
+			itemRender.renderItemIntoGUI(new ItemStack(AddedItems.Munny1), guiX + 36, guiY + 20);
 			break;
 			default:
 				buttonList.clear();

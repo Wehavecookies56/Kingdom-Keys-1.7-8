@@ -38,7 +38,7 @@ public class GuiMenuBase extends GuiScreen {
 		fontRendererObj.drawString(StatCollector.translateToLocal(Menu_Title), 20, 20, 0xFFFFFF);
 		GL11.glScalef(0.8F, 0.8F, 0.8F);
 		locName = mc.thePlayer.worldObj.provider.getDimensionName();
-		locID = mc.thePlayer.worldObj.provider.dimensionId;
+		locID = mc.thePlayer.worldObj.provider.getDimensionId();
 		worldTime = mc.theWorld.getWorldTime();
 		System.currentTimeMillis();
 		fontRendererObj.drawString(locName + "(" + locID +")", width - (locName.length() * 8 + 4), 32, 0xFFFFFF);

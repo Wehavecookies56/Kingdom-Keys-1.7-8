@@ -2,18 +2,18 @@ package wehavecookies56.kk.block;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.entities.tileentities.TileEntitySynthesis;
 import wehavecookies56.kk.lib.Strings;
@@ -31,31 +31,11 @@ public class BlockSynthesis extends BlockContainer{
 		this.setHardness(1.5F);
 	}
 
-	@SideOnly(Side.CLIENT)
-	private IIcon synthIconTop;
-	@SideOnly(Side.CLIENT)
-	private IIcon synthIconFront;
-
 	@Override
-	public IIcon getIcon(int par1, int par2)
-	{
-		return par1 == 1 ? this.synthIconTop : (par1 == 0 ? this.synthIconTop : (par1 != par2 ? this.blockIcon : this.synthIconFront));
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister par1IconRegister)
-	{
-		this.blockIcon = par1IconRegister.registerIcon("kk:synth_side");
-		this.synthIconFront = par1IconRegister.registerIcon("kk:synth_front");
-		this.synthIconTop = par1IconRegister.registerIcon("kk:synth_top");
-	}
-
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float a, float b, float c)
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float a, float b, float c)
 	{
 		if(!world.isRemote){
-			player.openGui(KingdomKeys.instance, 0, world, x, y, z);
+			player.openGui(KingdomKeys.instance, 0, world, pos.getX(), pos.getY(), pos.getZ());
 		}
 		if(world.isRemote){
 			Minecraft.getMinecraft().thePlayer.playSound("kk:kupo", 0.3F, 1.1F);
@@ -75,9 +55,9 @@ public class BlockSynthesis extends BlockContainer{
 	}
 
 	@Override
-	public void breakBlock(World world, int x, int y, int z, Block p_149749_5_, int p_149749_6_)
+	public void breakBlock(World world, BlockPos pos, IBlockState state)
 	{
-		TileEntitySynthesis te = (TileEntitySynthesis)world.getTileEntity(x, y, z);
+		TileEntitySynthesis te = (TileEntitySynthesis)world.getTileEntity(pos);
 
 		if (te != null)
 		{
@@ -101,7 +81,7 @@ public class BlockSynthesis extends BlockContainer{
 						}
 
 						itemstack.stackSize -= j1;
-						EntityItem entityitem = new EntityItem(world, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
+						EntityItem entityitem = new EntityItem(world, (double)((float)pos.getX() + f), (double)((float)pos.getY() + f1), (double)((float)pos.getZ() + f2), new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
 
 						if (itemstack.hasTagCompound())
 						{
@@ -117,7 +97,7 @@ public class BlockSynthesis extends BlockContainer{
 				}
 			}
 
-			world.func_147453_f(x, y, z, p_149749_5_);
+			world.setBlockState(pos, state);
 		}
 	}
 

@@ -8,6 +8,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class GuiDrawText {
 
 	public static void drawString(String text, int x, int y, int colour){
-		Minecraft.getMinecraft().fontRenderer.drawString(text, x, y, colour);
+		Minecraft.getMinecraft().fontRendererObj.drawString(text, x, y, colour);
 	}
 }

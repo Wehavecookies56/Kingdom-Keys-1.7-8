@@ -99,7 +99,7 @@ public class GuiSynthesis extends GuiContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	protected void drawGuiContainerForegroundLayer(int x, int y) {
-		mc.fontRenderer.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Title), 38, 5, 0x404040);
+		mc.fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Title), 38, 5, 0x404040);
 		GL11.glColor4f(1F, 1F, 1F, 1F);
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 		if(Tab1X + guiLeft <= x && x <= Tab1X + guiLeft + DimensionsOfTabW && Tab1Y + guiTop <= y && y <= Tab1Y + guiTop + DimensionsOfTabH){
@@ -132,17 +132,17 @@ public class GuiSynthesis extends GuiContainer {
 
 		EntityPropertyMunny props = EntityPropertyMunny.get(mc.thePlayer);
 
-		mc.fontRenderer.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Munny) + ": " + props.getMunny(), 0, 168, 0xFFF000);
+		mc.fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Munny) + ": " + props.getMunny(), 0, 168, 0xFFF000);
 		
 		if(synthesis.getStackInSlot(0) == null){
 			if(ClickedTab1){
-				mc.fontRenderer.drawSplitString(StatCollector.translateToLocal(LocalStrings.Synthesis_Place), 30, 48, 120, 0xFF0000);
+				mc.fontRendererObj.drawSplitString(StatCollector.translateToLocal(LocalStrings.Synthesis_Place), 30, 48, 120, 0xFF0000);
 			}
 			else if(ClickedTab2){
-				mc.fontRenderer.drawSplitString(StatCollector.translateToLocal(LocalStrings.Synthesis_Place), 30, 30, 120, 0xFF0000);
+				mc.fontRendererObj.drawSplitString(StatCollector.translateToLocal(LocalStrings.Synthesis_Place), 30, 30, 120, 0xFF0000);
 			}
 			else if(ClickedTab3){
-				mc.fontRenderer.drawSplitString(StatCollector.translateToLocal(LocalStrings.Synthesis_Place), 30, 30, 120, 0xFF0000);
+				mc.fontRendererObj.drawSplitString(StatCollector.translateToLocal(LocalStrings.Synthesis_Place), 30, 30, 120, 0xFF0000);
 			}
 		}
 
@@ -455,11 +455,11 @@ public class GuiSynthesis extends GuiContainer {
 					}else{
 						fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Material), 28, 40, 0x004CFF);
 					}
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(result), resultXY, resultXY);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(result), resultXY, resultXY);
 
 					//Stuff displayed on the second tab
 				}else if(GuiSynthesis.ClickedTab2){
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item1), item1X, item1Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item1), item1X, item1Y);
 					GL11.glColor3f(1, 1, 1);
 					GL11.glDisable(GL11.GL_LIGHTING);
 					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1)){
@@ -550,12 +550,12 @@ public class GuiSynthesis extends GuiContainer {
 					}else{
 						fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Material), 28, 40, 0x004CFF);
 					}
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(result), resultXY, resultXY);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(result), resultXY, resultXY);
 
 					//Stuff displayed on the second tab
 				}else if(GuiSynthesis.ClickedTab2){
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item1), item1X, item1Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item2), item2X, item2Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item1), item1X, item1Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item2), item2X, item2Y);
 					GL11.glColor3f(1, 1, 1);
 					GL11.glDisable(GL11.GL_LIGHTING);
 					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2)){
@@ -646,13 +646,13 @@ public class GuiSynthesis extends GuiContainer {
 					}else{
 						fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Material), 28, 40, 0x004CFF);
 					}
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(result), resultXY, resultXY);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(result), resultXY, resultXY);
 
 					//Stuff displayed on the second tab
 				}else if(GuiSynthesis.ClickedTab2){
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item1), item1X, item1Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item2), item2X, item2Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item3), item3X, item3Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item1), item1X, item1Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item2), item2X, item2Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item3), item3X, item3Y);
 					GL11.glColor3f(1, 1, 1);
 					GL11.glDisable(GL11.GL_LIGHTING);
 					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3)){
@@ -743,14 +743,14 @@ public class GuiSynthesis extends GuiContainer {
 					}else{
 						fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Material), 28, 40, 0x004CFF);
 					}
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(result), resultXY, resultXY);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(result), resultXY, resultXY);
 
 					//Stuff displayed on the second tab
 				}else if(GuiSynthesis.ClickedTab2){
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item1), item1X, item1Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item2), item2X, item2Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item3), item3X, item3Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item4), item4X, item4Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item1), item1X, item1Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item2), item2X, item2Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item3), item3X, item3Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item4), item4X, item4Y);
 					GL11.glColor3f(1, 1, 1);
 					GL11.glDisable(GL11.GL_LIGHTING);
 					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4)){
@@ -841,15 +841,15 @@ public class GuiSynthesis extends GuiContainer {
 					}else{
 						fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Material), 28, 40, 0x004CFF);
 					}
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(result), resultXY, resultXY);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(result), resultXY, resultXY);
 
 					//Stuff displayed on the second tab
 				}else if(GuiSynthesis.ClickedTab2){
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item1), item1X, item1Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item2), item2X, item2Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item3), item3X, item3Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item4), item4X, item4Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item5), item5X, item5Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item1), item1X, item1Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item2), item2X, item2Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item3), item3X, item3Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item4), item4X, item4Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item5), item5X, item5Y);
 					GL11.glColor3f(1, 1, 1);
 					GL11.glDisable(GL11.GL_LIGHTING);
 					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5)){
@@ -940,16 +940,16 @@ public class GuiSynthesis extends GuiContainer {
 					}else{
 						fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Material), 28, 40, 0x004CFF);
 					}
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(result), resultXY, resultXY);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(result), resultXY, resultXY);
 
 					//Stuff displayed on the second tab
 				}else if(GuiSynthesis.ClickedTab2){
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item1), item1X, item1Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item2), item2X, item2Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item3), item3X, item3Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item4), item4X, item4Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item5), item5X, item5Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item6), item6X, item6Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item1), item1X, item1Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item2), item2X, item2Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item3), item3X, item3Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item4), item4X, item4Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item5), item5X, item5Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item6), item6X, item6Y);
 					GL11.glColor3f(1, 1, 1);
 					GL11.glDisable(GL11.GL_LIGHTING);
 					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6)){
@@ -1040,17 +1040,17 @@ public class GuiSynthesis extends GuiContainer {
 					}else{
 						fontRendererObj.drawString(LocalStrings.Synthesis_Material, 28, 40, 0x004CFF);
 					}
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(result), resultXY, resultXY);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(result), resultXY, resultXY);
 
 					//Stuff displayed on the second tab
 				}else if(GuiSynthesis.ClickedTab2){
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item1), item1X, item1Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item2), item2X, item2Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item3), item3X, item3Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item4), item4X, item4Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item5), item5X, item5Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item6), item6X, item6Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item7), item7X, item7Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item1), item1X, item1Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item2), item2X, item2Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item3), item3X, item3Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item4), item4X, item4Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item5), item5X, item5Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item6), item6X, item6Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item7), item7X, item7Y);
 					GL11.glColor3f(1, 1, 1);
 					GL11.glDisable(GL11.GL_LIGHTING);
 					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7)){
@@ -1141,18 +1141,18 @@ public class GuiSynthesis extends GuiContainer {
 					}else{
 						fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Material), 28, 40, 0x004CFF);
 					}
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(result), resultXY, resultXY);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(result), resultXY, resultXY);
 
 					//Stuff displayed on the second tab
 				}else if(GuiSynthesis.ClickedTab2){
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item1), item1X, item1Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item2), item2X, item2Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item3), item3X, item3Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item4), item4X, item4Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item5), item5X, item5Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item6), item6X, item6Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item7), item7X, item7Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item8), item8X, item8Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item1), item1X, item1Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item2), item2X, item2Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item3), item3X, item3Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item4), item4X, item4Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item5), item5X, item5Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item6), item6X, item6Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item7), item7X, item7Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item8), item8X, item8Y);
 					GL11.glColor3f(1, 1, 1);
 					GL11.glDisable(GL11.GL_LIGHTING);
 					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8)){
@@ -1243,19 +1243,19 @@ public class GuiSynthesis extends GuiContainer {
 					}else{
 						fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Material), 28, 40, 0x004CFF);
 					}
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(result), resultXY, resultXY);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(result), resultXY, resultXY);
 
 					//Stuff displayed on the second tab
 				}else if(GuiSynthesis.ClickedTab2){
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item1), item1X, item1Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item2), item2X, item2Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item3), item3X, item3Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item4), item4X, item4Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item5), item5X, item5Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item6), item6X, item6Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item7), item7X, item7Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item8), item8X, item8Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item9), item9X, item9Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item1), item1X, item1Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item2), item2X, item2Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item3), item3X, item3Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item4), item4X, item4Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item5), item5X, item5Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item6), item6X, item6Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item7), item7X, item7Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item8), item8X, item8Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item9), item9X, item9Y);
 					GL11.glColor3f(1, 1, 1);
 					GL11.glDisable(GL11.GL_LIGHTING);
 					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item9)){
@@ -1346,20 +1346,20 @@ public class GuiSynthesis extends GuiContainer {
 					}else{
 						fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Material), 28, 40, 0x004CFF);
 					}
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(result), resultXY, resultXY);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(result), resultXY, resultXY);
 
 					//Stuff displayed on the second tab
 				}else if(GuiSynthesis.ClickedTab2){
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item1), item1X, item1Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item2), item2X, item2Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item3), item3X, item3Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item4), item4X, item4Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item5), item5X, item5Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item6), item6X, item6Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item7), item7X, item7Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item8), item8X, item8Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item9), item9X, item9Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item10), item10X, item10Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item1), item1X, item1Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item2), item2X, item2Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item3), item3X, item3Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item4), item4X, item4Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item5), item5X, item5Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item6), item6X, item6Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item7), item7X, item7Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item8), item8X, item8Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item9), item9X, item9Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item10), item10X, item10Y);
 					GL11.glColor3f(1, 1, 1);
 					GL11.glDisable(GL11.GL_LIGHTING);
 					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item9) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item10)){
@@ -1450,21 +1450,21 @@ public class GuiSynthesis extends GuiContainer {
 					}else{
 						fontRendererObj.drawString(StatCollector.translateToLocal(LocalStrings.Synthesis_Material), 28, 40, 0x004CFF);
 					}
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(result), resultXY, resultXY);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(result), resultXY, resultXY);
 
 					//Stuff displayed on the second tab
 				}else if(GuiSynthesis.ClickedTab2){
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item1), item1X, item1Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item2), item2X, item2Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item3), item3X, item3Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item4), item4X, item4Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item5), item5X, item5Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item6), item6X, item6Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item7), item7X, item7Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item8), item8X, item8Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item9), item9X, item9Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item10), item10X, item10Y);
-					itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(item11), item11X, item11Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item1), item1X, item1Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item2), item2X, item2Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item3), item3X, item3Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item4), item4X, item4Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item5), item5X, item5Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item6), item6X, item6Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item7), item7X, item7Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item8), item8X, item8Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item9), item9X, item9Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item10), item10X, item10Y);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(item11), item11X, item11Y);
 					GL11.glColor3f(1, 1, 1);
 					GL11.glDisable(GL11.GL_LIGHTING);
 					if(Minecraft.getMinecraft().thePlayer.inventory.hasItem(item1) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item2) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item3) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item4) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item5) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item6) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item7) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item8) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item9) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item10) && Minecraft.getMinecraft().thePlayer.inventory.hasItem(item11)){
