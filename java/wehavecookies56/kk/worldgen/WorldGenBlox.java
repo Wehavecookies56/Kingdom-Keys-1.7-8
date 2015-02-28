@@ -4,7 +4,9 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.fml.common.IWorldGenerator;
@@ -27,11 +29,12 @@ public class WorldGenBlox implements IWorldGenerator
 	/**
 	 * OVERWORLD GENERATION
 	 */
-
-		public void generateOverworld (World world, Random random, int chunkX, int chunkZ){
+	public void generateOverworld (World);
+		//public void generateOverworld (World world, Random random, BlockPos pos){
 			if(ConfigBooleans.enableOverworld){
-		    String s = world.getBiomeGenForCoords(chunkX + 8, chunkZ + 8).biomeName;
-			this.spawnOres(AddedBlocks.LucidOre, Blocks.stone, world, random, chunkX, chunkZ, 16, 16, 6, ints.LucidOreChance, 0, 70);
+		    String s = world.getBiomeGenForCoordsBody(pos).biomeName;
+		    //String s = world.getBiomeGenForCoords(chunkX + 8, chunkZ + 8).biomeName;
+			this.spawnOres(AddedBlocks.LucidOre, Blocks.stone, world, random, pos, 16, 16, 6, ints.LucidOreChance, 0, 70);
 			this.spawnOres(AddedBlocks.SerenityOre, Blocks.stone, world, random, chunkX, chunkZ, 16, 16, 5, ints.SerenityOreChance, 60, 128);
 			this.spawnOres(AddedBlocks.TranquilOre, Blocks.stone, world, random, chunkX, chunkZ, 16, 16, 6, ints.TranquilOreChance, 70, 128);
 			this.spawnOres(AddedBlocks.BrightOre, Blocks.stone, world, random, chunkX, chunkZ, 16, 16, 5, ints.BrightOreChance, 10, 128);

@@ -24,7 +24,7 @@ public class VillagerCreationHandler implements IVillageCreationHandler {
 	public Object buildComponent(PieceWeight villagePiece, Start startPiece,
 			List pieces, Random random, int p1, int p2, int p3,
 			EnumFacing facing, int p5) {
-		return ComponentRecipeHome.buildComponent(villagePiece, pieces, random, p1, p2, p3, facing, p5);
+		return ComponentRecipeHome.buildComponent(startPiece, pieces, random, p1, p2, p3, facing, p5);
 	}
 	
 
