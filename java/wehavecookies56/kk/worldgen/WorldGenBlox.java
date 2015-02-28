@@ -29,8 +29,7 @@ public class WorldGenBlox implements IWorldGenerator
 	/**
 	 * OVERWORLD GENERATION
 	 */
-	public void generateOverworld (World);
-		//public void generateOverworld (World world, Random random, BlockPos pos){
+		public void generateOverworld (World world, Random random, BlockPos pos){
 			if(ConfigBooleans.enableOverworld){
 		    String s = world.getBiomeGenForCoordsBody(pos).biomeName;
 		    //String s = world.getBiomeGenForCoords(chunkX + 8, chunkZ + 8).biomeName;
