@@ -79,7 +79,6 @@ public class BlockKKChest extends BlockContainer
 		return -1;
 	}
 
-	@Override
 	public boolean renderAsNormalBlock()
 	{
 		return false;
@@ -120,7 +119,8 @@ public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, En
 				player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.YoungXehanortsKeyblade||
 				player.getHeldItem() != null && player.getHeldItem().getItem() == AddedItems.ZeroOne)
 		{
-			if(!world.isRemote){
+			if(!world.isRemote)
+			{
                 TileEntity tileEntityKKChest = world.getTileEntity(new BlockPos(pos));
 
 				if (tileEntityKKChest == null)
